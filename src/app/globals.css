@@ -2,25 +2,132 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
 }
 
 @theme inline {
   --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-primary: #4a2a82;
+  --color-primary-dark: #3a2168;
+  --color-primary-mid: #5e3aa6;
+  --color-accent: #33b4e5;
+  --color-accent-dark: #1683b5;
+  --color-surface: #f4f6fa;
+  --color-ink: #1e1b2e;
+  --color-muted: #5b6472;
+  --font-sans: var(--font-plus-jakarta-sans);
+  --font-heading: var(--font-sora);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-background);
+  color: var(--color-ink);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .shadow-accent-glow {
+    box-shadow: 0 14px 30px -10px rgba(51, 180, 229, 0.7);
+  }
+
+  .decorative-blob {
+    filter: blur(6px);
+  }
+
+  .decorative-blob--a {
+    border-radius: 60% 40% 55% 45% / 50% 55% 45% 50%;
+    background: radial-gradient(
+      circle at 30% 30%,
+      rgba(51, 180, 229, 0.55),
+      rgba(51, 180, 229, 0)
+    );
+  }
+
+  .decorative-blob--b {
+    border-radius: 55% 45% 40% 60% / 45% 50% 55% 50%;
+    background: radial-gradient(
+      circle at 60% 40%,
+      rgba(148, 110, 214, 0.5),
+      rgba(148, 110, 214, 0)
+    );
+    filter: blur(8px);
+  }
+
+  .decorative-blob--c {
+    background: radial-gradient(circle, rgba(51, 180, 229, 0.35), transparent 70%);
+  }
+
+  .decorative-blob--cta {
+    border-radius: 60% 40% 55% 45% / 50% 55% 45% 50%;
+    background: radial-gradient(
+      circle at 40% 40%,
+      rgba(51, 180, 229, 0.5),
+      transparent 70%
+    );
+  }
+}
+
+@keyframes float-a {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(18px, -26px) rotate(6deg);
+  }
+}
+
+@keyframes float-b {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(-22px, 20px) rotate(-8deg);
+  }
+}
+
+@keyframes float-c {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(0, -16px) scale(1.06);
+  }
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-float-a {
+  animation: float-a 11s ease-in-out infinite;
+}
+
+.animate-float-b {
+  animation: float-b 13s ease-in-out infinite;
+}
+
+.animate-float-c {
+  animation: float-c 9s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 26s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-a,
+  .animate-float-b,
+  .animate-float-c,
+  .animate-spin-slow {
+    animation: none;
+  }
 }
