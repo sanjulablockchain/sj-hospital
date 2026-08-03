@@ -29,6 +29,11 @@ body {
   }
 }
 
+/* Offset anchor-scroll targets so content doesn't land behind the sticky header. */
+[id] {
+  scroll-margin-top: 120px;
+}
+
 @layer components {
   .shadow-accent-glow {
     box-shadow: 0 14px 30px -10px rgba(51, 180, 229, 0.7);
