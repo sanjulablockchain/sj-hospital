@@ -16,10 +16,10 @@ export function HeroImageCard() {
       className="relative"
     >
       <div className="pointer-events-none absolute -right-3 -top-3 h-32 w-32 animate-spin-slow rounded-full border-2 border-dashed border-accent/40 sm:h-36 sm:w-36" />
-      <div className="relative aspect-video overflow-hidden rounded-3xl shadow-[0_40px_80px_-30px_rgba(0,0,0,0.6)]">
+      <div className="relative aspect-4/5 overflow-hidden rounded-3xl shadow-[0_40px_80px_-30px_rgba(0,0,0,0.6)]">
         <Image
           src="/images/hero.jpg"
-          alt="St. Joseph Hospital Negombo building and staff"
+          alt="St. Joseph Hospital Negombo medical staff"
           fill
           sizes="(min-width: 1024px) 45vw, 90vw"
           className="object-cover"

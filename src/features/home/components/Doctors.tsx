@@ -10,7 +10,7 @@ export function Doctors() {
           <div className="relative aspect-square overflow-hidden rounded-3xl shadow-[0_40px_80px_-30px_rgba(0,0,0,0.5)]">
             <Image
               src="/images/doctors.jpg"
-              alt="Doctor at St. Joseph Hospital Negombo"
+              alt="Doctor consulting with a patient and family at St. Joseph Hospital Negombo"
               fill
               sizes="(min-width: 1024px) 45vw, 90vw"
               className="object-cover"

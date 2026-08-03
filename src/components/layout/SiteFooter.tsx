@@ -5,7 +5,10 @@ import { PhoneIcon, SmartphoneIcon, MailIcon } from "@/components/ui/Icons";
 
 export function SiteFooter() {
   return (
-    <footer id="contact" className="bg-[#2A183F] px-6 pb-7 pt-16 text-[#C9BBE0]">
+    <footer
+      id="contact"
+      className="rounded-t-4xl bg-[#2A183F] px-6 pb-7 pt-16 text-[#C9BBE0]"
+    >
       <div className="mx-auto grid max-w-[1240px] gap-11 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1.3fr_1fr]">
         <div>
           <Image

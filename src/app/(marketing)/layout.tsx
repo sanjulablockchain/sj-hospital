@@ -1,5 +1,6 @@
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { BackToTopButton } from "@/components/layout/BackToTopButton";
 
 export default function MarketingLayout({
   children,
@@ -11,6 +12,7 @@ export default function MarketingLayout({
       <SiteHeader />
       <main className="flex-1">{children}</main>
       <SiteFooter />
+      <BackToTopButton />
     </>
   );
 }

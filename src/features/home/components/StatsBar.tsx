@@ -37,7 +37,7 @@ export function StatsBar() {
       <div className="mx-auto grid max-w-[1240px] grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat, index) => (
           <RevealOnScroll key={stat.caption} delayMs={index * 90}>
-            <div className="rounded-[20px] border border-ink/10 bg-surface p-7 text-center">
+            <div className="h-full rounded-[20px] border border-ink/10 bg-surface p-7 text-center">
               <div className="font-heading text-4xl font-extrabold leading-none text-primary">
                 <AnimatedCounter
                   target={stat.target}
