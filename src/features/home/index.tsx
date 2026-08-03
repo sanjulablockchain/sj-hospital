@@ -5,6 +5,7 @@ import { Services } from "./components/Services";
 import { Doctors } from "./components/Doctors";
 import { WhyChooseUs } from "./components/WhyChooseUs";
 import { Testimonials } from "./components/Testimonials";
+import { CtaBanner } from "./components/CtaBanner";
 
 export function HomePage() {
   return (
@@ -16,6 +17,7 @@ export function HomePage() {
       <Doctors />
       <WhyChooseUs />
       <Testimonials />
+      <CtaBanner />
     </>
   );
 }
