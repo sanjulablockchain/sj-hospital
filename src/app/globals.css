@@ -10,7 +10,7 @@
   --color-primary-dark: #3a2168;
   --color-primary-mid: #5e3aa6;
   --color-accent: #33b4e5;
-  --color-accent-dark: #1683b5;
+  --color-accent-dark: #14769f;
   --color-surface: #f4f6fa;
   --color-ink: #1e1b2e;
   --color-muted: #5b6472;
@@ -29,9 +29,14 @@ body {
   }
 }
 
-/* Offset anchor-scroll targets so content doesn't land behind the sticky header. */
-[id] {
-  scroll-margin-top: 120px;
+/* Offset anchor-scroll targets so content doesn't land behind the sticky header.
+   Scoped to the real anchor targets (section/footer) rather than any [id] so it
+   doesn't also match unrelated elements like #mobile-nav-panel. 140px accounts
+   for the header growing to ~135px at intermediate viewport widths where the
+   top contact bar wraps. */
+section[id],
+footer[id] {
+  scroll-margin-top: 140px;
 }
 
 @layer components {
