@@ -5,11 +5,11 @@ export type NavItem = {
 
 export const primaryNavigation: NavItem[] = [
   { label: "Home", href: "/" },
-  { label: "Medical Services", href: "#services" },
-  { label: "Accommodation", href: "#accommodation" },
-  { label: "About Us", href: "#about" },
-  { label: "Career", href: "https://sjhospital.lk/career/" },
-  { label: "Contact Us", href: "#contact" },
+  { label: "Medical Services", href: "/services" },
+  { label: "Accommodation", href: "/accommodation" },
+  { label: "About Us", href: "/about-us" },
+  { label: "Career", href: "/career" },
+  { label: "Contact Us", href: "/contact-us" },
 ];
 
 export const footerQuickLinks: NavItem[] = primaryNavigation;

@@ -74,7 +74,7 @@ export function MobileNav({ items }: MobileNavProps) {
               )
             )}
             <Link
-              href="https://sjhospital.lk/e-channeling/"
+              href="/e-channeling"
               onClick={() => setIsOpen(false)}
               className="mt-2 rounded-full bg-primary px-5 py-3 text-center text-base font-bold text-white"
             >

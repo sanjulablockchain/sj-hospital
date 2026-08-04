@@ -132,7 +132,7 @@ export function SiteFooter() {
       <div className="mx-auto mt-9 flex max-w-[1240px] flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-5 text-[13px] text-[#9A8BB5]">
         <p>© 2026 St. Joseph Hospital</p>
         <div className="flex gap-5">
-          <Link href="https://sjhospital.lk/privacy-policy/" className="hover:text-white">
+          <Link href="/privacy-policy" className="hover:text-white">
             Privacy Policy
           </Link>
           <Link href="https://sjhospital.lk/gallery/" className="hover:text-white">

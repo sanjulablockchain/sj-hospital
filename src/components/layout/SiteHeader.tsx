@@ -42,13 +42,13 @@ export function SiteHeader() {
 
           <div className="flex items-center gap-2">
             <Link
-              href="https://sjhospital.lk/e-channeling/"
+              href="/e-channeling"
               className="rounded-full bg-accent px-3 py-1.5 text-xs font-bold text-primary-dark"
             >
               Book Appointment
             </Link>
             <Link
-              href="https://sjhospital.lk/accommodation/"
+              href="/accommodation"
               className="hidden rounded-full border border-white/40 px-3 py-1.5 text-xs font-semibold text-white/90 sm:inline-block"
             >
               Inpatient Room Booking
@@ -94,7 +94,7 @@ export function SiteHeader() {
 
           <div className="flex items-center gap-3">
             <Link
-              href="https://sjhospital.lk/e-channeling/"
+              href="/e-channeling"
               className="hidden shrink-0 rounded-full bg-primary px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-primary/30 hover:bg-primary-dark lg:inline-block"
             >
               Appointments
