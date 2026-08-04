@@ -1,7 +1,7 @@
 import { PageBanner } from "@/components/layout/PageBanner";
 import { ContactForm } from "./ContactForm";
 import { ContactInfo } from "./ContactInfo";
-import { LocationMap } from "./LocationMap";
+import { LocationMap } from "./LocationMapLazy";
 
 export function ContactPageContent() {
   return (

@@ -135,9 +135,9 @@ export function SiteFooter() {
           <Link href="/privacy-policy" className="hover:text-white">
             Privacy Policy
           </Link>
-          <Link href="https://sjhospital.lk/gallery/" className="hover:text-white">
+          <a href="https://sjhospital.lk/gallery/" className="hover:text-white">
             Gallery
-          </Link>
+          </a>
         </div>
       </div>
     </footer>

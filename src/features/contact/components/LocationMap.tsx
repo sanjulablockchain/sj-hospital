@@ -55,8 +55,7 @@ export function LocationMap() {
   return (
     <div
       ref={containerRef}
-      role="img"
-      aria-label="Map showing St. Joseph Hospital Negombo location"
+      aria-label="Interactive map showing St. Joseph Hospital Negombo location"
       className="h-80 w-full overflow-hidden rounded-2xl border border-ink/10"
     />
   );

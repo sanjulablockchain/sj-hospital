@@ -20,6 +20,16 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Environment Variables
+
+The contact form (used on `/contact-us` and `/accommodation`) sends email via Nodemailer over SMTP. Copy `.env.local.example` to `.env.local` and fill in real values before deploying:
+
+- `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS` — your SMTP provider's credentials
+- `SMTP_FROM` — the "from" address shown to recipients
+- `CONTACT_TO_EMAILS` — comma-separated list of inboxes that receive form submissions
+
+If any of these are missing at runtime, form submissions fail gracefully (the visitor sees a message asking them to call instead), but the message itself is lost — verify these are set before the site goes live.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
