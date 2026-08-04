@@ -35,7 +35,7 @@ export function Doctors() {
             possible treatment plan, helping you recover faster and live healthier.
           </p>
           <Link
-            href="https://sjhospital.lk/e-channeling/"
+            href="/e-channeling"
             className="shadow-accent-glow inline-block rounded-full bg-accent px-7 py-3.5 text-base font-bold text-[#0E2E3D] transition hover:-translate-y-0.5"
           >
             Make an Appointment

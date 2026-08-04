@@ -37,7 +37,7 @@ export function Hero() {
           <RevealOnScroll delayMs={240}>
             <div className="flex flex-wrap gap-4">
               <Link
-                href="https://sjhospital.lk/e-channeling/"
+                href="/e-channeling"
                 className="shadow-accent-glow rounded-full bg-accent px-7 py-3.5 text-base font-bold text-[#0E2E3D] transition hover:-translate-y-0.5"
               >
                 Book an Appointment

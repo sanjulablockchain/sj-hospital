@@ -20,13 +20,13 @@ export function CtaBanner() {
             </div>
             <div className="flex flex-col gap-3.5">
               <Link
-                href="https://sjhospital.lk/e-channeling/"
+                href="/e-channeling"
                 className="shadow-accent-glow rounded-full bg-accent px-7 py-4 text-center text-base font-bold text-[#0E2E3D] transition hover:-translate-y-0.5"
               >
                 Book an Appointment
               </Link>
               <Link
-                href="https://sjhospital.lk/accommodation/"
+                href="/accommodation"
                 className="rounded-full border border-white/30 bg-white/10 px-7 py-4 text-center text-base font-bold text-white transition hover:bg-white/20"
               >
                 Inpatient Room Booking
