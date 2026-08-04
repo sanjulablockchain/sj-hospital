@@ -1,18 +1,9 @@
 "use server";
 
+import { z } from "zod";
 import { contactMessageSchema } from "../schemas";
 import { sendContactEmail } from "../lib/mailer";
-
-export type ContactFormState = {
-  status: "idle" | "success" | "error";
-  message: string;
-  fieldErrors?: Partial<Record<"firstName" | "lastName" | "email" | "message", string[]>>;
-};
-
-export const initialContactFormState: ContactFormState = {
-  status: "idle",
-  message: "",
-};
+import type { ContactFormState } from "../types";
 
 export async function sendContactMessage(
   _prevState: ContactFormState,
@@ -29,7 +20,7 @@ export async function sendContactMessage(
     return {
       status: "error",
       message: "Please fix the highlighted fields and try again.",
-      fieldErrors: validated.error.flatten().fieldErrors,
+      fieldErrors: z.flattenError(validated.error).fieldErrors,
     };
   }
 

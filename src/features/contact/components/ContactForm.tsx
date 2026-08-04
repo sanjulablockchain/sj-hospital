@@ -1,7 +1,8 @@
 "use client";
 
 import { useActionState } from "react";
-import { sendContactMessage, initialContactFormState } from "../actions/sendContactMessage";
+import { sendContactMessage } from "../actions/sendContactMessage";
+import { initialContactFormState } from "../types";
 
 export function ContactForm() {
   const [state, formAction, pending] = useActionState(sendContactMessage, initialContactFormState);
