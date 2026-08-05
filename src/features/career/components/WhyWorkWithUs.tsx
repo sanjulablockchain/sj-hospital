@@ -31,6 +31,14 @@ const benefits: Benefit[] = [
     title: "Opportunities for All Roles",
     description: "From clinical to administrative, every role makes a real difference here.",
   },
+  {
+    title: "Job Security & Stability",
+    description: "Join a well-established hospital with a stable, long-term employment history.",
+  },
+  {
+    title: "Wellness & Mental Health Support",
+    description: "Support programs for your physical and mental wellbeing, on top of health benefits.",
+  },
 ];
 
 export function WhyWorkWithUs() {

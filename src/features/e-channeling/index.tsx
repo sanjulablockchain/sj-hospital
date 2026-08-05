@@ -1,5 +1,4 @@
 import { PageBanner } from "@/components/layout/PageBanner";
-import { Intro } from "./components/Intro";
 import { DoctorDirectory } from "./components/DoctorDirectory";
 import { doctors } from "./data/doctors";
 
@@ -12,8 +11,7 @@ export function EChannelingPage() {
         imageSrc="/images/echanneling-hero.jpg"
         imageAlt="Doctors and nurses with medical equipment at St. Joseph Hospital Negombo"
       />
-      <Intro />
-      <section className="bg-surface px-6 pb-20">
+      <section className="bg-surface px-6 py-16">
         <div className="mx-auto max-w-[1240px]">
           <DoctorDirectory doctors={doctors} />
         </div>

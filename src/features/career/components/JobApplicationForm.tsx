@@ -121,18 +121,10 @@ export function JobApplicationForm({ roleTitle }: JobApplicationFormProps) {
         </label>
         <label
           htmlFor="app-cv"
-          className={`flex cursor-pointer items-center gap-3 rounded-xl border px-4 py-2.5 transition has-[:focus-visible]:border-primary has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-primary/20 ${
+          className={`relative flex cursor-pointer items-center gap-3 rounded-xl border px-4 py-2.5 transition ${
             cvError ? "border-red-300 bg-red-50" : "border-ink/15 hover:border-primary/50"
           }`}
         >
-          <span className="shrink-0 rounded-full bg-primary px-4 py-1.5 text-xs font-bold text-white">
-            Choose File
-          </span>
-          <span className={`truncate text-sm ${selectedFile ? "text-ink" : "text-muted"}`}>
-            {selectedFile
-              ? `${selectedFile.name} (${formatFileSize(selectedFile.size)})`
-              : "No file selected"}
-          </span>
           <input
             id="app-cv"
             name="cv"
@@ -144,8 +136,16 @@ export function JobApplicationForm({ roleTitle }: JobApplicationFormProps) {
               setSelectedFile(file);
               setClientFileError(file ? validateCvFile(file) : null);
             }}
-            className="sr-only"
+            className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
           />
+          <span className="shrink-0 rounded-full bg-primary px-4 py-1.5 text-xs font-bold text-white">
+            Choose File
+          </span>
+          <span className={`truncate text-sm ${selectedFile ? "text-ink" : "text-muted"}`}>
+            {selectedFile
+              ? `${selectedFile.name} (${formatFileSize(selectedFile.size)})`
+              : "No file selected"}
+          </span>
         </label>
         {cvError && <p className="mt-1 text-xs font-semibold text-red-600">{cvError}</p>}
       </div>

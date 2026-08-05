@@ -31,14 +31,14 @@ export function Modal({ open, onClose, title, labelledBy, children }: ModalProps
         <div
           aria-hidden="true"
           onClick={onClose}
-          className="fixed inset-0 z-40 hidden bg-ink/60 backdrop-blur-sm lg:block"
+          className="fixed inset-0 z-60 hidden bg-ink/60 backdrop-blur-sm lg:block"
         />
       )}
       <dialog
         ref={dialogRef}
         aria-labelledby={labelledBy}
         onClose={onClose}
-        className="fixed inset-0 z-50 h-full w-full max-w-none max-h-none overflow-hidden rounded-none border-0 bg-white p-0 shadow-none lg:m-auto lg:h-fit lg:w-[calc(100%-2rem)] lg:max-w-lg lg:rounded-[22px] lg:border lg:border-ink/10 lg:shadow-[0_40px_80px_-30px_rgba(20,10,50,0.45)]"
+        className="fixed inset-0 z-70 h-full w-full max-w-none max-h-none overflow-hidden rounded-none border-0 bg-white p-0 shadow-none lg:m-auto lg:h-fit lg:w-[calc(100%-2rem)] lg:max-w-lg lg:rounded-[22px] lg:border lg:border-ink/10 lg:shadow-[0_40px_80px_-30px_rgba(20,10,50,0.45)]"
       >
         <div className="themed-scrollbar h-full overflow-y-auto lg:h-auto lg:max-h-[85vh]">
           {title && (

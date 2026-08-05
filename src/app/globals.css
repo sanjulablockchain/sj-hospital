@@ -101,6 +101,14 @@ footer[id] {
   .themed-scrollbar::-webkit-scrollbar-thumb:hover {
     background-color: rgba(74, 42, 130, 0.55);
   }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 @keyframes float-a {
