@@ -38,7 +38,7 @@ export function Modal({ open, onClose, title, labelledBy, children }: ModalProps
         ref={dialogRef}
         aria-labelledby={labelledBy}
         onClose={onClose}
-        className="fixed inset-0 z-50 h-full w-full overflow-hidden rounded-none border-0 bg-white p-0 shadow-none md:m-auto md:h-fit md:w-[calc(100%-2rem)] md:max-w-lg md:rounded-[22px] md:border md:border-ink/10 md:shadow-[0_40px_80px_-30px_rgba(20,10,50,0.45)]"
+        className="fixed inset-0 z-50 h-full w-full max-w-none max-h-none overflow-hidden rounded-none border-0 bg-white p-0 shadow-none md:m-auto md:h-fit md:w-[calc(100%-2rem)] md:max-w-lg md:rounded-[22px] md:border md:border-ink/10 md:shadow-[0_40px_80px_-30px_rgba(20,10,50,0.45)]"
       >
         <div className="themed-scrollbar h-full overflow-y-auto md:h-auto md:max-h-[85vh]">
           <div className="sticky top-0 z-10 flex items-center gap-2 border-b border-ink/10 bg-white/90 px-4 py-3 pt-[calc(env(safe-area-inset-top)+0.75rem)] backdrop-blur-md md:static md:items-start md:gap-4 md:border-0 md:bg-transparent md:px-8 md:pt-8 md:pb-0 md:backdrop-blur-none">
