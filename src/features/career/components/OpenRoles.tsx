@@ -3,7 +3,6 @@
 import { useId, useState } from "react";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { Modal } from "@/components/ui/Modal";
-import { CloseIcon } from "@/components/ui/Icons";
 import { JobApplicationForm } from "./JobApplicationForm";
 
 type Role = {
@@ -47,9 +46,9 @@ const roles: Role[] = [
 const cardHover =
   "transition hover:-translate-y-2 hover:shadow-[0_26px_48px_-24px_rgba(74,42,130,0.4)]";
 
-function CheckItem({ children }: { children: React.ReactNode }) {
+function RequirementRow({ children }: { children: React.ReactNode }) {
   return (
-    <li className="flex items-start gap-2.5 text-sm text-ink/80">
+    <li className="flex items-center gap-2.5 rounded-full bg-surface px-4 py-2 text-sm text-ink/80">
       <svg
         width="16"
         height="16"
@@ -59,7 +58,7 @@ function CheckItem({ children }: { children: React.ReactNode }) {
         strokeWidth="2.5"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="mt-1 shrink-0"
+        className="shrink-0"
       >
         <polyline points="20 6 9 17 4 12" />
       </svg>
@@ -127,23 +126,14 @@ export function OpenRoles() {
         </div>
       </div>
 
-      <Modal open={activeRole !== null} onClose={() => setOpenIndex(null)} labelledBy={titleId}>
+      <Modal
+        open={activeRole !== null}
+        onClose={() => setOpenIndex(null)}
+        title={activeRole?.title ?? ""}
+        labelledBy={titleId}
+      >
         {activeRole && (
           <div className="p-7 sm:p-8">
-            <div className="mb-5 flex items-start justify-between gap-4">
-              <h3 id={titleId} className="font-heading text-xl font-extrabold text-ink sm:text-2xl">
-                {activeRole.title}
-              </h3>
-              <button
-                type="button"
-                onClick={() => setOpenIndex(null)}
-                aria-label="Close job details"
-                className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full text-muted transition hover:bg-surface hover:text-ink"
-              >
-                <CloseIcon className="h-5 w-5" />
-              </button>
-            </div>
-
             <p className="mb-5 text-sm leading-relaxed text-muted">{activeRole.summary}</p>
 
             <p className="mb-2 text-xs font-bold uppercase tracking-wide text-accent-dark">
@@ -151,7 +141,7 @@ export function OpenRoles() {
             </p>
             <ul className="mb-5 space-y-2">
               {activeRole.requirements.map((requirement) => (
-                <CheckItem key={requirement}>{requirement}</CheckItem>
+                <RequirementRow key={requirement}>{requirement}</RequirementRow>
               ))}
             </ul>
 
