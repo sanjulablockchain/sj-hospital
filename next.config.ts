@@ -7,6 +7,9 @@ const nextConfig: NextConfig = {
       bodySizeLimit: "6mb",
     },
   },
+  watchOptions: {
+    pollIntervalMs: 500,
+  },
 };
 
 export default nextConfig;
