@@ -48,7 +48,7 @@ const cardHover =
 
 function RequirementRow({ children }: { children: React.ReactNode }) {
   return (
-    <li className="flex items-center gap-2.5 rounded-full bg-surface px-4 py-2 text-sm text-ink/80">
+    <li className="flex items-start gap-2.5 rounded-2xl bg-surface px-4 py-2 text-sm text-ink/80">
       <svg
         width="16"
         height="16"
@@ -58,7 +58,7 @@ function RequirementRow({ children }: { children: React.ReactNode }) {
         strokeWidth="2.5"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="shrink-0"
+        className="mt-1 shrink-0"
       >
         <polyline points="20 6 9 17 4 12" />
       </svg>
@@ -129,7 +129,7 @@ export function OpenRoles() {
       <Modal
         open={activeRole !== null}
         onClose={() => setOpenIndex(null)}
-        title={activeRole?.title ?? ""}
+        title={activeRole?.title}
         labelledBy={titleId}
       >
         {activeRole && (

@@ -52,7 +52,7 @@ export function JobApplicationForm({ roleTitle }: JobApplicationFormProps) {
             name="firstName"
             type="text"
             required
-            className="w-full rounded-xl border border-ink/15 px-4 py-2.5 text-sm text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
+            className="w-full rounded-xl border border-ink/15 px-4 py-2.5 text-sm text-ink outline-hidden focus:border-primary focus:ring-2 focus:ring-primary/20"
           />
           {state.fieldErrors?.firstName && (
             <p className="mt-1 text-xs font-semibold text-red-600">{state.fieldErrors.firstName[0]}</p>
@@ -67,7 +67,7 @@ export function JobApplicationForm({ roleTitle }: JobApplicationFormProps) {
             name="lastName"
             type="text"
             required
-            className="w-full rounded-xl border border-ink/15 px-4 py-2.5 text-sm text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
+            className="w-full rounded-xl border border-ink/15 px-4 py-2.5 text-sm text-ink outline-hidden focus:border-primary focus:ring-2 focus:ring-primary/20"
           />
           {state.fieldErrors?.lastName && (
             <p className="mt-1 text-xs font-semibold text-red-600">{state.fieldErrors.lastName[0]}</p>
@@ -84,7 +84,7 @@ export function JobApplicationForm({ roleTitle }: JobApplicationFormProps) {
           name="email"
           type="email"
           required
-          className="w-full rounded-xl border border-ink/15 px-4 py-2.5 text-sm text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
+          className="w-full rounded-xl border border-ink/15 px-4 py-2.5 text-sm text-ink outline-hidden focus:border-primary focus:ring-2 focus:ring-primary/20"
         />
         {state.fieldErrors?.email && (
           <p className="mt-1 text-xs font-semibold text-red-600">{state.fieldErrors.email[0]}</p>
@@ -99,7 +99,7 @@ export function JobApplicationForm({ roleTitle }: JobApplicationFormProps) {
           id="app-phone"
           name="phone"
           type="tel"
-          className="w-full rounded-xl border border-ink/15 px-4 py-2.5 text-sm text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
+          className="w-full rounded-xl border border-ink/15 px-4 py-2.5 text-sm text-ink outline-hidden focus:border-primary focus:ring-2 focus:ring-primary/20"
         />
       </div>
 
@@ -111,7 +111,7 @@ export function JobApplicationForm({ roleTitle }: JobApplicationFormProps) {
           id="app-message"
           name="message"
           rows={3}
-          className="w-full rounded-xl border border-ink/15 px-4 py-2.5 text-sm text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
+          className="w-full rounded-xl border border-ink/15 px-4 py-2.5 text-sm text-ink outline-hidden focus:border-primary focus:ring-2 focus:ring-primary/20"
         />
       </div>
 
@@ -121,7 +121,7 @@ export function JobApplicationForm({ roleTitle }: JobApplicationFormProps) {
         </label>
         <label
           htmlFor="app-cv"
-          className={`flex cursor-pointer items-center gap-3 rounded-xl border px-4 py-2.5 transition ${
+          className={`flex cursor-pointer items-center gap-3 rounded-xl border px-4 py-2.5 transition has-[:focus-visible]:border-primary has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-primary/20 ${
             cvError ? "border-red-300 bg-red-50" : "border-ink/15 hover:border-primary/50"
           }`}
         >
@@ -133,20 +133,20 @@ export function JobApplicationForm({ roleTitle }: JobApplicationFormProps) {
               ? `${selectedFile.name} (${formatFileSize(selectedFile.size)})`
               : "No file selected"}
           </span>
+          <input
+            id="app-cv"
+            name="cv"
+            type="file"
+            required
+            accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            onChange={(event) => {
+              const file = event.target.files?.[0] ?? null;
+              setSelectedFile(file);
+              setClientFileError(file ? validateCvFile(file) : null);
+            }}
+            className="sr-only"
+          />
         </label>
-        <input
-          id="app-cv"
-          name="cv"
-          type="file"
-          required
-          accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-          onChange={(event) => {
-            const file = event.target.files?.[0] ?? null;
-            setSelectedFile(file);
-            setClientFileError(file ? validateCvFile(file) : null);
-          }}
-          className="sr-only"
-        />
         {cvError && <p className="mt-1 text-xs font-semibold text-red-600">{cvError}</p>}
       </div>
 
