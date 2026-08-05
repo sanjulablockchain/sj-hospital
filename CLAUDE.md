@@ -13,6 +13,12 @@ npm run dev     # dev server → http://localhost:3000
 npm run build   # production build
 npm start       # serve the production build
 npm run lint    # ESLint (flat config: eslint.config.mjs)
+
+# Docker
+docker compose -f docker-compose.dev.yml up --build   # containerized dev server → http://localhost:3000
+docker compose up --build                              # containerized production build + serve → http://localhost:3000
+
+# On Windows + Docker Desktop: restart with `docker compose restart web` or use `npm run dev` for hot reload.
 ```
 
 Package manager: **npm** (`package-lock.json`). No test runner is configured yet.
