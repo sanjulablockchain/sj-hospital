@@ -52,7 +52,7 @@ export function JobApplicationForm({ roleTitle }: JobApplicationFormProps) {
             name="firstName"
             type="text"
             required
-            className="w-full rounded-xl border border-ink/15 px-4 py-2.5 text-sm text-ink outline-none focus:border-primary"
+            className="w-full rounded-xl border border-ink/15 px-4 py-2.5 text-sm text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
           />
           {state.fieldErrors?.firstName && (
             <p className="mt-1 text-xs font-semibold text-red-600">{state.fieldErrors.firstName[0]}</p>
@@ -67,7 +67,7 @@ export function JobApplicationForm({ roleTitle }: JobApplicationFormProps) {
             name="lastName"
             type="text"
             required
-            className="w-full rounded-xl border border-ink/15 px-4 py-2.5 text-sm text-ink outline-none focus:border-primary"
+            className="w-full rounded-xl border border-ink/15 px-4 py-2.5 text-sm text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
           />
           {state.fieldErrors?.lastName && (
             <p className="mt-1 text-xs font-semibold text-red-600">{state.fieldErrors.lastName[0]}</p>
@@ -84,7 +84,7 @@ export function JobApplicationForm({ roleTitle }: JobApplicationFormProps) {
           name="email"
           type="email"
           required
-          className="w-full rounded-xl border border-ink/15 px-4 py-2.5 text-sm text-ink outline-none focus:border-primary"
+          className="w-full rounded-xl border border-ink/15 px-4 py-2.5 text-sm text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
         />
         {state.fieldErrors?.email && (
           <p className="mt-1 text-xs font-semibold text-red-600">{state.fieldErrors.email[0]}</p>
@@ -99,7 +99,7 @@ export function JobApplicationForm({ roleTitle }: JobApplicationFormProps) {
           id="app-phone"
           name="phone"
           type="tel"
-          className="w-full rounded-xl border border-ink/15 px-4 py-2.5 text-sm text-ink outline-none focus:border-primary"
+          className="w-full rounded-xl border border-ink/15 px-4 py-2.5 text-sm text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
         />
       </div>
 
@@ -111,7 +111,7 @@ export function JobApplicationForm({ roleTitle }: JobApplicationFormProps) {
           id="app-message"
           name="message"
           rows={3}
-          className="w-full rounded-xl border border-ink/15 px-4 py-2.5 text-sm text-ink outline-none focus:border-primary"
+          className="w-full rounded-xl border border-ink/15 px-4 py-2.5 text-sm text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
         />
       </div>
 
