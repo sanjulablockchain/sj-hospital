@@ -72,7 +72,7 @@ export function LocationMap() {
     <div
       ref={containerRef}
       aria-label="Interactive map showing St. Joseph Hospital Negombo location"
-      className="relative isolate h-80 w-full overflow-hidden rounded-2xl border border-ink/10"
+      className="relative isolate h-72 w-full sm:h-80 md:h-95"
     />
   );
 }
