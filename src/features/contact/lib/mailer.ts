@@ -1,23 +1,7 @@
 import "server-only";
-import nodemailer from "nodemailer";
+import { getTransporter } from "@/lib/mailer";
 import type { ContactMessageInput } from "../schemas";
-
-function getTransporter() {
-  const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS } = process.env;
-
-  if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS) {
-    throw new Error(
-      "SMTP is not configured: set SMTP_HOST, SMTP_PORT, SMTP_USER, and SMTP_PASS in .env.local"
-    );
-  }
-
-  return nodemailer.createTransport({
-    host: SMTP_HOST,
-    port: Number(SMTP_PORT),
-    secure: Number(SMTP_PORT) === 465,
-    auth: { user: SMTP_USER, pass: SMTP_PASS },
-  });
-}
+import { contactEmailHtml } from "./emailTemplate";
 
 export async function sendContactEmail(input: ContactMessageInput) {
   const { SMTP_FROM, CONTACT_TO_EMAILS } = process.env;
@@ -39,5 +23,6 @@ export async function sendContactEmail(input: ContactMessageInput) {
       "",
       input.message?.trim() || "(no message provided)",
     ].join("\n"),
+    html: contactEmailHtml(input),
   });
 }

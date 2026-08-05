@@ -49,7 +49,7 @@ export function WhyWorkWithUs() {
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {benefits.map((benefit, index) => (
             <RevealOnScroll key={benefit.title} delayMs={(index % 3) * 80}>
-              <div className="flex h-full items-start gap-3 rounded-[20px] border border-ink/10 bg-white p-6">
+              <div className="flex h-full items-start gap-3 rounded-[20px] border border-ink/10 bg-white p-6 transition hover:-translate-y-2 hover:shadow-[0_26px_48px_-24px_rgba(74,42,130,0.4)]">
                 <svg
                   width="20"
                   height="20"

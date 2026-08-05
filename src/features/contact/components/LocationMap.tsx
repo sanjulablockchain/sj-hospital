@@ -33,14 +33,30 @@ export function LocationMap() {
 
       const marker = L.divIcon({
         className: "",
-        html: '<div style="width:34px;height:34px;border-radius:9999px;background:#4A2A82;border:3px solid #33B4E5;box-shadow:0 6px 16px rgba(74,42,130,0.45);"></div>',
-        iconSize: [34, 34],
-        iconAnchor: [17, 17],
+        html: `
+          <svg width="36" height="46" viewBox="0 0 36 46" fill="none" xmlns="http://www.w3.org/2000/svg"
+            style="filter:drop-shadow(0 6px 8px rgba(30,27,46,0.35));">
+            <path d="M18 0C8.06 0 0 8.06 0 18c0 12.5 18 28 18 28s18-15.5 18-28C36 8.06 27.94 0 18 0Z"
+              fill="#4A2A82" stroke="#33B4E5" stroke-width="2" />
+            <circle cx="18" cy="18" r="7" fill="#ffffff" />
+          </svg>
+        `,
+        iconSize: [36, 46],
+        iconAnchor: [18, 46],
+        popupAnchor: [0, -42],
       });
+
+      const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${HOSPITAL_COORDS[0]},${HOSPITAL_COORDS[1]}`;
 
       L.marker(HOSPITAL_COORDS, { icon: marker })
         .addTo(map)
-        .bindPopup("St. Joseph Hospital Negombo");
+        .bindPopup(
+          `<div style="font-family:inherit;min-width:180px;">
+            <p style="margin:0 0 6px;font-weight:700;color:#1e1b2e;">St. Joseph Hospital Negombo</p>
+            <a href="${directionsUrl}" target="_blank" rel="noopener noreferrer"
+              style="color:#14769f;font-weight:600;text-decoration:none;">Get Directions &rarr;</a>
+          </div>`
+        );
 
       mapRef.current = map;
     });
@@ -56,7 +72,7 @@ export function LocationMap() {
     <div
       ref={containerRef}
       aria-label="Interactive map showing St. Joseph Hospital Negombo location"
-      className="h-80 w-full overflow-hidden rounded-2xl border border-ink/10"
+      className="relative isolate h-80 w-full overflow-hidden rounded-2xl border border-ink/10"
     />
   );
 }

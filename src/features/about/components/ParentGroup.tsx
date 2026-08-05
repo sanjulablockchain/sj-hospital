@@ -43,17 +43,19 @@ export function ParentGroup() {
           </div>
         </RevealOnScroll>
 
-        <div className="mt-14 flex flex-wrap items-center justify-center gap-10">
-          {partnerLogos.map((src) => (
-            <Image
-              key={src}
-              src={src}
-              alt="Partner organization logo"
-              width={140}
-              height={70}
-              className="h-12 w-auto object-contain opacity-80 grayscale"
-            />
-          ))}
+        <div className="relative mt-14 overflow-hidden mask-[linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+          <div className="flex w-max animate-marquee items-center gap-10 sm:gap-16 hover:[animation-play-state:paused]">
+            {[...partnerLogos, ...partnerLogos, ...partnerLogos, ...partnerLogos].map((src, index) => (
+              <Image
+                key={`${src}-${index}`}
+                src={src}
+                alt="Partner organization logo"
+                width={140}
+                height={70}
+                className="h-10 w-auto shrink-0 object-contain opacity-80 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0 sm:h-12"
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

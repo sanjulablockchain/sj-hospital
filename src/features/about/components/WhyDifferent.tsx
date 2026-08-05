@@ -45,7 +45,7 @@ export function WhyDifferent() {
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {reasons.map((reason, index) => (
             <RevealOnScroll key={reason.title} delayMs={(index % 3) * 80}>
-              <div className="h-full rounded-[22px] border border-ink/10 bg-white p-7">
+              <div className="h-full rounded-[22px] border border-ink/10 bg-white p-7 transition hover:-translate-y-2 hover:shadow-[0_26px_48px_-24px_rgba(74,42,130,0.4)]">
                 <h3 className="mb-2.5 font-heading text-[17px] font-bold text-ink">{reason.title}</h3>
                 <p className="text-sm leading-relaxed text-muted">{reason.description}</p>
               </div>

@@ -15,19 +15,20 @@ export function AccommodationPage() {
       <RoomTypes />
 
       <section className="bg-surface px-6 py-20">
-        <div className="mx-auto grid max-w-[1240px] gap-8 lg:grid-cols-2">
-          <SpecialtiesChecklist />
+        <div className="mx-auto flex max-w-[1240px] flex-col gap-8">
+          <div className="grid gap-8 lg:grid-cols-2 lg:items-stretch">
+            <SpecialtiesChecklist />
 
-          <div className="rounded-[22px] border border-ink/10 bg-white p-7 sm:p-8">
-            <h3 className="mb-1 font-heading text-xl font-bold text-ink">Book an Inpatient Room</h3>
-            <p className="mb-6 text-sm text-muted">
-              Send us a message and our team will help you find the right room.
-            </p>
-            <ContactForm />
-            <div className="mt-8 border-t border-ink/10 pt-6">
-              <ContactInfo />
+            <div className="flex h-full flex-col rounded-[22px] border border-ink/10 bg-white p-7 sm:p-8">
+              <h3 className="mb-1 font-heading text-xl font-bold text-primary">Book an Inpatient Room</h3>
+              <p className="mb-6 text-sm text-muted">
+                Send us a message and our team will help you find the right room.
+              </p>
+              <ContactForm />
             </div>
           </div>
+
+          <ContactInfo />
         </div>
       </section>
     </>

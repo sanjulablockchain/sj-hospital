@@ -13,13 +13,16 @@ const specialties = [
 
 export function SpecialtiesChecklist() {
   return (
-    <div className="rounded-[22px] border border-ink/10 bg-surface p-7 sm:p-8">
-      <h3 className="mb-5 font-heading text-xl font-bold text-ink">
+    <div className="rounded-[22px] border border-ink/10 bg-white p-7 sm:p-8">
+      <h3 className="mb-5 font-heading text-xl font-bold text-primary">
         Specialties of Our Inpatient Rooms
       </h3>
-      <ul className="space-y-3">
+      <ul className="flex flex-col gap-2.5">
         {specialties.map((item) => (
-          <li key={item} className="flex items-center gap-2.5 text-sm font-semibold text-ink">
+          <li
+            key={item}
+            className="flex items-center gap-2.5 rounded-full bg-surface px-4 py-3 text-sm font-semibold text-ink transition-colors duration-200 hover:bg-accent/10"
+          >
             <svg
               width="18"
               height="18"
