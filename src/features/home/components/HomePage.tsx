@@ -14,6 +14,7 @@ import { NetworkSection } from "./NetworkSection";
 import { MediaSection } from "./MediaSection";
 import { CareersSection } from "./CareersSection";
 import { TestimonialsSection } from "./TestimonialsSection";
+import { ContactCtaSection } from "./ContactCtaSection";
 import { HomeFooter } from "./HomeFooter";
 import { FloatingActions } from "./FloatingActions";
 
@@ -43,6 +44,7 @@ export function HomePage() {
           <MediaSection />
           <CareersSection />
           <TestimonialsSection />
+          <ContactCtaSection />
         </main>
         <HomeFooter />
         <FloatingActions />
