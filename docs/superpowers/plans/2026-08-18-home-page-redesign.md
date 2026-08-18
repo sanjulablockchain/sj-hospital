@@ -887,11 +887,13 @@ git commit -m "Add home page routing shell, footer, and floating actions"
 - Create: `src/features/home/components/MobileNavPanel.tsx`
 - Create: `src/features/home/components/HomeHeader.tsx`
 - Create: `src/features/home/components/StatTicker.tsx`
+- Create: `src/features/home/components/HeroParallaxBackground.tsx`
 - Create: `src/features/home/components/HeroSection.tsx`
 - Modify: `src/features/home/components/HomePage.tsx`
 
 **Interfaces:**
 - Consumes: `homeNavigation` (`@/config/homeNavigation`, Task 1), `ThemeToggleButton` (Task 2), `Reveal` (`./Reveal`, Task 3), `useParallax` (`../hooks/useParallax`, Task 3). Uses `/images/hero.jpg`.
+- `HeroParallaxBackground(): JSX.Element` — `'use client'` leaf, wraps the hero photo: outer wrapper gets the scroll-linked parallax offset from `useParallax(0.16, 130)` (matching the reference's `data-px="0.16"` on this exact layer), inner `<Image>` gets the `animate-sj-burns` Ken Burns zoom. These two motions must stay on separate elements — putting both a CSS `animation` and an inline `style.transform` on the same element makes them fight over the `transform` property.
 - Produces: `HeroSection(): JSX.Element`, wired as the first child of `HomePage`'s `<main>`. Renders `HomeHeader` internally (matching the reference: the header lives inside the hero section and scrolls away with it — it is **not** a persistent sticky bar). Declares the `id="top"` anchor. `MobileNavPanel({ items }: { items: NavItem[] }): JSX.Element`.
 
 - [ ] **Step 1: Create `src/features/home/components/MobileNavPanel.tsx`**
@@ -1038,27 +1040,50 @@ export function StatTicker() {
 }
 ```
 
-- [ ] **Step 4: Create `src/features/home/components/HeroSection.tsx`**
+- [ ] **Step 4: Create `src/features/home/components/HeroParallaxBackground.tsx`**
 
 ```tsx
+"use client";
+
 import Image from "next/image";
+import { useParallax } from "../hooks/useParallax";
+
+export function HeroParallaxBackground() {
+  const parallax = useParallax(0.16, 130);
+
+  return (
+    <div
+      ref={parallax.ref}
+      style={{ transform: `translateY(${parallax.offset}px)` }}
+      className="absolute inset-x-0 -top-[14%] h-[128%] overflow-hidden"
+    >
+      <Image
+        src="/images/hero.jpg"
+        alt="St. Joseph Hospital building at dusk"
+        fill
+        priority
+        className="animate-sj-burns object-cover"
+        style={{ objectPosition: "60% 50%" }}
+      />
+    </div>
+  );
+}
+```
+
+Note: the parallax offset (translateY, from scroll position) goes on the outer wrapper via inline `style`; the Ken Burns zoom (`animate-sj-burns`, a CSS `animation` on `transform: scale(...)`) goes on the inner `<Image>`. Keeping them on separate elements is required — an element cannot have both an animated `transform` and an inline-style `transform` without one overriding the other.
+
+- [ ] **Step 5: Create `src/features/home/components/HeroSection.tsx`**
+
+```tsx
 import { Reveal } from "./Reveal";
 import { HomeHeader } from "./HomeHeader";
+import { HeroParallaxBackground } from "./HeroParallaxBackground";
 import { StatTicker } from "./StatTicker";
 
 export function HeroSection() {
   return (
     <section id="top" className="relative flex min-h-screen flex-col overflow-hidden bg-[#060B1F]">
-      <div className="absolute inset-x-0 -top-[14%] h-[128%] overflow-hidden">
-        <Image
-          src="/images/hero.jpg"
-          alt="St. Joseph Hospital building at dusk"
-          fill
-          priority
-          className="animate-sj-burns object-cover"
-          style={{ objectPosition: "60% 50%" }}
-        />
-      </div>
+      <HeroParallaxBackground />
       <div
         className="absolute inset-0"
         style={{
@@ -1127,7 +1152,7 @@ export function HeroSection() {
 }
 ```
 
-- [ ] **Step 5: Wire it into `src/features/home/components/HomePage.tsx`**
+- [ ] **Step 6: Wire it into `src/features/home/components/HomePage.tsx`**
 
 ```tsx
 import { HomeThemeScript } from "./HomeThemeScript";
@@ -1158,7 +1183,7 @@ export function HomePage() {
 }
 ```
 
-- [ ] **Step 6: Verify**
+- [ ] **Step 7: Verify**
 
 Run:
 
@@ -1169,9 +1194,9 @@ npm run lint
 
 Expected: both exit with no errors.
 
-Check the browser: the hero fills the viewport with the dusk hospital photo, a slow Ken Burns zoom/drift, the headline "To live is **a** privilege." (the word "a" outlined, "privilege." in blue), the pulsing phone CTA, and the looping stat ticker below. Click the sun/moon icon; confirm `data-theme` on `#home-root` flips and persists across a page reload (check `localStorage.sj-home-theme`). Resize below 1120px and confirm the inline nav disappears and the hamburger appears; open it and confirm all 9 links + Book now work and close the panel. Resize to phone width and confirm the vertical "Negombo, Sri Lanka" rail disappears and the hero still reads cleanly. Toggle OS reduced-motion and confirm the Ken Burns zoom, sheen, scan, ticker, and pulse all stop.
+Check the browser: the hero fills the viewport with the dusk hospital photo, a slow Ken Burns zoom/drift (and, if you scroll a little, a slight parallax drift on the whole photo layer, independent of the zoom), the headline "To live is **a** privilege." (the word "a" outlined, "privilege." in blue), the pulsing phone CTA, and the looping stat ticker below. Click the sun/moon icon; confirm `data-theme` on `#home-root` flips and persists across a page reload (check `localStorage.sj-home-theme`). Resize below 1120px and confirm the inline nav disappears and the hamburger appears; open it and confirm all 9 links + Book now work and close the panel. Resize to phone width and confirm the vertical "Negombo, Sri Lanka" rail disappears and the hero still reads cleanly. Toggle OS reduced-motion and confirm the Ken Burns zoom, sheen, scan, ticker, and pulse all stop.
 
-- [ ] **Step 7: Commit**
+- [ ] **Step 8: Commit**
 
 ```bash
 git add src/features/home
@@ -1550,14 +1575,17 @@ git commit -m "Add services bento grid section"
 - Modify: `src/features/home/components/HomePage.tsx`
 
 **Interfaces:**
-- Consumes: `Reveal` (Task 3). Uses `/images/about-facility.jpg`.
+- Consumes: `Reveal`, `useParallax` (Task 3). Uses `/images/about-facility.jpg`.
 - Produces: `SurgicalSection(): JSX.Element`, wired after `ServicesBentoSection`. Declares `id="surgical"`.
 
 - [ ] **Step 1: Create `src/features/home/components/SurgicalSection.tsx`**
 
 ```tsx
+"use client";
+
 import Image from "next/image";
 import { Reveal } from "./Reveal";
+import { useParallax } from "../hooks/useParallax";
 
 const procedures = [
   { name: "General surgery", note: "Elective and emergency" },
@@ -1568,9 +1596,13 @@ const procedures = [
 ];
 
 export function SurgicalSection() {
+  const bg = useParallax(0.12, 80);
+
   return (
     <section id="surgical" className="relative mt-30 overflow-hidden bg-[#081A3A]">
-      <Image src="/images/about-facility.jpg" alt="" fill className="object-cover opacity-34" />
+      <div ref={bg.ref} style={{ transform: `translateY(${bg.offset}px)` }} className="absolute inset-x-0 -top-[10%] h-[120%]">
+        <Image src="/images/about-facility.jpg" alt="" fill className="object-cover opacity-34" />
+      </div>
       <div
         className="absolute inset-0"
         style={{
@@ -1642,7 +1674,7 @@ npm run lint
 
 Expected: both exit with no errors.
 
-Check the browser: a full-bleed section with a faint background photo appears, "Theatres run to protocol, not to habit" on the left with two buttons, and a 5-row procedure list on the right. Resize below 900px and confirm it stacks to one column.
+Check the browser: a full-bleed section with a faint background photo appears, "Theatres run to protocol, not to habit" on the left with two buttons, and a 5-row procedure list on the right. Scroll past it and confirm the background photo drifts slightly (parallax) rather than staying pinned. Resize below 900px and confirm it stacks to one column.
 
 - [ ] **Step 4: Commit**
 
