@@ -13,7 +13,7 @@ export function HeroParallaxBackground() {
       className="absolute inset-x-0 -top-[14%] h-[128%] overflow-hidden"
     >
       <Image
-        src="/images/hero.jpg"
+        src="/images/hero-exterior.png"
         alt="St. Joseph Hospital building at dusk"
         fill
         priority

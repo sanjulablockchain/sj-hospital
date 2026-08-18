@@ -16,7 +16,7 @@ export const facilities: FacilityCard[] = [
     body: "Purpose built in Negombo, with ambulance bay and covered arrival.",
     linkLabel: "Ambulance bay open 24/7",
     href: "#facilities",
-    photo: "/images/hero.jpg",
+    photo: "/images/hero-exterior.png",
     photoAlt: "Hospital exterior",
   },
   {
