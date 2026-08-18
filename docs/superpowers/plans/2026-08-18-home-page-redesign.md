@@ -333,9 +333,9 @@ export function HomeThemeScript() {
 
 import {
   createContext,
+  useCallback,
   useContext,
-  useEffect,
-  useState,
+  useSyncExternalStore,
   type ReactNode,
 } from "react";
 
@@ -345,29 +345,33 @@ type HomeThemeContextValue = { theme: Theme; toggle: () => void };
 const HomeThemeContext = createContext<HomeThemeContextValue | null>(null);
 const STORAGE_KEY = "sj-home-theme";
 
-function readCurrentDomTheme(): Theme {
+function getSnapshot(): Theme {
   const attr = document.getElementById("home-root")?.getAttribute("data-theme");
   return attr === "light" ? "light" : "dark";
 }
 
+function getServerSnapshot(): Theme {
+  return "dark";
+}
+
+function subscribe(onStoreChange: () => void) {
+  const node = document.getElementById("home-root");
+  if (!node) return () => {};
+  const observer = new MutationObserver(onStoreChange);
+  observer.observe(node, { attributes: true, attributeFilter: ["data-theme"] });
+  return () => observer.disconnect();
+}
+
 export function HomeThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("dark");
+  const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
-  useEffect(() => {
-    setTheme(readCurrentDomTheme());
+  const toggle = useCallback(() => {
+    const node = document.getElementById("home-root");
+    const current = node?.getAttribute("data-theme");
+    const next: Theme = current === "light" ? "dark" : "light";
+    node?.setAttribute("data-theme", next);
+    window.localStorage.setItem(STORAGE_KEY, next);
   }, []);
-
-  useEffect(() => {
-    document.getElementById("home-root")?.setAttribute("data-theme", theme);
-  }, [theme]);
-
-  const toggle = () => {
-    setTheme((current) => {
-      const next: Theme = current === "dark" ? "light" : "dark";
-      window.localStorage.setItem(STORAGE_KEY, next);
-      return next;
-    });
-  };
 
   return (
     <HomeThemeContext.Provider value={{ theme, toggle }}>
@@ -384,6 +388,8 @@ export function useHomeTheme() {
   return ctx;
 }
 ```
+
+Note: this reads the `data-theme` attribute on `#home-root` as the single source of truth via `useSyncExternalStore` (subscribed through a `MutationObserver`), rather than mirroring it into a separate `useState` updated from a `useEffect` — the latter pattern trips this repo's `react-hooks/set-state-in-effect` ESLint rule (part of `eslint-config-next`'s React Compiler-oriented rule set). `toggle()` mutates the DOM attribute directly and persists the choice; the `MutationObserver` subscription is what notifies React to re-render consumers, so no component-level effect ever calls `setState`.
 
 - [ ] **Step 3: Create `src/features/home/components/ThemeToggleButton.tsx`**
 
