@@ -7,6 +7,7 @@ import { SurgicalSection } from "./SurgicalSection";
 import { FacilitiesSection } from "./FacilitiesSection";
 import { PharmacySection } from "./PharmacySection";
 import { RoomsSection } from "./RoomsSection";
+import { InternationalCareSection } from "./InternationalCareSection";
 import { HomeFooter } from "./HomeFooter";
 import { FloatingActions } from "./FloatingActions";
 
@@ -29,6 +30,7 @@ export function HomePage() {
           <FacilitiesSection />
           <PharmacySection />
           <RoomsSection />
+          <InternationalCareSection />
         </main>
         <HomeFooter />
         <FloatingActions />
