@@ -23,6 +23,7 @@
 - Every animation (`sj-up`, `sj-tick`, `sj-pulse`, `sj-burns`, `sj-sheen`, `sj-scan`, and the `Reveal`/`useParallax` primitives) must be disabled under `prefers-reduced-motion: reduce`.
 - The services bento grid (Task 7) and facilities grid (Task 9) differ from the spec's literal file list in one place: bento tiles are hardcoded JSX (not a generic data array) because their 8 layouts are structurally heterogeneous (one accent hero tile, two wide photo tiles, five plain tiles) and forcing them through one generic shape would need more conditional branching than just writing them out — facilities' 4 cards stay data-driven since they share one shape. This keeps content still 100% ported verbatim; only the internal representation differs from the spec's file list.
 - No automated test suite exists in this repo (`CLAUDE.md`: "No test runner is configured yet"). Every task's verification is `npx tsc --noEmit`, `npm run lint`, and a manual check in the browser. `npm run build` runs once, in the final task.
+- This repo's ESLint config (`eslint-config-next`'s React Compiler-oriented `eslint-plugin-react-hooks` rule set) enforces two rules this plan's code must satisfy everywhere: (1) `react-hooks/set-state-in-effect` — never call `setState` synchronously in a `useEffect`'s top-level body (calling it inside an async callback like an event listener or `IntersectionObserver` callback is fine); (2) `react-hooks/refs` — never access a hook's returned ref via member-expression (`someHookResult.ref`) when the hook returns an object containing a ref — always destructure it to a plain local variable first (`const { ref, offset } = useParallax(...)`), everywhere `useParallax` is used in this plan.
 - `next lint`/`tsc` must stay clean (no `any`, no unused vars/imports) throughout.
 
 Start the dev server once, before Task 1, and leave it running for the rest of implementation:
@@ -889,7 +890,7 @@ git commit -m "Add home page routing shell, footer, and floating actions"
 - Modify: `src/features/home/components/HomePage.tsx`
 
 **Interfaces:**
-- Consumes: `homeNavigation` (`@/config/homeNavigation`, Task 1), `ThemeToggleButton` (Task 2), `Reveal` (`./Reveal`, Task 3), `useParallax` (`../hooks/useParallax`, Task 3). Uses `/images/hero.jpg`.
+- Consumes: `homeNavigation` (`@/config/homeNavigation`, Task 1), `ThemeToggleButton` (Task 2), `useParallax` (`../hooks/useParallax`, Task 3). Uses `/images/hero.jpg`. Note: `Reveal` (Task 3) is NOT used here — hero content animates once on load via the `sj-up` CSS class (already applied directly in the JSX below), not on scroll-into-view, since the hero is always in view on page load. Do not import `Reveal` in this task's files.
 - `HeroParallaxBackground(): JSX.Element` — `'use client'` leaf, wraps the hero photo: outer wrapper gets the scroll-linked parallax offset from `useParallax(0.16, 130)` (matching the reference's `data-px="0.16"` on this exact layer), inner `<Image>` gets the `animate-sj-burns` Ken Burns zoom. These two motions must stay on separate elements — putting both a CSS `animation` and an inline `style.transform` on the same element makes them fight over the `transform` property.
 - Produces: `HeroSection(): JSX.Element`, wired as the first child of `HomePage`'s `<main>`. Renders `HomeHeader` internally (matching the reference: the header lives inside the hero section and scrolls away with it — it is **not** a persistent sticky bar). Declares the `id="top"` anchor. `MobileNavPanel({ items }: { items: NavItem[] }): JSX.Element`.
 
@@ -1046,12 +1047,12 @@ import Image from "next/image";
 import { useParallax } from "../hooks/useParallax";
 
 export function HeroParallaxBackground() {
-  const parallax = useParallax(0.16, 130);
+  const { ref, offset } = useParallax(0.16, 130);
 
   return (
     <div
-      ref={parallax.ref}
-      style={{ transform: `translateY(${parallax.offset}px)` }}
+      ref={ref}
+      style={{ transform: `translateY(${offset}px)` }}
       className="absolute inset-x-0 -top-[14%] h-[128%] overflow-hidden"
     >
       <Image
@@ -1069,10 +1070,11 @@ export function HeroParallaxBackground() {
 
 Note: the parallax offset (translateY, from scroll position) goes on the outer wrapper via inline `style`; the Ken Burns zoom (`animate-sj-burns`, a CSS `animation` on `transform: scale(...)`) goes on the inner `<Image>`. Keeping them on separate elements is required — an element cannot have both an animated `transform` and an inline-style `transform` without one overriding the other.
 
+Note: `useParallax`'s return value is destructured (`const { ref, offset } = useParallax(...)`) rather than held as a single object and accessed via `.ref`/`.offset`. This repo's ESLint config (`eslint-plugin-react-hooks`'s `react-hooks/refs` rule, part of `eslint-config-next`'s React Compiler rule set) flags member-expression access on any object returned from a hook when one of its properties is a ref — destructuring to plain local variables avoids the false positive. Every other use of `useParallax` in this plan (Surgical, Pharmacy, Rooms, School Wellness sections) follows this same destructured pattern.
+
 - [ ] **Step 5: Create `src/features/home/components/HeroSection.tsx`**
 
 ```tsx
-import { Reveal } from "./Reveal";
 import { HomeHeader } from "./HomeHeader";
 import { HeroParallaxBackground } from "./HeroParallaxBackground";
 import { StatTicker } from "./StatTicker";
@@ -1593,11 +1595,11 @@ const procedures = [
 ];
 
 export function SurgicalSection() {
-  const bg = useParallax(0.12, 80);
+  const { ref: bgRef, offset: bgOffset } = useParallax(0.12, 80);
 
   return (
     <section id="surgical" className="relative mt-30 overflow-hidden bg-[#081A3A]">
-      <div ref={bg.ref} style={{ transform: `translateY(${bg.offset}px)` }} className="absolute inset-x-0 -top-[10%] h-[120%]">
+      <div ref={bgRef} style={{ transform: `translateY(${bgOffset}px)` }} className="absolute inset-x-0 -top-[10%] h-[120%]">
         <Image src="/images/about-facility.jpg" alt="" fill className="object-cover opacity-34" />
       </div>
       <div
@@ -1883,13 +1885,13 @@ const stats = [
 ];
 
 export function PharmacySection() {
-  const watermark = useParallax(0.1, 60);
+  const { ref: watermarkRef, offset: watermarkOffset } = useParallax(0.1, 60);
 
   return (
     <section id="pharmacy" className="relative mt-30 overflow-hidden bg-[#081A3A]">
       <div
-        ref={watermark.ref}
-        style={{ transform: `translateY(${watermark.offset}px)` }}
+        ref={watermarkRef}
+        style={{ transform: `translateY(${watermarkOffset}px)` }}
         className="pointer-events-none absolute -top-[20%] -left-[6%] w-[32%] opacity-12"
       >
         <Image src="/images/logo.png" alt="" width={480} height={480} className="h-auto w-full" />
@@ -1996,11 +1998,11 @@ import { useParallax } from "../hooks/useParallax";
 const perks = ["Private and semi private options", "Attendant space for family", "Meals prepared to dietary orders"];
 
 export function RoomsSection() {
-  const bg = useParallax(0.14, 90);
+  const { ref: bgRef, offset: bgOffset } = useParallax(0.14, 90);
 
   return (
     <section id="rooms" className="relative overflow-hidden bg-[#081A3A]">
-      <div ref={bg.ref} style={{ transform: `translateY(${bg.offset}px)` }} className="absolute inset-x-0 -top-[10%] h-[120%]">
+      <div ref={bgRef} style={{ transform: `translateY(${bgOffset}px)` }} className="absolute inset-x-0 -top-[10%] h-[120%]">
         <Image src="/images/rooms/deluxe-1.jpg" alt="" fill className="object-cover opacity-32" />
       </div>
       <div
@@ -2368,7 +2370,7 @@ const rows = [
 ];
 
 export function SchoolWellnessSection() {
-  const photo = useParallax(0.08, 50);
+  const { ref: photoRef, offset: photoOffset } = useParallax(0.08, 50);
 
   return (
     <section id="wellness" className="mx-auto max-w-[1440px] px-5 pt-30 sm:px-8 lg:px-11">
@@ -2400,7 +2402,7 @@ export function SchoolWellnessSection() {
           </a>
         </Reveal>
         <Reveal className="relative min-h-[450px] overflow-hidden bg-[#0B1846]">
-          <div ref={photo.ref} style={{ transform: `translateY(${photo.offset}px)` }} className="absolute inset-x-0 -top-[8%] h-[116%]">
+          <div ref={photoRef} style={{ transform: `translateY(${photoOffset}px)` }} className="absolute inset-x-0 -top-[8%] h-[116%]">
             <Image src="/images/career-staff.jpg" alt="Pediatric doctor with a young patient" fill className="object-cover" />
           </div>
           <div className="absolute inset-0" style={{ background: "linear-gradient(rgba(6,11,31,0) 40%, rgba(6,11,31,0.8) 100%)" }} />
