@@ -1,6 +1,7 @@
 import { HomeThemeScript } from "./HomeThemeScript";
 import { HomeThemeProvider } from "../hooks/useHomeTheme";
 import { HeroSection } from "./HeroSection";
+import { WhoWeAreSection } from "./WhoWeAreSection";
 import { HomeFooter } from "./HomeFooter";
 import { FloatingActions } from "./FloatingActions";
 
@@ -17,6 +18,7 @@ export function HomePage() {
       <HomeThemeProvider>
         <main>
           <HeroSection />
+          <WhoWeAreSection />
         </main>
         <HomeFooter />
         <FloatingActions />
