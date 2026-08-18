@@ -23,6 +23,7 @@
 - Every animation (`sj-up`, `sj-tick`, `sj-pulse`, `sj-burns`, `sj-sheen`, `sj-scan`, and the `Reveal`/`useParallax` primitives) must be disabled under `prefers-reduced-motion: reduce`.
 - The services bento grid (Task 7) and facilities grid (Task 9) differ from the spec's literal file list in one place: bento tiles are hardcoded JSX (not a generic data array) because their 8 layouts are structurally heterogeneous (one accent hero tile, two wide photo tiles, five plain tiles) and forcing them through one generic shape would need more conditional branching than just writing them out — facilities' 4 cards stay data-driven since they share one shape. This keeps content still 100% ported verbatim; only the internal representation differs from the spec's file list.
 - No automated test suite exists in this repo (`CLAUDE.md`: "No test runner is configured yet"). Every task's verification is `npx tsc --noEmit`, `npm run lint`, and a manual check in the browser. `npm run build` runs once, in the final task.
+- This repo's ESLint config (`eslint-config-next`'s React Compiler-oriented `eslint-plugin-react-hooks` rule set) enforces two rules this plan's code must satisfy everywhere: (1) `react-hooks/set-state-in-effect` — never call `setState` synchronously in a `useEffect`'s top-level body (calling it inside an async callback like an event listener or `IntersectionObserver` callback is fine); (2) `react-hooks/refs` — never access a hook's returned ref via member-expression (`someHookResult.ref`) when the hook returns an object containing a ref — always destructure it to a plain local variable first (`const { ref, offset } = useParallax(...)`), everywhere `useParallax` is used in this plan.
 - `next lint`/`tsc` must stay clean (no `any`, no unused vars/imports) throughout.
 
 Start the dev server once, before Task 1, and leave it running for the rest of implementation:
@@ -51,7 +52,7 @@ Open `http://localhost:3000` and keep the tab open — Fast Refresh updates it l
   - `--font-bricolage`, `--font-manrope` CSS variables set on `<html>` via `next/font/google`.
   - `src/config/homeNavigation.ts` exports `homeNavigation: NavItem[]` (reusing the existing `NavItem` type from `@/config/navigation`).
 
-- [ ] **Step 1: Append to `src/app/globals.css`**
+- [x] **Step 1: Append to `src/app/globals.css`**
 
 Add this block at the end of the existing file (after the current `@media (prefers-reduced-motion: reduce)` block that ends the file):
 
@@ -192,7 +193,7 @@ Add this block at the end of the existing file (after the current `@media (prefe
 }
 ```
 
-- [ ] **Step 2: Modify `src/app/layout.tsx`**
+- [x] **Step 2: Modify `src/app/layout.tsx`**
 
 Replace the full file with (adds the two new font loaders and their variable classes; keeps everything else identical):
 
@@ -250,7 +251,7 @@ export default function RootLayout({
 }
 ```
 
-- [ ] **Step 3: Create `src/config/homeNavigation.ts`**
+- [x] **Step 3: Create `src/config/homeNavigation.ts`**
 
 ```ts
 import type { NavItem } from "@/config/navigation";
@@ -268,7 +269,7 @@ export const homeNavigation: NavItem[] = [
 ];
 ```
 
-- [ ] **Step 4: Verify**
+- [x] **Step 4: Verify**
 
 Run:
 
@@ -281,7 +282,7 @@ Expected: both exit with no errors.
 
 Check the browser: `http://localhost:3000` should render exactly as before (the old homepage is still in place; this task only adds unused-so-far tokens/fonts/config). No visual change is expected yet.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/app/globals.css src/app/layout.tsx src/config/homeNavigation.ts
@@ -304,7 +305,7 @@ git commit -m "Add home page v2 design tokens, fonts, and nav config"
   - `HomeThemeProvider({ children }): JSX.Element` and `useHomeTheme(): { theme: "dark" | "light"; toggle: () => void }` from `@/features/home/hooks/useHomeTheme` — the provider must wrap everything rendered inside `#home-root`.
   - `ThemeToggleButton(): JSX.Element` — `'use client'`, renders a sun/moon icon button that calls `toggle()`.
 
-- [ ] **Step 1: Create `src/features/home/components/HomeThemeScript.tsx`**
+- [x] **Step 1: Create `src/features/home/components/HomeThemeScript.tsx`**
 
 ```tsx
 const THEME_INIT_SCRIPT = `
@@ -326,16 +327,16 @@ export function HomeThemeScript() {
 }
 ```
 
-- [ ] **Step 2: Create `src/features/home/hooks/useHomeTheme.tsx`**
+- [x] **Step 2: Create `src/features/home/hooks/useHomeTheme.tsx`**
 
 ```tsx
 "use client";
 
 import {
   createContext,
+  useCallback,
   useContext,
-  useEffect,
-  useState,
+  useSyncExternalStore,
   type ReactNode,
 } from "react";
 
@@ -345,29 +346,33 @@ type HomeThemeContextValue = { theme: Theme; toggle: () => void };
 const HomeThemeContext = createContext<HomeThemeContextValue | null>(null);
 const STORAGE_KEY = "sj-home-theme";
 
-function readCurrentDomTheme(): Theme {
+function getSnapshot(): Theme {
   const attr = document.getElementById("home-root")?.getAttribute("data-theme");
   return attr === "light" ? "light" : "dark";
 }
 
+function getServerSnapshot(): Theme {
+  return "dark";
+}
+
+function subscribe(onStoreChange: () => void) {
+  const node = document.getElementById("home-root");
+  if (!node) return () => {};
+  const observer = new MutationObserver(onStoreChange);
+  observer.observe(node, { attributes: true, attributeFilter: ["data-theme"] });
+  return () => observer.disconnect();
+}
+
 export function HomeThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("dark");
+  const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
-  useEffect(() => {
-    setTheme(readCurrentDomTheme());
+  const toggle = useCallback(() => {
+    const node = document.getElementById("home-root");
+    const current = node?.getAttribute("data-theme");
+    const next: Theme = current === "light" ? "dark" : "light";
+    node?.setAttribute("data-theme", next);
+    window.localStorage.setItem(STORAGE_KEY, next);
   }, []);
-
-  useEffect(() => {
-    document.getElementById("home-root")?.setAttribute("data-theme", theme);
-  }, [theme]);
-
-  const toggle = () => {
-    setTheme((current) => {
-      const next: Theme = current === "dark" ? "light" : "dark";
-      window.localStorage.setItem(STORAGE_KEY, next);
-      return next;
-    });
-  };
 
   return (
     <HomeThemeContext.Provider value={{ theme, toggle }}>
@@ -385,7 +390,9 @@ export function useHomeTheme() {
 }
 ```
 
-- [ ] **Step 3: Create `src/features/home/components/ThemeToggleButton.tsx`**
+Note: this reads the `data-theme` attribute on `#home-root` as the single source of truth via `useSyncExternalStore` (subscribed through a `MutationObserver`), rather than mirroring it into a separate `useState` updated from a `useEffect` — the latter pattern trips this repo's `react-hooks/set-state-in-effect` ESLint rule (part of `eslint-config-next`'s React Compiler-oriented rule set). `toggle()` mutates the DOM attribute directly and persists the choice; the `MutationObserver` subscription is what notifies React to re-render consumers, so no component-level effect ever calls `setState`.
+
+- [x] **Step 3: Create `src/features/home/components/ThemeToggleButton.tsx`**
 
 ```tsx
 "use client";
@@ -410,7 +417,7 @@ export function ThemeToggleButton() {
 }
 ```
 
-- [ ] **Step 4: Verify**
+- [x] **Step 4: Verify**
 
 Run:
 
@@ -421,7 +428,7 @@ npm run lint
 
 Expected: both exit with no errors. Nothing renders yet (no host uses these components until Task 4), so there is no browser check for this task.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/features/home/components/HomeThemeScript.tsx src/features/home/hooks/useHomeTheme.tsx src/features/home/components/ThemeToggleButton.tsx
@@ -442,7 +449,7 @@ git commit -m "Add home page theme engine (script, provider, toggle button)"
   - `Reveal({ children, className? }): JSX.Element` — `'use client'`, wraps children, fades/slides them in once when scrolled into view; renders visible immediately under `prefers-reduced-motion: reduce`.
   - `useParallax(factor?: number, maxOffsetPx?: number): { ref: RefObject<HTMLDivElement | null>; offset: number }` — `'use client'` hook, `offset` is a translateY in px, `0` (no-op) under `prefers-reduced-motion: reduce`.
 
-- [ ] **Step 1: Create `src/features/home/components/Reveal.tsx`**
+- [x] **Step 1: Create `src/features/home/components/Reveal.tsx`**
 
 ```tsx
 "use client";
@@ -463,15 +470,6 @@ export function Reveal({ children, className = "" }: RevealProps) {
     const node = ref.current;
     if (!node) return;
 
-    const prefersReducedMotion =
-      typeof window.matchMedia === "function" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (prefersReducedMotion) {
-      setIsVisible(true);
-      return;
-    }
-
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -489,7 +487,7 @@ export function Reveal({ children, className = "" }: RevealProps) {
   return (
     <div
       ref={ref}
-      className={`transition-all duration-[850ms] ease-out ${
+      className={`transition-all duration-[850ms] ease-out motion-reduce:transition-none motion-reduce:opacity-100 motion-reduce:translate-y-0 ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[34px]"
       } ${className}`}
     >
@@ -499,7 +497,7 @@ export function Reveal({ children, className = "" }: RevealProps) {
 }
 ```
 
-- [ ] **Step 2: Create `src/features/home/hooks/useParallax.ts`**
+- [x] **Step 2: Create `src/features/home/hooks/useParallax.ts`**
 
 ```ts
 "use client";
@@ -556,7 +554,7 @@ export function useParallax(factor = 0.1, maxOffsetPx = 120) {
 }
 ```
 
-- [ ] **Step 3: Verify**
+- [x] **Step 3: Verify**
 
 Run:
 
@@ -567,7 +565,7 @@ npm run lint
 
 Expected: both exit with no errors. No browser check yet (no host until Task 5).
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add src/features/home/components/Reveal.tsx src/features/home/hooks/useParallax.ts
@@ -592,7 +590,7 @@ git commit -m "Add scroll-reveal and parallax primitives for the home page"
 - Consumes: `HomeThemeScript`, `HomeThemeProvider` (Task 2).
 - Produces: `HomePage(): JSX.Element` from `@/features/home`, rendering the `#home-root` wrapper with theme script + provider + empty `<main>` (sections added starting Task 5) + `HomeFooter` + `FloatingActions`. The `/` route renders this directly (no shared `SiteHeader`/`SiteFooter`). `WhatsAppIcon`, `FacebookIcon`, `InstagramIcon`, `LinkedInIcon`, `CallIcon`: `(props: { className?: string }) => JSX.Element` from `./icons`, reused by `FloatingActions` and `HomeFooter`.
 
-- [ ] **Step 1: Remove the old home feature implementation and old home route**
+- [x] **Step 1: Remove the old home feature implementation and old home route**
 
 ```bash
 git rm src/app/\(marketing\)/page.tsx
@@ -600,7 +598,7 @@ git rm src/features/home/index.tsx
 git rm src/features/home/components/CtaBanner.tsx src/features/home/components/Doctors.tsx src/features/home/components/Hero.tsx src/features/home/components/HeroImageCard.tsx src/features/home/components/HeroParallaxLayer.tsx src/features/home/components/Services.tsx src/features/home/components/StatsBar.tsx src/features/home/components/Testimonials.tsx src/features/home/components/Welcome.tsx src/features/home/components/WhyChooseUs.tsx
 ```
 
-- [ ] **Step 2: Create `src/features/home/components/icons.tsx`**
+- [x] **Step 2: Create `src/features/home/components/icons.tsx`**
 
 ```tsx
 type IconProps = {
@@ -648,7 +646,7 @@ export function CallIcon({ className = "" }: IconProps) {
 }
 ```
 
-- [ ] **Step 3: Create `src/features/home/components/FloatingActions.tsx`**
+- [x] **Step 3: Create `src/features/home/components/FloatingActions.tsx`**
 
 ```tsx
 "use client";
@@ -699,7 +697,7 @@ export function FloatingActions() {
 }
 ```
 
-- [ ] **Step 4: Create `src/features/home/components/HomeFooter.tsx`**
+- [x] **Step 4: Create `src/features/home/components/HomeFooter.tsx`**
 
 ```tsx
 import Image from "next/image";
@@ -815,7 +813,7 @@ export function HomeFooter() {
 }
 ```
 
-- [ ] **Step 5: Create `src/features/home/components/HomePage.tsx`**
+- [x] **Step 5: Create `src/features/home/components/HomePage.tsx`**
 
 ```tsx
 import { HomeThemeScript } from "./HomeThemeScript";
@@ -843,13 +841,13 @@ export function HomePage() {
 }
 ```
 
-- [ ] **Step 6: Create `src/features/home/index.ts`**
+- [x] **Step 6: Create `src/features/home/index.ts`**
 
 ```ts
 export { HomePage } from "./components/HomePage";
 ```
 
-- [ ] **Step 7: Create `src/app/page.tsx`**
+- [x] **Step 7: Create `src/app/page.tsx`**
 
 ```tsx
 import { HomePage } from "@/features/home";
@@ -859,7 +857,7 @@ export default function Page() {
 }
 ```
 
-- [ ] **Step 8: Verify**
+- [x] **Step 8: Verify**
 
 Run:
 
@@ -872,7 +870,7 @@ Expected: both exit with no errors.
 
 Check the browser: `http://localhost:3000` now shows a dark, empty page (no shared `SiteHeader` at the top anymore) with the new footer at the bottom and the WhatsApp/Call floating buttons at the bottom-right (the pulsing call button should visibly pulse). Click the theme toggle... wait, there's no toggle yet (that's added with the header in Task 5) — instead, confirm in the browser devtools that `<div id="home-root">` has `data-theme="dark"`. Confirm every other route (`/about-us`, `/services`, `/career`, `/contact-us`, `/accommodation`, `/e-channeling`) still renders with the old shared header/footer, unaffected.
 
-- [ ] **Step 9: Commit**
+- [x] **Step 9: Commit**
 
 ```bash
 git add -A
@@ -887,14 +885,16 @@ git commit -m "Add home page routing shell, footer, and floating actions"
 - Create: `src/features/home/components/MobileNavPanel.tsx`
 - Create: `src/features/home/components/HomeHeader.tsx`
 - Create: `src/features/home/components/StatTicker.tsx`
+- Create: `src/features/home/components/HeroParallaxBackground.tsx`
 - Create: `src/features/home/components/HeroSection.tsx`
 - Modify: `src/features/home/components/HomePage.tsx`
 
 **Interfaces:**
-- Consumes: `homeNavigation` (`@/config/homeNavigation`, Task 1), `ThemeToggleButton` (Task 2), `Reveal` (`./Reveal`, Task 3), `useParallax` (`../hooks/useParallax`, Task 3). Uses `/images/hero.jpg`.
+- Consumes: `homeNavigation` (`@/config/homeNavigation`, Task 1), `ThemeToggleButton` (Task 2), `useParallax` (`../hooks/useParallax`, Task 3). Uses `/images/hero.jpg`. Note: `Reveal` (Task 3) is NOT used here — hero content animates once on load via the `sj-up` CSS class (already applied directly in the JSX below), not on scroll-into-view, since the hero is always in view on page load. Do not import `Reveal` in this task's files.
+- `HeroParallaxBackground(): JSX.Element` — `'use client'` leaf, wraps the hero photo: outer wrapper gets the scroll-linked parallax offset from `useParallax(0.16, 130)` (matching the reference's `data-px="0.16"` on this exact layer), inner `<Image>` gets the `animate-sj-burns` Ken Burns zoom. These two motions must stay on separate elements — putting both a CSS `animation` and an inline `style.transform` on the same element makes them fight over the `transform` property.
 - Produces: `HeroSection(): JSX.Element`, wired as the first child of `HomePage`'s `<main>`. Renders `HomeHeader` internally (matching the reference: the header lives inside the hero section and scrolls away with it — it is **not** a persistent sticky bar). Declares the `id="top"` anchor. `MobileNavPanel({ items }: { items: NavItem[] }): JSX.Element`.
 
-- [ ] **Step 1: Create `src/features/home/components/MobileNavPanel.tsx`**
+- [x] **Step 1: Create `src/features/home/components/MobileNavPanel.tsx`**
 
 ```tsx
 "use client";
@@ -953,7 +953,7 @@ export function MobileNavPanel({ items }: MobileNavPanelProps) {
 }
 ```
 
-- [ ] **Step 2: Create `src/features/home/components/HomeHeader.tsx`**
+- [x] **Step 2: Create `src/features/home/components/HomeHeader.tsx`**
 
 ```tsx
 import Image from "next/image";
@@ -999,7 +999,7 @@ export function HomeHeader() {
 
 Note: the hero always renders on the reference's dark background regardless of the page's theme (`data-fixed-dark` in the reference), so the header here uses hardcoded white/near-white text rather than the `--home-heading`/`--home-body` tokens, matching that fixed-dark behavior.
 
-- [ ] **Step 3: Create `src/features/home/components/StatTicker.tsx`**
+- [x] **Step 3: Create `src/features/home/components/StatTicker.tsx`**
 
 ```tsx
 const tickerItems = [
@@ -1038,27 +1038,51 @@ export function StatTicker() {
 }
 ```
 
-- [ ] **Step 4: Create `src/features/home/components/HeroSection.tsx`**
+- [x] **Step 4: Create `src/features/home/components/HeroParallaxBackground.tsx`**
 
 ```tsx
+"use client";
+
 import Image from "next/image";
-import { Reveal } from "./Reveal";
+import { useParallax } from "../hooks/useParallax";
+
+export function HeroParallaxBackground() {
+  const { ref, offset } = useParallax(0.16, 130);
+
+  return (
+    <div
+      ref={ref}
+      style={{ transform: `translateY(${offset}px)` }}
+      className="absolute inset-x-0 -top-[14%] h-[128%] overflow-hidden"
+    >
+      <Image
+        src="/images/hero.jpg"
+        alt="St. Joseph Hospital building at dusk"
+        fill
+        priority
+        className="animate-sj-burns object-cover"
+        style={{ objectPosition: "60% 50%" }}
+      />
+    </div>
+  );
+}
+```
+
+Note: the parallax offset (translateY, from scroll position) goes on the outer wrapper via inline `style`; the Ken Burns zoom (`animate-sj-burns`, a CSS `animation` on `transform: scale(...)`) goes on the inner `<Image>`. Keeping them on separate elements is required — an element cannot have both an animated `transform` and an inline-style `transform` without one overriding the other.
+
+Note: `useParallax`'s return value is destructured (`const { ref, offset } = useParallax(...)`) rather than held as a single object and accessed via `.ref`/`.offset`. This repo's ESLint config (`eslint-plugin-react-hooks`'s `react-hooks/refs` rule, part of `eslint-config-next`'s React Compiler rule set) flags member-expression access on any object returned from a hook when one of its properties is a ref — destructuring to plain local variables avoids the false positive. Every other use of `useParallax` in this plan (Surgical, Pharmacy, Rooms, School Wellness sections) follows this same destructured pattern.
+
+- [x] **Step 5: Create `src/features/home/components/HeroSection.tsx`**
+
+```tsx
 import { HomeHeader } from "./HomeHeader";
+import { HeroParallaxBackground } from "./HeroParallaxBackground";
 import { StatTicker } from "./StatTicker";
 
 export function HeroSection() {
   return (
     <section id="top" className="relative flex min-h-screen flex-col overflow-hidden bg-[#060B1F]">
-      <div className="absolute inset-x-0 -top-[14%] h-[128%] overflow-hidden">
-        <Image
-          src="/images/hero.jpg"
-          alt="St. Joseph Hospital building at dusk"
-          fill
-          priority
-          className="animate-sj-burns object-cover"
-          style={{ objectPosition: "60% 50%" }}
-        />
-      </div>
+      <HeroParallaxBackground />
       <div
         className="absolute inset-0"
         style={{
@@ -1127,7 +1151,7 @@ export function HeroSection() {
 }
 ```
 
-- [ ] **Step 5: Wire it into `src/features/home/components/HomePage.tsx`**
+- [x] **Step 6: Wire it into `src/features/home/components/HomePage.tsx`**
 
 ```tsx
 import { HomeThemeScript } from "./HomeThemeScript";
@@ -1158,7 +1182,7 @@ export function HomePage() {
 }
 ```
 
-- [ ] **Step 6: Verify**
+- [x] **Step 7: Verify**
 
 Run:
 
@@ -1169,9 +1193,9 @@ npm run lint
 
 Expected: both exit with no errors.
 
-Check the browser: the hero fills the viewport with the dusk hospital photo, a slow Ken Burns zoom/drift, the headline "To live is **a** privilege." (the word "a" outlined, "privilege." in blue), the pulsing phone CTA, and the looping stat ticker below. Click the sun/moon icon; confirm `data-theme` on `#home-root` flips and persists across a page reload (check `localStorage.sj-home-theme`). Resize below 1120px and confirm the inline nav disappears and the hamburger appears; open it and confirm all 9 links + Book now work and close the panel. Resize to phone width and confirm the vertical "Negombo, Sri Lanka" rail disappears and the hero still reads cleanly. Toggle OS reduced-motion and confirm the Ken Burns zoom, sheen, scan, ticker, and pulse all stop.
+Check the browser: the hero fills the viewport with the dusk hospital photo, a slow Ken Burns zoom/drift (and, if you scroll a little, a slight parallax drift on the whole photo layer, independent of the zoom), the headline "To live is **a** privilege." (the word "a" outlined, "privilege." in blue), the pulsing phone CTA, and the looping stat ticker below. Click the sun/moon icon; confirm `data-theme` on `#home-root` flips and persists across a page reload (check `localStorage.sj-home-theme`). Resize below 1120px and confirm the inline nav disappears and the hamburger appears; open it and confirm all 9 links + Book now work and close the panel. Resize to phone width and confirm the vertical "Negombo, Sri Lanka" rail disappears and the hero still reads cleanly. Toggle OS reduced-motion and confirm the Ken Burns zoom, sheen, scan, ticker, and pulse all stop.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 8: Commit**
 
 ```bash
 git add src/features/home
@@ -1190,7 +1214,7 @@ git commit -m "Add home page header and hero section"
 - Consumes: `Reveal` (Task 3).
 - Produces: `WhoWeAreSection(): JSX.Element`, wired after `HeroSection`. Declares `id="standards"`.
 
-- [ ] **Step 1: Create `src/features/home/components/WhoWeAreSection.tsx`**
+- [x] **Step 1: Create `src/features/home/components/WhoWeAreSection.tsx`**
 
 ```tsx
 import { Reveal } from "./Reveal";
@@ -1253,7 +1277,7 @@ export function WhoWeAreSection() {
 }
 ```
 
-- [ ] **Step 2: Wire it into `HomePage.tsx`**
+- [x] **Step 2: Wire it into `HomePage.tsx`**
 
 In `src/features/home/components/HomePage.tsx`, add the import and render it after `<HeroSection />`:
 
@@ -1268,7 +1292,7 @@ import { WhoWeAreSection } from "./WhoWeAreSection";
         </main>
 ```
 
-- [ ] **Step 3: Verify**
+- [x] **Step 3: Verify**
 
 Run:
 
@@ -1281,7 +1305,7 @@ Expected: both exit with no errors.
 
 Check the browser: below the hero, "A US hospital in a Sri Lankan neighbourhood" appears on the left with body copy and three stat tiles (24 / 2h / 0) on the right. Scroll it into view and confirm the paragraphs and stat row fade/slide in once. On a wide viewport, scroll past the heading and confirm the left column stays pinned (`sticky`) while the right column continues scrolling. Resize below 900px and confirm it stacks to one column with no stickiness. Resize below 640px and confirm the 3 stat tiles stack to 1 column.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add src/features/home
@@ -1300,7 +1324,7 @@ git commit -m "Add who-we-are section"
 - Consumes: `Reveal` (Task 3). Uses `/images/about-facility.jpg`, `/images/doctors.jpg`.
 - Produces: `ServicesBentoSection(): JSX.Element`, wired after `WhoWeAreSection`. Declares `id="services"`.
 
-- [ ] **Step 1: Create `src/features/home/components/ServicesBentoSection.tsx`**
+- [x] **Step 1: Create `src/features/home/components/ServicesBentoSection.tsx`**
 
 ```tsx
 import Image from "next/image";
@@ -1508,7 +1532,7 @@ export function ServicesBentoSection() {
 }
 ```
 
-- [ ] **Step 2: Wire it into `HomePage.tsx`**
+- [x] **Step 2: Wire it into `HomePage.tsx`**
 
 Add the import and render after `<WhoWeAreSection />`:
 
@@ -1521,7 +1545,7 @@ import { ServicesBentoSection } from "./ServicesBentoSection";
           <ServicesBentoSection />
 ```
 
-- [ ] **Step 3: Verify**
+- [x] **Step 3: Verify**
 
 Run:
 
@@ -1534,7 +1558,7 @@ Expected: both exit with no errors.
 
 Check the browser: an 8-tile grid appears (accent-filled "Walk in at any hour" tile spanning 2x2, two photo-background wide tiles, five plain tiles), followed by the full-width "Go to surgical care & services" banner. Resize to ~1000px and confirm the grid becomes 2 columns; resize to phone width and confirm it becomes 1 column with every tile still fully readable. Confirm the "Open now" dot pulses.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add src/features/home
@@ -1550,14 +1574,17 @@ git commit -m "Add services bento grid section"
 - Modify: `src/features/home/components/HomePage.tsx`
 
 **Interfaces:**
-- Consumes: `Reveal` (Task 3). Uses `/images/about-facility.jpg`.
+- Consumes: `Reveal`, `useParallax` (Task 3). Uses `/images/about-facility.jpg`.
 - Produces: `SurgicalSection(): JSX.Element`, wired after `ServicesBentoSection`. Declares `id="surgical"`.
 
-- [ ] **Step 1: Create `src/features/home/components/SurgicalSection.tsx`**
+- [x] **Step 1: Create `src/features/home/components/SurgicalSection.tsx`**
 
 ```tsx
+"use client";
+
 import Image from "next/image";
 import { Reveal } from "./Reveal";
+import { useParallax } from "../hooks/useParallax";
 
 const procedures = [
   { name: "General surgery", note: "Elective and emergency" },
@@ -1568,9 +1595,13 @@ const procedures = [
 ];
 
 export function SurgicalSection() {
+  const { ref: bgRef, offset: bgOffset } = useParallax(0.12, 80);
+
   return (
     <section id="surgical" className="relative mt-30 overflow-hidden bg-[#081A3A]">
-      <Image src="/images/about-facility.jpg" alt="" fill className="object-cover opacity-34" />
+      <div ref={bgRef} style={{ transform: `translateY(${bgOffset}px)` }} className="absolute inset-x-0 -top-[10%] h-[120%]">
+        <Image src="/images/about-facility.jpg" alt="" fill className="object-cover opacity-34" />
+      </div>
       <div
         className="absolute inset-0"
         style={{
@@ -1620,7 +1651,7 @@ export function SurgicalSection() {
 }
 ```
 
-- [ ] **Step 2: Wire it into `HomePage.tsx`**
+- [x] **Step 2: Wire it into `HomePage.tsx`**
 
 ```tsx
 import { SurgicalSection } from "./SurgicalSection";
@@ -1631,7 +1662,7 @@ import { SurgicalSection } from "./SurgicalSection";
           <SurgicalSection />
 ```
 
-- [ ] **Step 3: Verify**
+- [x] **Step 3: Verify**
 
 Run:
 
@@ -1642,9 +1673,9 @@ npm run lint
 
 Expected: both exit with no errors.
 
-Check the browser: a full-bleed section with a faint background photo appears, "Theatres run to protocol, not to habit" on the left with two buttons, and a 5-row procedure list on the right. Resize below 900px and confirm it stacks to one column.
+Check the browser: a full-bleed section with a faint background photo appears, "Theatres run to protocol, not to habit" on the left with two buttons, and a 5-row procedure list on the right. Scroll past it and confirm the background photo drifts slightly (parallax) rather than staying pinned. Resize below 900px and confirm it stacks to one column.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add src/features/home
@@ -1664,7 +1695,7 @@ git commit -m "Add surgical care section"
 - Consumes: `Reveal` (Task 3).
 - Produces: `facilities: FacilityCard[]` from `../data/facilities`; `FacilitiesSection(): JSX.Element`, wired after `SurgicalSection`. Declares `id="facilities"`.
 
-- [ ] **Step 1: Create `src/features/home/data/facilities.ts`**
+- [x] **Step 1: Create `src/features/home/data/facilities.ts`**
 
 ```ts
 export type FacilityCard = {
@@ -1717,7 +1748,7 @@ export const facilities: FacilityCard[] = [
 ];
 ```
 
-- [ ] **Step 2: Create `src/features/home/components/FacilitiesSection.tsx`**
+- [x] **Step 2: Create `src/features/home/components/FacilitiesSection.tsx`**
 
 ```tsx
 import Image from "next/image";
@@ -1794,7 +1825,7 @@ export function FacilitiesSection() {
 }
 ```
 
-- [ ] **Step 3: Wire it into `HomePage.tsx`**
+- [x] **Step 3: Wire it into `HomePage.tsx`**
 
 ```tsx
 import { FacilitiesSection } from "./FacilitiesSection";
@@ -1805,7 +1836,7 @@ import { FacilitiesSection } from "./FacilitiesSection";
           <FacilitiesSection />
 ```
 
-- [ ] **Step 4: Verify**
+- [x] **Step 4: Verify**
 
 Run:
 
@@ -1818,7 +1849,7 @@ Expected: both exit with no errors.
 
 Check the browser: 4 cards appear (3 photo cards + 1 accent-filled "Inpatient rooms" card with no photo). Hover a photo card on desktop and confirm the photo zooms slightly, the bottom accent bar grows in from the left, and the "..." link fades up into view. Resize below 1024px and confirm 2 columns, below 640px and confirm 1 column.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/features/home
@@ -1837,7 +1868,7 @@ git commit -m "Add facilities section"
 - Consumes: `Reveal` (Task 3), `useParallax` (Task 3). Uses `/images/logo.png` as a faint watermark.
 - Produces: `PharmacySection(): JSX.Element`, wired after `FacilitiesSection`. Declares `id="pharmacy"`.
 
-- [ ] **Step 1: Create `src/features/home/components/PharmacySection.tsx`**
+- [x] **Step 1: Create `src/features/home/components/PharmacySection.tsx`**
 
 ```tsx
 "use client";
@@ -1854,13 +1885,13 @@ const stats = [
 ];
 
 export function PharmacySection() {
-  const watermark = useParallax(0.1, 60);
+  const { ref: watermarkRef, offset: watermarkOffset } = useParallax(0.1, 60);
 
   return (
     <section id="pharmacy" className="relative mt-30 overflow-hidden bg-[#081A3A]">
       <div
-        ref={watermark.ref}
-        style={{ transform: `translateY(${watermark.offset}px)` }}
+        ref={watermarkRef}
+        style={{ transform: `translateY(${watermarkOffset}px)` }}
         className="pointer-events-none absolute -top-[20%] -left-[6%] w-[32%] opacity-12"
       >
         <Image src="/images/logo.png" alt="" width={480} height={480} className="h-auto w-full" />
@@ -1912,7 +1943,7 @@ export function PharmacySection() {
 }
 ```
 
-- [ ] **Step 2: Wire it into `HomePage.tsx`**
+- [x] **Step 2: Wire it into `HomePage.tsx`**
 
 ```tsx
 import { PharmacySection } from "./PharmacySection";
@@ -1923,7 +1954,7 @@ import { PharmacySection } from "./PharmacySection";
           <PharmacySection />
 ```
 
-- [ ] **Step 3: Verify**
+- [x] **Step 3: Verify**
 
 Run:
 
@@ -1936,7 +1967,7 @@ Expected: both exit with no errors.
 
 Check the browser: "Authorized medicine. Nothing else." appears with two buttons on the left and a 4-row stat list (24/7, Negombo, Digital, 10%) on the right, with a faint logo watermark in the top-left corner that drifts very slightly as you scroll. Resize below 900px and confirm it stacks.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add src/features/home
@@ -1955,7 +1986,7 @@ git commit -m "Add pharmacy section"
 - Consumes: `Reveal`, `useParallax` (Task 3). Uses a photo from `/images/rooms/`.
 - Produces: `RoomsSection(): JSX.Element`, wired after `PharmacySection`. Declares `id="rooms"`.
 
-- [ ] **Step 1: Create `src/features/home/components/RoomsSection.tsx`**
+- [x] **Step 1: Create `src/features/home/components/RoomsSection.tsx`**
 
 ```tsx
 "use client";
@@ -1967,11 +1998,11 @@ import { useParallax } from "../hooks/useParallax";
 const perks = ["Private and semi private options", "Attendant space for family", "Meals prepared to dietary orders"];
 
 export function RoomsSection() {
-  const bg = useParallax(0.14, 90);
+  const { ref: bgRef, offset: bgOffset } = useParallax(0.14, 90);
 
   return (
     <section id="rooms" className="relative overflow-hidden bg-[#081A3A]">
-      <div ref={bg.ref} style={{ transform: `translateY(${bg.offset}px)` }} className="absolute inset-x-0 -top-[10%] h-[120%]">
+      <div ref={bgRef} style={{ transform: `translateY(${bgOffset}px)` }} className="absolute inset-x-0 -top-[10%] h-[120%]">
         <Image src="/images/rooms/deluxe-1.jpg" alt="" fill className="object-cover opacity-32" />
       </div>
       <div
@@ -2020,7 +2051,7 @@ export function RoomsSection() {
 }
 ```
 
-- [ ] **Step 2: Wire it into `HomePage.tsx`**
+- [x] **Step 2: Wire it into `HomePage.tsx`**
 
 ```tsx
 import { RoomsSection } from "./RoomsSection";
@@ -2031,7 +2062,7 @@ import { RoomsSection } from "./RoomsSection";
           <RoomsSection />
 ```
 
-- [ ] **Step 3: Verify**
+- [x] **Step 3: Verify**
 
 Run:
 
@@ -2044,7 +2075,7 @@ Expected: both exit with no errors.
 
 Check the browser: "A room that feels like recovery" appears on the left with a "Reserve a room" button, and a large "10,000 LKR per night" figure with 3 bullet perks on the right, over a faint room photo background. Resize below 900px and confirm it stacks.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add src/features/home
@@ -2064,7 +2095,7 @@ git commit -m "Add rooms section"
 - Consumes: `Reveal` (Task 3).
 - Produces: `internationalCareItems: InternationalCareItem[]` from `../data/internationalCare`; `InternationalCareSection(): JSX.Element`, wired after `RoomsSection`. Declares `id="international"`.
 
-- [ ] **Step 1: Create `src/features/home/data/internationalCare.ts`**
+- [x] **Step 1: Create `src/features/home/data/internationalCare.ts`**
 
 ```ts
 export type InternationalCareItem = {
@@ -2107,7 +2138,7 @@ export const internationalCareItems: InternationalCareItem[] = [
 ];
 ```
 
-- [ ] **Step 2: Create `src/features/home/components/InternationalCareSection.tsx`**
+- [x] **Step 2: Create `src/features/home/components/InternationalCareSection.tsx`**
 
 ```tsx
 import { Reveal } from "./Reveal";
@@ -2153,7 +2184,7 @@ export function InternationalCareSection() {
 }
 ```
 
-- [ ] **Step 3: Wire it into `HomePage.tsx`**
+- [x] **Step 3: Wire it into `HomePage.tsx`**
 
 ```tsx
 import { InternationalCareSection } from "./InternationalCareSection";
@@ -2164,7 +2195,7 @@ import { InternationalCareSection } from "./InternationalCareSection";
           <InternationalCareSection />
 ```
 
-- [ ] **Step 4: Verify**
+- [x] **Step 4: Verify**
 
 Run:
 
@@ -2177,7 +2208,7 @@ Expected: both exit with no errors.
 
 Check the browser: "Travelling for care, or just visiting" appears on the left (sticky on scroll, desktop) with a 2x3 grid of 6 items on the right. Resize below 900px and confirm one column with no stickiness; below 640px confirm the 2x3 grid becomes a single column.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/features/home
@@ -2197,7 +2228,7 @@ git commit -m "Add international patient care section"
 - Consumes: `Reveal` (Task 3).
 - Produces: `healthTips: HealthTip[]` from `../data/healthTips`; `HealthTipsSection(): JSX.Element`, wired after `InternationalCareSection`. Declares `id="tips"`.
 
-- [ ] **Step 1: Create `src/features/home/data/healthTips.ts`**
+- [x] **Step 1: Create `src/features/home/data/healthTips.ts`**
 
 ```ts
 export type HealthTip = {
@@ -2230,7 +2261,7 @@ export const healthTips: HealthTip[] = [
 ];
 ```
 
-- [ ] **Step 2: Create `src/features/home/components/HealthTipsSection.tsx`**
+- [x] **Step 2: Create `src/features/home/components/HealthTipsSection.tsx`**
 
 ```tsx
 import { Reveal } from "./Reveal";
@@ -2280,7 +2311,7 @@ export function HealthTipsSection() {
 }
 ```
 
-- [ ] **Step 3: Wire it into `HomePage.tsx`**
+- [x] **Step 3: Wire it into `HomePage.tsx`**
 
 ```tsx
 import { HealthTipsSection } from "./HealthTipsSection";
@@ -2291,7 +2322,7 @@ import { HealthTipsSection } from "./HealthTipsSection";
           <HealthTipsSection />
 ```
 
-- [ ] **Step 4: Verify**
+- [x] **Step 4: Verify**
 
 Run:
 
@@ -2304,7 +2335,7 @@ Expected: both exit with no errors.
 
 Check the browser: "Small habits, written by our doctors" with an "All health tips" button, followed by 4 rows (Pediatrics/Prevention/Dengue/Recovery). Resize to phone width and confirm each row stacks to 3 lines (category, title, excerpt) instead of 3 columns.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/features/home
@@ -2323,7 +2354,7 @@ git commit -m "Add health tips section"
 - Consumes: `Reveal`, `useParallax` (Task 3). Uses `/images/career-staff.jpg`.
 - Produces: `SchoolWellnessSection(): JSX.Element`, wired after `HealthTipsSection`. Declares `id="wellness"`.
 
-- [ ] **Step 1: Create `src/features/home/components/SchoolWellnessSection.tsx`**
+- [x] **Step 1: Create `src/features/home/components/SchoolWellnessSection.tsx`**
 
 ```tsx
 "use client";
@@ -2339,7 +2370,7 @@ const rows = [
 ];
 
 export function SchoolWellnessSection() {
-  const photo = useParallax(0.08, 50);
+  const { ref: photoRef, offset: photoOffset } = useParallax(0.08, 50);
 
   return (
     <section id="wellness" className="mx-auto max-w-[1440px] px-5 pt-30 sm:px-8 lg:px-11">
@@ -2371,7 +2402,7 @@ export function SchoolWellnessSection() {
           </a>
         </Reveal>
         <Reveal className="relative min-h-[450px] overflow-hidden bg-[#0B1846]">
-          <div ref={photo.ref} style={{ transform: `translateY(${photo.offset}px)` }} className="absolute inset-x-0 -top-[8%] h-[116%]">
+          <div ref={photoRef} style={{ transform: `translateY(${photoOffset}px)` }} className="absolute inset-x-0 -top-[8%] h-[116%]">
             <Image src="/images/career-staff.jpg" alt="Pediatric doctor with a young patient" fill className="object-cover" />
           </div>
           <div className="absolute inset-0" style={{ background: "linear-gradient(rgba(6,11,31,0) 40%, rgba(6,11,31,0.8) 100%)" }} />
@@ -2385,7 +2416,7 @@ export function SchoolWellnessSection() {
 }
 ```
 
-- [ ] **Step 2: Wire it into `HomePage.tsx`**
+- [x] **Step 2: Wire it into `HomePage.tsx`**
 
 ```tsx
 import { SchoolWellnessSection } from "./SchoolWellnessSection";
@@ -2396,7 +2427,7 @@ import { SchoolWellnessSection } from "./SchoolWellnessSection";
           <SchoolWellnessSection />
 ```
 
-- [ ] **Step 3: Verify**
+- [x] **Step 3: Verify**
 
 Run:
 
@@ -2409,7 +2440,7 @@ Expected: both exit with no errors.
 
 Check the browser: "We come to the classroom" appears with a 3-row list and a "Bring it to our school" button on the left, and a photo with a "Kids & Teens pediatric protocol" badge on the right. Resize below 900px and confirm it stacks (text above photo).
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add src/features/home
@@ -2429,7 +2460,7 @@ git commit -m "Add school wellness section"
 - Consumes: `Reveal` (Task 3).
 - Produces: `networkNodes: NetworkNode[]` from `../data/network`; `NetworkSection(): JSX.Element`, wired after `SchoolWellnessSection`. Declares `id="network"`.
 
-- [ ] **Step 1: Create `src/features/home/data/network.ts`**
+- [x] **Step 1: Create `src/features/home/data/network.ts`**
 
 ```ts
 export type NetworkNode = {
@@ -2462,7 +2493,7 @@ export const networkNodes: NetworkNode[] = [
 ];
 ```
 
-- [ ] **Step 2: Create `src/features/home/components/NetworkSection.tsx`**
+- [x] **Step 2: Create `src/features/home/components/NetworkSection.tsx`**
 
 ```tsx
 import { Reveal } from "./Reveal";
@@ -2509,7 +2540,7 @@ export function NetworkSection() {
 }
 ```
 
-- [ ] **Step 3: Wire it into `HomePage.tsx`**
+- [x] **Step 3: Wire it into `HomePage.tsx`**
 
 ```tsx
 import { NetworkSection } from "./NetworkSection";
@@ -2520,7 +2551,7 @@ import { NetworkSection } from "./NetworkSection";
           <NetworkSection />
 ```
 
-- [ ] **Step 4: Verify**
+- [x] **Step 4: Verify**
 
 Run:
 
@@ -2533,7 +2564,7 @@ Expected: both exit with no errors.
 
 Check the browser: "One group, two countries" with 4 rows (Negombo hospital, LA medical group, school wellness, telemedicine). Resize to phone width and confirm rows stack to 3 lines each.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/features/home
@@ -2553,7 +2584,7 @@ git commit -m "Add network section"
 - Consumes: `Reveal` (Task 3).
 - Produces: `mediaItems: MediaItem[]` from `../data/media`; `MediaSection(): JSX.Element`, wired after `NetworkSection`. Declares `id="media"`.
 
-- [ ] **Step 1: Create `src/features/home/data/media.ts`**
+- [x] **Step 1: Create `src/features/home/data/media.ts`**
 
 ```ts
 export type MediaItem = {
@@ -2570,7 +2601,7 @@ export const mediaItems: MediaItem[] = [
 ];
 ```
 
-- [ ] **Step 2: Create `src/features/home/components/MediaSection.tsx`**
+- [x] **Step 2: Create `src/features/home/components/MediaSection.tsx`**
 
 ```tsx
 import { Reveal } from "./Reveal";
@@ -2620,7 +2651,7 @@ export function MediaSection() {
 }
 ```
 
-- [ ] **Step 3: Wire it into `HomePage.tsx`**
+- [x] **Step 3: Wire it into `HomePage.tsx`**
 
 ```tsx
 import { MediaSection } from "./MediaSection";
@@ -2631,7 +2662,7 @@ import { MediaSection } from "./MediaSection";
           <MediaSection />
 ```
 
-- [ ] **Step 4: Verify**
+- [x] **Step 4: Verify**
 
 Run:
 
@@ -2644,7 +2675,7 @@ Expected: both exit with no errors.
 
 Check the browser: "News, press & gallery" with a "Media enquiries" button, then 4 dated rows. Resize to phone width and confirm each row stacks to 3 lines.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/features/home
@@ -2664,7 +2695,7 @@ git commit -m "Add media section"
 - Consumes: `Reveal` (Task 3).
 - Produces: `jobOpenings: JobOpening[]` from `../data/careers`; `CareersSection(): JSX.Element`, wired after `MediaSection`. Declares `id="career"`.
 
-- [ ] **Step 1: Create `src/features/home/data/careers.ts`**
+- [x] **Step 1: Create `src/features/home/data/careers.ts`**
 
 ```ts
 export type JobOpening = {
@@ -2682,7 +2713,7 @@ export const jobOpenings: JobOpening[] = [
 ];
 ```
 
-- [ ] **Step 2: Create `src/features/home/components/CareersSection.tsx`**
+- [x] **Step 2: Create `src/features/home/components/CareersSection.tsx`**
 
 ```tsx
 import { Reveal } from "./Reveal";
@@ -2734,7 +2765,7 @@ export function CareersSection() {
 }
 ```
 
-- [ ] **Step 3: Wire it into `HomePage.tsx`**
+- [x] **Step 3: Wire it into `HomePage.tsx`**
 
 ```tsx
 import { CareersSection } from "./CareersSection";
@@ -2745,7 +2776,7 @@ import { CareersSection } from "./CareersSection";
           <CareersSection />
 ```
 
-- [ ] **Step 4: Verify**
+- [x] **Step 4: Verify**
 
 Run:
 
@@ -2758,7 +2789,7 @@ Expected: both exit with no errors.
 
 Check the browser: "Work where the standard is the point" on the left (sticky on desktop) with 5 job rows on the right, each a clickable `mailto:` row. Resize below 900px and confirm one column, no stickiness; below 640px confirm each row stacks to lines instead of a 4-column grid.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/features/home
@@ -2778,7 +2809,7 @@ git commit -m "Add careers section"
 - Consumes: `Reveal` (Task 3).
 - Produces: `testimonials: Testimonial[]` from `../data/testimonials`; `TestimonialsSection(): JSX.Element` — `'use client'`, wired after `CareersSection`. Declares `id="voices"`.
 
-- [ ] **Step 1: Create `src/features/home/data/testimonials.ts`**
+- [x] **Step 1: Create `src/features/home/data/testimonials.ts`**
 
 ```ts
 export type Testimonial = {
@@ -2797,7 +2828,7 @@ export const testimonials: Testimonial[] = [
 ];
 ```
 
-- [ ] **Step 2: Create `src/features/home/components/TestimonialsSection.tsx`**
+- [x] **Step 2: Create `src/features/home/components/TestimonialsSection.tsx`**
 
 ```tsx
 "use client";
@@ -2855,7 +2886,7 @@ export function TestimonialsSection() {
 }
 ```
 
-- [ ] **Step 3: Wire it into `HomePage.tsx`**
+- [x] **Step 3: Wire it into `HomePage.tsx`**
 
 ```tsx
 import { TestimonialsSection } from "./TestimonialsSection";
@@ -2866,7 +2897,7 @@ import { TestimonialsSection } from "./TestimonialsSection";
           <TestimonialsSection />
 ```
 
-- [ ] **Step 4: Verify**
+- [x] **Step 4: Verify**
 
 Run:
 
@@ -2879,7 +2910,7 @@ Expected: both exit with no errors.
 
 Check the browser: the Michael Perera quote appears with prev/next arrow buttons and "1 / 1". Since there's only one testimonial, both arrow buttons should be disabled (dimmed) — confirm clicking them does nothing.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/features/home
@@ -2898,7 +2929,7 @@ git commit -m "Add testimonials section"
 - Consumes: nothing new.
 - Produces: `ContactCtaSection(): JSX.Element`, wired after `TestimonialsSection` and before `HomeFooter`. Declares `id="book"`.
 
-- [ ] **Step 1: Create `src/features/home/components/ContactCtaSection.tsx`**
+- [x] **Step 1: Create `src/features/home/components/ContactCtaSection.tsx`**
 
 ```tsx
 export function ContactCtaSection() {
@@ -2944,7 +2975,7 @@ export function ContactCtaSection() {
 }
 ```
 
-- [ ] **Step 2: Wire it into `HomePage.tsx`**
+- [x] **Step 2: Wire it into `HomePage.tsx`**
 
 ```tsx
 import { ContactCtaSection } from "./ContactCtaSection";
@@ -2955,7 +2986,7 @@ import { ContactCtaSection } from "./ContactCtaSection";
           <ContactCtaSection />
 ```
 
-- [ ] **Step 3: Verify**
+- [x] **Step 3: Verify**
 
 Run:
 
@@ -2968,7 +2999,7 @@ Expected: both exit with no errors.
 
 Check the browser: an accent-filled "Open right now. Yes, right now." panel appears alongside 3 stacked link rows (Surgical care, Reserve a room, phone number), directly above the footer. Resize below 900px and confirm it stacks to one column.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add src/features/home
@@ -2986,11 +3017,11 @@ git commit -m "Add contact CTA section"
 - Consumes: every section component from Tasks 5-19.
 - Produces: nothing new — this task is verification only.
 
-- [ ] **Step 1: Confirm final section order in `src/features/home/components/HomePage.tsx`**
+- [x] **Step 1: Confirm final section order in `src/features/home/components/HomePage.tsx`**
 
 Read the file and confirm `<main>` renders, in this exact order: `HeroSection`, `WhoWeAreSection`, `ServicesBentoSection`, `SurgicalSection`, `FacilitiesSection`, `PharmacySection`, `RoomsSection`, `InternationalCareSection`, `HealthTipsSection`, `SchoolWellnessSection`, `NetworkSection`, `MediaSection`, `CareersSection`, `TestimonialsSection`, `ContactCtaSection` — followed by `HomeFooter` and `FloatingActions` outside `<main>`. Fix the order if any task's wiring step landed a section out of sequence.
 
-- [ ] **Step 2: Full type check, lint, and production build**
+- [x] **Step 2: Full type check, lint, and production build**
 
 Run:
 
@@ -3002,7 +3033,7 @@ npm run build
 
 Expected: all three exit with no errors. `npm run build` in particular catches anything `next dev` tolerates but production doesn't (e.g. `next/image` misconfiguration).
 
-- [ ] **Step 3: Full manual QA pass in the browser**
+- [x] **Step 3: Full manual QA pass in the browser**
 
 With `npm run dev` running, on `http://localhost:3000`:
 
@@ -3016,7 +3047,7 @@ With `npm run dev` running, on `http://localhost:3000`:
 - Enable OS-level "reduce motion" and reload: confirm the hero photo doesn't zoom, the ticker doesn't scroll (or scrolls but content is still fully readable via the duplicated `aria-hidden` track), the pulse dots don't animate, and all `Reveal`-wrapped content is visible immediately without a fade-in.
 - Confirm every other route (`/about-us`, `/services`, `/career`, `/contact-us`, `/accommodation`, `/e-channeling`, `/privacy-policy`) still renders exactly as before, with the shared light-only `SiteHeader`/`SiteFooter`, completely unaffected by this work.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 If Step 1 required a fix:
 
