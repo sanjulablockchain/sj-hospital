@@ -182,3 +182,137 @@ footer[id] {
     animation: none;
   }
 }
+
+/* ---- Home page (v2 redesign) — scoped design system ---- */
+
+[data-home] {
+  --home-bg: #060b1f;
+  --home-surface: #0b1846;
+  --home-surface-2: #081a3a;
+  --home-heading: #ffffff;
+  --home-body: rgba(242, 246, 255, 0.82);
+  --home-muted: rgba(242, 246, 255, 0.6);
+  --home-hairline: rgba(242, 246, 255, 0.14);
+  --home-accent: #2ca6f0;
+  --home-accent-soft: #7fcbff;
+  --home-on-accent: #04122b;
+  font-family: var(--font-manrope), system-ui, sans-serif;
+}
+
+[data-home][data-theme="light"] {
+  --home-bg: #f1f5fc;
+  --home-surface: #ffffff;
+  --home-surface-2: #ffffff;
+  --home-heading: #0a1030;
+  --home-body: #0a1030;
+  --home-muted: #4b587a;
+  --home-hairline: rgba(10, 16, 48, 0.16);
+  --home-accent: #0b6fc0;
+  --home-accent-soft: #0b6fc0;
+  --home-on-accent: #ffffff;
+}
+
+[data-home] .font-display {
+  font-family: var(--font-bricolage), system-ui, sans-serif;
+}
+
+@keyframes sj-up {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes sj-tick {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes sj-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(44, 166, 240, 0.55);
+  }
+  50% {
+    box-shadow: 0 0 0 16px rgba(44, 166, 240, 0);
+  }
+}
+
+@keyframes sj-burns {
+  0% {
+    transform: scale(1.04) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: scale(1.16) translate3d(-2.5%, -1.5%, 0);
+  }
+  100% {
+    transform: scale(1.04) translate3d(0, 0, 0);
+  }
+}
+
+@keyframes sj-sheen {
+  0% {
+    opacity: 0.25;
+    transform: translate3d(-12%, 0, 0);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translate3d(10%, 0, 0);
+  }
+  100% {
+    opacity: 0.25;
+    transform: translate3d(-12%, 0, 0);
+  }
+}
+
+@keyframes sj-scan {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(700%);
+  }
+}
+
+.animate-sj-up {
+  animation: sj-up 0.8s ease both;
+}
+
+.animate-sj-tick {
+  animation: sj-tick 34s linear infinite;
+}
+
+.animate-sj-pulse {
+  animation: sj-pulse 2.2s ease-in-out infinite;
+}
+
+.animate-sj-burns {
+  animation: sj-burns 26s ease-in-out infinite;
+}
+
+.animate-sj-sheen {
+  animation: sj-sheen 18s ease-in-out infinite;
+}
+
+.animate-sj-scan {
+  animation: sj-scan 14s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-sj-up,
+  .animate-sj-tick,
+  .animate-sj-pulse,
+  .animate-sj-burns,
+  .animate-sj-sheen,
+  .animate-sj-scan {
+    animation: none;
+  }
+}
