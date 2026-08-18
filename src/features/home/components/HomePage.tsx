@@ -1,5 +1,6 @@
 import { HomeThemeScript } from "./HomeThemeScript";
 import { HomeThemeProvider } from "../hooks/useHomeTheme";
+import { HeroSection } from "./HeroSection";
 import { HomeFooter } from "./HomeFooter";
 import { FloatingActions } from "./FloatingActions";
 
@@ -14,7 +15,9 @@ export function HomePage() {
     >
       <HomeThemeScript />
       <HomeThemeProvider>
-        <main>{/* sections are added starting Task 5 */}</main>
+        <main>
+          <HeroSection />
+        </main>
         <HomeFooter />
         <FloatingActions />
       </HomeThemeProvider>
