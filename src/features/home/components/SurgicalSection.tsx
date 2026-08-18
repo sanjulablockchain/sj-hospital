@@ -16,7 +16,7 @@ export function SurgicalSection() {
   const { ref: bgRef, offset: bgOffset } = useParallax(0.12, 80);
 
   return (
-    <section id="surgical" className="relative mt-30 overflow-hidden bg-[#081A3A]">
+    <section id="surgical" className="relative mt-30 overflow-hidden bg-[#08123A]">
       <div ref={bgRef} style={{ transform: `translateY(${bgOffset}px)` }} className="absolute inset-x-0 -top-[10%] h-[120%]">
         <Image src="/images/about-facility.jpg" alt="" fill className="object-cover opacity-34" />
       </div>
@@ -55,7 +55,7 @@ export function SurgicalSection() {
           <Reveal>
             <div className="flex flex-col gap-px bg-white/18">
               {procedures.map((item) => (
-                <div key={item.name} className="flex items-baseline justify-between gap-5 bg-[#081A3A] px-7 py-5.5">
+                <div key={item.name} className="flex items-baseline justify-between gap-5 bg-[#08123A] px-7 py-5.5">
                   <span className="text-[17px] font-bold text-white">{item.name}</span>
                   <span className="text-right text-[14px] text-white/66">{item.note}</span>
                 </div>

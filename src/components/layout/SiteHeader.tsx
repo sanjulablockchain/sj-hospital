@@ -3,6 +3,7 @@ import Link from "next/link";
 import { primaryNavigation } from "@/config/navigation";
 import { PhoneIcon, SmartphoneIcon, MailIcon } from "@/components/ui/Icons";
 import { MobileNav } from "./MobileNav";
+import { LOGO_LOCKUP } from "@/config/brand";
 
 export function SiteHeader() {
   return (
@@ -61,11 +62,11 @@ export function SiteHeader() {
         <div className="mx-auto flex max-w-[1240px] items-center justify-between gap-6 px-6 py-3">
           <Link href="/" className="block shrink-0">
             <Image
-              src="/images/logo.png"
+              src={LOGO_LOCKUP.src}
               alt="St Joseph Hospital Negombo"
-              width={1248}
-              height={386}
-              className="h-10 w-auto sm:h-11"
+              width={LOGO_LOCKUP.width}
+              height={LOGO_LOCKUP.height}
+              className="h-9 w-auto sm:h-10"
               priority
             />
           </Link>

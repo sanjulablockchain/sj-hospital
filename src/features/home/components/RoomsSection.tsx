@@ -10,7 +10,7 @@ export function RoomsSection() {
   const { ref: bgRef, offset: bgOffset } = useParallax(0.14, 90);
 
   return (
-    <section id="rooms" className="relative overflow-hidden bg-[#081A3A]">
+    <section id="rooms" className="relative overflow-hidden bg-[#08123A]">
       <div ref={bgRef} style={{ transform: `translateY(${bgOffset}px)` }} className="absolute inset-x-0 -top-[10%] h-[120%]">
         <Image src="/images/rooms/deluxe-1.jpg" alt="" fill className="object-cover opacity-32" />
       </div>

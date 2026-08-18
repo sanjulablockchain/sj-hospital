@@ -134,7 +134,7 @@ export function ServicesBentoSection() {
 
           <a
             href="#facilities"
-            className="relative col-span-2 flex min-h-[178px] items-end overflow-hidden bg-[#081A3A] p-6.5 text-inherit max-[639px]:col-span-1"
+            className="relative col-span-2 flex min-h-[178px] items-end overflow-hidden bg-[#08123A] p-6.5 text-inherit max-[639px]:col-span-1"
           >
             <Image
               src="/images/doctors.jpg"

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Reveal } from "./Reveal";
 import { useParallax } from "../hooks/useParallax";
+import { LOGO_MARK } from "@/config/brand";
 
 const stats = [
   { label: "Counter hours", value: "24 / 7" },
@@ -15,13 +16,19 @@ export function PharmacySection() {
   const { ref: watermarkRef, offset: watermarkOffset } = useParallax(0.1, 60);
 
   return (
-    <section id="pharmacy" className="relative mt-30 overflow-hidden bg-[#081A3A]">
+    <section id="pharmacy" className="relative mt-30 overflow-hidden bg-[#08123A]">
       <div
         ref={watermarkRef}
         style={{ transform: `translateY(${watermarkOffset}px)` }}
         className="pointer-events-none absolute -top-[20%] -left-[6%] w-[32%] opacity-12"
       >
-        <Image src="/images/logo.png" alt="" width={1248} height={386} className="h-auto w-full brightness-0 invert" />
+        <Image
+          src={LOGO_MARK.src}
+          alt=""
+          width={LOGO_MARK.width}
+          height={LOGO_MARK.height}
+          className="h-auto w-full"
+        />
       </div>
       <div className="relative mx-auto max-w-[1440px] px-5 py-25 sm:px-8 lg:px-11">
         <div className="grid gap-15 min-[900px]:grid-cols-2 min-[900px]:items-center">
@@ -50,7 +57,7 @@ export function PharmacySection() {
           <Reveal>
             <div className="flex flex-col gap-px bg-white/16">
               {stats.map((stat) => (
-                <div key={stat.label} className="flex items-baseline justify-between gap-5 bg-[#081A3A] px-7.5 py-6">
+                <div key={stat.label} className="flex items-baseline justify-between gap-5 bg-[#08123A] px-7.5 py-6">
                   <span className="text-[15px] text-white/72">{stat.label}</span>
                   <span
                     className={`font-display text-[32px] font-extrabold tracking-[-0.03em] ${

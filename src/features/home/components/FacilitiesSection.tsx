@@ -40,7 +40,7 @@ export function FacilitiesSection() {
                 </div>
               </article>
             ) : (
-              <article key={card.index} className="group relative flex min-h-[430px] items-end overflow-hidden bg-[#081A3A]">
+              <article key={card.index} className="group relative flex min-h-[430px] items-end overflow-hidden bg-[#08123A]">
                 {card.photo && (
                   <Image
                     src={card.photo}

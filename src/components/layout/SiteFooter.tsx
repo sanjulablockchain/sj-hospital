@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { footerQuickLinks } from "@/config/navigation";
 import { PhoneIcon, SmartphoneIcon, MailIcon } from "@/components/ui/Icons";
+import { LOGO_LOCKUP } from "@/config/brand";
 
 export function SiteFooter() {
   return (
@@ -12,11 +13,11 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-[1240px] gap-11 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1.3fr_1fr]">
         <div>
           <Image
-            src="/images/logo.png"
+            src={LOGO_LOCKUP.src}
             alt="St Joseph Hospital"
-            width={1248}
-            height={386}
-            className="mb-5 h-10 w-auto brightness-0 invert"
+            width={LOGO_LOCKUP.width}
+            height={LOGO_LOCKUP.height}
+            className="mb-5 h-9 w-auto brightness-0 invert"
           />
           <p className="max-w-xs text-sm leading-relaxed">
             St. Joseph Hospital Negombo offers high-quality, compassionate,

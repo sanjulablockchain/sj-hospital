@@ -196,7 +196,7 @@ footer[id] {
 [data-home] {
   --home-bg: #060b1f;
   --home-surface: #0b1846;
-  --home-surface-2: #081a3a;
+  --home-surface-2: #08123a;
   --home-heading: #ffffff;
   --home-body: rgba(242, 246, 255, 0.82);
   --home-muted: rgba(242, 246, 255, 0.6);
@@ -222,14 +222,6 @@ footer[id] {
 
 [data-home] .font-display {
   font-family: var(--font-bricolage), system-ui, sans-serif;
-}
-
-[data-home] .home-logo {
-  filter: brightness(0) invert(1);
-}
-
-[data-home][data-theme="light"] .home-logo {
-  filter: none;
 }
 
 @keyframes sj-up {
