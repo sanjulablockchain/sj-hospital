@@ -1,4 +1,3 @@
-import { Reveal } from "./Reveal";
 import { HomeHeader } from "./HomeHeader";
 import { HeroParallaxBackground } from "./HeroParallaxBackground";
 import { StatTicker } from "./StatTicker";
