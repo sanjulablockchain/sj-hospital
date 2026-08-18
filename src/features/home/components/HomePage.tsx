@@ -4,6 +4,7 @@ import { HeroSection } from "./HeroSection";
 import { WhoWeAreSection } from "./WhoWeAreSection";
 import { ServicesBentoSection } from "./ServicesBentoSection";
 import { SurgicalSection } from "./SurgicalSection";
+import { FacilitiesSection } from "./FacilitiesSection";
 import { HomeFooter } from "./HomeFooter";
 import { FloatingActions } from "./FloatingActions";
 
@@ -23,6 +24,7 @@ export function HomePage() {
           <WhoWeAreSection />
           <ServicesBentoSection />
           <SurgicalSection />
+          <FacilitiesSection />
         </main>
         <HomeFooter />
         <FloatingActions />
