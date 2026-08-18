@@ -469,15 +469,6 @@ export function Reveal({ children, className = "" }: RevealProps) {
     const node = ref.current;
     if (!node) return;
 
-    const prefersReducedMotion =
-      typeof window.matchMedia === "function" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (prefersReducedMotion) {
-      setIsVisible(true);
-      return;
-    }
-
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -495,7 +486,7 @@ export function Reveal({ children, className = "" }: RevealProps) {
   return (
     <div
       ref={ref}
-      className={`transition-all duration-[850ms] ease-out ${
+      className={`transition-all duration-[850ms] ease-out motion-reduce:transition-none motion-reduce:opacity-100 motion-reduce:translate-y-0 ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[34px]"
       } ${className}`}
     >
