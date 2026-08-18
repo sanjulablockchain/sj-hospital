@@ -9,6 +9,7 @@ import { PharmacySection } from "./PharmacySection";
 import { RoomsSection } from "./RoomsSection";
 import { InternationalCareSection } from "./InternationalCareSection";
 import { HealthTipsSection } from "./HealthTipsSection";
+import { SchoolWellnessSection } from "./SchoolWellnessSection";
 import { HomeFooter } from "./HomeFooter";
 import { FloatingActions } from "./FloatingActions";
 
@@ -33,6 +34,7 @@ export function HomePage() {
           <RoomsSection />
           <InternationalCareSection />
           <HealthTipsSection />
+          <SchoolWellnessSection />
         </main>
         <HomeFooter />
         <FloatingActions />
