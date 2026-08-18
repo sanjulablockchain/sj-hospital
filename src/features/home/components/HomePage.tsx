@@ -3,6 +3,7 @@ import { HomeThemeProvider } from "../hooks/useHomeTheme";
 import { HeroSection } from "./HeroSection";
 import { WhoWeAreSection } from "./WhoWeAreSection";
 import { ServicesBentoSection } from "./ServicesBentoSection";
+import { SurgicalSection } from "./SurgicalSection";
 import { HomeFooter } from "./HomeFooter";
 import { FloatingActions } from "./FloatingActions";
 
@@ -21,6 +22,7 @@ export function HomePage() {
           <HeroSection />
           <WhoWeAreSection />
           <ServicesBentoSection />
+          <SurgicalSection />
         </main>
         <HomeFooter />
         <FloatingActions />
