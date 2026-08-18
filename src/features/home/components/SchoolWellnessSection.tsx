@@ -44,7 +44,13 @@ export function SchoolWellnessSection() {
         </Reveal>
         <Reveal className="relative min-h-[450px] overflow-hidden bg-[#0B1846]">
           <div ref={photoRef} style={{ transform: `translateY(${photoOffset}px)` }} className="absolute inset-x-0 -top-[8%] h-[116%]">
-            <Image src="/images/career-staff.jpg" alt="Pediatric doctor with a young patient" fill className="object-cover" />
+            <Image
+              src="/images/career-staff.jpg"
+              alt="Pediatric doctor with a young patient"
+              fill
+              sizes="(min-width: 900px) 50vw, 100vw"
+              className="object-cover"
+            />
           </div>
           <div className="absolute inset-0" style={{ background: "linear-gradient(rgba(6,11,31,0) 40%, rgba(6,11,31,0.8) 100%)" }} />
           <div className="absolute bottom-0 left-0 bg-[var(--home-accent)] px-6 py-4.5 text-[14px] font-bold text-[var(--home-on-accent)]">

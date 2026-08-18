@@ -42,7 +42,13 @@ export function FacilitiesSection() {
             ) : (
               <article key={card.index} className="group relative flex min-h-[430px] items-end overflow-hidden bg-[#081A3A]">
                 {card.photo && (
-                  <Image src={card.photo} alt={card.photoAlt ?? ""} fill className="object-cover opacity-55 transition-transform duration-700 group-hover:scale-[1.09] group-hover:opacity-78" />
+                  <Image
+                    src={card.photo}
+                    alt={card.photoAlt ?? ""}
+                    fill
+                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                    className="object-cover opacity-55 transition-transform duration-700 group-hover:scale-[1.09] group-hover:opacity-78"
+                  />
                 )}
                 <div
                   className="absolute inset-0"

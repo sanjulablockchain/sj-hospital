@@ -21,7 +21,7 @@ export function PharmacySection() {
         style={{ transform: `translateY(${watermarkOffset}px)` }}
         className="pointer-events-none absolute -top-[20%] -left-[6%] w-[32%] opacity-12"
       >
-        <Image src="/images/logo.png" alt="" width={480} height={480} className="h-auto w-full" />
+        <Image src="/images/logo.png" alt="" width={1248} height={386} className="h-auto w-full brightness-0 invert" />
       </div>
       <div className="relative mx-auto max-w-[1440px] px-5 py-25 sm:px-8 lg:px-11">
         <div className="grid gap-15 min-[900px]:grid-cols-2 min-[900px]:items-center">

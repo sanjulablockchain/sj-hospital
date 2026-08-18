@@ -11,14 +11,14 @@ export function MobileNavPanel({ items }: MobileNavPanelProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="ml-auto min-[1120px]:hidden">
+    <div className="ml-auto shrink-0 min-[1120px]:hidden">
       <button
         type="button"
         aria-expanded={isOpen}
         aria-controls="home-mobile-nav-panel"
         aria-label={isOpen ? "Close menu" : "Open menu"}
         onClick={() => setIsOpen((open) => !open)}
-        className="flex h-11 w-11 items-center justify-center border border-[var(--home-hairline)] text-[17px] text-[var(--home-heading)]"
+        className="flex h-11 w-11 items-center justify-center border border-white/28 text-[17px] text-white"
       >
         <span aria-hidden>{isOpen ? "✕" : "☰"}</span>
       </button>

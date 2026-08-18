@@ -23,17 +23,13 @@ export function HomeFooter() {
     <footer id="contact" className="mx-auto max-w-[1440px] px-5 pb-10 pt-26 sm:px-8 lg:px-11">
       <div className="flex flex-wrap items-start justify-between gap-13">
         <div className="max-w-[34ch]">
-          <span className="flex items-center gap-3.5">
-            <Image src="/images/logo.png" alt="St. Joseph Hospital" width={60} height={60} className="h-15 w-auto" />
-            <span className="block leading-[1.1]">
-              <span className="font-display block text-[20px] font-extrabold tracking-[-0.02em] text-[var(--home-heading)]">
-                ST. JOSEPH HOSPITAL
-              </span>
-              <span className="mt-1 block text-[10.5px] tracking-[0.22em] text-[var(--home-accent-soft)]">
-                TO LIVE IS A PRIVILEGE
-              </span>
-            </span>
-          </span>
+          <Image
+            src="/images/logo.png"
+            alt="St. Joseph Hospital"
+            width={1248}
+            height={386}
+            className="home-logo h-10 w-auto"
+          />
           <p className="mt-4.5 text-[15px] leading-[1.62] text-[var(--home-muted)]">
             Compassionate, patient centered care, bringing American healthcare standards to Sri Lanka.
           </p>

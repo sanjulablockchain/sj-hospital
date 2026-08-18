@@ -55,7 +55,13 @@ export function ServicesBentoSection() {
             href="#surgical"
             className="relative col-span-2 flex min-h-[178px] flex-col justify-end overflow-hidden bg-[#0B1846] p-7 text-white max-[639px]:col-span-1"
           >
-            <Image src="/images/about-facility.jpg" alt="" fill className="object-cover opacity-32" />
+            <Image
+              src="/images/about-facility.jpg"
+              alt=""
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover opacity-32"
+            />
             <span
               className="absolute inset-0"
               style={{
@@ -130,7 +136,13 @@ export function ServicesBentoSection() {
             href="#facilities"
             className="relative col-span-2 flex min-h-[178px] items-end overflow-hidden bg-[#081A3A] p-6.5 text-inherit max-[639px]:col-span-1"
           >
-            <Image src="/images/doctors.jpg" alt="" fill className="object-cover opacity-42" />
+            <Image
+              src="/images/doctors.jpg"
+              alt=""
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover opacity-42"
+            />
             <span
               className="absolute inset-0"
               style={{ background: "linear-gradient(rgba(6,11,31,0.3) 20%, rgba(6,11,31,0.92) 100%)" }}
