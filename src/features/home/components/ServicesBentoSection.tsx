@@ -89,10 +89,21 @@ export function ServicesBentoSection() {
 
           <a
             href="#rooms"
-            className="sj-bento row-span-2 flex flex-col justify-between border border-[var(--home-hairline)] bg-[#0B1846] p-6.5 text-inherit"
+            className="sj-bento relative row-span-2 flex flex-col justify-between overflow-hidden border border-[var(--home-hairline)] bg-[#0B1846] p-6.5 text-inherit"
           >
-            <span className="text-[12px] font-bold tracking-[0.2em] text-[#7FCBFF] uppercase">/03 Rooms</span>
-            <span className="block">
+            <Image
+              src="/images/rooms/deluxe-1.jpg"
+              alt=""
+              fill
+              sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+              className="object-cover opacity-30"
+            />
+            <span
+              className="absolute inset-0"
+              style={{ background: "linear-gradient(rgba(6,11,31,0.82) 0%, rgba(11,24,70,0.55) 46%, rgba(6,11,31,0.95) 100%)" }}
+            />
+            <span className="relative text-[12px] font-bold tracking-[0.2em] text-[#7FCBFF] uppercase">/03 Rooms</span>
+            <span className="relative block">
               <span className="font-display block text-[clamp(38px,4vw,58px)] leading-[0.86] font-extrabold tracking-[-0.045em] text-[var(--home-accent)] tabular-nums">
                 10,000
               </span>
@@ -104,10 +115,21 @@ export function ServicesBentoSection() {
 
           <a
             href="#pharmacy"
-            className="sj-bento flex flex-col justify-between border border-[var(--home-hairline)] bg-[#0B1846] p-6.5 text-inherit"
+            className="sj-bento relative flex flex-col justify-between overflow-hidden border border-[var(--home-hairline)] bg-[#0B1846] p-6.5 text-inherit"
           >
-            <span className="text-[12px] font-bold tracking-[0.2em] text-[#7FCBFF] uppercase">/04 Pharmacy</span>
-            <span className="block">
+            <Image
+              src="/images/services/pharmacy.jpg"
+              alt=""
+              fill
+              sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+              className="object-cover opacity-28"
+            />
+            <span
+              className="absolute inset-0"
+              style={{ background: "linear-gradient(rgba(6,11,31,0.76) 0%, rgba(6,11,31,0.95) 100%)" }}
+            />
+            <span className="relative text-[12px] font-bold tracking-[0.2em] text-[#7FCBFF] uppercase">/04 Pharmacy</span>
+            <span className="relative block">
               <span className="font-display block text-[26px] leading-none font-bold tracking-[-0.03em] text-white">
                 Authorized stock, 24/7
               </span>
@@ -119,10 +141,21 @@ export function ServicesBentoSection() {
 
           <a
             href="#facilities"
-            className="sj-bento flex flex-col justify-between border border-[var(--home-hairline)] bg-[#0B1846] p-6.5 text-inherit"
+            className="sj-bento relative flex flex-col justify-between overflow-hidden border border-[var(--home-hairline)] bg-[#0B1846] p-6.5 text-inherit"
           >
-            <span className="text-[12px] font-bold tracking-[0.2em] text-[#7FCBFF] uppercase">/05 Digital X-ray</span>
-            <span className="block">
+            <Image
+              src="/images/services/digital-xray.jpg"
+              alt=""
+              fill
+              sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+              className="object-cover opacity-28"
+            />
+            <span
+              className="absolute inset-0"
+              style={{ background: "linear-gradient(rgba(6,11,31,0.76) 0%, rgba(6,11,31,0.95) 100%)" }}
+            />
+            <span className="relative text-[12px] font-bold tracking-[0.2em] text-[#7FCBFF] uppercase">/05 Digital X-ray</span>
+            <span className="relative block">
               <span className="font-display block text-[26px] leading-none font-bold tracking-[-0.03em] text-white">
                 Lower dose, sharper plates
               </span>
@@ -162,10 +195,21 @@ export function ServicesBentoSection() {
 
           <a
             href="#book"
-            className="sj-bento flex flex-col justify-between border border-[var(--home-hairline)] bg-[#0B1846] p-6.5 text-inherit"
+            className="sj-bento relative flex flex-col justify-between overflow-hidden border border-[var(--home-hairline)] bg-[#0B1846] p-6.5 text-inherit"
           >
-            <span className="text-[12px] font-bold tracking-[0.2em] text-[#7FCBFF] uppercase">/07 Home visits</span>
-            <span className="block">
+            <Image
+              src="/images/network/home-visit-vehicle.jpg"
+              alt=""
+              fill
+              sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+              className="object-cover opacity-30"
+            />
+            <span
+              className="absolute inset-0"
+              style={{ background: "linear-gradient(rgba(6,11,31,0.74) 0%, rgba(6,11,31,0.95) 100%)" }}
+            />
+            <span className="relative text-[12px] font-bold tracking-[0.2em] text-[#7FCBFF] uppercase">/07 Home visits</span>
+            <span className="relative block">
               <span className="font-display block text-[26px] leading-none font-bold tracking-[-0.03em] text-white">
                 We come to you
               </span>
@@ -177,10 +221,21 @@ export function ServicesBentoSection() {
 
           <a
             href="#pharmacy"
-            className="sj-bento flex flex-col justify-between border border-[var(--home-hairline)] bg-[#0B1846] p-6.5 text-inherit"
+            className="sj-bento relative flex flex-col justify-between overflow-hidden border border-[var(--home-hairline)] bg-[#0B1846] p-6.5 text-inherit"
           >
-            <span className="text-[12px] font-bold tracking-[0.2em] text-[#7FCBFF] uppercase">/08 Delivery</span>
-            <span className="block">
+            <Image
+              src="/images/services/medicine-delivery.jpg"
+              alt=""
+              fill
+              sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+              className="object-cover opacity-28"
+            />
+            <span
+              className="absolute inset-0"
+              style={{ background: "linear-gradient(rgba(6,11,31,0.76) 0%, rgba(6,11,31,0.95) 100%)" }}
+            />
+            <span className="relative text-[12px] font-bold tracking-[0.2em] text-[#7FCBFF] uppercase">/08 Delivery</span>
+            <span className="relative block">
               <span className="font-display block text-[26px] leading-none font-bold tracking-[-0.03em] text-white">
                 Medicine to your door
               </span>
