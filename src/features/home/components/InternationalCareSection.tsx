@@ -1,4 +1,4 @@
-import { Reveal } from "./Reveal";
+import { RevealStagger } from "./RevealStagger";
 import { internationalCareItems } from "../data/internationalCare";
 
 export function InternationalCareSection() {
@@ -24,7 +24,7 @@ export function InternationalCareSection() {
             Talk to the international desk <span aria-hidden>&rarr;</span>
           </a>
         </div>
-        <Reveal className="grid grid-cols-1 gap-px bg-[var(--home-hairline)] min-[640px]:grid-cols-2">
+        <RevealStagger className="grid grid-cols-1 gap-px bg-[var(--home-hairline)] min-[640px]:grid-cols-2">
           {internationalCareItems.map((item) => (
             <div key={item.index} className="bg-[var(--home-bg)] px-7 py-7.5">
               <div className="text-[12px] font-bold tracking-[0.18em] text-[var(--home-accent)]">{item.index}</div>
@@ -34,7 +34,7 @@ export function InternationalCareSection() {
               <p className="mt-2.5 text-[14.5px] leading-[1.6] text-[var(--home-muted)]">{item.body}</p>
             </div>
           ))}
-        </Reveal>
+        </RevealStagger>
       </div>
     </section>
   );

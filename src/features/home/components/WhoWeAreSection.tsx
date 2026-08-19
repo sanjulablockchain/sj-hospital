@@ -1,8 +1,21 @@
 import { Reveal } from "./Reveal";
+import { RevealStagger } from "./RevealStagger";
+import { CountUp } from "./CountUp";
 
-const stats = [
-  { value: "24", caption: "Hours a day, every service open" },
-  { value: "2h", caption: "Cleaning cycle, US specification" },
+type Stat = {
+  /** Animated when set; `value` is used verbatim otherwise. */
+  count?: number;
+  value?: string;
+  /** Fixed text that sits directly after the counter. */
+  suffix?: string;
+  caption: string;
+};
+
+// The zero stays a literal zero: counting it down from anything would briefly
+// show a number its own caption then contradicts.
+const stats: Stat[] = [
+  { count: 24, caption: "Hours a day, every service open" },
+  { count: 2, suffix: "h", caption: "Cleaning cycle, US specification" },
   { value: "0", caption: "Tests ordered that you don't need" },
 ];
 
@@ -37,20 +50,28 @@ export function WhoWeAreSection() {
               report is read by two of them before it reaches you.
             </p>
           </Reveal>
-          <Reveal className="mt-13.5">
-            <div className="grid grid-cols-1 gap-px bg-[var(--home-hairline)] min-[640px]:grid-cols-3">
-              {stats.map((stat) => (
-                <div key={stat.caption} className="bg-[var(--home-bg)] px-6.5 py-7.5">
-                  <div className="font-display text-[76px] leading-[0.82] font-extrabold tracking-[-0.05em] text-[var(--home-accent)] tabular-nums">
-                    {stat.value}
-                  </div>
-                  <div className="mt-3.5 text-[12.5px] leading-[1.5] tracking-[0.14em] text-[var(--home-muted)] uppercase">
-                    {stat.caption}
-                  </div>
+          <RevealStagger
+            stepMs={110}
+            className="mt-13.5 grid grid-cols-1 gap-px bg-[var(--home-hairline)] min-[640px]:grid-cols-3"
+          >
+            {stats.map((stat) => (
+              <div key={stat.caption} className="bg-[var(--home-bg)] px-6.5 py-7.5">
+                <div className="font-display text-[76px] leading-[0.82] font-extrabold tracking-[-0.05em] text-[var(--home-accent)] tabular-nums">
+                  {stat.count === undefined ? (
+                    stat.value
+                  ) : (
+                    <>
+                      <CountUp to={stat.count} />
+                      {stat.suffix}
+                    </>
+                  )}
                 </div>
-              ))}
-            </div>
-          </Reveal>
+                <div className="mt-3.5 text-[12.5px] leading-[1.5] tracking-[0.14em] text-[var(--home-muted)] uppercase">
+                  {stat.caption}
+                </div>
+              </div>
+            ))}
+          </RevealStagger>
         </div>
       </div>
     </section>

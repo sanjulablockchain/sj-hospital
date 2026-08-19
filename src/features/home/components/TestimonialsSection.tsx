@@ -2,17 +2,27 @@
 
 import { useState } from "react";
 import { Reveal } from "./Reveal";
+import { useParallax } from "../hooks/useParallax";
 import { testimonials } from "../data/testimonials";
 
 export function TestimonialsSection() {
   const [index, setIndex] = useState(0);
+  const { ref: glyphRef, offset: glyphOffset } = useParallax(0.07, 40);
   const current = testimonials[index];
 
   const goPrev = () => setIndex((i) => (i - 1 + testimonials.length) % testimonials.length);
   const goNext = () => setIndex((i) => (i + 1) % testimonials.length);
 
   return (
-    <section id="voices" className="mx-auto max-w-[1440px] px-5 pt-30 sm:px-8 lg:px-11">
+    <section id="voices" className="relative isolate mx-auto max-w-[1440px] px-5 pt-30 sm:px-8 lg:px-11">
+      <div
+        ref={glyphRef}
+        aria-hidden
+        style={{ transform: `translateY(${glyphOffset}px)` }}
+        className="font-display pointer-events-none absolute top-16 right-4 -z-10 text-[clamp(180px,26vw,380px)] leading-none font-extrabold text-[var(--home-accent)] opacity-10 select-none sm:right-8 lg:right-11"
+      >
+        &rdquo;
+      </div>
       <Reveal>
         <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
           13 / Patient voices

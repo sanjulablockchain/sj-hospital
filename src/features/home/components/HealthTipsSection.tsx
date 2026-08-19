@@ -1,4 +1,5 @@
 import { Reveal } from "./Reveal";
+import { RevealStagger } from "./RevealStagger";
 import { healthTips } from "../data/healthTips";
 
 export function HealthTipsSection() {
@@ -23,7 +24,7 @@ export function HealthTipsSection() {
           </a>
         </div>
       </Reveal>
-      <Reveal className="mt-12 border-t border-[var(--home-hairline)]">
+      <RevealStagger className="mt-12 border-t border-[var(--home-hairline)]">
         {healthTips.map((tip) => (
           <a
             key={tip.title}
@@ -39,7 +40,7 @@ export function HealthTipsSection() {
             <span className="text-[14.5px] leading-[1.55] text-[var(--home-muted)]">{tip.excerpt}</span>
           </a>
         ))}
-      </Reveal>
+      </RevealStagger>
     </section>
   );
 }

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Reveal } from "./Reveal";
 import { useParallax } from "../hooks/useParallax";
+import { CountUp } from "./CountUp";
 
 const perks = ["Private and semi private options", "Attendant space for family", "Meals prepared to dietary orders"];
 
@@ -42,7 +43,7 @@ export function RoomsSection() {
           <Reveal className="border-l border-white/24 pl-8">
             <div className="text-[12px] tracking-[0.18em] text-white/55 uppercase">Rooms from</div>
             <div className="font-display mt-2.5 text-[clamp(62px,8vw,126px)] leading-[0.82] font-extrabold tracking-[-0.05em] text-[var(--home-accent)] tabular-nums">
-              10,000
+              <CountUp to={10000} grouped durationMs={1700} />
             </div>
             <div className="mt-3 text-[15px] text-white/70">LKR per night, all inclusive of nursing care</div>
             <div className="mt-7 flex flex-col gap-3 text-[15px] text-white/80">

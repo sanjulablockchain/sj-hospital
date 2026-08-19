@@ -420,3 +420,86 @@ footer[id] {
     transform: none;
   }
 }
+
+/* ---- Staggered scroll reveal (see RevealStagger.tsx) ----
+   The children are targeted from here instead of being wrapped in extra
+   elements, so the grid and flex layouts that depend on them being direct
+   children keep working. Nothing hides until RevealStagger mounts and sets
+   data-stagger-armed, which means a JS-less render shows everything. */
+
+[data-home] [data-stagger-armed] > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.72s ease-out,
+    transform 0.72s ease-out;
+}
+
+[data-home] [data-stagger-revealed] > * {
+  opacity: 1;
+  transform: none;
+}
+
+[data-home] [data-stagger-revealed] > *:nth-child(1) {
+  transition-delay: calc(var(--sj-stagger-step, 70ms) * 0);
+}
+
+[data-home] [data-stagger-revealed] > *:nth-child(2) {
+  transition-delay: calc(var(--sj-stagger-step, 70ms) * 1);
+}
+
+[data-home] [data-stagger-revealed] > *:nth-child(3) {
+  transition-delay: calc(var(--sj-stagger-step, 70ms) * 2);
+}
+
+[data-home] [data-stagger-revealed] > *:nth-child(4) {
+  transition-delay: calc(var(--sj-stagger-step, 70ms) * 3);
+}
+
+[data-home] [data-stagger-revealed] > *:nth-child(5) {
+  transition-delay: calc(var(--sj-stagger-step, 70ms) * 4);
+}
+
+[data-home] [data-stagger-revealed] > *:nth-child(6) {
+  transition-delay: calc(var(--sj-stagger-step, 70ms) * 5);
+}
+
+[data-home] [data-stagger-revealed] > *:nth-child(7) {
+  transition-delay: calc(var(--sj-stagger-step, 70ms) * 6);
+}
+
+[data-home] [data-stagger-revealed] > *:nth-child(8) {
+  transition-delay: calc(var(--sj-stagger-step, 70ms) * 7);
+}
+
+[data-home] [data-stagger-revealed] > *:nth-child(9) {
+  transition-delay: calc(var(--sj-stagger-step, 70ms) * 8);
+}
+
+[data-home] [data-stagger-revealed] > *:nth-child(10) {
+  transition-delay: calc(var(--sj-stagger-step, 70ms) * 9);
+}
+
+[data-home] [data-stagger-revealed] > *:nth-child(11) {
+  transition-delay: calc(var(--sj-stagger-step, 70ms) * 10);
+}
+
+[data-home] [data-stagger-revealed] > *:nth-child(12) {
+  transition-delay: calc(var(--sj-stagger-step, 70ms) * 11);
+}
+
+[data-home] [data-stagger-revealed] > *:nth-child(13) {
+  transition-delay: calc(var(--sj-stagger-step, 70ms) * 12);
+}
+
+[data-home] [data-stagger-revealed] > *:nth-child(14) {
+  transition-delay: calc(var(--sj-stagger-step, 70ms) * 13);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-home] [data-stagger-armed] > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

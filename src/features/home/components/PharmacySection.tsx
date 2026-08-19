@@ -3,13 +3,25 @@
 import Image from "next/image";
 import { Reveal } from "./Reveal";
 import { useParallax } from "../hooks/useParallax";
+import { RevealStagger } from "./RevealStagger";
+import { CountUp } from "./CountUp";
 import { LOGO_MARK } from "@/config/brand";
 
-const stats = [
-  { label: "Counter hours", value: "24 / 7" },
+type PharmacyStat = {
+  label: string;
+  /** Animated when set; `value` is used verbatim otherwise. */
+  count?: number;
+  value?: string;
+  /** Fixed text that sits directly after the counter. */
+  suffix?: string;
+  accent?: boolean;
+};
+
+const stats: PharmacyStat[] = [
+  { label: "Counter hours", count: 24, suffix: " / 7" },
   { label: "Home delivery radius", value: "Negombo" },
   { label: "Prescriptions on file", value: "Digital", accent: true },
-  { label: "OPD patient lab discount", value: "10%" },
+  { label: "OPD patient lab discount", count: 10, suffix: "%" },
 ];
 
 export function PharmacySection() {
@@ -54,22 +66,27 @@ export function PharmacySection() {
               </a>
             </div>
           </Reveal>
-          <Reveal>
-            <div className="flex flex-col gap-px bg-white/16">
-              {stats.map((stat) => (
-                <div key={stat.label} className="flex items-baseline justify-between gap-5 bg-[#08123A] px-7.5 py-6">
-                  <span className="text-[15px] text-white/72">{stat.label}</span>
-                  <span
-                    className={`font-display text-[32px] font-extrabold tracking-[-0.03em] ${
-                      stat.accent ? "text-[var(--home-accent)]" : "text-white"
-                    }`}
-                  >
-                    {stat.value}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </Reveal>
+          <RevealStagger stepMs={90} className="flex flex-col gap-px bg-white/16">
+            {stats.map((stat) => (
+              <div key={stat.label} className="flex items-baseline justify-between gap-5 bg-[#08123A] px-7.5 py-6">
+                <span className="text-[15px] text-white/72">{stat.label}</span>
+                <span
+                  className={`font-display text-[32px] font-extrabold tracking-[-0.03em] tabular-nums ${
+                    stat.accent ? "text-[var(--home-accent)]" : "text-white"
+                  }`}
+                >
+                  {stat.count === undefined ? (
+                    stat.value
+                  ) : (
+                    <>
+                      <CountUp to={stat.count} />
+                      {stat.suffix}
+                    </>
+                  )}
+                </span>
+              </div>
+            ))}
+          </RevealStagger>
         </div>
       </div>
     </section>

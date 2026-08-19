@@ -1,4 +1,5 @@
 import { Reveal } from "./Reveal";
+import { RevealStagger } from "./RevealStagger";
 import { mediaItems } from "../data/media";
 
 export function MediaSection() {
@@ -21,7 +22,7 @@ export function MediaSection() {
           </a>
         </div>
       </Reveal>
-      <Reveal className="mt-11.5 border-t border-[var(--home-hairline)]">
+      <RevealStagger className="mt-11.5 border-t border-[var(--home-hairline)]">
         {mediaItems.map((item) => (
           <a
             key={item.title}
@@ -39,7 +40,7 @@ export function MediaSection() {
             </span>
           </a>
         ))}
-      </Reveal>
+      </RevealStagger>
     </section>
   );
 }

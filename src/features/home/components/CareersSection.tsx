@@ -1,4 +1,4 @@
-import { Reveal } from "./Reveal";
+import { RevealStagger } from "./RevealStagger";
 import { jobOpenings } from "../data/careers";
 
 export function CareersSection() {
@@ -23,7 +23,7 @@ export function CareersSection() {
             Send your CV <span aria-hidden>&rarr;</span>
           </a>
         </div>
-        <Reveal className="border-t border-[var(--home-hairline)]">
+        <RevealStagger className="border-t border-[var(--home-hairline)]">
           {jobOpenings.map((job) => (
             <a
               key={job.title}
@@ -40,7 +40,7 @@ export function CareersSection() {
               </span>
             </a>
           ))}
-        </Reveal>
+        </RevealStagger>
       </div>
     </section>
   );
