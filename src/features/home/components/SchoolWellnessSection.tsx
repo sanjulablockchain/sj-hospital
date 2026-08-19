@@ -38,7 +38,7 @@ export function SchoolWellnessSection() {
               </div>
             ))}
           </div>
-          <a href="#contact" className="mt-7 inline-flex items-center gap-2.5 bg-[var(--home-accent)] px-6 py-4 text-[15px] font-bold text-[var(--home-on-accent)]">
+          <a href="#contact" className="sj-invert mt-7 inline-flex items-center gap-2.5 bg-[var(--home-accent)] px-6 py-4 text-[15px] font-bold text-[var(--home-on-accent)]">
             Bring it to our school <span aria-hidden>&rarr;</span>
           </a>
         </Reveal>

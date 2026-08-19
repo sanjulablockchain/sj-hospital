@@ -30,7 +30,7 @@ export function TestimonialsSection() {
             aria-label="Previous testimonial"
             onClick={goPrev}
             disabled={testimonials.length < 2}
-            className="flex h-13 w-13 items-center justify-center border border-[var(--home-hairline)] text-[18px] text-[var(--home-heading)] disabled:opacity-40"
+            className="sj-invert flex h-13 w-13 items-center justify-center border border-[var(--home-hairline-strong)] text-[18px] text-[var(--home-heading)] disabled:opacity-40"
           >
             <span aria-hidden>&larr;</span>
           </button>
@@ -39,7 +39,7 @@ export function TestimonialsSection() {
             aria-label="Next testimonial"
             onClick={goNext}
             disabled={testimonials.length < 2}
-            className="flex h-13 w-13 items-center justify-center border border-[var(--home-hairline)] text-[18px] text-[var(--home-heading)] disabled:opacity-40"
+            className="sj-invert flex h-13 w-13 items-center justify-center border border-[var(--home-hairline-strong)] text-[18px] text-[var(--home-heading)] disabled:opacity-40"
           >
             <span aria-hidden>&rarr;</span>
           </button>

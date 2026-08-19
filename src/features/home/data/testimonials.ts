@@ -11,4 +11,16 @@ export const testimonials: Testimonial[] = [
     name: "Michael Perera",
     role: "OPD patient",
   },
+  {
+    quote:
+      "The nurses are so understanding, and the check-up reminders really help. The facilities feel world class.",
+    name: "Malini De Silva",
+    role: "Regular check-ups",
+  },
+  {
+    quote:
+      "Surgery in the morning, my own room by noon, and a nurse who stayed with me until I was steady.",
+    name: "Samantha Jayasinghe",
+    role: "Surgical patient",
+  },
 ];

@@ -25,7 +25,7 @@ export function NetworkSection() {
         {networkNodes.map((node) => (
           <div
             key={node.name}
-            className="grid grid-cols-1 gap-3 border-b border-[var(--home-hairline)] py-6.5 min-[640px]:grid-cols-[0.6fr_1.4fr_1fr] min-[640px]:items-baseline min-[640px]:gap-6"
+            className="sj-row grid grid-cols-1 gap-3 border-b border-[var(--home-hairline)] px-1 py-6.5 min-[640px]:grid-cols-[0.6fr_1.4fr_1fr] min-[640px]:items-baseline min-[640px]:gap-6"
           >
             <span className="text-[13px] font-bold tracking-[0.16em] text-[var(--home-accent)] uppercase">
               {node.location}

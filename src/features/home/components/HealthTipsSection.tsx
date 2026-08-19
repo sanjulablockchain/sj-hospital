@@ -18,7 +18,7 @@ export function HealthTipsSection() {
               our doctors
             </h2>
           </div>
-          <a href="#tips" className="inline-flex items-center gap-2.5 border border-[var(--home-hairline)] px-5.5 py-3.5 text-[14.5px] font-bold text-[var(--home-heading)]">
+          <a href="#tips" className="sj-invert inline-flex items-center gap-2.5 border border-[var(--home-hairline-strong)] px-5.5 py-3.5 text-[14.5px] font-bold text-[var(--home-heading)]">
             All health tips <span aria-hidden>&rarr;</span>
           </a>
         </div>
@@ -28,7 +28,7 @@ export function HealthTipsSection() {
           <a
             key={tip.title}
             href="#tips"
-            className="grid grid-cols-1 gap-3 border-b border-[var(--home-hairline)] py-6.5 text-inherit min-[640px]:grid-cols-[0.5fr_1.5fr_1fr] min-[640px]:items-baseline min-[640px]:gap-6"
+            className="sj-row grid grid-cols-1 gap-3 border-b border-[var(--home-hairline)] px-1 py-6.5 text-inherit min-[640px]:grid-cols-[0.5fr_1.5fr_1fr] min-[640px]:items-baseline min-[640px]:gap-6"
           >
             <span className="text-[13px] font-bold tracking-[0.14em] text-[var(--home-accent)] uppercase">
               {tip.category}

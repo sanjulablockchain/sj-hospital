@@ -18,19 +18,19 @@ export function ContactCtaSection() {
         <div className="flex flex-col bg-[var(--home-bg)]">
           <a
             href="#surgical"
-            className="font-display flex flex-1 items-center justify-between gap-5 border-b border-[var(--home-hairline)] px-8 py-7 text-[25px] font-semibold tracking-[-0.02em] text-[var(--home-heading)]"
+            className="sj-invert font-display flex flex-1 items-center justify-between gap-5 border-b border-[var(--home-hairline)] px-8 py-7 text-[25px] font-semibold tracking-[-0.02em] text-[var(--home-heading)]"
           >
             Surgical care <span aria-hidden>&rarr;</span>
           </a>
           <a
             href="#rooms"
-            className="font-display flex flex-1 items-center justify-between gap-5 border-b border-[var(--home-hairline)] px-8 py-7 text-[25px] font-semibold tracking-[-0.02em] text-[var(--home-heading)]"
+            className="sj-invert font-display flex flex-1 items-center justify-between gap-5 border-b border-[var(--home-hairline)] px-8 py-7 text-[25px] font-semibold tracking-[-0.02em] text-[var(--home-heading)]"
           >
             Reserve a room <span aria-hidden>&rarr;</span>
           </a>
           <a
             href="tel:+94117848484"
-            className="font-display flex flex-1 items-center justify-between gap-5 px-8 py-7 text-[25px] font-semibold tracking-[-0.02em] text-[var(--home-heading)] tabular-nums"
+            className="sj-invert font-display flex flex-1 items-center justify-between gap-5 px-8 py-7 text-[25px] font-semibold tracking-[-0.02em] text-[var(--home-heading)] tabular-nums"
           >
             0117 84 84 84 <span aria-hidden>&#9742;</span>
           </a>

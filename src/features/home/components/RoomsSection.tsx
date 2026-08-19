@@ -35,7 +35,7 @@ export function RoomsSection() {
               Quiet, private and sanitised on a two hour cycle, with nursing that knows your name and a doctor
               on the floor at all times.
             </p>
-            <a href="#book" className="mt-8 inline-flex items-center gap-3 bg-white px-6.5 py-4.5 text-[15px] font-bold text-[#060B1F]">
+            <a href="#book" className="sj-accentify mt-8 inline-flex items-center gap-3 bg-white px-6.5 py-4.5 text-[15px] font-bold text-[#060B1F]">
               Reserve a room <span aria-hidden>&rarr;</span>
             </a>
           </Reveal>

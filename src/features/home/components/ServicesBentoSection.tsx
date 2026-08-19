@@ -29,7 +29,7 @@ export function ServicesBentoSection() {
         >
           <a
             href="#book"
-            className="group relative col-span-2 row-span-2 flex flex-col justify-between overflow-hidden bg-[var(--home-accent)] p-8 text-[var(--home-on-accent)] max-[639px]:col-span-1"
+            className="sj-bento sj-bento-accent group relative col-span-2 row-span-2 flex flex-col justify-between overflow-hidden bg-[var(--home-accent)] p-8 text-[var(--home-on-accent)] max-[639px]:col-span-1"
           >
             <span className="flex items-center justify-between gap-4 text-[12px] font-bold tracking-[0.2em] uppercase opacity-72">
               <span>/01 Emergency &amp; OPD</span>
@@ -53,7 +53,7 @@ export function ServicesBentoSection() {
 
           <a
             href="#surgical"
-            className="relative col-span-2 flex min-h-[178px] flex-col justify-end overflow-hidden bg-[#0B1846] p-7 text-white max-[639px]:col-span-1"
+            className="sj-bento relative col-span-2 flex min-h-[178px] flex-col justify-end overflow-hidden bg-[#0B1846] p-7 text-white max-[639px]:col-span-1"
           >
             <Image
               src="/images/about-facility.jpg"
@@ -89,7 +89,7 @@ export function ServicesBentoSection() {
 
           <a
             href="#rooms"
-            className="row-span-2 flex flex-col justify-between border border-[var(--home-hairline)] bg-[#0B1846] p-6.5 text-inherit"
+            className="sj-bento row-span-2 flex flex-col justify-between border border-[var(--home-hairline)] bg-[#0B1846] p-6.5 text-inherit"
           >
             <span className="text-[12px] font-bold tracking-[0.2em] text-[#7FCBFF] uppercase">/03 Rooms</span>
             <span className="block">
@@ -104,7 +104,7 @@ export function ServicesBentoSection() {
 
           <a
             href="#pharmacy"
-            className="flex flex-col justify-between border border-[var(--home-hairline)] bg-[#0B1846] p-6.5 text-inherit"
+            className="sj-bento flex flex-col justify-between border border-[var(--home-hairline)] bg-[#0B1846] p-6.5 text-inherit"
           >
             <span className="text-[12px] font-bold tracking-[0.2em] text-[#7FCBFF] uppercase">/04 Pharmacy</span>
             <span className="block">
@@ -119,7 +119,7 @@ export function ServicesBentoSection() {
 
           <a
             href="#facilities"
-            className="flex flex-col justify-between border border-[var(--home-hairline)] bg-[#0B1846] p-6.5 text-inherit"
+            className="sj-bento flex flex-col justify-between border border-[var(--home-hairline)] bg-[#0B1846] p-6.5 text-inherit"
           >
             <span className="text-[12px] font-bold tracking-[0.2em] text-[#7FCBFF] uppercase">/05 Digital X-ray</span>
             <span className="block">
@@ -134,7 +134,7 @@ export function ServicesBentoSection() {
 
           <a
             href="#facilities"
-            className="relative col-span-2 flex min-h-[178px] items-end overflow-hidden bg-[#08123A] p-6.5 text-inherit max-[639px]:col-span-1"
+            className="sj-bento relative col-span-2 flex min-h-[178px] items-end overflow-hidden bg-[#08123A] p-6.5 text-inherit max-[639px]:col-span-1"
           >
             <Image
               src="/images/doctors.jpg"
@@ -162,7 +162,7 @@ export function ServicesBentoSection() {
 
           <a
             href="#book"
-            className="flex flex-col justify-between border border-[var(--home-hairline)] bg-[#0B1846] p-6.5 text-inherit"
+            className="sj-bento flex flex-col justify-between border border-[var(--home-hairline)] bg-[#0B1846] p-6.5 text-inherit"
           >
             <span className="text-[12px] font-bold tracking-[0.2em] text-[#7FCBFF] uppercase">/07 Home visits</span>
             <span className="block">
@@ -177,7 +177,7 @@ export function ServicesBentoSection() {
 
           <a
             href="#pharmacy"
-            className="flex flex-col justify-between border border-[var(--home-hairline)] bg-[#0B1846] p-6.5 text-inherit"
+            className="sj-bento flex flex-col justify-between border border-[var(--home-hairline)] bg-[#0B1846] p-6.5 text-inherit"
           >
             <span className="text-[12px] font-bold tracking-[0.2em] text-[#7FCBFF] uppercase">/08 Delivery</span>
             <span className="block">
@@ -195,7 +195,7 @@ export function ServicesBentoSection() {
       <Reveal>
         <a
           href="#surgical"
-          className="mt-8.5 flex flex-wrap items-center justify-between gap-7.5 bg-[var(--home-accent)] px-9 py-8.5 text-[var(--home-on-accent)] transition-colors"
+          className="mt-8.5 flex flex-wrap items-center justify-between gap-7.5 bg-[var(--home-accent)] px-9 py-8.5 text-[var(--home-on-accent)] sj-invert"
         >
           <span className="block">
             <span className="block text-[11.5px] font-bold tracking-[0.24em] uppercase opacity-70">

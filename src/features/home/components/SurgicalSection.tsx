@@ -44,10 +44,10 @@ export function SurgicalSection() {
               tracking on every instrument set and a nurse assigned to your recovery from theatre to discharge.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a href="#book" className="inline-flex items-center gap-2.5 bg-[var(--home-accent)] px-6 py-4 text-[15px] font-bold text-[var(--home-on-accent)]">
+              <a href="#book" className="sj-invert inline-flex items-center gap-2.5 bg-[var(--home-accent)] px-6 py-4 text-[15px] font-bold text-[var(--home-on-accent)]">
                 Request a surgical consult <span aria-hidden>&rarr;</span>
               </a>
-              <a href="tel:+94117848484" className="inline-flex items-center gap-2.5 border border-white/30 px-6 py-4 text-[15px] font-bold text-white">
+              <a href="tel:+94117848484" className="sj-invert inline-flex items-center gap-2.5 border border-white/30 px-6 py-4 text-[15px] font-bold text-white">
                 Speak to the theatre desk
               </a>
             </div>

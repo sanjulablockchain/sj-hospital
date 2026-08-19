@@ -22,10 +22,10 @@ export function FacilitiesSection() {
             card.accent ? (
               <article
                 key={card.index}
-                className="relative flex min-h-[430px] flex-col justify-end overflow-hidden bg-[var(--home-accent)]"
+                className="group relative flex min-h-[430px] flex-col justify-end overflow-hidden bg-[var(--home-accent)]"
               >
-                <div className="absolute inset-x-0 bottom-0 h-1 bg-[var(--home-on-accent)]" />
-                <div className="relative p-7 text-[var(--home-on-accent)]">
+                <div className="absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-[var(--home-on-accent)] transition-transform duration-[450ms] group-hover:scale-x-100" />
+                <div className="relative p-7 text-[var(--home-on-accent)] transition-transform duration-500 group-hover:-translate-y-2">
                   <div className="text-[12px] font-bold tracking-[0.18em] opacity-65">{card.index}</div>
                   <h3 className="font-display mt-3 text-[26px] leading-[1.06] font-semibold tracking-[-0.025em]">
                     {card.title}

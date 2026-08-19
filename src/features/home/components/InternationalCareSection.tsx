@@ -20,7 +20,7 @@ export function InternationalCareSection() {
             Negombo sits ten minutes from the international airport. We look after visitors, expatriates and
             medical travellers from arrival to follow up at home.
           </p>
-          <a href="mailto:international@sjhospital.lk" className="mt-7 inline-flex items-center gap-2.5 bg-[var(--home-accent)] px-5.5 py-3.5 text-[14.5px] font-bold text-[var(--home-on-accent)]">
+          <a href="mailto:international@sjhospital.lk" className="sj-invert mt-7 inline-flex items-center gap-2.5 bg-[var(--home-accent)] px-5.5 py-3.5 text-[14.5px] font-bold text-[var(--home-on-accent)]">
             Talk to the international desk <span aria-hidden>&rarr;</span>
           </a>
         </div>
