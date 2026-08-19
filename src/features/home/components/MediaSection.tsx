@@ -27,7 +27,7 @@ export function MediaSection() {
           <a
             key={item.title}
             href="#media"
-            className="sj-row grid grid-cols-1 gap-3 border-b border-[var(--home-hairline)] px-1 py-6.5 text-inherit min-[640px]:grid-cols-[0.5fr_1.6fr_0.9fr] min-[640px]:items-baseline min-[640px]:gap-6"
+            className="sj-row-fill grid grid-cols-1 gap-3 border-b border-[var(--home-hairline)] px-1 py-6.5 text-inherit min-[640px]:grid-cols-[0.5fr_1.6fr_0.9fr] min-[640px]:items-baseline min-[640px]:gap-6"
           >
             <span className="text-[13.5px] font-bold tracking-[0.1em] text-[var(--home-muted)] tabular-nums">
               {item.date}

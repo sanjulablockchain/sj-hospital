@@ -29,7 +29,7 @@ export function HealthTipsSection() {
           <a
             key={tip.title}
             href="#tips"
-            className="sj-row grid grid-cols-1 gap-3 border-b border-[var(--home-hairline)] px-1 py-6.5 text-inherit min-[640px]:grid-cols-[0.5fr_1.5fr_1fr] min-[640px]:items-baseline min-[640px]:gap-6"
+            className="sj-row-fill grid grid-cols-1 gap-3 border-b border-[var(--home-hairline)] px-1 py-6.5 text-inherit min-[640px]:grid-cols-[0.5fr_1.5fr_1fr] min-[640px]:items-baseline min-[640px]:gap-6"
           >
             <span className="text-[13px] font-bold tracking-[0.14em] text-[var(--home-accent)] uppercase">
               {tip.category}
