@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { WhatsAppIcon, CallIcon } from "./icons";
+import { WhatsAppIcon, CallIcon } from "@/components/ui/BrandIcons";
 
 export function FloatingActions() {
   const [showBackToTop, setShowBackToTop] = useState(false);

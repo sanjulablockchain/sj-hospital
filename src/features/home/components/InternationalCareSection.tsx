@@ -1,4 +1,4 @@
-import { RevealStagger } from "./RevealStagger";
+import { RevealStagger } from "@/components/ui/RevealStagger";
 import { internationalCareItems } from "../data/internationalCare";
 
 export function InternationalCareSection() {

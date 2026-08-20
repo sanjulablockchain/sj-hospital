@@ -1,4 +1,4 @@
-import { RevealStagger } from "./RevealStagger";
+import { RevealStagger } from "@/components/ui/RevealStagger";
 import { jobOpenings } from "../data/careers";
 
 export function CareersSection() {

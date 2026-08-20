@@ -1,5 +1,5 @@
-import { Reveal } from "./Reveal";
-import { RevealStagger } from "./RevealStagger";
+import { Reveal } from "@/components/ui/Reveal";
+import { RevealStagger } from "@/components/ui/RevealStagger";
 import { CountUp } from "./CountUp";
 
 type Stat = {

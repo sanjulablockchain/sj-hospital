@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ParallaxLayer } from "./ParallaxLayer";
+import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { LOGO_MARK } from "@/config/brand";
 
 export function ContactCtaSection() {

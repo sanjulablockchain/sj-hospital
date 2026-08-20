@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Reveal } from "./Reveal";
+import { Reveal } from "@/components/ui/Reveal";
 import { useParallax } from "../hooks/useParallax";
 
 const procedures = [

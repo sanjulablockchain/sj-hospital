@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { Reveal } from "./Reveal";
-import { RevealStagger } from "./RevealStagger";
-import { ParallaxLayer } from "./ParallaxLayer";
+import { Reveal } from "@/components/ui/Reveal";
+import { RevealStagger } from "@/components/ui/RevealStagger";
+import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { facilities } from "../data/facilities";
 
 export function FacilitiesSection() {

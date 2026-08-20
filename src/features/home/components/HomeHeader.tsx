@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { homeNavigation } from "@/config/homeNavigation";
 import { ThemeToggleButton } from "@/components/theme/ThemeToggleButton";
-import { MobileNavPanel } from "./MobileNavPanel";
+import { MobileNavPanel } from "@/components/layout/MobileNavPanel";
 import { LOGO_MARK } from "@/config/brand";
 
 export function HomeHeader() {

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { FacebookIcon, InstagramIcon, LinkedInIcon, WhatsAppIcon } from "./icons";
+import { FacebookIcon, InstagramIcon, LinkedInIcon, WhatsAppIcon } from "@/components/ui/BrandIcons";
 import { LOGO_MARK } from "@/config/brand";
 
 const careLinks = [

@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { useParallax } from "../hooks/useParallax";
+import { useScrollParallax } from "@/hooks/useScrollParallax";
 
 type ParallaxLayerProps = {
   children: ReactNode;
@@ -21,7 +21,7 @@ export function ParallaxLayer({
   factor = 0.08,
   maxOffsetPx = 44,
 }: ParallaxLayerProps) {
-  const { ref, offset } = useParallax(factor, maxOffsetPx);
+  const { ref, offset } = useScrollParallax(factor, maxOffsetPx);
 
   return (
     <div ref={ref} style={{ transform: `translateY(${offset}px)` }} className={className}>
