@@ -1,5 +1,4 @@
-import { ThemeScript } from "@/components/theme/ThemeScript";
-import { SiteThemeProvider } from "@/components/theme/useSiteTheme";
+import { ThemedShell } from "@/components/layout/ThemedShell";
 import { HeroSection } from "./HeroSection";
 import { WhoWeAreSection } from "./WhoWeAreSection";
 import { ServicesBentoSection } from "./ServicesBentoSection";
@@ -20,35 +19,26 @@ import { FloatingActions } from "./FloatingActions";
 
 export function HomePage() {
   return (
-    <div
-      id="sj-root"
-      data-sj
-      data-theme="dark"
-      suppressHydrationWarning
-      className="min-h-screen bg-[var(--home-bg)] text-[var(--home-body)] antialiased"
-    >
-      <ThemeScript />
-      <SiteThemeProvider>
-        <main>
-          <HeroSection />
-          <WhoWeAreSection />
-          <ServicesBentoSection />
-          <SurgicalSection />
-          <FacilitiesSection />
-          <PharmacySection />
-          <RoomsSection />
-          <InternationalCareSection />
-          <HealthTipsSection />
-          <SchoolWellnessSection />
-          <NetworkSection />
-          <MediaSection />
-          <CareersSection />
-          <TestimonialsSection />
-          <ContactCtaSection />
-        </main>
-        <HomeFooter />
-        <FloatingActions />
-      </SiteThemeProvider>
-    </div>
+    <ThemedShell>
+      <main data-flow-header>
+        <HeroSection />
+        <WhoWeAreSection />
+        <ServicesBentoSection />
+        <SurgicalSection />
+        <FacilitiesSection />
+        <PharmacySection />
+        <RoomsSection />
+        <InternationalCareSection />
+        <HealthTipsSection />
+        <SchoolWellnessSection />
+        <NetworkSection />
+        <MediaSection />
+        <CareersSection />
+        <TestimonialsSection />
+        <ContactCtaSection />
+      </main>
+      <HomeFooter />
+      <FloatingActions />
+    </ThemedShell>
   );
 }
