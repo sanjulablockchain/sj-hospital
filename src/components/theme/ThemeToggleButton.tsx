@@ -1,9 +1,9 @@
 "use client";
 
-import { useHomeTheme } from "../hooks/useHomeTheme";
+import { useSiteTheme } from "./useSiteTheme";
 
 export function ThemeToggleButton() {
-  const { theme, toggle } = useHomeTheme();
+  const { theme, toggle } = useSiteTheme();
   const isDark = theme === "dark";
 
   return (

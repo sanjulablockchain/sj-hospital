@@ -1,5 +1,5 @@
-import { HomeThemeScript } from "./HomeThemeScript";
-import { HomeThemeProvider } from "../hooks/useHomeTheme";
+import { ThemeScript } from "@/components/theme/ThemeScript";
+import { SiteThemeProvider } from "@/components/theme/useSiteTheme";
 import { HeroSection } from "./HeroSection";
 import { WhoWeAreSection } from "./WhoWeAreSection";
 import { ServicesBentoSection } from "./ServicesBentoSection";
@@ -21,14 +21,14 @@ import { FloatingActions } from "./FloatingActions";
 export function HomePage() {
   return (
     <div
-      id="home-root"
-      data-home
+      id="sj-root"
+      data-sj
       data-theme="dark"
       suppressHydrationWarning
       className="min-h-screen bg-[var(--home-bg)] text-[var(--home-body)] antialiased"
     >
-      <HomeThemeScript />
-      <HomeThemeProvider>
+      <ThemeScript />
+      <SiteThemeProvider>
         <main>
           <HeroSection />
           <WhoWeAreSection />
@@ -48,7 +48,7 @@ export function HomePage() {
         </main>
         <HomeFooter />
         <FloatingActions />
-      </HomeThemeProvider>
+      </SiteThemeProvider>
     </div>
   );
 }

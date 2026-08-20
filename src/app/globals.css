@@ -42,8 +42,8 @@ footer[id] {
 /* The home page's header is not sticky (it scrolls away inside the hero),
    so the 140px offset above is wrong for all of its in-page anchors —
    cancel it here. */
-[data-home] section[id],
-[data-home] footer[id] {
+[data-sj] section[id],
+[data-sj] footer[id] {
   scroll-margin-top: 0;
 }
 
@@ -193,7 +193,7 @@ footer[id] {
 
 /* ---- Home page (v2 redesign) — scoped design system ---- */
 
-[data-home] {
+[data-sj] {
   --home-bg: #060b1f;
   --home-surface: #0b1846;
   --home-surface-2: #08123a;
@@ -207,7 +207,7 @@ footer[id] {
   font-family: var(--font-manrope), system-ui, sans-serif;
 }
 
-[data-home][data-theme="light"] {
+[data-sj][data-theme="light"] {
   --home-bg: #f1f5fc;
   --home-surface: #ffffff;
   --home-surface-2: #ffffff;
@@ -220,7 +220,7 @@ footer[id] {
   --home-on-accent: #ffffff;
 }
 
-[data-home] .font-display {
+[data-sj] .font-display {
   font-family: var(--font-bricolage), system-ui, sans-serif;
 }
 
@@ -331,41 +331,41 @@ footer[id] {
    two "invert" targets are tokens so the light theme flips to ink-on-white
    instead of white-on-white. */
 
-[data-home] {
+[data-sj] {
   --home-hairline-strong: rgba(242, 246, 255, 0.28);
   --home-invert-bg: #ffffff;
   --home-invert-fg: #060b1f;
   --home-accent-hover: #7fcbff;
 }
 
-[data-home][data-theme="light"] {
+[data-sj][data-theme="light"] {
   --home-hairline-strong: rgba(10, 16, 48, 0.28);
   --home-invert-bg: #0a1030;
   --home-invert-fg: #ffffff;
   --home-accent-hover: #0f86e0;
 }
 
-[data-home] .sj-invert,
-[data-home] .sj-accentify,
-[data-home] .sj-link {
+[data-sj] .sj-invert,
+[data-sj] .sj-accentify,
+[data-sj] .sj-link {
   transition:
     background-color 0.25s ease,
     border-color 0.25s ease,
     color 0.25s ease;
 }
 
-[data-home] .sj-row {
+[data-sj] .sj-row {
   transition: padding 0.25s ease;
 }
 
-[data-home] .sj-row-fill {
+[data-sj] .sj-row-fill {
   transition:
     background-color 0.25s ease,
     color 0.25s ease,
     padding 0.25s ease;
 }
 
-[data-home] .sj-bento {
+[data-sj] .sj-bento {
   transition:
     background-color 0.35s ease,
     transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -373,50 +373,50 @@ footer[id] {
 
 @media (hover: hover) {
   /* Filled and outlined buttons both flip to the inverted pair. */
-  [data-home] .sj-invert:hover {
+  [data-sj] .sj-invert:hover {
     background-color: var(--home-invert-bg);
     border-color: var(--home-invert-bg);
     color: var(--home-invert-fg);
   }
 
   /* The one button that starts light and picks up accent instead. */
-  [data-home] .sj-accentify:hover {
+  [data-sj] .sj-accentify:hover {
     background-color: var(--home-accent);
     color: var(--home-on-accent);
   }
 
-  [data-home] .sj-link:hover {
+  [data-sj] .sj-link:hover {
     color: var(--home-accent);
   }
 
   /* Directory rows step in from the left. */
-  [data-home] .sj-row:hover {
+  [data-sj] .sj-row:hover {
     padding-left: 16px;
   }
 
   /* Job rows also fill with accent. Their children set their own colours, so
      pull those onto the fill or the text stays unreadable. */
-  [data-home] .sj-row-fill:hover {
+  [data-sj] .sj-row-fill:hover {
     background-color: var(--home-accent);
     color: var(--home-on-accent);
     padding-left: 16px;
   }
 
-  [data-home] .sj-row-fill:hover * {
+  [data-sj] .sj-row-fill:hover * {
     color: inherit;
   }
 
-  [data-home] .sj-bento:hover {
+  [data-sj] .sj-bento:hover {
     transform: translateY(-6px);
   }
 
-  [data-home] .sj-bento-accent:hover {
+  [data-sj] .sj-bento-accent:hover {
     background-color: var(--home-accent-hover);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  [data-home] .sj-bento:hover {
+  [data-sj] .sj-bento:hover {
     transform: none;
   }
 }
@@ -427,7 +427,7 @@ footer[id] {
    children keep working. Nothing hides until RevealStagger mounts and sets
    data-stagger-armed, which means a JS-less render shows everything. */
 
-[data-home] [data-stagger-armed] > * {
+[data-sj] [data-stagger-armed] > * {
   opacity: 0;
   transform: translateY(24px);
   transition:
@@ -435,69 +435,69 @@ footer[id] {
     transform 0.72s ease-out;
 }
 
-[data-home] [data-stagger-revealed] > * {
+[data-sj] [data-stagger-revealed] > * {
   opacity: 1;
   transform: none;
 }
 
-[data-home] [data-stagger-revealed] > *:nth-child(1) {
+[data-sj] [data-stagger-revealed] > *:nth-child(1) {
   transition-delay: calc(var(--sj-stagger-step, 70ms) * 0);
 }
 
-[data-home] [data-stagger-revealed] > *:nth-child(2) {
+[data-sj] [data-stagger-revealed] > *:nth-child(2) {
   transition-delay: calc(var(--sj-stagger-step, 70ms) * 1);
 }
 
-[data-home] [data-stagger-revealed] > *:nth-child(3) {
+[data-sj] [data-stagger-revealed] > *:nth-child(3) {
   transition-delay: calc(var(--sj-stagger-step, 70ms) * 2);
 }
 
-[data-home] [data-stagger-revealed] > *:nth-child(4) {
+[data-sj] [data-stagger-revealed] > *:nth-child(4) {
   transition-delay: calc(var(--sj-stagger-step, 70ms) * 3);
 }
 
-[data-home] [data-stagger-revealed] > *:nth-child(5) {
+[data-sj] [data-stagger-revealed] > *:nth-child(5) {
   transition-delay: calc(var(--sj-stagger-step, 70ms) * 4);
 }
 
-[data-home] [data-stagger-revealed] > *:nth-child(6) {
+[data-sj] [data-stagger-revealed] > *:nth-child(6) {
   transition-delay: calc(var(--sj-stagger-step, 70ms) * 5);
 }
 
-[data-home] [data-stagger-revealed] > *:nth-child(7) {
+[data-sj] [data-stagger-revealed] > *:nth-child(7) {
   transition-delay: calc(var(--sj-stagger-step, 70ms) * 6);
 }
 
-[data-home] [data-stagger-revealed] > *:nth-child(8) {
+[data-sj] [data-stagger-revealed] > *:nth-child(8) {
   transition-delay: calc(var(--sj-stagger-step, 70ms) * 7);
 }
 
-[data-home] [data-stagger-revealed] > *:nth-child(9) {
+[data-sj] [data-stagger-revealed] > *:nth-child(9) {
   transition-delay: calc(var(--sj-stagger-step, 70ms) * 8);
 }
 
-[data-home] [data-stagger-revealed] > *:nth-child(10) {
+[data-sj] [data-stagger-revealed] > *:nth-child(10) {
   transition-delay: calc(var(--sj-stagger-step, 70ms) * 9);
 }
 
-[data-home] [data-stagger-revealed] > *:nth-child(11) {
+[data-sj] [data-stagger-revealed] > *:nth-child(11) {
   transition-delay: calc(var(--sj-stagger-step, 70ms) * 10);
 }
 
-[data-home] [data-stagger-revealed] > *:nth-child(12) {
+[data-sj] [data-stagger-revealed] > *:nth-child(12) {
   transition-delay: calc(var(--sj-stagger-step, 70ms) * 11);
 }
 
-[data-home] [data-stagger-revealed] > *:nth-child(13) {
+[data-sj] [data-stagger-revealed] > *:nth-child(13) {
   transition-delay: calc(var(--sj-stagger-step, 70ms) * 12);
 }
 
-[data-home] [data-stagger-revealed] > *:nth-child(14) {
+[data-sj] [data-stagger-revealed] > *:nth-child(14) {
   transition-delay: calc(var(--sj-stagger-step, 70ms) * 13);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  [data-home] [data-stagger-armed] > * {
+  [data-sj] [data-stagger-armed] > * {
     opacity: 1;
     transform: none;
     transition: none;

@@ -5,12 +5,12 @@ const THEME_INIT_SCRIPT = `
     var theme = stored === 'light' || stored === 'dark'
       ? stored
       : (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-    var root = document.getElementById('home-root');
+    var root = document.getElementById('sj-root');
     if (root) root.setAttribute('data-theme', theme);
   } catch (e) {}
 })();
 `;
 
-export function HomeThemeScript() {
+export function ThemeScript() {
   return <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />;
 }

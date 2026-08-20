@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { homeNavigation } from "@/config/homeNavigation";
-import { ThemeToggleButton } from "./ThemeToggleButton";
+import { ThemeToggleButton } from "@/components/theme/ThemeToggleButton";
 import { MobileNavPanel } from "./MobileNavPanel";
 import { LOGO_MARK } from "@/config/brand";
 
