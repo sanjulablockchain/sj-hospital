@@ -3,8 +3,15 @@ import assert from "node:assert/strict";
 import type { Service } from "../types.ts";
 import { emergencyServices } from "./emergency.ts";
 import { surgicalServices } from "./surgical.ts";
+import { diagnosticServices } from "./diagnostics.ts";
+import { womenChildrenServices } from "./womenChildren.ts";
 
-const ALL: Service[] = [...emergencyServices, ...surgicalServices];
+const ALL: Service[] = [
+  ...emergencyServices,
+  ...surgicalServices,
+  ...diagnosticServices,
+  ...womenChildrenServices,
+];
 
 /** Every string in a service, with a label for failure messages. */
 function strings(s: Service): [string, string][] {

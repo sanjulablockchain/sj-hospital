@@ -3,17 +3,28 @@ import assert from "node:assert/strict";
 import type { Service } from "../types.ts";
 import { emergencyServices } from "./emergency.ts";
 import { surgicalServices } from "./surgical.ts";
+import { diagnosticServices } from "./diagnostics.ts";
+import { womenChildrenServices } from "./womenChildren.ts";
 
-const SO_FAR: Service[] = [...emergencyServices, ...surgicalServices];
+const SO_FAR: Service[] = [
+  ...emergencyServices,
+  ...surgicalServices,
+  ...diagnosticServices,
+  ...womenChildrenServices,
+];
 
 test("group modules have the expected sizes", () => {
   assert.equal(emergencyServices.length, 2);
   assert.equal(surgicalServices.length, 7);
+  assert.equal(diagnosticServices.length, 4);
+  assert.equal(womenChildrenServices.length, 5);
 });
 
 test("every service is tagged with its own group", () => {
   for (const s of emergencyServices) assert.equal(s.group, "Emergency");
   for (const s of surgicalServices) assert.equal(s.group, "Surgical");
+  for (const s of diagnosticServices) assert.equal(s.group, "Diagnostics");
+  for (const s of womenChildrenServices) assert.equal(s.group, "Women & children");
 });
 
 test("slugs are unique, lowercase and url-safe", () => {
