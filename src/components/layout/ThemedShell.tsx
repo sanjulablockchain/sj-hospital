@@ -2,11 +2,20 @@ import type { ReactNode } from "react";
 import { ThemeScript } from "@/components/theme/ThemeScript";
 import { SiteThemeProvider } from "@/components/theme/useSiteTheme";
 
-export function ThemedShell({ children, className }: { children: ReactNode; className?: string }) {
+export function ThemedShell({
+  children,
+  className,
+  flowHeader = false,
+}: {
+  children: ReactNode;
+  className?: string;
+  flowHeader?: boolean;
+}) {
   return (
     <div
       id="sj-root"
       data-sj
+      data-flow-header={flowHeader ? true : undefined}
       data-theme="dark"
       suppressHydrationWarning
       className={

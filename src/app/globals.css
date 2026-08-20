@@ -41,11 +41,9 @@ footer[id] {
 
 /* data-flow-header marks a page whose header is not sticky (it scrolls away
    inside the hero, as on the home page), so the 140px offset above is wrong
-   for all of its in-page anchors — cancel it here. The footer sits as a
-   sibling of the flow-header element (see ThemedShell), not a descendant of
-   it, hence the sibling combinator below. */
-[data-sj] [data-flow-header] section[id],
-[data-sj] [data-flow-header] ~ footer[id] {
+   for all of its in-page anchors — cancel it here. */
+[data-sj][data-flow-header] section[id],
+[data-sj][data-flow-header] footer[id] {
   scroll-margin-top: 0;
 }
 

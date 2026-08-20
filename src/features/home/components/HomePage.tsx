@@ -19,8 +19,8 @@ import { FloatingActions } from "./FloatingActions";
 
 export function HomePage() {
   return (
-    <ThemedShell>
-      <main data-flow-header>
+    <ThemedShell flowHeader>
+      <main>
         <HeroSection />
         <WhoWeAreSection />
         <ServicesBentoSection />
