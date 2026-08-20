@@ -113,7 +113,7 @@ export const centres: Centre[] = [
     no: "09",
     name: "Physiotherapy & Wound Care",
     desc: "A dedicated wound clinic alongside physiotherapy for post-operative and long-term recovery.",
-    lead: "Weekly reviews",
+    lead: "Rehab & dressings",
   },
 ];
 
