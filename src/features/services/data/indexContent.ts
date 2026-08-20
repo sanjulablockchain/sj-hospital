@@ -138,12 +138,12 @@ export const diagnosticRows: DiagnosticRow[] = [
   {
     name: "Microbiology & cultures",
     note: "Infection screening and culture testing",
-    turnaround: "48 to 72 h",
+    turnaround: "Reported as cultures complete",
   },
   {
     name: "Histopathology",
     note: "Tissue and biopsy analysis",
-    turnaround: "3 to 5 days",
+    turnaround: "Reported by our histopathology service",
   },
   {
     name: "Digital X-ray",
