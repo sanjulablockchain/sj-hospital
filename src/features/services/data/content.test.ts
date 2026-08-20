@@ -5,12 +5,14 @@ import { emergencyServices } from "./emergency.ts";
 import { surgicalServices } from "./surgical.ts";
 import { diagnosticServices } from "./diagnostics.ts";
 import { womenChildrenServices } from "./womenChildren.ts";
+import { clinicServices } from "./clinics.ts";
 
 const ALL: Service[] = [
   ...emergencyServices,
   ...surgicalServices,
   ...diagnosticServices,
   ...womenChildrenServices,
+  ...clinicServices,
 ];
 
 /** Every string in a service, with a label for failure messages. */

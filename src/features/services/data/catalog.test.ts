@@ -5,12 +5,14 @@ import { emergencyServices } from "./emergency.ts";
 import { surgicalServices } from "./surgical.ts";
 import { diagnosticServices } from "./diagnostics.ts";
 import { womenChildrenServices } from "./womenChildren.ts";
+import { clinicServices } from "./clinics.ts";
 
 const SO_FAR: Service[] = [
   ...emergencyServices,
   ...surgicalServices,
   ...diagnosticServices,
   ...womenChildrenServices,
+  ...clinicServices,
 ];
 
 test("group modules have the expected sizes", () => {
@@ -18,6 +20,7 @@ test("group modules have the expected sizes", () => {
   assert.equal(surgicalServices.length, 7);
   assert.equal(diagnosticServices.length, 4);
   assert.equal(womenChildrenServices.length, 5);
+  assert.equal(clinicServices.length, 14);
 });
 
 test("every service is tagged with its own group", () => {
@@ -25,6 +28,7 @@ test("every service is tagged with its own group", () => {
   for (const s of surgicalServices) assert.equal(s.group, "Surgical");
   for (const s of diagnosticServices) assert.equal(s.group, "Diagnostics");
   for (const s of womenChildrenServices) assert.equal(s.group, "Women & children");
+  for (const s of clinicServices) assert.equal(s.group, "Clinics");
 });
 
 test("slugs are unique, lowercase and url-safe", () => {
