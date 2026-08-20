@@ -6,6 +6,8 @@ import { surgicalServices } from "./surgical.ts";
 import { diagnosticServices } from "./diagnostics.ts";
 import { womenChildrenServices } from "./womenChildren.ts";
 import { clinicServices } from "./clinics.ts";
+import { atHomeServices } from "./atHome.ts";
+import { services, serviceSlugs, getService, relatedServices, groupCounts } from "./services.ts";
 
 const SO_FAR: Service[] = [
   ...emergencyServices,
@@ -72,5 +74,43 @@ test("facts and strips are non-empty key/value pairs", () => {
     for (const kv of [...s.facts, ...s.strip]) {
       assert.ok(kv.k.trim() && kv.v.trim(), `${s.slug} has an empty key/value`);
     }
+  }
+});
+
+test("the catalog holds 36 services", () => {
+  assert.equal(atHomeServices.length, 4);
+  assert.equal(services.length, 36);
+  assert.equal(serviceSlugs.length, 36);
+  assert.equal(new Set(serviceSlugs).size, 36);
+});
+
+test("group counts sum to 36 and match the spec", () => {
+  const counts = groupCounts();
+  assert.deepEqual(counts, {
+    All: 36,
+    Emergency: 2,
+    Surgical: 7,
+    Diagnostics: 4,
+    Clinics: 14,
+    "Women & children": 5,
+    "At home": 4,
+  });
+  const sum = Object.entries(counts)
+    .filter(([g]) => g !== "All")
+    .reduce((n, [, v]) => n + v, 0);
+  assert.equal(sum, 36);
+});
+
+test("getService resolves every slug and rejects unknown ones", () => {
+  for (const slug of serviceSlugs) assert.equal(getService(slug)?.slug, slug);
+  assert.equal(getService("not-a-service"), undefined);
+});
+
+test("relatedServices returns 3 distinct others, preferring the same group", () => {
+  for (const s of services) {
+    const rel = relatedServices(s.slug);
+    assert.equal(rel.length, 3, `${s.slug} related count`);
+    assert.ok(!rel.some((r) => r.slug === s.slug), `${s.slug} relates to itself`);
+    assert.equal(new Set(rel.map((r) => r.slug)).size, 3, `${s.slug} related duplicates`);
   }
 });
