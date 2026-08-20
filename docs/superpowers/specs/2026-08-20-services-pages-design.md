@@ -5,45 +5,141 @@ Branch: `worktree-services-pages`
 
 ## Goal
 
-Rebuild `/services` and add a detail page for every service, matching two
-Claude Design references:
+Rebuild `/services` as a services hub, and give **every** service its own page,
+in the visual language of two Claude Design references.
 
-- `C:\Users\User\Documents\Designs\sj-hospital\SJ Hospital Services.html` — the index
-- `C:\Users\User\Documents\Designs\sj-hospital\SJ Hospital Service Pages.html` — the detail template
+## Sources and their standing
 
-Both are bundled artifacts. Decode as described in the `home-design-reference`
-memory: line 390 (`lines[389]`) JSON-parses into the rendered DOM; line 378 is the
-asset map; styling is almost entirely inline `style` attributes with
-`style-hover="…"` pairs for hover states.
+| Source | Standing |
+|---|---|
+| `…\Designs\sj-hospital\SJ Hospital Services.html` | **Design only** — index layout, sections, motion |
+| `…\Designs\sj-hospital\SJ Hospital Service Pages.html` | **Design only** — detail-page template |
+| This repo (`MainServicesGrid`, `DepartmentGrid`, `e-channeling/data/doctors.ts`, home sections) | **Authority on what the hospital actually offers** |
+| `kingshospital.lk`, `lankahospitals.com`, `nawaloka.com` | Clinical grounding for wording — scope, conditions, prep |
+
+The references are examples that establish the *look*, not a content contract.
+Their service list is partly invented and must not be treated as fact. The
+catalog is built from what this hospital actually offers, and the reference
+design is applied to it.
+
+The three hospital sites inform vocabulary and the shape of a service
+description only. **Nothing is copied verbatim** — all copy is written fresh.
+**Every contact detail is St. Joseph's own**: `0117 84 84 84`,
+`229/10 St. Joseph Street, Negombo`. No phone, address, price, or consultant
+name from any other hospital appears anywhere.
+
+Both refs are bundled artifacts. Decode as in the `home-design-reference`
+memory: `JSON.parse(lines[389])` is the rendered DOM, line 378 is the asset map,
+styling is inline `style` attributes with `style-hover="…"` pairs for hover.
 
 ## Decisions
 
 | Decision | Choice |
 |---|---|
-| Design shell | The home page's themed system (Bricolage Grotesque + Manrope, `sj-theme` dark/light, `#2CA6F0` accent), **not** the purple `SiteHeader`/`SiteFooter` marketing shell |
-| Shell code | Promote the home design system to shared components; both home and services consume one implementation |
-| Detail coverage | All 24 services get a full detail page |
-| Routing | Real routes `/services/<slug>`, server-rendered, per-service metadata |
-| Existing page | Replaced; `features/services` old components deleted |
+| Design shell | The home page's themed system (Bricolage Grotesque + Manrope, `sj-theme` dark/light, `#2CA6F0` accent), **not** the purple marketing shell |
+| Shell code | Promote the home design system to shared components; home and services share one implementation |
+| Catalog source | The hospital's real services, plus reference extras the user confirmed |
+| Taxonomy | The reference's 6 groups |
+| Coverage | Every service gets a full detail page — 36 |
+| Routing | Real routes `/services/<slug>`, prerendered, per-service metadata |
+| Existing page | Replaced; old `features/services` components deleted |
 
-## Reference reconciliation
+User-confirmed facts (asked because the codebase could not settle them):
 
-The references carry **two** service arrays that overlap inconsistently:
+- **Full ICU** — monitored beds with ventilation and consultant rounds.
+- **No dental service** — dropped entirely; it appears in neither the directory
+  nor as a page. (Kings and Lanka both offer dental; St. Joseph does not.)
+- **Health-check packages are not priced** — the section keeps the reference's
+  three-tier design but carries **no prices**. Each tier gets a "Request a
+  quote" CTA instead. No LKR figure from the reference is used.
+- **True sub-claims:** neonatal support at delivery, day-case cataract surgery,
+  a dedicated wound clinic, and an own ambulance fleet.
 
-- Index ref: 24 entries with `title, group, hours, cta, desc, tags[], facts[]`
-- Detail ref: 11 entries with `slug, title, group, cta, lede, aboutHead, body1,
-  body2, strip[], covers[], conditions[], facts[], location, steps[4], prep[],
-  team[], faq[]`
+## Catalog — 36 services
 
-Titles diverge across the two (`"Accident & emergency unit"` vs
-`"Accident & emergency"`; `"Physiotherapy & rehabilitation"` appears in both with
-different `hours`). They are merged into **one catalog** of 24 entries, keyed by
-slug, holding both the directory fields and the detail fields. The index-ref
-title wins for the directory row; the detail-ref title wins for the `<h1>` and
-`<title>` — both are stored so neither view has to mutate strings.
+Every entry is backed by a consultant in `e-channeling/data/doctors.ts`, a
+service in `MainServicesGrid`/`DepartmentGrid`, a home-page claim, or an explicit
+user confirmation above.
 
-The detail ref's 11 authored services are ported verbatim. The remaining 13 are
-authored fresh — see "Authored content" below.
+Editorial merges (judgment calls, not new claims): `General Physician` folds into
+**OPD**; `PTA` folds into **Physiotherapy**; `Audiology` folds into **ENT** (as
+the reference itself does); `Clinical Laboratory` and `Laboratory Services` are
+one service; `Scanning` is covered by **Radiology**.
+
+### Emergency (2)
+
+| Slug | Title | Backed by |
+|---|---|---|
+| `accident-emergency` | Accident & emergency | `MainServicesGrid` Emergency; ambulance bay; own fleet confirmed |
+| `intensive-critical-care` | Intensive & critical care | User confirmed full ICU |
+
+### Surgical (7)
+
+| Slug | Title | Backed by |
+|---|---|---|
+| `general-surgery` | General surgery | `Surgeon`; `SurgicalSection` "General surgery" |
+| `orthopaedic-surgery` | Orthopaedic surgery | `Orthopaedic Surgeon`; "Orthopaedic procedures" |
+| `ent-surgery` | ENT surgery & audiology | `ENT Surgeon`, `Audiologist` |
+| `urology` | Urology | `Urologist` |
+| `ophthalmology` | Ophthalmology & cataract surgery | `Eye Surgeon`; day-case cataract confirmed |
+| `neurosurgery` | Neurosurgery | `Neuro Surgeon` |
+| `endoscopy` | Gastrointestinal & endoscopy | `Gastroenterologist`; "Endoscopy suite" |
+
+### Diagnostics (4)
+
+| Slug | Title | Backed by |
+|---|---|---|
+| `laboratory` | Laboratory services | Laboratory Services, Clinical Laboratory, `Histopathologist` |
+| `radiology` | Radiology & digital X-ray | X-Ray Service, Scanning, `Radiologist` |
+| `cardiac-screening` | Cardiac screening & ECG | ECG department, `Cardiologist` |
+| `fetal-monitoring` | CTG & fetal monitoring | CTG department |
+
+### Clinics (14)
+
+| Slug | Title | Backed by |
+|---|---|---|
+| `outpatient-department` | Outpatient department (OPD) | OPD; `Physician` |
+| `cardiology` | Cardiology | `Cardiologist` |
+| `dermatology` | Dermatology & wound clinic | `Dermatologist`; wound clinic confirmed |
+| `diabetes-endocrinology` | Diabetes & endocrine care | Diabetes Care; `Endocrinologist` |
+| `nutrition` | Nutrition & dietetics | Nutrition; `Nutritionist` |
+| `rheumatology` | Rheumatology | Rheumatology; `Rheumatologist` |
+| `neurology` | Neurology | `Neurologist / Neuro Physician` |
+| `nephrology` | Nephrology & renal care | `Nephrologist` |
+| `respiratory-medicine` | Respiratory & chest medicine | `Respiratory / Chest Physician` |
+| `haematology` | Haematology | `Hematologist` |
+| `mental-health` | Mental health & counselling | `Psychiatrist`, `Counseling Psychologist` |
+| `physiotherapy` | Physiotherapy & rehabilitation | Physiotherapy, PTA; `Physiotherapist` |
+| `speech-therapy` | Speech & language therapy | Speech Therapy; `Speech Therapist` |
+| `inpatient-rooms` | Inpatient rooms | Inpatient Rooms; `RoomsSection` |
+
+### Women & children (5)
+
+| Slug | Title | Backed by |
+|---|---|---|
+| `obstetrics-maternity` | Obstetrics & maternity | `Gynecologist`; "Obstetric theatre"; neonatal support confirmed |
+| `gynaecology` | Gynaecology | Gynecology; `Gynecologist` |
+| `paediatrics` | Paediatrics & neonatal care | Pediatrics; `Pediatrician`; Kids & Teens protocol |
+| `fertility` | Fertility & embryology | `Clinical Embryologist / Fertility Counselor` |
+| `vaccination-clinic` | Vaccination clinic | Vaccination Clinic |
+
+### At home (4)
+
+| Slug | Title | Backed by |
+|---|---|---|
+| `pharmacy` | 24-hour pharmacy | Pharmacy; `PharmacySection` 24/7 |
+| `medicine-delivery` | Medicine delivery | "Home delivery radius: Negombo" |
+| `home-visits` | Home visits | Home Visiting Services, 6 vehicles |
+| `telemedicine` | Telemedicine | Telemedicine department |
+
+Filter chip counts, which must sum to 36: All 36 · Emergency 2 · Surgical 7 ·
+Diagnostics 4 · Clinics 14 · Women & children 5 · At home 4.
+
+Eleven services have reference copy that can be adapted (`accident-emergency`,
+`general-surgery`, `endoscopy`, `obstetrics-maternity`, `paediatrics`,
+`laboratory`, `radiology`, `physiotherapy`, `pharmacy`, `home-visits`,
+`inpatient-rooms`) — adapted, not pasted, since the reference states facts this
+hospital has not confirmed. The other 25 are written from scratch.
 
 ## Data model
 
@@ -81,75 +177,30 @@ export type Service = {
   prep: string[];
   team: TeamMember[];
   faq: Faq[];
-  authored: boolean;      // true = copy written by us, needs clinical review
 };
 ```
 
-`src/features/services/data/services.ts` exports `services: Service[]` (24, in the
-index ref's order) plus `getService(slug)`, `serviceSlugs`, and
-`relatedServices(slug)` (the ref's `[1,2,3].map(o => SERVICES[(idx+o) % len])`).
+`src/features/services/data/services.ts` exports `services: Service[]` (36),
+`getService(slug)`, `serviceSlugs`, and `relatedServices(slug)` — three
+same-group services where possible, falling back to the reference's
+`(idx + n) % len` walk.
 
 `src/features/services/data/groups.ts` exports the filter order:
 `["All", "Emergency", "Surgical", "Diagnostics", "Clinics", "Women & children", "At home"]`.
 
-Group counts, verified against the index reference — the filter chips must show
-these, and they sum to 24:
-
-| Group | Count |
-|---|---|
-| Emergency | 2 |
-| Surgical | 6 |
-| Diagnostics | 3 |
-| Clinics | 5 |
-| Women & children | 4 |
-| At home | 4 |
-
-### Catalog
-
-Ported verbatim from the detail ref (11):
-
-| # | Slug | Group |
-|---|---|---|
-| 1 | `accident-emergency` | Emergency |
-| 4 | `general-surgery` | Surgical |
-| 5 | `endoscopy` | Surgical |
-| 11 | `obstetrics-maternity` | Women & children |
-| 13 | `paediatrics` | Women & children |
-| 14 | `laboratory` | Diagnostics |
-| 15 | `radiology` | Diagnostics |
-| 17 | `physiotherapy` | Clinics |
-| 20 | `pharmacy` | At home |
-| 22 | `home-visits` | At home |
-| 24 | `inpatient-rooms` | Clinics |
-
-Authored by us (13), `authored: true`:
-
-| # | Slug | Group |
-|---|---|---|
-| 2 | `intensive-critical-care` | Emergency |
-| 3 | `outpatient-department` | Clinics |
-| 6 | `orthopaedic-surgery` | Surgical |
-| 7 | `ent-surgery` | Surgical |
-| 8 | `urology` | Surgical |
-| 9 | `ophthalmology` | Surgical |
-| 10 | `dental-surgery` | Clinics |
-| 12 | `gynaecology` | Women & children |
-| 16 | `cardiac-screening` | Diagnostics |
-| 18 | `dermatology-wound-clinic` | Clinics |
-| 19 | `vaccination-clinic` | Women & children |
-| 21 | `medicine-delivery` | At home |
-| 23 | `telemedicine` | At home |
+Because the file is large, the catalog is split into one module per group
+(`data/services/emergency.ts`, `surgical.ts`, …) and concatenated in
+`data/services.ts`. Keeps each file reviewable.
 
 ## Routing
 
-`/services` moves out of the `(marketing)` route group — that layout injects the
-purple `SiteHeader`/`SiteFooter`, and leaving the old segment in place would
-collide on the same URL.
+`/services` leaves the `(marketing)` route group — that layout injects the purple
+`SiteHeader`/`SiteFooter`, and leaving the old segment would collide on the URL.
 
 ```
-src/app/services/layout.tsx          # themed shell wrapper
-src/app/services/page.tsx            # index
-src/app/services/[slug]/page.tsx     # detail
+src/app/services/layout.tsx
+src/app/services/page.tsx
+src/app/services/[slug]/page.tsx
 src/app/services/[slug]/not-found.tsx
 ```
 
@@ -157,133 +208,125 @@ Next 16 specifics:
 
 - `params` is a Promise: `const { slug } = await params` — in the page **and**
   `generateMetadata`.
-- `generateStaticParams()` returns all 24 slugs so every detail page prerenders.
+- `generateStaticParams()` returns all 36 slugs.
 - Unknown slug → `notFound()`.
 - No `cookies`/`headers`/`searchParams` are read, so no `<Suspense>` boundary is
-  required. Filter state lives in client state, not the URL.
-- Read the bundled guide in `node_modules/next/dist/docs/` before writing the
-  route files rather than coding from memory.
+  needed; filter state is client state, not URL state.
+- Read the relevant guide in `node_modules/next/dist/docs/` before writing the
+  route files.
 
-`src/app/(marketing)/services/` is deleted, along with
+Deleted: `src/app/(marketing)/services/`, and
 `features/services/components/{MainServicesGrid,DepartmentGrid,DepartmentIcons}.tsx`
 once nothing imports them.
 
 ## Shared shell
 
-Today the home design system is scoped by `[data-home]` in `globals.css`
-(28 `--home-*` custom properties, the `.sj-invert` / `.sj-accentify` / `.sj-link`
-/ `.sj-row` / `.sj-row-fill` / `.sj-bento` hover utilities, and the
-`[data-stagger-armed]` / `[data-stagger-revealed]` reveal), and the theme store
-reads `#home-root`. Only four files reference those hooks: `globals.css`,
-`HomePage.tsx`, `HomeThemeScript.tsx`, `useHomeTheme.tsx`.
+The home design system is scoped by `[data-home]` in `globals.css` (28
+`--home-*` custom properties, the `.sj-invert` / `.sj-accentify` / `.sj-link` /
+`.sj-row` / `.sj-row-fill` / `.sj-bento` hover utilities, and the
+`[data-stagger-armed]` / `[data-stagger-revealed]` reveal). The theme store reads
+`#home-root`. Only four files touch those hooks: `globals.css`, `HomePage.tsx`,
+`HomeThemeScript.tsx`, `useHomeTheme.tsx`.
 
-Changes:
-
-1. Rename the scope hook `[data-home]` → `[data-sj]` and `#home-root` →
-   `#sj-root` throughout `globals.css` and the four files. Keep every
-   `--home-*` variable name as-is — renaming ~28 tokens across the whole home
-   feature is churn with no benefit and real regression risk.
-2. Move to shared locations:
+1. Rename the scope hook `[data-home]` → `[data-sj]`, `#home-root` → `#sj-root`.
+   Keep every `--home-*` variable name — renaming 28 tokens across the home
+   feature is churn with real regression risk and no benefit.
+2. Promote to shared:
    - `src/components/theme/ThemeScript.tsx` (from `HomeThemeScript`)
    - `src/components/theme/useSiteTheme.tsx` (from `useHomeTheme`; storage key
-     stays `sj-home-theme` so a visitor's saved theme survives)
+     stays `sj-home-theme` so saved themes survive)
    - `src/components/theme/ThemeToggleButton.tsx`
-   - `src/components/layout/ThemedShell.tsx` — renders the `#sj-root` div with
-     `data-sj`, `data-theme="dark"`, `suppressHydrationWarning`, the theme
-     script and provider
+   - `src/components/layout/ThemedShell.tsx` — the `#sj-root` div with `data-sj`,
+     `data-theme="dark"`, `suppressHydrationWarning`, theme script and provider
    - `src/components/ui/{Reveal,RevealStagger,ParallaxLayer}.tsx`
    - `src/components/layout/MobileNavPanel.tsx`
-   - `src/components/ui/BrandIcons.tsx` (the social/util icons in
-     `features/home/components/icons.tsx`)
-3. `src/components/layout/ThemedHeader.tsx` and `ThemedFooter.tsx` —
-   parameterised by nav items, footer link columns and the book href. The refs
-   genuinely differ here (the services header nav is
-   `Services / Facilities / Health Checks / Admissions / International Patient Care`
-   pointing at in-page anchors; the services footer columns are
-   `Centres of excellence / Full directory / Department of surgery / …`), so the
-   markup is shared and only the data differs.
+   - `src/components/ui/BrandIcons.tsx` (from `features/home/components/icons.tsx`)
+3. `ThemedHeader` / `ThemedFooter` in `src/components/layout/`, parameterised by
+   nav items, footer link columns and book href. The references genuinely differ
+   here (services nav is
+   `Services / Facilities / Health Checks / Admissions / International Patient Care`;
+   services footer columns are `Centres of excellence / Full directory / …`), so
+   markup is shared and only data differs.
 4. `features/home` is refactored to consume all of the above. **The home page's
-   rendered markup must not change** — this is a move-and-parameterise, not a
-   redesign. `data-home` → `data-sj` is the only attribute change, and
-   `globals.css` is updated in the same commit.
+   rendered markup must not change** — a move-and-parameterise, not a redesign.
+   `data-home` → `data-sj` is the only attribute change, and `globals.css` is
+   updated in the same commit.
 
 Neither reference header is sticky (both sit inside the hero), so the existing
-`[data-home] section[id] { scroll-margin-top: 0 }` rule — becoming
-`[data-sj] …` — applies correctly to the services pages too.
+`[data-home] section[id] { scroll-margin-top: 0 }` rule — becoming `[data-sj] …`
+— is correct for the services pages too.
 
 ## Index page — `/services`
 
 Thirteen sections, in reference order:
 
-1. **`#top` hero** — fixed-dark, exterior render with parallax, header + nav +
-   theme toggle, headline, "Open the directory →" CTA.
+1. **`#top` hero** — fixed-dark exterior render with parallax, header + nav +
+   theme toggle, headline, "Open the directory →".
 2. **`#jump`** — 4 cards: `9 units / Centres of excellence`,
-   `24 services / Full directory`, `3 packages / Health checks`,
-   `4 steps / Admissions`, each anchoring to its section.
-3. **`#centres`** — 9 centres of excellence (`01`–`09`), each with name, desc and
-   a lead line, linking into `#directory`.
-4. **`#directory`** — the core. Group filter chips showing counts
-   (`All (24)`, `Emergency (2)`, …), a heading that switches between
-   `"Everything we treat"` and `"<Group> services"`, an `"N of 24 services"`
-   count, and 24 accordion rows numbered `/01`–`/24`. An open row reveals desc,
-   tags, facts and the service's CTA. **Deviation from the ref:** each row also
-   links to `/services/<slug>`, since detail pages now exist.
-5. **`#surgical`** — Department of surgery, 12 name/note pairs.
-6. **`#diagnostics`** — 8 entries with name, note and turnaround.
-7. **`#packages`** — 3 health-check packages (Essential 9,500 / Comprehensive
-   18,500 / Executive & cardiac 32,000 LKR), the middle one accent-filled.
+   `36 services / Full directory`, `Health checks`, `4 steps / Admissions`.
+3. **`#centres`** — 9 centres of excellence, each linking into `#directory`.
+4. **`#directory`** — the core. Group filter chips with counts (`All (36)`,
+   `Emergency (2)`, …), heading switching between `"Everything we treat"` and
+   `"<Group> services"`, an `"N of 36 services"` count, and 36 accordion rows
+   numbered `/01`–`/36`. An open row shows desc, tags, facts, and — **a
+   deviation from the reference** — a link to `/services/<slug>`.
+5. **`#surgical`** — Department of surgery: the 7 surgical services plus
+   anaesthesia and post-operative care.
+6. **`#diagnostics`** — laboratory, imaging and cardiac tests with turnarounds
+   already claimed on the site (same-day reports, X-ray read within the hour).
+7. **`#packages`** — three health-check tiers, reference design, **no prices**,
+   "Request a quote" CTA on each.
 8. **`#admissions`** — 4 steps, "Bring with you", "Payment & insurance",
    "The rooms".
-9. **`#facilities`** — 4 `data-fac` cards plus the 10 comforts chips.
-10. **`#pharmacy`** — authorized-stock section.
-11. **`#international`** — 6 numbered items, "Ten minutes from the airport".
+9. **`#facilities`** — 4 facility cards plus the comforts chips.
+10. **`#pharmacy`** — authorized stock, 24/7, Negombo delivery.
+11. **`#international`** — 6 numbered items, airport proximity.
 12. **`#book`** — CTA with "Browse services →".
-13. **`footer #contact`** — themed footer with services-specific link columns.
+13. **`footer #contact`** — themed footer, services-specific link columns.
 
-Client leaves: `ServiceDirectory` (filter + accordion state). Everything else is
-a Server Component.
+Client leaves: `ServiceDirectory` (filter + accordion). Everything else is a
+Server Component.
 
 ## Detail page — `/services/<slug>`
 
-Sections, in reference order:
-
 1. **`#top` hero** — Ken Burns exterior image (`data-burns`, 26s, disabled under
-   `prefers-reduced-motion`), header, group eyebrow, `<h1>` title, lede, CTA, and
-   the 4-stat `strip`.
-2. **Service picker** — the ref's client-side `#hash` picker becomes a row of
-   `<Link>`s to all 24 routes, current one accent-filled.
+   `prefers-reduced-motion`), header, group eyebrow, `<h1>`, lede, CTA, 4-stat
+   `strip`.
+2. **Service picker** — the reference's client-side `#hash` picker becomes a row
+   of `<Link>`s across all 36 routes, current one accent-filled.
 3. **`#about`** — `aboutHead`, `body1`, `body2`, "What this covers" (`covers`),
-   "Conditions we see most" (`conditions` chips), and a CTA card carrying `facts`
-   and `location` above `229/10 St. Joseph Street, Negombo`.
+   "Conditions we see most" (`conditions` chips), and a CTA card carrying
+   `facts` and `location` above `229/10 St. Joseph Street, Negombo`.
 4. **`#journey`** — "Your visit, step by step", 4 big-numbered steps, then
    "How to prepare" / "Bring with you" from `prep`.
-5. **`#team`** — "The team on this service", `team` role/note pairs.
-6. **`#faq`** — "Asked before you ask", accordion over `faq`.
-7. **`#related`** — 3 related services, each linking to its route.
+5. **`#team`** — role/note pairs. Roles only — **no consultant names**, so the
+   pages never go stale against the e-channeling directory.
+6. **`#faq`** — accordion over `faq`.
+7. **`#related`** — 3 related services, linked.
 8. **`#book`** — CTA using the service's `cta`.
 9. **`footer #contact`**.
 
 Client leaves: `FaqAccordion`. Everything else is a Server Component.
 
-Metadata per service: `title: "<title> | St. Joseph Hospital Negombo"`,
-`description` from `lede` (trimmed to ~155 chars).
+Metadata: `title: "<title> | St. Joseph Hospital Negombo"`, `description` from
+`lede` trimmed to ~155 chars.
 
 ## Wiring
 
 - `config/homeNavigation.ts`: `Services` → `/services` (was `#services`).
 - `HomeFooter` care column: `Services` → `/services`.
-- `features/home/components/ServicesBentoSection.tsx`: each card links to its
-  `/services/<slug>`, plus a "View all 24 services →" link to `/services`.
-- `config/navigation.ts`: `Medical Services` → `/services` is already correct;
-  `footerQuickLinks` inherits it, so the marketing footer needs no change.
+- `ServicesBentoSection`: cards link to their `/services/<slug>`, plus a
+  "View all 36 services →" link.
+- `config/navigation.ts`: `Medical Services` → `/services` already correct, so
+  the marketing footer needs no change.
 - Detail pages carry a back-link to `/services`.
 - Cross-links between `#centres`, directory rows, `#related` and detail routes.
 
 ## Assets
 
-Five of the refs' images already exist in the repo (verified by md5):
+Five reference images already exist in the repo (md5-verified):
 
-| Ref asset | Repo file |
+| Reference asset | Repo file |
 |---|---|
 | `e810bcd3…` "Outpatient reception" | `public/images/welcome.jpg` |
 | `b36977ed…` "Diagnostics" | `public/images/doctors.jpg` |
@@ -291,49 +334,54 @@ Five of the refs' images already exist in the repo (verified by md5):
 | `ee4678cc…` / `72e34c9c…` | logo — use `LOGO_MARK` from `config/brand` |
 
 Two are new exterior dusk renders, added as
-`public/images/services/exterior-dusk-a.png` (`7da935c7…`, index/detail hero) and
-`public/images/services/exterior-dusk-b.png` (`ea1cbf25…`, "Hospital exterior and
-ambulance entrance"). Copied as-is; `sharp`'s install scripts are blocked in this
-worktree, so no re-encoding.
+`public/images/services/exterior-dusk-a.png` (`7da935c7…`, index and detail hero)
+and `public/images/services/exterior-dusk-b.png` (`ea1cbf25…`, ambulance
+entrance). Copied as-is — `sharp`'s install scripts are blocked in this worktree,
+so no re-encoding.
 
-## Authored content
+## Content rules
 
-The 13 services listed above have no reference copy. Their `lede`, `aboutHead`,
-`body1/2`, `strip`, `covers`, `conditions`, `facts`, `location`, `steps`, `prep`,
-`team` and `faq` are written in the references' voice, grounded only in facts
-already established across the refs and the existing site: 24-hour lab and
-pharmacy, two-doctor report verification, consultant-led anaesthesia, same-day
-reporting, the 10% OPD lab discount, `0117 84 84 84`, Kids & Teens protocol,
-`229/10 St. Joseph Street, Negombo`.
+All 36 services need written copy. Hard rules:
 
-Constraints on authored copy:
+- **Never** a price, a consultant name, an equipment brand, an accreditation, or
+  a success rate.
+- Turnaround and hours claims only where the site already states them: 24-hour
+  lab, pharmacy, OPD and emergency; two-doctor report verification; X-ray read
+  within the hour; same-day lab reports; 10% OPD lab discount; 6 home-visit
+  vehicles; rooms from 10,000 LKR; Kids & Teens paediatric protocol; ten minutes
+  from Bandaranaike International.
+- Contact details are always St. Joseph's: `0117 84 84 84`,
+  `229/10 St. Joseph Street, Negombo`.
+- `team` lists roles, never names.
+- Nothing is copied verbatim from any reference or hospital site.
+- Where a service's scope is uncertain, describe it narrowly rather than
+  expansively.
 
-- No invented prices, consultant names, equipment brands, or accreditations.
-- No invented turnaround or success-rate claims beyond those the refs state.
-- Each authored service is marked `authored: true` in the catalog, and the
-  implementation hands over a checklist of all 13 pages and every clinical claim
-  made, for the user's fact-check.
+The implementation hands over a review checklist of all 36 pages and every
+clinical claim made, for the user's fact-check.
 
 ## Verification
 
 1. `npm run lint` — clean.
-2. `npm run build` — succeeds; route list shows `/services` plus 24 prerendered
+2. `npm run build` — succeeds; route list shows `/services` plus 36 prerendered
    `/services/[slug]` entries.
-3. `npm run dev` in the worktree on a free port; click through `/services` and a
-   sample of detail routes in **both** themes, checking the group filter, the
-   directory accordion, the FAQ accordion, reveals and parallax.
-4. Re-check the **home page** for regressions from the shared-shell refactor —
+3. Assert in review that no `[data-home]` references remain and that filter
+   counts sum to 36.
+4. `npm run dev` on a free port; click through `/services` and a sample of detail
+   routes in **both** themes — group filter, directory accordion, FAQ accordion,
+   reveals, parallax, mobile nav.
+5. Re-check the **home page** for regressions from the shared-shell refactor —
    hero, bento hovers, stagger reveals, theme toggle, footer.
-5. Report the authored-content checklist.
+6. Hand over the content review checklist.
 
 Baseline before any change: lint clean, build succeeds, 11 static routes.
 
 ## Out of scope
 
-- Porting `about-us`, `career`, `contact-us`, `accommodation` or `e-channeling`
-  to the themed shell. They keep the purple marketing chrome, so the site has two
-  looks until those are ported separately.
-- Booking/e-channeling integration — every CTA points at `#book` or the existing
-  contact route.
+- Porting `about-us`, `career`, `contact-us`, `accommodation`, `e-channeling` to
+  the themed shell. They keep the purple chrome, so the site carries two looks
+  until those are ported separately.
+- Booking / e-channeling integration — CTAs point at `#book` or existing routes.
 - Renaming the `--home-*` custom properties.
 - Any change to the home page's rendered output.
+- Dental services, and any priced health-check package.
