@@ -3,6 +3,8 @@ import { JumpCards } from "./index/JumpCards";
 import { CentresSection } from "./index/CentresSection";
 import { SurgicalSection } from "./index/SurgicalSection";
 import { DiagnosticsSection } from "./index/DiagnosticsSection";
+import { PackagesSection } from "./index/PackagesSection";
+import { AdmissionsSection } from "./index/AdmissionsSection";
 
 // Tasks 11-15 append their sections here, in the spec's order: centres,
 // directory, surgical, diagnostics, packages, admissions, facilities,
@@ -16,6 +18,8 @@ export function ServicesIndexPage() {
       {/* Task 12: interactive #directory section slots in here. */}
       <SurgicalSection />
       <DiagnosticsSection />
+      <PackagesSection />
+      <AdmissionsSection />
     </>
   );
 }
