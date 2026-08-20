@@ -1,5 +1,6 @@
 import { ServicesHero } from "./index/ServicesHero";
 import { JumpCards } from "./index/JumpCards";
+import { CentresSection } from "./index/CentresSection";
 
 // Tasks 11-15 append their sections here, in the spec's order: centres,
 // directory, surgical, diagnostics, packages, admissions, facilities,
@@ -9,6 +10,8 @@ export function ServicesIndexPage() {
     <>
       <ServicesHero />
       <JumpCards />
+      <CentresSection />
+      {/* Task 12: interactive #directory section slots in here. */}
     </>
   );
 }
