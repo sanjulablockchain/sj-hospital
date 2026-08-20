@@ -25,7 +25,7 @@ export function ServicesHero() {
       >
         <Image
           src="/images/services/exterior-dusk-a.png"
-          alt=""
+          alt="St. Joseph Hospital building at dusk"
           fill
           priority
           className="animate-sj-burns object-cover"

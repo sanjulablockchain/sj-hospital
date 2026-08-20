@@ -41,6 +41,9 @@ export const jumpCards: JumpCard[] = [
     href: "#centres",
   },
   {
+    // Placeholder, not the source of truth: JumpCards.tsx replaces this count
+    // at render time with `groupCounts().All` from the live catalog, so it
+    // can never drift from the real number of services.
     count: "36 services",
     label: "Full directory",
     note: "Hours, scope and how to start each one.",
