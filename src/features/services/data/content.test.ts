@@ -43,10 +43,16 @@ function strings(s: Service): [string, string][] {
   return out;
 }
 
+// The hospital's own site already states "rooms from 10,000 LKR a night" for
+// inpatient-rooms (Task 7), so that one service may carry a price. Every
+// other service must not.
+const PRICE_EXEMPT = new Set<string>(["inpatient-rooms"]);
+
 test("no prices anywhere", () => {
   // LKR/Rs amounts, or bare thousands separators like 9,500 / 32,000.
   const price = /\b(?:LKR|Rs\.?|USD|\$)\s?[\d,]+|\b\d{1,3},\d{3}\b/i;
   for (const s of ALL) {
+    if (PRICE_EXEMPT.has(s.slug)) continue;
     for (const [label, v] of strings(s)) {
       assert.ok(!price.test(v), `${label} contains a price: ${v}`);
     }
@@ -54,11 +60,18 @@ test("no prices anywhere", () => {
 });
 
 test("the only phone number is the hospital's own", () => {
-  const anyPhone = /\b(?:0\d{3}\s?\d{2}\s?\d{2}\s?\d{2}|\+94[\d\s]{7,})\b/g;
+  // Normalize before matching rather than enumerating groupings: strip
+  // separators, then find digit runs and compare against the flattened
+  // allowed number. This catches any local grouping (011 234 5678,
+  // 077 123 4567, etc.), not just the 4-2-2-2 shape the hospital's own
+  // number happens to use.
+  const ALLOWED = "0117848484";
   for (const s of ALL) {
     for (const [label, v] of strings(s)) {
-      for (const hit of v.match(anyPhone) ?? []) {
-        assert.equal(hit.trim(), "0117 84 84 84", `${label} has a foreign number: ${hit}`);
+      const flat = v.replace(/[\s()\-.]/g, "");
+      for (const hit of flat.match(/(?:\+94|0)\d{8,10}/g) ?? []) {
+        const normalized = hit.replace(/^\+94/, "0");
+        assert.equal(normalized, ALLOWED, `${label} has a foreign number: ${hit}`);
       }
     }
   }
