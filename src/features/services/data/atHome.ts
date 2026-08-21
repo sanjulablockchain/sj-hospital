@@ -3,6 +3,8 @@ import type { Service } from "../types";
 export const atHomeServices: Service[] = [
   {
     slug: "pharmacy",
+    heroImage: "/images/services/heroes/pharmacy.jpg",
+    heroAlt: "A pharmacist checking stocked medicine shelves in a dispensary",
     title: "24-hour pharmacy",
     directoryTitle: "24-hour pharmacy",
     group: "At home",
@@ -65,6 +67,8 @@ export const atHomeServices: Service[] = [
   },
   {
     slug: "medicine-delivery",
+    heroImage: "/images/services/heroes/medicine-delivery.jpg",
+    heroAlt: "Medicine delivery boxes left at a doorstep",
     title: "Medicine delivery",
     directoryTitle: "Medicine delivery",
     group: "At home",
@@ -127,6 +131,8 @@ export const atHomeServices: Service[] = [
   },
   {
     slug: "home-visits",
+    heroImage: "/images/services/heroes/home-visits.jpg",
+    heroAlt: "A healthcare worker checking a patient's blood pressure during a home visit",
     title: "Home visits",
     directoryTitle: "Home visits",
     group: "At home",
@@ -190,6 +196,8 @@ export const atHomeServices: Service[] = [
   },
   {
     slug: "telemedicine",
+    heroImage: "/images/services/heroes/telemedicine.jpg",
+    heroAlt: "A clinician using a laptop for a video consultation",
     title: "Telemedicine",
     directoryTitle: "Telemedicine",
     group: "At home",

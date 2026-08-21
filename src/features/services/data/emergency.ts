@@ -3,6 +3,8 @@ import type { Service } from "../types";
 export const emergencyServices: Service[] = [
   {
     slug: "accident-emergency",
+    heroImage: "/images/services/heroes/accident-emergency.jpg",
+    heroAlt: "A stretcher and emergency medical equipment secured inside an ambulance",
     title: "Accident & emergency",
     directoryTitle: "Accident & emergency unit",
     group: "Emergency",
@@ -72,6 +74,8 @@ export const emergencyServices: Service[] = [
   },
   {
     slug: "intensive-critical-care",
+    heroImage: "/images/services/heroes/intensive-critical-care.jpg",
+    heroAlt: "A hospital monitor displaying continuous vital signs and heart rate data",
     title: "Intensive & critical care",
     directoryTitle: "Intensive care unit",
     group: "Emergency",

@@ -72,6 +72,18 @@ test("collection fields have the shapes the pages assume", () => {
   }
 });
 
+test("every service has its own hero image and descriptive alt text", () => {
+  for (const s of SO_FAR) {
+    assert.ok(s.heroImage.trim().length > 0, `${s.slug}.heroImage is empty`);
+    assert.match(
+      s.heroImage,
+      /^\/images\/services\/heroes\/[a-z-]+\.jpg$/,
+      `${s.slug}.heroImage has an unexpected path shape: ${s.heroImage}`,
+    );
+    assert.ok(s.heroAlt.trim().length > 0, `${s.slug}.heroAlt is empty`);
+  }
+});
+
 test("facts and strips are non-empty key/value pairs", () => {
   for (const s of SO_FAR) {
     for (const kv of [...s.facts, ...s.strip]) {

@@ -3,6 +3,8 @@ import type { Service } from "../types";
 export const diagnosticServices: Service[] = [
   {
     slug: "laboratory",
+    heroImage: "/images/services/heroes/laboratory.jpg",
+    heroAlt: "A gloved hand holding a sample vial beside a laboratory analyser",
     title: "Laboratory services",
     directoryTitle: "Laboratory services",
     group: "Diagnostics",
@@ -69,6 +71,8 @@ export const diagnosticServices: Service[] = [
   },
   {
     slug: "radiology",
+    heroImage: "/images/services/heroes/radiology.jpg",
+    heroAlt: "A digital X-ray room with an overhead imaging unit and examination table",
     title: "Radiology & digital X-ray",
     directoryTitle: "Radiology & digital X-ray",
     group: "Diagnostics",
@@ -135,6 +139,8 @@ export const diagnosticServices: Service[] = [
   },
   {
     slug: "cardiac-screening",
+    heroImage: "/images/services/heroes/cardiac-screening.jpg",
+    heroAlt: "A bedside monitor displaying an ECG waveform and heart rate readings",
     title: "Cardiac screening & ECG",
     directoryTitle: "Cardiac screening & ECG",
     group: "Diagnostics",
@@ -201,6 +207,8 @@ export const diagnosticServices: Service[] = [
   },
   {
     slug: "fetal-monitoring",
+    heroImage: "/images/services/heroes/fetal-monitoring.jpg",
+    heroAlt: "A CTG monitor printing a fetal heart rate and contraction trace",
     title: "CTG & fetal monitoring",
     directoryTitle: "CTG & fetal monitoring",
     group: "Diagnostics",

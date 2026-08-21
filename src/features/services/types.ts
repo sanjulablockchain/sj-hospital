@@ -29,6 +29,10 @@ export type Service = {
   aboutHead: string;
   body1: string;
   body2: string;
+  /** Public path to this service's hero background image */
+  heroImage: string;
+  /** Descriptive alt text for heroImage; describes the image, not the service */
+  heroAlt: string;
   /** Exactly 4 hero stats */
   strip: KeyValue[];
   covers: string[];

@@ -6,13 +6,14 @@ import { servicesDetailNavigation } from "@/config/servicesNavigation";
 import type { Service } from "@/features/services/types";
 
 /**
- * `#top` hero for a single service's detail page. Same fixed-dark exterior
- * render and Ken Burns drift as the services index hero (ServicesHero),
+ * `#top` hero for a single service's detail page. Same fixed-dark gradient
+ * treatment and Ken Burns drift as the services index hero (ServicesHero),
  * shorter at ~72vh since a detail page has more content below the fold, and
  * scoped to one service's title/lede/cta/strip rather than the index copy.
  *
- * The exterior render is shared across all 36 detail pages, so the alt text
- * describes the building rather than the service shown on it.
+ * Each service supplies its own illustrative heroImage/heroAlt (equipment,
+ * clinical detail) rather than sharing one building render, so the image
+ * matches the subject of the page it sits on.
  */
 export function ServiceHero({ service }: { service: Service }) {
   return (
@@ -26,10 +27,11 @@ export function ServiceHero({ service }: { service: Service }) {
         className="absolute inset-x-0 -top-[14%] h-[128%] overflow-hidden"
       >
         <Image
-          src="/images/services/exterior-dusk-a.png"
-          alt="St. Joseph Hospital building at dusk"
+          src={service.heroImage}
+          alt={service.heroAlt}
           fill
           priority
+          sizes="100vw"
           className="animate-sj-burns object-cover"
           style={{ objectPosition: "55% 50%" }}
         />

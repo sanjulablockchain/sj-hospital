@@ -3,6 +3,8 @@ import type { Service } from "../types";
 export const womenChildrenServices: Service[] = [
   {
     slug: "obstetrics-maternity",
+    heroImage: "/images/services/heroes/obstetrics-maternity.jpg",
+    heroAlt: "An ultrasound monitor displaying a scan during a prenatal check",
     title: "Obstetrics & maternity",
     directoryTitle: "Obstetrics & maternity",
     group: "Women & children",
@@ -68,6 +70,8 @@ export const womenChildrenServices: Service[] = [
   },
   {
     slug: "gynaecology",
+    heroImage: "/images/services/heroes/gynaecology.jpg",
+    heroAlt: "A well-equipped gynaecological examination room with modern medical equipment",
     title: "Gynaecology",
     directoryTitle: "Gynaecology",
     group: "Women & children",
@@ -133,6 +137,8 @@ export const womenChildrenServices: Service[] = [
   },
   {
     slug: "paediatrics",
+    heroImage: "/images/services/heroes/paediatrics.jpg",
+    heroAlt: "A child being weighed on a scale during a paediatric check-up",
     title: "Paediatrics & neonatal care",
     directoryTitle: "Paediatrics & neonatal care",
     group: "Women & children",
@@ -199,6 +205,8 @@ export const womenChildrenServices: Service[] = [
   },
   {
     slug: "fertility",
+    heroImage: "/images/services/heroes/fertility.jpg",
+    heroAlt: "A microscope set up on a laboratory bench",
     title: "Fertility & embryology",
     directoryTitle: "Fertility & embryology",
     group: "Women & children",
@@ -262,6 +270,8 @@ export const womenChildrenServices: Service[] = [
   },
   {
     slug: "vaccination-clinic",
+    heroImage: "/images/services/heroes/vaccination-clinic.jpg",
+    heroAlt: "A syringe and vaccine vials arranged on a table",
     title: "Vaccination clinic",
     directoryTitle: "Vaccination clinic",
     group: "Women & children",

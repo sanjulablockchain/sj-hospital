@@ -3,6 +3,8 @@ import type { Service } from "../types";
 export const clinicServices: Service[] = [
   {
     slug: "outpatient-department",
+    heroImage: "/images/services/heroes/outpatient-department.jpg",
+    heroAlt: "A doctor and patient reviewing medical notes together at a consultation desk",
     title: "Outpatient department (OPD)",
     directoryTitle: "Outpatient department (OPD)",
     group: "Clinics",
@@ -68,6 +70,8 @@ export const clinicServices: Service[] = [
   },
   {
     slug: "cardiology",
+    heroImage: "/images/services/heroes/cardiology.jpg",
+    heroAlt: "An ECG machine beside an anatomical heart model in a clinic room",
     title: "Cardiology",
     directoryTitle: "Cardiology clinic",
     group: "Clinics",
@@ -133,6 +137,8 @@ export const clinicServices: Service[] = [
   },
   {
     slug: "dermatology",
+    heroImage: "/images/services/heroes/dermatology.jpg",
+    heroAlt: "A clinician examining skin using a digital dermatoscope and tablet",
     title: "Dermatology & wound clinic",
     directoryTitle: "Dermatology & wound clinic",
     group: "Clinics",
@@ -199,6 +205,8 @@ export const clinicServices: Service[] = [
   },
   {
     slug: "diabetes-endocrinology",
+    heroImage: "/images/services/heroes/diabetes-endocrinology.jpg",
+    heroAlt: "A digital blood glucose meter displaying a blood sugar reading",
     title: "Diabetes & endocrine care",
     directoryTitle: "Diabetes & endocrine care",
     group: "Clinics",
@@ -265,6 +273,8 @@ export const clinicServices: Service[] = [
   },
   {
     slug: "nutrition",
+    heroImage: "/images/services/heroes/nutrition.jpg",
+    heroAlt: "Hands pointing to a nutrition chart beside fresh vegetables",
     title: "Nutrition & dietetics",
     directoryTitle: "Nutrition & dietetics",
     group: "Clinics",
@@ -331,6 +341,8 @@ export const clinicServices: Service[] = [
   },
   {
     slug: "rheumatology",
+    heroImage: "/images/services/heroes/rheumatology.jpg",
+    heroAlt: "An X-ray showing the bones and joints of a human hand",
     title: "Rheumatology",
     directoryTitle: "Rheumatology clinic",
     group: "Clinics",
@@ -396,6 +408,8 @@ export const clinicServices: Service[] = [
   },
   {
     slug: "neurology",
+    heroImage: "/images/services/heroes/neurology.jpg",
+    heroAlt: "A brain MRI scan displayed on a medical monitor",
     title: "Neurology",
     directoryTitle: "Neurology clinic",
     group: "Clinics",
@@ -461,6 +475,8 @@ export const clinicServices: Service[] = [
   },
   {
     slug: "nephrology",
+    heroImage: "/images/services/heroes/nephrology.jpg",
+    heroAlt: "A digital blood pressure monitor and cuff on a plain background",
     title: "Nephrology & renal care",
     directoryTitle: "Nephrology & renal care",
     group: "Clinics",
@@ -526,6 +542,8 @@ export const clinicServices: Service[] = [
   },
   {
     slug: "respiratory-medicine",
+    heroImage: "/images/services/heroes/respiratory-medicine.jpg",
+    heroAlt: "A stethoscope resting on a light marble surface",
     title: "Respiratory & chest medicine",
     directoryTitle: "Respiratory & chest medicine",
     group: "Clinics",
@@ -591,6 +609,8 @@ export const clinicServices: Service[] = [
   },
   {
     slug: "haematology",
+    heroImage: "/images/services/heroes/haematology.jpg",
+    heroAlt: "Blood sample tubes with barcode labels arranged in a laboratory rack",
     title: "Haematology",
     directoryTitle: "Haematology clinic",
     group: "Clinics",
@@ -655,6 +675,8 @@ export const clinicServices: Service[] = [
   },
   {
     slug: "mental-health",
+    heroImage: "/images/services/heroes/mental-health.jpg",
+    heroAlt: "A counsellor taking notes on a clipboard in a calm, softly lit room",
     title: "Mental health & counselling",
     directoryTitle: "Mental health & counselling",
     group: "Clinics",
@@ -719,6 +741,8 @@ export const clinicServices: Service[] = [
   },
   {
     slug: "physiotherapy",
+    heroImage: "/images/services/heroes/physiotherapy.jpg",
+    heroAlt: "Electrical stimulation pads applied to a knee during a physiotherapy session",
     title: "Physiotherapy & rehabilitation",
     directoryTitle: "Physiotherapy & rehabilitation",
     group: "Clinics",
@@ -784,6 +808,8 @@ export const clinicServices: Service[] = [
   },
   {
     slug: "speech-therapy",
+    heroImage: "/images/services/heroes/speech-therapy.jpg",
+    heroAlt: "A child's hand pressing therapy putty during a hands-on session",
     title: "Speech & language therapy",
     directoryTitle: "Speech & language therapy",
     group: "Clinics",
@@ -848,6 +874,8 @@ export const clinicServices: Service[] = [
   },
   {
     slug: "inpatient-rooms",
+    heroImage: "/images/services/heroes/inpatient-rooms.jpg",
+    heroAlt: "A clean, modern hospital room with an adjustable bed",
     title: "Inpatient rooms",
     directoryTitle: "Inpatient rooms & wards",
     group: "Clinics",

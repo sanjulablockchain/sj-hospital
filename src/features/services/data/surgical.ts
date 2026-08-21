@@ -3,6 +3,8 @@ import type { Service } from "../types";
 export const surgicalServices: Service[] = [
   {
     slug: "general-surgery",
+    heroImage: "/images/services/heroes/general-surgery.jpg",
+    heroAlt: "Surgical instruments laid out on a tray in an operating theatre",
     title: "General surgery",
     directoryTitle: "General surgery",
     group: "Surgical",
@@ -68,6 +70,8 @@ export const surgicalServices: Service[] = [
   },
   {
     slug: "orthopaedic-surgery",
+    heroImage: "/images/services/heroes/orthopaedic-surgery.jpg",
+    heroAlt: "A foot X-ray displayed in close-up on a digital tablet",
     title: "Orthopaedic surgery",
     directoryTitle: "Orthopaedic surgery",
     group: "Surgical",
@@ -133,6 +137,8 @@ export const surgicalServices: Service[] = [
   },
   {
     slug: "ent-surgery",
+    heroImage: "/images/services/heroes/ent-surgery.jpg",
+    heroAlt: "A clinician's gloved hand using an otoscope to examine a patient's ear",
     title: "ENT surgery & audiology",
     directoryTitle: "ENT surgery & audiology",
     group: "Surgical",
@@ -198,6 +204,8 @@ export const surgicalServices: Service[] = [
   },
   {
     slug: "urology",
+    heroImage: "/images/services/heroes/urology.jpg",
+    heroAlt: "An ultrasound machine console in a clinic examination room",
     title: "Urology",
     directoryTitle: "Urology",
     group: "Surgical",
@@ -263,6 +271,8 @@ export const surgicalServices: Service[] = [
   },
   {
     slug: "ophthalmology",
+    heroImage: "/images/services/heroes/ophthalmology.jpg",
+    heroAlt: "An ophthalmic examination chair beside slit lamp equipment in a clinic room",
     title: "Ophthalmology & cataract surgery",
     directoryTitle: "Ophthalmology & cataract surgery",
     group: "Surgical",
@@ -328,6 +338,8 @@ export const surgicalServices: Service[] = [
   },
   {
     slug: "neurosurgery",
+    heroImage: "/images/services/heroes/neurosurgery.jpg",
+    heroAlt: "A sagittal MRI scan of the human brain displayed for review",
     title: "Neurosurgery",
     directoryTitle: "Neurosurgery",
     group: "Surgical",
@@ -392,6 +404,8 @@ export const surgicalServices: Service[] = [
   },
   {
     slug: "endoscopy",
+    heroImage: "/images/services/heroes/endoscopy.jpg",
+    heroAlt: "A gloved hand operating a surgical instrument during a procedure",
     title: "Gastrointestinal & endoscopy",
     directoryTitle: "Gastrointestinal & endoscopy",
     group: "Surgical",
