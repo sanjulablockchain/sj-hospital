@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
@@ -12,6 +12,20 @@ type ServiceDirectoryProps = {
   services: Service[];
   counts: Record<string, number>;
 };
+
+// The first row (or a filter's freshly mounted first row) opens by default —
+// the user never clicked it. If height were measured in a plain `useEffect`,
+// the browser paints one frame at max-height 0 *before* that effect runs,
+// then the panel visibly grows to full height over the 550ms transition on
+// load. Measuring before paint instead means that frame never happens: a CSS
+// transition only plays between two values the browser has already painted,
+// so a row's first-ever paint (mount) never animates no matter what value is
+// set during it — only a later, genuine open/close (which does have a prior
+// painted frame) transitions. `useLayoutEffect` does nothing on the server
+// and only logs a warning there, so it's aliased to the ordinary effect
+// during the framework's server render pass and left as the real
+// pre-paint effect in the browser.
+const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 /**
  * `#directory`: the page's only client component and its only stateful piece —
@@ -110,7 +124,9 @@ function DirectoryRow({ service, index, isOpen, onToggle, idPrefix }: DirectoryR
   // (never itself clipped by the animated wrapper's max-height/overflow), so
   // it keeps reporting the true height even while the row is collapsed —
   // covering both the open/close transition and any reflow from a resize.
-  useEffect(() => {
+  // Runs pre-paint (see useIsomorphicLayoutEffect above) so a row that's
+  // already open on mount never flashes collapsed first.
+  useIsomorphicLayoutEffect(() => {
     const node = contentRef.current;
     if (!node) return;
 
