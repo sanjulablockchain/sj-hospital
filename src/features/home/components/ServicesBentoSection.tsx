@@ -1,5 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
+import { services } from "@/features/services/data/services";
 
 export function ServicesBentoSection() {
   return (
@@ -27,8 +29,8 @@ export function ServicesBentoSection() {
           className="grid gap-3.5 max-[639px]:grid-cols-1 min-[640px]:grid-cols-2 min-[1024px]:grid-cols-4"
           style={{ gridAutoRows: "minmax(178px, auto)" }}
         >
-          <a
-            href="#book"
+          <Link
+            href="/services/accident-emergency"
             className="sj-bento sj-bento-accent group relative col-span-2 row-span-2 flex flex-col justify-between overflow-hidden bg-[var(--home-accent)] p-8 text-[var(--home-on-accent)] max-[639px]:col-span-1"
           >
             <span className="flex items-center justify-between gap-4 text-[12px] font-bold tracking-[0.2em] uppercase opacity-72">
@@ -49,10 +51,10 @@ export function ServicesBentoSection() {
                 every day of the year.
               </span>
             </span>
-          </a>
+          </Link>
 
-          <a
-            href="#surgical"
+          <Link
+            href="/services/general-surgery"
             className="sj-bento relative col-span-2 flex min-h-[178px] flex-col justify-end overflow-hidden bg-[#0B1846] p-7 text-white max-[639px]:col-span-1"
           >
             <Image
@@ -85,10 +87,10 @@ export function ServicesBentoSection() {
                 Surgical services <span aria-hidden className="text-[18px]">&rarr;</span>
               </span>
             </span>
-          </a>
+          </Link>
 
-          <a
-            href="#rooms"
+          <Link
+            href="/services/inpatient-rooms"
             className="sj-bento relative row-span-2 flex flex-col justify-between overflow-hidden border border-[var(--home-hairline)] bg-[#0B1846] p-6.5 text-inherit"
           >
             <Image
@@ -111,10 +113,10 @@ export function ServicesBentoSection() {
                 LKR a night. Private and semi private, sanitised every two hours, nursing that knows your name.
               </span>
             </span>
-          </a>
+          </Link>
 
-          <a
-            href="#pharmacy"
+          <Link
+            href="/services/pharmacy"
             className="sj-bento relative flex flex-col justify-between overflow-hidden border border-[var(--home-hairline)] bg-[#0B1846] p-6.5 text-inherit"
           >
             <Image
@@ -137,10 +139,10 @@ export function ServicesBentoSection() {
                 Verified medicine only. No substitutes.
               </span>
             </span>
-          </a>
+          </Link>
 
-          <a
-            href="#facilities"
+          <Link
+            href="/services/radiology"
             className="sj-bento relative flex flex-col justify-between overflow-hidden border border-[var(--home-hairline)] bg-[#0B1846] p-6.5 text-inherit"
           >
             <Image
@@ -163,10 +165,10 @@ export function ServicesBentoSection() {
                 Read within the hour, not the week.
               </span>
             </span>
-          </a>
+          </Link>
 
-          <a
-            href="#facilities"
+          <Link
+            href="/services/laboratory"
             className="sj-bento relative col-span-2 flex min-h-[178px] items-end overflow-hidden bg-[#08123A] p-6.5 text-inherit max-[639px]:col-span-1"
           >
             <Image
@@ -191,10 +193,10 @@ export function ServicesBentoSection() {
               </span>
               <span className="text-[14px] whitespace-nowrap text-white/75">10% off for OPD patients</span>
             </span>
-          </a>
+          </Link>
 
-          <a
-            href="#book"
+          <Link
+            href="/services/home-visits"
             className="sj-bento relative flex flex-col justify-between overflow-hidden border border-[var(--home-hairline)] bg-[#0B1846] p-6.5 text-inherit"
           >
             <Image
@@ -217,10 +219,10 @@ export function ServicesBentoSection() {
                 Doctors, nurses and lab technicians at your door.
               </span>
             </span>
-          </a>
+          </Link>
 
-          <a
-            href="#pharmacy"
+          <Link
+            href="/services/medicine-delivery"
             className="sj-bento relative flex flex-col justify-between overflow-hidden border border-[var(--home-hairline)] bg-[#0B1846] p-6.5 text-inherit"
           >
             <Image
@@ -243,13 +245,13 @@ export function ServicesBentoSection() {
                 Across Negombo, from our own counter.
               </span>
             </span>
-          </a>
+          </Link>
         </div>
       </Reveal>
 
       <Reveal>
-        <a
-          href="#surgical"
+        <Link
+          href="/services"
           className="mt-8.5 flex flex-wrap items-center justify-between gap-7.5 bg-[var(--home-accent)] px-9 py-8.5 text-[var(--home-on-accent)] sj-invert"
         >
           <span className="block">
@@ -257,13 +259,13 @@ export function ServicesBentoSection() {
               Full service directory
             </span>
             <span className="font-display mt-2.5 block text-[clamp(28px,3.4vw,46px)] leading-none font-extrabold tracking-[-0.035em] uppercase">
-              Go to surgical care &amp; services
+              Every service, in one place
             </span>
           </span>
           <span className="inline-flex items-center gap-3 text-[15px] font-bold whitespace-nowrap">
-            Open the page <span aria-hidden className="text-[22px]">&rarr;</span>
+            View all {services.length} services <span aria-hidden className="text-[22px]">&rarr;</span>
           </span>
-        </a>
+        </Link>
       </Reveal>
     </section>
   );
