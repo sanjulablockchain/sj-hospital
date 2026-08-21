@@ -5,8 +5,8 @@ import type { Service } from "@/features/services/types";
 /**
  * `#book`: the detail page's closing call to action, and the target the
  * hero's CTA and the site header's "Book now" button both already point at
- * on all 36 detail pages. Mirrors the index page's `BookSection` — same
- * accent plate, phone number and contact link — but the heading is built
+ * on all 36 detail pages. Mirrors the index page's `BookSection` (same
+ * accent plate, phone number and contact link), but the heading is built
  * from this service's own `cta` rather than generic copy, and the ghost
  * link returns to `/services` (there is no on-page directory to return to
  * here, unlike the index page's `#directory`).

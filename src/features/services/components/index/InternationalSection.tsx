@@ -5,7 +5,7 @@ import { internationalSteps } from "@/features/services/data/indexContent";
 /**
  * `#international`: the six-step journey for a patient travelling in from
  * overseas, in a 3-column grid that collapses to a single column below
- * 900px — one breakpoint only, unlike the two-breakpoint admissions grid.
+ * 900px; one breakpoint only, unlike the two-breakpoint admissions grid.
  */
 export function InternationalSection() {
   return (

@@ -46,7 +46,7 @@ export function SiteThemeProvider({ children }: { children: ReactNode }) {
   // The FOUC-prevention inline script only runs on a hard page load, so a
   // soft (client-side) navigation into the home page can leave data-theme
   // stuck at its hardcoded default even when a different theme is saved.
-  // Reconcile it from localStorage once on mount — a no-op on hard loads
+  // Reconcile it from localStorage once on mount: a no-op on hard loads
   // where the script already set it correctly.
   useEffect(() => {
     const node = document.getElementById("sj-root");

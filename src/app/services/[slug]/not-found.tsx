@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 // Renders inside the /services layout's ThemedShell, so the --home-* tokens
-// and font-display are already in scope — this reads as a real page, not a
+// and font-display are already in scope; this reads as a real page, not a
 // bare Next.js stub.
 export default function ServiceNotFound() {
   return (

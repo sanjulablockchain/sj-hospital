@@ -1,6 +1,6 @@
 /** Brand artwork lifted from the official St. Joseph Hospital logo. */
 
-/** Leaf mark on its own, transparent — legible on both the dark and light themes. */
+/** Leaf mark on its own, transparent; legible on both the dark and light themes. */
 export const LOGO_MARK = {
   src: "/images/logo-mark.png",
   width: 583,

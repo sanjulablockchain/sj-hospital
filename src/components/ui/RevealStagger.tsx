@@ -22,7 +22,7 @@ type RevealStaggerProps = {
  * out of the render cycle entirely.
  *
  * Nothing is hidden until this mounts and sets `data-stagger-armed`, so with JS
- * off — or under prefers-reduced-motion — every child just renders.
+ * off (or under prefers-reduced-motion) every child just renders.
  */
 export function RevealStagger({ children, className = "", stepMs = 70 }: RevealStaggerProps) {
   const ref = useRef<HTMLDivElement>(null);

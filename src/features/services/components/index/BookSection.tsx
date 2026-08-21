@@ -3,8 +3,8 @@ import { Reveal } from "@/components/ui/Reveal";
 
 /**
  * `#book`: the page's closing call to action. Kept to what the brief asks
- * for — a heading, a short paragraph, the hospital's phone number, a primary
- * link to `/contact-us` and a ghost link back into the directory — rather
+ * for: a heading, a short paragraph, the hospital's phone number, a primary
+ * link to `/contact-us` and a ghost link back into the directory, rather
  * than the home page's larger three-link `ContactCtaSection`.
  */
 export function BookSection() {

@@ -64,7 +64,7 @@ export const diagnosticServices: Service[] = [
       { q: "Is the laboratory open at night?", a: "Yes. The laboratory runs 24 hours, so a sample can be taken and processed at any hour, including urgent requests from the emergency department." },
       { q: "How long until my results are ready?", a: "Most reports are ready the same day. Your test request will show the expected time when you book." },
       { q: "Why does a report take two doctors to check?", a: "Every report is verified by two doctors before release, adding an extra check on accuracy before it reaches you or your doctor." },
-      { q: "Do I get a discount as an outpatient?", a: "Yes. OPD patients receive a 10% discount on laboratory charges — bring your OPD card when you pay." },
+      { q: "Do I get a discount as an outpatient?", a: "Yes. OPD patients receive a 10% discount on laboratory charges. Bring your OPD card when you pay." },
     ],
   },
   {
@@ -74,7 +74,7 @@ export const diagnosticServices: Service[] = [
     group: "Diagnostics",
     hours: "24 hours",
     cta: "Book imaging",
-    desc: "Digital X-ray and ultrasound available around the clock, with films read within the hour and portable imaging brought to the ward when a patient cannot travel. CT and MRI are not performed on site — where a scan is needed, we arrange referral to a partner imaging centre.",
+    desc: "Digital X-ray and ultrasound available around the clock, with films read within the hour and portable imaging brought to the ward when a patient cannot travel. CT and MRI are not performed on site: where a scan is needed, we arrange referral to a partner imaging centre.",
     tags: ["Digital X-ray", "Ultrasound", "Portable imaging", "Referral for CT/MRI"],
     facts: [
       { k: "Hours", v: "24 hours" },

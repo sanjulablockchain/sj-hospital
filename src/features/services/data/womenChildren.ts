@@ -149,7 +149,7 @@ export const womenChildrenServices: Service[] = [
     lede: "Newborn review, growth tracking and childhood vaccination run to the Kids & Teens Medical Group protocol, with acute care available at any hour.",
     aboutHead: "Child health care built on a structured protocol",
     body1: "Paediatric care follows the Kids & Teens Medical Group protocol, covering newborn review after delivery, ongoing growth and development tracking, and the full childhood vaccination schedule. Neonatal support is available at delivery when a newborn needs extra attention in the first minutes of life.",
-    body2: "Acute childhood illness — fever, breathing difficulty, dehydration and similar concerns — is seen at any hour, without needing to wait for a scheduled clinic. For newborns, a home visit option is available where a visit to the hospital is not the easiest first step.",
+    body2: "Acute childhood illness (fever, breathing difficulty, dehydration and similar concerns) is seen at any hour, without needing to wait for a scheduled clinic. For newborns, a home visit option is available where a visit to the hospital is not the easiest first step.",
     strip: [
       { k: "Hours", v: "24 hours" },
       { k: "Protocol", v: "Kids & Teens" },

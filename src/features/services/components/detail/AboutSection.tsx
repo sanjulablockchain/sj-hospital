@@ -3,7 +3,7 @@ import type { Service } from "@/features/services/types";
 
 /**
  * `#about`: the per-service explainer. Left column carries the service's own
- * copy — `aboutHead` as the page's only `<h2>` here, `body1`/`body2`, then
+ * copy: `aboutHead` as the page's only `<h2>` here, `body1`/`body2`, then
  * "what this covers" and "conditions we see most" as real lists. Right
  * column is a compact facts card that follows the reader down the page
  * (`WhoWeAreSection`'s sticky-column pattern, mirrored onto the shorter

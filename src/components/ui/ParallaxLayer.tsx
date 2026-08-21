@@ -12,7 +12,7 @@ type ParallaxLayerProps = {
 
 /**
  * Scroll-drifts whatever is inside it. Exists so a Server Component can hold a
- * parallax layer without turning into a Client Component itself — only this
+ * parallax layer without turning into a Client Component itself; only this
  * leaf ships to the browser.
  */
 export function ParallaxLayer({

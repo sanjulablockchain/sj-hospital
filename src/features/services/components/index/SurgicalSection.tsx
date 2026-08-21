@@ -3,7 +3,7 @@ import { RevealStagger } from "@/components/ui/RevealStagger";
 import { surgicalRows } from "@/features/services/data/indexContent";
 
 /**
- * `#surgical`: a `--home-surface-2` band — the same charcoal plate the home
+ * `#surgical`: a `--home-surface-2` band, the same charcoal plate the home
  * page's dark sections use by default, flipping to a plain white panel in
  * light mode. No fixed-dark literal here; only the fixed-dark hero is exempt
  * from the token rule.

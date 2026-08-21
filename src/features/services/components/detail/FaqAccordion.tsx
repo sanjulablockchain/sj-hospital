@@ -7,7 +7,7 @@ import type { Faq } from "@/features/services/types";
 
 // Measuring in a plain `useEffect` would let the browser paint one frame at
 // max-height 0 before the effect runs, so a panel that starts open would
-// visibly grow open on load. `useLayoutEffect` runs before that paint — but
+// visibly grow open on load. `useLayoutEffect` runs before that paint, but
 // only in the browser; on the server it does nothing but warn, so it's
 // aliased to the ordinary effect during the framework's server render pass.
 // See `ServiceDirectory.tsx`, which this accordion mirrors.
@@ -16,7 +16,7 @@ const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffec
 /**
  * `#faq`: one-open-at-a-time accordion over a service's FAQ entries. Unlike
  * `ServiceDirectory`'s directory rows (which open the first row by default),
- * every panel here starts closed — `useState<number>(-1)` — since nothing on
+ * every panel here starts closed (`useState<number>(-1)`) since nothing on
  * this page has been clicked yet.
  */
 export function FaqAccordion({ faq }: { faq: Faq[] }) {
@@ -58,7 +58,7 @@ function FaqRow({ item, isOpen, onToggle, idPrefix }: FaqRowProps) {
   const [contentHeight, setContentHeight] = useState(0);
 
   // Measure the panel's natural content height instead of the reference's
-  // fixed 320px cap — a longer answer must never be clipped. ResizeObserver
+  // fixed 320px cap: a longer answer must never be clipped. ResizeObserver
   // watches the inner content node (never itself clipped by the animated
   // wrapper's max-height/overflow), so it keeps reporting the true height
   // through the whole open/close transition.
@@ -95,7 +95,7 @@ function FaqRow({ item, isOpen, onToggle, idPrefix }: FaqRowProps) {
         <span className="font-display text-[clamp(17px,1.7vw,22px)] leading-[1.25] font-semibold tracking-[-0.01em] text-[var(--home-heading)]">
           {item.q}
         </span>
-        {/* Decorative only — the button's accessible name is the question
+        {/* Decorative only: the button's accessible name is the question
             text above, not this glyph. */}
         <span
           aria-hidden

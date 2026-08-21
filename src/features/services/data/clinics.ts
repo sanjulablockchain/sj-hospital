@@ -347,7 +347,7 @@ export const clinicServices: Service[] = [
     lede: "Joint and connective tissue disease assessment, with inflammatory markers and imaging arranged in the same corridor.",
     aboutHead: "Joint and connective tissue care, reviewed over time",
     body1: "The rheumatology clinic assesses joint pain, swelling and stiffness alongside connective tissue conditions that affect more than one part of the body. Inflammatory blood markers and imaging are arranged in the same corridor as the clinic, so a picture can build without sending you elsewhere for each step.",
-    body2: "Many of the conditions seen here need long-term monitoring rather than a single visit, so the clinic is built around ongoing review — tracking how markers and symptoms change and adjusting your management plan at each appointment.",
+    body2: "Many of the conditions seen here need long-term monitoring rather than a single visit, so the clinic is built around ongoing review: tracking how markers and symptoms change and adjusting your management plan at each appointment.",
     strip: [
       { k: "Clinics", v: "Weekly" },
       { k: "Markers", v: "Same corridor" },
@@ -583,7 +583,7 @@ export const clinicServices: Service[] = [
       { role: "Clinic coordinator", note: "Books consultations and ongoing respiratory review." },
     ],
     faq: [
-      { q: "Will I get a chest X-ray at my first visit?", a: "Where it helps your assessment, yes — a chest X-ray can be taken at the same visit as your consultation." },
+      { q: "Will I get a chest X-ray at my first visit?", a: "Where it helps your assessment, yes, a chest X-ray can be taken at the same visit as your consultation." },
       { q: "Do I need a referral to be seen?", a: "No. You can book a consult directly, and a referral from another doctor is also accepted." },
       { q: "Is physiotherapy part of this clinic?", a: "Respiratory physiotherapy is arranged for patients admitted to the ward with a chest condition, alongside medical treatment." },
       { q: "Can this clinic manage long-term COPD?", a: "Yes. Ongoing COPD review and management is part of the clinic's regular work." },
@@ -670,7 +670,7 @@ export const clinicServices: Service[] = [
     ],
     lede: "Psychiatric assessment and counselling in private consulting rooms, with medication review and follow-up arranged around you.",
     aboutHead: "A private, unhurried space to talk things through",
-    body1: "Appointments take place in private consulting rooms, away from the general outpatient area, so you can talk openly about what has been difficult. A first appointment is an assessment — a conversation about how you have been, what has changed, and what kind of support might help.",
+    body1: "Appointments take place in private consulting rooms, away from the general outpatient area, so you can talk openly about what has been difficult. A first appointment is an assessment: a conversation about how you have been, what has changed, and what kind of support might help.",
     body2: "Where medication is already part of your care, or might help, it is reviewed as part of the appointment and explained clearly, including what to expect and what to raise if something doesn't feel right. Follow-up is scheduled to suit you, whether that means a single conversation or ongoing appointments over time.",
     strip: [
       { k: "Setting", v: "Private rooms" },
@@ -699,7 +699,7 @@ export const clinicServices: Service[] = [
       { no: "04", title: "Plan follow-up", desc: "You agree together what happens next, whether that is one visit or ongoing appointments." },
     ],
     prep: [
-      "There is nothing you need to prepare — come as you are",
+      "There is nothing you need to prepare; come as you are",
       "Bring a list of any medicines you currently take, if relevant",
       "Write down anything you want to remember to mention",
       "Let the desk know if you would prefer a particular appointment time",
@@ -714,7 +714,7 @@ export const clinicServices: Service[] = [
       { q: "Do I need a referral to book an appointment?", a: "No. You can book an appointment directly and speak with someone in confidence." },
       { q: "Will my appointment be private?", a: "Yes. Appointments take place in private consulting rooms, separate from the general outpatient area." },
       { q: "Will I be put on medication?", a: "Not necessarily. Medication is only part of the conversation where it is relevant to you, and it is always explained clearly before anything changes." },
-      { q: "How often will I need to come back?", a: "That is agreed with you directly — some people need a single conversation, others prefer ongoing appointments." },
+      { q: "How often will I need to come back?", a: "That is agreed with you directly: some people need a single conversation, others prefer ongoing appointments." },
     ],
   },
   {
@@ -863,7 +863,7 @@ export const clinicServices: Service[] = [
     ],
     lede: "Standard, deluxe and super deluxe rooms plus wards, sanitised every two hours, with attendant space and meals to your dietary needs.",
     aboutHead: "A room to suit your stay",
-    body1: "Admission is offered across a range of room types — standard, deluxe and super deluxe private rooms, and general wards — so you can choose what suits your recovery and budget. Every room and ward is sanitised every two hours throughout your stay, and rooms come with space for an attendant to remain with you.",
+    body1: "Admission is offered across a range of room types: standard, deluxe and super deluxe private rooms, and general wards, so you can choose what suits your recovery and budget. Every room and ward is sanitised every two hours throughout your stay, and rooms come with space for an attendant to remain with you.",
     body2: "Meals are prepared to your dietary requirements, whether that is a diabetic diet, a post-operative diet or another requirement noted at admission. Rooms are available from 10,000 LKR a night, with the exact rate depending on the room type you choose.",
     strip: [
       { k: "From", v: "10,000 LKR / night" },

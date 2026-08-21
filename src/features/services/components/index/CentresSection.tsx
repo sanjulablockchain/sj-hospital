@@ -5,7 +5,7 @@ import { centres } from "@/features/services/data/indexContent";
 /**
  * `#centres`: the nine centres of excellence, each card linking into the full
  * directory below. The `lead` fact stays hidden until hover so the grid reads
- * as calm scan-copy first, with the extra detail as a reward for lingering —
+ * as calm scan-copy first, with the extra detail as a reward for lingering;
  * screen readers still get it regardless of hover state.
  */
 export function CentresSection() {

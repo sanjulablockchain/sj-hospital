@@ -16,7 +16,7 @@ export type Service = {
   slug: string;
   /** Detail page <h1> */
   title: string;
-  /** Directory row label — may differ from title */
+  /** Directory row label (may differ from title) */
   directoryTitle: string;
   group: ServiceGroup;
   hours: string;

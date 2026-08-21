@@ -13,14 +13,14 @@ type ServiceDirectoryProps = {
   counts: Record<string, number>;
 };
 
-// The first row (or a filter's freshly mounted first row) opens by default —
+// The first row (or a filter's freshly mounted first row) opens by default:
 // the user never clicked it. If height were measured in a plain `useEffect`,
 // the browser paints one frame at max-height 0 *before* that effect runs,
 // then the panel visibly grows to full height over the 550ms transition on
 // load. Measuring before paint instead means that frame never happens: a CSS
 // transition only plays between two values the browser has already painted,
 // so a row's first-ever paint (mount) never animates no matter what value is
-// set during it — only a later, genuine open/close (which does have a prior
+// set during it; only a later, genuine open/close (which does have a prior
 // painted frame) transitions. `useLayoutEffect` does nothing on the server
 // and only logs a warning there, so it's aliased to the ordinary effect
 // during the framework's server render pass and left as the real
@@ -28,11 +28,11 @@ type ServiceDirectoryProps = {
 const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 /**
- * `#directory`: the page's only client component and its only stateful piece —
+ * `#directory`: the page's only client component and its only stateful piece:
  * a group filter paired with a one-open-row-at-a-time accordion over the full
  * catalog. Data arrives as props (`services`, `counts`) rather than being
- * pulled from `data/services` here, so the rest of the page — and this
- * component's client bundle — never has to import that module's server-side
+ * pulled from `data/services` here, so the rest of the page (and this
+ * component's client bundle) never has to import that module's server-side
  * helpers.
  */
 export function ServiceDirectory({ services, counts }: ServiceDirectoryProps) {
@@ -122,7 +122,7 @@ function DirectoryRow({ service, index, isOpen, onToggle, idPrefix }: DirectoryR
   // tags and facts than the reference's did, and a fixed cap would clip real
   // clinical information. ResizeObserver watches the *inner* content node
   // (never itself clipped by the animated wrapper's max-height/overflow), so
-  // it keeps reporting the true height even while the row is collapsed —
+  // it keeps reporting the true height even while the row is collapsed:
   // covering both the open/close transition and any reflow from a resize.
   // Runs pre-paint (see useIsomorphicLayoutEffect above) so a row that's
   // already open on mount never flashes collapsed first.
@@ -157,7 +157,7 @@ function DirectoryRow({ service, index, isOpen, onToggle, idPrefix }: DirectoryR
         onClick={onToggle}
         className="grid w-full grid-cols-[50px_1fr_34px] items-center gap-4 px-1 py-6 text-left min-[900px]:grid-cols-[64px_1fr_auto_34px]"
       >
-        {/* Decorative ordinal only — aria-hidden so the row's accessible name
+        {/* Decorative ordinal only: aria-hidden so the row's accessible name
             starts with the service name, not a leading "01". */}
         <span aria-hidden className="text-[13px] font-bold text-[var(--home-accent)] tabular-nums">
           /{orderLabel}
@@ -179,7 +179,7 @@ function DirectoryRow({ service, index, isOpen, onToggle, idPrefix }: DirectoryR
       </button>
 
       {/* A collapsed panel must be unreachable by keyboard and screen reader,
-          but `hidden` sets display:none, which cannot be transitioned — so the
+          but `hidden` sets display:none, which cannot be transitioned, so the
           expand/collapse would just snap. Instead the height/opacity animation
           runs on max-height + opacity, and `inert` is what actually removes the
           panel from the tab order and the accessibility tree while collapsed

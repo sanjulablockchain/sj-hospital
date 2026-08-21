@@ -8,7 +8,7 @@ import { groupCounts } from "@/features/services/data/services";
  * `#top` hero: a fixed-dark exterior render behind the themed header and the
  * page's only <h1>. Content uses `animate-sj-up` (not Reveal) so it appears on
  * load rather than waiting on an intersection observer for what's already in
- * the first viewport — the same choice the home hero makes.
+ * the first viewport, the same choice the home hero makes.
  */
 export function ServicesHero() {
   const totalServices = groupCounts().All;
@@ -56,7 +56,7 @@ export function ServicesHero() {
           className="animate-sj-up max-w-[52ch] text-[18px] leading-[1.6] text-white/82"
           style={{ textWrap: "pretty" }}
         >
-          {totalServices} services across nine centres of excellence — emergency, surgical, diagnostic and
+          {totalServices} services across nine centres of excellence: emergency, surgical, diagnostic and
           family care, organised around the problem you came in with, not the department that happens to
           treat it.
         </p>

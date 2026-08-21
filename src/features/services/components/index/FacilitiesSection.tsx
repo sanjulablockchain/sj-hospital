@@ -57,8 +57,8 @@ const facilityCards: FacilityCard[] = [
  * `#facilities`: four campus cards in the home page's canonical photo-card
  * idiom (`ParallaxLayer` drift, bottom bar wipe, body lift on hover), followed
  * by the everyday-comfort chips. The cards' dark navy base and pale-blue
- * index colour are fixed literals rather than `--home-*` tokens — matching
- * `features/home/components/FacilitiesSection.tsx` exactly — because a photo
+ * index colour are fixed literals rather than `--home-*` tokens (matching
+ * `features/home/components/FacilitiesSection.tsx` exactly) because a photo
  * needs a dark scrim to keep white text legible in both the light and dark
  * site themes, the same reasoning that exempts the hero.
  */

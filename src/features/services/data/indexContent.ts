@@ -24,7 +24,7 @@ export type SurgicalRow = { name: string; note: string };
 /** One row in the diagnostics table. */
 export type DiagnosticRow = { name: string; note: string; turnaround: string };
 
-/** One health-check tier. Deliberately carries no price — see indexContent.test.ts. */
+/** One health-check tier. Deliberately carries no price; see indexContent.test.ts. */
 export type PackageTier = {
   tier: string;
   name: string;

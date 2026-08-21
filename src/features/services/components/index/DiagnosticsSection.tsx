@@ -4,7 +4,7 @@ import { diagnosticRows } from "@/features/services/data/indexContent";
 
 /**
  * `#diagnostics`: lab, imaging and endoscopy turnarounds. The `turnaround`
- * column is scan-friendly extra detail, so it drops out below 900px — but
+ * column is scan-friendly extra detail, so it drops out below 900px, but
  * `note` (which carries the CT & MRI off-site referral fact) is never hidden
  * or truncated at any width; a patient needs to see it before travelling.
  */

@@ -3,7 +3,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { packages } from "@/features/services/data/indexContent";
 
 /**
- * `#packages`: three health-check tiers. Deliberately carries no price —
+ * `#packages`: three health-check tiers. Deliberately carries no price:
  * the reference design's LKR figures were never real, so each card renders
  * only `tier`, `name`, a ticked `items` list and `ctaLabel`. Do not add a
  * price element, placeholder, dash or "POA" back in; see indexContent.test.ts.

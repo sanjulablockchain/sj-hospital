@@ -60,7 +60,7 @@ export const surgicalServices: Service[] = [
       { role: "Recovery nurses", note: "Assigned to monitor patients from the end of surgery until discharge or ward transfer." },
     ],
     faq: [
-      { q: "Will my operation be done laparoscopically?", a: "Where it is suitable, yes — a laparoscopic approach is used because it generally means less pain and a faster return home. Your surgeon will explain if an open operation is a better fit for your case." },
+      { q: "Will my operation be done laparoscopically?", a: "Where it is suitable, yes, a laparoscopic approach is used because it generally means less pain and a faster return home. Your surgeon will explain if an open operation is a better fit for your case." },
       { q: "Who gives the anaesthetic?", a: "A consultant anaesthetist assesses you beforehand and remains responsible for your anaesthesia throughout the operation." },
       { q: "How long will I be in hospital?", a: "Many hernia, gallbladder and appendix operations are day case or overnight stays; your surgeon will confirm what to expect at your consultation." },
       { q: "What happens right after surgery?", a: "A recovery nurse is assigned to watch over you as you wake, before you are moved to a ward bed or discharged with written instructions." },
@@ -257,7 +257,7 @@ export const surgicalServices: Service[] = [
     faq: [
       { q: "Will I get results on the same day?", a: "Ultrasound and flow studies are carried out at your first visit, so your urologist can usually discuss findings with you the same day." },
       { q: "Do I need to prepare for the flow study?", a: "You will be asked to arrive with a comfortably full bladder; the clinic will explain timing when you book." },
-      { q: "Is surgery always needed for stones?", a: "Not always — some stones pass on their own or are managed with medication. Your urologist will explain the options that suit your case." },
+      { q: "Is surgery always needed for stones?", a: "Not always. Some stones pass on their own or are managed with medication. Your urologist will explain the options that suit your case." },
       { q: "How soon can surgery be booked?", a: "Procedures run on weekly lists, and your urologist will give you an expected date once assessment is complete." },
     ],
   },
@@ -322,7 +322,7 @@ export const surgicalServices: Service[] = [
     faq: [
       { q: "Will I stay overnight after cataract surgery?", a: "No. Cataract surgery is done as a day case, and you go home the same day with drops and written instructions." },
       { q: "What happens at the first visit?", a: "Your ophthalmologist checks refraction, eye pressure and the retina, and discusses lens options with you before surgery is booked." },
-      { q: "Do I need someone with me on the day?", a: "Yes — arrange for someone to take you home after surgery, since your vision will be blurred from the drops used during the procedure." },
+      { q: "Do I need someone with me on the day?", a: "Yes, arrange for someone to take you home after surgery, since your vision will be blurred from the drops used during the procedure." },
       { q: "When will my vision be checked afterwards?", a: "You return the next day for a review, with further follow-up arranged if your ophthalmologist recommends it." },
     ],
   },
@@ -344,7 +344,7 @@ export const surgicalServices: Service[] = [
     lede: "Assessment of brain and spine problems, built around imaging and a referral pathway to the right next step of care.",
     aboutHead: "Assessment and planning, led by imaging",
     body1: "Patients are seen by referral, and a neurosurgeon reviews imaging together with the patient before discussing what, if anything, needs to happen next. Planning is built around what the scans show rather than a fixed procedure list, so each case is considered on its own findings.",
-    body2: "Where surgery is recommended, it is arranged through the appropriate surgical pathway, and this service continues to follow the patient afterwards — reviewing imaging, checking recovery and confirming the plan for further care.",
+    body2: "Where surgery is recommended, it is arranged through the appropriate surgical pathway, and this service continues to follow the patient afterwards: reviewing imaging, checking recovery and confirming the plan for further care.",
     strip: [
       { k: "Access", v: "By referral" },
       { k: "Planning", v: "Imaging-led" },

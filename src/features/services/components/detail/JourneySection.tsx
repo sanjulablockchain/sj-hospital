@@ -4,8 +4,8 @@ import type { Service } from "@/features/services/types";
 import { bringWithYou } from "@/features/services/data/indexContent";
 
 /**
- * `#journey`: the service's four-step visit, on a `--home-surface-2` band —
- * the same charcoal-or-white plate `SurgicalSection`/`PharmacySection` use —
+ * `#journey`: the service's four-step visit, on a `--home-surface-2` band
+ * (the same charcoal-or-white plate `SurgicalSection`/`PharmacySection` use),
  * followed by what to prepare and what to bring. The step numerals reuse
  * `AdmissionsSection`'s exact size ramp (56px, growing past 900px) rather
  * than inventing a new one.

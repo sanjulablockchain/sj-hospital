@@ -8,7 +8,7 @@ const groupList = `${SERVICE_GROUPS.slice(0, -1).join(", ")} and ${SERVICE_GROUP
 
 export const metadata: Metadata = {
   title: "Medical Services | St. Joseph Hospital Negombo",
-  description: `${totalServices} medical services across six groups — ${groupList} — at St. Joseph Hospital Negombo.`,
+  description: `${totalServices} medical services across six groups (${groupList}) at St. Joseph Hospital Negombo.`,
 };
 
 export default function Page() {

@@ -4,7 +4,7 @@ import type { Service } from "@/features/services/types";
 
 /**
  * `#team`: who staffs this service, by role only. `content.test.ts` enforces
- * that no `team` entry names an individual clinician — these rows describe a
+ * that no `team` entry names an individual clinician: these rows describe a
  * function on the ward, not a person.
  */
 export function TeamSection({ service }: { service: Service }) {

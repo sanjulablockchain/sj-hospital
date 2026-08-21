@@ -4,7 +4,7 @@ import { services } from "@/features/services/data/services";
 /**
  * All services as a chip row directly under the hero. The design reference
  * swapped services client-side via a hash picker; now that each service is a
- * real route this is plain navigation, so it stays a Server Component — chips
+ * real route this is plain navigation, so it stays a Server Component: chips
  * render from `services` (no hardcoded count or slug list) and the current
  * page's chip is marked with `aria-current`.
  *

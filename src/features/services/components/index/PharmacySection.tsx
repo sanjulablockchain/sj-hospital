@@ -14,7 +14,7 @@ const pharmacyFacts: PharmacyFact[] = [
 /**
  * `#pharmacy`: a `--home-surface-2` band summarising the 24-hour counter and
  * its delivery service. This is a summary, not a duplicate of the `pharmacy`
- * and `medicine-delivery` catalog entries in `data/atHome.ts` — it reuses
+ * and `medicine-delivery` catalog entries in `data/atHome.ts`: it reuses
  * their facts (authorized stock only, pharmacist check, digital
  * prescriptions, Negombo coverage) without repeating their sentences.
  */
