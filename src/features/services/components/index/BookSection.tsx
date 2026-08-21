@@ -18,7 +18,7 @@ export function BookSection() {
           Tell us what you need
         </h2>
         <p className="mx-auto mt-5.5 max-w-[52ch] text-[17px] leading-[1.6] opacity-85">
-          Call the number below or send your details through &mdash; a coordinator will match you to the right
+          Call the number below or send your details through. A coordinator will match you to the right
           department and confirm a plan before anything begins.
         </p>
         <div className="mt-9 flex flex-wrap items-center justify-center gap-4">

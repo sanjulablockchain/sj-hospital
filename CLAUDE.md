@@ -74,4 +74,4 @@ Rules:
 - Component files: `PascalCase.tsx`. Hooks: `useXxx.ts`. Route folders: `kebab-case`.
 - Validate every external input (forms, route params, API bodies) against a schema at the boundary before use.
 - Default every component to a Server Component; extract interactive pieces into small `'use client'` leaves.
-- Never use the em dash (U+2014) in UI copy or documentation. Restructure the sentence, or use a comma, colon, semicolon, parentheses, or a full stop instead.
+- Never use the em dash in UI copy or documentation, in any encoding: the literal character (U+2014), the `&mdash;` entity, or the numeric forms `&#8212;` / `&#x2014;`. Restructure the sentence, or use a comma, colon, semicolon, parentheses, or a full stop instead. When checking, grep for all four forms; a search for the bare character alone misses entity-encoded ones.
