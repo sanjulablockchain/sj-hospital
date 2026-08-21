@@ -1,4 +1,5 @@
 import { ThemedShell } from "@/components/layout/ThemedShell";
+import { FloatingActions } from "@/components/layout/FloatingActions";
 import { HeroSection } from "./HeroSection";
 import { WhoWeAreSection } from "./WhoWeAreSection";
 import { ServicesBentoSection } from "./ServicesBentoSection";
@@ -15,7 +16,6 @@ import { CareersSection } from "./CareersSection";
 import { TestimonialsSection } from "./TestimonialsSection";
 import { ContactCtaSection } from "./ContactCtaSection";
 import { HomeFooter } from "./HomeFooter";
-import { FloatingActions } from "./FloatingActions";
 
 export function HomePage() {
   return (
