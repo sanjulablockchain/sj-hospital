@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ThemedHeader } from "@/components/layout/ThemedHeader";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
-import { servicesNavigation } from "@/config/servicesNavigation";
+import { servicesDetailNavigation } from "@/config/servicesNavigation";
 import type { Service } from "@/features/services/types";
 
 /**
@@ -42,7 +42,7 @@ export function ServiceHero({ service }: { service: Service }) {
         }}
       />
 
-      <ThemedHeader navItems={servicesNavigation} />
+      <ThemedHeader navItems={servicesDetailNavigation} />
 
       <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 flex-col justify-end gap-6 px-5 pb-14 sm:px-8 lg:px-11">
         <Link

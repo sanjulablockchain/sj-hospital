@@ -9,6 +9,19 @@ export const servicesNavigation: NavItem[] = [
   { label: "International Patient Care", href: "#international" },
 ];
 
+// Same labels as servicesNavigation, but the targets are sections that only
+// exist on the /services index page. Detail pages (/services/[slug]) don't
+// have #centres, #facilities, #packages, #admissions or #international on
+// themselves, so their header must point back at the index page's anchors
+// instead of a same-page hash that resolves to nothing.
+export const servicesDetailNavigation: NavItem[] = [
+  { label: "Services", href: "/services#centres" },
+  { label: "Facilities", href: "/services#facilities" },
+  { label: "Health Checks", href: "/services#packages" },
+  { label: "Admissions", href: "/services#admissions" },
+  { label: "International Patient Care", href: "/services#international" },
+];
+
 export const servicesFooterColumns: FooterColumn[] = [
   {
     heading: "Care",
