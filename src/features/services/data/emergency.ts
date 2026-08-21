@@ -88,7 +88,7 @@ export const emergencyServices: Service[] = [
     lede: "A monitored unit for the sickest patients in the hospital, where one nurse watches only a small group of beds and a consultant reviews every case each day.",
     aboutHead: "Continuous monitoring, close by",
     body1: "Beds are wired for continuous monitoring of heart rhythm, oxygen levels and blood pressure, with ventilators and infusion pumps on hand for patients who need breathing or drug support. A consultant leads rounds daily and adjusts the plan as the patient's condition changes.",
-    body2: "Because the unit sits beside the operating theatres and the emergency department, a patient who deteriorates on the ward or after surgery can be moved in without delay. Visiting is kept to fixed hours so patients can rest, and a family member is called with an update once a day.",
+    body2: "Because the unit sits beside the operating theatres and the emergency department, a patient who deteriorates on the ward or after surgery can be moved straight into the unit rather than transferred to another hospital. Visiting is kept to fixed hours so patients can rest, and a family member is called with an update once a day.",
     strip: [
       { k: "Monitoring", v: "Continuous" },
       { k: "Nursing", v: "Small bed groups" },
