@@ -22,24 +22,35 @@ export const servicesDetailNavigation: NavItem[] = [
   { label: "International Patient Care", href: "/services#international" },
 ];
 
+// Absolute `/services#...` targets rather than bare hashes, so these same
+// columns work correctly from both page families: from a detail page
+// (/services/[slug]) the link navigates to the index and lands on the
+// section, while from the index page itself the link resolves to the exact
+// URL already loaded — ThemedFooter renders these as plain <a> tags, not
+// next/link, so the browser's own same-document fragment navigation takes
+// over: it scrolls to the target id rather than reloading, since the
+// pathname is unchanged. One source of truth for both contexts, instead of
+// a servicesDetailFooterColumns sibling that could drift from this one (the
+// same defect servicesDetailNavigation above was introduced to fix, one
+// layer up, for the header).
 export const servicesFooterColumns: FooterColumn[] = [
   {
     heading: "Care",
     links: [
-      { label: "Centres of excellence", href: "#centres" },
-      { label: "Full directory", href: "#directory" },
-      { label: "Department of surgery", href: "#surgical" },
-      { label: "Diagnostics & radiology", href: "#diagnostics" },
-      { label: "Pharmacy", href: "#pharmacy" },
+      { label: "Centres of excellence", href: "/services#centres" },
+      { label: "Full directory", href: "/services#directory" },
+      { label: "Department of surgery", href: "/services#surgical" },
+      { label: "Diagnostics & radiology", href: "/services#diagnostics" },
+      { label: "Pharmacy", href: "/services#pharmacy" },
     ],
   },
   {
     heading: "Hospital",
     links: [
-      { label: "Health check packages", href: "#packages" },
-      { label: "Admissions", href: "#admissions" },
-      { label: "Facilities", href: "#facilities" },
-      { label: "International patient care", href: "#international" },
+      { label: "Health check packages", href: "/services#packages" },
+      { label: "Admissions", href: "/services#admissions" },
+      { label: "Facilities", href: "/services#facilities" },
+      { label: "International patient care", href: "/services#international" },
       { label: "Home", href: "/" },
     ],
   },
