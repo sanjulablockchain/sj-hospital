@@ -12,7 +12,12 @@ import { bringWithYou } from "@/features/services/data/indexContent";
  */
 export function JourneySection({ service }: { service: Service }) {
   return (
-    <section id="journey" className="bg-[var(--home-surface-2)]">
+    // mt-30 matches the home page's banded sections (SurgicalSection,
+    // PharmacySection). Without it the tinted band starts flush against the
+    // preceding section's last row, so #about's condition chips collide with
+    // the colour change. The reference spaces this the same way, with a
+    // margin-top on the banded section rather than bottom padding above.
+    <section id="journey" className="mt-30 bg-[var(--home-surface-2)]">
       <div className="mx-auto max-w-[1440px] px-5 py-26 sm:px-8 lg:px-11">
         <Reveal>
           <h2 className="font-display text-[clamp(34px,3.8vw,54px)] leading-[1.02] font-extrabold tracking-[-0.03em] text-[var(--home-heading)] uppercase">

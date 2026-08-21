@@ -10,7 +10,9 @@ import { surgicalRows } from "@/features/services/data/indexContent";
  */
 export function SurgicalSection() {
   return (
-    <section id="surgical" className="bg-[var(--home-surface-2)]">
+    // mt-30 matches the home page's banded sections, so the tinted band does
+    // not start flush against the preceding section's last row.
+    <section id="surgical" className="mt-30 bg-[var(--home-surface-2)]">
       <div className="mx-auto max-w-[1440px] px-5 py-26 sm:px-8 lg:px-11">
         <div className="grid gap-15 min-[900px]:grid-cols-2 min-[900px]:items-center">
           <Reveal>
