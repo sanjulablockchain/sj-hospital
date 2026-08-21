@@ -8,7 +8,7 @@ export const emergencyServices: Service[] = [
     group: "Emergency",
     hours: "24 hours, walk in",
     cta: "Come straight in",
-    desc: "A resuscitation bay staffed around the clock behind a covered ambulance entrance. Triage starts at the door, with on-call surgical and anaesthetic cover and theatres kept ready on site, so emergency surgery happens here rather than after a transfer.",
+    desc: "A resuscitation bay staffed around the clock behind a covered ambulance entrance, where triage starts before paperwork and on-call surgical and anaesthetic cover keeps theatres ready on site.",
     tags: ["Resuscitation bay", "Trauma", "Ambulance dispatch", "On-call theatre"],
     facts: [
       { k: "Ambulance", v: "0117 84 84 84" },
@@ -18,8 +18,8 @@ export const emergencyServices: Service[] = [
     ],
     lede: "A resuscitation bay staffed at every hour behind a covered ambulance entrance. No appointment, no queue, and no waiting for a doctor to be called in from home.",
     aboutHead: "Open every hour of every day",
-    body1: "Triage begins at the door. A doctor sees you before any paperwork is started, and on-call surgical and anaesthetic teams and theatres are kept ready on site, so emergency surgery happens here rather than after a transfer.",
-    body2: "Our own ambulances are dispatched from the same bay, and the laboratory and digital X-ray sit metres away, so bloods and films come back while you are still being assessed rather than after a transfer.",
+    body1: "A doctor sees you at the door before any paperwork is started. On-call surgical and anaesthetic teams keep theatres ready on site, so emergency surgery happens here rather than after a transfer.",
+    body2: "Our own ambulances are dispatched from the same bay, and the laboratory and digital X-ray sit metres away, so bloods and films come back while you are still being assessed.",
     strip: [
       { k: "Hours", v: "24 / 7" },
       { k: "Appointment", v: "Not needed" },

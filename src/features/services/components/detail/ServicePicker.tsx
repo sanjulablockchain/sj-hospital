@@ -21,6 +21,7 @@ export function ServicePicker({ current }: { current: string }) {
             <Link
               key={service.slug}
               href={`/services/${service.slug}`}
+              prefetch={false}
               aria-current={isCurrent ? "page" : undefined}
               className={
                 isCurrent

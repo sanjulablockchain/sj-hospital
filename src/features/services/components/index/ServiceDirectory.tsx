@@ -57,7 +57,7 @@ export function ServiceDirectory({ services, counts }: ServiceDirectoryProps) {
         <h2 className="font-display mt-4.5 text-[clamp(38px,4.4vw,66px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
           {heading}
         </h2>
-        <p className="mt-4 text-[14px] font-bold tabular-nums text-[var(--home-muted)]">
+        <p aria-live="polite" className="mt-4 text-[14px] font-bold tabular-nums text-[var(--home-muted)]">
           {shown.length} of {services.length} services
         </p>
       </Reveal>

@@ -5,9 +5,10 @@ import type { NavItem } from "@/config/navigation";
 
 type MobileNavPanelProps = {
   items: NavItem[];
+  bookHref?: string;
 };
 
-export function MobileNavPanel({ items }: MobileNavPanelProps) {
+export function MobileNavPanel({ items, bookHref = "#book" }: MobileNavPanelProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -40,7 +41,7 @@ export function MobileNavPanel({ items }: MobileNavPanelProps) {
               </a>
             ))}
             <a
-              href="#book"
+              href={bookHref}
               onClick={() => setIsOpen(false)}
               className="mt-2 bg-[var(--home-accent)] px-5 py-3 text-center text-[15px] font-bold text-[var(--home-on-accent)]"
             >

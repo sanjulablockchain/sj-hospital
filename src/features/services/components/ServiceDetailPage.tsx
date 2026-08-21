@@ -16,14 +16,16 @@ import type { Service } from "@/features/services/types";
 export function ServiceDetailPage({ service }: { service: Service }) {
   return (
     <>
-      <ServiceHero service={service} />
-      <ServicePicker current={service.slug} />
-      <AboutSection service={service} />
-      <JourneySection service={service} />
-      <TeamSection service={service} />
-      <FaqAccordion faq={service.faq} />
-      <RelatedSection slug={service.slug} />
-      <DetailBookSection service={service} />
+      <main>
+        <ServiceHero service={service} />
+        <ServicePicker current={service.slug} />
+        <AboutSection service={service} />
+        <JourneySection service={service} />
+        <TeamSection service={service} />
+        <FaqAccordion faq={service.faq} />
+        <RelatedSection slug={service.slug} />
+        <DetailBookSection service={service} />
+      </main>
       <ThemedFooter columns={servicesFooterColumns} id="contact" />
     </>
   );

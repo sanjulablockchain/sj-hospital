@@ -20,18 +20,20 @@ import { servicesFooterColumns } from "@/config/servicesNavigation";
 export function ServicesIndexPage() {
   return (
     <>
-      <ServicesHero />
-      <JumpCards />
-      <CentresSection />
-      <ServiceDirectory services={services} counts={groupCounts()} />
-      <SurgicalSection />
-      <DiagnosticsSection />
-      <PackagesSection />
-      <AdmissionsSection />
-      <FacilitiesSection />
-      <PharmacySection />
-      <InternationalSection />
-      <BookSection />
+      <main>
+        <ServicesHero />
+        <JumpCards />
+        <CentresSection />
+        <ServiceDirectory services={services} counts={groupCounts()} />
+        <SurgicalSection />
+        <DiagnosticsSection />
+        <PackagesSection />
+        <AdmissionsSection />
+        <FacilitiesSection />
+        <PharmacySection />
+        <InternationalSection />
+        <BookSection />
+      </main>
       <ThemedFooter columns={servicesFooterColumns} id="contact" />
     </>
   );

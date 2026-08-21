@@ -41,7 +41,7 @@ export function ThemedHeader({ navItems, bookHref = "#book", homeHref = "#top" }
         ))}
       </nav>
 
-      <MobileNavPanel items={navItems} />
+      <MobileNavPanel items={navItems} bookHref={bookHref} />
 
       <ThemeToggleButton />
 

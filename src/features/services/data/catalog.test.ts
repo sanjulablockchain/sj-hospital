@@ -15,6 +15,7 @@ const SO_FAR: Service[] = [
   ...diagnosticServices,
   ...womenChildrenServices,
   ...clinicServices,
+  ...atHomeServices,
 ];
 
 test("group modules have the expected sizes", () => {
@@ -23,6 +24,7 @@ test("group modules have the expected sizes", () => {
   assert.equal(diagnosticServices.length, 4);
   assert.equal(womenChildrenServices.length, 5);
   assert.equal(clinicServices.length, 14);
+  assert.equal(atHomeServices.length, 4);
 });
 
 test("every service is tagged with its own group", () => {
@@ -31,6 +33,7 @@ test("every service is tagged with its own group", () => {
   for (const s of diagnosticServices) assert.equal(s.group, "Diagnostics");
   for (const s of womenChildrenServices) assert.equal(s.group, "Women & children");
   for (const s of clinicServices) assert.equal(s.group, "Clinics");
+  for (const s of atHomeServices) assert.equal(s.group, "At home");
 });
 
 test("slugs are unique, lowercase and url-safe", () => {

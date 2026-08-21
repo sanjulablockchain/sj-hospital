@@ -1,15 +1,7 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
 import type { Service } from "@/features/services/types";
-
-// A short, fixed checklist rather than per-service data: every service's
-// visit needs the same four things, regardless of what's being treated.
-const bringWithYou: string[] = [
-  "Photo ID",
-  "A list of your current medicines",
-  "Any previous reports or test results",
-  "Insurance details, if you have them",
-];
+import { bringWithYou } from "@/features/services/data/indexContent";
 
 /**
  * `#journey`: the service's four-step visit, on a `--home-surface-2` band —

@@ -42,7 +42,7 @@ export function ServiceHero({ service }: { service: Service }) {
         }}
       />
 
-      <ThemedHeader navItems={servicesDetailNavigation} />
+      <ThemedHeader navItems={servicesDetailNavigation} homeHref="/" />
 
       <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 flex-col justify-end gap-6 px-5 pb-14 sm:px-8 lg:px-11">
         <Link

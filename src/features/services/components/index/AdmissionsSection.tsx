@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
 import { admissionSteps, bringWithYou, paymentNotes } from "@/features/services/data/indexContent";
@@ -75,12 +76,12 @@ export function AdmissionsSection() {
           <p className="mt-4.5 text-[14px] leading-[1.55] text-[var(--home-muted)]">
             Private and semi-private rooms with attendant space, sanitised on a two hour cycle.
           </p>
-          <a
+          <Link
             href="/accommodation"
             className="sj-invert mt-5.5 inline-flex w-fit items-center gap-2.5 bg-[var(--home-accent)] px-5.5 py-3.5 text-[14px] font-bold text-[var(--home-on-accent)]"
           >
             See the rooms <span aria-hidden>&rarr;</span>
-          </a>
+          </Link>
         </Reveal>
       </div>
     </section>
