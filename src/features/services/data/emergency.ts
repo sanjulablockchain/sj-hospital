@@ -8,7 +8,7 @@ export const emergencyServices: Service[] = [
     group: "Emergency",
     hours: "24 hours, walk in",
     cta: "Come straight in",
-    desc: "A resuscitation bay staffed around the clock behind a covered ambulance entrance. Triage starts at the door, and the on-call surgical and anaesthetic teams can be in theatre within minutes of a decision to operate.",
+    desc: "A resuscitation bay staffed around the clock behind a covered ambulance entrance. Triage starts at the door, with on-call surgical and anaesthetic cover and theatres kept ready on site, so emergency surgery happens here rather than after a transfer.",
     tags: ["Resuscitation bay", "Trauma", "Ambulance dispatch", "On-call theatre"],
     facts: [
       { k: "Ambulance", v: "0117 84 84 84" },
@@ -18,7 +18,7 @@ export const emergencyServices: Service[] = [
     ],
     lede: "A resuscitation bay staffed at every hour behind a covered ambulance entrance. No appointment, no queue, and no waiting for a doctor to be called in from home.",
     aboutHead: "Open every hour of every day",
-    body1: "Triage begins at the door. A doctor sees you before any paperwork is started, and the on-call surgical and anaesthetic teams can be in theatre within minutes of a decision to operate.",
+    body1: "Triage begins at the door. A doctor sees you before any paperwork is started, and on-call surgical and anaesthetic teams and theatres are kept ready on site, so emergency surgery happens here rather than after a transfer.",
     body2: "Our own ambulances are dispatched from the same bay, and the laboratory and digital X-ray sit metres away, so bloods and films come back while you are still being assessed rather than after a transfer.",
     strip: [
       { k: "Hours", v: "24 / 7" },
@@ -47,7 +47,7 @@ export const emergencyServices: Service[] = [
     location: "Ground floor, ambulance entrance",
     steps: [
       { no: "01", title: "Arrive", desc: "Walk in or arrive by ambulance. Registration can wait; assessment does not." },
-      { no: "02", title: "Triage", desc: "A nurse and doctor assess severity within minutes and start treatment straight away." },
+      { no: "02", title: "Triage", desc: "A nurse and doctor assess severity on arrival, and treatment begins before registration is completed." },
       { no: "03", title: "Investigate", desc: "Bloods, ECG and imaging are ordered on the spot and reported while you are still here." },
       { no: "04", title: "Admit or discharge", desc: "A room, a theatre slot, or a discharge plan with written instructions and a follow-up date." },
     ],
@@ -60,14 +60,14 @@ export const emergencyServices: Service[] = [
     team: [
       { role: "Emergency medical officers", note: "On site at every hour, with immediate access to senior support." },
       { role: "Emergency nursing team", note: "Triage trained, with one nurse assigned to each resuscitation bay." },
-      { role: "On-call consultants", note: "Surgery, anaesthesia, obstetrics and paediatrics reachable within minutes." },
+      { role: "On-call consultants", note: "Surgery, anaesthesia, obstetrics and paediatrics on call at every hour." },
       { role: "Ambulance crew", note: "Dispatched from our own bay with oxygen and monitoring on board." },
     ],
     faq: [
       { q: "Do I need an appointment or a referral?", a: "No. Emergency care is walk in at any hour. If you are unsure whether it is an emergency, call 0117 84 84 84 and a nurse will advise you." },
       { q: "Will I be seen before I pay?", a: "Yes. Assessment and stabilisation happen first. Billing is settled afterwards, and the desk will prepare insurance paperwork for you." },
       { q: "Can my family stay with me?", a: "One family member can stay in most cases. During resuscitation we may ask them to wait nearby, and a nurse will keep them updated." },
-      { q: "What if I need surgery straight away?", a: "The on-call surgical and anaesthetic teams are reachable within minutes and our theatres are kept ready, so you are not transferred elsewhere for emergency surgery." },
+      { q: "What if I need surgery straight away?", a: "On-call surgical and anaesthetic teams and theatres are kept ready on site, so you are not transferred elsewhere for emergency surgery." },
     ],
   },
   {
