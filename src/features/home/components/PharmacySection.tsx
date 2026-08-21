@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { Reveal } from "./Reveal";
+import { Reveal } from "@/components/ui/Reveal";
 import { useParallax } from "../hooks/useParallax";
-import { RevealStagger } from "./RevealStagger";
+import { RevealStagger } from "@/components/ui/RevealStagger";
 import { CountUp } from "./CountUp";
 import { LOGO_MARK } from "@/config/brand";
 

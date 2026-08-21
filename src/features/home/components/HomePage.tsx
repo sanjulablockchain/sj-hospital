@@ -1,5 +1,5 @@
-import { HomeThemeScript } from "./HomeThemeScript";
-import { HomeThemeProvider } from "../hooks/useHomeTheme";
+import { ThemedShell } from "@/components/layout/ThemedShell";
+import { FloatingActions } from "@/components/layout/FloatingActions";
 import { HeroSection } from "./HeroSection";
 import { WhoWeAreSection } from "./WhoWeAreSection";
 import { ServicesBentoSection } from "./ServicesBentoSection";
@@ -16,39 +16,29 @@ import { CareersSection } from "./CareersSection";
 import { TestimonialsSection } from "./TestimonialsSection";
 import { ContactCtaSection } from "./ContactCtaSection";
 import { HomeFooter } from "./HomeFooter";
-import { FloatingActions } from "./FloatingActions";
 
 export function HomePage() {
   return (
-    <div
-      id="home-root"
-      data-home
-      data-theme="dark"
-      suppressHydrationWarning
-      className="min-h-screen bg-[var(--home-bg)] text-[var(--home-body)] antialiased"
-    >
-      <HomeThemeScript />
-      <HomeThemeProvider>
-        <main>
-          <HeroSection />
-          <WhoWeAreSection />
-          <ServicesBentoSection />
-          <SurgicalSection />
-          <FacilitiesSection />
-          <PharmacySection />
-          <RoomsSection />
-          <InternationalCareSection />
-          <HealthTipsSection />
-          <SchoolWellnessSection />
-          <NetworkSection />
-          <MediaSection />
-          <CareersSection />
-          <TestimonialsSection />
-          <ContactCtaSection />
-        </main>
-        <HomeFooter />
-        <FloatingActions />
-      </HomeThemeProvider>
-    </div>
+    <ThemedShell flowHeader>
+      <main>
+        <HeroSection />
+        <WhoWeAreSection />
+        <ServicesBentoSection />
+        <SurgicalSection />
+        <FacilitiesSection />
+        <PharmacySection />
+        <RoomsSection />
+        <InternationalCareSection />
+        <HealthTipsSection />
+        <SchoolWellnessSection />
+        <NetworkSection />
+        <MediaSection />
+        <CareersSection />
+        <TestimonialsSection />
+        <ContactCtaSection />
+      </main>
+      <HomeFooter />
+      <FloatingActions />
+    </ThemedShell>
   );
 }

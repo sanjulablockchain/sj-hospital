@@ -9,7 +9,7 @@ type CountUpOptions = {
   durationMs?: number;
   /**
    * Turns the in-flight number into the text to display. Must be referentially
-   * stable — a new identity restarts the count.
+   * stable: a new identity restarts the count.
    */
   format: (value: number) => string;
 };
@@ -23,7 +23,7 @@ type CountUpOptions = {
  * a React render on every one of the ~85 frames.
  *
  * Callers render `to` as the element's children, so the real figure is what
- * gets server-rendered — crawlers and no-JS readers see the number, not a zero.
+ * gets server-rendered: crawlers and no-JS readers see the number, not a zero.
  * On mount the element is rewound to `from` (it is still off screen at that
  * point) and played forward when the observer fires. Under
  * prefers-reduced-motion nothing is touched and the final value simply stands.
