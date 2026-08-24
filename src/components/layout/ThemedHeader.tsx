@@ -11,7 +11,14 @@ type ThemedHeaderProps = {
 
 export function ThemedHeader({ navItems, bookHref = "#book", homeHref = "#top" }: ThemedHeaderProps) {
   return (
-    <header className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-wrap items-center gap-5 px-5 py-5 sm:px-8 lg:px-11">
+    // z-20, not z-10: the header's z-index makes it a stacking context, so
+    // MobileNavPanel's own z-30 cannot lift the open panel out of it. At z-10
+    // the header tied with the hero content block that follows it in the DOM,
+    // and the later sibling won, drawing the hero copy straight through the
+    // open menu on every page that uses this header. z-20 keeps the header (and
+    // the panel inside it) above hero content, and still below the z-60
+    // FloatingActions.
+    <header className="relative z-20 mx-auto flex w-full max-w-[1440px] flex-wrap items-center gap-5 px-5 py-5 sm:px-8 lg:px-11">
       <a href={homeHref} className="flex shrink-0 items-center gap-3.25">
         <Image
           src={LOGO_MARK.src}

@@ -42,11 +42,14 @@ export function PharmacySection() {
               before it is handed over or sent out for delivery. Digital records make a repeat order
               straightforward, and delivery reaches homes across Negombo.
             </p>
+            {/* This band is a summary; the counter, stock, delivery and repeat
+                prescriptions all have their own sections on /pharmacy, so the
+                CTA hands off there rather than to this page's #book. */}
             <a
-              href="#book"
+              href="/pharmacy"
               className="sj-invert mt-7 inline-flex items-center gap-2.5 bg-[var(--home-accent)] px-6 py-4 text-[15px] font-bold text-[var(--home-on-accent)]"
             >
-              Order a delivery <span aria-hidden>&rarr;</span>
+              Visit the pharmacy <span aria-hidden>&rarr;</span>
             </a>
           </Reveal>
 

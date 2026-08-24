@@ -3,7 +3,7 @@ import { ServicePicker } from "./detail/ServicePicker";
 import { AboutSection } from "./detail/AboutSection";
 import { JourneySection } from "./detail/JourneySection";
 import { TeamSection } from "./detail/TeamSection";
-import { FaqAccordion } from "./detail/FaqAccordion";
+import { FaqAccordion } from "@/components/ui/FaqAccordion";
 import { RelatedSection } from "./detail/RelatedSection";
 import { DetailBookSection } from "./detail/DetailBookSection";
 import { ThemedFooter } from "@/components/layout/ThemedFooter";
@@ -22,7 +22,7 @@ export function ServiceDetailPage({ service }: { service: Service }) {
         <AboutSection service={service} />
         <JourneySection service={service} />
         <TeamSection service={service} />
-        <FaqAccordion faq={service.faq} />
+        <FaqAccordion faq={service.faq} heading="Asked before you ask" />
         <RelatedSection slug={service.slug} />
         <DetailBookSection service={service} />
       </main>

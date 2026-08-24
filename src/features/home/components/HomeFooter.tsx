@@ -3,12 +3,12 @@ import { ThemedFooter } from "@/components/layout/ThemedFooter";
 const careLinks = [
   { label: "Services", href: "/services" },
   { label: "Surgical care", href: "#surgical" },
-  { label: "Pharmacy", href: "#pharmacy" },
+  { label: "Pharmacy", href: "/pharmacy" },
   { label: "Accommodation", href: "#rooms" },
 ];
 
 const hospitalLinks = [
-  { label: "Facilities", href: "#facilities" },
+  { label: "Facilities", href: "/facilities" },
   { label: "International patient care", href: "#international" },
   { label: "Health tips", href: "/health-tips" },
   { label: "School wellness", href: "#wellness" },

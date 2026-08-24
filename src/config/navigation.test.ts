@@ -3,24 +3,56 @@ import assert from "node:assert/strict";
 import { homeNavigation } from "./homeNavigation.ts";
 import { healthTipsNavigation } from "./healthTipsNavigation.ts";
 import { servicesNavigation, servicesDetailNavigation } from "./servicesNavigation.ts";
+import { pharmacyNavigation } from "./pharmacyNavigation.ts";
+import { facilitiesNavigation } from "./facilitiesNavigation.ts";
 
 const labels = (items: { label: string }[]) => items.map((i) => i.label);
+
+// Every nav on the site. Add a page's nav here when you add the page: these
+// checks are what caught the health tips, pharmacy and facilities navs
+// drifting apart from each other when three branches landed in turn.
+const ALL_NAVS = [
+  homeNavigation,
+  healthTipsNavigation,
+  servicesNavigation,
+  servicesDetailNavigation,
+  pharmacyNavigation,
+  facilitiesNavigation,
+];
 
 // The header must read identically on every page: only the targets differ.
 // This is the check that stops a new page's nav from quietly growing its own
 // items, which is exactly what the health tips reference design did.
 test("every page's nav carries the same labels in the same order", () => {
   const expected = labels(homeNavigation);
-  assert.deepEqual(labels(healthTipsNavigation), expected);
-  assert.deepEqual(labels(servicesNavigation), expected);
-  assert.deepEqual(labels(servicesDetailNavigation), expected);
+  for (const nav of ALL_NAVS) assert.deepEqual(labels(nav), expected);
 });
 
+// A page whose nav points at its own section uses a bare hash; every other
+// nav has to reach the page itself. Getting this wrong is invisible until
+// someone clicks, so it is asserted rather than reviewed.
 test("Health Tips points at the health tips page from every nav but its own", () => {
-  for (const nav of [homeNavigation, servicesNavigation, servicesDetailNavigation]) {
+  for (const nav of ALL_NAVS) {
+    if (nav === healthTipsNavigation) continue;
     const item = nav.find((i) => i.label === "Health Tips");
     assert.ok(item, "no Health Tips item");
     assert.equal(item.href, "/health-tips");
+  }
+});
+
+test("Facilities and Pharmacy reach their own pages from every nav but their own", () => {
+  for (const nav of ALL_NAVS) {
+    for (const [label, href] of [
+      ["Facilities", "/facilities"],
+      ["Pharmacy", "/pharmacy"],
+    ]) {
+      const item = nav.find((i) => i.label === label);
+      assert.ok(item, `no ${label} item`);
+      // The page's own nav anchors into itself instead; anything else must be
+      // the page, never a superseded /services band.
+      if (item.href.startsWith("#")) continue;
+      assert.equal(item.href, href, `${label} points at ${item.href}`);
+    }
   }
 });
 
@@ -31,12 +63,7 @@ test("on the health tips page itself, Health Tips is an in-page anchor", () => {
 });
 
 test("no nav item still points at the retired #tips home section", () => {
-  for (const nav of [
-    homeNavigation,
-    healthTipsNavigation,
-    servicesNavigation,
-    servicesDetailNavigation,
-  ]) {
+  for (const nav of ALL_NAVS) {
     for (const item of nav) {
       assert.ok(!/#tips$/.test(item.href), `${item.label} still points at ${item.href}`);
     }

@@ -2,16 +2,17 @@ import type { NavItem } from "@/config/navigation";
 import type { FooterColumn } from "@/components/layout/ThemedFooter";
 
 // Labels and order mirror homeNavigation exactly, so the header reads
-// identically on every page. Only the targets differ: Facilities, Pharmacy
-// and International Patient Care have their own sections on /services, so
-// this variant points at those in-page anchors; Health Tips has a page of its
-// own at /health-tips; and the remaining four items (School Wellness,
-// Network, Media, Careers) have no home on the services pages, so they always
-// point back at the matching section on the home page.
+// identically on every page. Only the targets differ. International Patient
+// Care is the last item with its own section on this index, so it stays an
+// in-page anchor. Facilities, Pharmacy and Health Tips are all pages of their
+// own now, superseding the summary bands still on this index, so they leave
+// /services entirely. The remaining four (School Wellness, Network, Media,
+// Careers) have no home on the services pages, so they always point back at
+// the matching section on the home page.
 export const servicesNavigation: NavItem[] = [
   { label: "Services", href: "#directory" },
-  { label: "Facilities", href: "#facilities" },
-  { label: "Pharmacy", href: "#pharmacy" },
+  { label: "Facilities", href: "/facilities" },
+  { label: "Pharmacy", href: "/pharmacy" },
   { label: "Health Tips", href: "/health-tips" },
   { label: "International Patient Care", href: "#international" },
   { label: "School Wellness", href: "/#wellness" },
@@ -22,14 +23,15 @@ export const servicesNavigation: NavItem[] = [
 
 // Same labels and order as servicesNavigation, for the /services/[slug]
 // detail pages, which have none of the /services index sections on
-// themselves. Facilities, Pharmacy and International Patient Care point at
-// the index page's anchors (/services#...) instead of a same-page hash that
-// would resolve to nothing; Services points at the index page itself since
-// there's no equivalent section on a detail page to jump to.
+// themselves. International Patient Care points at the index page's anchor
+// (/services#...) instead of a same-page hash that would resolve to nothing;
+// Facilities, Pharmacy and Health Tips point at their own pages, the same
+// targets servicesNavigation uses; and Services points at the index page
+// itself, since there's no equivalent section on a detail page to jump to.
 export const servicesDetailNavigation: NavItem[] = [
   { label: "Services", href: "/services" },
-  { label: "Facilities", href: "/services#facilities" },
-  { label: "Pharmacy", href: "/services#pharmacy" },
+  { label: "Facilities", href: "/facilities" },
+  { label: "Pharmacy", href: "/pharmacy" },
   { label: "Health Tips", href: "/health-tips" },
   { label: "International Patient Care", href: "/services#international" },
   { label: "School Wellness", href: "/#wellness" },
@@ -57,7 +59,7 @@ export const servicesFooterColumns: FooterColumn[] = [
       { label: "Full directory", href: "/services#directory" },
       { label: "Department of surgery", href: "/services#surgical" },
       { label: "Diagnostics & radiology", href: "/services#diagnostics" },
-      { label: "Pharmacy", href: "/services#pharmacy" },
+      { label: "Pharmacy", href: "/pharmacy" },
     ],
   },
   {
@@ -65,7 +67,7 @@ export const servicesFooterColumns: FooterColumn[] = [
     links: [
       { label: "Health check packages", href: "/services#packages" },
       { label: "Admissions", href: "/services#admissions" },
-      { label: "Facilities", href: "/services#facilities" },
+      { label: "Facilities", href: "/facilities" },
       { label: "International patient care", href: "/services#international" },
       { label: "Health tips", href: "/health-tips" },
       { label: "Home", href: "/" },
