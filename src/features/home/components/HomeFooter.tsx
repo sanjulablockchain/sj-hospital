@@ -3,7 +3,7 @@ import { ThemedFooter } from "@/components/layout/ThemedFooter";
 const careLinks = [
   { label: "Services", href: "/services" },
   { label: "Surgical care", href: "#surgical" },
-  { label: "Pharmacy", href: "#pharmacy" },
+  { label: "Pharmacy", href: "/pharmacy" },
   { label: "Accommodation", href: "#rooms" },
 ];
 

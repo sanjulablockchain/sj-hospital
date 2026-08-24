@@ -3,7 +3,8 @@
 import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
-import type { Faq } from "@/features/services/types";
+
+export type FaqItem = { q: string; a: string };
 
 // Measuring in a plain `useEffect` would let the browser paint one frame at
 // max-height 0 before the effect runs, so a panel that starts open would
@@ -13,21 +14,37 @@ import type { Faq } from "@/features/services/types";
 // See `ServiceDirectory.tsx`, which this accordion mirrors.
 const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
+type FaqAccordionProps = {
+  faq: FaqItem[];
+  /** Section heading. */
+  heading: string;
+  /** Optional numbered kicker above the heading, as the pharmacy page uses. */
+  eyebrow?: string;
+};
+
 /**
- * `#faq`: one-open-at-a-time accordion over a service's FAQ entries. Unlike
- * `ServiceDirectory`'s directory rows (which open the first row by default),
- * every panel here starts closed (`useState<number>(-1)`) since nothing on
- * this page has been clicked yet.
+ * `#faq`: one-open-at-a-time accordion. Every panel starts closed
+ * (`useState<number>(-1)`) since nothing on the page has been clicked yet,
+ * unlike `ServiceDirectory`'s rows, which open their first row by default.
+ *
+ * Shared rather than owned by a feature: the services detail pages and the
+ * pharmacy page both need it, and the height measurement below is not worth
+ * having two copies of.
  */
-export function FaqAccordion({ faq }: { faq: Faq[] }) {
+export function FaqAccordion({ faq, heading, eyebrow }: FaqAccordionProps) {
   const [open, setOpen] = useState(-1);
   const baseId = useId();
 
   return (
-    <section id="faq" className="mx-auto max-w-[1440px] px-5 pt-30 sm:px-8 lg:px-11">
+    <section id="faq" className="mx-auto max-w-[1440px] px-5 pt-30 sm:px-8 lg:px-11 max-[640px]:pt-18">
       <Reveal>
+        {eyebrow ? (
+          <div className="mb-4.5 text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
+            {eyebrow}
+          </div>
+        ) : null}
         <h2 className="font-display text-[clamp(34px,3.8vw,54px)] leading-[1.02] font-extrabold tracking-[-0.03em] text-[var(--home-heading)] uppercase">
-          Asked before you ask
+          {heading}
         </h2>
       </Reveal>
 
@@ -47,7 +64,7 @@ export function FaqAccordion({ faq }: { faq: Faq[] }) {
 }
 
 type FaqRowProps = {
-  item: Faq;
+  item: FaqItem;
   isOpen: boolean;
   onToggle: () => void;
   idPrefix: string;
