@@ -5,12 +5,12 @@ import type { FooterColumn } from "@/components/layout/ThemedFooter";
 // identically on every page: the same choice servicesNavigation makes, and the
 // reason this file exists rather than the pharmacy page inventing its own nav.
 // Only the targets differ. Pharmacy is the page you are already on, so it
-// points at #counters, the first of its own sections; Facilities and
-// International Patient Care live on /services; the remaining four have no
-// home outside the home page.
+// points at #counters, the first of its own sections; Facilities has a page of
+// its own; International Patient Care lives on /services; the remaining four
+// have no home outside the home page.
 export const pharmacyNavigation: NavItem[] = [
   { label: "Services", href: "/services" },
-  { label: "Facilities", href: "/services#facilities" },
+  { label: "Facilities", href: "/facilities" },
   { label: "Pharmacy", href: "#counters" },
   { label: "Health Tips", href: "/#tips" },
   { label: "International Patient Care", href: "/services#international" },
@@ -39,7 +39,7 @@ export const pharmacyFooterColumns: FooterColumn[] = [
     links: [
       { label: "Home", href: "/" },
       { label: "All services", href: "/services" },
-      { label: "Facilities", href: "/services#facilities" },
+      { label: "Facilities", href: "/facilities" },
       { label: "Admissions", href: "/services#admissions" },
       { label: "Careers", href: "/#career" },
     ],

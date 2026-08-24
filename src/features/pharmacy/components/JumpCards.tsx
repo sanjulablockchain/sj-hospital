@@ -7,11 +7,12 @@ import { jumpCards } from "../data/content";
  * there are no double borders where cards meet.
  *
  * Hover fills the whole card with the accent and flips every line to
- * `--home-on-accent`, per the reference. It sets `color: #04122B` on the anchor
- * for this, but its three spans carry explicit colours that would have won, so
- * the flip is done with `group-hover` on each line instead. Tokens rather than
- * the reference's literals, so the light theme fills with its own deeper accent
- * and switches the text to white.
+ * `--home-on-accent`, per the reference. That is the shared `sj-fill` utility:
+ * it carries the `* { color: inherit }` needed to pull the three spans (each
+ * with its own explicit colour) onto the fill, and it is tokenised, so the
+ * light theme fills with its own deeper accent and switches the text to white.
+ * It also sits behind `@media (hover: hover)`, so a touch device does not latch
+ * a card into the filled state.
  */
 export function JumpCards() {
   return (
@@ -24,17 +25,15 @@ export function JumpCards() {
           <a
             key={card.href}
             href={card.href}
-            className="group flex flex-col gap-2.5 bg-[var(--home-bg)] px-6 py-6.5 transition-colors duration-300 hover:bg-[var(--home-accent)]"
+            className="sj-fill flex flex-col gap-2.5 bg-[var(--home-bg)] px-6 py-6.5"
           >
-            <span className="text-[11.5px] font-bold tracking-[0.2em] text-[var(--home-accent-soft)] uppercase group-hover:text-[var(--home-on-accent)]">
+            <span className="text-[11.5px] font-bold tracking-[0.2em] text-[var(--home-accent-soft)] uppercase">
               {card.count}
             </span>
-            <span className="font-display text-[25px] leading-[1.04] font-semibold tracking-[-0.03em] text-[var(--home-heading)] group-hover:text-[var(--home-on-accent)]">
+            <span className="font-display text-[25px] leading-[1.04] font-semibold tracking-[-0.03em] text-[var(--home-heading)]">
               {card.label}
             </span>
-            <span className="text-[14px] leading-[1.5] text-[var(--home-muted)] group-hover:text-[var(--home-on-accent)]">
-              {card.note}
-            </span>
+            <span className="text-[14px] leading-[1.5] text-[var(--home-muted)]">{card.note}</span>
           </a>
         ))}
       </RevealStagger>

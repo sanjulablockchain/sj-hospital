@@ -1,13 +1,17 @@
 /**
- * Scrolling marquee strip. Two identical tracks sit side by side inside a
- * `w-max` flex row and the whole row is translated by -50% over the animation
- * (`animate-sj-tick`), so the second track has taken the first one's place
- * exactly when the loop restarts and the seam never shows.
+ * The horizontal marquee that sits under a hero.
  *
- * The duplicate track is `aria-hidden`, so a screen reader reads the phrases
- * once rather than twice.
+ * Two identical tracks sit side by side inside a `w-max` flex row, and
+ * `animate-sj-tick` translates that row by exactly -50%, so the moment the
+ * first track scrolls out the second has taken its place and the loop is
+ * seamless. The duplicate is `aria-hidden`, so a screen reader hears the list
+ * once.
+ *
+ * Fixed-dark on purpose: this band always sits over the hero photograph, where
+ * a token-driven light-theme foreground would disappear. Same exemption the
+ * hero heading and the photo cards take.
  */
-export function Ticker({ items }: { items: string[] }) {
+export function Ticker({ items }: { items: readonly string[] }) {
   return (
     <div className="relative z-10 overflow-hidden border-y border-white/14 bg-black/20 py-3.5">
       <div className="animate-sj-tick flex w-max">
@@ -18,10 +22,12 @@ export function Ticker({ items }: { items: string[] }) {
   );
 }
 
-function TickerTrack({ items, hidden }: { items: string[]; hidden?: boolean }) {
+function TickerTrack({ items, hidden }: { items: readonly string[]; hidden?: boolean }) {
   return (
     <span
       aria-hidden={hidden}
+      // Drops to 11px under 640px, per the reference's own `[data-r="tick"]` rule:
+      // at 12.5px with this tracking the phrases crowd on a phone.
       className="flex items-center gap-8 pr-8 text-[12.5px] font-bold tracking-[0.2em] whitespace-nowrap text-white/72 uppercase max-[640px]:text-[11px]"
     >
       {items.map((item, index) => (

@@ -38,7 +38,7 @@ export function SafetySection() {
         {safety.map((card) => (
           <div
             key={card.no}
-            className="flex min-h-[216px] flex-col bg-[var(--home-bg)] px-6 pt-7 pb-6.5 transition-[background-color,transform] duration-[450ms] hover:-translate-y-1.5 hover:bg-[var(--home-accent)]/10"
+            className="sj-tint flex min-h-[216px] flex-col bg-[var(--home-bg)] px-6 pt-7 pb-6.5"
           >
             <span className="text-[11.5px] font-bold tracking-[0.2em] text-[var(--home-accent-soft)]">
               {card.no}

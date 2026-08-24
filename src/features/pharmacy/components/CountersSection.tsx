@@ -38,12 +38,13 @@ export function CountersSection() {
         stepMs={90}
         className="mt-10.5 grid grid-cols-3 gap-0.5 bg-[var(--home-hairline)] max-[1023px]:grid-cols-2 max-[640px]:grid-cols-1"
       >
-        {/* Hover is the reference's `[data-unit]` treatment: a 6px lift plus a
-            10% accent wash, the same pair the #safety cards use. */}
+        {/* sj-tint is the reference's `[data-unit]` treatment: a 6px lift over a
+            10% accent wash, with the lift dropped under prefers-reduced-motion
+            and the whole thing behind @media (hover: hover). */}
         {counters.map((counter) => (
           <div
             key={counter.name}
-            className="flex min-h-[260px] flex-col bg-[var(--home-bg)] px-7 pt-8 pb-7.5 transition-[background-color,transform] duration-[450ms] hover:-translate-y-1.5 hover:bg-[var(--home-accent)]/10"
+            className="sj-tint flex min-h-[260px] flex-col bg-[var(--home-bg)] px-7 pt-8 pb-7.5"
           >
             <span className="text-[11.5px] font-bold tracking-[0.2em] text-[var(--home-accent-soft)] uppercase">
               {counter.where}
