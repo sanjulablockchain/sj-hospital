@@ -9,7 +9,7 @@ const careLinks = [
 
 const hospitalLinks = [
   { label: "Facilities", href: "/facilities" },
-  { label: "International patient care", href: "#international" },
+  { label: "International patient care", href: "/international-care" },
   { label: "Health tips", href: "/health-tips" },
   { label: "School wellness", href: "#wellness" },
   { label: "Network", href: "#network" },

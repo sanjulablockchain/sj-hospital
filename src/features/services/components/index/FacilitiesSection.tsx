@@ -47,7 +47,10 @@ const facilityCards: FacilityCard[] = [
     title: "Ambulance entrance",
     body: "A covered entrance served by our own ambulance fleet, ten minutes from Bandaranaike International.",
     linkLabel: "See international care",
-    href: "#international",
+    // The /international-care page supersedes this index's own #international
+    // band, the same way /facilities and /pharmacy superseded theirs. The band
+    // stays as the summary; this card is the way through to the full page.
+    href: "/international-care",
     photo: "/images/services/exterior-dusk-b.png",
     photoAlt: "Hospital exterior and ambulance entrance",
   },

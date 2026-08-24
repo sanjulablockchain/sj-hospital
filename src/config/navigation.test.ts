@@ -5,6 +5,7 @@ import { healthTipsNavigation } from "./healthTipsNavigation.ts";
 import { servicesNavigation, servicesDetailNavigation } from "./servicesNavigation.ts";
 import { pharmacyNavigation } from "./pharmacyNavigation.ts";
 import { facilitiesNavigation } from "./facilitiesNavigation.ts";
+import { internationalNavigation } from "./internationalNavigation.ts";
 
 const labels = (items: { label: string }[]) => items.map((i) => i.label);
 
@@ -18,6 +19,7 @@ const ALL_NAVS = [
   servicesDetailNavigation,
   pharmacyNavigation,
   facilitiesNavigation,
+  internationalNavigation,
 ];
 
 // The header must read identically on every page: only the targets differ.
@@ -40,11 +42,12 @@ test("Health Tips points at the health tips page from every nav but its own", ()
   }
 });
 
-test("Facilities and Pharmacy reach their own pages from every nav but their own", () => {
+test("Facilities, Pharmacy and International reach their pages from every other nav", () => {
   for (const nav of ALL_NAVS) {
     for (const [label, href] of [
       ["Facilities", "/facilities"],
       ["Pharmacy", "/pharmacy"],
+      ["International Patient Care", "/international-care"],
     ]) {
       const item = nav.find((i) => i.label === label);
       assert.ok(item, `no ${label} item`);
@@ -62,10 +65,19 @@ test("on the health tips page itself, Health Tips is an in-page anchor", () => {
   assert.equal(item.href, "#library");
 });
 
-test("no nav item still points at the retired #tips home section", () => {
+test("on the international page itself, International Patient Care is an in-page anchor", () => {
+  const item = internationalNavigation.find((i) => i.label === "International Patient Care");
+  assert.ok(item);
+  assert.equal(item.href, "#journey");
+});
+
+test("no nav item still points at a retired home or services band", () => {
   for (const nav of ALL_NAVS) {
     for (const item of nav) {
       assert.ok(!/#tips$/.test(item.href), `${item.label} still points at ${item.href}`);
+      // International patient care has a page of its own now, so neither the
+      // home band nor the /services band is a valid target any more.
+      assert.ok(!/#international$/.test(item.href), `${item.label} still points at ${item.href}`);
     }
   }
 });

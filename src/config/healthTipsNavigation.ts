@@ -6,15 +6,15 @@ import type { FooterColumn } from "@/components/layout/ThemedFooter";
 // own items ("When to come in", "Screening") and dropped four of ours, which
 // would have made the nav change shape as you moved around the site. Only the
 // targets differ here. Health Tips is the one item with a home on this page,
-// so it points at the library; Facilities and Pharmacy have pages of their
-// own; and the rest point back at the home page or the services index,
+// so it points at the library; Facilities, Pharmacy and International Patient
+// Care have pages of their own; and the rest point back at the home page,
 // matching how servicesNavigation is built.
 export const healthTipsNavigation: NavItem[] = [
   { label: "Services", href: "/services" },
   { label: "Facilities", href: "/facilities" },
   { label: "Pharmacy", href: "/pharmacy" },
   { label: "Health Tips", href: "#library" },
-  { label: "International Patient Care", href: "/services#international" },
+  { label: "International Patient Care", href: "/international-care" },
   { label: "School Wellness", href: "/#wellness" },
   { label: "Network", href: "/#network" },
   { label: "Media", href: "/#media" },
