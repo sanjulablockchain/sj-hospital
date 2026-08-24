@@ -121,8 +121,8 @@ test("standards and delivery facts are short key/value pairs", () => {
   }
 });
 
-test("eight questions, each with a real answer", () => {
-  assert.equal(faq.length, 8);
+test("nine questions, each with a real answer", () => {
+  assert.equal(faq.length, 9);
   for (const item of faq) {
     assert.match(item.q, /\?$/);
     assert.ok(item.a.length >= 80, `${item.q} has a stub answer`);

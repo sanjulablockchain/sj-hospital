@@ -248,6 +248,13 @@ export const safety: SafetyCard[] = [
 ];
 
 export const faq: PharmacyFaq[] = [
+  // First, as in the reference. Cut on the first pass because the catalog does
+  // not mention external prescriptions; restored on the user's confirmation
+  // that the counter does accept them, in their own wording.
+  {
+    q: "Do you accept prescriptions from doctors outside the hospital?",
+    a: "Yes. We dispense prescriptions written by our own doctors and by any registered practitioner elsewhere. Bring the original or send a clear photograph, and our pharmacist will check it before dispensing.",
+  },
   {
     q: "Is the pharmacy open at night?",
     a: "Yes. The counter is open 24 hours, on the ground floor. Collection is possible at any hour, which is what makes an urgent prescription after a night admission straightforward.",

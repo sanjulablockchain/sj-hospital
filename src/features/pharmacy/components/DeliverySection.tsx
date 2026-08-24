@@ -27,8 +27,18 @@ export function DeliverySection() {
         stepMs={80}
         className="mt-10 grid grid-cols-4 gap-0.5 bg-[var(--home-hairline)] max-[899px]:grid-cols-1"
       >
-        {steps.map((step) => (
-          <div key={step.no} className="bg-[var(--home-bg)] pt-8 pr-6.5 pb-8.5 max-[899px]:px-0 max-[899px]:py-6">
+        {/* Every cell keeps the reference's 26px right padding, but only the
+            first is flush left: the reference left-padded none of them, which
+            put the text of cells 2 to 4 hard against the divider the 2px grid
+            gap draws. The others get a matching 26px on the left, so the copy
+            clears the rule while cell 1 stays aligned with the h2 above. */}
+        {steps.map((step, index) => (
+          <div
+            key={step.no}
+            className={`bg-[var(--home-bg)] pt-8 pr-6.5 pb-8.5 max-[899px]:px-0 max-[899px]:py-6 ${
+              index === 0 ? "" : "pl-6.5"
+            }`}
+          >
             <div className="font-display text-[64px] leading-[0.82] font-extrabold tracking-[-0.05em] text-[var(--home-accent)] tabular-nums max-[899px]:text-[54px]">
               {step.no}
             </div>
