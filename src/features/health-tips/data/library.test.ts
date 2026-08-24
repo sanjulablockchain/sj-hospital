@@ -21,11 +21,19 @@ test("TIP_CATEGORIES is CATEGORIES without All", () => {
   assert.deepEqual([...TIP_CATEGORIES], CATEGORIES.slice(1));
 });
 
-test("twenty-two articles, every one tagged with a real category", () => {
-  assert.equal(articles.length, 22);
+test("twenty-four articles, every one tagged with a real category", () => {
+  assert.equal(articles.length, 24);
   for (const a of articles) {
     assert.ok(TIP_CATEGORIES.includes(a.tag), `${a.title} has an unknown tag: ${a.tag}`);
   }
+});
+
+// The grid is three across at desktop width, and its dividing lines are drawn
+// by the container's background showing through a 1px gap. A count that is not
+// a multiple of three leaves the trailing cells empty, which reads as a large
+// blank panel rather than as whitespace.
+test("the article count fills the three-across grid exactly", () => {
+  assert.equal(articles.length % 3, 0, `${articles.length} articles leaves a short last row`);
 });
 
 test("every category carries at least one article", () => {

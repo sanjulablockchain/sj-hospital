@@ -137,6 +137,12 @@ export const articles: Article[] = [
     lede: "Repeated dehydration in field and outdoor work is linked to chronic kidney disease. Thirst arrives late.",
   },
   {
+    tag: "Kidney",
+    title: "Protein in your urine is the earliest warning",
+    by: "Nephrology",
+    lede: "Kidneys lose function for years without symptoms, and a simple urine test finds it long before swelling or tiredness do. With diabetes or high blood pressure, ask for it yearly.",
+  },
+  {
     tag: "Living well",
     title: "Finish the antibiotic course, even when you feel better",
     by: "Pharmacy",
@@ -159,6 +165,12 @@ export const articles: Article[] = [
     title: "Sitting is the new smoking, and offices are the worst",
     by: "Physiotherapy",
     lede: "Standing and moving for two minutes every half hour undoes a surprising amount of what a desk day does to you.",
+  },
+  {
+    tag: "Living well",
+    title: "Betel and areca nut: the habit worth stopping first",
+    by: "ENT surgery",
+    lede: "Chewing is the leading cause of mouth cancer in Sri Lankan men, and it does harm with no tobacco added. Any ulcer or white patch that has not healed in three weeks needs looking at.",
   },
 ];
 
