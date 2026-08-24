@@ -69,7 +69,7 @@ export function RoomsSection() {
             {roomStandard.map((item) => (
               <li
                 key={item}
-                className="border border-[var(--home-hairline-strong)] px-3.5 py-2 text-[13px] font-bold text-[var(--home-heading)]"
+                className="sj-invert border border-[var(--home-hairline-strong)] px-3.5 py-2 text-[13px] font-bold text-[var(--home-heading)]"
               >
                 {item}
               </li>

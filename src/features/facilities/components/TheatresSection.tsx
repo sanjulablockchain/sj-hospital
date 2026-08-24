@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
+import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { theatreFigures, theatreSpecs } from "@/features/facilities/data/content";
 
@@ -60,9 +61,12 @@ export function TheatresSection() {
                 <div key={figure.label} className="bg-[#060B1F]/70 px-6 py-7">
                   <dt className="sr-only">{figure.label}</dt>
                   <dd>
-                    <span className="font-display block text-[54px] leading-[0.85] font-extrabold tracking-[-0.04em] text-[var(--home-accent)] tabular-nums min-[900px]:text-[clamp(58px,5.4vw,84px)]">
-                      {figure.value}
-                    </span>
+                    <AnimatedCounter
+                      target={figure.value}
+                      prefix={figure.prefix}
+                      suffix={figure.suffix}
+                      className="font-display block text-[54px] leading-[0.85] font-extrabold tracking-[-0.04em] text-[var(--home-accent)] tabular-nums min-[900px]:text-[clamp(58px,5.4vw,84px)]"
+                    />
                     <span className="mt-3 block text-[13.5px] leading-[1.4] text-white/72">
                       {figure.label}
                     </span>

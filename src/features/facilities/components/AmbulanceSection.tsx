@@ -1,33 +1,34 @@
 import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
+import { LOGO_MARK } from "@/config/brand";
 import { ambulanceSpecs } from "@/features/facilities/data/content";
 
 /**
  * `#ambulance`: the second full-bleed dark band, fixed-dark in both themes for
  * the same reason as the theatre band.
+ *
+ * Solid navy rather than a photograph, matching the reference: an oversized
+ * leaf mark drifts behind the copy at 12% instead. That also keeps the two dark
+ * bands distinct, since the theatre band above is the one carrying a photo.
  */
 export function AmbulanceSection() {
   return (
-    <section id="ambulance" className="relative mt-30 overflow-hidden bg-[#060B1F]">
-      <ParallaxLayer factor={0.1} maxOffsetPx={70} className="absolute inset-x-0 -top-[10%] h-[120%]">
+    <section id="ambulance" className="relative mt-30 overflow-hidden bg-[#08123A]">
+      <ParallaxLayer
+        factor={0.1}
+        maxOffsetPx={70}
+        className="pointer-events-none absolute -top-[20%] -left-[6%] w-[32%] opacity-[0.12]"
+      >
         <Image
-          src="/images/facilities/ambulance-night.jpg"
+          src={LOGO_MARK.src}
           alt=""
           aria-hidden
-          fill
-          sizes="100vw"
-          className="object-cover"
-          style={{ objectPosition: "50% 50%" }}
+          width={LOGO_MARK.width}
+          height={LOGO_MARK.height}
+          className="h-auto w-full"
         />
       </ParallaxLayer>
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(rgba(6,11,31,0.9) 0%, rgba(6,11,31,0.8) 50%, rgba(6,11,31,0.94) 100%)",
-        }}
-      />
 
       <div className="relative z-10 mx-auto max-w-[1440px] px-5 py-26 sm:px-8 lg:px-11">
         <div className="grid gap-10 min-[900px]:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] min-[900px]:gap-16">

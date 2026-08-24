@@ -336,6 +336,11 @@ footer[id] {
   --home-invert-bg: #ffffff;
   --home-invert-fg: #060b1f;
   --home-accent-hover: #7fcbff;
+  /* The reference washes hovered cards and table rows with the accent at two
+     strengths: 0.10 for cards, 0.06 for rows. Tokenised so the light theme can
+     wash with its own darker accent rather than the dark theme's. */
+  --home-accent-tint: rgba(44, 166, 240, 0.1);
+  --home-accent-tint-soft: rgba(44, 166, 240, 0.06);
 }
 
 [data-sj][data-theme="light"] {
@@ -343,6 +348,8 @@ footer[id] {
   --home-invert-bg: #0a1030;
   --home-invert-fg: #ffffff;
   --home-accent-hover: #0f86e0;
+  --home-accent-tint: rgba(11, 111, 192, 0.1);
+  --home-accent-tint-soft: rgba(11, 111, 192, 0.06);
 }
 
 [data-sj] .sj-invert,
@@ -369,6 +376,26 @@ footer[id] {
   transition:
     background-color 0.35s ease,
     transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Fills with accent on hover, without the sj-row-fill padding step: for cards
+   rather than list rows. */
+[data-sj] .sj-fill {
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+/* Accent wash. sj-tint is for cards, which also lift; sj-tint-row is for table
+   rows, which do not. */
+[data-sj] .sj-tint {
+  transition:
+    background-color 0.35s ease,
+    transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+[data-sj] .sj-tint-row {
+  transition: background-color 0.32s ease;
 }
 
 @media (hover: hover) {
@@ -413,10 +440,31 @@ footer[id] {
   [data-sj] .sj-bento-accent:hover {
     background-color: var(--home-accent-hover);
   }
+
+  /* As with sj-row-fill, the children carry their own colours, so pull them
+     onto the fill or the card's text stays pale blue on blue. */
+  [data-sj] .sj-fill:hover {
+    background-color: var(--home-accent);
+    color: var(--home-on-accent);
+  }
+
+  [data-sj] .sj-fill:hover * {
+    color: inherit;
+  }
+
+  [data-sj] .sj-tint:hover {
+    background-color: var(--home-accent-tint);
+    transform: translateY(-6px);
+  }
+
+  [data-sj] .sj-tint-row:hover {
+    background-color: var(--home-accent-tint-soft);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  [data-sj] .sj-bento:hover {
+  [data-sj] .sj-bento:hover,
+  [data-sj] .sj-tint:hover {
     transform: none;
   }
 }

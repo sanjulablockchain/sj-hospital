@@ -171,11 +171,16 @@ export const showcaseCards: ShowcaseCard[] = [
   },
 ];
 
-/** Headline figures for the theatre section. All three are repo-backed. */
-export const theatreFigures: { value: string; label: string }[] = [
-  { value: "1:1", label: "Recovery nursing" },
-  { value: "0", label: "Reused consumables" },
-  { value: "24h", label: "On call theatre cover" },
+/**
+ * Headline figures for the theatre section. All three are repo-backed.
+ *
+ * Split into prefix / number / suffix so <AnimatedCounter> can count the
+ * numeric part up when the section scrolls in: "1:" + 1, then 0, then 24 + "h".
+ */
+export const theatreFigures: { prefix?: string; value: number; suffix?: string; label: string }[] = [
+  { prefix: "1:", value: 1, label: "Recovery nursing" },
+  { value: 0, label: "Reused consumables" },
+  { value: 24, suffix: "h", label: "On call theatre cover" },
 ];
 
 export const theatreSpecs: SpecRow[] = [

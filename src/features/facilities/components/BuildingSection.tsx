@@ -37,7 +37,7 @@ export function BuildingSection() {
         {buildingZones.map((zone) => (
           <div
             key={zone.no}
-            className="group grid grid-cols-[66px_minmax(0,1fr)] items-baseline gap-x-6 gap-y-2 border-b border-[var(--home-hairline)] py-6 transition-colors duration-300 hover:bg-[var(--home-surface-2)] min-[900px]:grid-cols-[92px_minmax(0,1.05fr)_minmax(0,1.6fr)] min-[900px]:gap-x-10 min-[900px]:py-7"
+            className="sj-tint-row group grid grid-cols-[66px_minmax(0,1fr)] items-baseline gap-x-6 gap-y-2 border-b border-[var(--home-hairline)] px-1.5 py-6 min-[900px]:grid-cols-[92px_minmax(0,1.05fr)_minmax(0,1.6fr)] min-[900px]:gap-x-10 min-[900px]:py-7"
           >
             <span className="font-display text-[34px] leading-none font-extrabold tracking-[-0.03em] text-[var(--home-accent)] tabular-nums transition-all duration-[450ms] group-hover:translate-x-1.5 min-[900px]:text-[44px]">
               {zone.no}

@@ -37,7 +37,7 @@ export function SupportSection() {
         {support.map((item) => (
           <div
             key={item.no}
-            className="bg-[var(--home-bg)] p-7 transition-transform duration-[450ms] hover:-translate-y-1.5"
+            className="sj-tint bg-[var(--home-bg)] p-7"
           >
             <div className="text-[12px] font-bold tracking-[0.18em] text-[var(--home-accent)] tabular-nums">
               {item.no}

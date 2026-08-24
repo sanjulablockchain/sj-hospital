@@ -46,11 +46,11 @@ export function HygieneSection() {
         </Reveal>
 
         <Reveal>
-          <div className="relative aspect-[4/5] overflow-hidden bg-[#08123A] max-[899px]:aspect-[4/3]">
+          <div className="relative aspect-[4/3] overflow-hidden bg-[#08123A]">
             <ParallaxLayer factor={0.08} maxOffsetPx={40} className="absolute inset-x-0 -top-[8%] h-[116%]">
               <Image
-                src="/images/facilities/ward-corridor.jpg"
-                alt="A nurse moving equipment along a ward corridor"
+                src="/images/facilities/sterile-instruments.jpg"
+                alt="A sterile instrument set laid out on a drape before surgery"
                 fill
                 sizes="(min-width: 900px) 50vw, 100vw"
                 className="object-cover"

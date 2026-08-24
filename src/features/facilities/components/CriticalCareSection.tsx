@@ -36,7 +36,7 @@ export function CriticalCareSection() {
         {careUnits.map((unit) => (
           <div
             key={unit.code}
-            className="group bg-[var(--home-bg)] p-7.5 transition-transform duration-[450ms] hover:-translate-y-1.5"
+            className="sj-tint group bg-[var(--home-bg)] p-7.5"
           >
             <div className="font-display text-[13px] font-bold tracking-[0.18em] text-[var(--home-accent)] uppercase">
               {unit.code}
@@ -54,11 +54,16 @@ export function CriticalCareSection() {
 
       <div className="mt-11.5 grid grid-cols-1 gap-px bg-[var(--home-hairline)] min-[900px]:grid-cols-3">
         {careNotes.map((note) => (
-          <Reveal key={note.title} className="bg-[var(--home-surface-2)] p-7.5">
-            <h3 className="text-[11.5px] font-bold tracking-[0.2em] text-[var(--home-accent)] uppercase">
-              {note.title}
-            </h3>
-            <p className="mt-4 text-[14.5px] leading-[1.6] text-[var(--home-muted)]">{note.body}</p>
+          // The tint goes on an inner element rather than on Reveal itself:
+          // sj-tint sets its own transition, which would otherwise outrank and
+          // shorten Reveal's 850ms entrance.
+          <Reveal key={note.title} className="h-full">
+            <div className="sj-tint h-full bg-[var(--home-surface-2)] p-7.5">
+              <h3 className="text-[11.5px] font-bold tracking-[0.2em] text-[var(--home-accent)] uppercase">
+                {note.title}
+              </h3>
+              <p className="mt-4 text-[14.5px] leading-[1.6] text-[var(--home-muted)]">{note.body}</p>
+            </div>
           </Reveal>
         ))}
       </div>

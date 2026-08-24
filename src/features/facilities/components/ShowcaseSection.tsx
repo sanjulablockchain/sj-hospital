@@ -47,7 +47,12 @@ export function ShowcaseSection() {
                 <div className="text-[12px] font-bold tracking-[0.18em] text-[#7FCBFF] tabular-nums">
                   {card.no}
                 </div>
-                <h3 className="font-display mt-3 text-[26px] leading-[1.06] font-semibold tracking-[-0.025em] text-white">
+                {/* Two lines are reserved whether the title needs them or not.
+                    The cards are bottom-aligned, so without this a title that
+                    wraps ("Reception & admissions") makes its body taller and
+                    knocks that card's heading and paragraph out of line with
+                    the other three. */}
+                <h3 className="font-display mt-3 min-h-[2.12em] text-[25px] leading-[1.06] font-semibold tracking-[-0.025em] text-white">
                   {card.title}
                 </h3>
                 <p className="mt-2.5 text-[14.5px] leading-[1.55] text-white/78">{card.body}</p>
