@@ -4,15 +4,15 @@ import type { FooterColumn } from "@/components/layout/ThemedFooter";
 // Labels and order mirror homeNavigation exactly, so the header reads
 // identically on every page. Only the targets differ: Facilities, Pharmacy
 // and International Patient Care have their own sections on /services, so
-// this variant points at those in-page anchors; the remaining five items
-// (Health Tips, School Wellness, Network, Media, Careers) have no home on
-// the services pages, so they always point back at the matching section on
-// the home page.
+// this variant points at those in-page anchors; Health Tips has a page of its
+// own at /health-tips; and the remaining four items (School Wellness,
+// Network, Media, Careers) have no home on the services pages, so they always
+// point back at the matching section on the home page.
 export const servicesNavigation: NavItem[] = [
   { label: "Services", href: "#directory" },
   { label: "Facilities", href: "#facilities" },
   { label: "Pharmacy", href: "#pharmacy" },
-  { label: "Health Tips", href: "/#tips" },
+  { label: "Health Tips", href: "/health-tips" },
   { label: "International Patient Care", href: "#international" },
   { label: "School Wellness", href: "/#wellness" },
   { label: "Network", href: "/#network" },
@@ -30,7 +30,7 @@ export const servicesDetailNavigation: NavItem[] = [
   { label: "Services", href: "/services" },
   { label: "Facilities", href: "/services#facilities" },
   { label: "Pharmacy", href: "/services#pharmacy" },
-  { label: "Health Tips", href: "/#tips" },
+  { label: "Health Tips", href: "/health-tips" },
   { label: "International Patient Care", href: "/services#international" },
   { label: "School Wellness", href: "/#wellness" },
   { label: "Network", href: "/#network" },
@@ -67,6 +67,7 @@ export const servicesFooterColumns: FooterColumn[] = [
       { label: "Admissions", href: "/services#admissions" },
       { label: "Facilities", href: "/services#facilities" },
       { label: "International patient care", href: "/services#international" },
+      { label: "Health tips", href: "/health-tips" },
       { label: "Home", href: "/" },
     ],
   },
