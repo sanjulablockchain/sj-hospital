@@ -13,7 +13,7 @@ export const homeNavigation: NavItem[] = [
   // and the library, triage list, screening table and first aid live on
   // /health-tips.
   { label: "Health Tips", href: "/health-tips" },
-  { label: "International Patient Care", href: "#international" },
+  { label: "International Patient Care", href: "/international-care" },
   { label: "School Wellness", href: "#wellness" },
   { label: "Network", href: "#network" },
   { label: "Media", href: "#media" },

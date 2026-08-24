@@ -1,6 +1,15 @@
+import Link from "next/link";
 import { RevealStagger } from "@/components/ui/RevealStagger";
 import { internationalCareItems } from "../data/internationalCare";
 
+/**
+ * `#international`: the six-item summary of what the desk does, with the full
+ * story on `/international-care`.
+ *
+ * The band stays as the teaser now that page exists, the same arrangement
+ * `#tips` keeps beside `/health-tips`: an accent primary action, and an
+ * outlined secondary through to the page itself.
+ */
 export function InternationalCareSection() {
   return (
     <section id="international" className="mx-auto max-w-[1440px] px-5 pt-30 sm:px-8 lg:px-11">
@@ -20,9 +29,20 @@ export function InternationalCareSection() {
             Negombo sits ten minutes from the international airport. We look after visitors, expatriates and
             medical travellers from arrival to follow up at home.
           </p>
-          <a href="mailto:international@sjhospital.lk" className="sj-invert mt-7 inline-flex items-center gap-2.5 bg-[var(--home-accent)] px-5.5 py-3.5 text-[14.5px] font-bold text-[var(--home-on-accent)]">
-            Talk to the international desk <span aria-hidden>&rarr;</span>
-          </a>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <Link
+              href="/international-care"
+              className="sj-invert inline-flex items-center gap-2.5 bg-[var(--home-accent)] px-5.5 py-3.5 text-[14.5px] font-bold text-[var(--home-on-accent)]"
+            >
+              See international care <span aria-hidden>&rarr;</span>
+            </Link>
+            <a
+              href="mailto:international@sjhospital.lk"
+              className="sj-invert inline-flex items-center gap-2.5 border border-[var(--home-hairline-strong)] px-5.5 py-3.5 text-[14.5px] font-bold text-[var(--home-heading)]"
+            >
+              Talk to the desk <span aria-hidden>&rarr;</span>
+            </a>
+          </div>
         </div>
         <RevealStagger className="grid grid-cols-1 gap-px bg-[var(--home-hairline)] min-[640px]:grid-cols-2">
           {internationalCareItems.map((item) => (
