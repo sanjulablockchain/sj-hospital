@@ -45,6 +45,22 @@ export function FamilySection() {
             {group.orgs.map((org) => (
               <OrgCard key={org.slug} org={org} />
             ))}
+            {/* Two of the three groups hold only two companies, leaving an empty
+                third cell in the grid. Without a filler, that empty cell shows the
+                hairline background at full card size: barely visible on the dark
+                reference, but a solid grey block once the token is tokenised for
+                the light theme. These cells paint over it with the section's own
+                background so an empty cell is indistinguishable from the section
+                behind it. */}
+            {Array.from({ length: (3 - (group.orgs.length % 3)) % 3 }).map((_, index) => (
+              <div
+                key={`filler-${index}`}
+                aria-hidden
+                className={`bg-[var(--home-bg)] max-[640px]:hidden ${
+                  group.orgs.length % 2 === 0 ? "max-[1023px]:hidden" : ""
+                }`}
+              />
+            ))}
           </div>
         </Reveal>
       ))}
