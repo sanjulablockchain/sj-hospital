@@ -7,6 +7,9 @@ photography or a render supplied by the client.
 | File | Source | Photographer | Licence |
 | --- | --- | --- | --- |
 | `public/images/health-tips/hero-consultation.jpg` | [Unsplash](https://unsplash.com/photos/doctor-checks-patients-blood-pressure-with-stethoscope-NDOYHZ_98Rw) | Vitaly Gariev ([@silverkblack](https://unsplash.com/@silverkblack)) | [Unsplash License](https://unsplash.com/license) (free, commercial use, attribution not required) |
+| `public/images/network/logos/st-gianna.png` | [St. Gianna Medical Group](https://sgmdoctor.com) | N/A (company logo, not a photograph) | Official mark, taken from the company's own site. Group company logo, shown as published. |
+| `public/images/network/logos/laipt.png` | [LA Intensive Pediatric Therapy](https://laipt.org) | N/A (company logo, not a photograph) | Official mark, taken from the company's own site. Group company logo, shown as published. |
+| `public/images/network/logos/human-compass.png` | [Human Compass MSO](https://humancompassmso.com) | N/A (company logo, not a photograph) | Official mark, taken from the company's own site. Group company logo, shown as published. |
 
 ## Adding to this list
 
