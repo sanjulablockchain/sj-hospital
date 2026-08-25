@@ -145,6 +145,23 @@ anchor offset is cancelled) wrapping the page and `FloatingActions`.
 `ThemedShell`, `ThemedHeader`, `ThemedFooter`, `ParallaxLayer`, `Ticker`,
 `Reveal`, `RevealStagger`.
 
+### Existing utilities that already match the reference
+
+No new CSS is needed for the hovers. `globals.css` already carries:
+
+- `.sj-tint`, whose hover is `background-color: var(--home-accent-tint)` plus
+  `translateY(-6px)` on a `0.35s ease / 0.45s cubic-bezier(0.2,0.8,0.2,1)`
+  transition, behind `@media (hover: hover)` and cancelled under
+  `prefers-reduced-motion`. `--home-accent-tint` is already
+  `rgba(44,166,240,0.1)`. That is the reference's `[data-org]` rule exactly.
+- `.sj-fill` for the jump cards, including the `* { color: inherit }` that pulls
+  each card's three separately-coloured spans onto the accent fill.
+- `.sj-invert` for the contact rows.
+
+The hidden-CTA reveal reuses the hover-guarded Tailwind pattern already in
+`features/health-tips/components/LibrarySection.tsx`, which keeps a touch device
+from latching the CTA visible.
+
 ### One shared-component change
 
 `FaqAccordion` renders its own `<section id="faq">` with its own heading, so it
@@ -234,9 +251,13 @@ ordering and is kept.
 
 `Network` currently resolves to `/#network` in `facilitiesNavigation`,
 `healthTipsNavigation`, `internationalNavigation`, `pharmacyNavigation` and
-`servicesNavigation` (twice), and to `#network` in `homeNavigation`. All become
-`/network`, except `homeNavigation`, whose `Network` item keeps pointing at the
-home page's own `#network` teaser section since that is a same-page anchor.
+`servicesNavigation` (twice, counting `servicesDetailNavigation`), and to
+`#network` in `homeNavigation`. All become `/network`, `homeNavigation`
+included: a nav label has to mean the same thing wherever it is clicked, and
+leaving the home page's item pointing at its own teaser would make `Network`
+scroll on one page and navigate on every other. That is the drift
+`navigation.test.ts` exists to catch, so the assertion for `Facilities`,
+`Pharmacy` and `International Patient Care` is extended to cover `Network`.
 
 `networkNavigation` carries the same nine labels; its own `Network` item points
 at `#family`, the first of this page's own sections, matching how
@@ -247,8 +268,10 @@ through to `/network`.
 
 ## Testing
 
-No test runner is configured for components, so `content.test.ts` follows the
-sibling pages' `node:test` pattern and covers the things that can silently rot:
+`npm test` runs `node --test` over `src/**/*.test.ts`. There is no component or
+browser test runner, so hover and layout are verified by eye against the
+reference, and `content.test.ts` follows the sibling pages' `node:test` pattern
+to cover the things that can silently rot:
 
 1. The placeholder notice exists and names each unverified claim area.
 2. Nine organisations across three groups, and the ticker lists all eight
