@@ -1,18 +1,8 @@
-"use client";
-
-import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import { Reveal } from "@/components/ui/Reveal";
-import { RevealStagger } from "@/components/ui/RevealStagger";
+import { AccordionList } from "@/components/ui/AccordionList";
+import type { AccordionItem } from "@/components/ui/AccordionList";
 
-export type FaqItem = { q: string; a: string };
-
-// Measuring in a plain `useEffect` would let the browser paint one frame at
-// max-height 0 before the effect runs, so a panel that starts open would
-// visibly grow open on load. `useLayoutEffect` runs before that paint, but
-// only in the browser; on the server it does nothing but warn, so it's
-// aliased to the ordinary effect during the framework's server render pass.
-// See `ServiceDirectory.tsx`, which this accordion mirrors.
-const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
+export type FaqItem = AccordionItem;
 
 type FaqAccordionProps = {
   faq: FaqItem[];
@@ -23,18 +13,14 @@ type FaqAccordionProps = {
 };
 
 /**
- * `#faq`: one-open-at-a-time accordion. Every panel starts closed
- * (`useState<number>(-1)`) since nothing on the page has been clicked yet,
- * unlike `ServiceDirectory`'s rows, which open their first row by default.
+ * `#faq`: one-open-at-a-time accordion under a heading. The rows themselves
+ * live in the shared `AccordionList`, which `/network`'s referrals section also
+ * uses inside a different layout.
  *
- * Shared rather than owned by a feature: the services detail pages and the
- * pharmacy page both need it, and the height measurement below is not worth
- * having two copies of.
+ * Shared rather than owned by a feature: the services detail pages, pharmacy
+ * and international care all need this exact section.
  */
 export function FaqAccordion({ faq, heading, eyebrow }: FaqAccordionProps) {
-  const [open, setOpen] = useState(-1);
-  const baseId = useId();
-
   return (
     <section id="faq" className="mx-auto max-w-[1440px] px-5 pt-30 sm:px-8 lg:px-11 max-[640px]:pt-18">
       <Reveal>
@@ -48,104 +34,11 @@ export function FaqAccordion({ faq, heading, eyebrow }: FaqAccordionProps) {
         </h2>
       </Reveal>
 
-      <RevealStagger stepMs={45} className="mt-10 flex flex-col gap-px bg-[var(--home-hairline)]">
-        {faq.map((item, index) => (
-          <FaqRow
-            key={item.q}
-            item={item}
-            isOpen={open === index}
-            onToggle={() => setOpen((current) => (current === index ? -1 : index))}
-            idPrefix={`${baseId}-${index}`}
-          />
-        ))}
-      </RevealStagger>
+      <AccordionList
+        items={faq}
+        stepMs={45}
+        className="mt-10 flex flex-col gap-px bg-[var(--home-hairline)]"
+      />
     </section>
-  );
-}
-
-type FaqRowProps = {
-  item: FaqItem;
-  isOpen: boolean;
-  onToggle: () => void;
-  idPrefix: string;
-};
-
-function FaqRow({ item, isOpen, onToggle, idPrefix }: FaqRowProps) {
-  const contentRef = useRef<HTMLDivElement>(null);
-  const [contentHeight, setContentHeight] = useState(0);
-
-  // Measure the panel's natural content height instead of the reference's
-  // fixed 320px cap: a longer answer must never be clipped. ResizeObserver
-  // watches the inner content node (never itself clipped by the animated
-  // wrapper's max-height/overflow), so it keeps reporting the true height
-  // through the whole open/close transition.
-  useIsomorphicLayoutEffect(() => {
-    const node = contentRef.current;
-    if (!node) return;
-
-    const measure = () => setContentHeight(node.scrollHeight);
-    measure();
-
-    if (typeof ResizeObserver === "undefined") {
-      window.addEventListener("resize", measure);
-      return () => window.removeEventListener("resize", measure);
-    }
-
-    const observer = new ResizeObserver(measure);
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
-
-  const buttonId = `${idPrefix}-trigger`;
-  const panelId = `${idPrefix}-panel`;
-
-  return (
-    <div className="bg-[var(--home-bg)]">
-      <button
-        type="button"
-        id={buttonId}
-        aria-expanded={isOpen}
-        aria-controls={panelId}
-        onClick={onToggle}
-        className="flex w-full items-center justify-between gap-6 px-1 py-6.5 text-left"
-      >
-        <span className="font-display text-[clamp(17px,1.7vw,22px)] leading-[1.25] font-semibold tracking-[-0.01em] text-[var(--home-heading)]">
-          {item.q}
-        </span>
-        {/* Decorative only: the button's accessible name is the question
-            text above, not this glyph. */}
-        <span
-          aria-hidden
-          className={`flex h-8.5 w-8.5 shrink-0 items-center justify-center border border-[var(--home-hairline-strong)] text-[18px] leading-none font-bold text-[var(--home-heading)] transition-transform duration-[350ms] ${
-            isOpen ? "rotate-45" : ""
-          }`}
-        >
-          +
-        </span>
-      </button>
-
-      {/* `hidden` (display:none) can't be transitioned, so the animation runs
-          on max-height + opacity instead; `inert` is what actually pulls the
-          panel's links/text out of the tab order and accessibility tree
-          while collapsed (a zero max-height alone doesn't stop keyboard
-          focus from landing inside). `aria-hidden` stays alongside it for
-          assistive tech that doesn't yet honour `inert`. */}
-      <div
-        id={panelId}
-        aria-hidden={!isOpen}
-        inert={!isOpen}
-        style={{
-          maxHeight: isOpen ? `${contentHeight}px` : "0px",
-          transitionProperty: "max-height, opacity",
-          transitionDuration: "550ms, 400ms",
-          transitionTimingFunction: "cubic-bezier(0.2,0.8,0.2,1), ease",
-        }}
-        className={`overflow-hidden ${isOpen ? "opacity-100" : "opacity-0"}`}
-      >
-        <div ref={contentRef} className="px-1 pb-7">
-          <p className="max-w-[62ch] text-[15px] leading-[1.65] text-[var(--home-muted)]">{item.a}</p>
-        </div>
-      </div>
-    </div>
   );
 }
