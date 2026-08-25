@@ -1,18 +1,11 @@
 "use client";
 
-import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
+import { useId, useState } from "react";
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
+import { useMeasuredHeight } from "@/hooks/useMeasuredHeight";
 
 export type FaqItem = { q: string; a: string };
-
-// Measuring in a plain `useEffect` would let the browser paint one frame at
-// max-height 0 before the effect runs, so a panel that starts open would
-// visibly grow open on load. `useLayoutEffect` runs before that paint, but
-// only in the browser; on the server it does nothing but warn, so it's
-// aliased to the ordinary effect during the framework's server render pass.
-// See `ServiceDirectory.tsx`, which this accordion mirrors.
-const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 type FaqAccordionProps = {
   faq: FaqItem[];
@@ -71,30 +64,9 @@ type FaqRowProps = {
 };
 
 function FaqRow({ item, isOpen, onToggle, idPrefix }: FaqRowProps) {
-  const contentRef = useRef<HTMLDivElement>(null);
-  const [contentHeight, setContentHeight] = useState(0);
-
   // Measure the panel's natural content height instead of the reference's
-  // fixed 320px cap: a longer answer must never be clipped. ResizeObserver
-  // watches the inner content node (never itself clipped by the animated
-  // wrapper's max-height/overflow), so it keeps reporting the true height
-  // through the whole open/close transition.
-  useIsomorphicLayoutEffect(() => {
-    const node = contentRef.current;
-    if (!node) return;
-
-    const measure = () => setContentHeight(node.scrollHeight);
-    measure();
-
-    if (typeof ResizeObserver === "undefined") {
-      window.addEventListener("resize", measure);
-      return () => window.removeEventListener("resize", measure);
-    }
-
-    const observer = new ResizeObserver(measure);
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
+  // fixed 320px cap: a longer answer must never be clipped.
+  const { ref: contentRef, height: contentHeight } = useMeasuredHeight<HTMLDivElement>();
 
   const buttonId = `${idPrefix}-trigger`;
   const panelId = `${idPrefix}-panel`;

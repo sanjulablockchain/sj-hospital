@@ -2,36 +2,36 @@ import type { NavItem } from "@/config/navigation";
 import type { FooterColumn } from "@/components/layout/ThemedFooter";
 
 // The same nine labels in the same order as homeNavigation, so the header reads
-// identically on every page: the reference design for this page invented its
-// own items ("Cost estimates", "Questions") and dropped five of ours, which
-// would have made the nav change shape as you moved around the site. Only the
-// targets differ. International Patient Care is the page you are already on, so
-// it points at #journey, the first of its own sections; the other eight resolve
-// the same way facilitiesNavigation resolves them.
-export const internationalNavigation: NavItem[] = [
+// identically on every page. The reference design for this page ran a seven
+// item nav of its own invention (it added "Press desk" and dropped School
+// Wellness, Network and Careers), which would have made the nav change shape as
+// you moved around the site. Only the targets differ. Media is the page you are
+// already on, so it points at #newsroom, the first of its own sections; the
+// other eight resolve the same way internationalNavigation resolves them.
+export const mediaNavigation: NavItem[] = [
   { label: "Services", href: "/services" },
   { label: "Facilities", href: "/facilities" },
   { label: "Pharmacy", href: "/pharmacy" },
   { label: "Health Tips", href: "/health-tips" },
-  { label: "International Patient Care", href: "#journey" },
+  { label: "International Patient Care", href: "/international-care" },
   { label: "School Wellness", href: "/#wellness" },
   { label: "Network", href: "/#network" },
-  { label: "Media", href: "/media" },
+  { label: "Media", href: "#newsroom" },
   { label: "Careers", href: "/#career" },
 ];
 
 // Bare hashes for this page's own sections (ThemedFooter renders plain <a>
 // tags, so the browser's same-document fragment navigation scrolls rather than
 // reloading the route), absolute paths for everything that lives elsewhere.
-export const internationalFooterColumns: FooterColumn[] = [
+export const mediaFooterColumns: FooterColumn[] = [
   {
-    heading: "International",
+    heading: "Media",
     links: [
-      { label: "The journey", href: "#journey" },
-      { label: "What the desk handles", href: "#services" },
-      { label: "Written estimates", href: "#estimates" },
-      { label: "Rooms & attendants", href: "#rooms" },
-      { label: "Insurance & billing", href: "#insurance" },
+      { label: "Newsroom", href: "#newsroom" },
+      { label: "Press desk", href: "#press" },
+      { label: "Press kit and logos", href: "#kit" },
+      { label: "Image library", href: "#gallery" },
+      { label: "Filming and privacy", href: "#usage" },
     ],
   },
   {
@@ -40,8 +40,8 @@ export const internationalFooterColumns: FooterColumn[] = [
       { label: "Home", href: "/" },
       { label: "All services", href: "/services" },
       { label: "Facilities", href: "/facilities" },
-      { label: "Pharmacy", href: "/pharmacy" },
       { label: "Health tips", href: "/health-tips" },
+      { label: "International care", href: "/international-care" },
     ],
   },
 ];

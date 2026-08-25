@@ -460,11 +460,37 @@ footer[id] {
   [data-sj] .sj-tint-row:hover {
     background-color: var(--home-accent-tint-soft);
   }
+
+  /* A line inside an sj-tint card that fades up as the card lifts: the date on
+     the newsroom tiles. Both the hidden base state and the reveal live inside
+     this hover query on purpose. The reference hides its equivalent
+     unconditionally, so on a touch device, where nothing ever hovers, the date
+     is simply invisible; here it is always shown unless the pointer can
+     actually reveal it. */
+  [data-sj] .sj-tint .sj-hover-reveal {
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+      opacity 0.4s ease,
+      transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  [data-sj] .sj-tint:hover .sj-hover-reveal,
+  /* Keyboard users never hover, so a tile reached by Tab reveals its date too. */
+  [data-sj] .sj-tint:focus-within .sj-hover-reveal {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   [data-sj] .sj-bento:hover,
   [data-sj] .sj-tint:hover {
+    transform: none;
+  }
+
+  /* Still fades, but does not travel. */
+  [data-sj] .sj-tint .sj-hover-reveal {
     transform: none;
   }
 }
