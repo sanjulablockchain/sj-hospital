@@ -6,6 +6,7 @@ import { servicesNavigation, servicesDetailNavigation } from "./servicesNavigati
 import { pharmacyNavigation } from "./pharmacyNavigation.ts";
 import { facilitiesNavigation } from "./facilitiesNavigation.ts";
 import { internationalNavigation } from "./internationalNavigation.ts";
+import { networkNavigation } from "./networkNavigation.ts";
 
 const labels = (items: { label: string }[]) => items.map((i) => i.label);
 
@@ -20,6 +21,7 @@ const ALL_NAVS = [
   pharmacyNavigation,
   facilitiesNavigation,
   internationalNavigation,
+  networkNavigation,
 ];
 
 // The header must read identically on every page: only the targets differ.
@@ -48,6 +50,7 @@ test("Facilities, Pharmacy and International reach their pages from every other 
       ["Facilities", "/facilities"],
       ["Pharmacy", "/pharmacy"],
       ["International Patient Care", "/international-care"],
+      ["Network", "/network"],
     ]) {
       const item = nav.find((i) => i.label === label);
       assert.ok(item, `no ${label} item`);
@@ -69,6 +72,23 @@ test("on the international page itself, International Patient Care is an in-page
   const item = internationalNavigation.find((i) => i.label === "International Patient Care");
   assert.ok(item);
   assert.equal(item.href, "#journey");
+});
+
+test("on the network page itself, Network is an in-page anchor", () => {
+  const item = networkNavigation.find((i) => i.label === "Network");
+  assert.ok(item);
+  assert.equal(item.href, "#family");
+});
+
+test("no nav item still points at the superseded home network band", () => {
+  for (const nav of ALL_NAVS) {
+    const item = nav.find((i) => i.label === "Network");
+    assert.ok(item, "no Network item");
+    assert.ok(
+      item.href === "#family" || item.href === "/network",
+      `Network points at ${item.href}`,
+    );
+  }
 });
 
 test("no nav item still points at a retired home or services band", () => {

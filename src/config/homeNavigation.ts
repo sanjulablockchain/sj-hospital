@@ -15,7 +15,12 @@ export const homeNavigation: NavItem[] = [
   { label: "Health Tips", href: "/health-tips" },
   { label: "International Patient Care", href: "/international-care" },
   { label: "School Wellness", href: "#wellness" },
-  { label: "Network", href: "#network" },
+  // And the same again for Network: the #network band stays on as the
+  // four-node teaser, and the family of companies, the group figures and the
+  // referral answers live on /network. A nav label has to mean the same thing
+  // wherever it is clicked, so this points at the page here too, not at the
+  // teaser directly below it.
+  { label: "Network", href: "/network" },
   { label: "Media", href: "#media" },
   { label: "Careers", href: "#career" },
 ];

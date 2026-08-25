@@ -3,11 +3,11 @@ import type { FooterColumn } from "@/components/layout/ThemedFooter";
 
 // Labels and order mirror homeNavigation exactly, so the header reads
 // identically on every page. Only the targets differ. Facilities, Pharmacy,
-// Health Tips and International Patient Care are all pages of their own now,
-// superseding the summary bands still on this index, so they leave /services
-// entirely. The remaining four (School Wellness, Network, Media, Careers) have
-// no home on the services pages, so they always point back at the matching
-// section on the home page.
+// Health Tips, International Patient Care and Network are all pages of their
+// own now, superseding the summary bands still on this index, so they leave
+// /services entirely. The remaining three (School Wellness, Media, Careers)
+// have no home on the services pages, so they always point back at the
+// matching section on the home page.
 export const servicesNavigation: NavItem[] = [
   { label: "Services", href: "#directory" },
   { label: "Facilities", href: "/facilities" },
@@ -15,7 +15,7 @@ export const servicesNavigation: NavItem[] = [
   { label: "Health Tips", href: "/health-tips" },
   { label: "International Patient Care", href: "/international-care" },
   { label: "School Wellness", href: "/#wellness" },
-  { label: "Network", href: "/#network" },
+  { label: "Network", href: "/network" },
   { label: "Media", href: "/#media" },
   { label: "Careers", href: "/#career" },
 ];
@@ -33,7 +33,7 @@ export const servicesDetailNavigation: NavItem[] = [
   { label: "Health Tips", href: "/health-tips" },
   { label: "International Patient Care", href: "/international-care" },
   { label: "School Wellness", href: "/#wellness" },
-  { label: "Network", href: "/#network" },
+  { label: "Network", href: "/network" },
   { label: "Media", href: "/#media" },
   { label: "Careers", href: "/#career" },
 ];

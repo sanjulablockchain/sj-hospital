@@ -14,7 +14,7 @@ export const facilitiesNavigation: NavItem[] = [
   { label: "Health Tips", href: "/health-tips" },
   { label: "International Patient Care", href: "/international-care" },
   { label: "School Wellness", href: "/#wellness" },
-  { label: "Network", href: "/#network" },
+  { label: "Network", href: "/network" },
   { label: "Media", href: "/#media" },
   { label: "Careers", href: "/#career" },
 ];
