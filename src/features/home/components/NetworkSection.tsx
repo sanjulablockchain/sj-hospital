@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { NetworkAccordion } from "./NetworkAccordion";
 
@@ -16,9 +17,17 @@ export function NetworkSection() {
               two countries
             </h2>
           </div>
-          <p className="max-w-[36ch] text-[16.5px] leading-[1.6] text-[var(--home-muted)]">
-            Our Negombo hospital shares clinical governance with the largest pediatric group in Los Angeles.
-          </p>
+          <div>
+            <p className="max-w-[36ch] text-[16.5px] leading-[1.6] text-[var(--home-muted)]">
+              Our Negombo hospital shares clinical governance with the largest pediatric group in Los Angeles.
+            </p>
+            <Link
+              href="/network"
+              className="mt-5 sj-invert inline-flex items-center gap-2.5 border border-[var(--home-hairline-strong)] px-5.5 py-3.5 text-[14.5px] font-bold text-[var(--home-heading)]"
+            >
+              The full network <span aria-hidden>&rarr;</span>
+            </Link>
+          </div>
         </div>
       </Reveal>
       <Reveal className="mt-11.5">
