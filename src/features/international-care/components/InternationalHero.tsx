@@ -7,13 +7,15 @@ import { internationalNavigation } from "@/config/internationalNavigation";
 import { heroFacts, tickerItems } from "../data/content";
 
 /**
- * `#top`: the entrance render behind the themed header and the page's only
+ * `#top`: the arrival photograph behind the themed header and the page's only
  * <h1>, closed off by a fact strip and the scrolling ticker.
  *
- * The image is the arrival elevation with the ambulance bay, deliberately not
- * one of the three exteriors already carrying the home, services and
- * facilities heroes, so a visitor coming from any of them sees a new view of
- * the same building.
+ * The image is a wide-body on approach at dusk, landing lights lit over a lit
+ * runway, which is the moment the headline is about. It is deliberately not the
+ * building: the home, services and facilities heroes already carry three views
+ * of that, and this is the one page whose subject is the journey rather than the
+ * place. The aircraft is silhouetted, so no airline or airport is identifiable
+ * and nothing on it contradicts Katunayake.
  *
  * Accent colours here are literal rather than `var(--home-accent)`: this block
  * is fixed-dark in both themes because it sits on a photograph, and the light
@@ -34,13 +36,25 @@ export function InternationalHero() {
         maxOffsetPx={100}
         className="absolute inset-x-0 -top-[14%] h-[128%] overflow-hidden"
       >
+        {/* Two framings rather than one. On a wide screen the focal point is
+            pulled left of centre, which pushes the aircraft and its
+            landing-light flare into the right half, clear of the left-aligned
+            copy: centred, the flare sits directly behind the lede and eats its
+            contrast. Below 640px the crop is so narrow that the same framing
+            loses the aircraft altogether, so the phone recentres on it. */}
         <Image
-          src="/images/international/arrival-entrance.png"
-          alt="The lit entrance of St. Joseph Hospital Negombo at dusk, with an ambulance at the covered bay"
+          src="/images/international/hero-arrival.jpg"
+          alt="A wide-body airliner on approach at dusk, landing lights lit above a runway"
           fill
           priority
-          className="animate-sj-burns object-cover"
-          style={{ objectPosition: "50% 46%" }}
+          // Deliberately far above 100vw. The parallax layer is 128% of a
+          // 76-84vh section, so this box is much taller than the viewport and
+          // object-cover scales to its *height*: at sizes="100vw" (the default
+          // for `fill`) Next serves a 390px source into a 406x1690 box on a
+          // phone and upscales it more than sixfold. These values ask for a
+          // candidate wide enough to cover the height instead.
+          sizes="(max-width: 640px) 300vw, (max-width: 1024px) 200vw, 150vw"
+          className="animate-sj-burns object-cover object-[36%_44%] max-[640px]:object-[50%_46%]"
         />
       </ParallaxLayer>
       <div

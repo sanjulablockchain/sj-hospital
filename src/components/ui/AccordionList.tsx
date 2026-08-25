@@ -1,17 +1,10 @@
 "use client";
 
-import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
+import { useId, useState } from "react";
 import { RevealStagger } from "@/components/ui/RevealStagger";
+import { useMeasuredHeight } from "@/hooks/useMeasuredHeight";
 
 export type AccordionItem = { q: string; a: string };
-
-// Measuring in a plain `useEffect` would let the browser paint one frame at
-// max-height 0 before the effect runs, so a panel that starts open would
-// visibly grow open on load. `useLayoutEffect` runs before that paint, but
-// only in the browser; on the server it does nothing but warn, so it's
-// aliased to the ordinary effect during the framework's server render pass.
-// See `ServiceDirectory.tsx`, which this accordion mirrors.
-const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 type AccordionListProps = {
   items: AccordionItem[];
@@ -28,9 +21,10 @@ type AccordionListProps = {
  * default.
  *
  * Extracted from `FaqAccordion` so `/network`'s referrals section can put the
- * same rows inside a two-column split with a sticky heading. The height
- * measurement and the `inert` collapsed panel below are not worth having two
- * copies of.
+ * same rows inside a two-column split with a sticky heading. The row markup and
+ * the `inert` collapsed panel below are not worth having two copies of, and the
+ * height measurement itself lives one level down again in `useMeasuredHeight`,
+ * which the media page's ground rules accordion also uses with its own markup.
  */
 export function AccordionList({ items, className = "", stepMs = 45 }: AccordionListProps) {
   const [open, setOpen] = useState(-1);
@@ -59,30 +53,12 @@ type AccordionRowProps = {
 };
 
 function AccordionRow({ item, isOpen, onToggle, idPrefix }: AccordionRowProps) {
-  const contentRef = useRef<HTMLDivElement>(null);
-  const [contentHeight, setContentHeight] = useState(0);
-
   // Measure the panel's natural content height instead of the reference's
-  // fixed 320px cap: a longer answer must never be clipped. ResizeObserver
-  // watches the inner content node (never itself clipped by the animated
-  // wrapper's max-height/overflow), so it keeps reporting the true height
-  // through the whole open/close transition.
-  useIsomorphicLayoutEffect(() => {
-    const node = contentRef.current;
-    if (!node) return;
-
-    const measure = () => setContentHeight(node.scrollHeight);
-    measure();
-
-    if (typeof ResizeObserver === "undefined") {
-      window.addEventListener("resize", measure);
-      return () => window.removeEventListener("resize", measure);
-    }
-
-    const observer = new ResizeObserver(measure);
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
+  // fixed 320px cap: a longer answer must never be clipped. The hook attaches
+  // to the inner content node, never the animated wrapper, so the measurement
+  // is not itself clipped mid-transition. Shared with the media page's ground
+  // rules accordion, which animates identically but is laid out differently.
+  const { ref: contentRef, height: contentHeight } = useMeasuredHeight<HTMLDivElement>();
 
   const buttonId = `${idPrefix}-trigger`;
   const panelId = `${idPrefix}-panel`;

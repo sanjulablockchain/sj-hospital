@@ -7,6 +7,7 @@ import { pharmacyNavigation } from "./pharmacyNavigation.ts";
 import { facilitiesNavigation } from "./facilitiesNavigation.ts";
 import { internationalNavigation } from "./internationalNavigation.ts";
 import { networkNavigation } from "./networkNavigation.ts";
+import { mediaNavigation } from "./mediaNavigation.ts";
 
 const labels = (items: { label: string }[]) => items.map((i) => i.label);
 
@@ -22,6 +23,7 @@ const ALL_NAVS = [
   facilitiesNavigation,
   internationalNavigation,
   networkNavigation,
+  mediaNavigation,
 ];
 
 // The header must read identically on every page: only the targets differ.
@@ -44,13 +46,14 @@ test("Health Tips points at the health tips page from every nav but its own", ()
   }
 });
 
-test("Facilities, Pharmacy and International reach their pages from every other nav", () => {
+test("Facilities, Pharmacy, International and Media reach their pages from every other nav", () => {
   for (const nav of ALL_NAVS) {
     for (const [label, href] of [
       ["Facilities", "/facilities"],
       ["Pharmacy", "/pharmacy"],
       ["International Patient Care", "/international-care"],
       ["Network", "/network"],
+      ["Media", "/media"],
     ]) {
       const item = nav.find((i) => i.label === label);
       assert.ok(item, `no ${label} item`);
@@ -80,6 +83,12 @@ test("on the network page itself, Network is an in-page anchor", () => {
   assert.equal(item.href, "#family");
 });
 
+test("on the media page itself, Media is an in-page anchor", () => {
+  const item = mediaNavigation.find((i) => i.label === "Media");
+  assert.ok(item);
+  assert.equal(item.href, "#newsroom");
+});
+
 test("no nav item still points at the superseded home network band", () => {
   for (const nav of ALL_NAVS) {
     const item = nav.find((i) => i.label === "Network");
@@ -99,6 +108,12 @@ test("no nav item still points at a retired home or services band", () => {
       // International patient care has a page of its own now, so neither the
       // home band nor the /services band is a valid target any more.
       assert.ok(!/#international$/.test(item.href), `${item.label} still points at ${item.href}`);
+      // Media has a page of its own now, so the home page's #media teaser band
+      // is no longer a valid nav target either.
+      assert.ok(!/#media$/.test(item.href), `${item.label} still points at ${item.href}`);
+      // And the same for Network, whose #network band on the home page is now
+      // only a teaser.
+      assert.ok(!/#network$/.test(item.href), `${item.label} still points at ${item.href}`);
     }
   }
 });

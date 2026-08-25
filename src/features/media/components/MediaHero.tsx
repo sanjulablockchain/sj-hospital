@@ -3,12 +3,23 @@ import Link from "next/link";
 import { ThemedHeader } from "@/components/layout/ThemedHeader";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { Ticker } from "@/components/ui/Ticker";
-import { networkNavigation } from "@/config/networkNavigation";
+import { mediaNavigation } from "@/config/mediaNavigation";
 import { heroFacts, tickerItems } from "../data/content";
 
 /**
- * `#top`: the dusk exterior behind the themed header and the page's only <h1>,
- * closed off by a fact strip and the ticker of the other eight companies.
+ * `#top`: the clinical team photograph behind the themed header and the page's
+ * only <h1>, closed off by a fact strip and the scrolling ticker.
+ *
+ * It is also the second shot in the image library below, which is deliberate:
+ * the picture the press desk offers journalists is the picture the page opens
+ * with.
+ *
+ * Not the reference's photograph. The reference used `doctors.jpg`, which shows
+ * an identifiable patient in a bed, on a page that promises in two places that
+ * no identifiable patient is released at any resolution. That contradiction is
+ * the one a journalist would notice, so this page uses the staff portrait
+ * instead. `doctors.jpg` stays in use on the four other pages that carry it;
+ * only /media, which makes the promise, avoids it.
  *
  * Accent colours here are literal rather than `var(--home-accent)`: this block
  * is fixed-dark in both themes because it sits on a photograph, and the light
@@ -18,11 +29,11 @@ import { heroFacts, tickerItems } from "../data/content";
  * Copy animates with `animate-sj-up` rather than `Reveal`, since it is already
  * in the first viewport and should not wait on an intersection observer.
  */
-export function NetworkHero() {
+export function MediaHero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-[84vh] flex-col overflow-hidden bg-[#060B1F] max-[899px]:min-h-[76vh]"
+      className="relative flex min-h-[80vh] flex-col overflow-hidden bg-[#060B1F] max-[899px]:min-h-[76vh]"
     >
       <ParallaxLayer
         factor={0.14}
@@ -30,30 +41,30 @@ export function NetworkHero() {
         className="absolute inset-x-0 -top-[14%] h-[128%] overflow-hidden"
       >
         <Image
-          src="/images/network/exterior-dusk.png"
-          alt="St. Joseph Hospital Negombo lit at dusk, with an ambulance at the covered entrance bay"
+          src="/images/career-staff.jpg"
+          alt="Three St. Joseph Hospital clinicians in branded scrubs standing together"
           fill
           priority
           className="animate-sj-burns object-cover"
-          style={{ objectPosition: "50% 46%" }}
+          style={{ objectPosition: "50% 32%" }}
         />
       </ParallaxLayer>
       <div
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(rgba(6,11,31,0.9) 0%, rgba(6,11,31,0.58) 44%, rgba(6,11,31,0.97) 100%)",
+            "linear-gradient(rgba(6,11,31,0.9) 0%, rgba(6,11,31,0.56) 42%, rgba(6,11,31,0.97) 100%)",
         }}
       />
       <div
         className="animate-sj-sheen absolute inset-0"
         style={{
           background:
-            "radial-gradient(64% 50% at 78% 28%, rgba(44,166,240,0.32) 0%, rgba(6,11,31,0) 66%)",
+            "radial-gradient(62% 50% at 76% 26%, rgba(44,166,240,0.3) 0%, rgba(6,11,31,0) 66%)",
         }}
       />
 
-      <ThemedHeader navItems={networkNavigation} homeHref="/" bookHref="#contact" />
+      <ThemedHeader navItems={mediaNavigation} homeHref="/" bookHref="#press" />
 
       <div className="relative z-10 mx-auto mt-auto flex w-full max-w-[1440px] gap-10 px-5 sm:px-8 lg:px-11">
         {/* Decorative vertical strapline, dropped below 900px where there is no
@@ -66,7 +77,7 @@ export function NetworkHero() {
             className="text-[11px] tracking-[0.3em] text-white/50 uppercase"
             style={{ writingMode: "vertical-rl" }}
           >
-            Negombo to Los Angeles
+            Press desk answers same day
           </span>
           <span className="w-px flex-1 bg-gradient-to-b from-white/40 to-transparent" />
         </div>
@@ -80,22 +91,21 @@ export function NetworkHero() {
             <span aria-hidden className="opacity-50">
               /
             </span>
-            Our Network
+            Media
           </div>
 
-          <h1 className="font-display animate-sj-up mt-4.5 text-[clamp(42px,7vw,118px)] leading-[0.86] font-extrabold tracking-[-0.045em] text-white uppercase">
-            A hospital in
+          <h1 className="font-display animate-sj-up mt-4.5 text-[clamp(44px,7.6vw,126px)] leading-[0.86] font-extrabold tracking-[-0.045em] text-white uppercase">
+            On the
             <br />
-            {/* Outlined rather than filled, so the three lines read as one
-                phrase stepping from solid to hollow to accent. */}
+            {/* Outlined then accent, so the three words step from solid to
+                hollow to accent across two lines. */}
             <span
               className="text-transparent"
               style={{ WebkitTextStroke: "1.4px rgba(242,246,255,0.75)" }}
             >
-              Negombo,
-            </span>
-            <br />
-            <span className="text-[#2CA6F0]">backed from LA.</span>
+              record.
+            </span>{" "}
+            <span className="text-[#2CA6F0]">Always.</span>
           </h1>
 
           <div className="animate-sj-up mt-8 flex flex-col items-start gap-5.5">
@@ -103,23 +113,26 @@ export function NetworkHero() {
               className="max-w-[54ch] text-[18px] leading-[1.6] text-white/82"
               style={{ textWrap: "pretty" }}
             >
-              St. Joseph Hospital is operated by Kids &amp; Teens Medical Group, one of the largest
-              paediatric groups in California. That is where the clinical protocols, the training
-              and the second opinions come from.
+              Hospital news, clinical milestones, community programmes and everything a journalist
+              needs to file accurately: named spokespeople, approved logos, high resolution
+              photographs and a desk that replies the same working day.
             </p>
             <div className="flex flex-wrap gap-3">
               <a
-                href="#family"
+                href="#newsroom"
                 className="sj-invert inline-flex items-center gap-2.5 bg-[#2CA6F0] px-6 py-4 text-[15px] font-bold text-[#04122B]"
               >
-                Meet the network <span aria-hidden>&rarr;</span>
+                Read the newsroom <span aria-hidden>&rarr;</span>
               </a>
+              {/* The reference labels this "Download the press kit", but no kit
+                  file exists to download. It goes to the section that lists what
+                  the kit holds and how to ask for it. */}
               <a
-                href="#matters"
+                href="#kit"
                 className="inline-flex items-center gap-3 border border-white/30 px-6 py-4 text-[15px] font-bold whitespace-nowrap text-white transition-colors hover:bg-white hover:text-[#060B1F]"
               >
                 <span aria-hidden className="animate-sj-pulse h-2 w-2 rounded-full bg-[#2CA6F0]" />
-                What it means for you
+                See the press kit
               </a>
             </div>
           </div>

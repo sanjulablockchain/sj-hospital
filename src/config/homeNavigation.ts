@@ -21,6 +21,6 @@ export const homeNavigation: NavItem[] = [
   // wherever it is clicked, so this points at the page here too, not at the
   // teaser directly below it.
   { label: "Network", href: "/network" },
-  { label: "Media", href: "#media" },
+  { label: "Media", href: "/media" },
   { label: "Careers", href: "#career" },
 ];
