@@ -14,6 +14,10 @@ import type { Org } from "../types";
  * inset along the top edge, drawn as an inset box-shadow rather than a border
  * so it does not change the card's box and shift the grid by a pixel.
  *
+ * `min-h-[356px]` is the reference's figure. It keeps the hover CTA on the
+ * baseline across a row of cards whose bodies differ in length, since
+ * `mt-auto` pushes the CTA to the bottom of whichever card is tallest.
+ *
  * The logo tile is one deliberate departure from the reference, which has no
  * logos at all: it renders the company's real 144x144 logo mark, object-contain,
  * on a solid white 48x48 chip in both themes. Several of the marks carry dark
