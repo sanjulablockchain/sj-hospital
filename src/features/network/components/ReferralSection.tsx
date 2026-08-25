@@ -48,7 +48,7 @@ export function ReferralSection() {
         <AccordionList
           items={referrals}
           stepMs={45}
-          className="flex flex-col border-t border-[var(--home-hairline)]"
+          className="flex flex-col border-t border-[var(--home-hairline)] [&>*]:border-b [&>*]:border-[var(--home-hairline)]"
         />
       </Reveal>
     </section>
