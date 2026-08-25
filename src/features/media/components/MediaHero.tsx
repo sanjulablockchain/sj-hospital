@@ -10,9 +10,16 @@ import { heroFacts, tickerItems } from "../data/content";
  * `#top`: the clinical team photograph behind the themed header and the page's
  * only <h1>, closed off by a fact strip and the scrolling ticker.
  *
- * The image is the same one the reference chose here, and it is also the second
- * shot in the image library below, which is deliberate: the picture the press
- * desk offers journalists is the picture the page opens with.
+ * It is also the second shot in the image library below, which is deliberate:
+ * the picture the press desk offers journalists is the picture the page opens
+ * with.
+ *
+ * Not the reference's photograph. The reference used `doctors.jpg`, which shows
+ * an identifiable patient in a bed, on a page that promises in two places that
+ * no identifiable patient is released at any resolution. That contradiction is
+ * the one a journalist would notice, so this page uses the staff portrait
+ * instead. `doctors.jpg` stays in use on the four other pages that carry it;
+ * only /media, which makes the promise, avoids it.
  *
  * Accent colours here are literal rather than `var(--home-accent)`: this block
  * is fixed-dark in both themes because it sits on a photograph, and the light
@@ -34,12 +41,12 @@ export function MediaHero() {
         className="absolute inset-x-0 -top-[14%] h-[128%] overflow-hidden"
       >
         <Image
-          src="/images/doctors.jpg"
-          alt="Consultants and nursing staff of St. Joseph Hospital Negombo"
+          src="/images/career-staff.jpg"
+          alt="Three St. Joseph Hospital clinicians in branded scrubs standing together"
           fill
           priority
           className="animate-sj-burns object-cover"
-          style={{ objectPosition: "50% 38%" }}
+          style={{ objectPosition: "50% 32%" }}
         />
       </ParallaxLayer>
       <div

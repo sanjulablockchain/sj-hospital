@@ -302,11 +302,14 @@ export const gallery: GalleryShot[] = [
     credit: "Credit: St. Joseph Hospital, Negombo",
     fit: "cover",
   },
+  // Not the reference's `doctors.jpg`: that photograph shows an identifiable
+  // patient in a bed, which is precisely what the caption above this grid says
+  // is never released. See the note on `MediaHero`.
   {
-    src: "/images/doctors.jpg",
+    src: "/images/career-staff.jpg",
     tag: "Clinical team",
     title: "Consultants and nursing staff",
-    alt: "Consultants and nursing staff of St. Joseph Hospital Negombo",
+    alt: "Three St. Joseph Hospital clinicians in branded scrubs standing together",
     credit: "Credit: St. Joseph Hospital, Negombo",
     fit: "cover",
   },

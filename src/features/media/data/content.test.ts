@@ -92,7 +92,7 @@ test("news titles are unique, since the grid keys on them", () => {
 // These three files ship in public/images and carry other pages on the site;
 // the reference's own fallbacks pointed at paths that do not exist here.
 test("every gallery image is a repo asset with alt text and a credit", () => {
-  const known = ["/images/hero-exterior.png", "/images/doctors.jpg", "/images/logo-mark.png"];
+  const known = ["/images/hero-exterior.png", "/images/career-staff.jpg", "/images/logo-mark.png"];
   assert.deepEqual(
     gallery.map((shot) => shot.src),
     known,
@@ -101,6 +101,23 @@ test("every gallery image is a repo asset with alt text and a credit", () => {
     assert.ok(shot.alt.length > 20, `${shot.title} needs real alt text`);
     assert.ok(shot.credit.length > 0, `${shot.title} needs a credit`);
   }
+});
+
+// This page states twice that no identifiable patient is released at any
+// resolution: once in the gallery's own lede, once in the featured release's
+// journalist notes. `doctors.jpg` shows a patient in a bed, so it is the one
+// image on the site that must not appear here, however convenient it is
+// elsewhere. The reference used it for both the hero and this grid.
+test("no photograph of an identifiable patient is used on the press page", () => {
+  const banned = "/images/doctors.jpg";
+  for (const shot of gallery) assert.notEqual(shot.src, banned);
+  const hero = readFileSync(
+    fileURLToPath(new URL("../components/MediaHero.tsx", import.meta.url)),
+    "utf8",
+  );
+  const heroSrc = hero.match(/src="(\/images\/[^"]+)"/)?.[1];
+  assert.notEqual(heroSrc, banned, "the hero is back on the patient photograph");
+  assert.ok(heroSrc, "could not find the hero image src");
 });
 
 // The logo mark must not be cropped to a 4:3 box like the two photographs.
