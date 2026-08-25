@@ -26,6 +26,11 @@ hospital before treating any of it as fact, then either correct it here or
 delete this notice deliberately (content.test.ts pins the notice, so removing
 it fails the suite rather than passing unnoticed).
 
+mattersBody, in the same section, carries the same unverified assertions in
+prose form: which protocols the doctors follow, who reviews a difficult case,
+and how a child treated in Los Angeles can be followed up in Negombo without
+starting the file again.
+
 The "In practice" list in the matters section asserts: that the group's
 paediatric and emergency protocols are inherited and adapted to Sri Lankan
 guidelines; that difficult paediatric cases can be put to colleagues in the
@@ -34,15 +39,19 @@ across countries; that prescriptions are written in generic names so either
 country can dispense them; and that nursing and technician training runs against
 group standards.
 
-All seven referral answers assert: that a referral desk exists; that an LA
-paediatrician's chart is sent ahead of travel and read rather than restarted;
-that second opinions are a real channel and are disclosed when used; that dengue
-management follows Sri Lankan national guidelines while stricter American
-infection control and newborn observation protocols are kept; how an ACIG policy
-settles at this hospital; that recruitment charges candidates no fee at any
-stage; that admitting rights are open to consultants in Negombo, Chilaw and
-Gampaha; and that pricing is set for the Sri Lankan market rather than an
-imported cost base.`;
+All seven referral answers assert: that an LA paediatrician's chart is sent
+ahead of travel and read rather than restarted; that second opinions are a real
+channel and are disclosed when used; that dengue management follows Sri Lankan
+national guidelines while stricter American infection control and newborn
+observation protocols are kept; how an ACIG policy settles at this hospital;
+that recruitment charges candidates no fee at any stage; that admitting rights
+are open to consultants in Negombo, Chilaw and Gampaha; and that pricing is set
+for the Sri Lankan market rather than an imported cost base.
+
+Separately, and not one of the seven answers above (none of them mentions a
+desk): the referral section's intro paragraph and its call to action assert
+that a referral desk exists at this hospital. That claim is not verified
+either.`;
 
 /** Scrolling strip along the bottom of the hero: the other eight companies. */
 export const tickerItems = [
@@ -168,7 +177,7 @@ export const orgGroups: OrgGroup[] = [
       {
         slug: "laipt",
         logo: "/images/network/logos/laipt.png",
-        wordmark: "LA Intensive Paediatric Therapy",
+        wordmark: "LA Intensive Pediatric Therapy",
         badge: "Therapy, since 2010",
         name: "LA Intensive Pediatric Therapy",
         tagline: "Expert paediatric therapy.",
@@ -192,7 +201,7 @@ export const orgGroups: OrgGroup[] = [
       {
         slug: "after-hours",
         logo: "/images/network/logos/after-hours.png",
-        wordmark: "After-Hours Paediatric Urgent Care",
+        wordmark: "After-Hours Pediatric Urgent Care",
         badge: "Round the clock",
         name: "After-Hours Pediatric Urgent Care",
         tagline: "Out of hours? We are here for yours.",
@@ -242,11 +251,18 @@ export const reachRows: ReachRow[] = [
   { n: "20+", k: "Serendib Healthways locations", who: "Los Angeles County" },
   { n: "50+", k: "Board certified doctors", who: "Serendib Healthways network" },
   { n: "20+", k: "After hours urgent care clinics", who: "California, ages 0 to 21" },
-  { n: "25", k: "Years of Human Compass MSO", who: "Southern California" },
+  { n: "25+", k: "Years of Human Compass MSO", who: "Southern California" },
   { n: "2010", k: "LA Intensive Pediatric Therapy since", who: "Speech, occupational, developmental" },
   { n: "2", k: "Countries with BPO teams", who: "Sri Lanka and Mexico" },
   { n: "1", k: "Hospital in Sri Lanka", who: "This one, in Negombo" },
 ];
+
+/** See PLACEHOLDER_NOTICE: the referral desk this asserts is not verified. */
+export const referralIntro =
+  "Families in the group move between Los Angeles and Sri Lanka more often than you would think. Summer with grandparents, a semester back home, a parent posted abroad. The referral desk exists so nobody starts from a blank page.";
+
+/** See PLACEHOLDER_NOTICE: the referral desk this asserts is not verified. */
+export const referralCta = "Ask the referral desk";
 
 /** See PLACEHOLDER_NOTICE: none of these seven answers is verified. */
 export const referrals: AccordionItem[] = [

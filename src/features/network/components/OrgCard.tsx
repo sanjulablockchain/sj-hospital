@@ -25,25 +25,63 @@ import type { Org } from "../types";
  * so the chip is kept white rather than tinted, and the flagship's accent fill
  * is dropped from it. The card-level accent inset still distinguishes the two
  * flagships.
+ *
+ * St. Joseph Hospital's card has no `href`: it is this site, so it is not a
+ * link out. That is the one card that must not offer any affordance implying
+ * a click will do something. It gets no `sj-tint` and no `group`, so no lift
+ * and no accent wash; its logo row sits at full opacity with no hover
+ * transition; and its "This hospital" line renders as a plain, always
+ * visible line with no arrow, since there it is a statement of fact rather
+ * than a call to action (the "You are here" badge already says as much).
+ * Every other card has an `href` and keeps the full hover treatment
+ * unchanged: lift, wash, logo opacity lift, and a CTA with an arrow that
+ * reveals on hover.
  */
 export function OrgCard({ org }: { org: Org }) {
+  const isLink = Boolean(org.href);
+
+  const logo = (
+    <span
+      className={`flex h-12 items-center gap-3 ${
+        isLink
+          ? "opacity-88 transition-opacity duration-[400ms] [@media(hover:hover)]:group-hover:opacity-100"
+          : ""
+      }`}
+    >
+      <span className="flex h-12 w-12 shrink-0 items-center justify-center bg-white">
+        <Image
+          src={org.logo}
+          alt=""
+          width={144}
+          height={144}
+          className="h-full w-full object-contain"
+        />
+      </span>
+      <span className="font-display block max-w-[150px] text-[15px] leading-[1.12] font-bold tracking-[-0.02em] text-[var(--home-heading)] uppercase">
+        {org.wordmark}
+      </span>
+    </span>
+  );
+
+  const cta = isLink ? (
+    // Hidden until the card is hovered, and only where hover is a real
+    // input: on a touch screen there is no hover to end, so an unguarded
+    // reveal latches visible after the first tap. Same pattern as
+    // features/health-tips/components/LibrarySection.tsx.
+    <span className="mt-auto inline-flex items-center gap-2 pt-5 text-[13.5px] font-bold text-[var(--home-accent-soft)] transition-[opacity,transform] duration-[450ms] motion-reduce:transform-none [@media(hover:hover)]:translate-y-2 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:translate-y-0 [@media(hover:hover)]:group-hover:opacity-100">
+      {org.cta} <span aria-hidden>&rarr;</span>
+    </span>
+  ) : (
+    // A statement of fact, not a call to action: always visible, no arrow,
+    // no hover reveal.
+    <span className="mt-auto inline-flex items-center gap-2 pt-5 text-[13.5px] font-bold text-[var(--home-accent-soft)]">
+      {org.cta}
+    </span>
+  );
+
   const inner = (
     <>
-      {/* opacity lift on card hover, per the reference's [data-org-logo]. */}
-      <span className="flex h-12 items-center gap-3 opacity-88 transition-opacity duration-[400ms] [@media(hover:hover)]:group-hover:opacity-100">
-        <span className="flex h-12 w-12 shrink-0 items-center justify-center bg-white">
-          <Image
-            src={org.logo}
-            alt=""
-            width={144}
-            height={144}
-            className="h-full w-full object-contain"
-          />
-        </span>
-        <span className="font-display block max-w-[150px] text-[15px] leading-[1.12] font-bold tracking-[-0.02em] text-[var(--home-heading)] uppercase">
-          {org.wordmark}
-        </span>
-      </span>
+      {logo}
 
       <span className="mt-5.5 text-[11px] font-bold tracking-[0.2em] text-[var(--home-accent-soft)] uppercase">
         {org.badge}
@@ -69,28 +107,20 @@ export function OrgCard({ org }: { org: Org }) {
         ))}
       </span>
 
-      {/* Hidden until the card is hovered, and only where hover is a real
-          input: on a touch screen there is no hover to end, so an unguarded
-          reveal latches visible after the first tap. Same pattern as
-          features/health-tips/components/LibrarySection.tsx. */}
-      <span className="mt-auto inline-flex items-center gap-2 pt-5 text-[13.5px] font-bold text-[var(--home-accent-soft)] transition-[opacity,transform] duration-[450ms] motion-reduce:transform-none [@media(hover:hover)]:translate-y-2 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:translate-y-0 [@media(hover:hover)]:group-hover:opacity-100">
-        {org.cta} <span aria-hidden>&rarr;</span>
-      </span>
+      {cta}
     </>
   );
 
-  const className = `sj-tint group flex min-h-[356px] flex-col bg-[var(--home-bg)] px-6.5 pt-7.5 pb-7 ${
+  const base = `flex min-h-[356px] flex-col bg-[var(--home-bg)] px-6.5 pt-7.5 pb-7 ${
     org.flagship ? "shadow-[inset_0_3px_0_0_var(--home-accent)]" : ""
   }`;
 
-  // St. Joseph Hospital is this site, so its card is not a link out. Everything
-  // else opens the company's own site in a new tab.
-  if (!org.href) {
-    return <div className={className}>{inner}</div>;
+  if (!isLink) {
+    return <div className={base}>{inner}</div>;
   }
 
   return (
-    <a href={org.href} target="_blank" rel="noreferrer noopener" className={className}>
+    <a href={org.href} target="_blank" rel="noreferrer noopener" className={`sj-tint group ${base}`}>
       {inner}
     </a>
   );

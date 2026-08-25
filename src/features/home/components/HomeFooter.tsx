@@ -12,7 +12,7 @@ const hospitalLinks = [
   { label: "International patient care", href: "/international-care" },
   { label: "Health tips", href: "/health-tips" },
   { label: "School wellness", href: "#wellness" },
-  { label: "Network", href: "#network" },
+  { label: "Network", href: "/network" },
   { label: "Media", href: "#media" },
   { label: "Careers", href: "#career" },
 ];

@@ -1,6 +1,6 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { AccordionList } from "@/components/ui/AccordionList";
-import { referrals } from "../data/content";
+import { referralCta, referralIntro, referrals } from "../data/content";
 
 /**
  * `#referrals`: seven answers about moving between the group's countries, in a
@@ -33,15 +33,13 @@ export function ReferralSection() {
             you are
           </h2>
           <p className="mt-5 max-w-[38ch] text-[16.5px] leading-[1.65] text-[var(--home-muted)]">
-            Families in the group move between Los Angeles and Sri Lanka more often than you would
-            think. Summer with grandparents, a semester back home, a parent posted abroad. The
-            referral desk exists so nobody starts from a blank page.
+            {referralIntro}
           </p>
           <a
             href="#contact"
             className="sj-invert mt-6 inline-flex items-center gap-2.5 bg-[var(--home-accent)] px-5.5 py-3.75 text-[14.5px] font-bold text-[var(--home-on-accent)]"
           >
-            Ask the referral desk <span aria-hidden>&rarr;</span>
+            {referralCta} <span aria-hidden>&rarr;</span>
           </a>
         </div>
 

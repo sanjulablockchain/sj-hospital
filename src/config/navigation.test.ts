@@ -84,10 +84,11 @@ test("no nav item still points at the superseded home network band", () => {
   for (const nav of ALL_NAVS) {
     const item = nav.find((i) => i.label === "Network");
     assert.ok(item, "no Network item");
-    assert.ok(
-      item.href === "#family" || item.href === "/network",
-      `Network points at ${item.href}`,
-    );
+    // Only the network page's own nav may anchor into itself with #family;
+    // every other nav must reach the page, or this could regress to #family
+    // without the test noticing.
+    const allowed = nav === networkNavigation ? ["#family", "/network"] : ["/network"];
+    assert.ok(allowed.includes(item.href), `Network points at ${item.href}`);
   }
 });
 

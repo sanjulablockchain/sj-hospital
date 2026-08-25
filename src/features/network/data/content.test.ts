@@ -12,6 +12,8 @@ import {
   orgGroups,
   practice,
   reachRows,
+  referralCta,
+  referralIntro,
   referrals,
   tickerItems,
 } from "./content.ts";
@@ -29,6 +31,8 @@ const allCopy = [
   ...orgGroups.flatMap((g) => [g.name, g.note]),
   ...orgs.flatMap((o) => [o.wordmark, o.badge, o.name, o.tagline, o.body, o.cta, ...o.chips]),
   ...reachRows.flatMap((r) => [r.n, r.k, r.who]),
+  referralIntro,
+  referralCta,
   ...referrals.flatMap((r) => [r.q, r.a]),
   ...contactRows.map((c) => c.label),
   disclaimer,
@@ -47,6 +51,14 @@ test("the placeholder notice names both unverified blocks", () => {
   assert.match(PLACEHOLDER_NOTICE, /not verified/i);
   assert.match(PLACEHOLDER_NOTICE, /In practice/);
   assert.match(PLACEHOLDER_NOTICE, /referral/i);
+});
+
+test("the placeholder notice names mattersBody as carrying the same claims", () => {
+  assert.match(PLACEHOLDER_NOTICE, /mattersBody/);
+});
+
+test("the placeholder notice names the referral desk as its own unverified item", () => {
+  assert.match(PLACEHOLDER_NOTICE, /referral desk/i);
 });
 
 test("the placeholder notice names each unverified claim", () => {
@@ -140,7 +152,7 @@ test("the numbers section matches what the group publishes", () => {
   assert.equal(byKey.get("Serendib Healthways locations"), "20+");
   assert.equal(byKey.get("Board certified doctors"), "50+");
   assert.equal(byKey.get("After hours urgent care clinics"), "20+");
-  assert.equal(byKey.get("Years of Human Compass MSO"), "25");
+  assert.equal(byKey.get("Years of Human Compass MSO"), "25+");
   assert.equal(byKey.get("LA Intensive Pediatric Therapy since"), "2010");
   assert.equal(byKey.get("Countries with BPO teams"), "2");
   assert.equal(byKey.get("Hospital in Sri Lanka"), "1");
@@ -168,6 +180,20 @@ test("every company links to the domain it is credited with", () => {
     assert.ok(org, `no card for ${slug}`);
     assert.ok(org.href?.includes(domain), `${slug} links to ${org.href}, not ${domain}`);
     assert.ok(org.cta.includes(domain), `${slug} cta reads "${org.cta}"`);
+  }
+});
+
+// ---- Spelling ----
+//
+// Company names keep their own published spelling (American, for the two
+// group companies below), even though surrounding prose on this page uses
+// British spellings deliberately. wordmark and name are both company names,
+// so neither should carry the British "Paediatric" spelling.
+
+test("no wordmark or name anglicises a company's own spelling", () => {
+  for (const org of orgs) {
+    assert.ok(!org.wordmark.includes("Paediatric"), `${org.slug} wordmark reads "${org.wordmark}"`);
+    assert.ok(!org.name.includes("Paediatric"), `${org.slug} name reads "${org.name}"`);
   }
 });
 
