@@ -2,13 +2,11 @@ import type { NavItem } from "@/config/navigation";
 import type { FooterColumn } from "@/components/layout/ThemedFooter";
 
 // The same nine labels in the same order as homeNavigation, so the header reads
-// identically on every page. The reference design for this page shipped its own
-// shorter item list (seven entries, School Wellness where Health Tips belongs),
-// which would have made the nav change shape as you moved around the site.
-// Only the targets differ. Careers is the page you are already on, so it points
-// at #openings, the section a candidate actually came for, matching the way the
-// reference points its own Careers link.
-export const careerNavigation: NavItem[] = [
+// identically on every page. About Us is not one of the nine, so unlike the
+// facilities or careers navs there is no item to anchor into this page: every
+// target here is the page it names. navigation.test.ts asserts the label
+// equality, which is what caught three earlier navs drifting apart.
+export const aboutNavigation: NavItem[] = [
   { label: "Services", href: "/services" },
   { label: "Facilities", href: "/facilities" },
   { label: "Pharmacy", href: "/pharmacy" },
@@ -17,34 +15,29 @@ export const careerNavigation: NavItem[] = [
   { label: "School Wellness", href: "/school-wellness" },
   { label: "Network", href: "/network" },
   { label: "Media", href: "/media" },
-  { label: "Careers", href: "#openings" },
+  { label: "Careers", href: "/careers" },
 ];
 
 // Bare hashes for this page's own sections (ThemedFooter renders plain <a>
 // tags, so the browser's same-document fragment navigation scrolls rather than
 // reloading the route), absolute paths for everything that lives elsewhere.
-export const careerFooterColumns: FooterColumn[] = [
+export const aboutFooterColumns: FooterColumn[] = [
   {
-    heading: "Careers",
+    heading: "About us",
     links: [
-      { label: "Why here", href: "#why" },
-      { label: "Benefits", href: "#benefits" },
-      { label: "Open positions", href: "#openings" },
-      { label: "How hiring works", href: "#process" },
-      { label: "Recruitment fraud", href: "#fraud" },
-      { label: "Submit your CV", href: "#form" },
+      { label: "Who we are", href: "#story" },
+      { label: "What makes us different", href: "#different" },
+      { label: "Mission and vision", href: "#mission" },
+      { label: "Our parent group", href: "#group" },
     ],
   },
   {
     heading: "Hospital",
     links: [
       { label: "Home", href: "/" },
-      { label: "About us", href: "/about-us" },
       { label: "All services", href: "/services" },
-      { label: "Facilities", href: "/facilities" },
-      { label: "Pharmacy", href: "/pharmacy" },
-      { label: "Our network", href: "/network" },
       { label: "Accommodation", href: "/accommodation" },
+      { label: "Book a doctor", href: "/e-channeling" },
       { label: "Contact us", href: "/contact-us" },
     ],
   },

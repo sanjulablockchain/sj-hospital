@@ -65,7 +65,7 @@ export function CareersHero() {
         }}
       />
 
-      <ThemedHeader navItems={careerNavigation} homeHref="/" bookHref="#form" />
+      <ThemedHeader navItems={careerNavigation} homeHref="/" bookHref="/e-channeling" />
 
       <div className="relative z-10 mx-auto mt-auto flex w-full max-w-[1440px] gap-10 px-5 sm:px-8 lg:px-11">
         {/* Decorative vertical strapline, dropped below 900px where there is no

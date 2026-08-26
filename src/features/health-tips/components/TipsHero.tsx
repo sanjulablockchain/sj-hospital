@@ -46,7 +46,7 @@ export function TipsHero() {
         }}
       />
 
-      <ThemedHeader navItems={healthTipsNavigation} homeHref="/" bookHref="#book" />
+      <ThemedHeader navItems={healthTipsNavigation} homeHref="/" bookHref="/e-channeling" />
 
       <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 gap-11 px-5 sm:px-8 lg:px-11">
         {/* Vertical rail: decoration plus a standing label, hidden below 900px

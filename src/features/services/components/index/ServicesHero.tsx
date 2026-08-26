@@ -40,7 +40,7 @@ export function ServicesHero() {
         }}
       />
 
-      <ThemedHeader navItems={servicesNavigation} homeHref="/" />
+      <ThemedHeader navItems={servicesNavigation} homeHref="/" bookHref="/e-channeling" />
 
       <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 flex-col justify-end gap-6 px-5 pb-16 sm:px-8 lg:px-11">
         <div className="animate-sj-up inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">

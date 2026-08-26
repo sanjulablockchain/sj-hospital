@@ -1,15 +1,22 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { homeNavigation } from "./homeNavigation.ts";
-import { healthTipsNavigation } from "./healthTipsNavigation.ts";
-import { servicesNavigation, servicesDetailNavigation } from "./servicesNavigation.ts";
-import { pharmacyNavigation } from "./pharmacyNavigation.ts";
-import { facilitiesNavigation } from "./facilitiesNavigation.ts";
-import { internationalNavigation } from "./internationalNavigation.ts";
-import { networkNavigation } from "./networkNavigation.ts";
-import { mediaNavigation } from "./mediaNavigation.ts";
-import { wellnessNavigation } from "./wellnessNavigation.ts";
-import { careerNavigation } from "./careerNavigation.ts";
+import { readdirSync, readFileSync } from "node:fs";
+import { join } from "node:path";
+import { homeNavigation, homeFooterColumns } from "./homeNavigation.ts";
+import { healthTipsNavigation, healthTipsFooterColumns } from "./healthTipsNavigation.ts";
+import { servicesNavigation, servicesDetailNavigation, servicesFooterColumns } from "./servicesNavigation.ts";
+import { pharmacyNavigation, pharmacyFooterColumns } from "./pharmacyNavigation.ts";
+import { facilitiesNavigation, facilitiesFooterColumns } from "./facilitiesNavigation.ts";
+import { internationalNavigation, internationalFooterColumns } from "./internationalNavigation.ts";
+import { networkNavigation, networkFooterColumns } from "./networkNavigation.ts";
+import { mediaNavigation, mediaFooterColumns } from "./mediaNavigation.ts";
+import { wellnessNavigation, wellnessFooterColumns } from "./wellnessNavigation.ts";
+import { careerNavigation, careerFooterColumns } from "./careerNavigation.ts";
+import { aboutNavigation, aboutFooterColumns } from "./aboutNavigation.ts";
+import { contactNavigation, contactFooterColumns } from "./contactNavigation.ts";
+import { accommodationNavigation, accommodationFooterColumns } from "./accommodationNavigation.ts";
+import { channelingNavigation, channelingFooterColumns } from "./channelingNavigation.ts";
+import { privacyNavigation, privacyFooterColumns } from "./privacyNavigation.ts";
 
 const labels = (items: { label: string }[]) => items.map((i) => i.label);
 
@@ -28,6 +35,33 @@ const ALL_NAVS = [
   mediaNavigation,
   wellnessNavigation,
   careerNavigation,
+  aboutNavigation,
+  contactNavigation,
+  accommodationNavigation,
+  channelingNavigation,
+  privacyNavigation,
+];
+
+// Every footer on the site. About us, Contact us and Accommodation were each
+// unreachable before this change: no footer anywhere linked to them, so the
+// only way in was to type the URL. This list is what the reachability checks
+// below iterate over.
+const ALL_FOOTERS = [
+  aboutFooterColumns,
+  contactFooterColumns,
+  accommodationFooterColumns,
+  channelingFooterColumns,
+  privacyFooterColumns,
+  careerFooterColumns,
+  facilitiesFooterColumns,
+  healthTipsFooterColumns,
+  internationalFooterColumns,
+  mediaFooterColumns,
+  networkFooterColumns,
+  pharmacyFooterColumns,
+  servicesFooterColumns,
+  wellnessFooterColumns,
+  homeFooterColumns,
 ];
 
 // The header must read identically on every page: only the targets differ.
@@ -140,5 +174,85 @@ test("no nav item still points at a retired home or services band", () => {
       // the application form.
       assert.ok(!/#career$/.test(item.href), `${item.label} still points at ${item.href}`);
     }
+  }
+});
+
+// The three pages that were unreachable before this change. No footer column
+// anywhere linked to them, so on the redesigned site the only way in was to
+// type the URL. These assertions are the reason the wiring cannot regress.
+//
+// A page is exempt from linking to itself: /about-us does not need an "About
+// us" entry in its own footer, and adding one would be a self-link. OWN records
+// that exemption per page.
+test("every footer reaches about, contact and accommodation", () => {
+  const REQUIRED = ["/about-us", "/contact-us", "/accommodation"];
+  const OWN = new Map([
+    [aboutFooterColumns, "/about-us"],
+    [contactFooterColumns, "/contact-us"],
+    [accommodationFooterColumns, "/accommodation"],
+  ]);
+  for (const columns of ALL_FOOTERS) {
+    const hrefs = columns.flatMap((c) => c.links.map((l) => l.href));
+    for (const href of REQUIRED) {
+      if (OWN.get(columns) === href) continue;
+      assert.ok(hrefs.includes(href), `no ${href} in ${columns[0].heading}`);
+    }
+  }
+});
+
+test("footer links are either bare hashes or absolute paths", () => {
+  for (const columns of ALL_FOOTERS) {
+    for (const column of columns) {
+      for (const link of column.links) {
+        assert.ok(
+          link.href.startsWith("#") || link.href.startsWith("/"),
+          `${link.label} points at ${link.href}`
+        );
+      }
+    }
+  }
+});
+
+test("no footer column is empty and no heading repeats within a page", () => {
+  for (const columns of ALL_FOOTERS) {
+    const headings = columns.map((c) => c.heading);
+    assert.equal(new Set(headings).size, headings.length, `duplicate heading in ${headings}`);
+    for (const column of columns) {
+      assert.ok(column.links.length > 0, `${column.heading} has no links`);
+    }
+  }
+});
+
+// Walks src/features for every *Hero.tsx file, the same set `globSync("src/
+// features/**/*Hero.tsx")` would return. Written by hand instead: the
+// @types/node version pinned in this repo (20.x) predates fs.globSync's type
+// declarations, so importing it fails `tsc --noEmit` even though the pinned
+// Node runtime (which does have it) would run it fine.
+function findHeroFiles(dir: string): string[] {
+  const found: string[] = [];
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const full = join(dir, entry.name);
+    if (entry.isDirectory()) found.push(...findHeroFiles(full));
+    else if (entry.isFile() && entry.name.endsWith("Hero.tsx")) found.push(full);
+  }
+  return found;
+}
+
+// The header's "Book now" button has to mean the same thing on every page. It
+// used to be a per-page anchor (#form, #book, #enquiry, #press, #contact), so
+// the same button scrolled somewhere different depending on where you clicked
+// it. ThemedHeader and MobileNavPanel are off limits for this fix (their
+// "#book" default stays untouched), so every hero is required to pass the
+// prop explicitly instead: a hero that forgets it would silently fall back to
+// the unfixed default, which is exactly the regression this guards against.
+test("every hero passes bookHref=\"/e-channeling\" to ThemedHeader", () => {
+  const heroes = findHeroFiles("src/features");
+  assert.ok(heroes.length >= 6, `only found ${heroes.length} heroes`);
+  for (const file of heroes) {
+    const src = readFileSync(file, "utf8");
+    if (!src.includes("<ThemedHeader")) continue;
+    const match = src.match(/bookHref=\{?"([^"]+)"\}?/);
+    assert.ok(match, `${file} renders ThemedHeader without an explicit bookHref`);
+    assert.equal(match[1], "/e-channeling", `${file} passes bookHref="${match[1]}"`);
   }
 });
