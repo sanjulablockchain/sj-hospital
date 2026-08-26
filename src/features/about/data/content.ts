@@ -117,10 +117,11 @@ export const heroStandfirst =
 export const storyIntro =
   "Our hospital was recently refurbished with a USD 1 million investment led by Kids & Teens Pediatric Medical Group (Los Angeles) and Asia Corp.";
 
-// `#different`'s SectionHead intro: built entirely from `reasons`' own
-// titles rather than restating any one description, so no sentence from the
-// grid below is quoted twice in the same section.
-export const differentIntro = reasons.map((r) => r.title).join(", ");
+// `#different`'s SectionHead intro: the whole of `storyParagraphs[1]`, the
+// first-in-Negombo claim that sets up why the six differentiators below are
+// worth stating, not a restatement of the grid's own titles.
+export const differentIntro =
+  "We are the first hospital in Negombo to offer corporate insurance acceptance at our OPD, ensuring convenience and accessibility to healthcare for the local community.";
 
 // `#mission`'s SectionHead intro: a clause lifted from `mission.body`.
 export const missionIntro =

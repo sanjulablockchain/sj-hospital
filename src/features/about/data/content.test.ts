@@ -120,9 +120,7 @@ test("no SectionHead intro repeats its jump card's note, and each is a literal s
   assert.ok(storyParagraphs[0].includes(storyIntro));
   assert.notEqual(storyIntro, jumpCards[0].note);
 
-  for (const reason of reasons) {
-    assert.ok(differentIntro.includes(reason.title));
-  }
+  assert.ok(storyParagraphs[1].includes(differentIntro));
   assert.notEqual(differentIntro, jumpCards[1].note);
 
   assert.ok(mission.body.includes(missionIntro) || vision.body.includes(missionIntro));
