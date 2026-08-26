@@ -9,6 +9,7 @@ import { internationalNavigation } from "./internationalNavigation.ts";
 import { networkNavigation } from "./networkNavigation.ts";
 import { mediaNavigation } from "./mediaNavigation.ts";
 import { wellnessNavigation } from "./wellnessNavigation.ts";
+import { careerNavigation } from "./careerNavigation.ts";
 
 const labels = (items: { label: string }[]) => items.map((i) => i.label);
 
@@ -26,6 +27,7 @@ const ALL_NAVS = [
   networkNavigation,
   mediaNavigation,
   wellnessNavigation,
+  careerNavigation,
 ];
 
 // The header must read identically on every page: only the targets differ.
@@ -57,6 +59,7 @@ test("Facilities, Pharmacy, International and Media reach their pages from every
       ["School Wellness", "/school-wellness"],
       ["Network", "/network"],
       ["Media", "/media"],
+      ["Careers", "/careers"],
     ]) {
       const item = nav.find((i) => i.label === label);
       assert.ok(item, `no ${label} item`);
@@ -90,6 +93,12 @@ test("on the school wellness page itself, School Wellness is an in-page anchor",
   const item = wellnessNavigation.find((i) => i.label === "School Wellness");
   assert.ok(item);
   assert.equal(item.href, "#programme");
+});
+
+test("on the careers page itself, Careers is an in-page anchor", () => {
+  const item = careerNavigation.find((i) => i.label === "Careers");
+  assert.ok(item);
+  assert.equal(item.href, "#openings");
 });
 
 test("on the media page itself, Media is an in-page anchor", () => {
@@ -126,6 +135,10 @@ test("no nav item still points at a retired home or services band", () => {
       // School wellness has a page of its own now, so the home page's #wellness
       // teaser band is no longer a valid nav target either.
       assert.ok(!/#wellness$/.test(item.href), `${item.label} still points at ${item.href}`);
+      // And the same for Careers: the home page's #career band is now only a
+      // five-row teaser, and /careers carries the roles, the hiring process and
+      // the application form.
+      assert.ok(!/#career$/.test(item.href), `${item.label} still points at ${item.href}`);
     }
   }
 });

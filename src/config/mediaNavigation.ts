@@ -17,7 +17,7 @@ export const mediaNavigation: NavItem[] = [
   { label: "School Wellness", href: "/school-wellness" },
   { label: "Network", href: "/network" },
   { label: "Media", href: "#newsroom" },
-  { label: "Careers", href: "/#career" },
+  { label: "Careers", href: "/careers" },
 ];
 
 // Bare hashes for this page's own sections (ThemedFooter renders plain <a>

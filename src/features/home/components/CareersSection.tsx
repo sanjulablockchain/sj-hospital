@@ -19,7 +19,10 @@ export function CareersSection() {
           <p className="mt-5.5 max-w-[34ch] text-[16.5px] leading-[1.65] text-[var(--home-muted)]">
             Clinicians and staff trained to US protocol, supported by a group that invests in them.
           </p>
-          <a href="mailto:careers@sjhospital.lk" className="sj-invert mt-6 inline-flex items-center gap-2.5 bg-[var(--home-accent)] px-5.5 py-3.5 text-[14.5px] font-bold text-[var(--home-on-accent)]">
+          {/* Was a bare mailto. /careers now carries the application form, the
+              full role detail and the recruitment-fraud warning, so the teaser
+              sends people there instead of straight into their mail client. */}
+          <a href="/careers#form" className="sj-invert mt-6 inline-flex items-center gap-2.5 bg-[var(--home-accent)] px-5.5 py-3.5 text-[14.5px] font-bold text-[var(--home-on-accent)]">
             Send your CV <span aria-hidden>&rarr;</span>
           </a>
         </div>
@@ -27,7 +30,7 @@ export function CareersSection() {
           {jobOpenings.map((job) => (
             <a
               key={job.title}
-              href="mailto:careers@sjhospital.lk"
+              href="/careers#openings"
               className="sj-row-fill grid grid-cols-1 gap-2 border-b border-[var(--home-hairline)] px-1 py-6 text-inherit min-[640px]:grid-cols-[1.4fr_0.8fr_0.7fr_auto] min-[640px]:items-center min-[640px]:gap-5"
             >
               <span className="font-display text-[clamp(20px,2vw,29px)] leading-[1.08] font-semibold tracking-[-0.025em] text-[var(--home-heading)]">
