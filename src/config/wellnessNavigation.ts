@@ -16,7 +16,7 @@ export const wellnessNavigation: NavItem[] = [
   { label: "School Wellness", href: "#programme" },
   { label: "Network", href: "/network" },
   { label: "Media", href: "/media" },
-  { label: "Careers", href: "/#career" },
+  { label: "Careers", href: "/careers" },
 ];
 
 // Bare hashes for this page's own sections (ThemedFooter renders plain <a>

@@ -54,7 +54,19 @@ export function CareersPage() {
           headingMaxCh={26}
         />
 
-        <FaqAccordion faq={[...faq]} heading="Before you apply" eyebrow="07 / Candidate questions" />
+        {/* Hard-broken to the reference's two lines, which the shared
+            FaqAccordion allows now that its heading takes a node. */}
+        <FaqAccordion
+          faq={[...faq]}
+          heading={
+            <>
+              Before you
+              <br />
+              apply
+            </>
+          }
+          eyebrow="07 / Candidate questions"
+        />
 
         <ApplicationSection />
         <ApplySection />
