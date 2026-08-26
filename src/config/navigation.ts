@@ -8,7 +8,7 @@ export const primaryNavigation: NavItem[] = [
   { label: "Medical Services", href: "/services" },
   { label: "Accommodation", href: "/accommodation" },
   { label: "About Us", href: "/about-us" },
-  { label: "Career", href: "/career" },
+  { label: "Careers", href: "/careers" },
   { label: "Contact Us", href: "/contact-us" },
 ];
 

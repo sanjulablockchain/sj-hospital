@@ -14,7 +14,7 @@ const hospitalLinks = [
   { label: "School wellness", href: "#wellness" },
   { label: "Network", href: "/network" },
   { label: "Media", href: "#media" },
-  { label: "Careers", href: "#career" },
+  { label: "Careers", href: "/careers" },
 ];
 
 export function HomeFooter() {

@@ -17,7 +17,7 @@ export const pharmacyNavigation: NavItem[] = [
   { label: "School Wellness", href: "/#wellness" },
   { label: "Network", href: "/network" },
   { label: "Media", href: "/media" },
-  { label: "Careers", href: "/#career" },
+  { label: "Careers", href: "/careers" },
 ];
 
 // Bare hashes are safe here, unlike servicesFooterColumns: every one of these
@@ -41,7 +41,7 @@ export const pharmacyFooterColumns: FooterColumn[] = [
       { label: "All services", href: "/services" },
       { label: "Facilities", href: "/facilities" },
       { label: "Admissions", href: "/services#admissions" },
-      { label: "Careers", href: "/#career" },
+      { label: "Careers", href: "/careers" },
     ],
   },
 ];

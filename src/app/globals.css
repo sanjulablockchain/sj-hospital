@@ -341,6 +341,11 @@ footer[id] {
      wash with its own darker accent rather than the dark theme's. */
   --home-accent-tint: rgba(44, 166, 240, 0.1);
   --home-accent-tint-soft: rgba(44, 166, 240, 0.06);
+  /* Validation text on a form field. The reference sets these per theme in its
+     `[data-status="error"]` rules; tokenised here so a form does not have to
+     carry a theme-aware class of its own. The success pair is already
+     --home-accent-soft, which flips the same way. */
+  --home-danger: #ffb4a2;
 }
 
 [data-sj][data-theme="light"] {
@@ -350,6 +355,8 @@ footer[id] {
   --home-accent-hover: #0f86e0;
   --home-accent-tint: rgba(11, 111, 192, 0.1);
   --home-accent-tint-soft: rgba(11, 111, 192, 0.06);
+  /* The dark theme's salmon would be unreadable on the light page background. */
+  --home-danger: #b23a20;
 }
 
 [data-sj] .sj-invert,

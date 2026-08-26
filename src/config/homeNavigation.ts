@@ -22,5 +22,9 @@ export const homeNavigation: NavItem[] = [
   // teaser directly below it.
   { label: "Network", href: "/network" },
   { label: "Media", href: "/media" },
-  { label: "Careers", href: "#career" },
+  // And the same again for Careers: the #career band stays on as the teaser,
+  // and the open roles, benefits, hiring process and application form live on
+  // /careers. A nav label has to mean the same thing wherever it is clicked, so
+  // this points at the page here too, not at the teaser below it.
+  { label: "Careers", href: "/careers" },
 ];

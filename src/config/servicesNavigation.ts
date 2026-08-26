@@ -17,7 +17,7 @@ export const servicesNavigation: NavItem[] = [
   { label: "School Wellness", href: "/#wellness" },
   { label: "Network", href: "/network" },
   { label: "Media", href: "/media" },
-  { label: "Careers", href: "/#career" },
+  { label: "Careers", href: "/careers" },
 ];
 
 // Same labels and order as servicesNavigation, for the /services/[slug]
@@ -35,7 +35,7 @@ export const servicesDetailNavigation: NavItem[] = [
   { label: "School Wellness", href: "/#wellness" },
   { label: "Network", href: "/network" },
   { label: "Media", href: "/media" },
-  { label: "Careers", href: "/#career" },
+  { label: "Careers", href: "/careers" },
 ];
 
 // Absolute `/services#...` targets rather than bare hashes, so these same
