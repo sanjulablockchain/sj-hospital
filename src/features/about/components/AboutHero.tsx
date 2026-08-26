@@ -4,7 +4,7 @@ import { ThemedHeader } from "@/components/layout/ThemedHeader";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { Ticker } from "@/components/ui/Ticker";
 import { aboutNavigation } from "@/config/aboutNavigation";
-import { heroFacts, tickerItems } from "../data/content";
+import { heroFacts, heroStandfirst, tickerItems } from "../data/content";
 
 /**
  * `#top`: the hospital building behind the themed header and the page's only
@@ -98,8 +98,7 @@ export function AboutHero() {
               className="max-w-[54ch] text-[18px] leading-[1.6] text-white/82"
               style={{ textWrap: "pretty" }}
             >
-              St. Joseph Hospital in Negombo delivers US standard, high-quality healthcare to Sri
-              Lankans at affordable prices.
+              {heroStandfirst}
             </p>
             <div className="flex flex-wrap gap-3">
               <a

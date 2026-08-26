@@ -6,6 +6,13 @@
 // The only new strings on this page are `tickerItems`, `heroFacts`' labels and
 // `jumpCards`' notes: each restates a claim already present in the copy below,
 // so none of them is a new hospital fact.
+//
+// `heroStandfirst` and the four `*Intro` constants near the bottom of this
+// file are not new copy either: each is a literal substring of the ported
+// paragraph or reason it introduces (`content.test.ts` asserts the substring
+// relationship), chosen so a jump card's `note` is never repeated verbatim by
+// the section it points at, and so the hero standfirst and `#story`'s intro
+// never quote the same sentence.
 
 export const tickerItems = [
   "US standard care",
@@ -98,3 +105,27 @@ export const partnerLogos: string[] = [
   "/images/partners/partner-4.png",
   "/images/partners/partner-5.png",
 ];
+
+// The hero standfirst: the first sentence of `storyParagraphs[0]`, quoted
+// literally so the hero states no fact `#story` doesn't already back.
+export const heroStandfirst =
+  "St. Joseph Hospital in Negombo delivers US standard, high-quality healthcare to Sri Lankans at affordable prices.";
+
+// `#story`'s SectionHead intro: the second sentence of `storyParagraphs[0]`,
+// the one `heroStandfirst` above does not use, so the hero and the section
+// never quote the same sentence.
+export const storyIntro =
+  "Our hospital was recently refurbished with a USD 1 million investment led by Kids & Teens Pediatric Medical Group (Los Angeles) and Asia Corp.";
+
+// `#different`'s SectionHead intro: built entirely from `reasons`' own
+// titles rather than restating any one description, so no sentence from the
+// grid below is quoted twice in the same section.
+export const differentIntro = reasons.map((r) => r.title).join(", ");
+
+// `#mission`'s SectionHead intro: a clause lifted from `mission.body`.
+export const missionIntro =
+  "complete healthcare solutions that combine advanced technology with patient-centered care";
+
+// `#group`'s SectionHead intro: the first sentence of `groupBody[0]`.
+export const groupIntro =
+  "Kids & Teens Medical Group, a leading pediatric care provider in Southern California, is dedicated to delivering compassionate and comprehensive healthcare services for children and adolescents.";

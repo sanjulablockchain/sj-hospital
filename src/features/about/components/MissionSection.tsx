@@ -1,10 +1,13 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHead } from "./SectionHead";
-import { jumpCards, mission, vision } from "../data/content";
+import { jumpCards, mission, missionIntro, vision } from "../data/content";
 
 /**
  * `#mission`: the mission and vision ported verbatim from the deleted
  * MissionVision.tsx, side by side above 900px and stacked below it.
+ *
+ * `intro` is `missionIntro`, a clause lifted from `mission.body`, not the
+ * jump card's `note` restated.
  */
 export function MissionSection() {
   return (
@@ -12,7 +15,7 @@ export function MissionSection() {
       id="mission"
       className="mx-auto max-w-[1440px] px-5 pt-26 sm:px-8 lg:px-11 max-[640px]:pt-18"
     >
-      <SectionHead eyebrow="03 / What we aim at" heading={jumpCards[2].label} intro={jumpCards[2].note} />
+      <SectionHead eyebrow="03 / What we aim at" heading={jumpCards[2].label} intro={missionIntro} />
 
       <div className="mt-10.5 grid gap-px bg-[var(--home-hairline)] min-[900px]:grid-cols-2">
         <Reveal>

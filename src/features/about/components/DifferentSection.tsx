@@ -1,6 +1,6 @@
 import { RevealStagger } from "@/components/ui/RevealStagger";
 import { SectionHead } from "./SectionHead";
-import { jumpCards, reasons } from "../data/content";
+import { differentIntro, jumpCards, reasons } from "../data/content";
 
 /**
  * `#different`: the six differentiators ported verbatim from the deleted
@@ -8,6 +8,11 @@ import { jumpCards, reasons } from "../data/content";
  * the parent background showing through a 1px grid gap, the same
  * hairline-through-a-grid-gap idiom `JumpCards` uses, so there are no double
  * borders where cells meet.
+ *
+ * `intro` is `differentIntro`, the six reason titles joined rather than the
+ * jump card's `note` restated: the grid below already spells out each title
+ * in full, so this only ever repeats a short label, the same pattern the
+ * heading's reuse of `jumpCards[1].label` already relies on.
  */
 export function DifferentSection() {
   return (
@@ -15,7 +20,7 @@ export function DifferentSection() {
       id="different"
       className="mx-auto max-w-[1440px] px-5 pt-26 sm:px-8 lg:px-11 max-[640px]:pt-18"
     >
-      <SectionHead eyebrow="02 / Why here" heading={jumpCards[1].label} intro={jumpCards[1].note} />
+      <SectionHead eyebrow="02 / Why here" heading={jumpCards[1].label} intro={differentIntro} />
 
       <RevealStagger
         stepMs={80}

@@ -1,12 +1,17 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
+  differentIntro,
   groupBody,
+  groupIntro,
   heroFacts,
+  heroStandfirst,
   jumpCards,
   mission,
+  missionIntro,
   partnerLogos,
   reasons,
+  storyIntro,
   storyParagraphs,
   tickerItems,
   vision,
@@ -23,6 +28,11 @@ const allCopy = [
   vision.title,
   vision.body,
   ...groupBody,
+  heroStandfirst,
+  storyIntro,
+  differentIntro,
+  missionIntro,
+  groupIntro,
 ];
 
 // Ruling A (controller): the brief's numeric scan below includes
@@ -41,6 +51,11 @@ const allCopyForNumberScan = [
   vision.title,
   vision.body,
   ...groupBody,
+  heroStandfirst,
+  storyIntro,
+  differentIntro,
+  missionIntro,
+  groupIntro,
 ];
 
 test("four story paragraphs, six reasons, four hero facts, four jump cards", () => {
@@ -92,10 +107,38 @@ test("the parent group copy keeps the roster figure and the expansion paragraph"
 
 test("every jump card anchors to a section this page renders", () => {
   const ids = ["#story", "#different", "#mission", "#group"];
-    for (const card of jumpCards) {
+  for (const card of jumpCards) {
     assert.ok(ids.includes(card.href), `${card.label} points at ${card.href}`);
   }
   assert.equal(new Set(jumpCards.map((c) => c.href)).size, 4);
+});
+
+// A reader who reads a jump card and clicks through must not see the same
+// sentence again immediately: each SectionHead intro is a literal substring
+// of its own section's ported copy, never the jump card's `note`.
+test("no SectionHead intro repeats its jump card's note, and each is a literal substring of its own section's copy", () => {
+  assert.ok(storyParagraphs[0].includes(storyIntro));
+  assert.notEqual(storyIntro, jumpCards[0].note);
+
+  for (const reason of reasons) {
+    assert.ok(differentIntro.includes(reason.title));
+  }
+  assert.notEqual(differentIntro, jumpCards[1].note);
+
+  assert.ok(mission.body.includes(missionIntro) || vision.body.includes(missionIntro));
+  assert.notEqual(missionIntro, jumpCards[2].note);
+
+  assert.ok(groupBody[0].includes(groupIntro) || groupBody[1].includes(groupIntro));
+  assert.notEqual(groupIntro, jumpCards[3].note);
+});
+
+// The hero standfirst and #story's intro must not quote the same sentence,
+// even though both are drawn from storyParagraphs[0].
+test("the hero standfirst and #story's intro are different sentences", () => {
+  assert.ok(storyParagraphs[0].includes(heroStandfirst));
+  assert.notEqual(heroStandfirst, storyIntro);
+  assert.ok(!heroStandfirst.includes(storyIntro));
+  assert.ok(!storyIntro.includes(heroStandfirst));
 });
 
 test("no invented figure: the only money and count claims are the refurbishment and the pediatrician roster", () => {
