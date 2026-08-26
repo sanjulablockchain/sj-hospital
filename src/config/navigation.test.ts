@@ -8,6 +8,7 @@ import { facilitiesNavigation } from "./facilitiesNavigation.ts";
 import { internationalNavigation } from "./internationalNavigation.ts";
 import { networkNavigation } from "./networkNavigation.ts";
 import { mediaNavigation } from "./mediaNavigation.ts";
+import { wellnessNavigation } from "./wellnessNavigation.ts";
 
 const labels = (items: { label: string }[]) => items.map((i) => i.label);
 
@@ -24,6 +25,7 @@ const ALL_NAVS = [
   internationalNavigation,
   networkNavigation,
   mediaNavigation,
+  wellnessNavigation,
 ];
 
 // The header must read identically on every page: only the targets differ.
@@ -52,6 +54,7 @@ test("Facilities, Pharmacy, International and Media reach their pages from every
       ["Facilities", "/facilities"],
       ["Pharmacy", "/pharmacy"],
       ["International Patient Care", "/international-care"],
+      ["School Wellness", "/school-wellness"],
       ["Network", "/network"],
       ["Media", "/media"],
     ]) {
@@ -81,6 +84,12 @@ test("on the network page itself, Network is an in-page anchor", () => {
   const item = networkNavigation.find((i) => i.label === "Network");
   assert.ok(item);
   assert.equal(item.href, "#family");
+});
+
+test("on the school wellness page itself, School Wellness is an in-page anchor", () => {
+  const item = wellnessNavigation.find((i) => i.label === "School Wellness");
+  assert.ok(item);
+  assert.equal(item.href, "#programme");
 });
 
 test("on the media page itself, Media is an in-page anchor", () => {
@@ -114,6 +123,9 @@ test("no nav item still points at a retired home or services band", () => {
       // And the same for Network, whose #network band on the home page is now
       // only a teaser.
       assert.ok(!/#network$/.test(item.href), `${item.label} still points at ${item.href}`);
+      // School wellness has a page of its own now, so the home page's #wellness
+      // teaser band is no longer a valid nav target either.
+      assert.ok(!/#wellness$/.test(item.href), `${item.label} still points at ${item.href}`);
     }
   }
 });

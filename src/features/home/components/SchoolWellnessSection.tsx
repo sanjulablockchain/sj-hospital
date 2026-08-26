@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { useParallax } from "../hooks/useParallax";
 
@@ -38,9 +39,15 @@ export function SchoolWellnessSection() {
               </div>
             ))}
           </div>
-          <a href="#contact" className="sj-invert mt-7 inline-flex items-center gap-2.5 bg-[var(--home-accent)] px-6 py-4 text-[15px] font-bold text-[var(--home-on-accent)]">
+          {/* Through to the page rather than down to #contact, the same way the
+              network teaser links to /network: the school wellness page's own
+              #book section is where a principal starts. */}
+          <Link
+            href="/school-wellness"
+            className="sj-invert mt-7 inline-flex items-center gap-2.5 bg-[var(--home-accent)] px-6 py-4 text-[15px] font-bold text-[var(--home-on-accent)]"
+          >
             Bring it to our school <span aria-hidden>&rarr;</span>
-          </a>
+          </Link>
         </Reveal>
         <Reveal className="relative min-h-[450px] overflow-hidden bg-[#0B1846]">
           <div ref={photoRef} style={{ transform: `translateY(${photoOffset}px)` }} className="absolute inset-x-0 -top-[8%] h-[116%]">
