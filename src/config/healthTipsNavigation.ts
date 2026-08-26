@@ -15,7 +15,7 @@ export const healthTipsNavigation: NavItem[] = [
   { label: "Pharmacy", href: "/pharmacy" },
   { label: "Health Tips", href: "#library" },
   { label: "International Patient Care", href: "/international-care" },
-  { label: "School Wellness", href: "/#wellness" },
+  { label: "School Wellness", href: "/school-wellness" },
   { label: "Network", href: "/network" },
   { label: "Media", href: "/media" },
   { label: "Careers", href: "/careers" },
@@ -42,7 +42,7 @@ export const healthTipsFooterColumns: FooterColumn[] = [
       { label: "All services", href: "/services" },
       { label: "Facilities", href: "/facilities" },
       { label: "Pharmacy", href: "/pharmacy" },
-      { label: "School wellness", href: "/#wellness" },
+      { label: "School wellness", href: "/school-wellness" },
     ],
   },
 ];

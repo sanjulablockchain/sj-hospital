@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { Reveal } from "@/components/ui/Reveal";
 import { AccordionList } from "@/components/ui/AccordionList";
 import type { AccordionItem } from "@/components/ui/AccordionList";
@@ -6,8 +7,13 @@ export type FaqItem = AccordionItem;
 
 type FaqAccordionProps = {
   faq: FaqItem[];
-  /** Section heading. */
-  heading: string;
+  /**
+   * Section heading. A node rather than a string so a caller can hard-break it,
+   * as /school-wellness does: where the line falls is a typographic decision
+   * that belongs beside the markup. The type stays the same everywhere else,
+   * so the four pages using this still share one size and weight.
+   */
+  heading: ReactNode;
   /** Optional numbered kicker above the heading, as the pharmacy page uses. */
   eyebrow?: string;
 };

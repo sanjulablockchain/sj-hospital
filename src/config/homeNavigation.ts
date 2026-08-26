@@ -14,7 +14,7 @@ export const homeNavigation: NavItem[] = [
   // /health-tips.
   { label: "Health Tips", href: "/health-tips" },
   { label: "International Patient Care", href: "/international-care" },
-  { label: "School Wellness", href: "#wellness" },
+  { label: "School Wellness", href: "/school-wellness" },
   // And the same again for Network: the #network band stays on as the
   // four-node teaser, and the family of companies, the group figures and the
   // referral answers live on /network. A nav label has to mean the same thing
