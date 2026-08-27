@@ -1,13 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { roomTypes } from "../data/content";
 
-const rooms = [
-  { id: "standard", label: "Standard" },
-  { id: "deluxe", label: "Deluxe" },
-  { id: "super-deluxe", label: "Super Deluxe" },
-  { id: "wards", label: "Wards" },
-];
+// Derived from `roomTypes` rather than a locally hardcoded list, so the ids
+// this component observes can never drift from the sections the page
+// actually renders.
+const rooms = roomTypes.map(({ id, name }) => ({ id, label: name }));
 
 export function RoomTypeNav() {
   const [headerHeight, setHeaderHeight] = useState(0);
@@ -47,7 +46,7 @@ export function RoomTypeNav() {
 
   return (
     <div
-      className="sticky z-30 border-b border-ink/10 bg-white/95 backdrop-blur-md"
+      className="sticky z-30 border-b border-[var(--home-hairline)] bg-[var(--home-bg)]/95 backdrop-blur-md"
       style={{ top: headerHeight }}
     >
       <div className="themed-scrollbar mx-auto flex max-w-[1240px] gap-2 overflow-x-auto px-6 py-3">
@@ -57,8 +56,8 @@ export function RoomTypeNav() {
             href={`#${room.id}`}
             className={`shrink-0 rounded-full px-4 py-2 text-sm font-semibold whitespace-nowrap transition ${
               activeId === room.id
-                ? "bg-primary text-white shadow-md shadow-primary/25"
-                : "bg-surface text-ink/70 hover:bg-primary/10 hover:text-primary"
+                ? "bg-[var(--home-accent)] text-[var(--home-on-accent)]"
+                : "text-[var(--home-muted)] hover:text-[var(--home-heading)]"
             }`}
           >
             {room.label}
