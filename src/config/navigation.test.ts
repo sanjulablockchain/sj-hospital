@@ -279,7 +279,7 @@ function stripCommentLines(src: string): string {
     .join("\n");
 }
 
-const RETIRED_COMPONENTS = ["SiteHeader", "SiteFooter", "PageBanner", "BackToTopButton"];
+const RETIRED_COMPONENTS = ["SiteHeader", "SiteFooter", "PageBanner", "BackToTopButton", "MobileNav"];
 const RETIRED_IDENTIFIERS = ["primaryNavigation", "footerQuickLinks"];
 
 // The old chrome is gone. These files were the last thing rendering the
@@ -293,6 +293,14 @@ const RETIRED_IDENTIFIERS = ["primaryNavigation", "footerQuickLinks"];
 // don't produce valid `from "..."` or `<Foo` syntax, so the component checks
 // need no stripping; the identifier checks do, since a plain word like
 // "primaryNavigation" could otherwise appear inside a sentence.
+//
+// MobileNav shares this generic treatment with the other four rather than a
+// narrower path-only special case: MobileNavPanel (which stays) does not
+// false-positive on either half. The path pattern requires the closing quote
+// immediately after the name, so "MobileNavPanel" never matches "MobileNav"
+// there; the JSX pattern's `\b` requires a word boundary, and there isn't one
+// between the "v" and the "P" in "<MobileNavPanel". Verified empirically, not
+// just by inspection: see the Round 2 section of the task report.
 test("the retired chrome is not referenced anywhere in src", () => {
   const files = findSourceFiles("src");
   for (const file of files) {
@@ -305,13 +313,6 @@ test("the retired chrome is not referenced anywhere in src", () => {
       assert.ok(!importPath.test(src), `${file} imports the retired ${name} module`);
       assert.ok(!jsxUsage.test(src), `${file} still renders <${name}`);
     }
-
-    // MobileNav (not MobileNavPanel, which stays) only ever appeared as an
-    // import path, so the path check alone is already a code reference.
-    assert.ok(
-      !/from\s+["']@\/components\/layout\/MobileNav["']/.test(src),
-      `${file} still imports the retired MobileNav`
-    );
 
     const stripped = stripCommentLines(src);
     for (const name of RETIRED_IDENTIFIERS) {
