@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
 import { CountUp } from "./CountUp";
@@ -49,6 +50,14 @@ export function WhoWeAreSection() {
               on a two hour cycle. Our in-house doctors order only the tests you genuinely need, and every
               report is read by two of them before it reaches you.
             </p>
+          </Reveal>
+          <Reveal className="mt-8">
+            <Link
+              href="/about-us"
+              className="sj-invert inline-flex items-center gap-2.5 border border-[var(--home-hairline-strong)] px-5.5 py-3.5 text-[14.5px] font-bold text-[var(--home-heading)]"
+            >
+              More about us <span aria-hidden>&rarr;</span>
+            </Link>
           </Reveal>
           <RevealStagger
             stepMs={110}

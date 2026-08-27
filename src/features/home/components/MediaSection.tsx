@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
 import { mediaItems } from "../data/media";
@@ -17,16 +18,19 @@ export function MediaSection() {
               &amp; gallery
             </h2>
           </div>
-          <a href="#media" className="sj-invert inline-flex items-center gap-2.5 border border-[var(--home-hairline-strong)] px-5.5 py-3.5 text-[14.5px] font-bold text-[var(--home-heading)]">
+          <Link
+            href="/media#contactdesk"
+            className="sj-invert inline-flex items-center gap-2.5 border border-[var(--home-hairline-strong)] px-5.5 py-3.5 text-[14.5px] font-bold text-[var(--home-heading)]"
+          >
             Media enquiries <span aria-hidden>&rarr;</span>
-          </a>
+          </Link>
         </div>
       </Reveal>
       <RevealStagger className="mt-11.5 border-t border-[var(--home-hairline)]">
         {mediaItems.map((item) => (
-          <a
+          <Link
             key={item.title}
-            href="#media"
+            href="/media#newsroom"
             className="sj-row-fill grid grid-cols-1 gap-3 border-b border-[var(--home-hairline)] px-1 py-6.5 text-inherit min-[640px]:grid-cols-[0.5fr_1.6fr_0.9fr] min-[640px]:items-baseline min-[640px]:gap-6"
           >
             <span className="text-[13.5px] font-bold tracking-[0.1em] text-[var(--home-muted)] tabular-nums">
@@ -38,7 +42,7 @@ export function MediaSection() {
             <span className="text-[13px] font-bold tracking-[0.14em] text-[var(--home-accent)] uppercase">
               {item.tag}
             </span>
-          </a>
+          </Link>
         ))}
       </RevealStagger>
     </section>

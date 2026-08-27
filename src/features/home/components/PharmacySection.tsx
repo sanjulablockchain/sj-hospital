@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { useParallax } from "../hooks/useParallax";
 import { RevealStagger } from "@/components/ui/RevealStagger";
@@ -58,9 +59,12 @@ export function PharmacySection() {
               read your file, at any hour of the night.
             </p>
             <div className="mt-7.5 flex flex-wrap gap-3">
-              <a href="#book" className="sj-invert inline-flex items-center gap-2.5 bg-[var(--home-accent)] px-6 py-4 text-[15px] font-bold text-[var(--home-on-accent)]">
+              <Link
+                href="/pharmacy#delivery"
+                className="sj-invert inline-flex items-center gap-2.5 bg-[var(--home-accent)] px-6 py-4 text-[15px] font-bold text-[var(--home-on-accent)]"
+              >
                 Order a delivery <span aria-hidden>&rarr;</span>
-              </a>
+              </Link>
               <a href="tel:+94742223334" className="sj-invert inline-flex items-center gap-2.5 border border-white/30 px-6 py-4 text-[15px] font-bold text-white">
                 Ask a pharmacist
               </a>

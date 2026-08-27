@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { LOGO_MARK } from "@/config/brand";
 
@@ -33,18 +34,18 @@ export function ContactCtaSection() {
           </p>
         </div>
         <div className="flex flex-col bg-[var(--home-bg)]">
-          <a
-            href="#surgical"
+          <Link
+            href="/services/general-surgery"
             className="sj-invert font-display flex flex-1 items-center justify-between gap-5 border-b border-[var(--home-hairline)] px-8 py-7 text-[25px] font-semibold tracking-[-0.02em] text-[var(--home-heading)]"
           >
             Surgical care <span aria-hidden>&rarr;</span>
-          </a>
-          <a
-            href="#rooms"
+          </Link>
+          <Link
+            href="/accommodation#book"
             className="sj-invert font-display flex flex-1 items-center justify-between gap-5 border-b border-[var(--home-hairline)] px-8 py-7 text-[25px] font-semibold tracking-[-0.02em] text-[var(--home-heading)]"
           >
             Reserve a room <span aria-hidden>&rarr;</span>
-          </a>
+          </Link>
           <a
             href="tel:+94117848484"
             className="sj-invert font-display flex flex-1 items-center justify-between gap-5 px-8 py-7 text-[25px] font-semibold tracking-[-0.02em] text-[var(--home-heading)] tabular-nums"
