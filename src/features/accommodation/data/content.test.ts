@@ -12,7 +12,6 @@ import {
   roomTypes,
   specialties,
   specialtiesHeading,
-  specialtiesIntro,
   tickerItems,
 } from "./content.ts";
 
@@ -44,11 +43,12 @@ test("only the standard room carries a figure; the rest are on request", () => {
 });
 
 // Every string export in this file, flattened to one array, so the price and
-// em-dash tests below cannot silently miss a newly added export the way the
-// original version of this file missed `heroStandfirst`, `roomsHeading`,
-// `specialtiesHeading`, `bookHeading`, `bookIntro` (all five tests) and
+// em-dash tests below cannot silently miss a newly added export the way an
+// earlier version of this file missed `heroStandfirst`, `roomsHeading`,
+// `specialtiesHeading`, `bookHeading`, `bookIntro` (both tests) and
 // `heroFacts` (the em-dash test only). Anything with copy that a reader can
-// see belongs in this array.
+// see belongs in this array. `content.ts` has no `specialtiesIntro`: see its
+// file-level comment for why `#specialties` has no standfirst at all.
 const allCopy: string[] = [
   ...tickerItems,
   mealsNote,
@@ -60,7 +60,6 @@ const allCopy: string[] = [
   roomsHeading,
   roomsIntro,
   specialtiesHeading,
-  specialtiesIntro,
   bookHeading,
   bookIntro,
 ];

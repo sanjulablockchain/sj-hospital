@@ -1,14 +1,18 @@
 import { RevealStagger } from "@/components/ui/RevealStagger";
 import { SectionHead } from "./SectionHead";
-import { specialties, specialtiesHeading, specialtiesIntro } from "../data/content";
+import { specialties, specialtiesHeading } from "../data/content";
 
 /**
  * `#specialties`: the ten specialties ported verbatim from the deleted
  * SpecialtiesChecklist.tsx, as a `RevealStagger` hairline grid.
  *
- * `heading` is `specialtiesHeading`, the checklist's own old heading. `intro`
- * is `specialtiesIntro`, the standard room's description, distinct from
- * `roomsIntro` above and from every jump card note.
+ * `heading` is `specialtiesHeading`, the checklist's own old heading. No
+ * `intro`: the heading plus the ten-item list below it is self-explanatory,
+ * and the one prose sentence this page has that is true of every room
+ * category rather than one (`mealsNote`) is already spent as `#rooms`'
+ * standfirst, immediately above this section. Quoting it again here, even as
+ * a different substring, would print the same sentence twice in a row, which
+ * is worse than a section with no standfirst at all.
  */
 export function SpecialtiesSection() {
   return (
@@ -16,7 +20,7 @@ export function SpecialtiesSection() {
       id="specialties"
       className="mx-auto max-w-[1440px] px-5 pt-26 sm:px-8 lg:px-11 max-[640px]:pt-18"
     >
-      <SectionHead eyebrow="02 / What every room includes" heading={specialtiesHeading} intro={specialtiesIntro} />
+      <SectionHead eyebrow="02 / What every room includes" heading={specialtiesHeading} />
 
       <RevealStagger
         stepMs={70}

@@ -3,14 +3,26 @@ import { Reveal } from "@/components/ui/Reveal";
 
 /**
  * The numbered eyebrow and heading on the left, the standfirst on the right,
- * both sitting on the same baseline. `#rooms`, `#specialties` and `#book` use
- * it identically; the reference repeats the same block for each.
+ * both sitting on the same baseline. `#rooms` and `#book` use it with an
+ * `intro`; `#specialties` omits one (see SpecialtiesSection.tsx for why), so
+ * `intro` is optional and the `<p>` only renders when there is one to show.
+ * `justify-between` still spaces the heading block correctly with the `<p>`
+ * absent, since a `flex` container with one child just lets it take its
+ * natural width instead of splitting space with a sibling.
  *
  * `heading` is a node rather than a string because both callers hard-break
  * their heading, and where the line falls is a typographic decision that
  * belongs beside the markup rather than in `data/content.ts`.
  */
-export function SectionHead({ eyebrow, heading, intro }: { eyebrow: string; heading: ReactNode; intro: string }) {
+export function SectionHead({
+  eyebrow,
+  heading,
+  intro,
+}: {
+  eyebrow: string;
+  heading: ReactNode;
+  intro?: string;
+}) {
   return (
     <Reveal className="flex flex-wrap items-end justify-between gap-10">
       <div>
@@ -21,7 +33,7 @@ export function SectionHead({ eyebrow, heading, intro }: { eyebrow: string; head
           {heading}
         </h2>
       </div>
-      <p className="max-w-[38ch] text-[16.5px] leading-[1.6] text-[var(--home-muted)]">{intro}</p>
+      {intro && <p className="max-w-[38ch] text-[16.5px] leading-[1.6] text-[var(--home-muted)]">{intro}</p>}
     </Reveal>
   );
 }

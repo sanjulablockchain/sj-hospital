@@ -14,14 +14,14 @@
  * and `jumpCards`' notes: each restates a claim already present in the copy
  * below, so none of them is a new hospital fact.
  *
- * `heroStandfirst` and the three `*Intro` constants near the bottom of this
- * file are not new copy either: each is a literal quote or literal substring
- * of copy the old accommodation page or its components already carried,
- * chosen so a jump card's `note` is never repeated (verbatim or paraphrased)
- * by the section it points at. `roomsIntro` and `specialtiesIntro` are both
- * drawn from `mealsNote`, but as different strings (the full sentence for
- * one, a substring for the other), because it is the one sentence on this
- * page that applies to every room category rather than one of them.
+ * `heroStandfirst` and the `*Intro` constants near the bottom of this file
+ * are not new copy either: each is a literal quote of copy the old
+ * accommodation page or its components already carried, chosen so a jump
+ * card's `note` is never repeated (verbatim or paraphrased) by the section it
+ * points at. This page has exactly one prose sentence that is true of every
+ * room category rather than one (`mealsNote`), and it is spent once, as
+ * `roomsIntro`. `#specialties` has no `intro` at all rather than a second,
+ * near-identical quote of that same sentence: see SpecialtiesSection.tsx.
  */
 
 /** One of the four inpatient room categories. */
@@ -192,18 +192,10 @@ export const heroStandfirst = "Experience US Standard Comfort and Facilities in 
 export const roomsHeading = "Rooms ranging from functional to premium";
 export const roomsIntro = mealsNote;
 
-// `#specialties`'s SectionHead heading and intro: the checklist's own old
-// heading, verbatim, and a literal substring of `mealsNote` (dropping the
-// leading "Enjoy " and the trailing period) rather than `mealsNote` in full,
-// so this section's standfirst is a different string from `roomsIntro`
-// above even though both are drawn from the same sentence. Meals are the one
-// thing `mealsNote` states applies across every category rather than one, so
-// this is "about all rooms" the way the standard room's own description
-// (the previous, wrong choice here) was not. It is also not `jumpCards[0]`'s
-// (or any other card's) `note`, whether verbatim or paraphrased.
+// `#specialties`'s SectionHead heading: the checklist's own old heading,
+// verbatim. No matching `*Intro`: see the file-level comment above and
+// SpecialtiesSection.tsx for why this section has no standfirst.
 export const specialtiesHeading = "Specialties of Our Inpatient Rooms";
-export const specialtiesIntro =
-  "three daily meals with a choice of Eastern, Western, or Sri Lankan cuisine, including a diabetic menu option, plus tea or coffee with a snack";
 
 // `#book`'s SectionHead heading and intro: the old index.tsx's own booking
 // panel copy, verbatim, distinct from every intro and jump card note above.
