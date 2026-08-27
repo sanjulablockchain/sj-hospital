@@ -589,7 +589,23 @@ footer[id] {
    glaring white block on an otherwise dark page. Inverting and rotating the hue
    back gives a dark map from the same tiles: no second tile host, no extra
    attribution. Applied to the tile pane alone, so the marker and popup keep
-   their real colours. */
+   their real colours.
+
+   The light-theme rule below (an identity filter) matters as much as the
+   dark-theme one: Leaflet's own tiles inherit `filter` from this pane
+   (`.leaflet-tile { filter: inherit; }` in leaflet.css) and are positioned
+   with `transform: translate3d(...)`, which promotes them to their own
+   compositor layer. Toggling the theme while the map is on screen used to add
+   or remove the `filter` property outright, which changes whether that layer
+   exists at all; Chromium would drop the previous paint on that transition
+   and never repaint it, leaving fully-loaded tiles rendering as blank grey.
+   Keeping `filter` present at all times in both themes, so only its values
+   change, keeps the compositor layer alive across a toggle and avoids that
+   blank repaint. */
+[data-sj] .leaflet-tile-pane {
+  filter: invert(0) hue-rotate(0deg) brightness(1) contrast(1);
+}
+
 [data-sj][data-theme="dark"] .leaflet-tile-pane {
   filter: invert(1) hue-rotate(180deg) brightness(0.95) contrast(0.9);
 }

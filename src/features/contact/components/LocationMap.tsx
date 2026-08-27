@@ -8,6 +8,7 @@ import { HOSPITAL_COORDS } from "../data/content";
 export function LocationMap() {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<LeafletMap | null>(null);
+  const themeObserverRef = useRef<MutationObserver | null>(null);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -69,10 +70,29 @@ export function LocationMap() {
         );
 
       mapRef.current = map;
+
+      // Belt-and-braces alongside the always-present `filter` in globals.css
+      // (see the comment on `.leaflet-tile-pane` there): force Leaflet to
+      // recompute and repaint its tile positions right after a theme toggle,
+      // so a toggle can never leave the map blank even if some other
+      // reflow/compositing quirk survives the CSS-only fix. `invalidateSize`
+      // is Leaflet's own API for "the container's geometry may have changed,
+      // reposition everything", which is exactly the effect a theme toggle
+      // (and its filter change) has on the tile pane.
+      const root = document.getElementById("sj-root");
+      const observer = root
+        ? new MutationObserver(() => {
+            requestAnimationFrame(() => mapRef.current?.invalidateSize());
+          })
+        : null;
+      observer?.observe(root!, { attributes: true, attributeFilter: ["data-theme"] });
+      themeObserverRef.current = observer;
     });
 
     return () => {
       cancelled = true;
+      themeObserverRef.current?.disconnect();
+      themeObserverRef.current = null;
       mapRef.current?.remove();
       mapRef.current = null;
     };
