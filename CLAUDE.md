@@ -21,7 +21,7 @@ docker compose up --build                              # containerized productio
 # Windows/Docker Desktop: live hot-reload doesn't auto-compile: restart with "docker compose -f docker-compose.dev.yml restart web" or use npm run dev
 ```
 
-Package manager: **npm** (`package-lock.json`). No test runner is configured yet.
+Package manager: **npm** (`package-lock.json`). `npm test` runs `node --test` over `src/**/*.test.ts`.
 
 ## Next.js 16 gotchas (changed from earlier versions)
 

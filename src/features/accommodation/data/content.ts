@@ -181,7 +181,7 @@ export const jumpCards = [
   },
 ];
 
-// The old page's PageBanner title, verbatim. `#top`'s standfirst: broad,
+// The old page's page-banner title, verbatim. `#top`'s standfirst: broad,
 // naming the whole room lineup rather than one category, and distinct from
 // every intro below and from every jump card note above.
 export const heroStandfirst = "Experience US Standard Comfort and Facilities in Our Inpatient Rooms";

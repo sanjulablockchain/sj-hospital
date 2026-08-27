@@ -82,7 +82,7 @@ export const contactRows: {
 // verbatim. Distinct from jumpCards[0].note above and from every other intro.
 export const reachIntro = "Call, message, or walk in, whichever is easiest for you.";
 
-// `#message`'s SectionHead intro: the old PageBanner's subtitle and
+// `#message`'s SectionHead intro: the old page banner's subtitle and
 // ContactFormPanel.tsx's own standfirst (the two were the same sentence in the
 // old page too), verbatim. Distinct from jumpCards[1].note above.
 export const messageIntro = "We will contact you within one business day.";

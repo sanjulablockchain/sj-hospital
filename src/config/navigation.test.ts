@@ -238,6 +238,52 @@ function findHeroFiles(dir: string): string[] {
   return found;
 }
 
+// Walks all of src for every .ts/.tsx file, the same set
+// `globSync("src/**/*.{ts,tsx}")` would return. Written by hand instead, for
+// the same reason findHeroFiles above is: @types/node@20 (pinned in this
+// repo) predates fs.globSync's type declarations, so importing it fails
+// `tsc --noEmit` even though the pinned Node runtime would run it fine.
+function findSourceFiles(dir: string): string[] {
+  const found: string[] = [];
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const full = join(dir, entry.name);
+    if (entry.isDirectory()) found.push(...findSourceFiles(full));
+    else if (entry.isFile() && (entry.name.endsWith(".ts") || entry.name.endsWith(".tsx")))
+      found.push(full);
+  }
+  return found;
+}
+
+// The old chrome is gone. These files were the last thing rendering the
+// pre-redesign header, footer and page banner, and (marketing) was the only
+// route group still using them. A stray re-import would silently reintroduce a
+// second design system, so it fails the suite instead.
+test("the retired chrome is not referenced anywhere in src", () => {
+  const RETIRED = [
+    "SiteHeader",
+    "SiteFooter",
+    "MobileNav\"",
+    "PageBanner",
+    "BackToTopButton",
+    "primaryNavigation",
+    "footerQuickLinks",
+  ];
+  const files = findSourceFiles("src");
+  for (const file of files) {
+    if (file.endsWith("navigation.test.ts")) continue;
+    const src = readFileSync(file, "utf8");
+    for (const name of RETIRED) {
+      assert.ok(!src.includes(name), `${file} still references ${name}`);
+    }
+  }
+});
+
+test("navigation.ts still exports the NavItem type every nav depends on", () => {
+  const src = readFileSync("src/config/navigation.ts", "utf8");
+  assert.match(src, /export type NavItem/);
+  assert.ok(!src.includes("primaryNavigation"));
+});
+
 // The header's "Book now" button has to mean the same thing on every page. It
 // used to be a per-page anchor (#form, #book, #enquiry, #press, #contact), so
 // the same button scrolled somewhere different depending on where you clicked

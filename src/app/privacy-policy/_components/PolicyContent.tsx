@@ -4,8 +4,13 @@ type Block =
   | { type: "p"; text: string }
   | { type: "ul"; items: string[] };
 
+// The policy's own "Last updated" line, verbatim. PolicyHero reads this
+// export for its standfirst rather than retyping the date, so the two can
+// never drift apart.
+export const policyLastUpdated = "Last updated: August 31, 2025";
+
 const blocks: Block[] = [
-  { type: "p", text: "Last updated: August 31, 2025" },
+  { type: "p", text: policyLastUpdated },
   {
     type: "p",
     text: "This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.",
@@ -179,18 +184,18 @@ const blocks: Block[] = [
 
 export function PolicyContent() {
   return (
-    <div className="mx-auto max-w-3xl space-y-5 px-6 py-16 text-sm leading-relaxed text-ink/80 sm:py-20">
+    <div className="mx-auto max-w-[72ch] space-y-5 px-6 py-16 text-sm leading-relaxed text-[var(--home-body)] sm:py-20">
       {blocks.map((block, index) => {
         if (block.type === "h2") {
           return (
-            <h2 key={index} className="pt-4 font-heading text-xl font-bold text-ink">
+            <h2 key={index} className="font-display pt-4 text-xl font-bold text-[var(--home-heading)]">
               {block.text}
             </h2>
           );
         }
         if (block.type === "h3") {
           return (
-            <h3 key={index} className="pt-2 font-heading text-base font-bold text-ink">
+            <h3 key={index} className="font-display pt-2 text-base font-bold text-[var(--home-heading)]">
               {block.text}
             </h3>
           );

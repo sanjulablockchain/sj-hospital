@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import { PageBanner } from "@/components/layout/PageBanner";
+import { ThemedFooter } from "@/components/layout/ThemedFooter";
+import { privacyFooterColumns } from "@/config/privacyNavigation";
+import { PolicyHero } from "./_components/PolicyHero";
 import { PolicyContent } from "./_components/PolicyContent";
 
 export const metadata: Metadata = {
@@ -11,8 +13,9 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <PageBanner title="Privacy Policy" />
+      <PolicyHero />
       <PolicyContent />
+      <ThemedFooter columns={privacyFooterColumns} id="footer" />
     </>
   );
 }

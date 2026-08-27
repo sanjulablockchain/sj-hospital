@@ -10,7 +10,7 @@
  *
  * `helpRail`'s heading and body are lifted verbatim from the gradient rail
  * that used to sit inside DoctorDirectory.tsx. `heroStandfirst` is the old
- * index.tsx PageBanner's own subtitle, verbatim. None of this is a new
+ * index.tsx page banner's own subtitle, verbatim. None of this is a new
  * hospital fact.
  */
 import { doctors } from "./doctors.ts";
@@ -36,7 +36,7 @@ export const tickerItems: readonly string[] = Object.entries(
   .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
   .map(([speciality]) => speciality);
 
-// The old index.tsx PageBanner's own subtitle, verbatim.
+// The old index.tsx page banner's own subtitle, verbatim.
 export const heroStandfirst =
   "Consult our in-house doctors at St. Joseph Hospital in Negombo. We have a 24/7 online doctor channeling system to help you book online.";
 
