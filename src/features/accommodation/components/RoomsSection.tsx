@@ -17,9 +17,13 @@ import { roomsHeading, roomsIntro, roomTypes } from "../data/content";
  * `heading` and `intro` are `roomsHeading` and `roomsIntro`: RoomTypes.tsx's
  * own old h2 and meals sentence, so this section states nothing new.
  *
- * Each room wrapper carries `scroll-mt-[200px]`, because the sticky nav above
- * it would otherwise overlap the room heading when the browser jumps to the
- * anchor.
+ * Each room wrapper carries `scroll-mt-[88px]`, matched to `RoomTypeNav`'s own
+ * sticky bar so it clears the room heading rather than covering it (or, if
+ * oversized, leaving it absurdly far below the bar). The bar renders at about
+ * 64px tall: a 1px bottom border, `py-3`'s 24px of vertical padding, and a
+ * chip's own 36px (`text-sm`'s 20px line height plus `py-2`'s 16px), rounded
+ * up. 88px adds about 24px of breathing room past that, so a hash jump to,
+ * say, `#super-deluxe` leaves the heading clear of the bar.
  */
 export function RoomsSection() {
   return (
@@ -38,7 +42,7 @@ export function RoomsSection() {
             <RevealOnScroll key={room.id} delayMs={index * 60}>
               <div
                 id={room.id}
-                className="scroll-mt-[200px] grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center"
+                className="scroll-mt-[88px] grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center"
               >
                 <div className={index % 2 === 1 ? "lg:order-2" : undefined}>
                   <div className="mb-2.5 flex flex-wrap items-baseline gap-x-3 gap-y-1">

@@ -24,12 +24,16 @@ test("four room types in the site's own order, with their ids", () => {
   );
 });
 
-test("every room type has photos, amenities and a price", () => {
+test("every room type has photos, amenities, a price and a short label", () => {
   for (const room of roomTypes) {
     assert.ok(room.amenities.length >= 6, `${room.id} has ${room.amenities.length} amenities`);
     assert.equal(room.photos.length, 2);
     assert.ok(room.description.trim().length > 0);
     assert.ok(room.price.trim().length > 0);
+    // FIX 8: RoomTypeNav.tsx's chips read `shortName`, not `name`, so they
+    // match the short forms the jump cards and footer already use. Any value
+    // here must be a substring of `name`, never new wording.
+    assert.ok(room.name.includes(room.shortName), `${room.id}'s shortName "${room.shortName}" is not part of "${room.name}"`);
   }
 });
 

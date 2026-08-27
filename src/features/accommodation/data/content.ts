@@ -28,6 +28,10 @@
 export type RoomType = {
   id: string;
   name: string;
+  /** A short form of `name`, always a substring of it (never new wording),
+   * for the chips in RoomTypeNav.tsx: the same short forms ("Standard",
+   * "Super Deluxe") the jump cards and footer already use. */
+  shortName: string;
   description: string;
   amenities: string[];
   photos: { src: string; alt: string }[];
@@ -40,6 +44,7 @@ export const roomTypes: RoomType[] = [
   {
     id: "standard",
     name: "Standard Rooms",
+    shortName: "Standard",
     description:
       "Our standard rooms offer essential comfort to suit your basics and function, backed by comprehensive medical support.",
     amenities: [
@@ -59,6 +64,7 @@ export const roomTypes: RoomType[] = [
   {
     id: "deluxe",
     name: "Deluxe Rooms",
+    shortName: "Deluxe",
     description: "A larger space with added comfort for patients who want a bit more.",
     amenities: [
       "Hot & cool water",
@@ -79,6 +85,7 @@ export const roomTypes: RoomType[] = [
   {
     id: "super-deluxe",
     name: "Super Deluxe Rooms",
+    shortName: "Super Deluxe",
     description: "Our most premium inpatient rooms, with dedicated steward service.",
     amenities: [
       "Hot & cool water",
@@ -101,6 +108,7 @@ export const roomTypes: RoomType[] = [
   {
     id: "wards",
     name: "Wards",
+    shortName: "Wards",
     description:
       "Comfortable shared wards with 3-bed and 2-bed options and bed separators for privacy. Upon discharge, patients may receive a complimentary fruit or chocolate basket. Discounts may also be available at the attending physician's discretion, and VIP service is available for those seeking enhanced care.",
     amenities: [
