@@ -1,25 +1,28 @@
 "use client";
 
 import { useState } from "react";
+import { ThemeMenuToggle } from "@/components/theme/ThemeMenuToggle";
 import type { NavItem } from "@/config/navigation";
 
 type MobileNavPanelProps = {
   items: NavItem[];
-  bookHref?: string;
 };
 
-export function MobileNavPanel({ items, bookHref = "#book" }: MobileNavPanelProps) {
+export function MobileNavPanel({ items }: MobileNavPanelProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="ml-auto shrink-0 min-[1120px]:hidden">
+    // ThemedHeader decides when this is on screen and keeps it last in the row,
+    // so the hamburger is the rightmost control. The panel below is positioned
+    // against the header, which is the nearest positioned ancestor.
+    <div className="shrink-0">
       <button
         type="button"
         aria-expanded={isOpen}
         aria-controls="home-mobile-nav-panel"
         aria-label={isOpen ? "Close menu" : "Open menu"}
         onClick={() => setIsOpen((open) => !open)}
-        className="flex h-11 w-11 items-center justify-center border border-white/28 text-[17px] text-white"
+        className="flex h-10 w-10 items-center justify-center border border-white/28 text-[16px] text-white sm:h-11 sm:w-11 sm:text-[17px]"
       >
         <span aria-hidden>{isOpen ? "✕" : "☰"}</span>
       </button>
@@ -40,14 +43,13 @@ export function MobileNavPanel({ items, bookHref = "#book" }: MobileNavPanelProp
                 {item.label}
               </a>
             ))}
-            <a
-              href={bookHref}
-              onClick={() => setIsOpen(false)}
-              className="mt-2 bg-[var(--home-accent)] px-5 py-3 text-center text-[15px] font-bold text-[var(--home-on-accent)]"
-            >
-              Book now
-            </a>
           </nav>
+
+          {/* Book now is not repeated here: it now sits in the header row at
+              every width, so the menu carries the theme switch instead. */}
+          <div className="mt-3 border-t border-[var(--home-hairline)] pt-2">
+            <ThemeMenuToggle />
+          </div>
         </div>
       )}
     </div>
