@@ -12,12 +12,14 @@
  * WHAT IS REAL, and checked against the repo:
  *
  * - All six `jobs`. Two carry the full detail the old /career page published
- *   (Pharmacist, and Business Development / Insurance Coordinator), including
- *   the real `hr@ktdoctor.com` / 074 220 8704 application route. The other four
+ *   (Pharmacist, and Business Development / Insurance Coordinator). Their
+ *   074 220 8704 application line is real; the `hr@ktdoctor.com` address they
+ *   published is not one of the site's two allowed mailboxes, so the
+ *   applications route is `info@sjhospital.lk`. The other four
  *   are the vacancies `features/home/data/careers.ts` already advertises on the
  *   home page; only their titles, departments and contract types come from
  *   there, so see the placeholder list below.
- * - The `0117 84 84 84` switchboard, `careers@sjhospital.lk`, the LinkedIn
+ * - The `0117 84 84 84` switchboard, the LinkedIn
  *   page, and the nine-company group, all evidenced elsewhere in this repo.
  * - The hero photograph: St. Joseph Hospital's own staff, in the hospital's own
  *   branded scrubs, from the hospital's own media library.
@@ -48,10 +50,11 @@
  * - Eleven of the reference's seventeen vacancies. None of them exists in this
  *   repo, and inventing an open ICU or maternity post is the one error on a
  *   careers page that costs a stranger a wasted application.
- * - "Every genuine communication comes from an address ending sjhospital.lk",
- *   from the fraud checklist. The hospital's own advertised HR address is
- *   `hr@ktdoctor.com`, so the reference's rule would have told candidates that
- *   the real one was a scam. `fraudChecks` names both domains.
+ * - Nothing from the fraud checklist any more. Its "every genuine
+ *   communication comes from an address ending sjhospital.lk" rule was once
+ *   cut, because the hospital advertised an `hr@ktdoctor.com` route and the
+ *   rule would have branded that address a scam. The route is retired, so the
+ *   rule now stands as the reference wrote it.
  *
  * `content.test.ts` pins this notice, the cut claims and the derived counts, so
  * none of it can quietly drift back.
@@ -74,11 +77,15 @@ export const PLACEHOLDER_NOTICE =
 export const SWITCHBOARD = "0117 84 84 84";
 export const SWITCHBOARD_TEL = "+94117848484";
 
-/** The address the home page's careers band already sends people to. */
-export const CAREERS_EMAIL = "careers@sjhospital.lk";
-
-/** The route the two fully specified vacancies already publish. */
-export const HR_EMAIL = "hr@ktdoctor.com";
+/**
+ * The one address this page publishes. It was `careers@sjhospital.lk`, and the
+ * two fully specified vacancies carried a second route on a second domain,
+ * `hr@ktdoctor.com`, inherited from the old /career page. The site now
+ * publishes only the two mailboxes `@/config/contactEmails` allows, and a job
+ * application is general correspondence rather than a booking, so both routes
+ * collapse onto the general one.
+ */
+export const CAREERS_EMAIL = "info@sjhospital.lk";
 export const HR_PHONE = "074 220 8704";
 
 export const LINKEDIN_URL = "https://www.linkedin.com/company/sjhnegomb/";
@@ -104,7 +111,7 @@ export const jobs: readonly Job[] = [
       "Strong interpersonal skills, and a team player",
     ],
     detail: [
-      `Send your CV to ${HR_EMAIL} with "Pharmacist" in the subject line`,
+      `Send your CV to ${CAREERS_EMAIL} with "Pharmacist" in the subject line`,
       `Call ${HR_PHONE} if you would rather ask about the post first`,
       "Based at St. Joseph Hospital, Negombo",
     ],
@@ -121,7 +128,7 @@ export const jobs: readonly Job[] = [
       "Fluent in English and Sinhala, with Tamil an advantage",
     ],
     detail: [
-      `Send your CV to ${HR_EMAIL}`,
+      `Send your CV to ${CAREERS_EMAIL}`,
       `Call ${HR_PHONE} for enquiries about the post`,
       "Based in Negombo",
     ],
@@ -138,7 +145,7 @@ export const jobs: readonly Job[] = [
     ],
     detail: [
       "Shift roster, covering nights and weekends",
-      `Apply to ${HR_EMAIL} with the role in the subject line`,
+      `Apply to ${CAREERS_EMAIL} with the role in the subject line`,
     ],
   },
   {
@@ -152,7 +159,7 @@ export const jobs: readonly Job[] = [
     ],
     detail: [
       "Shift roster, with on call cover for emergency lists",
-      `Apply to ${HR_EMAIL} with the role in the subject line`,
+      `Apply to ${CAREERS_EMAIL} with the role in the subject line`,
     ],
   },
   {
@@ -166,7 +173,7 @@ export const jobs: readonly Job[] = [
     ],
     detail: [
       "Shift roster, including nights",
-      `Apply to ${HR_EMAIL} with the role in the subject line`,
+      `Apply to ${CAREERS_EMAIL} with the role in the subject line`,
     ],
   },
   {
@@ -180,7 +187,7 @@ export const jobs: readonly Job[] = [
     ],
     detail: [
       "Shift roster, including nights",
-      `Apply to ${HR_EMAIL} with the role in the subject line`,
+      `Apply to ${CAREERS_EMAIL} with the role in the subject line`,
     ],
   },
 ];
@@ -388,15 +395,16 @@ export const students: readonly StudentRoute[] = [
 ];
 
 /**
- * The one section of the reference that needed almost no cutting, because it
- * makes promises about what the hospital will NOT do. The exception is the
- * domain rule: the reference said every genuine message ends `sjhospital.lk`,
- * which would have branded the hospital's own advertised `hr@ktdoctor.com` a
- * scam. Both domains are named instead.
+ * The one section of the reference that needed no cutting, because it makes
+ * promises about what the hospital will NOT do. Its domain rule was once the
+ * exception: the reference said every genuine message ends `sjhospital.lk`,
+ * which would have branded the hospital's then advertised `hr@ktdoctor.com`
+ * route a scam. That route is retired and the site publishes from one domain
+ * now, so the rule is stated as the reference wrote it.
  */
 export const fraudChecks: readonly string[] = [
   "We advertise only on this website, our own social media pages, and recognised job boards",
-  "Genuine messages come from an address ending sjhospital.lk or ktdoctor.com",
+  "Genuine messages come from an address ending sjhospital.lk",
   "We never ask for an application fee, training deposit or agent commission",
   "We never ask for a payment to process a visa or an overseas placement",
   "We never ask for your bank details or your original certificates before an offer",

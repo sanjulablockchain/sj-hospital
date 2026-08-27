@@ -16,9 +16,10 @@
  *   it (the thousandth cholecystectomy, the fortieth school, the nine hundred
  *   people screened, the forty nursing officers).
  * - `featured`, which is the August 2026 endoscopy suite release.
- * - The `media@sjhospital.lk` address. The repo only evidences
- *   `careers@sjhospital.lk` and `appointments-sjhospital`, so this follows the
- *   pattern but is an assumption.
+ * - Nothing about the press desk address. The reference's invented
+ *   `media@sjhospital.lk` is gone: enquiries go to the hospital's general
+ *   mailbox, one of the two addresses this site is allowed to publish. What
+ *   remains assumed is that Corporate Communications reads it.
  * - The Communications hours (weekdays 8am to 5pm), the duty phone outside
  *   them, and the same working day reply promise in `heroFacts` and `desk`.
  * - Every row of `kit`. None of these files exists in the repo, which is why
@@ -49,8 +50,13 @@ import type {
 export const PLACEHOLDER_NOTICE =
   "Placeholder content awaiting St. Joseph Hospital Corporate Communications sign-off.";
 
-/** Press desk address. Assumed from the `careers@` pattern, not confirmed. */
-export const MEDIA_EMAIL = "media@sjhospital.lk";
+/**
+ * Press desk address. This was `media@sjhospital.lk`, invented by the design
+ * reference and flagged in the header above as an assumption. The site
+ * publishes only the two mailboxes `@/config/contactEmails` allows, and a
+ * press enquiry is general correspondence, so it is the general one.
+ */
+export const MEDIA_EMAIL = "info@sjhospital.lk";
 
 /** The hospital's real switchboard, the one number the repo does evidence. */
 export const SWITCHBOARD = "0117 84 84 84";

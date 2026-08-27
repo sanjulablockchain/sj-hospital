@@ -47,5 +47,7 @@ export const helpRail = {
   body: "Our channelling desk will match you to the right consultant, any hour of the day.",
   phone: "0117 84 84 84",
   phoneHref: "tel:+94117848484",
-  email: "info@sjhospital.lk",
+  // The channelling desk books consultations, so it takes the appointments
+  // mailbox rather than the general one. See `@/config/contactEmails`.
+  email: "appointments@sjhospital.lk",
 };

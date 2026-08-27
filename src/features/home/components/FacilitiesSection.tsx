@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
@@ -35,12 +36,12 @@ export function FacilitiesSection() {
                   {card.title}
                 </h3>
                 <p className="mt-2.5 text-[14.5px] leading-[1.55] opacity-82">{card.body}</p>
-                <a
+                <Link
                   href={card.href}
                   className="mt-4.5 inline-flex items-center gap-2 border-b border-[var(--home-on-accent)]/40 pb-0.5 text-[14px] font-bold"
                 >
                   {card.linkLabel} <span aria-hidden>&rarr;</span>
-                </a>
+                </Link>
               </div>
             </article>
           ) : (
@@ -72,12 +73,12 @@ export function FacilitiesSection() {
                   {card.title}
                 </h3>
                 <p className="mt-2.5 text-[14.5px] leading-[1.55] text-white/78">{card.body}</p>
-                <a
+                <Link
                   href={card.href}
                   className="mt-3.5 inline-flex translate-y-2.5 items-center gap-2 text-[13.5px] font-bold text-[#7FCBFF] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100"
                 >
                   {card.linkLabel} <span aria-hidden>&rarr;</span>
-                </a>
+                </Link>
               </div>
             </article>
           )

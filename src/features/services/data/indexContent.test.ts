@@ -11,7 +11,33 @@ import {
   paymentNotes,
   comforts,
   internationalSteps,
+  tickerItems,
 } from "./indexContent.ts";
+
+// The services index was the only page whose hero had no marquee. These pin
+// the copy that filled the gap: short enough to read while it scrolls, and
+// every phrase a claim the rest of the repo already makes.
+test("the hero marquee carries short, unpriced phrases", () => {
+  assert.ok(tickerItems.length >= 5, `only ${tickerItems.length} ticker phrases`);
+  for (const item of tickerItems) {
+    assert.ok(item.trim().length > 0, "empty ticker phrase");
+    assert.ok(item.length <= 40, `too long to read while scrolling: ${item}`);
+    assert.ok(!/\b\d{1,3},\d{3}\b|\bLKR\b|\bRs\.?\b/i.test(item), `${item} is priced`);
+    for (const form of ["\u2014", "&mdash;", "&#8212;", "&#x2014;"]) {
+      assert.ok(!item.includes(form), `${item} contains an em dash`);
+    }
+  }
+});
+
+// The count is derived elsewhere on the page and must not be contradicted by a
+// phrase that hard-codes it, which is the same trap the directory jump card
+// documents.
+test("the marquee's centre count matches the centres it advertises", () => {
+  const claim = tickerItems.find((item) => /centres of excellence/i.test(item));
+  assert.ok(claim, "the marquee no longer mentions the centres");
+  assert.match(claim, /^Nine /, `${claim} does not state nine`);
+  assert.equal(centres.length, 9);
+});
 
 test("nine centres of excellence, numbered 01-09", () => {
   assert.equal(centres.length, 9);

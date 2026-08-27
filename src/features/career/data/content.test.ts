@@ -12,7 +12,6 @@ import {
   formNotes,
   fraudChecks,
   heroFacts,
-  HR_EMAIL,
   jobs,
   jumpCards,
   PLACEHOLDER_NOTICE,
@@ -84,14 +83,17 @@ test("the reference's invented figures stay out", () => {
   assert.ok(!/one to two or better|1 to 2 ratio/i.test(copy), "the nurse ratio promise is back");
 });
 
-// The reference's fraud checklist said every genuine message ends
-// `sjhospital.lk`, which would have told candidates that the hospital's own
-// advertised HR address was a scam. Both domains have to be named.
-test("the fraud checklist does not brand the real HR address a scam", () => {
+// The checklist has to keep telling candidates which domain is genuine, and
+// name only the domain the site actually sends from. It used to have to name
+// ktdoctor.com as well, because the hospital advertised an HR address there.
+// That route is retired, so naming a second domain now would legitimise
+// exactly the kind of address this checklist exists to warn people about.
+test("the fraud checklist names the one genuine domain and no other", () => {
   const domainRule = fraudChecks.find((check) => check.includes("sjhospital.lk"));
-  assert.ok(domainRule, "the checklist no longer says which domains are genuine");
-  assert.match(domainRule, /ktdoctor\.com/);
-  assert.ok(copy.includes(HR_EMAIL), "the real HR address has gone missing from the job detail");
+  assert.ok(domainRule, "the checklist no longer says which domain is genuine");
+  assert.ok(!/ktdoctor\.com/.test(domainRule), "the retired HR domain is still called genuine");
+  assert.ok(!copy.includes("ktdoctor.com"), "the retired HR address is still in the job detail");
+  assert.ok(copy.includes(CAREERS_EMAIL), "the applications address has gone missing");
 });
 
 // Chips are derived, so a department can never be offered as a filter that
@@ -164,7 +166,7 @@ test("no select option is an empty string, which the schema treats as unanswered
 
 test("the switchboard is the number the rest of the repo publishes", () => {
   assert.equal(SWITCHBOARD, "0117 84 84 84");
-  assert.equal(CAREERS_EMAIL, "careers@sjhospital.lk");
+  assert.equal(CAREERS_EMAIL, "info@sjhospital.lk");
 });
 
 test("the ticker advertises role families the vacancy list actually contains", () => {

@@ -36,12 +36,18 @@ export const homeNavigation: NavItem[] = [
 // four-card teaser, and the full page is the real destination, matching how
 // Facilities, Pharmacy, Health Tips, Network and Careers were each repointed
 // when their own pages landed.
+//
+// Surgical care and Media were the last two holding out, scrolling to a home
+// band while the pages they name sat one click further away. Every link here
+// now leaves the page, and teaserLinks.test.ts asserts it: unlike the other
+// footers, this one has no page sections of its own worth linking, because
+// every band on the home page is a teaser for somewhere else.
 export const homeFooterColumns: FooterColumn[] = [
   {
     heading: "Care",
     links: [
       { label: "Services", href: "/services" },
-      { label: "Surgical care", href: "#surgical" },
+      { label: "Surgical care", href: "/services/general-surgery" },
       { label: "Pharmacy", href: "/pharmacy" },
       { label: "Accommodation", href: "/accommodation" },
       { label: "Book a doctor", href: "/e-channeling" },
@@ -56,7 +62,7 @@ export const homeFooterColumns: FooterColumn[] = [
       { label: "Health tips", href: "/health-tips" },
       { label: "School wellness", href: "/school-wellness" },
       { label: "Network", href: "/network" },
-      { label: "Media", href: "#media" },
+      { label: "Media", href: "/media" },
       { label: "Careers", href: "/careers" },
       { label: "Contact us", href: "/contact-us" },
       { label: "Privacy policy", href: "/privacy-policy" },

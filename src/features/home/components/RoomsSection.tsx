@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { useParallax } from "../hooks/useParallax";
 import { CountUp } from "./CountUp";
@@ -36,9 +37,12 @@ export function RoomsSection() {
               Quiet, private and sanitised on a two hour cycle, with nursing that knows your name and a doctor
               on the floor at all times.
             </p>
-            <a href="#book" className="sj-accentify mt-8 inline-flex items-center gap-3 bg-white px-6.5 py-4.5 text-[15px] font-bold text-[#060B1F]">
+            <Link
+              href="/accommodation#book"
+              className="sj-accentify mt-8 inline-flex items-center gap-3 bg-white px-6.5 py-4.5 text-[15px] font-bold text-[#060B1F]"
+            >
               Reserve a room <span aria-hidden>&rarr;</span>
-            </a>
+            </Link>
           </Reveal>
           <Reveal className="border-l border-white/24 pl-8">
             <div className="text-[12px] tracking-[0.18em] text-white/55 uppercase">Rooms from</div>

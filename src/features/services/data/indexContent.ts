@@ -33,6 +33,27 @@ export type PackageTier = {
   accent: boolean;
 };
 
+/**
+ * The marquee under the hero. Every other hero on the site carries one; the
+ * services index was the only page missing it.
+ *
+ * Each phrase is a fact the repo already states somewhere else, so the ticker
+ * cannot promise something no page delivers: the nine centres are
+ * `centres.length`, and the rest are the claims the home page's own service
+ * tiles make (around the clock emergency and OPD, a 24 hour laboratory, X-ray
+ * read within the hour, two doctors on every report, consultant led theatres,
+ * home visits and delivery across Negombo).
+ */
+export const tickerItems: readonly string[] = [
+  "Nine centres of excellence",
+  "Emergency and OPD around the clock",
+  "Laboratory open 24 hours",
+  "Digital X-ray read within the hour",
+  "Two doctors read every report",
+  "Consultant led theatres",
+  "Home visits across Negombo",
+];
+
 export const jumpCards: JumpCard[] = [
   {
     count: "9 units",

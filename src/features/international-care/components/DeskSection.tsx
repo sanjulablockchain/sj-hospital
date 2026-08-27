@@ -63,10 +63,10 @@ export function DeskSection() {
               write ahead and it is arranged before you land.
             </p>
             <a
-              href="mailto:international@sjhospital.lk"
+              href="mailto:appointments@sjhospital.lk"
               className="sj-invert mt-6.5 inline-flex w-fit items-center gap-2.5 bg-[#2CA6F0] px-5.5 py-3.75 text-[14.5px] font-bold text-[#04122B]"
             >
-              international@sjhospital.lk
+              appointments@sjhospital.lk
             </a>
           </Reveal>
 

@@ -17,24 +17,40 @@ import { heroFacts, tickerItems } from "@/features/facilities/data/content";
 export function FacilitiesHero() {
   return (
     <section id="top" className="relative flex flex-col overflow-hidden bg-[#060B1F]">
-      <div className="relative flex min-h-[86vh] flex-col max-[899px]:min-h-[76vh]">
+      {/* overflow-hidden is load bearing. The section below has its own, but
+          the photo lives in here, and the fact strip and marquee are siblings
+          *after* this div: without clipping, the parallax layer's -top-[14%]
+          h-[128%] spilled the ungraded photograph 14% of the hero's height
+          downward, past the gradient (inset-0 of this div, so it stops short of
+          the spill) and behind the fact strip. The strip is capped at
+          max-w-[1440px], so on wider viewports the spill showed through the
+          left and right gutters as two bright fragments. */}
+      <div className="relative flex min-h-[86vh] flex-col overflow-hidden max-[899px]:min-h-[76vh]">
         <ParallaxLayer
           factor={0.14}
           maxOffsetPx={100}
           className="absolute inset-x-0 -top-[14%] h-[128%] overflow-hidden"
         >
-          {/* The real building at dusk, not stock interior photography. It is
-              already dark enough to carry white display type, it is unmistakably
-              this hospital, and the storeys are visible in frame, which is the
-              claim the section below this one makes. The services hero uses the
-              -a angle, so this page takes -b. */}
+          {/* Theatre lights, replacing the -b angle of the building render
+              that the services hero also used. This is illustrative stock, not
+              this hospital: that is a deliberate line, because a photograph of
+              somebody else's *building* on the page that describes this
+              hospital's own building would be a false claim, while clinical
+              equipment is understood as illustration. The section further down
+              the page carries the hospital's own theatre and instrument
+              photography.
+
+              Composition earns its place here too: the wall fills the lower
+              left, which is where the 146px headline lands, and the lights sit
+              right of centre. The horizontal objectPosition is inert, since a
+              3:2 source in a hero this wide is cropped vertically only. */}
           <Image
-            src="/images/services/exterior-dusk-b.png"
-            alt="St. Joseph Hospital, Negombo, at dusk"
+            src="/images/facilities/hero-theatre-lights.jpg"
+            alt="Twin operating theatre lights above a surgical table"
             fill
             priority
             className="animate-sj-burns object-cover"
-            style={{ objectPosition: "50% 42%" }}
+            style={{ objectPosition: "50% 46%" }}
           />
         </ParallaxLayer>
         <div

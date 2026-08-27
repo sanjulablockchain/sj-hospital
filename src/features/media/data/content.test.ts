@@ -21,9 +21,9 @@ import {
 const source = readFileSync(fileURLToPath(new URL("./content.ts", import.meta.url)), "utf8");
 
 // The comments in content.ts discuss the very things the scans below forbid:
-// the header explains why `media@` is an assumption by contrasting it with
-// `careers@sjhospital.lk`. Strip comments so the scans read the copy that
-// actually reaches the page, not the reasoning about it.
+// the header explains which press desk details are assumed, and names the
+// address the page no longer publishes. Strip comments so the scans read the
+// copy that actually reaches the page, not the reasoning about it.
 const copy = source.replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
 
 // The whole point of this file. Everything on /media came out of a design
