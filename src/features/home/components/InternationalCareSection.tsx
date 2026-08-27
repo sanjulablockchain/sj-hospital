@@ -37,7 +37,7 @@ export function InternationalCareSection() {
               See international care <span aria-hidden>&rarr;</span>
             </Link>
             <a
-              href="mailto:international@sjhospital.lk"
+              href="mailto:appointments@sjhospital.lk"
               className="sj-invert inline-flex items-center gap-2.5 border border-[var(--home-hairline-strong)] px-5.5 py-3.5 text-[14.5px] font-bold text-[var(--home-heading)]"
             >
               Talk to the desk <span aria-hidden>&rarr;</span>

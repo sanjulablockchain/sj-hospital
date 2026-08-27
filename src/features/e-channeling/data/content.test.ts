@@ -15,7 +15,7 @@ test("the hero's counts are computed from the doctor list, not typed in", () => 
 test("the help rail offers the hospital's own desk only", () => {
   assert.equal(helpRail.phone, "0117 84 84 84");
   assert.equal(helpRail.phoneHref, "tel:+94117848484");
-  assert.equal(helpRail.email, "info@sjhospital.lk");
+  assert.equal(helpRail.email, "appointments@sjhospital.lk");
 });
 
 test("no em dash in any encoding", () => {

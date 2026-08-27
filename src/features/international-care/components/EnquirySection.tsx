@@ -13,7 +13,7 @@ const ROW =
 
 /** The three direct contacts, in the order the reference stacks them. */
 const contactRows = [
-  { label: "Email the desk", href: "mailto:international@sjhospital.lk", glyph: "→" },
+  { label: "Email the desk", href: "mailto:appointments@sjhospital.lk", glyph: "→" },
   { label: "WhatsApp your reports", href: "https://wa.me/94742223334", glyph: "→" },
   { label: "0117 84 84 84", href: "tel:+94117848484", glyph: "☎", numeric: true },
 ];
