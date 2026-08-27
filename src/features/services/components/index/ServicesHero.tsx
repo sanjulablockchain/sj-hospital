@@ -1,7 +1,9 @@
 import Image from "next/image";
 import { ThemedHeader } from "@/components/layout/ThemedHeader";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
+import { Ticker } from "@/components/ui/Ticker";
 import { servicesNavigation } from "@/config/servicesNavigation";
+import { tickerItems } from "@/features/services/data/indexContent";
 import { groupCounts } from "@/features/services/data/services";
 
 /**
@@ -23,13 +25,20 @@ export function ServicesHero() {
         maxOffsetPx={100}
         className="absolute inset-x-0 -top-[14%] h-[128%] overflow-hidden"
       >
+        {/* A consultation rather than the building: "every service, under one
+            roof" is a claim about the care, and /facilities is the page that
+            speaks for the premises. The dark wall behind the desk is what makes
+            this work under the gradient below, which takes 86% of the light out
+            of the top of the frame. objectPosition keeps both faces above the
+            headline; the horizontal value is inert, since a 16:9 source in a
+            hero this wide is cropped vertically only. */}
         <Image
-          src="/images/services/exterior-dusk-a.png"
-          alt="St. Joseph Hospital building at dusk"
+          src="/images/services/hero-consultation.jpg"
+          alt="A doctor consulting a patient at St. Joseph Hospital"
           fill
           priority
           className="animate-sj-burns object-cover"
-          style={{ objectPosition: "55% 50%" }}
+          style={{ objectPosition: "50% 32%" }}
         />
       </ParallaxLayer>
       <div
@@ -42,7 +51,7 @@ export function ServicesHero() {
 
       <ThemedHeader navItems={servicesNavigation} homeHref="/" bookHref="/e-channeling" />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 flex-col justify-end gap-6 px-5 pb-16 sm:px-8 lg:px-11">
+      <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 flex-col justify-end gap-6 px-5 pb-12 sm:px-8 lg:px-11">
         <div className="animate-sj-up inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
           <span className="h-px w-11 bg-[var(--home-accent)]" />
           Medical Services
@@ -67,6 +76,8 @@ export function ServicesHero() {
           Open the directory <span aria-hidden>&rarr;</span>
         </a>
       </div>
+
+      <Ticker items={tickerItems} />
     </section>
   );
 }
