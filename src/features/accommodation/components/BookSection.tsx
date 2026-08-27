@@ -1,37 +1,22 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 import { ClockIcon, MailIcon, PhoneIcon, SmartphoneIcon } from "@/components/ui/Icons";
 import { ContactForm } from "@/features/contact";
 import { SectionHead } from "./SectionHead";
-import { bookHeading, bookIntro } from "../data/content";
+import { bookHeading, bookIntro, bookRail } from "../data/content";
 
-// The hospital's own phone, WhatsApp and email, the same values
-// features/contact/data/content.ts's `contactRows` and
-// features/facilities/components/BookSection.tsx's `rows` carry, plus a link
-// to /e-channeling for booking a doctor instead. Icons are JSX, so they stay
-// here rather than in `data/content.ts`.
-const rail = [
-  { label: "Call us", value: "0117 84 84 84", href: "tel:+94117848484", icon: <PhoneIcon className="h-5 w-5" /> },
-  {
-    label: "WhatsApp",
-    value: "074 222 333 4",
-    href: "https://wa.me/94742223334",
-    icon: <SmartphoneIcon className="h-5 w-5" />,
-    external: true,
-  },
-  {
-    label: "Email",
-    value: "info@sjhospital.lk",
-    href: "mailto:info@sjhospital.lk",
-    icon: <MailIcon className="h-5 w-5" />,
-  },
-  {
-    label: "Book a doctor instead",
-    value: "e-Channeling",
-    href: "/e-channeling",
-    icon: <ClockIcon className="h-5 w-5" />,
-    internal: true,
-  },
-];
+// `bookRail`'s icon, keyed by `label`. Icons are JSX, so they can't live in
+// `data/content.ts` with the rest of the rail's fields; every value that can
+// drift (phone, WhatsApp, email, href) does live there now, and is pinned by
+// content.test.ts.
+const railIcons: Record<string, ReactNode> = {
+  "Call us": <PhoneIcon className="h-5 w-5" />,
+  WhatsApp: <SmartphoneIcon className="h-5 w-5" />,
+  Email: <MailIcon className="h-5 w-5" />,
+  "Book a doctor instead": <ClockIcon className="h-5 w-5" />,
+};
+
+const rail = bookRail.map((row) => ({ ...row, icon: railIcons[row.label] }));
 
 /**
  * `#book`: the consolidated `ContactForm` beside a contact rail carrying the

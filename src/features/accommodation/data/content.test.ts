@@ -2,20 +2,8 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import {
-  bookHeading,
-  bookIntro,
-  heroFacts,
-  heroStandfirst,
-  jumpCards,
-  mealsNote,
-  roomsHeading,
-  roomsIntro,
-  roomTypes,
-  specialties,
-  specialtiesHeading,
-  tickerItems,
-} from "./content.ts";
+import * as content from "./content.ts";
+import { bookRail, jumpCards, roomTypes, specialties } from "./content.ts";
 
 test("four room types in the site's own order, with their ids", () => {
   assert.deepEqual(
@@ -42,40 +30,54 @@ test("every room type has photos, amenities, a price and a short label", () => {
 // list. features/facilities/data/content.ts is the authority for this.
 test("only the standard room carries a figure; the rest are on request", () => {
   const byId = new Map(roomTypes.map((r) => [r.id, r]));
-  assert.equal(byId.get("standard")!.price, "From 10,000 LKR");
+  assert.equal(byId.get("standard")?.price, "From 10,000 LKR");
   for (const id of ["deluxe", "super-deluxe", "wards"]) {
-    assert.equal(byId.get(id)!.price, "On request");
+    assert.equal(byId.get(id)?.price, "On request");
   }
 });
 
-// Every string export in this file, flattened to one array, so the price and
-// em-dash tests below cannot silently miss a newly added export the way an
+// FIX 4: the #book contact rail used to be hardcoded inside BookSection.tsx,
+// outside data/content.ts and outside every test, while the same values in
+// contact/data/content.ts were pinned. Pinned here the same way
+// contact/data/content.test.ts pins `contactRows`, so a transposed digit on
+// the page whose whole purpose is booking a room can no longer ship silently.
+test("the booking rail carries the hospital's real contact details, unchanged", () => {
+  const byLabel = new Map(bookRail.map((r) => [r.label, r]));
+  assert.equal(byLabel.get("Call us")?.value, "0117 84 84 84");
+  assert.equal(byLabel.get("Call us")?.href, "tel:+94117848484");
+  assert.equal(byLabel.get("WhatsApp")?.value, "074 222 333 4");
+  assert.equal(byLabel.get("WhatsApp")?.href, "https://wa.me/94742223334");
+  assert.equal(byLabel.get("Email")?.value, "info@sjhospital.lk");
+  assert.equal(byLabel.get("Email")?.href, "mailto:info@sjhospital.lk");
+  assert.equal(byLabel.get("Book a doctor instead")?.href, "/e-channeling");
+});
+
+// FIX 5c: every string export in this module, gathered by reflection rather
+// than by hand, so a newly added export cannot be silently missed the way an
 // earlier version of this file missed `heroStandfirst`, `roomsHeading`,
-// `specialtiesHeading`, `bookHeading`, `bookIntro` (both tests) and
-// `heroFacts` (the em-dash test only). Anything with copy that a reader can
-// see belongs in this array. `content.ts` has no `specialtiesIntro`: see its
-// file-level comment for why `#specialties` has no standfirst at all.
-const allCopy: string[] = [
-  ...tickerItems,
-  mealsNote,
-  ...specialties,
-  ...heroFacts.flatMap((f) => [f.k, f.v]),
-  ...jumpCards.flatMap((c) => [c.count, c.label, c.note]),
-  ...roomTypes.flatMap((r) => [r.name, r.description, r.price, ...r.amenities]),
-  heroStandfirst,
-  roomsHeading,
-  roomsIntro,
-  specialtiesHeading,
-  bookHeading,
-  bookIntro,
-];
+// `specialtiesHeading`, `bookHeading`, `bookIntro` (both scans below) and
+// `heroFacts` (the em-dash scan only). `content.ts` has no `specialtiesIntro`:
+// see its file-level comment for why `#specialties` has no standfirst at all.
+function collectStrings(value: unknown, seen: Set<object> = new Set()): string[] {
+  if (typeof value === "string") return [value];
+  if (Array.isArray(value)) return value.flatMap((entry) => collectStrings(entry, seen));
+  if (value !== null && typeof value === "object") {
+    if (seen.has(value)) return [];
+    seen.add(value);
+    return Object.values(value).flatMap((entry) => collectStrings(entry, seen));
+  }
+  return [];
+}
+
+const allCopy: string[] = Object.values(content).flatMap((value) => collectStrings(value));
 
 // FIX 1: src/app/accommodation/page.tsx's <meta name="description"> lives
-// outside this module entirely, so no scan of content.ts's own exports can
-// ever see it, and it is exactly what a search engine or a social unfurl
-// publishes. A fabricated "starting from 10,000 LKR" there once attributed
-// the Standard-only price to all four room categories; read the route file's
-// source directly so a price introduced there fails this suite too.
+// outside this module entirely, so no reflection over content.ts's own
+// exports can ever see it, and it is exactly what a search engine or a social
+// unfurl publishes. A fabricated "starting from 10,000 LKR" there once
+// attributed the Standard-only price to all four room categories; read the
+// route file's source directly so a price introduced there fails this suite
+// too.
 const pageSource = readFileSync(
   fileURLToPath(new URL("../../../app/accommodation/page.tsx", import.meta.url)),
   "utf8"

@@ -209,3 +209,23 @@ export const specialtiesHeading = "Specialties of Our Inpatient Rooms";
 // panel copy, verbatim, distinct from every intro and jump card note above.
 export const bookHeading = "Book an Inpatient Room";
 export const bookIntro = "Send us a message and our team will help you find the right room.";
+
+// `#book`'s contact rail: the hospital's own phone, WhatsApp and email, the
+// same values contact/data/content.ts's `contactRows` and
+// features/facilities/components/BookSection.tsx's `rows` carry, plus a link
+// to /e-channeling for booking a doctor instead of a room. `icon` is JSX, so
+// it stays in BookSection.tsx, looked up by `label`; every other field lives
+// here so content.test.ts can pin it exactly, the way
+// contact/data/content.test.ts pins `contactRows`.
+export const bookRail: {
+  label: string;
+  value: string;
+  href: string;
+  external?: boolean;
+  internal?: boolean;
+}[] = [
+  { label: "Call us", value: "0117 84 84 84", href: "tel:+94117848484" },
+  { label: "WhatsApp", value: "074 222 333 4", href: "https://wa.me/94742223334", external: true },
+  { label: "Email", value: "info@sjhospital.lk", href: "mailto:info@sjhospital.lk" },
+  { label: "Book a doctor instead", value: "e-Channeling", href: "/e-channeling", internal: true },
+];
