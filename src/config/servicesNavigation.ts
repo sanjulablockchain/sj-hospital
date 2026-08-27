@@ -72,6 +72,7 @@ export const servicesFooterColumns: FooterColumn[] = [
       { label: "About us", href: "/about-us" },
       { label: "Accommodation", href: "/accommodation" },
       { label: "Contact us", href: "/contact-us" },
+      { label: "Privacy policy", href: "/privacy-policy" },
     ],
   },
 ];

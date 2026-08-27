@@ -46,6 +46,7 @@ export const careerFooterColumns: FooterColumn[] = [
       { label: "Our network", href: "/network" },
       { label: "Accommodation", href: "/accommodation" },
       { label: "Contact us", href: "/contact-us" },
+      { label: "Privacy policy", href: "/privacy-policy" },
     ],
   },
 ];

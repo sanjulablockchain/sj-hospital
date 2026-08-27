@@ -45,6 +45,7 @@ export const mediaFooterColumns: FooterColumn[] = [
       { label: "International care", href: "/international-care" },
       { label: "Accommodation", href: "/accommodation" },
       { label: "Contact us", href: "/contact-us" },
+      { label: "Privacy policy", href: "/privacy-policy" },
     ],
   },
 ];

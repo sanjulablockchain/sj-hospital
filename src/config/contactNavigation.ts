@@ -36,6 +36,7 @@ export const contactFooterColumns: FooterColumn[] = [
       { label: "Accommodation", href: "/accommodation" },
       { label: "Book a doctor", href: "/e-channeling" },
       { label: "All services", href: "/services" },
+      { label: "Privacy policy", href: "/privacy-policy" },
     ],
   },
 ];

@@ -35,6 +35,7 @@ export const channelingFooterColumns: FooterColumn[] = [
       { label: "About us", href: "/about-us" },
       { label: "Facilities", href: "/facilities" },
       { label: "Contact us", href: "/contact-us" },
+      { label: "Privacy policy", href: "/privacy-policy" },
     ],
   },
 ];

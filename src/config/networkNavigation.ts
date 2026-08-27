@@ -44,6 +44,7 @@ export const networkFooterColumns: FooterColumn[] = [
       { label: "Health tips", href: "/health-tips" },
       { label: "Accommodation", href: "/accommodation" },
       { label: "Contact us", href: "/contact-us" },
+      { label: "Privacy policy", href: "/privacy-policy" },
     ],
   },
 ];

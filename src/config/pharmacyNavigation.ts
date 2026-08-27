@@ -45,6 +45,7 @@ export const pharmacyFooterColumns: FooterColumn[] = [
       { label: "Careers", href: "/careers" },
       { label: "Accommodation", href: "/accommodation" },
       { label: "Contact us", href: "/contact-us" },
+      { label: "Privacy policy", href: "/privacy-policy" },
     ],
   },
 ];

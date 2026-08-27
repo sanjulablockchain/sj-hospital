@@ -59,6 +59,7 @@ export const homeFooterColumns: FooterColumn[] = [
       { label: "Media", href: "#media" },
       { label: "Careers", href: "/careers" },
       { label: "Contact us", href: "/contact-us" },
+      { label: "Privacy policy", href: "/privacy-policy" },
     ],
   },
 ];

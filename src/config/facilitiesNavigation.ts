@@ -46,6 +46,7 @@ export const facilitiesFooterColumns: FooterColumn[] = [
       { label: "Book a room", href: "/accommodation" },
       { label: "About us", href: "/about-us" },
       { label: "Contact us", href: "/contact-us" },
+      { label: "Privacy policy", href: "/privacy-policy" },
     ],
   },
 ];

@@ -46,6 +46,7 @@ export const healthTipsFooterColumns: FooterColumn[] = [
       { label: "School wellness", href: "/school-wellness" },
       { label: "Accommodation", href: "/accommodation" },
       { label: "Contact us", href: "/contact-us" },
+      { label: "Privacy policy", href: "/privacy-policy" },
     ],
   },
 ];

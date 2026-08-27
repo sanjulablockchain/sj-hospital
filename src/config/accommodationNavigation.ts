@@ -38,6 +38,7 @@ export const accommodationFooterColumns: FooterColumn[] = [
       { label: "Facilities", href: "/facilities" },
       { label: "Book a doctor", href: "/e-channeling" },
       { label: "Contact us", href: "/contact-us" },
+      { label: "Privacy policy", href: "/privacy-policy" },
     ],
   },
 ];

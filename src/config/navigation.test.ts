@@ -200,6 +200,21 @@ test("every footer reaches about, contact and accommodation", () => {
   }
 });
 
+// The privacy policy takes no self-link exemption, unlike the three above.
+// A policy page is the one page a reader may arrive at from anywhere and then
+// want to leave and come back to, and every footer on the web carries the link
+// unconditionally, including on the policy itself. It was briefly reachable
+// only from its own footer, which is to say not reachable at all.
+test("every footer reaches the privacy policy, with no exemption", () => {
+  for (const columns of ALL_FOOTERS) {
+    const hrefs = columns.flatMap((c) => c.links.map((l) => l.href));
+    assert.ok(
+      hrefs.includes("/privacy-policy"),
+      `no /privacy-policy in the footer whose first column is ${columns[0].heading}`
+    );
+  }
+});
+
 test("footer links are either bare hashes or absolute paths", () => {
   for (const columns of ALL_FOOTERS) {
     for (const column of columns) {
