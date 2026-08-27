@@ -7,10 +7,11 @@ import { tickerItems } from "@/features/services/data/indexContent";
 import { groupCounts } from "@/features/services/data/services";
 
 /**
- * `#top` hero: a fixed-dark exterior render behind the themed header and the
- * page's only <h1>. Content uses `animate-sj-up` (not Reveal) so it appears on
- * load rather than waiting on an intersection observer for what's already in
- * the first viewport, the same choice the home hero makes.
+ * `#top` hero: a fixed-dark consultation photograph behind the themed header
+ * and the page's only <h1>, closed off by the marquee. Content uses
+ * `animate-sj-up` (not Reveal) so it appears on load rather than waiting on an
+ * intersection observer for what's already in the first viewport, the same
+ * choice the home hero makes.
  */
 export function ServicesHero() {
   const totalServices = groupCounts().All;
