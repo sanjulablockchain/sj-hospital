@@ -37,10 +37,14 @@ export const wellnessFooterColumns: FooterColumn[] = [
     heading: "Hospital",
     links: [
       { label: "Home", href: "/" },
+      { label: "About us", href: "/about-us" },
       { label: "All services", href: "/services" },
       { label: "Facilities", href: "/facilities" },
       { label: "Health tips", href: "/health-tips" },
       { label: "Our network", href: "/network" },
+      { label: "Accommodation", href: "/accommodation" },
+      { label: "Contact us", href: "/contact-us" },
+      { label: "Privacy policy", href: "/privacy-policy" },
     ],
   },
 ];

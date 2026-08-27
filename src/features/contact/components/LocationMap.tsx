@@ -3,12 +3,12 @@
 import "leaflet/dist/leaflet.css";
 import { useEffect, useRef } from "react";
 import type { Map as LeafletMap } from "leaflet";
-
-const HOSPITAL_COORDS: [number, number] = [7.206699127328975, 79.8453343846586];
+import { HOSPITAL_COORDS } from "../data/content";
 
 export function LocationMap() {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<LeafletMap | null>(null);
+  const themeObserverRef = useRef<MutationObserver | null>(null);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -31,14 +31,25 @@ export function LocationMap() {
         maxZoom: 19,
       }).addTo(map);
 
+      // The SVG below is a template string, not JSX, but it is still inserted
+      // into the live DOM (Leaflet mounts `divIcon` HTML as a real element),
+      // as a descendant of the themed `[data-sj]` root. So rather than
+      // reading `--home-accent` once via `getComputedStyle` at mount, which
+      // froze the marker's colour at whatever the theme happened to be when
+      // the map first loaded, the SVG's `style` attributes reference the CSS
+      // custom properties directly: the marker repaints on every theme
+      // toggle, the same as everything else on the page, with no listener
+      // needed. `fill` and `stroke` are two different tokens (not the same
+      // token twice) so the pin keeps a visible edge against the map tiles in
+      // both themes.
       const marker = L.divIcon({
         className: "",
         html: `
           <svg width="36" height="46" viewBox="0 0 36 46" fill="none" xmlns="http://www.w3.org/2000/svg"
             style="filter:drop-shadow(0 6px 8px rgba(30,27,46,0.35));">
             <path d="M18 0C8.06 0 0 8.06 0 18c0 12.5 18 28 18 28s18-15.5 18-28C36 8.06 27.94 0 18 0Z"
-              fill="#4A2A82" stroke="#33B4E5" stroke-width="2" />
-            <circle cx="18" cy="18" r="7" fill="#ffffff" />
+              style="fill:var(--home-accent);stroke:var(--home-on-accent);stroke-width:2;" />
+            <circle cx="18" cy="18" r="7" style="fill:var(--home-on-accent);" />
           </svg>
         `,
         iconSize: [36, 46],
@@ -54,15 +65,34 @@ export function LocationMap() {
           `<div style="font-family:inherit;min-width:180px;">
             <p style="margin:0 0 6px;font-weight:700;color:#1e1b2e;">St. Joseph Hospital Negombo</p>
             <a href="${directionsUrl}" target="_blank" rel="noopener noreferrer"
-              style="color:#14769f;font-weight:600;text-decoration:none;">Get Directions &rarr;</a>
+              style="color:var(--home-accent);font-weight:600;text-decoration:none;">Get Directions &rarr;</a>
           </div>`
         );
 
       mapRef.current = map;
+
+      // Belt-and-braces alongside the always-present `filter` in globals.css
+      // (see the comment on `.leaflet-tile-pane` there): force Leaflet to
+      // recompute and repaint its tile positions right after a theme toggle,
+      // so a toggle can never leave the map blank even if some other
+      // reflow/compositing quirk survives the CSS-only fix. `invalidateSize`
+      // is Leaflet's own API for "the container's geometry may have changed,
+      // reposition everything", which is exactly the effect a theme toggle
+      // (and its filter change) has on the tile pane.
+      const root = document.getElementById("sj-root");
+      const observer = root
+        ? new MutationObserver(() => {
+            requestAnimationFrame(() => mapRef.current?.invalidateSize());
+          })
+        : null;
+      observer?.observe(root!, { attributes: true, attributeFilter: ["data-theme"] });
+      themeObserverRef.current = observer;
     });
 
     return () => {
       cancelled = true;
+      themeObserverRef.current?.disconnect();
+      themeObserverRef.current = null;
       mapRef.current?.remove();
       mapRef.current = null;
     };

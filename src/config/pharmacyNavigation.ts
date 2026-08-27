@@ -38,10 +38,14 @@ export const pharmacyFooterColumns: FooterColumn[] = [
     heading: "Hospital",
     links: [
       { label: "Home", href: "/" },
+      { label: "About us", href: "/about-us" },
       { label: "All services", href: "/services" },
       { label: "Facilities", href: "/facilities" },
       { label: "Admissions", href: "/services#admissions" },
       { label: "Careers", href: "/careers" },
+      { label: "Accommodation", href: "/accommodation" },
+      { label: "Contact us", href: "/contact-us" },
+      { label: "Privacy policy", href: "/privacy-policy" },
     ],
   },
 ];

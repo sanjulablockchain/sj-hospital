@@ -41,7 +41,12 @@ export const facilitiesFooterColumns: FooterColumn[] = [
       { label: "Visiting & getting here", href: "#visiting" },
       { label: "All services", href: "/services" },
       { label: "Admissions", href: "/services#admissions" },
+      // Already the reachability check's target for /accommodation, so About
+      // us and Contact us are the only two links this column was missing.
       { label: "Book a room", href: "/accommodation" },
+      { label: "About us", href: "/about-us" },
+      { label: "Contact us", href: "/contact-us" },
+      { label: "Privacy policy", href: "/privacy-policy" },
     ],
   },
 ];

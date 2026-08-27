@@ -39,10 +39,14 @@ export const healthTipsFooterColumns: FooterColumn[] = [
     heading: "Hospital",
     links: [
       { label: "Home", href: "/" },
+      { label: "About us", href: "/about-us" },
       { label: "All services", href: "/services" },
       { label: "Facilities", href: "/facilities" },
       { label: "Pharmacy", href: "/pharmacy" },
       { label: "School wellness", href: "/school-wellness" },
+      { label: "Accommodation", href: "/accommodation" },
+      { label: "Contact us", href: "/contact-us" },
+      { label: "Privacy policy", href: "/privacy-policy" },
     ],
   },
 ];

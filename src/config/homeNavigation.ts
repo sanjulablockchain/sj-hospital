@@ -1,4 +1,5 @@
 import type { NavItem } from "@/config/navigation";
+import type { FooterColumn } from "@/components/layout/ThemedFooter";
 
 export const homeNavigation: NavItem[] = [
   { label: "Services", href: "/services" },
@@ -27,4 +28,38 @@ export const homeNavigation: NavItem[] = [
   // /careers. A nav label has to mean the same thing wherever it is clicked, so
   // this points at the page here too, not at the teaser below it.
   { label: "Careers", href: "/careers" },
+];
+
+// Moved here from HomeFooter.tsx so every footer's data lives in src/config,
+// where navigation.test.ts can reach it. The Accommodation link now points at
+// /accommodation rather than the home page's own #rooms band: that band is a
+// four-card teaser, and the full page is the real destination, matching how
+// Facilities, Pharmacy, Health Tips, Network and Careers were each repointed
+// when their own pages landed.
+export const homeFooterColumns: FooterColumn[] = [
+  {
+    heading: "Care",
+    links: [
+      { label: "Services", href: "/services" },
+      { label: "Surgical care", href: "#surgical" },
+      { label: "Pharmacy", href: "/pharmacy" },
+      { label: "Accommodation", href: "/accommodation" },
+      { label: "Book a doctor", href: "/e-channeling" },
+    ],
+  },
+  {
+    heading: "Hospital",
+    links: [
+      { label: "About us", href: "/about-us" },
+      { label: "Facilities", href: "/facilities" },
+      { label: "International patient care", href: "/international-care" },
+      { label: "Health tips", href: "/health-tips" },
+      { label: "School wellness", href: "/school-wellness" },
+      { label: "Network", href: "/network" },
+      { label: "Media", href: "#media" },
+      { label: "Careers", href: "/careers" },
+      { label: "Contact us", href: "/contact-us" },
+      { label: "Privacy policy", href: "/privacy-policy" },
+    ],
+  },
 ];
