@@ -177,6 +177,28 @@ test("no nav item still points at a retired home or services band", () => {
   }
 });
 
+// The retired-band check above covers nav items only. Footer columns were
+// checked for reachability and shape but never against the bands, so two links
+// in the home footer (Surgical care -> #surgical, Media -> #media) still
+// scrolled to a teaser while the pages they name sat a click further away.
+//
+// The home footer is the one footer this rule can apply to wholesale. Every
+// other page owns sections worth linking to, which is why facilitiesFooter
+// legitimately carries #theatres and #rooms; but every band on the home page is
+// a teaser for a page somewhere else, so nothing there should hold a reader on
+// the home page. #top is the exception a back-to-top link needs.
+test("every home nav and footer link leaves the page, apart from back to top", () => {
+  const hrefs = [
+    ...homeNavigation.map((item) => item.href),
+    ...homeFooterColumns.flatMap((column) => column.links.map((link) => link.href)),
+  ];
+  assert.ok(hrefs.length > 10, `only found ${hrefs.length} home chrome links`);
+  for (const href of hrefs) {
+    if (href === "#top") continue;
+    assert.ok(!href.startsWith("#"), `the home chrome links ${href}, which scrolls in place`);
+  }
+});
+
 // The three pages that were unreachable before this change. No footer column
 // anywhere linked to them, so on the redesigned site the only way in was to
 // type the URL. These assertions are the reason the wiring cannot regress.
