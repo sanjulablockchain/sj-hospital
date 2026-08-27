@@ -30,23 +30,25 @@ export function LocationMap() {
         maxZoom: 19,
       }).addTo(map);
 
-      // The SVG below is a template string, not JSX, so it cannot read a CSS
-      // variable directly: read the computed token off the themed root at
-      // mount instead, with a literal fallback for the moment before that
-      // root exists.
-      const root = document.getElementById("sj-root");
-      const styles = root ? getComputedStyle(root) : null;
-      const accent = styles?.getPropertyValue("--home-accent").trim() || "#2ca6f0";
-      const onAccent = styles?.getPropertyValue("--home-on-accent").trim() || "#04122b";
-
+      // The SVG below is a template string, not JSX, but it is still inserted
+      // into the live DOM (Leaflet mounts `divIcon` HTML as a real element),
+      // as a descendant of the themed `[data-sj]` root. So rather than
+      // reading `--home-accent` once via `getComputedStyle` at mount, which
+      // froze the marker's colour at whatever the theme happened to be when
+      // the map first loaded, the SVG's `style` attributes reference the CSS
+      // custom properties directly: the marker repaints on every theme
+      // toggle, the same as everything else on the page, with no listener
+      // needed. `fill` and `stroke` are two different tokens (not the same
+      // token twice) so the pin keeps a visible edge against the map tiles in
+      // both themes.
       const marker = L.divIcon({
         className: "",
         html: `
           <svg width="36" height="46" viewBox="0 0 36 46" fill="none" xmlns="http://www.w3.org/2000/svg"
             style="filter:drop-shadow(0 6px 8px rgba(30,27,46,0.35));">
             <path d="M18 0C8.06 0 0 8.06 0 18c0 12.5 18 28 18 28s18-15.5 18-28C36 8.06 27.94 0 18 0Z"
-              fill="${accent}" stroke="${accent}" stroke-width="2" />
-            <circle cx="18" cy="18" r="7" fill="${onAccent}" />
+              style="fill:var(--home-accent);stroke:var(--home-on-accent);stroke-width:2;" />
+            <circle cx="18" cy="18" r="7" style="fill:var(--home-on-accent);" />
           </svg>
         `,
         iconSize: [36, 46],
@@ -62,7 +64,7 @@ export function LocationMap() {
           `<div style="font-family:inherit;min-width:180px;">
             <p style="margin:0 0 6px;font-weight:700;color:#1e1b2e;">St. Joseph Hospital Negombo</p>
             <a href="${directionsUrl}" target="_blank" rel="noopener noreferrer"
-              style="color:${accent};font-weight:600;text-decoration:none;">Get Directions &rarr;</a>
+              style="color:var(--home-accent);font-weight:600;text-decoration:none;">Get Directions &rarr;</a>
           </div>`
         );
 

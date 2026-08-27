@@ -111,8 +111,10 @@ export function ContactForm() {
         <p
           role="status"
           aria-live="polite"
-          className={`px-4 py-3 text-sm font-semibold ${
-            state.status === "success" ? "text-[var(--home-accent-soft)]" : "text-[var(--home-danger)]"
+          className={`border px-4 py-3 text-sm font-semibold ${
+            state.status === "success"
+              ? "border-[var(--home-accent)]/30 bg-[var(--home-accent)]/10 text-[var(--home-accent-soft)]"
+              : "border-[var(--home-danger)]/30 bg-[var(--home-danger)]/10 text-[var(--home-danger)]"
           }`}
         >
           {state.message}
