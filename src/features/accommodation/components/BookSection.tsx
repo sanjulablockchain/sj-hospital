@@ -36,13 +36,22 @@ export function BookSection() {
           <ContactForm />
         </div>
 
+        {/* The grid column stretches this rail to the form's own height (grid
+            items default to `align-items: stretch`), but a flex column's
+            children don't grow to fill leftover space on their own. Without
+            `flex-1` on each row below, that leftover space showed this
+            container's own background, `--home-hairline` (a colour meant only
+            for the 1px gaps between rows), as a large solid block under the
+            last row. `flex-1` has the rows themselves consume that space
+            instead, the same fix in spirit as filling empty org-grid cells:
+            no gap is left for the hairline colour to paint over. */}
         <div className="flex flex-col gap-px bg-[var(--home-hairline)]">
           {rail.map((row) =>
             row.internal ? (
               <Link
                 key={row.href}
                 href={row.href}
-                className="sj-fill flex items-center gap-3.5 bg-[var(--home-bg)] px-6 py-6"
+                className="sj-fill flex flex-1 items-center gap-3.5 bg-[var(--home-bg)] px-6 py-6"
               >
                 <span className="flex h-11 w-11 shrink-0 items-center justify-center bg-[var(--home-accent)] text-[var(--home-on-accent)]">
                   {row.icon}
@@ -62,7 +71,7 @@ export function BookSection() {
                 href={row.href}
                 target={row.external ? "_blank" : undefined}
                 rel={row.external ? "noopener noreferrer" : undefined}
-                className="sj-fill flex items-center gap-3.5 bg-[var(--home-bg)] px-6 py-6"
+                className="sj-fill flex flex-1 items-center gap-3.5 bg-[var(--home-bg)] px-6 py-6"
               >
                 <span className="flex h-11 w-11 shrink-0 items-center justify-center bg-[var(--home-accent)] text-[var(--home-on-accent)]">
                   {row.icon}
