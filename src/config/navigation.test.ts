@@ -254,26 +254,69 @@ function findSourceFiles(dir: string): string[] {
   return found;
 }
 
+// Strips full-line `//` comments and `/* ... */` blocks (the only comment
+// styles this codebase uses; nothing here ever trails a comment after real
+// code on the same line). Used below so a comment that merely *names* a
+// retired component, e.g. "the old page's page-banner title", cannot fail
+// the identifier checks meant for actual code.
+function stripCommentLines(src: string): string {
+  let inBlock = false;
+  return src
+    .split("\n")
+    .map((line) => {
+      const trimmed = line.trim();
+      if (inBlock) {
+        if (trimmed.endsWith("*/")) inBlock = false;
+        return "";
+      }
+      if (trimmed.startsWith("/*")) {
+        if (!trimmed.endsWith("*/")) inBlock = true;
+        return "";
+      }
+      if (trimmed.startsWith("//") || trimmed.startsWith("*")) return "";
+      return line;
+    })
+    .join("\n");
+}
+
+const RETIRED_COMPONENTS = ["SiteHeader", "SiteFooter", "PageBanner", "BackToTopButton"];
+const RETIRED_IDENTIFIERS = ["primaryNavigation", "footerQuickLinks"];
+
 // The old chrome is gone. These files were the last thing rendering the
 // pre-redesign header, footer and page banner, and (marketing) was the only
 // route group still using them. A stray re-import would silently reintroduce a
 // second design system, so it fails the suite instead.
+//
+// This matches actual code references, not any occurrence of the word: an
+// import from the retired module's path, a JSX usage, or (for the two nav
+// exports, comment-stripped first) a bare identifier reference. Comments
+// don't produce valid `from "..."` or `<Foo` syntax, so the component checks
+// need no stripping; the identifier checks do, since a plain word like
+// "primaryNavigation" could otherwise appear inside a sentence.
 test("the retired chrome is not referenced anywhere in src", () => {
-  const RETIRED = [
-    "SiteHeader",
-    "SiteFooter",
-    "MobileNav\"",
-    "PageBanner",
-    "BackToTopButton",
-    "primaryNavigation",
-    "footerQuickLinks",
-  ];
   const files = findSourceFiles("src");
   for (const file of files) {
     if (file.endsWith("navigation.test.ts")) continue;
     const src = readFileSync(file, "utf8");
-    for (const name of RETIRED) {
-      assert.ok(!src.includes(name), `${file} still references ${name}`);
+
+    for (const name of RETIRED_COMPONENTS) {
+      const importPath = new RegExp(`from\\s+["'][^"']*/${name}["']`);
+      const jsxUsage = new RegExp(`<${name}\\b`);
+      assert.ok(!importPath.test(src), `${file} imports the retired ${name} module`);
+      assert.ok(!jsxUsage.test(src), `${file} still renders <${name}`);
+    }
+
+    // MobileNav (not MobileNavPanel, which stays) only ever appeared as an
+    // import path, so the path check alone is already a code reference.
+    assert.ok(
+      !/from\s+["']@\/components\/layout\/MobileNav["']/.test(src),
+      `${file} still imports the retired MobileNav`
+    );
+
+    const stripped = stripCommentLines(src);
+    for (const name of RETIRED_IDENTIFIERS) {
+      const identifier = new RegExp(`\\b${name}\\b`);
+      assert.ok(!identifier.test(stripped), `${file} still references ${name} outside a comment`);
     }
   }
 });
