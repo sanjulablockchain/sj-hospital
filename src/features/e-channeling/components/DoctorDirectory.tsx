@@ -196,7 +196,7 @@ export function DoctorDirectory({ doctors }: DoctorDirectoryProps) {
                   <span className="font-display text-lg font-bold text-[var(--home-heading)]">
                     {doctor.name}
                   </span>
-                  <span className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-[var(--home-accent)] transition">
+                  <span className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-[var(--home-accent)]">
                     Book appointment
                     <svg
                       width="16"

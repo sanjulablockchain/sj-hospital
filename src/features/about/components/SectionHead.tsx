@@ -6,9 +6,10 @@ import { Reveal } from "@/components/ui/Reveal";
  * both sitting on the same baseline. `#story`, `#different`, `#mission` and
  * `#group` use it identically; the reference repeats the same block for each.
  *
- * `heading` is a node rather than a string because both callers hard-break
- * their heading, and where the line falls is a typographic decision that
- * belongs beside the markup rather than in `data/content.ts`.
+ * `heading` is typed as a node rather than a string so a caller could
+ * hard-break it if a heading ever needed to; none of the four callers here do
+ * today, they all just pass a plain string (`jumpCards[n].label` or
+ * `groupHeading`).
  */
 export function SectionHead({ eyebrow, heading, intro }: { eyebrow: string; heading: ReactNode; intro: string }) {
   return (

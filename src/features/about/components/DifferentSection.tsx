@@ -9,10 +9,11 @@ import { differentIntro, jumpCards, reasons } from "../data/content";
  * hairline-through-a-grid-gap idiom `JumpCards` uses, so there are no double
  * borders where cells meet.
  *
- * `intro` is `differentIntro`, the six reason titles joined rather than the
- * jump card's `note` restated: the grid below already spells out each title
- * in full, so this only ever repeats a short label, the same pattern the
- * heading's reuse of `jumpCards[1].label` already relies on.
+ * `intro` is `differentIntro`, `storyParagraphs[1]` verbatim: the
+ * first-in-Negombo OPD insurance claim, which is a reason the six
+ * differentiators below are worth stating, not a restatement of their titles
+ * or of the jump card's `note`. `content.test.ts:123` asserts `differentIntro`
+ * is a literal substring of `storyParagraphs[1]`.
  */
 export function DifferentSection() {
   return (

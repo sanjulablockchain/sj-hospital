@@ -10,9 +10,9 @@ import { Reveal } from "@/components/ui/Reveal";
  * absent, since a `flex` container with one child just lets it take its
  * natural width instead of splitting space with a sibling.
  *
- * `heading` is a node rather than a string because both callers hard-break
- * their heading, and where the line falls is a typographic decision that
- * belongs beside the markup rather than in `data/content.ts`.
+ * `heading` is typed as a node rather than a string so a caller could
+ * hard-break it if a heading ever needed to; none of the three callers here do
+ * today, they all just pass a plain string.
  */
 export function SectionHead({
   eyebrow,
