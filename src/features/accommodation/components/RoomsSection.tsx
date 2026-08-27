@@ -17,6 +17,15 @@ import { roomsHeading, roomsIntro, roomTypes } from "../data/content";
  * `heading` and `intro` are `roomsHeading` and `roomsIntro`: RoomTypes.tsx's
  * own old h2 and meals sentence, so this section states nothing new.
  *
+ * `RoomTypeNav` and the four room sections share one wrapping `<div
+ * className="mt-10.5">` rather than each getting their own: `position:
+ * sticky` only ever has room to travel within its own containing block (here,
+ * that wrapper), so a wrapper holding nothing but the nav gives it no
+ * distance to travel, and it scrolls away exactly like `position: static`.
+ * Nesting the room list inside the same wrapper as the nav gives that
+ * containing block real height, the room list's own height, so the bar can
+ * actually pin to the top of the viewport while the rooms scroll past it.
+ *
  * Each room wrapper carries `scroll-mt-[88px]`, matched to `RoomTypeNav`'s own
  * sticky bar so it clears the room heading rather than covering it (or, if
  * oversized, leaving it absurdly far below the bar). The bar renders at about
@@ -34,101 +43,101 @@ export function RoomsSection() {
 
       <div className="mt-10.5">
         <RoomTypeNav />
-      </div>
 
-      <div className="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 lg:px-11">
-        <div className="flex flex-col gap-16">
-          {roomTypes.map((room, index) => (
-            <RevealOnScroll key={room.id} delayMs={index * 60}>
-              <div
-                id={room.id}
-                className="scroll-mt-[88px] grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center"
-              >
-                <div className={index % 2 === 1 ? "lg:order-2" : undefined}>
-                  <div className="mb-2.5 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                    <h3 className="font-display text-2xl font-bold text-[var(--home-heading)]">
-                      {room.name}
-                    </h3>
-                    <span className="font-display text-lg font-semibold text-[var(--home-accent)]">
-                      {room.price}
-                    </span>
-                  </div>
-                  <p className="mb-4 text-sm leading-relaxed text-[var(--home-muted)]">{room.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {room.amenities.map((amenity) => (
-                      <div
-                        key={amenity}
-                        className="flex items-center gap-1.5 border border-[var(--home-hairline)] bg-[var(--home-surface)] px-3.5 py-1.5 text-sm font-semibold text-[var(--home-body)] transition-colors duration-200 hover:bg-[var(--home-accent)]/10"
-                      >
-                        <span className="text-[var(--home-accent)]">
-                          <svg
-                            width="15"
-                            height="15"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="shrink-0"
-                          >
-                            <polyline points="20 6 9 17 4 12" />
-                          </svg>
-                        </span>
-                        {amenity}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className={`relative ${index % 2 === 1 ? "lg:order-1" : ""}`}>
-                  <div className="grid grid-cols-2 gap-3 lg:hidden">
-                    {room.photos.map((photo) => (
-                      <div
-                        key={photo.src}
-                        className="group relative aspect-3/4 overflow-hidden rounded-2xl"
-                      >
-                        <Image
-                          src={photo.src}
-                          alt={photo.alt}
-                          fill
-                          sizes="45vw"
-                          className="object-cover transition-transform duration-300 ease-out group-hover:scale-110"
-                        />
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="relative hidden aspect-4/3 lg:block">
-                    <div className="group absolute inset-0 overflow-hidden rounded-2xl">
-                      <Image
-                        src={room.photos[0].src}
-                        alt={room.photos[0].alt}
-                        fill
-                        sizes="40vw"
-                        className="object-cover transition-transform duration-300 ease-out group-hover:scale-110"
-                      />
+        <div className="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 lg:px-11">
+          <div className="flex flex-col gap-16">
+            {roomTypes.map((room, index) => (
+              <RevealOnScroll key={room.id} delayMs={index * 60}>
+                <div
+                  id={room.id}
+                  className="scroll-mt-[88px] grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center"
+                >
+                  <div className={index % 2 === 1 ? "lg:order-2" : undefined}>
+                    <div className="mb-2.5 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                      <h3 className="font-display text-2xl font-bold text-[var(--home-heading)]">
+                        {room.name}
+                      </h3>
+                      <span className="font-display text-lg font-semibold text-[var(--home-accent)]">
+                        {room.price}
+                      </span>
                     </div>
-                    {room.photos[1] && (
-                      <div
-                        className={`group absolute bottom-4 h-28 w-40 overflow-hidden rounded-xl border-4 border-[var(--home-bg)] shadow-xl xl:h-32 xl:w-44 ${
-                          index % 2 === 1 ? "left-4" : "right-4"
-                        }`}
-                      >
+                    <p className="mb-4 text-sm leading-relaxed text-[var(--home-muted)]">{room.description}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {room.amenities.map((amenity) => (
+                        <div
+                          key={amenity}
+                          className="flex items-center gap-1.5 border border-[var(--home-hairline)] bg-[var(--home-surface)] px-3.5 py-1.5 text-sm font-semibold text-[var(--home-body)] transition-colors duration-200 hover:bg-[var(--home-accent)]/10"
+                        >
+                          <span className="text-[var(--home-accent)]">
+                            <svg
+                              width="15"
+                              height="15"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              className="shrink-0"
+                            >
+                              <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                          </span>
+                          {amenity}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className={`relative ${index % 2 === 1 ? "lg:order-1" : ""}`}>
+                    <div className="grid grid-cols-2 gap-3 lg:hidden">
+                      {room.photos.map((photo) => (
+                        <div
+                          key={photo.src}
+                          className="group relative aspect-3/4 overflow-hidden rounded-2xl"
+                        >
+                          <Image
+                            src={photo.src}
+                            alt={photo.alt}
+                            fill
+                            sizes="45vw"
+                            className="object-cover transition-transform duration-300 ease-out group-hover:scale-110"
+                          />
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="relative hidden aspect-4/3 lg:block">
+                      <div className="group absolute inset-0 overflow-hidden rounded-2xl">
                         <Image
-                          src={room.photos[1].src}
-                          alt={room.photos[1].alt}
+                          src={room.photos[0].src}
+                          alt={room.photos[0].alt}
                           fill
-                          sizes="16vw"
+                          sizes="40vw"
                           className="object-cover transition-transform duration-300 ease-out group-hover:scale-110"
                         />
                       </div>
-                    )}
+                      {room.photos[1] && (
+                        <div
+                          className={`group absolute bottom-4 h-28 w-40 overflow-hidden rounded-xl border-4 border-[var(--home-bg)] shadow-xl xl:h-32 xl:w-44 ${
+                            index % 2 === 1 ? "left-4" : "right-4"
+                          }`}
+                        >
+                          <Image
+                            src={room.photos[1].src}
+                            alt={room.photos[1].alt}
+                            fill
+                            sizes="16vw"
+                            className="object-cover transition-transform duration-300 ease-out group-hover:scale-110"
+                          />
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </RevealOnScroll>
-          ))}
+              </RevealOnScroll>
+            ))}
+          </div>
         </div>
       </div>
     </section>
