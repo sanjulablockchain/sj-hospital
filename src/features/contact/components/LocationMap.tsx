@@ -3,8 +3,7 @@
 import "leaflet/dist/leaflet.css";
 import { useEffect, useRef } from "react";
 import type { Map as LeafletMap } from "leaflet";
-
-const HOSPITAL_COORDS: [number, number] = [7.206699127328975, 79.8453343846586];
+import { HOSPITAL_COORDS } from "../data/content";
 
 export function LocationMap() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -31,14 +30,23 @@ export function LocationMap() {
         maxZoom: 19,
       }).addTo(map);
 
+      // The SVG below is a template string, not JSX, so it cannot read a CSS
+      // variable directly: read the computed token off the themed root at
+      // mount instead, with a literal fallback for the moment before that
+      // root exists.
+      const root = document.getElementById("sj-root");
+      const styles = root ? getComputedStyle(root) : null;
+      const accent = styles?.getPropertyValue("--home-accent").trim() || "#2ca6f0";
+      const onAccent = styles?.getPropertyValue("--home-on-accent").trim() || "#04122b";
+
       const marker = L.divIcon({
         className: "",
         html: `
           <svg width="36" height="46" viewBox="0 0 36 46" fill="none" xmlns="http://www.w3.org/2000/svg"
             style="filter:drop-shadow(0 6px 8px rgba(30,27,46,0.35));">
             <path d="M18 0C8.06 0 0 8.06 0 18c0 12.5 18 28 18 28s18-15.5 18-28C36 8.06 27.94 0 18 0Z"
-              fill="#4A2A82" stroke="#33B4E5" stroke-width="2" />
-            <circle cx="18" cy="18" r="7" fill="#ffffff" />
+              fill="${accent}" stroke="${accent}" stroke-width="2" />
+            <circle cx="18" cy="18" r="7" fill="${onAccent}" />
           </svg>
         `,
         iconSize: [36, 46],
@@ -54,7 +62,7 @@ export function LocationMap() {
           `<div style="font-family:inherit;min-width:180px;">
             <p style="margin:0 0 6px;font-weight:700;color:#1e1b2e;">St. Joseph Hospital Negombo</p>
             <a href="${directionsUrl}" target="_blank" rel="noopener noreferrer"
-              style="color:#14769f;font-weight:600;text-decoration:none;">Get Directions &rarr;</a>
+              style="color:${accent};font-weight:600;text-decoration:none;">Get Directions &rarr;</a>
           </div>`
         );
 

@@ -584,3 +584,12 @@ footer[id] {
     transition: none;
   }
 }
+
+/* OpenStreetMap ships light tiles only, so on the dark theme the map is a
+   glaring white block on an otherwise dark page. Inverting and rotating the hue
+   back gives a dark map from the same tiles: no second tile host, no extra
+   attribution. Applied to the tile pane alone, so the marker and popup keep
+   their real colours. */
+[data-sj][data-theme="dark"] .leaflet-tile-pane {
+  filter: invert(1) hue-rotate(180deg) brightness(0.95) contrast(0.9);
+}

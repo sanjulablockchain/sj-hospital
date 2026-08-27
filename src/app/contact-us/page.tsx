@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ContactPageContent } from "@/features/contact";
+import { ContactPage } from "@/features/contact";
 
 export const metadata: Metadata = {
   title: "Contact Us | St. Joseph Hospital Negombo",
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <ContactPageContent />;
+  return <ContactPage />;
 }
