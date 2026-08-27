@@ -1,5 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 import {
   bookHeading,
   bookIntro,
@@ -64,20 +66,40 @@ const allCopy: string[] = [
   bookIntro,
 ];
 
+// FIX 1: src/app/accommodation/page.tsx's <meta name="description"> lives
+// outside this module entirely, so no scan of content.ts's own exports can
+// ever see it, and it is exactly what a search engine or a social unfurl
+// publishes. A fabricated "starting from 10,000 LKR" there once attributed
+// the Standard-only price to all four room categories; read the route file's
+// source directly so a price introduced there fails this suite too.
+const pageSource = readFileSync(
+  fileURLToPath(new URL("../../../app/accommodation/page.tsx", import.meta.url)),
+  "utf8"
+);
+const metadataDescriptionMatch = pageSource.match(/description:\s*\n?\s*"((?:[^"\\]|\\.)*)"/);
+if (!metadataDescriptionMatch) {
+  throw new Error(
+    "could not find accommodation/page.tsx's metadata description; update this test's regex"
+  );
+}
+const routeMetadataDescription = metadataDescriptionMatch[1];
+
 // Controller ruling B: the brief's original version of this test asserted zero
 // matches of /LKR|Rs\.?\s*\d/ across a copy array that includes `heroFacts`,
 // but Step 3 specifies a hero fact of "10,000 LKR" restating the standard
 // room's own price, so a zero-match assertion fails against the very data this
-// task specifies. This replaces it with an exact-set assertion over `allCopy`,
-// every string export in this file: gather every price-bearing string across
-// all of the page's data, and require that set to be exactly the standard
-// room's price and the hero fact restating it. Any third price-bearing string
-// (a fabricated figure, a stray currency, a typo that duplicates the real
-// price under different phrasing, or a price smuggled into a heading or an
-// intro) still fails.
+// task specifies. This replaces it with an exact-set assertion over `allCopy`
+// plus the route's own metadata description: gather every price-bearing string
+// across all of the page's data, and require that set to be exactly the
+// standard room's price and the hero fact restating it. Any third
+// price-bearing string (a fabricated figure, a stray currency, a typo that
+// duplicates the real price under different phrasing, or a price smuggled into
+// a heading, an intro, or the route's metadata) still fails.
 test("no price figure appears anywhere except the standard room's own and the hero fact restating it", () => {
   const priceRegex = /LKR|Rs\.?\s*\d/;
-  const found = new Set(allCopy.filter((value) => priceRegex.test(value)));
+  const found = new Set(
+    [...allCopy, routeMetadataDescription].filter((value) => priceRegex.test(value))
+  );
   assert.deepEqual(found, new Set(["From 10,000 LKR", "10,000 LKR"]));
 });
 
