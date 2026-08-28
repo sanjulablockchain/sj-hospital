@@ -5,6 +5,11 @@ import { RevealStagger } from "@/components/ui/RevealStagger";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { facilities } from "../data/facilities";
 
+/**
+ * The card itself is the link, not the small label inside it. Readers click the
+ * photograph or the heading, and on the three photo cards the label only fades
+ * in on hover, so a nested link left most of a 430px card doing nothing.
+ */
 export function FacilitiesSection() {
   return (
     <section id="facilities" className="mx-auto max-w-[1440px] pt-30">
@@ -25,9 +30,10 @@ export function FacilitiesSection() {
       >
         {facilities.map((card) =>
           card.accent ? (
-            <article
+            <Link
               key={card.index}
-              className="group relative flex min-h-[430px] flex-col justify-end overflow-hidden bg-[var(--home-accent)]"
+              href={card.href}
+              className="group relative flex min-h-[430px] flex-col justify-end overflow-hidden bg-[var(--home-accent)] focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-[var(--home-on-accent)]"
             >
               <div className="absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-[var(--home-on-accent)] transition-transform duration-[450ms] group-hover:scale-x-100" />
               <div className="relative p-7 text-[var(--home-on-accent)] transition-transform duration-500 group-hover:-translate-y-2">
@@ -36,16 +42,17 @@ export function FacilitiesSection() {
                   {card.title}
                 </h3>
                 <p className="mt-2.5 text-[14.5px] leading-[1.55] opacity-82">{card.body}</p>
-                <Link
-                  href={card.href}
-                  className="mt-4.5 inline-flex items-center gap-2 border-b border-[var(--home-on-accent)]/40 pb-0.5 text-[14px] font-bold"
-                >
+                <span className="mt-4.5 inline-flex items-center gap-2 border-b border-[var(--home-on-accent)]/40 pb-0.5 text-[14px] font-bold">
                   {card.linkLabel} <span aria-hidden>&rarr;</span>
-                </Link>
+                </span>
               </div>
-            </article>
+            </Link>
           ) : (
-            <article key={card.index} className="group relative flex min-h-[430px] items-end overflow-hidden bg-[#08123A]">
+            <Link
+              key={card.index}
+              href={card.href}
+              className="group relative flex min-h-[430px] items-end overflow-hidden bg-[#08123A] focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-[var(--home-accent)]"
+            >
               {card.photo && (
                 // Taller than the card so the drift never exposes an edge.
                 <ParallaxLayer
@@ -73,14 +80,13 @@ export function FacilitiesSection() {
                   {card.title}
                 </h3>
                 <p className="mt-2.5 text-[14.5px] leading-[1.55] text-white/78">{card.body}</p>
-                <Link
-                  href={card.href}
-                  className="mt-3.5 inline-flex translate-y-2.5 items-center gap-2 text-[13.5px] font-bold text-[#7FCBFF] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100"
-                >
+                {/* Below 1024px there is no hover to reveal it, so the label
+                    stays put rather than never showing at all. */}
+                <span className="mt-3.5 inline-flex translate-y-2.5 items-center gap-2 text-[13.5px] font-bold text-[#7FCBFF] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 max-[1023px]:translate-y-0 max-[1023px]:opacity-100">
                   {card.linkLabel} <span aria-hidden>&rarr;</span>
-                </Link>
+                </span>
               </div>
-            </article>
+            </Link>
           )
         )}
       </RevealStagger>

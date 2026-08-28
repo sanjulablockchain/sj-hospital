@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { facilities } from "./data/facilities.ts";
+import { networkNodes } from "./data/network.ts";
 
 // Walks src/features/home for every .ts/.tsx file. Hand-written for the same
 // reason navigation.test.ts writes its own walker: @types/node@20 (pinned in
@@ -127,4 +128,23 @@ test("the facilities teasers deep link to the section each one describes", () =>
   assert.equal(byTitle.get("Outpatient wing"), "/facilities#floors");
   assert.equal(byTitle.get("Imaging, lab & theatres"), "/facilities#diagnostic");
   assert.equal(byTitle.get("Inpatient rooms"), "/accommodation#rooms");
+});
+
+// The network accordion is the other data driven teaser band. Its panels used
+// to be buttons and nothing else, so an open panel described a place the
+// reader then had no way to reach.
+test("every network teaser panel reaches a page, not a home anchor", () => {
+  assert.equal(networkNodes.length, 4);
+  for (const node of networkNodes) {
+    assert.ok(node.href.startsWith("/"), `${node.name} links ${node.href}`);
+    assert.ok(node.linkLabel.trim().length > 0, `${node.name} has no link label`);
+  }
+});
+
+test("the network teasers each point at the page that covers that node", () => {
+  const byName = new Map(networkNodes.map((node) => [node.name, node.href]));
+  assert.equal(byName.get("St. Joseph Hospital"), "/facilities");
+  assert.equal(byName.get("Kids & Teens Medical Group"), "/network#family");
+  assert.equal(byName.get("School wellness programme"), "/school-wellness");
+  assert.equal(byName.get("Telemedicine & delivery"), "/services/telemedicine");
 });
