@@ -406,6 +406,33 @@ test("navigation.ts still exports the NavItem type every nav depends on", () => 
 // "#book" default stays untouched), so every hero is required to pass the
 // prop explicitly instead: a hero that forgets it would silently fall back to
 // the unfixed default, which is exactly the regression this guards against.
+// Every hero on the site closes with a marquee under the fact strip, and it is
+// the band that tells a reader at a glance what the page covers. /home-care
+// shipped without one and nothing failed, because the convention lived in
+// thirteen files and in nobody's test. It lives here now.
+//
+// Matches any component whose name ends in Ticker, not just <Ticker: /health-tips
+// wraps its own TipsTicker around a live seasonal list, and the home page's
+// StatTicker wraps the shared one. Both are the band this is asking for.
+//
+// ServiceHero is the one exemption, and it is a real one rather than a file that
+// slipped through. It is not a page hero: it is a single template rendered for
+// all 37 service detail routes, and it closes on `service.strip`, the per
+// service stat row, which is that band's equivalent. A ticker there would need
+// eight phrases per service, invented 37 times over.
+const HERO_WITHOUT_TICKER = "ServiceHero.tsx";
+
+test("every page hero closes with a ticker", () => {
+  const heroes = findHeroFiles("src/features");
+  assert.ok(heroes.length >= 6, `only found ${heroes.length} heroes`);
+  const checked = heroes.filter((file) => !file.endsWith(HERO_WITHOUT_TICKER));
+  assert.equal(checked.length, heroes.length - 1, "the ServiceHero exemption no longer matches");
+  for (const file of checked) {
+    const src = stripCommentLines(readFileSync(file, "utf8"));
+    assert.match(src, /<\w*Ticker\b/, `${file} renders no ticker`);
+  }
+});
+
 test("every hero passes bookHref=\"/e-channeling\" to ThemedHeader", () => {
   const heroes = findHeroFiles("src/features");
   assert.ok(heroes.length >= 6, `only found ${heroes.length} heroes`);

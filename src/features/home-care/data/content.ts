@@ -63,6 +63,26 @@ home is confirmed; the list of tests, any turnaround, and how a sample travels
 to the laboratory are not, so the copy stays general.`;
 
 /**
+ * The marquee under the hero fact strip, in the register every other hero's
+ * ticker uses: short labels naming what the page covers, sentence case here and
+ * uppercased by the component.
+ *
+ * Nothing new is claimed. Each item is something stated in full further down the
+ * page or in the home visits service entry, which is the point of the band: a
+ * reader who scrolls no further should still know what comes to the door.
+ */
+export const tickerItems: readonly string[] = [
+  "Doctors, nurses and laboratory technicians",
+  "Visits by appointment",
+  "6 dedicated vehicles",
+  "Sampling done at home",
+  "Notes on your hospital file",
+  "Elders, infants and post-operative care",
+  "Medicine from our own counter",
+  "Video and phone consultations",
+];
+
+/**
  * The strip closing the hero. Every pair here also appears in the home visits
  * service entry, which is what content.test.ts checks it against: these are not
  * independent facts, and a figure edited here alone should fail.

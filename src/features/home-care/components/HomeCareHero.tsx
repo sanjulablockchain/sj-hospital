@@ -2,8 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { ThemedHeader } from "@/components/layout/ThemedHeader";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
+import { Ticker } from "@/components/ui/Ticker";
 import { homeCareNavigation } from "@/config/homeCareNavigation";
-import { heroFacts } from "../data/content";
+import { heroFacts, tickerItems } from "../data/content";
 
 /**
  * `#top`: a home visit behind the themed header and the page's only <h1>,
@@ -15,10 +16,11 @@ import { heroFacts } from "../data/content";
  * recognise where they are, and the media library has no second home-visit
  * photograph that would say anything the first does not.
  *
- * No ticker under the strip, unlike /school-wellness. A ticker earns its place
- * where there is a long list worth scrolling past (what a screening covers);
- * here the four facts are the whole story, and a second moving band would be
- * decoration.
+ * The ticker closing the section is the band every other hero on the site ends
+ * with, and `navigation.test.ts` now requires it of all of them. This page
+ * briefly shipped without one on the reasoning that the four facts were the
+ * whole story; that was wrong, because the marquee is what a reader who scrolls
+ * no further actually reads.
  *
  * Accent colours are literal rather than `var(--home-accent)`, as on the other
  * hero blocks: this sits on a photograph in both themes, and the light theme
@@ -149,6 +151,8 @@ export function HomeCareHero() {
           ))}
         </dl>
       </div>
+
+      <Ticker items={tickerItems} />
     </section>
   );
 }

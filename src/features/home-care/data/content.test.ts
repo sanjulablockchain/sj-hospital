@@ -15,6 +15,7 @@ import {
   samplingPoints,
   steps,
   suitedCases,
+  tickerItems,
   visitLede,
   visitRoles,
 } from "./content.ts";
@@ -23,6 +24,7 @@ const source = readFileSync(fileURLToPath(new URL("./content.ts", import.meta.ur
 
 /** Everything on the page that is prose the reader sees. */
 const allCopy = [
+  ...tickerItems,
   ...heroFacts.flatMap((f) => [f.k, f.v]),
   ...jumpCards.flatMap((c) => [c.count, c.label, c.note]),
   visitLede,
@@ -181,6 +183,28 @@ test("four jump cards, each anchoring to a section on this page", () => {
     assert.ok(card.count.trim().length > 0, `${card.label} has no count`);
   }
   assert.equal(new Set(jumpCards.map((c) => c.href)).size, 4, "two cards share an anchor");
+});
+
+// The Ticker sets its items uppercase at 12.5px with 0.2em tracking, so a
+// phrase that reads fine in a paragraph runs half the band on its own. The
+// existing tickers sit around two to five words; 42 characters is the ceiling
+// that keeps this one in the same register rather than a scrolling sentence.
+test("the ticker items are short enough to read while moving", () => {
+  assert.ok(tickerItems.length >= 5, `only ${tickerItems.length} ticker items`);
+  for (const item of tickerItems) {
+    assert.ok(item.trim().length > 0, "an empty ticker item");
+    assert.ok(item.length <= 42, `"${item}" is too long for the marquee`);
+    // Sentence case in the data, uppercased by the component. A full stop
+    // means someone wrote prose for a band that takes labels.
+    assert.ok(!item.endsWith("."), `"${item}" is a sentence, not a label`);
+  }
+});
+
+test("the ticker names the three roles the page leads with", () => {
+  const joined = tickerItems.join(" ").toLowerCase();
+  for (const role of ["doctor", "nurse", "laboratory technician"]) {
+    assert.match(joined, new RegExp(role), `the ticker does not mention a ${role}`);
+  }
 });
 
 test("the sampling band has points and facts, not just a heading", () => {
