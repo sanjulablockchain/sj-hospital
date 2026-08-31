@@ -257,7 +257,7 @@ works because slugs are identical across locales. Choosing a language writes
 `sj-locale` (one year, `SameSite=Lax`, `path=/`) and navigates, so the reader
 lands on the same page in the new language rather than on the home page.
 
-Accessibility: the menu is a labelled listbox, the current locale carries
+Accessibility: the menu is a labelled menu, the current locale carries
 `aria-current`, each option sets `lang` on itself so a screen reader announces
 the native names in the right voice, and focus returns to the button on close.
 
