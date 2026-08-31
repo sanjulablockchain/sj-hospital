@@ -23,6 +23,50 @@ body {
   color: var(--color-ink);
 }
 
+/* One scrollbar colour for the whole site, defined on :root rather than beside
+   the --home-* tokens on purpose. Those live on [data-sj], which is a div inside
+   body, and the document scrollbar belongs to html: a custom property set on a
+   descendant is invisible to it, so the page bar could never have read them.
+   Kept theme-neutral for the same reason. data-theme is written to #sj-root, not
+   to html (see components/theme/ThemeScript), so html cannot tell which theme is
+   active either. This mid blue-grey at partial alpha stays legible on the dark
+   #060b1f, the light #f1f5fc and the white modal surface alike. */
+:root {
+  --sj-scrollbar-thumb: rgba(94, 134, 184, 0.5);
+  --sj-scrollbar-thumb-hover: rgba(94, 134, 184, 0.78);
+}
+
+/* The page scrollbar. Every inner scroll container on the site already had a
+   thin themed bar via .themed-scrollbar, which left the document bar as the
+   widest and only unstyled scrollbar on the page.
+   Both syntaxes are needed: Firefox and Chrome 121+ honour the standard
+   `scrollbar-width`, older Chromium and Safari need the ::-webkit- rules.
+   10px rather than the 8px the inner containers use: this is the bar people
+   actually drag, and 8px is fiddly to grab with a mouse. It is left visible
+   rather than hidden, because it is the only thing telling a reader how far
+   down a long page they are. */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--sj-scrollbar-thumb) transparent;
+}
+
+html::-webkit-scrollbar {
+  width: 10px;
+}
+
+html::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  background-color: var(--sj-scrollbar-thumb);
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background-color: var(--sj-scrollbar-thumb-hover);
+}
+
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
@@ -88,9 +132,14 @@ footer[id] {
     );
   }
 
+  /* Shares --sj-scrollbar-thumb with the document bar above, so the site has one
+     scrollbar identity. This carried a purple, rgba(74, 42, 130, 0.35), from a
+     palette that predates the current blue accent, which had the modal, the
+     doctor directory rail and the room type nav all scrolling purple on a blue
+     site. globals.test.ts fails if that colour returns. */
   .themed-scrollbar {
     scrollbar-width: thin;
-    scrollbar-color: rgba(74, 42, 130, 0.35) transparent;
+    scrollbar-color: var(--sj-scrollbar-thumb) transparent;
   }
 
   .themed-scrollbar::-webkit-scrollbar {
@@ -103,11 +152,11 @@ footer[id] {
 
   .themed-scrollbar::-webkit-scrollbar-thumb {
     border-radius: 9999px;
-    background-color: rgba(74, 42, 130, 0.35);
+    background-color: var(--sj-scrollbar-thumb);
   }
 
   .themed-scrollbar::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(74, 42, 130, 0.55);
+    background-color: var(--sj-scrollbar-thumb-hover);
   }
 
   .no-scrollbar {
