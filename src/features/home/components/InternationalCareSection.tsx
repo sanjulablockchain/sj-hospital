@@ -16,7 +16,7 @@ export function InternationalCareSection() {
       <div className="grid gap-15 min-[900px]:grid-cols-[0.9fr_1.1fr] min-[900px]:items-start">
         <div className="min-[900px]:sticky min-[900px]:top-10">
           <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
-            07 / International patient care
+            08 / International patient care
           </div>
           <h2 className="font-display mt-4.5 text-[clamp(38px,4.6vw,70px)] leading-[0.9] font-extrabold tracking-[-0.04em] text-[var(--home-heading)] uppercase">
             Travelling

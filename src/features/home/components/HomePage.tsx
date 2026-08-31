@@ -6,6 +6,7 @@ import { ServicesBentoSection } from "./ServicesBentoSection";
 import { SurgicalSection } from "./SurgicalSection";
 import { FacilitiesSection } from "./FacilitiesSection";
 import { PharmacySection } from "./PharmacySection";
+import { HomeCareSection } from "./HomeCareSection";
 import { RoomsSection } from "./RoomsSection";
 import { InternationalCareSection } from "./InternationalCareSection";
 import { HealthTipsSection } from "./HealthTipsSection";
@@ -27,6 +28,7 @@ export function HomePage() {
         <SurgicalSection />
         <FacilitiesSection />
         <PharmacySection />
+        <HomeCareSection />
         <RoomsSection />
         <InternationalCareSection />
         <HealthTipsSection />

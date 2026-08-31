@@ -17,6 +17,7 @@ import { contactNavigation, contactFooterColumns } from "./contactNavigation.ts"
 import { accommodationNavigation, accommodationFooterColumns } from "./accommodationNavigation.ts";
 import { channelingNavigation, channelingFooterColumns } from "./channelingNavigation.ts";
 import { privacyNavigation, privacyFooterColumns } from "./privacyNavigation.ts";
+import { homeCareNavigation, homeCareFooterColumns } from "./homeCareNavigation.ts";
 
 const labels = (items: { label: string }[]) => items.map((i) => i.label);
 
@@ -40,6 +41,7 @@ const ALL_NAVS = [
   accommodationNavigation,
   channelingNavigation,
   privacyNavigation,
+  homeCareNavigation,
 ];
 
 // Every footer on the site. About us, Contact us and Accommodation were each
@@ -61,6 +63,7 @@ const ALL_FOOTERS = [
   pharmacyFooterColumns,
   servicesFooterColumns,
   wellnessFooterColumns,
+  homeCareFooterColumns,
   homeFooterColumns,
 ];
 
@@ -94,6 +97,7 @@ test("Facilities, Pharmacy, International and Media reach their pages from every
       ["Network", "/network"],
       ["Media", "/media"],
       ["Careers", "/careers"],
+      ["Care at Home", "/home-care"],
     ]) {
       const item = nav.find((i) => i.label === label);
       assert.ok(item, `no ${label} item`);
@@ -139,6 +143,36 @@ test("on the media page itself, Media is an in-page anchor", () => {
   const item = mediaNavigation.find((i) => i.label === "Media");
   assert.ok(item);
   assert.equal(item.href, "#newsroom");
+});
+
+test("on the home care page itself, Care at Home is an in-page anchor", () => {
+  const item = homeCareNavigation.find((i) => i.label === "Care at Home");
+  assert.ok(item);
+  assert.equal(item.href, "#visits");
+});
+
+// Care at Home is the tenth nav item, and the four bands it gathers all had a
+// home elsewhere first: home visits and telemedicine as service detail pages,
+// medicine delivery on /pharmacy too. So the label has to reach the new page
+// rather than deep linking into whichever of those came to mind, or the nav
+// would mean something different depending on the page you clicked it from.
+test("Care at Home reaches the home care page from every nav but its own", () => {
+  for (const nav of ALL_NAVS) {
+    if (nav === homeCareNavigation) continue;
+    const item = nav.find((i) => i.label === "Care at Home");
+    assert.ok(item, "no Care at Home item");
+    assert.equal(item.href, "/home-care");
+  }
+});
+
+// The bands on /home-care that only summarise a page which already owns the
+// detail. Both must stay outbound links: the point of keeping those two bands
+// thin is that the reader ends up on the page holding the real content, and a
+// bare hash would strand them on the summary.
+test("the home care footer sends medicine and telemedicine to the pages that own them", () => {
+  const hrefs = homeCareFooterColumns.flatMap((c) => c.links.map((l) => l.href));
+  assert.ok(hrefs.includes("/pharmacy#delivery"), "no pharmacy delivery link");
+  assert.ok(hrefs.includes("/services/telemedicine"), "no telemedicine link");
 });
 
 test("no nav item still points at the superseded home network band", () => {

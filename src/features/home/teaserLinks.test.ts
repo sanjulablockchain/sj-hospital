@@ -4,6 +4,7 @@ import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { facilities } from "./data/facilities.ts";
 import { networkNodes } from "./data/network.ts";
+import { homeCareCards } from "./data/homeCare.ts";
 
 // Walks src/features/home for every .ts/.tsx file. Hand-written for the same
 // reason navigation.test.ts writes its own walker: @types/node@20 (pinned in
@@ -79,6 +80,10 @@ const RETIRED_BANDS = new Map([
   ["#book", "/e-channeling"],
   ["#standards", "/about-us"],
   ["#voices", "/about-us"],
+  // The care-at-home band is a teaser from the day it lands, so it never gets
+  // the chance to become a section someone links to in place. Listed here with
+  // the rest so it cannot acquire one later.
+  ["#home-care", "/home-care"],
 ]);
 
 test("no home teaser links to a band that now has a page of its own", () => {
@@ -139,6 +144,26 @@ test("every network teaser panel reaches a page, not a home anchor", () => {
     assert.ok(node.href.startsWith("/"), `${node.name} links ${node.href}`);
     assert.ok(node.linkLabel.trim().length > 0, `${node.name} has no link label`);
   }
+});
+
+// The care-at-home band is the third data driven teaser. Its three cards are
+// the three strands /home-care gathers, and each deep links into the band that
+// covers that strand rather than dropping the reader at the top of the page.
+test("every care at home teaser card reaches a page, not a home anchor", () => {
+  assert.equal(homeCareCards.length, 3);
+  for (const card of homeCareCards) {
+    assert.ok(card.href.startsWith("/"), `${card.title} links ${card.href}`);
+    assert.ok(card.linkLabel.trim().length > 0, `${card.title} has no link label`);
+  }
+});
+
+test("the care at home teasers deep link to the section each one describes", () => {
+  const byTitle = new Map(homeCareCards.map((card) => [card.title, card.href]));
+  assert.equal(byTitle.get("Home visits"), "/home-care#visits");
+  assert.equal(byTitle.get("Sampling at home"), "/home-care#sampling");
+  // Telemedicine is summarised on /home-care but owned by the service page, so
+  // this card skips the summary and goes where the detail actually is.
+  assert.equal(byTitle.get("Telemedicine"), "/services/telemedicine");
 });
 
 test("the network teasers each point at the page that covers that node", () => {

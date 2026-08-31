@@ -19,7 +19,7 @@ export function SchoolWellnessSection() {
       <div className="grid gap-15 min-[900px]:grid-cols-[1.05fr_0.95fr] min-[900px]:items-center">
         <Reveal>
           <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
-            09 / School wellness
+            10 / School wellness
           </div>
           <h2 className="font-display mt-4.5 text-[clamp(38px,4.6vw,70px)] leading-[0.9] font-extrabold tracking-[-0.04em] text-[var(--home-heading)] uppercase">
             We come to

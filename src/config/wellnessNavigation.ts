@@ -11,6 +11,7 @@ export const wellnessNavigation: NavItem[] = [
   { label: "Services", href: "/services" },
   { label: "Facilities", href: "/facilities" },
   { label: "Pharmacy", href: "/pharmacy" },
+  { label: "Care at Home", href: "/home-care" },
   { label: "Health Tips", href: "/health-tips" },
   { label: "International Patient Care", href: "/international-care" },
   { label: "School Wellness", href: "#programme" },

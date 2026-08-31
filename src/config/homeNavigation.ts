@@ -10,6 +10,7 @@ export const homeNavigation: NavItem[] = [
   // Same reasoning for Pharmacy: the #pharmacy band stays on as the teaser, and
   // this leaves the home page for the full one.
   { label: "Pharmacy", href: "/pharmacy" },
+  { label: "Care at Home", href: "/home-care" },
   // And the same again for Health Tips: #tips stays as the four-row teaser,
   // and the library, triage list, screening table and first aid live on
   // /health-tips.
@@ -50,6 +51,7 @@ export const homeFooterColumns: FooterColumn[] = [
       { label: "Surgical care", href: "/services/general-surgery" },
       { label: "Pharmacy", href: "/pharmacy" },
       { label: "Accommodation", href: "/accommodation" },
+      { label: "Care at home", href: "/home-care" },
       { label: "Book a doctor", href: "/e-channeling" },
     ],
   },

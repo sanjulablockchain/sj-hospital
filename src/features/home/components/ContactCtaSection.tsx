@@ -21,7 +21,7 @@ export function ContactCtaSection() {
               className="h-auto w-full"
             />
           </ParallaxLayer>
-          <div className="relative text-[11.5px] font-bold tracking-[0.24em] uppercase opacity-70">14 / Come see us</div>
+          <div className="relative text-[11.5px] font-bold tracking-[0.24em] uppercase opacity-70">15 / Come see us</div>
           <h2 className="font-display relative mt-4.5 text-[clamp(36px,5vw,72px)] leading-[0.9] font-extrabold tracking-[-0.04em] uppercase">
             Open right
             <br />

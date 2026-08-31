@@ -10,7 +10,7 @@ export function HealthTipsSection() {
         <div className="flex flex-wrap items-end justify-between gap-10">
           <div>
             <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
-              08 / Health tips
+              09 / Health tips
             </div>
             <h2 className="font-display mt-4.5 text-[clamp(38px,4.4vw,66px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
               Small habits,

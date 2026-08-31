@@ -25,7 +25,7 @@ export function TestimonialsSection() {
       </div>
       <Reveal>
         <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
-          13 / Patient voices
+          14 / Patient voices
         </div>
         <blockquote className="font-display mt-6.5 max-w-[26ch] text-[clamp(27px,3.9vw,58px)] leading-[1.06] font-normal tracking-[-0.03em] text-[var(--home-heading)]" style={{ textWrap: "pretty" }}>
           {current.quote}

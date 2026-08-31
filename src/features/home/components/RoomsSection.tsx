@@ -25,7 +25,7 @@ export function RoomsSection() {
       <div className="relative mx-auto max-w-[1440px] px-5 py-26 sm:px-8 lg:px-11">
         <div className="grid gap-15 min-[900px]:grid-cols-[1.1fr_0.9fr] min-[900px]:items-center">
           <Reveal>
-            <div className="text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">06 / Stay with us</div>
+            <div className="text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">07 / Stay with us</div>
             <h2 className="font-display mt-4.5 text-[clamp(40px,5.4vw,82px)] leading-[0.9] font-extrabold tracking-[-0.04em] text-white uppercase">
               A room that
               <br />

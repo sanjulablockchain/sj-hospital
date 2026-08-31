@@ -12,6 +12,7 @@ export const servicesNavigation: NavItem[] = [
   { label: "Services", href: "#directory" },
   { label: "Facilities", href: "/facilities" },
   { label: "Pharmacy", href: "/pharmacy" },
+  { label: "Care at Home", href: "/home-care" },
   { label: "Health Tips", href: "/health-tips" },
   { label: "International Patient Care", href: "/international-care" },
   { label: "School Wellness", href: "/school-wellness" },
@@ -30,6 +31,7 @@ export const servicesDetailNavigation: NavItem[] = [
   { label: "Services", href: "/services" },
   { label: "Facilities", href: "/facilities" },
   { label: "Pharmacy", href: "/pharmacy" },
+  { label: "Care at Home", href: "/home-care" },
   { label: "Health Tips", href: "/health-tips" },
   { label: "International Patient Care", href: "/international-care" },
   { label: "School Wellness", href: "/school-wellness" },
@@ -58,6 +60,7 @@ export const servicesFooterColumns: FooterColumn[] = [
       { label: "Department of surgery", href: "/services#surgical" },
       { label: "Diagnostics & radiology", href: "/services#diagnostics" },
       { label: "Pharmacy", href: "/pharmacy" },
+      { label: "Care at home", href: "/home-care" },
     ],
   },
   {
