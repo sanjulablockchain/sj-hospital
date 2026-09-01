@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getService, serviceSlugs } from "@/features/services/data/services";
 import { ServiceDetailPage } from "@/features/services";
+import { localeAlternates } from "@/lib/i18n/alternates";
+import type { Locale } from "@/lib/i18n/locales";
 
 export function generateStaticParams() {
   return serviceSlugs.map((slug) => ({ slug }));
@@ -12,7 +14,7 @@ export async function generateMetadata({
 }: {
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const service = getService(slug);
   if (!service) return {};
   const description =
@@ -20,6 +22,7 @@ export async function generateMetadata({
   return {
     title: `${service.title} | St. Joseph Hospital Negombo`,
     description,
+    alternates: localeAlternates(`/services/${slug}`, locale as Locale),
   };
 }
 

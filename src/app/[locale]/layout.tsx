@@ -10,7 +10,8 @@ import {
   Catamaran,
 } from "next/font/google";
 import { notFound } from "next/navigation";
-import { LOCALES, hasLocale } from "@/lib/i18n/locales";
+import { LOCALES, hasLocale, type Locale } from "@/lib/i18n/locales";
+import { localeAlternates, SITE_URL } from "@/lib/i18n/alternates";
 import "../globals.css";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -71,11 +72,28 @@ const catamaran = Catamaran({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "St. Joseph Hospital Negombo | To Live Is a Privilege",
-  description:
-    "US-standard healthcare in Negombo, Sri Lanka. 24/7 OPD, Emergency, Pharmacy, in-house doctors, and digital X-ray, with inpatient rooms from 10,000 LKR.",
-};
+export async function generateMetadata({ params }: LayoutProps<'/[locale]'>): Promise<Metadata> {
+  const { locale } = await params;
+
+  // The generated ParamMap types every dynamic segment as `string`, so this
+  // narrows it back to Locale. hasLocale below is what actually enforces the
+  // invariant at runtime (an unknown segment 404s); this cast just tells the
+  // type checker what the guard already guarantees by the time a page renders.
+  const typedLocale = locale as Locale;
+
+  return {
+    metadataBase: new URL(SITE_URL),
+    title: "St. Joseph Hospital Negombo | To Live Is a Privilege",
+    description:
+      "US-standard healthcare in Negombo, Sri Lanka. 24/7 OPD, Emergency, Pharmacy, in-house doctors, and digital X-ray, with inpatient rooms from 10,000 LKR.",
+    // The title and description above stay English until the content plan
+    // translates them. The alternates are what matter now: they tell a search
+    // engine the three URLs are the same page in different languages rather
+    // than duplicate content.
+    alternates: localeAlternates("/", typedLocale),
+    openGraph: { locale: typedLocale },
+  };
+}
 
 /**
  * Prerender all three locales. Without this the tree is dynamic and every page
