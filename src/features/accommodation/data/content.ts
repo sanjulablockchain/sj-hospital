@@ -22,6 +22,12 @@
  * room category rather than one (`mealsNote`), and it is spent once, as
  * `roomsIntro`. `#specialties` has no `intro` at all rather than a second,
  * near-identical quote of that same sentence: see SpecialtiesSection.tsx.
+ *
+ * `hero` and `sectionEyebrows` near the bottom of this file are page
+ * furniture rather than hospital facts, moved here out of RoomsHero.tsx,
+ * RoomsSection.tsx, SpecialtiesSection.tsx and BookSection.tsx (each had an
+ * eyebrow or a heading string sitting directly in its JSX) so the i18n parity
+ * test can see them, the same move about's and e-channeling's overlays made.
  */
 
 /** One of the four inpatient room categories. */
@@ -213,19 +219,71 @@ export const bookIntro = "Send us a message and our team will help you find the 
 // `#book`'s contact rail: the hospital's own phone, WhatsApp and email, the
 // same values contact/data/content.ts's `contactRows` and
 // features/facilities/components/BookSection.tsx's `rows` carry, plus a link
-// to /e-channeling for booking a doctor instead of a room. `icon` is JSX, so
-// it stays in BookSection.tsx, looked up by `label`; every other field lives
-// here so content.test.ts can pin it exactly, the way
-// contact/data/content.test.ts pins `contactRows`.
+// to /e-channeling for booking a doctor instead of a room. `icon` picks the
+// glyph in BookSection.tsx by name rather than by `label`, the same fix
+// contact/data/content.ts's `contactRows.icon` made: keying the icon off
+// translatable text is what left four blank squares on every Sinhala and
+// Tamil page in the pilot. Every other field lives here so content.test.ts
+// can pin it exactly, the way contact/data/content.test.ts pins `contactRows`.
 export const bookRail: {
+  icon: "phone" | "whatsapp" | "email" | "doctor";
   label: string;
   value: string;
   href: string;
   external?: boolean;
   internal?: boolean;
 }[] = [
-  { label: "Call us", value: "0117 84 84 84", href: "tel:+94117848484" },
-  { label: "WhatsApp", value: "074 222 333 4", href: "https://wa.me/94742223334", external: true },
-  { label: "Email", value: "info@sjhospital.lk", href: "mailto:info@sjhospital.lk" },
-  { label: "Book a doctor instead", value: "e-Channeling", href: "/e-channeling", internal: true },
+  { icon: "phone", label: "Call us", value: "0117 84 84 84", href: "tel:+94117848484" },
+  {
+    icon: "whatsapp",
+    label: "WhatsApp",
+    value: "074 222 333 4",
+    href: "https://wa.me/94742223334",
+    external: true,
+  },
+  { icon: "email", label: "Email", value: "info@sjhospital.lk", href: "mailto:info@sjhospital.lk" },
+  {
+    icon: "doctor",
+    label: "Book a doctor instead",
+    value: "e-Channeling",
+    href: "/e-channeling",
+    internal: true,
+  },
 ];
+
+/**
+ * The hero's own copy, moved here out of RoomsHero.tsx so it can be
+ * translated. `strapline` is the decorative vertical label only: unlike
+ * about's hero, this page's "See rooms" CTA is its own distinct sentence
+ * (`seeRoomsCta`), not a second use of the strapline, so there is nothing to
+ * collapse into one field here the way about's `strapline` did.
+ *
+ * `breadcrumbCurrent` is "Accommodation", the same word
+ * navigationLabels.si.ts / .ta.ts already translate for this page's own nav
+ * link, so it is translated here too rather than kept English: unlike
+ * "E-Channeling" or "St. Joseph Hospital", this is an ordinary noun, not the
+ * feature's own brand name.
+ */
+export const hero = {
+  strapline: "Where you'll stay",
+  breadcrumbHome: "Home",
+  breadcrumbCurrent: "Accommodation",
+  headingLead: "US standard comfort,",
+  headingAccent: "by the night.",
+  bookCta: "Book a doctor",
+  seeRoomsCta: "See rooms",
+};
+
+/**
+ * The three section eyebrows, moved here out of RoomsSection.tsx,
+ * SpecialtiesSection.tsx and BookSection.tsx so they can be translated with
+ * the rest of the page's copy. The leading number is structural and stays
+ * the same in every language; only the words after it change, translated
+ * whole together with the number, the same way about's and e-channeling's
+ * eyebrows are.
+ */
+export const sectionEyebrows = {
+  rooms: "01 / Our rooms",
+  specialties: "02 / What every room includes",
+  book: "03 / Book a room",
+};

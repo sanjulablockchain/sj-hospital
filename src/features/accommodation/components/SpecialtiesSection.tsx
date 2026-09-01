@@ -1,6 +1,6 @@
 import { RevealStagger } from "@/components/ui/RevealStagger";
 import { SectionHead } from "./SectionHead";
-import { specialties, specialtiesHeading } from "../data/content";
+import type { AccommodationContent } from "../data/getContent";
 
 /**
  * `#specialties`: the ten specialties ported verbatim from the deleted
@@ -14,13 +14,14 @@ import { specialties, specialtiesHeading } from "../data/content";
  * a different substring, would print the same sentence twice in a row, which
  * is worse than a section with no standfirst at all.
  */
-export function SpecialtiesSection() {
+export function SpecialtiesSection({ content }: { content: AccommodationContent }) {
+  const { sectionEyebrows, specialties, specialtiesHeading } = content;
   return (
     <section
       id="specialties"
       className="mx-auto max-w-[1440px] px-5 pt-26 sm:px-8 lg:px-11 max-[640px]:pt-18"
     >
-      <SectionHead eyebrow="02 / What every room includes" heading={specialtiesHeading} />
+      <SectionHead eyebrow={sectionEyebrows.specialties} heading={specialtiesHeading} />
 
       <RevealStagger
         stepMs={70}

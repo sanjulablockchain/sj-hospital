@@ -1,23 +1,23 @@
-import Link from "next/link";
 import type { ReactNode } from "react";
+import { LocaleLink } from "@/components/i18n/LocaleLink";
 import { ClockIcon, MailIcon, PhoneIcon, SmartphoneIcon } from "@/components/ui/Icons";
 import { ContactForm, getContactContent } from "@/features/contact";
-import { DEFAULT_LOCALE } from "@/lib/i18n/locales";
+import type { Locale } from "@/lib/i18n/locales";
 import { SectionHead } from "./SectionHead";
-import { bookHeading, bookIntro, bookRail } from "../data/content";
+import type { AccommodationContent } from "../data/getContent";
 
-// `bookRail`'s icon, keyed by `label`. Icons are JSX, so they can't live in
-// `data/content.ts` with the rest of the rail's fields; every value that can
-// drift (phone, WhatsApp, email, href) does live there now, and is pinned by
-// content.test.ts.
+// `bookRail`'s icon, keyed by the structural `icon` name rather than by
+// `label`: keying it off translatable text is what left four blank squares
+// on every Sinhala and Tamil page in the pilot the moment a label was
+// translated. Icons are JSX, so they still can't live in `data/content.ts`
+// with the rest of the rail's fields; every value that can drift (phone,
+// WhatsApp, email, href) does live there now, and is pinned by content.test.ts.
 const railIcons: Record<string, ReactNode> = {
-  "Call us": <PhoneIcon className="h-5 w-5" />,
-  WhatsApp: <SmartphoneIcon className="h-5 w-5" />,
-  Email: <MailIcon className="h-5 w-5" />,
-  "Book a doctor instead": <ClockIcon className="h-5 w-5" />,
+  phone: <PhoneIcon className="h-5 w-5" />,
+  whatsapp: <SmartphoneIcon className="h-5 w-5" />,
+  email: <MailIcon className="h-5 w-5" />,
+  doctor: <ClockIcon className="h-5 w-5" />,
 };
-
-const rail = bookRail.map((row) => ({ ...row, icon: railIcons[row.label] }));
 
 /**
  * `#book`: the consolidated `ContactForm` beside a contact rail carrying the
@@ -28,15 +28,24 @@ const rail = bookRail.map((row) => ({ ...row, icon: railIcons[row.label] }));
  * index.tsx's own booking panel copy, so this section states nothing new.
  *
  * `ContactForm` takes its copy as a prop rather than importing it, so this
- * fetches the English copy directly: the accommodation feature is not itself
- * localized yet, and `AccommodationPage` has no locale to hand down.
+ * fetches the contact feature's own copy for whichever locale
+ * `AccommodationPage` is rendering, via `locale` rather than the fixed
+ * English default the page used before it had a locale to hand down.
  */
-export async function BookSection() {
-  const { form } = await getContactContent(DEFAULT_LOCALE);
+export async function BookSection({
+  content,
+  locale,
+}: {
+  content: AccommodationContent;
+  locale: Locale;
+}) {
+  const { bookHeading, bookIntro, bookRail, sectionEyebrows } = content;
+  const { form } = await getContactContent(locale);
+  const rail = bookRail.map((row) => ({ ...row, icon: railIcons[row.icon] }));
 
   return (
     <section id="book" className="mx-auto max-w-[1440px] px-5 pt-26 pb-26 sm:px-8 lg:px-11 max-[640px]:pt-18">
-      <SectionHead eyebrow="03 / Book a room" heading={bookHeading} intro={bookIntro} />
+      <SectionHead eyebrow={sectionEyebrows.book} heading={bookHeading} intro={bookIntro} />
 
       <div className="mt-10.5 grid gap-10 min-[900px]:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
         <div className="border border-[var(--home-hairline)] bg-[var(--home-surface)] px-6 py-8 sm:px-9 sm:py-10">
@@ -55,7 +64,7 @@ export async function BookSection() {
         <div className="flex flex-col gap-px bg-[var(--home-hairline)]">
           {rail.map((row) =>
             row.internal ? (
-              <Link
+              <LocaleLink
                 key={row.href}
                 href={row.href}
                 className="sj-fill flex flex-1 items-center gap-3.5 bg-[var(--home-bg)] px-6 py-6"
@@ -71,7 +80,7 @@ export async function BookSection() {
                     {row.value}
                   </span>
                 </span>
-              </Link>
+              </LocaleLink>
             ) : (
               <a
                 key={row.href}

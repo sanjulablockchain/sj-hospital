@@ -1,11 +1,10 @@
 import Image from "next/image";
-import Link from "next/link";
 import { LocaleLink } from "@/components/i18n/LocaleLink";
 import { ThemedHeader } from "@/components/layout/ThemedHeader";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { Ticker } from "@/components/ui/Ticker";
 import { accommodationNavigation } from "@/config/accommodationNavigation";
-import { heroFacts, heroStandfirst, tickerItems } from "../data/content";
+import type { AccommodationContent } from "../data/getContent";
 
 /**
  * `#top`: a private inpatient room behind the themed header and the page's
@@ -16,7 +15,8 @@ import { heroFacts, heroStandfirst, tickerItems } from "../data/content";
  * hero blocks: this sits on a photograph in both themes, and the light theme
  * swaps that token to a deep `#0B6FC0` that would sink into the image.
  */
-export function RoomsHero() {
+export function RoomsHero({ content }: { content: AccommodationContent }) {
+  const { hero, heroFacts, heroStandfirst, tickerItems } = content;
   return (
     <section
       id="top"
@@ -63,7 +63,7 @@ export function RoomsHero() {
             className="text-[11px] tracking-[0.3em] text-white/50 uppercase"
             style={{ writingMode: "vertical-rl" }}
           >
-            Where you&apos;ll stay
+            {hero.strapline}
           </span>
           <span className="w-px flex-1 bg-gradient-to-b from-white/40 to-transparent" />
         </div>
@@ -71,19 +71,19 @@ export function RoomsHero() {
         <div className="flex-1 pb-11">
           <div className="animate-sj-up inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
             <span aria-hidden className="h-px w-11 bg-[#2CA6F0]" />
-            <Link href="/" className="text-[#7FCBFF] hover:text-white">
-              Home
-            </Link>
+            <LocaleLink href="/" className="text-[#7FCBFF] hover:text-white">
+              {hero.breadcrumbHome}
+            </LocaleLink>
             <span aria-hidden className="opacity-50">
               /
             </span>
-            Accommodation
+            {hero.breadcrumbCurrent}
           </div>
 
           <h1 className="font-display animate-sj-up mt-4.5 text-[clamp(38px,6.4vw,100px)] leading-[0.9] font-extrabold tracking-[-0.045em] text-white uppercase">
-            US standard comfort,
+            {hero.headingLead}
             <br />
-            <span className="text-[#2CA6F0]">by the night.</span>
+            <span className="text-[#2CA6F0]">{hero.headingAccent}</span>
           </h1>
 
           <div className="animate-sj-up mt-8 flex flex-col items-start gap-5.5">
@@ -98,14 +98,14 @@ export function RoomsHero() {
                 href="/e-channeling"
                 className="sj-invert inline-flex items-center gap-2.5 bg-[#2CA6F0] px-6 py-4 text-[15px] font-bold text-[#04122B]"
               >
-                Book a doctor <span aria-hidden>&rarr;</span>
+                {hero.bookCta} <span aria-hidden>&rarr;</span>
               </LocaleLink>
               <a
                 href="#rooms"
                 className="inline-flex items-center gap-3 border border-white/30 px-6 py-4 text-[15px] font-bold whitespace-nowrap text-white transition-colors hover:bg-white hover:text-[#060B1F]"
               >
                 <span aria-hidden className="animate-sj-pulse h-2 w-2 rounded-full bg-[#2CA6F0]" />
-                See rooms
+                {hero.seeRoomsCta}
               </a>
             </div>
           </div>
