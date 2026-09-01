@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { LocaleLink } from "@/components/i18n/LocaleLink";
 import { ThemedHeader } from "@/components/layout/ThemedHeader";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
@@ -16,7 +15,7 @@ import type { ContactContent } from "../data/getContent";
  * swaps that token to a deep `#0B6FC0` that would sink into the image.
  */
 export function ContactHero({ content }: { content: ContactContent }) {
-  const { heroFacts, heroStandfirst, tickerItems } = content;
+  const { hero, heroFacts, heroStandfirst, tickerItems } = content;
   return (
     <section
       id="top"
@@ -63,7 +62,7 @@ export function ContactHero({ content }: { content: ContactContent }) {
             className="text-[11px] tracking-[0.3em] text-white/50 uppercase"
             style={{ writingMode: "vertical-rl" }}
           >
-            Get in touch
+            {hero.strapline}
           </span>
           <span className="w-px flex-1 bg-gradient-to-b from-white/40 to-transparent" />
         </div>
@@ -71,17 +70,17 @@ export function ContactHero({ content }: { content: ContactContent }) {
         <div className="flex-1 pb-11">
           <div className="animate-sj-up inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
             <span aria-hidden className="h-px w-11 bg-[#2CA6F0]" />
-            <Link href="/" className="text-[#7FCBFF] hover:text-white">
-              Home
-            </Link>
+            <LocaleLink href="/" className="text-[#7FCBFF] hover:text-white">
+              {hero.breadcrumbHome}
+            </LocaleLink>
             <span aria-hidden className="opacity-50">
               /
             </span>
-            Contact Us
+            {hero.breadcrumbCurrent}
           </div>
 
           <h1 className="font-display animate-sj-up mt-4.5 text-[clamp(38px,6.4vw,100px)] leading-[0.9] font-extrabold tracking-[-0.045em] text-white uppercase">
-            Get in <span className="text-[#2CA6F0]">touch.</span>
+            {hero.headingLead} <span className="text-[#2CA6F0]">{hero.headingAccent}</span>
           </h1>
 
           <div className="animate-sj-up mt-8 flex flex-col items-start gap-5.5">
@@ -96,14 +95,14 @@ export function ContactHero({ content }: { content: ContactContent }) {
                 href="/e-channeling"
                 className="sj-invert inline-flex items-center gap-2.5 bg-[#2CA6F0] px-6 py-4 text-[15px] font-bold text-[#04122B]"
               >
-                Book a doctor <span aria-hidden>&rarr;</span>
+                {hero.bookCta} <span aria-hidden>&rarr;</span>
               </LocaleLink>
               <a
                 href="#reach"
                 className="inline-flex items-center gap-3 border border-white/30 px-6 py-4 text-[15px] font-bold whitespace-nowrap text-white transition-colors hover:bg-white hover:text-[#060B1F]"
               >
                 <span aria-hidden className="animate-sj-pulse h-2 w-2 rounded-full bg-[#2CA6F0]" />
-                Reach us
+                {hero.reachCta}
               </a>
             </div>
           </div>

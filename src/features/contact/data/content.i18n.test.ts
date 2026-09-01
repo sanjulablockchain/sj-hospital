@@ -23,9 +23,29 @@ function isUntranslatable(path: string): boolean {
     path === "DIRECTIONS_URL" ||
     path.endsWith(".href") ||
     path.endsWith(".value") ||
-    path.endsWith(".count")
+    path.endsWith(".count") ||
+    // Which glyph a contact row shows. A name the code switches on, not copy,
+    // and deliberately not the label: keying the icon off translatable text is
+    // what left four blank squares on every Sinhala and Tamil page.
+    path.endsWith(".icon")
   );
 }
+
+/**
+ * Strings the translations deliberately leave in English.
+ *
+ * The register is code-mixed, the way a Sri Lankan hospital site actually
+ * reads: a Sinhala or Tamil sentence carrying the English nouns people really
+ * say. Listing them by path rather than waving through any English-looking
+ * string keeps each one a decision somebody made, so a genuinely forgotten
+ * translation still fails the suite.
+ */
+const KEEPS_ENGLISH = new Set([
+  "heroFacts[0].k", // Reception
+  "heroFacts[2].v", // WhatsApp, a product name in every script
+  "contactRows[2].label", // WhatsApp / Mobile
+  "contactRows[3].label", // Email
+]);
 
 test("every translatable string in contact has Sinhala", () => {
   const missing = assertTranslationParity(base, si, isUntranslatable);
@@ -67,13 +87,11 @@ test("no translated string is left identical to its English source", () => {
 
     for (const [path, translated] of translatedByPath) {
       if (isUntranslatable(path)) continue;
-      // Brand names and product names are the same in every script, so they
-      // are allowed through by name rather than by accident.
-      if (translated === "WhatsApp") continue;
+      if (KEEPS_ENGLISH.has(path)) continue;
       assert.notEqual(
         translated,
         englishByPath.get(path),
-        `${name} ${path} is still the English string`
+        `${name} ${path} is still the English string. If that is deliberate, add it to KEEPS_ENGLISH with a reason.`
       );
     }
   }

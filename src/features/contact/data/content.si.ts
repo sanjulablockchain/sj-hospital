@@ -1,33 +1,38 @@
 // Sinhala for the contact page.
 //
-// Only translatable copy lives here. The hospital's facts, the street address,
-// both phone numbers, the email, the coordinate and every href stay in
-// content.ts and have exactly one home. `content.i18n.test.ts` fails if a
-// string that should be translated is missing, and also if one is left as its
-// English original.
+// The register is code-mixed, which is how Sri Lankans actually read a
+// hospital site: the sentence is Sinhala, but everyday English nouns stay in
+// English rather than being replaced by literary coinages nobody says out
+// loud. So "Email" rather than "විද්‍යුත් තැපෑල", "Reception" rather than
+// "පිළිගැනීමේ කවුන්ටරය", and "Book" as a verb. Every one of those is listed in
+// KEEPS_ENGLISH in content.i18n.test.ts, so each is a recorded decision rather
+// than a string somebody forgot.
 //
-// The register is the polite plural throughout ("කරන්න" rather than "කරපන්"),
-// which is how a hospital addresses a patient it has not met.
+// Sentence forms use the polite plural ("කරන්න"), which is how a hospital
+// addresses a patient it has not met.
+//
+// Only translatable copy lives here. The street address, both phone numbers,
+// the email address, the coordinate, the icon names and every href stay in
+// content.ts and have exactly one home.
 
 /**
  * Not yet read by a Sinhala speaker. `npm run i18n:status` lists every file
- * still in this state, and the pre-merge check refuses to pass while any
+ * still in this state, and `-- --require-reviewed` exits non-zero while any
  * remain.
  */
 export const __review = { status: "draft", reviewer: null, date: null } as const;
 
 export const tickerItems = [
   "පැය 24 පුරාම විවෘතයි",
-  "පිළිගැනීමේ කවුන්ටරය, පැය 24",
-  "වේගවත්ම පිළිතුර සඳහා WhatsApp",
+  "Reception, පැය 24",
+  "වේගවත්ම පිළිතුර WhatsApp එකෙන්",
   "දිනක් ඇතුළත පිළිතුරු",
-  "පැමිණෙන්න, කතා කරන්න, හෝ පණිවිඩයක් යවන්න",
+  "එන්න, call කරන්න, නැත්නම් message කරන්න",
 ];
 
 export const heroFacts = [
-  { k: "පිළිගැනීම", v: "පැය 24 පුරාම විවෘතයි" },
+  { k: "Reception", v: "පැය 24 පුරාම විවෘතයි" },
   { k: "පිළිතුර", v: "එක් වැඩ කරන දිනක් ඇතුළත" },
-  // WhatsApp is a product name and stays as it is in every script.
   { k: "වේගවත්ම", v: "WhatsApp" },
   { k: "කොහේද", v: "මීගමුව" },
 ];
@@ -35,42 +40,52 @@ export const heroFacts = [
 export const jumpCards = [
   {
     label: "අප හා සම්බන්ධ වන්න",
-    note: "ස්ථානය, දුරකථනය, WhatsApp සහ විද්‍යුත් තැපෑල.",
+    note: "ස්ථානය, දුරකථනය, WhatsApp සහ Email.",
   },
   {
-    label: "පණිවිඩයක් යවන්න",
-    note: "අපි එක් වැඩ කරන දිනක් ඇතුළත පිළිතුරු දෙමු.",
+    label: "Message එකක් යවන්න",
+    note: "අපි එක් වැඩ කරන දිනක් ඇතුළත පිළිතුරු දෙනවා.",
   },
   {
-    // The street name is transliterated rather than left in English so the
-    // line reads as one sentence. The authoritative address is still the
-    // English one in contactRows, which this only restates.
+    // The street name is transliterated so the line reads as one Sinhala
+    // sentence. The authoritative address is still the English one in
+    // contactRows, which this only restates.
     label: "අප සොයා ගන්න",
     note: "229/10, ශාන්ත ජෝසප් වීදිය, මීගමුව.",
   },
   {
-    label: "වෛද්‍යවරයෙකු වෙන්කරවා ගන්න",
-    note: "පෝරමය මඟ හැර වේලාවක් තෝරන්න.",
+    label: "වෛද්‍යවරයෙක් Book කරන්න",
+    note: "Form එක මඟ හැර වේලාවක් තෝරන්න.",
   },
 ];
 
 export const contactRows = [
   { label: "ස්ථානය", sub: "මීගමුව, ශ්‍රී ලංකාව" },
-  { label: "අපට කතා කරන්න", sub: "පිළිගැනීම, පැය 24" },
-  { label: "WhatsApp / ජංගම", sub: "වේගවත්ම පිළිතුර" },
-  { label: "විද්‍යුත් තැපෑල", sub: "දිනක් ඇතුළත පිළිතුරු" },
+  { label: "අපට call කරන්න", sub: "Reception, පැය 24" },
+  { label: "WhatsApp / Mobile", sub: "වේගවත්ම පිළිතුර" },
+  { label: "Email", sub: "දිනක් ඇතුළත පිළිතුරු" },
 ];
 
-export const reachIntro = "ඔබට පහසුම ආකාරයෙන් අමතන්න, පණිවිඩයක් යවන්න, නැතහොත් කෙලින්ම පැමිණෙන්න.";
+export const reachIntro = "ඔබට පහසුම විදිහට call කරන්න, message කරන්න, නැත්නම් කෙලින්ම එන්න.";
 
-export const messageIntro = "අපි එක් වැඩ කරන දිනක් ඇතුළත ඔබ හා සම්බන්ධ වන්නෙමු.";
+export const messageIntro = "අපි එක් වැඩ කරන දිනක් ඇතුළත ඔබ හා සම්බන්ධ වෙනවා.";
 
-export const mapIntro = "ශාන්ත ජෝසප් රෝහල, මීගමුව පිහිටි ස්ථානය දක්වන අන්තර්ක්‍රියාකාරී සිතියම.";
+export const mapIntro = "ශාන්ත ජෝසප් රෝහල, මීගමුව පිහිටි ස්ථානය පෙන්වන map එක.";
 
 export const heroStandfirst = "පැය 24 පුරාම, සෑම දිනකම සෑම පැයකම විවෘතයි.";
 
 export const sectionEyebrows = {
   reach: "01 / අප හා සම්බන්ධ වන්න",
-  message: "02 / පණිවිඩයක් යවන්න",
+  message: "02 / Message එකක් යවන්න",
   map: "03 / අප සොයා ගන්න",
+};
+
+export const hero = {
+  strapline: "අප හා සම්බන්ධ වන්න",
+  breadcrumbHome: "මුල් පිටුව",
+  breadcrumbCurrent: "සම්බන්ධ වන්න",
+  headingLead: "සම්බන්ධ",
+  headingAccent: "වන්න.",
+  bookCta: "වෛද්‍යවරයෙක් Book කරන්න",
+  reachCta: "අප හා සම්බන්ධ වන්න",
 };
