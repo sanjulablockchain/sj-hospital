@@ -5,7 +5,7 @@ import { DEFAULT_LOCALE, PREFIXED_LOCALES, type Locale } from "./locales.ts";
  * `/site-map` and `/talks` stay English routes rather than being read as
  * Sinhala and Tamil.
  */
-const PREFIX_PATTERN = new RegExp(`^/(${PREFIXED_LOCALES.join("|")})(?=/|$)`);
+const PREFIX_PATTERN = new RegExp(`^/(${PREFIXED_LOCALES.join("|")})(?=[/?#]|$)`);
 
 export type SplitPath = {
   locale: Locale;
@@ -22,10 +22,15 @@ export function splitLocale(pathname: string): SplitPath {
   const match = PREFIX_PATTERN.exec(pathname);
   if (!match) return { locale: DEFAULT_LOCALE, rest: pathname };
 
-  const rest = pathname.slice(match[0].length);
+  let rest = pathname.slice(match[0].length);
+  if (rest === "") {
+    rest = "/";
+  } else if (!rest.startsWith("/")) {
+    rest = "/" + rest;
+  }
   return {
     locale: match[1] as Locale,
-    rest: rest === "" || rest === "/" ? "/" : rest,
+    rest,
   };
 }
 

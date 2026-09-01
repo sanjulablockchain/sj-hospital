@@ -90,3 +90,12 @@ test("localeHref is idempotent on an already-prefixed href", () => {
   assert.equal(localeHref("/si/services", "si"), "/si/services");
   assert.equal(localeHref(localeHref("/services", "ta"), "ta"), "/ta/services");
 });
+
+// A path that is exactly a locale prefix can still carry a query or a
+// fragment. The prefix has to be recognised there too, or the locale is
+// silently lost and the next href built from it is wrong.
+test("a bare locale prefix is still recognised before a query or fragment", () => {
+  assert.deepEqual(splitLocale("/si?ref=1"), { locale: "si", rest: "/?ref=1" });
+  assert.deepEqual(splitLocale("/ta#top"), { locale: "ta", rest: "/#top" });
+  assert.equal(localeHref("/si?ref=1", "ta"), "/si?ref=1");
+});
