@@ -1000,16 +1000,24 @@ For every route, in both locales, fetch the page and look for Latin-script sente
 
 Screenshot every route at 360, 768, 1280 and 1440 in `en`, `si` and `ta`, using the recipe's overflow detector. Report every overflow, every bad wrap, every clipped heading and every missing icon or image.
 
-- [ ] **Step 3: Fix what the sweep found**
+- [ ] **Step 3: Move the nav dictionary off the client**
+
+Task 1 shipped `navigationLabels.ts` statically importing both the Sinhala and the Tamil dictionaries into three client components, so every visitor on every route downloads roughly 16KB of labels in two languages they are not reading. That was mandated by Task 1 own brief and accepted as a deviation at the time, because translating nav labels on the server needed a locale that the Page components did not yet carry.
+
+By now they do: every one of the 17 routes threads a locale into its Page component. So translate the nav items and footer columns at the server boundary, pass the already-translated strings into `ThemedHeader`, `MobileNavPanel` and `ThemedFooter`, and delete `NavLabel.tsx` and the client-side dictionary import along with it. Keep `chromeCopyFor`: ten strings is the bounded exception the plan sanctioned.
+
+Verify with a production build that neither `navigationLabels.si` nor `navigationLabels.ta` appears in any client chunk.
+
+- [ ] **Step 4: Fix what the sweep found**
 
 One commit per class of problem, not one per screenshot.
 
-- [ ] **Step 4: Confirm the gate still refuses**
+- [ ] **Step 5: Confirm the gate still refuses**
 
 Run: `npm run i18n:status`
 Expected: every overlay listed as DRAFT, and `-- --require-reviewed` exits 1. Roughly 30 overlay files by now.
 
-- [ ] **Step 5: Hand over for review**
+- [ ] **Step 6: Hand over for review**
 
 Report to the user: the count of overlays awaiting sign-off, the register decisions their reviewer should confirm, and every string deliberately left in English. **Do not flip any `__review` status yourself.** That is the reviewer's act, and the whole gate exists to make it one.
 
