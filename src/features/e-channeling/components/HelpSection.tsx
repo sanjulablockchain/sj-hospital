@@ -1,5 +1,5 @@
 import { Reveal } from "@/components/ui/Reveal";
-import { helpRail } from "../data/content";
+import type { EChannelingContent } from "../data/getContent";
 
 /**
  * `#help`: the closing accent rail, ported out of DoctorDirectory.tsx where it
@@ -10,8 +10,15 @@ import { helpRail } from "../data/content";
  * No numbered eyebrow: this page has one job (`#directory`), and dressing a
  * two-line phone/email prompt as a second numbered section would overstate
  * it.
+ *
+ * `callCtaTemplate` carries a `{phone}` token rather than a fixed "Call " +
+ * number split, so word order can move between languages; the whole
+ * interpolated string sits inside one clickable `<a>`, unlike the
+ * emergency-note pattern elsewhere that has to keep a link mid-sentence.
  */
-export function HelpSection() {
+export function HelpSection({ content }: { content: EChannelingContent }) {
+  const { helpRail } = content;
+  const callCta = helpRail.callCtaTemplate.replace("{phone}", helpRail.phone);
   return (
     <section id="help" className="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 lg:px-11 max-[640px]:py-10">
       <Reveal className="flex flex-col items-center gap-5 bg-[var(--home-accent)] p-8 text-center text-[var(--home-on-accent)] sm:flex-row sm:justify-between sm:p-11 sm:text-left">
@@ -26,13 +33,13 @@ export function HelpSection() {
             href={helpRail.phoneHref}
             className="sj-invert inline-flex h-12 items-center bg-[var(--home-on-accent)] px-6 text-sm font-bold whitespace-nowrap text-[var(--home-accent)]"
           >
-            Call {helpRail.phone}
+            {callCta}
           </a>
           <a
             href={`mailto:${helpRail.email}`}
             className="inline-flex h-12 items-center border border-[var(--home-on-accent)]/40 px-6 text-sm font-bold whitespace-nowrap transition-colors hover:bg-[var(--home-on-accent)]/10"
           >
-            Email us
+            {helpRail.emailCta}
           </a>
         </div>
       </Reveal>
