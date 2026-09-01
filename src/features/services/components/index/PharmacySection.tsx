@@ -1,3 +1,4 @@
+import { LocaleLink } from "@/components/i18n/LocaleLink";
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
 
@@ -45,12 +46,12 @@ export function PharmacySection() {
             {/* This band is a summary; the counter, stock, delivery and repeat
                 prescriptions all have their own sections on /pharmacy, so the
                 CTA hands off there rather than to this page's #book. */}
-            <a
+            <LocaleLink
               href="/pharmacy"
               className="sj-invert mt-7 inline-flex items-center gap-2.5 bg-[var(--home-accent)] px-6 py-4 text-[15px] font-bold text-[var(--home-on-accent)]"
             >
               Visit the pharmacy <span aria-hidden>&rarr;</span>
-            </a>
+            </LocaleLink>
           </Reveal>
 
           <RevealStagger className="flex flex-col gap-px bg-[var(--home-hairline)]">

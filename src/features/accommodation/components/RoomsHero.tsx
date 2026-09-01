@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { LocaleLink } from "@/components/i18n/LocaleLink";
 import { ThemedHeader } from "@/components/layout/ThemedHeader";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { Ticker } from "@/components/ui/Ticker";
@@ -93,12 +94,12 @@ export function RoomsHero() {
               {heroStandfirst}
             </p>
             <div className="flex flex-wrap gap-3">
-              <a
+              <LocaleLink
                 href="/e-channeling"
                 className="sj-invert inline-flex items-center gap-2.5 bg-[#2CA6F0] px-6 py-4 text-[15px] font-bold text-[#04122B]"
               >
                 Book a doctor <span aria-hidden>&rarr;</span>
-              </a>
+              </LocaleLink>
               <a
                 href="#rooms"
                 className="inline-flex items-center gap-3 border border-white/30 px-6 py-4 text-[15px] font-bold whitespace-nowrap text-white transition-colors hover:bg-white hover:text-[#060B1F]"
