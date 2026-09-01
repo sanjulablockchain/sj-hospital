@@ -6,18 +6,23 @@ import { swapLocale } from "@/lib/i18n/paths";
 import { useLocale } from "@/lib/i18n/useLocale";
 import { rememberLocale } from "@/lib/i18n/rememberLocale";
 
+type LanguageMenuToggleProps = {
+  onChoose?: () => void;
+};
+
 /**
  * The language switch as a menu row, the same relationship ThemeMenuToggle has
  * to ThemeToggleButton. Inside the panel there is room to lay all three
  * languages out flat, so there is no second menu to open.
  */
-export function LanguageMenuToggle() {
+export function LanguageMenuToggle({ onChoose }: LanguageMenuToggleProps) {
   const current = useLocale();
   const pathname = usePathname();
   const router = useRouter();
 
   function choose(locale: Locale) {
     rememberLocale(locale);
+    onChoose?.();
     router.push(swapLocale(pathname, locale));
   }
 

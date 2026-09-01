@@ -52,7 +52,7 @@ export function MobileNavPanel({ items }: MobileNavPanelProps) {
           {/* Book now is not repeated here: it now sits in the header row at
               every width, so the menu carries the theme switch instead. */}
           <div className="mt-3 border-t border-[var(--home-hairline)] pt-2">
-            <LanguageMenuToggle />
+            <LanguageMenuToggle onChoose={() => setIsOpen(false)} />
             <ThemeMenuToggle />
           </div>
         </div>

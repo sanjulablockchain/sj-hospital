@@ -172,7 +172,7 @@ export function ThemedHeader({ navItems, bookHref = "#book", homeHref = "#top" }
           ))}
         </nav>
 
-        <div ref={toggleRef} className={wideOnly}>
+        <div ref={toggleRef} className={`gap-2 ${wideOnly}`}>
           <LanguageToggleButton />
           <ThemeToggleButton />
         </div>
