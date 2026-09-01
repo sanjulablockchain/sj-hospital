@@ -14,7 +14,10 @@ import { Reveal } from "@/components/ui/Reveal";
 export function SectionHead({ eyebrow, heading, intro }: { eyebrow: string; heading: ReactNode; intro: string }) {
   return (
     <Reveal className="flex flex-wrap items-end justify-between gap-10">
-      <div>
+      {/* min-w-0 prevents flex items from expanding beyond their content width;
+          Sinhala and Tamil form single unbreakable tokens where English has spaces,
+          so they overflow 360px columns without this constraint. */}
+      <div className="min-w-0">
         <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
           {eyebrow}
         </div>
