@@ -18,6 +18,34 @@
   --font-heading: var(--font-sora);
 }
 
+/* Sinhala and Tamil type.
+   --font-sans and --font-heading are declared in @theme inline, which means the
+   generated utilities read the variable rather than baking in a value, so
+   rebinding them here re-points every existing font-sans and font-heading
+   utility without touching a single component.
+   Latin fallbacks stay in each stack: a Sinhala page still renders English
+   proper nouns, phone numbers and the brand name. */
+html[lang="si"] {
+  --font-sans: var(--font-noto-sinhala), var(--font-plus-jakarta-sans), system-ui, sans-serif;
+  --font-heading: var(--font-gemunu), var(--font-sora), system-ui, sans-serif;
+}
+
+html[lang="ta"] {
+  --font-sans: var(--font-noto-tamil), var(--font-plus-jakarta-sans), system-ui, sans-serif;
+  --font-heading: var(--font-catamaran), var(--font-sora), system-ui, sans-serif;
+}
+
+/* Both scripts carry taller ascenders and descenders than Latin and crowd
+   themselves at Latin line-heights. This is a floor, not a rule: any component
+   that sets its own leading utility still wins, and the ones that then look
+   cramped get fixed individually during the QA sweep. */
+@layer base {
+  html[lang="si"] body,
+  html[lang="ta"] body {
+    line-height: 1.75;
+  }
+}
+
 body {
   background: var(--color-background);
   color: var(--color-ink);

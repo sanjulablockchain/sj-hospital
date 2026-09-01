@@ -1,5 +1,14 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Sora, Bricolage_Grotesque, Manrope } from "next/font/google";
+import {
+  Plus_Jakarta_Sans,
+  Sora,
+  Bricolage_Grotesque,
+  Manrope,
+  Noto_Sans_Sinhala,
+  Gemunu_Libre,
+  Noto_Sans_Tamil,
+  Catamaran,
+} from "next/font/google";
 import { notFound } from "next/navigation";
 import { LOCALES, hasLocale } from "@/lib/i18n/locales";
 import "../globals.css";
@@ -24,6 +33,42 @@ const manrope = Manrope({
   variable: "--font-manrope",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
+});
+
+// preload is off for these four on purpose. All eight families are declared in
+// one module, so preloading would make an English reader fetch Sinhala and
+// Tamil files they will never see. Without the preload hint a browser fetches a
+// face only when text actually uses it, which is exactly the behaviour wanted.
+const notoSansSinhala = Noto_Sans_Sinhala({
+  variable: "--font-noto-sinhala",
+  subsets: ["sinhala"],
+  weight: ["400", "500", "600", "700"],
+  preload: false,
+  display: "swap",
+});
+
+const gemunuLibre = Gemunu_Libre({
+  variable: "--font-gemunu",
+  subsets: ["sinhala"],
+  weight: ["400", "600", "700", "800"],
+  preload: false,
+  display: "swap",
+});
+
+const notoSansTamil = Noto_Sans_Tamil({
+  variable: "--font-noto-tamil",
+  subsets: ["tamil"],
+  weight: ["400", "500", "600", "700"],
+  preload: false,
+  display: "swap",
+});
+
+const catamaran = Catamaran({
+  variable: "--font-catamaran",
+  subsets: ["tamil", "latin"],
+  weight: ["400", "600", "700", "800"],
+  preload: false,
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -54,7 +99,7 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
-      className={`${plusJakartaSans.variable} ${sora.variable} ${bricolageGrotesque.variable} ${manrope.variable} antialiased`}
+      className={`${plusJakartaSans.variable} ${sora.variable} ${bricolageGrotesque.variable} ${manrope.variable} ${notoSansSinhala.variable} ${gemunuLibre.variable} ${notoSansTamil.variable} ${catamaran.variable} antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <noscript>
