@@ -3,6 +3,7 @@ import { FacebookIcon, InstagramIcon, LinkedInIcon, WhatsAppIcon } from "@/compo
 import { LOGO_MARK } from "@/config/brand";
 import { LocaleLink } from "@/components/i18n/LocaleLink";
 import { NavLabel } from "@/components/i18n/NavLabel";
+import { ChromeText } from "@/components/i18n/ChromeText";
 
 export type FooterColumn = {
   heading: string;
@@ -65,7 +66,7 @@ export function ThemedFooter({ columns, id = "contact" }: ThemedFooterProps) {
             </span>
           </span>
           <p className="mt-4.5 text-[15px] leading-[1.62] text-[var(--home-muted)]">
-            Compassionate, patient centered care, bringing American healthcare standards to Sri Lanka.
+            <ChromeText id="tagline" />
           </p>
           <div className="mt-6 flex items-center gap-3">
             {socials.map((social) => (

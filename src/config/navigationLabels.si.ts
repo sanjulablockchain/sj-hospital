@@ -12,6 +12,8 @@
 // are hotel-style room class names, and Sri Lankan hospitals and hotels alike
 // print them in English rather than coining a Sinhala equivalent nobody uses.
 
+export const __review = { status: "draft", reviewer: null, date: null } as const;
+
 export const NAV_LABELS: Record<string, string> = {
   "About us": "අප ගැන",
   Accommodation: "නවාතැන් පහසුකම්",

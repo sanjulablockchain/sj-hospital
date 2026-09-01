@@ -12,6 +12,8 @@
 // are hotel-style room class names, and Sri Lankan hospitals and hotels alike
 // print them in English rather than coining a Tamil equivalent nobody uses.
 
+export const __review = { status: "draft", reviewer: null, date: null } as const;
+
 export const NAV_LABELS: Record<string, string> = {
   "About us": "எங்களைப் பற்றி",
   Accommodation: "தங்குமிட வசதிகள்",
@@ -111,7 +113,12 @@ export const FOOTER_HEADINGS: Record<string, string> = {
   "About us": "எங்களைப் பற்றி",
   Booking: "முன்பதிவு",
   "Care at home": "வீட்டு சிகிச்சை",
-  Care: "பராமரிப்பு",
+  // Same word as every compound "*care" label above (Care at home, Critical
+  // care, Surgical care, International care), matching Sinhala's single
+  // consistent "සත්කාර" for all of these. This heading groups exactly that
+  // set of links (see servicesNavigation.ts / homeNavigation.ts), so it is
+  // the same concept as the compounds, not a different one.
+  Care: "சிகிச்சை",
   Careers: "வேலைவாய்ப்புகள்",
   Contact: "தொடர்பு",
   "Health tips": "சுகாதார ஆலோசனைகள்",

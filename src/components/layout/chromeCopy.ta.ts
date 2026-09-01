@@ -6,6 +6,8 @@
 // "WhatsApp" is left in English deliberately: it is the product name, the
 // same decision as everywhere else in the chrome and in the contact feature.
 
+export const __review = { status: "draft", reviewer: null, date: null } as const;
+
 export const chromeCopy = {
   // Shorter than a full "இப்போதே Book செய்யுங்கள்" sentence deliberately: this
   // is a button label, not a sentence, and the header never wraps the row
@@ -19,7 +21,8 @@ export const chromeCopy = {
   whatsappUs: "எங்களுக்கு WhatsApp செய்யுங்கள்",
   whatsapp: "WhatsApp",
   callUs: "எங்களை call செய்யுங்கள்",
-  reachUs: "எங்களை அணுகுங்கள்",
+  tagline:
+    "இரக்கமுள்ள, நோயாளர் மைய சிகிச்சை மூலம், அமெரிக்க சுகாதார தரநிலைகளை இலங்கைக்குக் கொண்டு வருகிறோம்.",
   toLightMode: "Light mode க்கு மாறுங்கள்",
   toDarkMode: "Dark mode க்கு மாறுங்கள்",
 };
