@@ -22,9 +22,29 @@ export function proxy(request: NextRequest) {
   const url = request.nextUrl.clone();
   url.pathname = action.pathname;
 
-  return action.kind === "redirect"
-    ? NextResponse.redirect(url)
-    : NextResponse.rewrite(url);
+  // The app runs `output: "standalone"` behind a Docker stack, where a shared
+  // cache (CDN, reverse proxy) is the expected deployment. Both branches below
+  // choose their response by reading the sj-locale cookie, so a cache keyed on
+  // the URL alone would serve one visitor's redirect or rewrite to every later
+  // visitor with a different cookie, bare URL and all: a shared cache could
+  // trap crawlers, and everyone else, in one reader's chosen locale. `Vary:
+  // Cookie` tells any such cache the response depends on the cookie, not just
+  // the URL.
+  if (action.kind === "redirect") {
+    // A redirect additionally must never be cached at all: caching a 307 to
+    // /si/... under the bare URL is exactly the "one Sinhala reader bounces
+    // every later visitor into Sinhala" scenario Vary alone is meant to
+    // prevent, since a cache is free to key on Vary and still store the
+    // response for that cookie value.
+    const response = NextResponse.redirect(url);
+    response.headers.set("Vary", "Cookie");
+    response.headers.set("Cache-Control", "private, no-store");
+    return response;
+  }
+
+  const response = NextResponse.rewrite(url);
+  response.headers.set("Vary", "Cookie");
+  return response;
 }
 
 export const config = {

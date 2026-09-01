@@ -1,4 +1,4 @@
-import { LOCALES, type Locale } from "./locales.ts";
+import { DEFAULT_LOCALE, LOCALES, type Locale } from "./locales.ts";
 import { localePath } from "./paths.ts";
 
 /** The public origin, used to make metadata alternates absolute. */
@@ -24,5 +24,10 @@ export function localeAlternates(
   for (const other of LOCALES) {
     languages[other] = `${SITE_URL}${localePath(path, other)}`;
   }
+  // English is the unprefixed fallback for any reader whose language isn't
+  // one of the three offered, so it also stands in as x-default: the entry a
+  // search engine falls back to when none of the explicit hreflang values
+  // match the searcher's language.
+  languages["x-default"] = `${SITE_URL}${localePath(path, DEFAULT_LOCALE)}`;
   return { canonical: `${SITE_URL}${localePath(path, locale)}`, languages };
 }

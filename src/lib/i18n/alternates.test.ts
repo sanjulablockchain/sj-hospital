@@ -11,13 +11,23 @@ test("a page is canonical for itself, in its own locale", () => {
   assert.equal(localeAlternates("/contact-us", "ta").canonical, `${SITE_URL}/ta/contact-us`);
 });
 
-test("every locale is offered as an alternate, absolute", () => {
+test("every locale is offered as an alternate, absolute, plus x-default", () => {
   const { languages } = localeAlternates("/contact-us", "en");
   assert.deepEqual(languages, {
     en: `${SITE_URL}/contact-us`,
     si: `${SITE_URL}/si/contact-us`,
     ta: `${SITE_URL}/ta/contact-us`,
+    "x-default": `${SITE_URL}/contact-us`,
   });
+});
+
+// English is the unprefixed fallback locale, so it also stands in as
+// x-default: the entry a search engine falls back to for a searcher whose
+// language matches none of the explicit hreflang values.
+test("x-default points at the English URL", () => {
+  assert.equal(localeAlternates("/contact-us", "en").languages["x-default"], `${SITE_URL}/contact-us`);
+  assert.equal(localeAlternates("/contact-us", "si").languages["x-default"], `${SITE_URL}/contact-us`);
+  assert.equal(localeAlternates("/contact-us", "ta").languages["x-default"], `${SITE_URL}/contact-us`);
 });
 
 // The three pages must agree about the set they belong to, or a search engine

@@ -2,6 +2,13 @@
 
 :root {
   --background: #ffffff;
+  /* Defaults for the two families the site actually renders with: [data-sj]'s
+     body copy and [data-sj] .font-display. Declared on :root, not on
+     [data-sj], so html[lang="si"] and html[lang="ta"] below can rebind them
+     and have [data-sj] inherit the per-locale value rather than its own fixed
+     one. */
+  --sj-body: var(--font-manrope), system-ui, sans-serif;
+  --sj-display: var(--font-bricolage), system-ui, sans-serif;
 }
 
 @theme inline {
@@ -19,20 +26,29 @@
 }
 
 /* Sinhala and Tamil type.
-   --font-sans and --font-heading are declared in @theme inline, which means the
-   generated utilities read the variable rather than baking in a value, so
-   rebinding them here re-points every existing font-sans and font-heading
-   utility without touching a single component.
-   Latin fallbacks stay in each stack: a Sinhala page still renders English
-   proper nouns, phone numbers and the brand name. */
+   --font-sans and --font-heading above are declared inside @theme inline,
+   which in Tailwind v4 makes the generated .font-sans/.font-heading
+   utilities emit the referenced value directly (e.g.
+   `.font-sans { font-family: var(--font-plus-jakarta-sans) }`), not
+   `var(--font-sans)`. Rebinding those two custom properties would therefore
+   change nothing, and the site does not use those utility classes anyway:
+   every page renders inside ThemedShell's [data-sj] root, which sets its own
+   font-family directly and defines .font-display for headings.
+   So the two script-aware families are wired through --sj-body and
+   --sj-display instead: [data-sj] and [data-sj] .font-display read those
+   custom properties (see below), :root supplies the English default, and
+   these two selectors override it. Being custom properties, not @theme
+   entries, they inherit normally from html down into [data-sj].
+   Latin fallbacks stay in each stack: a Sinhala or Tamil page still renders
+   English proper nouns, phone numbers and the brand name. */
 html[lang="si"] {
-  --font-sans: var(--font-noto-sinhala), var(--font-plus-jakarta-sans), system-ui, sans-serif;
-  --font-heading: var(--font-gemunu), var(--font-sora), system-ui, sans-serif;
+  --sj-body: var(--font-noto-sinhala), var(--font-manrope), system-ui, sans-serif;
+  --sj-display: var(--font-gemunu), var(--font-bricolage), system-ui, sans-serif;
 }
 
 html[lang="ta"] {
-  --font-sans: var(--font-noto-tamil), var(--font-plus-jakarta-sans), system-ui, sans-serif;
-  --font-heading: var(--font-catamaran), var(--font-sora), system-ui, sans-serif;
+  --sj-body: var(--font-noto-tamil), var(--font-manrope), system-ui, sans-serif;
+  --sj-display: var(--font-catamaran), var(--font-bricolage), system-ui, sans-serif;
 }
 
 /* Both scripts carry taller ascenders and descenders than Latin and crowd
@@ -281,7 +297,7 @@ footer[id] {
   --home-accent: #2ca6f0;
   --home-accent-soft: #7fcbff;
   --home-on-accent: #04122b;
-  font-family: var(--font-manrope), system-ui, sans-serif;
+  font-family: var(--sj-body);
 }
 
 [data-sj][data-theme="light"] {
@@ -298,7 +314,7 @@ footer[id] {
 }
 
 [data-sj] .font-display {
-  font-family: var(--font-bricolage), system-ui, sans-serif;
+  font-family: var(--sj-display);
 }
 
 @keyframes sj-up {

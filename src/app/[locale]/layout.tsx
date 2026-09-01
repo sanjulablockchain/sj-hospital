@@ -75,6 +75,12 @@ const catamaran = Catamaran({
 export async function generateMetadata({ params }: LayoutProps<'/[locale]'>): Promise<Metadata> {
   const { locale } = await params;
 
+  // Metadata resolution is a separate pass from rendering the body, so
+  // without this an invalid segment such as /xx/contact-us would emit a
+  // nonsense canonical into <head> even though the body below correctly
+  // 404s via notFound().
+  if (!hasLocale(locale)) return {};
+
   // The generated ParamMap types every dynamic segment as `string`, so this
   // narrows it back to Locale. hasLocale below is what actually enforces the
   // invariant at runtime (an unknown segment 404s); this cast just tells the

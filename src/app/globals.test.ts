@@ -42,3 +42,41 @@ test("the document and inner scrollbars share one thumb colour", () => {
 test("the retired purple scrollbar colour is gone", () => {
   assert.ok(!/74,\s*42,\s*130/.test(declarations), "the purple scrollbar thumb is back");
 });
+
+// [data-sj] and its .font-display heading utility must read the two custom
+// properties that actually vary by locale, --sj-body and --sj-display, rather
+// than a fixed font stack or the @theme inline --font-sans/--font-heading
+// pair (whose generated utilities bake in a value and are not used by the
+// site at all). Rebinding those two instead of these two is exactly the bug
+// this stylesheet shipped with.
+test("[data-sj] and its heading utility read the shared body/display variables", () => {
+  assert.match(
+    declarations,
+    /\[data-sj\]\s*\{[^}]*font-family:\s*var\(--sj-body\)/,
+    "[data-sj] does not paint with var(--sj-body)"
+  );
+  assert.match(
+    declarations,
+    /\[data-sj\]\s*\.font-display\s*\{[^}]*font-family:\s*var\(--sj-display\)/,
+    "[data-sj] .font-display does not paint with var(--sj-display)"
+  );
+});
+
+// Both html[lang="si"] and html[lang="ta"] must rebind both variables, each
+// with its own script's font first, so a Sinhala or Tamil page actually picks
+// up its own type instead of silently falling back to the English faces.
+test("Sinhala and Tamil each rebind both shared font variables with their own faces", () => {
+  const siBlockMatch = declarations.match(/html\[lang="si"\]\s*\{([^}]*)\}/);
+  const taBlockMatch = declarations.match(/html\[lang="ta"\]\s*\{([^}]*)\}/);
+  assert.ok(siBlockMatch, "no html[lang=\"si\"] rule");
+  assert.ok(taBlockMatch, "no html[lang=\"ta\"] rule");
+
+  const siBlock = siBlockMatch![1];
+  const taBlock = taBlockMatch![1];
+
+  assert.match(siBlock, /--sj-body:[^;]*--font-noto-sinhala/, "si does not rebind --sj-body with the Sinhala face");
+  assert.match(siBlock, /--sj-display:[^;]*--font-gemunu/, "si does not rebind --sj-display with the Sinhala display face");
+
+  assert.match(taBlock, /--sj-body:[^;]*--font-noto-tamil/, "ta does not rebind --sj-body with the Tamil face");
+  assert.match(taBlock, /--sj-display:[^;]*--font-catamaran/, "ta does not rebind --sj-display with the Tamil display face");
+});

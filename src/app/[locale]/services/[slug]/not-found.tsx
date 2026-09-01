@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { LocaleLink } from "@/components/i18n/LocaleLink";
 
 // Renders inside the /services layout's ThemedShell, so the --home-* tokens
 // and font-display are already in scope; this reads as a real page, not a
@@ -17,12 +17,12 @@ export default function ServiceNotFound() {
         The service you&rsquo;re looking for doesn&rsquo;t exist, or may have moved. Take a look at the full
         directory to find the right department instead.
       </p>
-      <Link
+      <LocaleLink
         href="/services"
         className="mt-2 inline-flex items-center gap-2.5 border border-[var(--home-hairline)] px-6 py-4 text-[15px] font-bold text-[var(--home-heading)] hover:border-[var(--home-accent)]"
       >
         Back to all services <span aria-hidden>&rarr;</span>
-      </Link>
+      </LocaleLink>
     </section>
   );
 }
