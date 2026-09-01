@@ -45,6 +45,8 @@ const KEEPS_ENGLISH = new Set([
   "heroFacts[2].v", // WhatsApp, a product name in every script
   "contactRows[2].label", // WhatsApp / Mobile
   "contactRows[3].label", // Email
+  "form.emailLabel", // Email*, the word every Sri Lankan form already uses
+  "form.emailPlaceholder", // an example address, not prose
 ]);
 
 test("every translatable string in contact has Sinhala", () => {

@@ -91,3 +91,18 @@ export const hero = {
   bookCta: "Doctor ஐ Book செய்யுங்கள்",
   reachCta: "எங்களைத் தொடர்பு கொள்ள",
 };
+
+export const form = {
+  firstNameLabel: "முதல் பெயர்*",
+  firstNamePlaceholder: "சுனில்",
+  lastNameLabel: "கடைசிப் பெயர்*",
+  lastNamePlaceholder: "பெரேரா",
+  emailLabel: "Email*",
+  emailPlaceholder: "john.doe@example.com",
+  messageLabel: "Message அல்லது கருத்து",
+  messagePlaceholder: "ஏதேனும் குறிப்பிட்ட தேவைகள் இருந்தால் தெரிவியுங்கள்...",
+  submit: "Message அனுப்புங்கள்",
+  submitting: "அனுப்புகிறது...",
+  callInstead: "அல்லது call செய்யுங்கள்",
+  emergency: "அவசர நிலையில் {phone} ஐ அழையுங்கள். இந்த form இரவு நேரத்தில் கண்காணிக்கப்படுவதில்லை.",
+};

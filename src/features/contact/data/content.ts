@@ -138,3 +138,33 @@ export const hero = {
   bookCta: "Book a doctor",
   reachCta: "Reach us",
 };
+
+/**
+ * The contact form's own copy, moved here out of ContactForm so it can be
+ * translated. ContactForm is a Client Component, so this arrives as a prop
+ * from MessageSection rather than being imported: that keeps the other two
+ * locales' copy out of the client bundle.
+ *
+ * `emergency` carries a {phone} token rather than being split into a before
+ * and an after string. Word order moves between languages, and the number
+ * does not sit in the same place in a Sinhala sentence as in an English one.
+ *
+ * NOT here: the field validation messages. Those come back from the Server
+ * Action in `schemas.ts`, which has no locale, so they are still English in
+ * every language. Translating them needs the action to learn the locale and
+ * is its own piece of work.
+ */
+export const form = {
+  firstNameLabel: "First Name*",
+  firstNamePlaceholder: "John",
+  lastNameLabel: "Last Name*",
+  lastNamePlaceholder: "Doe",
+  emailLabel: "Email*",
+  emailPlaceholder: "john.doe@example.com",
+  messageLabel: "Comment or Message",
+  messagePlaceholder: "Please let us know any specific requirements...",
+  submit: "Send Message",
+  submitting: "Sending...",
+  callInstead: "Or Call Us",
+  emergency: "For emergencies, please call {phone}. The form is not monitored overnight.",
+};

@@ -17,22 +17,26 @@ const inputClasses =
  * Also used on `/accommodation`, which is why it stays exported from this
  * feature's `index.ts` rather than moving into a route-only folder.
  */
-export function ContactForm() {
+export function ContactForm({ copy }: { copy: ContactContent["form"] }) {
   const [state, formAction, pending] = useActionState(sendContactMessage, initialContactFormState);
+
+  // The number sits in a different place in each language, so the sentence
+  // carries a {phone} token rather than being split into two fixed halves.
+  const [beforePhone, afterPhone] = copy.emergency.split("{phone}");
 
   return (
     <form action={formAction} className="flex flex-1 flex-col gap-5">
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="firstName" className="mb-1.5 block text-sm font-semibold text-[var(--home-heading)]">
-            First Name*
+            {copy.firstNameLabel}
           </label>
           <input
             id="firstName"
             name="firstName"
             type="text"
             required
-            placeholder="John"
+            placeholder={copy.firstNamePlaceholder}
             className={inputClasses}
           />
           {state.fieldErrors?.firstName && (
@@ -43,14 +47,14 @@ export function ContactForm() {
         </div>
         <div>
           <label htmlFor="lastName" className="mb-1.5 block text-sm font-semibold text-[var(--home-heading)]">
-            Last Name*
+            {copy.lastNameLabel}
           </label>
           <input
             id="lastName"
             name="lastName"
             type="text"
             required
-            placeholder="Doe"
+            placeholder={copy.lastNamePlaceholder}
             className={inputClasses}
           />
           {state.fieldErrors?.lastName && (
@@ -63,14 +67,14 @@ export function ContactForm() {
 
       <div>
         <label htmlFor="email" className="mb-1.5 block text-sm font-semibold text-[var(--home-heading)]">
-          Email*
+          {copy.emailLabel}
         </label>
         <input
           id="email"
           name="email"
           type="email"
           required
-          placeholder="john.doe@example.com"
+          placeholder={copy.emailPlaceholder}
           className={inputClasses}
         />
         {state.fieldErrors?.email && (
@@ -80,13 +84,13 @@ export function ContactForm() {
 
       <div className="flex flex-1 flex-col">
         <label htmlFor="contactMessage" className="mb-1.5 block text-sm font-semibold text-[var(--home-heading)]">
-          Comment or Message
+          {copy.messageLabel}
         </label>
         <textarea
           id="contactMessage"
           name="message"
           rows={5}
-          placeholder="Please let us know any specific requirements..."
+          placeholder={copy.messagePlaceholder}
           className={`${inputClasses} flex-1 resize-y`}
         />
       </div>
@@ -97,13 +101,13 @@ export function ContactForm() {
           disabled={pending}
           className="min-w-50 flex-1 bg-[var(--home-accent)] px-7 py-3.5 text-sm font-bold text-[var(--home-on-accent)] transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {pending ? "Sending..." : "Send Message"}
+          {pending ? copy.submitting : copy.submit}
         </button>
         <a
           href="tel:+94117848484"
           className="inline-flex items-center justify-center border border-[var(--home-hairline)] bg-transparent px-6 py-3.5 text-sm font-bold text-[var(--home-accent)] transition hover:bg-[var(--home-surface)]"
         >
-          Or Call Us
+          {copy.callInstead}
         </a>
       </div>
 
@@ -122,11 +126,11 @@ export function ContactForm() {
       )}
 
       <p className="text-xs leading-relaxed text-[var(--home-muted)]">
-        For emergencies, please call{" "}
+        {beforePhone}
         <a href="tel:+94117848484" className="font-semibold text-[var(--home-accent)] hover:opacity-80">
           0117 84 84 84
         </a>
-        . The form is not monitored overnight.
+        {afterPhone}
       </p>
     </form>
   );
