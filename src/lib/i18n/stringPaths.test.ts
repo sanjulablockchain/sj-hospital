@@ -54,3 +54,18 @@ test("an empty translation counts as missing, not as present", () => {
   const base = { label: "Reach us" };
   assert.deepEqual(assertTranslationParity(base, { label: "   " }, () => false), ["label"]);
 });
+
+// A blank string in the English source is a bug someone should see, so it stays
+// a required path rather than quietly exempting itself.
+test("a blank string in the base is still a path a translation owes", () => {
+  assert.deepEqual(stringPaths({ label: "", note: "A note" }).sort(), ["label", "note"]);
+  assert.deepEqual(
+    assertTranslationParity({ label: "" }, {}, () => false),
+    ["label"]
+  );
+});
+
+test("double underscore keys are skipped at any depth, not just the top", () => {
+  const value = { outer: { __review: { status: "draft" }, label: "Reach us" } };
+  assert.deepEqual(stringPaths(value), ["outer.label"]);
+});
