@@ -123,6 +123,19 @@ export default async function Page({ params }: PageProps<'/[locale]'>) {
 
 Client components get their slice as a prop from their Server parent, never by import.
 
+### Step E2: give every heading container room to shrink
+
+Sinhala and Tamil form long unbreakable tokens where English would have a space. A Tamil heading that ends in an enclitic such as `-உம்` is one word to the browser, and a flex item does not shrink below its content width by default, so it pushes straight out of a 360px column. In English the same layout never overflows, so nothing warns you.
+
+Each feature has its own `SectionHead` (there are seven, plus career's `SectionHeading`). Before you screenshot, check yours: if the heading group sits in a `flex` row without `min-w-0`, add it.
+
+```tsx
+<Reveal className="flex flex-wrap items-end justify-between gap-10">
+  <div className="min-w-0">   {/* without this, a long Tamil token overflows */}
+```
+
+`min-w-0` is already the idiom for this elsewhere in the codebase (`Modal.tsx`, `BookSection.tsx`). Fix the layout rather than rephrasing the translation around it: rephrasing works, but it means every future translator has to rediscover the trap.
+
 ### Step F: verify, including with your eyes
 
 ```bash
