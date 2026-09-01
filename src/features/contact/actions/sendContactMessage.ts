@@ -4,12 +4,18 @@ import { z } from "zod";
 import { contactMessageSchema } from "../schemas";
 import { sendContactEmail } from "../lib/mailer";
 import type { ContactFormState } from "../types";
+import { DEFAULT_LOCALE, hasLocale } from "@/lib/i18n/locales";
 
 export async function sendContactMessage(
   _prevState: ContactFormState,
   formData: FormData
 ): Promise<ContactFormState> {
-  const validated = contactMessageSchema.safeParse({
+  // The locale arrives from a hidden form field, so it is untrusted input: a
+  // missing or unrecognised value falls back to English rather than throwing.
+  const submittedLocale = String(formData.get("locale") ?? "");
+  const locale = hasLocale(submittedLocale) ? submittedLocale : DEFAULT_LOCALE;
+
+  const validated = contactMessageSchema(locale).safeParse({
     firstName: formData.get("firstName"),
     lastName: formData.get("lastName"),
     email: formData.get("email"),

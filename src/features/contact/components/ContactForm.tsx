@@ -4,6 +4,7 @@ import { useActionState } from "react";
 import { sendContactMessage } from "../actions/sendContactMessage";
 import { initialContactFormState } from "../types";
 import type { ContactContent } from "../data/getContent";
+import { useLocale } from "@/lib/i18n/useLocale";
 
 const inputClasses =
   "w-full border border-[var(--home-hairline)] bg-[var(--home-surface)] px-4 py-2.5 text-sm text-[var(--home-body)] outline-none placeholder:text-[var(--home-muted)] transition focus:border-[var(--home-accent)] focus:ring-2 focus:ring-[var(--home-accent)]/20";
@@ -20,6 +21,7 @@ const inputClasses =
  */
 export function ContactForm({ copy }: { copy: ContactContent["form"] }) {
   const [state, formAction, pending] = useActionState(sendContactMessage, initialContactFormState);
+  const locale = useLocale();
 
   // The number sits in a different place in each language, so the sentence
   // carries a {phone} token rather than being split into two fixed halves.
@@ -27,6 +29,7 @@ export function ContactForm({ copy }: { copy: ContactContent["form"] }) {
 
   return (
     <form action={formAction} className="flex flex-1 flex-col gap-5">
+      <input type="hidden" name="locale" value={locale} />
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="firstName" className="mb-1.5 block text-sm font-semibold text-[var(--home-heading)]">
