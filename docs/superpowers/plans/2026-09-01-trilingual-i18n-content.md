@@ -117,7 +117,8 @@ test("every footer heading in every config has Sinhala and Tamil", () => {
 // The dictionary is keyed by the English string, so an entry whose value is
 // still the English string is either a real gap or a decision. Decisions go in
 // KEEPS_ENGLISH; gaps fail here.
-const KEEPS_ENGLISH = new Set(["Media", "WhatsApp"]);
+const KEEPS_ENGLISH = new Set(["Media", "WhatsApp", "Pharmacy"]);
+// Add any further label you deliberately keep in English, with a reason.
 
 test("no dictionary entry is left as its English key", () => {
   for (const [name, dict] of [["si", si.NAV_LABELS], ["ta", ta.NAV_LABELS]] as const) {
@@ -407,13 +408,23 @@ export function contactMessageSchema(locale: Locale) {
   return z.object({
     firstName: z.string().trim().min(1, m.firstNameRequired),
     lastName: z.string().trim().min(1, m.lastNameRequired),
-    email: z.string().trim().min(1, m.emailRequired).email(m.emailInvalid),
-    message: z.string().trim(),
+    email: z.string().trim().min(1, m.emailRequired).pipe(z.email(m.emailInvalid)),
+    message: z.string().trim().optional(),
   });
 }
+
+// The existing type export derives from a const schema, which no longer
+// exists. Rederive it from the factory's return type or every importer breaks.
+export type ContactMessageInput = z.infer<ReturnType<typeof contactMessageSchema>>;
 ```
 
-Read the existing `schemas.ts` first and carry over every field and rule it already has. The four keys above are the ones visible in it today; if it validates more fields, add their messages in all three locales rather than dropping them.
+Three details in that code are not incidental, and getting any of them wrong breaks the build rather than just the translation:
+
+- **Zod here is 4.4.3, not 3.** The email rule is `.pipe(z.email(msg))`, which is what `schemas.ts` already uses. `.email()` as a string method is the Zod 3 idiom and is wrong here.
+- **`message` is `.optional()`** in the current schema. Keep it optional; making it required silently rejects every message-less submission.
+- **`ContactMessageInput` is exported today** as `z.infer<typeof contactMessageSchema>`. Once the schema is a factory that no longer type-checks, so it is rederived from `ReturnType<>` above. Check who imports it.
+
+Read the existing `schemas.ts` first and carry over every field and rule it already has. The four message keys above are the ones visible in it today; if it validates more fields, add their messages in all three locales rather than dropping them.
 
 - [ ] **Step 5: Run the test to verify it passes**
 
@@ -478,7 +489,7 @@ Ordered smallest first, so the register is well worn before the hard content. `h
 
 - [ ] **Step 1: Inventory** following recipe Step A. Report how many stranded component strings you found, and which files held them.
 
-- [ ] **Step 2: Parity test first** following recipe Step B. Run `npm test` and confirm it fails with `Cannot find module './content.si.ts'` before writing a single translation.
+- [ ] **Step 2: Parity test first** following recipe Step B. Run `npm test` and confirm it fails with a `Cannot find module` error naming the first overlay you are about to write, before writing a single translation. For a feature with several data files, that is the first of them, not `content.si.ts`.
 
 - [ ] **Step 3: Write both overlays** following recipe Step C, until `npm test` passes. Anything left in English goes in `KEEPS_ENGLISH` with a reason.
 
@@ -516,7 +527,7 @@ git commit -m "feat(i18n): translate about into Sinhala and Tamil"
 
 - [ ] **Step 1: Inventory** following recipe Step A. Report how many stranded component strings you found, and which files held them.
 
-- [ ] **Step 2: Parity test first** following recipe Step B. Run `npm test` and confirm it fails with `Cannot find module './content.si.ts'` before writing a single translation.
+- [ ] **Step 2: Parity test first** following recipe Step B. Run `npm test` and confirm it fails with a `Cannot find module` error naming the first overlay you are about to write, before writing a single translation. For a feature with several data files, that is the first of them, not `content.si.ts`.
 
 - [ ] **Step 3: Write both overlays** following recipe Step C, until `npm test` passes. Anything left in English goes in `KEEPS_ENGLISH` with a reason.
 
@@ -554,7 +565,7 @@ git commit -m "feat(i18n): translate e-channeling into Sinhala and Tamil"
 
 - [ ] **Step 1: Inventory** following recipe Step A. Report how many stranded component strings you found, and which files held them.
 
-- [ ] **Step 2: Parity test first** following recipe Step B. Run `npm test` and confirm it fails with `Cannot find module './content.si.ts'` before writing a single translation.
+- [ ] **Step 2: Parity test first** following recipe Step B. Run `npm test` and confirm it fails with a `Cannot find module` error naming the first overlay you are about to write, before writing a single translation. For a feature with several data files, that is the first of them, not `content.si.ts`.
 
 - [ ] **Step 3: Write both overlays** following recipe Step C, until `npm test` passes. Anything left in English goes in `KEEPS_ENGLISH` with a reason.
 
@@ -589,7 +600,7 @@ git commit -m "feat(i18n): translate accommodation into Sinhala and Tamil"
 
 - [ ] **Step 1: Inventory** following recipe Step A. Report how many stranded component strings you found, and which files held them.
 
-- [ ] **Step 2: Parity test first** following recipe Step B. Run `npm test` and confirm it fails with `Cannot find module './content.si.ts'` before writing a single translation.
+- [ ] **Step 2: Parity test first** following recipe Step B. Run `npm test` and confirm it fails with a `Cannot find module` error naming the first overlay you are about to write, before writing a single translation. For a feature with several data files, that is the first of them, not `content.si.ts`.
 
 - [ ] **Step 3: Write both overlays** following recipe Step C, until `npm test` passes. Anything left in English goes in `KEEPS_ENGLISH` with a reason.
 
@@ -624,7 +635,7 @@ git commit -m "feat(i18n): translate home-care into Sinhala and Tamil"
 
 - [ ] **Step 1: Inventory** following recipe Step A. Report how many stranded component strings you found, and which files held them.
 
-- [ ] **Step 2: Parity test first** following recipe Step B. Run `npm test` and confirm it fails with `Cannot find module './content.si.ts'` before writing a single translation.
+- [ ] **Step 2: Parity test first** following recipe Step B. Run `npm test` and confirm it fails with a `Cannot find module` error naming the first overlay you are about to write, before writing a single translation. For a feature with several data files, that is the first of them, not `content.si.ts`.
 
 - [ ] **Step 3: Write both overlays** following recipe Step C, until `npm test` passes. Anything left in English goes in `KEEPS_ENGLISH` with a reason.
 
@@ -661,7 +672,7 @@ git commit -m "feat(i18n): translate pharmacy into Sinhala and Tamil"
 
 - [ ] **Step 1: Inventory** following recipe Step A. Report how many stranded component strings you found, and which files held them.
 
-- [ ] **Step 2: Parity test first** following recipe Step B. Run `npm test` and confirm it fails with `Cannot find module './content.si.ts'` before writing a single translation.
+- [ ] **Step 2: Parity test first** following recipe Step B. Run `npm test` and confirm it fails with a `Cannot find module` error naming the first overlay you are about to write, before writing a single translation. For a feature with several data files, that is the first of them, not `content.si.ts`.
 
 - [ ] **Step 3: Write both overlays** following recipe Step C, until `npm test` passes. Anything left in English goes in `KEEPS_ENGLISH` with a reason.
 
@@ -698,7 +709,7 @@ git commit -m "feat(i18n): translate network into Sinhala and Tamil"
 
 - [ ] **Step 1: Inventory** following recipe Step A. Report how many stranded component strings you found, and which files held them.
 
-- [ ] **Step 2: Parity test first** following recipe Step B. Run `npm test` and confirm it fails with `Cannot find module './content.si.ts'` before writing a single translation.
+- [ ] **Step 2: Parity test first** following recipe Step B. Run `npm test` and confirm it fails with a `Cannot find module` error naming the first overlay you are about to write, before writing a single translation. For a feature with several data files, that is the first of them, not `content.si.ts`.
 
 - [ ] **Step 3: Write both overlays** following recipe Step C, until `npm test` passes. Anything left in English goes in `KEEPS_ENGLISH` with a reason.
 
@@ -733,7 +744,7 @@ git commit -m "feat(i18n): translate international-care into Sinhala and Tamil"
 
 - [ ] **Step 1: Inventory** following recipe Step A. Report how many stranded component strings you found, and which files held them.
 
-- [ ] **Step 2: Parity test first** following recipe Step B. Run `npm test` and confirm it fails with `Cannot find module './content.si.ts'` before writing a single translation.
+- [ ] **Step 2: Parity test first** following recipe Step B. Run `npm test` and confirm it fails with a `Cannot find module` error naming the first overlay you are about to write, before writing a single translation. For a feature with several data files, that is the first of them, not `content.si.ts`.
 
 - [ ] **Step 3: Write both overlays** following recipe Step C, until `npm test` passes. Anything left in English goes in `KEEPS_ENGLISH` with a reason.
 
@@ -770,7 +781,7 @@ git commit -m "feat(i18n): translate school-wellness into Sinhala and Tamil"
 
 - [ ] **Step 1: Inventory** following recipe Step A. Report how many stranded component strings you found, and which files held them.
 
-- [ ] **Step 2: Parity test first** following recipe Step B. Run `npm test` and confirm it fails with `Cannot find module './content.si.ts'` before writing a single translation.
+- [ ] **Step 2: Parity test first** following recipe Step B. Run `npm test` and confirm it fails with a `Cannot find module` error naming the first overlay you are about to write, before writing a single translation. For a feature with several data files, that is the first of them, not `content.si.ts`.
 
 - [ ] **Step 3: Write both overlays** following recipe Step C, until `npm test` passes. Anything left in English goes in `KEEPS_ENGLISH` with a reason.
 
@@ -808,7 +819,7 @@ git commit -m "feat(i18n): translate facilities into Sinhala and Tamil"
 
 - [ ] **Step 1: Inventory** following recipe Step A. Report how many stranded component strings you found, and which files held them.
 
-- [ ] **Step 2: Parity test first** following recipe Step B. Run `npm test` and confirm it fails with `Cannot find module './content.si.ts'` before writing a single translation.
+- [ ] **Step 2: Parity test first** following recipe Step B. Run `npm test` and confirm it fails with a `Cannot find module` error naming the first overlay you are about to write, before writing a single translation. For a feature with several data files, that is the first of them, not `content.si.ts`.
 
 - [ ] **Step 3: Write both overlays** following recipe Step C, until `npm test` passes. Anything left in English goes in `KEEPS_ENGLISH` with a reason.
 
@@ -846,7 +857,7 @@ git commit -m "feat(i18n): translate media into Sinhala and Tamil"
 
 - [ ] **Step 1: Inventory** following recipe Step A. Report how many stranded component strings you found, and which files held them.
 
-- [ ] **Step 2: Parity test first** following recipe Step B. Run `npm test` and confirm it fails with `Cannot find module './content.si.ts'` before writing a single translation.
+- [ ] **Step 2: Parity test first** following recipe Step B. Run `npm test` and confirm it fails with a `Cannot find module` error naming the first overlay you are about to write, before writing a single translation. For a feature with several data files, that is the first of them, not `content.si.ts`.
 
 - [ ] **Step 3: Write both overlays** following recipe Step C, until `npm test` passes. Anything left in English goes in `KEEPS_ENGLISH` with a reason.
 
@@ -884,7 +895,7 @@ git commit -m "feat(i18n): translate career into Sinhala and Tamil"
 
 - [ ] **Step 1: Inventory** following recipe Step A. Report how many stranded component strings you found, and which files held them.
 
-- [ ] **Step 2: Parity test first** following recipe Step B. Run `npm test` and confirm it fails with `Cannot find module './content.si.ts'` before writing a single translation.
+- [ ] **Step 2: Parity test first** following recipe Step B. Run `npm test` and confirm it fails with a `Cannot find module` error naming the first overlay you are about to write, before writing a single translation. For a feature with several data files, that is the first of them, not `content.si.ts`.
 
 - [ ] **Step 3: Write both overlays** following recipe Step C, until `npm test` passes. Anything left in English goes in `KEEPS_ENGLISH` with a reason.
 
@@ -922,7 +933,7 @@ git commit -m "feat(i18n): translate home into Sinhala and Tamil"
 
 - [ ] **Step 1: Inventory** following recipe Step A. Report how many stranded component strings you found, and which files held them.
 
-- [ ] **Step 2: Parity test first** following recipe Step B. Run `npm test` and confirm it fails with `Cannot find module './content.si.ts'` before writing a single translation.
+- [ ] **Step 2: Parity test first** following recipe Step B. Run `npm test` and confirm it fails with a `Cannot find module` error naming the first overlay you are about to write, before writing a single translation. For a feature with several data files, that is the first of them, not `content.si.ts`.
 
 - [ ] **Step 3: Write both overlays** following recipe Step C, until `npm test` passes. Anything left in English goes in `KEEPS_ENGLISH` with a reason.
 
@@ -960,7 +971,7 @@ git commit -m "feat(i18n): translate services into Sinhala and Tamil"
 
 - [ ] **Step 1: Inventory** following recipe Step A. Report how many stranded component strings you found, and which files held them.
 
-- [ ] **Step 2: Parity test first** following recipe Step B. Run `npm test` and confirm it fails with `Cannot find module './content.si.ts'` before writing a single translation.
+- [ ] **Step 2: Parity test first** following recipe Step B. Run `npm test` and confirm it fails with a `Cannot find module` error naming the first overlay you are about to write, before writing a single translation. For a feature with several data files, that is the first of them, not `content.si.ts`.
 
 - [ ] **Step 3: Write both overlays** following recipe Step C, until `npm test` passes. Anything left in English goes in `KEEPS_ENGLISH` with a reason.
 
