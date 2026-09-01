@@ -130,7 +130,7 @@ export function ThemedHeader({ navItems, bookHref = "#book", homeHref = "#top" }
     // dropping the Book now button onto a second line.
     <header
       ref={headerRef}
-      className="relative z-20 mx-auto flex w-full max-w-[1440px] items-center gap-3 px-4 py-5 sm:gap-5 sm:px-8 lg:px-11"
+      className="relative z-20 mx-auto flex w-full max-w-[1440px] items-center gap-1.5 px-3 py-5 sm:gap-5 sm:px-8 lg:px-11"
     >
       <a ref={logoRef} href={localeHref(homeHref, locale)} className="flex shrink-0 items-center gap-2.5 sm:gap-3.25">
         <Image
@@ -158,7 +158,7 @@ export function ThemedHeader({ navItems, bookHref = "#book", homeHref = "#top" }
       {/* One right-aligned group in a single DOM order: wide drops the
           hamburger, compact drops the nav and the toggle, which leaves Book now
           and the hamburger together at the top right. */}
-      <div className="ml-auto flex shrink-0 items-center gap-3 sm:gap-5">
+      <div className="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-5">
         <nav
           ref={navRef}
           /* The type/gap tier steps down well before the row runs out of room.
@@ -183,7 +183,7 @@ export function ThemedHeader({ navItems, bookHref = "#book", homeHref = "#top" }
         <a
           ref={bookRef}
           href={localeHref(bookHref, locale)}
-          className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap bg-[var(--home-accent)] px-3.5 py-2.5 text-[12.5px] font-bold text-[var(--home-on-accent)] sm:gap-2.5 sm:px-5 sm:py-3.5 sm:text-[13.5px]"
+          className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap bg-[var(--home-accent)] px-2 py-2.5 text-[12.5px] font-bold text-[var(--home-on-accent)] sm:gap-2.5 sm:px-5 sm:py-3.5 sm:text-[13.5px]"
         >
           {copy.bookNow}{" "}
           <span aria-hidden className="hidden sm:inline">
