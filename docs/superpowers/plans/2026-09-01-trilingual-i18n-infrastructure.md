@@ -87,8 +87,10 @@ test("hasLocale accepts the three and rejects everything else", () => {
 // so an English transliteration would defeat the control.
 test("each language is labelled in its own script", () => {
   assert.equal(LOCALE_LABELS.en, "English");
-  assert.match(LOCALE_LABELS.si, /[඀-෿]/, "Sinhala label must use Sinhala characters");
-  assert.match(LOCALE_LABELS.ta, /[஀-௿]/, "Tamil label must use Tamil characters");
+  // Escapes rather than literal characters: this assertion must keep working
+  // whatever a future editor does to the file's encoding.
+  assert.match(LOCALE_LABELS.si, /[\u0D80-\u0DFF]/, "Sinhala label must use Sinhala characters");
+  assert.match(LOCALE_LABELS.ta, /[\u0B80-\u0BFF]/, "Tamil label must use Tamil characters");
 });
 
 test("every locale has a label, with no gaps", () => {
@@ -447,23 +449,51 @@ test("an explicit /en URL redirects to the canonical bare path", () => {
   });
 });
 
-// The property that matters most: no input may produce a redirect whose target
-// would itself redirect, or the browser loops.
-test("no redirect target ever redirects again", () => {
+// The property that matters most: following the redirects must always stop.
+// Chains are allowed and one real case produces one: /en with a Sinhala cookie
+// goes /en -> / -> /si, which is correct behaviour, not a loop. What must never
+// happen is a chain that fails to terminate.
+test("following redirects always terminates", () => {
   const paths = ["/", "/contact-us", "/services/cardiology", "/en", "/en/services", "/si", "/si/x"];
   const cookies = [undefined, "en", "si", "ta", "junk"];
+
   for (const path of paths) {
     for (const cookie of cookies) {
-      const first = resolveLocaleRoute(path, cookie);
-      if (first.kind !== "redirect") continue;
-      const second = resolveLocaleRoute(first.pathname, cookie);
+      const seen = new Set([path]);
+      let current = path;
+
+      for (let hop = 0; hop < 5; hop += 1) {
+        const action = resolveLocaleRoute(current, cookie);
+        if (action.kind !== "redirect") break;
+
+        assert.ok(
+          !seen.has(action.pathname),
+          `${path} with cookie ${cookie} redirects back to ${action.pathname}, a loop`
+        );
+        seen.add(action.pathname);
+        current = action.pathname;
+      }
+
       assert.notEqual(
-        second.kind,
+        resolveLocaleRoute(current, cookie).kind,
         "redirect",
-        `${path} with cookie ${cookie} redirects to ${first.pathname}, which redirects again`
+        `${path} with cookie ${cookie} was still redirecting after 5 hops`
       );
     }
   }
+});
+
+// The chain above, pinned explicitly so the two-hop case is a documented
+// decision rather than an accident nobody noticed.
+test("an explicit /en with a Sinhala cookie lands on Sinhala in two hops", () => {
+  assert.deepEqual(resolveLocaleRoute("/en/contact-us", "si"), {
+    kind: "redirect",
+    pathname: "/contact-us",
+  });
+  assert.deepEqual(resolveLocaleRoute("/contact-us", "si"), {
+    kind: "redirect",
+    pathname: "/si/contact-us",
+  });
 });
 ```
 
@@ -526,7 +556,7 @@ export function resolveLocaleRoute(
 - [ ] **Step 4: Run the test to verify it passes**
 
 Run: `npm test 2>&1 | tail -8`
-Expected: PASS, total climbs to 298.
+Expected: PASS, total climbs to 299.
 
 - [ ] **Step 5: Commit**
 
@@ -542,10 +572,9 @@ git commit -m "feat(i18n): decide rewrite, redirect or pass for every incoming p
 Move every route under `app/[locale]` and wire the proxy. These ship together because neither works alone: the tree without the proxy 404s every existing URL, and the proxy without the tree rewrites to nothing.
 
 **Files:**
-- Create: `src/app/[locale]/layout.tsx` (the new root layout)
+- Move: `src/app/layout.tsx` to `src/app/[locale]/layout.tsx` with `git mv`, then edit it in place. It is not deleted and not rewritten from scratch: the four font declarations and the metadata export must survive the move untouched.
+- Move: every route directory and `page.tsx` under `src/app` into `src/app/[locale]/`, with `git mv`
 - Create: `src/proxy.ts`
-- Delete: `src/app/layout.tsx` (its contents move into the new root layout)
-- Move: every route directory and `page.tsx` under `src/app` into `src/app/[locale]/`
 - Leave in place: `src/app/globals.css`, `src/app/globals.test.ts`, `src/app/icon.png`
 
 **Interfaces:**
@@ -674,7 +703,7 @@ export const config = {
 - [ ] **Step 5: Run the unit tests, which must still pass untouched**
 
 Run: `npm test 2>&1 | tail -8`
-Expected: PASS, 298 tests. Nothing here changes any tested module, so a failure means a route move broke an import.
+Expected: PASS, 299 tests. Nothing here changes any tested module, so a failure means a route move broke an import.
 
 - [ ] **Step 6: Build, which is the real check on the route move**
 
@@ -682,6 +711,8 @@ Run: `npm run build 2>&1 | tail -40`
 Expected: build succeeds. In the route list every page appears three times, as `/en/...`, `/si/...` and `/ta/...`, and they are prerendered rather than dynamic.
 
 If the build complains that a page's `params` is not awaited, that page needs `const { locale } = await params` before use. Fix each one it names.
+
+One failure is known in advance. `src/app/[locale]/services/[slug]/page.tsx` types its own params by hand as `{ params: Promise<{ slug: string }> }`, which is now wrong because the route has two dynamic segments. Change both `generateStaticParams` and `generateMetadata` there to account for the locale, typing the params as `Promise<{ locale: string; slug: string }>`. Leave the slug list and the metadata body alone: `serviceSlugs` and `getService` still come from `@/features/services/data/services`.
 
 - [ ] **Step 7: Verify the URLs by hand**
 
@@ -838,7 +869,7 @@ Expected: only Latin faces are fetched, and no request mentions sinhala, tamil, 
 - [ ] **Step 6: Run the CSS test**
 
 Run: `npm test 2>&1 | tail -8`
-Expected: PASS, 298 tests. `src/app/globals.test.ts` asserts things about this stylesheet, so if it fails, read what it pins before changing anything.
+Expected: PASS, 299 tests. `src/app/globals.test.ts` asserts things about this stylesheet, so if it fails, read what it pins before changing anything.
 
 - [ ] **Step 7: Commit**
 
@@ -995,7 +1026,7 @@ Leave the `tel:`, `https://wa.me/` and `mailto:` anchors as plain `<a>` elements
 - [ ] **Step 6: Run the tests and the build**
 
 Run: `npm test 2>&1 | tail -8`
-Expected: PASS, 298 tests.
+Expected: PASS, 299 tests.
 
 Run: `npm run build 2>&1 | tail -20`
 Expected: build succeeds.
@@ -1023,6 +1054,7 @@ git commit -m "feat(i18n): keep header, menu and footer links inside the reader'
 ### Task 7: The language switcher
 
 **Files:**
+- Create: `src/lib/i18n/rememberLocale.ts`
 - Create: `src/components/i18n/LanguageToggleButton.tsx`
 - Create: `src/components/i18n/LanguageMenuToggle.tsx`
 - Modify: `src/components/layout/ThemedHeader.tsx`
@@ -1030,9 +1062,31 @@ git commit -m "feat(i18n): keep header, menu and footer links inside the reader'
 
 **Interfaces:**
 - Consumes: `useLocale`, `swapLocale`, `LOCALE_LABELS`, `LOCALES`, `LOCALE_COOKIE`, `type Locale`.
-- Produces: `<LanguageToggleButton />` and `<LanguageMenuToggle />`, both self-contained.
+- Produces: `rememberLocale(locale: Locale): void`, `<LanguageToggleButton />` and `<LanguageMenuToggle />`.
 
-- [ ] **Step 1: Write the shared switch behaviour and the header button**
+- [ ] **Step 1: Write the cookie write, on its own**
+
+Both switcher variants need it, and a component file is the wrong home for a helper another component imports.
+
+Create `src/lib/i18n/rememberLocale.ts`:
+
+```ts
+import { LOCALE_COOKIE, type Locale } from "@/lib/i18n/locales";
+
+/**
+ * Remember an explicit choice for a year. This cookie is the only thing that
+ * ever moves a reader off English automatically, and only after they have
+ * asked for it once by using the switcher.
+ *
+ * No "use client" directive: this is a plain function that happens to touch
+ * `document`, and the client components that call it carry the directive.
+ */
+export function rememberLocale(locale: Locale) {
+  document.cookie = `${LOCALE_COOKIE}=${locale}; path=/; max-age=31536000; samesite=lax`;
+}
+```
+
+- [ ] **Step 2: Write the header button**
 
 Create `src/components/i18n/LanguageToggleButton.tsx`:
 
@@ -1041,18 +1095,10 @@ Create `src/components/i18n/LanguageToggleButton.tsx`:
 
 import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { LOCALE_COOKIE, LOCALE_LABELS, LOCALES, type Locale } from "@/lib/i18n/locales";
+import { LOCALE_LABELS, LOCALES, type Locale } from "@/lib/i18n/locales";
 import { swapLocale } from "@/lib/i18n/paths";
+import { rememberLocale } from "@/lib/i18n/rememberLocale";
 import { useLocale } from "@/lib/i18n/useLocale";
-
-/**
- * Remember an explicit choice for a year. The proxy reads this cookie, which is
- * the only thing that ever moves a reader off English automatically, and only
- * after they have asked for it once.
- */
-export function rememberLocale(locale: Locale) {
-  document.cookie = `${LOCALE_COOKIE}=${locale}; path=/; max-age=31536000; samesite=lax`;
-}
 
 /**
  * The header's language control, sized and bordered to match
@@ -1143,7 +1189,7 @@ export function LanguageToggleButton() {
 
 The `lang` attribute on each option matters: it tells a screen reader to pronounce the Sinhala and Tamil names in the right voice instead of spelling them out as English.
 
-- [ ] **Step 2: Write the mobile menu row**
+- [ ] **Step 3: Write the mobile menu row**
 
 Create `src/components/i18n/LanguageMenuToggle.tsx`:
 
@@ -1154,7 +1200,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { LOCALE_LABELS, LOCALES, type Locale } from "@/lib/i18n/locales";
 import { swapLocale } from "@/lib/i18n/paths";
 import { useLocale } from "@/lib/i18n/useLocale";
-import { rememberLocale } from "@/components/i18n/LanguageToggleButton";
+import { rememberLocale } from "@/lib/i18n/rememberLocale";
 
 /**
  * The language switch as a menu row, the same relationship ThemeMenuToggle has
@@ -1199,7 +1245,7 @@ export function LanguageMenuToggle() {
 }
 ```
 
-- [ ] **Step 3: Put the button in the header**
+- [ ] **Step 4: Put the button in the header**
 
 In `src/components/layout/ThemedHeader.tsx`, add:
 
@@ -1216,7 +1262,7 @@ and render it immediately before `<ThemeToggleButton />`, inside the same toggle
 
 Do not add a wrapper element around the pair. The container is one of the elements the header measures to decide when to collapse, and an extra box would change that measurement.
 
-- [ ] **Step 4: Put the row in the mobile panel**
+- [ ] **Step 5: Put the row in the mobile panel**
 
 In `src/components/layout/MobileNavPanel.tsx`, add:
 
@@ -1233,15 +1279,15 @@ and extend the existing bordered block at the foot of the panel so it holds both
 </div>
 ```
 
-- [ ] **Step 5: Run the tests and the build**
+- [ ] **Step 6: Run the tests and the build**
 
 Run: `npm test 2>&1 | tail -8`
-Expected: PASS, 298 tests.
+Expected: PASS, 299 tests.
 
 Run: `npm run build 2>&1 | tail -20`
 Expected: build succeeds.
 
-- [ ] **Step 6: Verify the switcher end to end**
+- [ ] **Step 7: Verify the switcher end to end**
 
 Run `npm run dev` and, starting at `http://localhost:3000/contact-us`:
 
@@ -1254,7 +1300,7 @@ Run `npm run dev` and, starting at `http://localhost:3000/contact-us`:
 - Narrow to 375px, open the hamburger, and confirm all three language buttons are there, reachable, and above the theme row.
 - At 1280px, confirm the header has not collapsed to a hamburger. If it has, the switcher is wider than the 52px budget and needs trimming.
 
-- [ ] **Step 7: Commit**
+- [ ] **Step 8: Commit**
 
 ```bash
 git add src/components/i18n/LanguageToggleButton.tsx src/components/i18n/LanguageMenuToggle.tsx src/components/layout/ThemedHeader.tsx src/components/layout/MobileNavPanel.tsx
@@ -1273,7 +1319,7 @@ git commit -m "feat(i18n): add the language switcher to the header and the mobil
 
 **Interfaces:**
 - Consumes: `LOCALES`, `type Locale`, `localePath`.
-- Produces: `SITE_URL: string`, `localeAlternates(path: string): { canonical: string; languages: Record<string, string> }`.
+- Produces: `SITE_URL: string`, `localeAlternates(path: string, locale: Locale): { canonical: string; languages: Record<string, string> }`.
 
 - [ ] **Step 1: Write the failing test**
 
@@ -1284,13 +1330,17 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { localeAlternates, SITE_URL } from "./alternates.ts";
 
-test("the canonical URL is the English one, with no prefix", () => {
-  assert.equal(localeAlternates("/contact-us").canonical, `${SITE_URL}/contact-us`);
-  assert.equal(localeAlternates("/").canonical, `${SITE_URL}/`);
+// Each locale is canonical for itself. Pointing a translation's canonical at
+// the English URL would tell a search engine the Sinhala page is a duplicate
+// to drop from the index, which would throw away the whole translation effort.
+test("a page is canonical for itself, in its own locale", () => {
+  assert.equal(localeAlternates("/contact-us", "en").canonical, `${SITE_URL}/contact-us`);
+  assert.equal(localeAlternates("/contact-us", "si").canonical, `${SITE_URL}/si/contact-us`);
+  assert.equal(localeAlternates("/contact-us", "ta").canonical, `${SITE_URL}/ta/contact-us`);
 });
 
 test("every locale is offered as an alternate, absolute", () => {
-  const { languages } = localeAlternates("/contact-us");
+  const { languages } = localeAlternates("/contact-us", "en");
   assert.deepEqual(languages, {
     en: `${SITE_URL}/contact-us`,
     si: `${SITE_URL}/si/contact-us`,
@@ -1298,8 +1348,17 @@ test("every locale is offered as an alternate, absolute", () => {
   });
 });
 
+// The three pages must agree about the set they belong to, or a search engine
+// treats the cluster as inconsistent and ignores the hreflang entirely.
+test("the alternate set is the same whichever locale asks for it", () => {
+  const fromEnglish = localeAlternates("/services", "en").languages;
+  assert.deepEqual(localeAlternates("/services", "si").languages, fromEnglish);
+  assert.deepEqual(localeAlternates("/services", "ta").languages, fromEnglish);
+});
+
 test("the home page alternates do not collect a double slash", () => {
-  const { languages } = localeAlternates("/");
+  const { canonical, languages } = localeAlternates("/", "si");
+  assert.equal(canonical, `${SITE_URL}/si`);
   assert.equal(languages.en, `${SITE_URL}/`);
   assert.equal(languages.si, `${SITE_URL}/si`);
   assert.equal(languages.ta, `${SITE_URL}/ta`);
@@ -1321,34 +1380,40 @@ Expected: FAIL, `Cannot find module` for `./alternates.ts`.
 Create `src/lib/i18n/alternates.ts`:
 
 ```ts
-import { LOCALES } from "./locales.ts";
+import { LOCALES, type Locale } from "./locales.ts";
 import { localePath } from "./paths.ts";
 
 /** The public origin, used to make metadata alternates absolute. */
 export const SITE_URL = "https://sjhospital.lk";
 
 /**
- * The canonical URL and the hreflang set for one page.
+ * The canonical URL and the hreflang set for one page in one locale.
  *
- * English is canonical because it is the version served from the bare URL and
- * the version a crawler always reaches, having no cookie.
+ * The canonical is the locale's own URL, never English's. A translation whose
+ * canonical points at the English page is telling a search engine to drop it
+ * as a duplicate, which would waste the entire translation effort. Each locale
+ * is canonical for itself, and the shared `languages` map is what ties the
+ * three together as one page in three languages.
  */
-export function localeAlternates(path: string): {
+export function localeAlternates(
+  path: string,
+  locale: Locale
+): {
   canonical: string;
   languages: Record<string, string>;
 } {
   const languages: Record<string, string> = {};
-  for (const locale of LOCALES) {
-    languages[locale] = `${SITE_URL}${localePath(path, locale)}`;
+  for (const other of LOCALES) {
+    languages[other] = `${SITE_URL}${localePath(path, other)}`;
   }
-  return { canonical: `${SITE_URL}${path}`, languages };
+  return { canonical: `${SITE_URL}${localePath(path, locale)}`, languages };
 }
 ```
 
 - [ ] **Step 4: Run the test to verify it passes**
 
 Run: `npm test 2>&1 | tail -8`
-Expected: PASS, total climbs to 302.
+Expected: PASS, total climbs to 304.
 
 - [ ] **Step 5: Make the root layout's metadata locale-aware**
 
@@ -1372,7 +1437,7 @@ export async function generateMetadata({ params }: LayoutProps<'/[locale]'>): Pr
     // translates them. The alternates are what matter now: they tell a search
     // engine the three URLs are the same page in different languages rather
     // than duplicate content.
-    alternates: localeAlternates("/"),
+    alternates: localeAlternates("/", locale),
     openGraph: { locale },
   };
 }
@@ -1380,7 +1445,57 @@ export async function generateMetadata({ params }: LayoutProps<'/[locale]'>): Pr
 
 Keep the existing `import type { Metadata } from "next"` if the file already has one rather than adding a second.
 
-- [ ] **Step 6: Add the sitemap**
+This covers the home page only. Metadata set in a layout is inherited by everything beneath it, so without the next step every route would claim to be canonically the home page, which is worse than having no canonical at all.
+
+- [ ] **Step 6: Give each route its own alternates**
+
+Fifteen route layouts plus the services detail page each need the alternates for their own path. This is the same three-line edit fifteen times, so do them in one pass rather than one at a time.
+
+For each layout in the table below, add these imports:
+
+```ts
+import type { Metadata } from "next";
+import { localeAlternates } from "@/lib/i18n/alternates";
+```
+
+and this export, using that row's path:
+
+```ts
+export async function generateMetadata({ params }: LayoutProps<'/[locale]'>): Promise<Metadata> {
+  const { locale } = await params;
+  return { alternates: localeAlternates("/contact-us", locale) };
+}
+```
+
+| Layout file, under `src/app/[locale]/` | Path argument |
+|---|---|
+| `about-us/layout.tsx` | `/about-us` |
+| `accommodation/layout.tsx` | `/accommodation` |
+| `careers/layout.tsx` | `/careers` |
+| `contact-us/layout.tsx` | `/contact-us` |
+| `e-channeling/layout.tsx` | `/e-channeling` |
+| `facilities/layout.tsx` | `/facilities` |
+| `health-tips/layout.tsx` | `/health-tips` |
+| `home-care/layout.tsx` | `/home-care` |
+| `international-care/layout.tsx` | `/international-care` |
+| `media/layout.tsx` | `/media` |
+| `network/layout.tsx` | `/network` |
+| `pharmacy/layout.tsx` | `/pharmacy` |
+| `privacy-policy/layout.tsx` | `/privacy-policy` |
+| `school-wellness/layout.tsx` | `/school-wellness` |
+| `services/layout.tsx` | `/services` |
+
+Two of these already export something metadata-shaped. Where a layout already has a `metadata` object or a `generateMetadata`, do not add a second export: fold `alternates` into the one that is there, keeping its existing title and description untouched. Run `grep -rn "export const metadata\|export async function generateMetadata" "src/app/[locale]"` first and read what each one has.
+
+The services detail page is the one dynamic route and needs the slug in its path. In `src/app/[locale]/services/[slug]/page.tsx`, extend the existing `generateMetadata` return value with:
+
+```ts
+alternates: localeAlternates(`/services/${slug}`, locale as Locale),
+```
+
+taking `locale` from the same `await params` the previous task added there, and importing `type Locale` from `@/lib/i18n/locales`.
+
+- [ ] **Step 7: Add the sitemap**
 
 Read the reference first: `sed -n '1,60p' node_modules/next/dist/docs/01-app/03-api-reference/03-file-conventions/metadata/sitemap.md`
 
@@ -1389,7 +1504,7 @@ Create `src/app/sitemap.ts`:
 ```ts
 import type { MetadataRoute } from "next";
 import { localeAlternates } from "@/lib/i18n/alternates";
-import { SERVICE_SLUGS } from "@/features/services";
+import { serviceSlugs } from "@/features/services/data/services";
 
 /**
  * Every page, once, at its canonical English URL, each carrying the Sinhala and
@@ -1418,18 +1533,21 @@ const STATIC_PATHS = [
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const paths = [...STATIC_PATHS, ...SERVICE_SLUGS.map((slug) => `/services/${slug}`)];
+  const paths = [...STATIC_PATHS, ...serviceSlugs.map((slug) => `/services/${slug}`)];
 
   return paths.map((path) => {
-    const { canonical, languages } = localeAlternates(path);
+    // The English URL is the entry, with the other two hanging off it as
+    // alternates. Listing all three as separate entries would describe the
+    // same page three times.
+    const { canonical, languages } = localeAlternates(path, "en");
     return { url: canonical, alternates: { languages } };
   });
 }
 ```
 
-Before writing this, run `grep -rn "generateStaticParams" "src/app/[locale]/services/[slug]/page.tsx"` and read how that route lists its slugs. If the slug list is not already exported as `SERVICE_SLUGS` from `@/features/services`, export it from there and import it here, rather than duplicating the list.
+`serviceSlugs` is already exported from `@/features/services/data/services`, which is where `src/app/[locale]/services/[slug]/page.tsx` gets it. Import it, do not re-declare the list.
 
-- [ ] **Step 7: Build and verify the output**
+- [ ] **Step 8: Build and verify the output**
 
 Run: `npm run build 2>&1 | tail -30`
 Expected: build succeeds and `/sitemap.xml` appears in the route list.
@@ -1438,15 +1556,24 @@ Run `npm run dev`, then:
 
 ```bash
 curl -s http://localhost:3000/sitemap.xml | head -30
-curl -s http://localhost:3000/contact-us | grep -o '<link rel="alternate"[^>]*>'
+for u in /contact-us /si/contact-us /ta/services; do
+  echo "== $u"
+  curl -s "http://localhost:3000$u" | grep -oE '<link rel="(alternate|canonical)"[^>]*>'
+done
 ```
 
-Expected: the sitemap lists every path once with three `xhtml:link` alternates each, and the page head carries `hreflang` links for en, si and ta.
+Expected:
 
-- [ ] **Step 8: Commit**
+- the sitemap lists every path once, each with three `xhtml:link` alternates
+- every one of the three pages carries `hreflang` links for en, si and ta
+- `/contact-us` is canonical to `https://sjhospital.lk/contact-us`
+- `/si/contact-us` is canonical to `https://sjhospital.lk/si/contact-us`, **not** to the English URL. A Sinhala page claiming the English page as canonical is the specific bug this step exists to catch.
+- `/ta/services` is canonical to `https://sjhospital.lk/ta/services`, which proves the per-route step landed and pages are not all inheriting the home page's alternates.
+
+- [ ] **Step 9: Commit**
 
 ```bash
-git add "src/app/[locale]/layout.tsx" src/lib/i18n/alternates.ts src/lib/i18n/alternates.test.ts src/app/sitemap.ts
+git add -A
 git commit -m "feat(i18n): declare the three URLs of every page to search engines"
 ```
 
@@ -1616,7 +1743,7 @@ export function localize<T>(base: T, overlay: unknown): T {
 - [ ] **Step 4: Run the test to verify it passes**
 
 Run: `npm test 2>&1 | tail -8`
-Expected: PASS, total climbs to 311.
+Expected: PASS, total climbs to 313.
 
 - [ ] **Step 5: Write the failing test for the parity check**
 
@@ -1740,12 +1867,12 @@ Note that `stringPaths` returns `[]` for a bare string at the root, since a root
 - [ ] **Step 8: Run the test to verify it passes**
 
 Run: `npm test 2>&1 | tail -8`
-Expected: PASS, total climbs to 318.
+Expected: PASS, total climbs to 320.
 
 - [ ] **Step 9: Run the whole suite and build one last time**
 
 Run: `npm test 2>&1 | tail -8 && npm run build 2>&1 | tail -12 && npm run lint`
-Expected: 318 tests pass, the build succeeds, lint is clean.
+Expected: 320 tests pass, the build succeeds, lint is clean.
 
 - [ ] **Step 10: Commit**
 
@@ -1758,7 +1885,7 @@ git commit -m "feat(i18n): merge translations over English, and name what is mis
 
 ## Done when
 
-- `npm test` passes with 318 tests, up from the 275 baseline, and none of the original 275 were changed.
+- `npm test` passes with 320 tests, up from the 275 baseline, and none of the original 275 were changed.
 - `npm run build` succeeds and `npm run lint` is clean.
 - `/contact-us` serves English at its original URL, with no redirect.
 - `/si/contact-us` and `/ta/contact-us` render that page with English copy, Sinhala or Tamil font variables bound, and `<html lang>` set correctly.
@@ -1766,7 +1893,7 @@ git commit -m "feat(i18n): merge translations over English, and name what is mis
 - The switcher appears in the header and in the mobile menu, moves between locales on the same page, and is remembered across a reload.
 - Header, mobile menu and footer links keep the reader inside their locale.
 - An English page downloads no Sinhala or Tamil font bytes.
-- `/sitemap.xml` lists every page once with three alternates, and each page head carries hreflang for all three.
+- `/sitemap.xml` lists every page once with three alternates, each page head carries hreflang for all three, and every page is canonical to its own locale's URL rather than to English.
 
 ## Not in this plan
 
