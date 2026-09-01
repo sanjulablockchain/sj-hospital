@@ -47,11 +47,12 @@ export const jumpCards = [
     note: "ஒரு வேலை நாளுக்குள் நாங்கள் பதிலளிப்போம்.",
   },
   {
-    // The street name is transliterated so the line reads as one Tamil
-    // sentence. The authoritative address is still the English one in
-    // contactRows, which this only restates.
+    // The street stays in English. It is the address a driver is shown and
+    // the one printed on the building, and contactRows holds the same string
+    // verbatim. The city is written in Tamil because that is a place name,
+    // not a proper noun belonging to the hospital.
     label: "எங்களைக் கண்டறியுங்கள்",
-    note: "229/10, புனித ஜோசப் வீதி, நீர்கொழும்பு.",
+    note: "229/10 St. Joseph Street, நீர்கொழும்பு.",
   },
   {
     label: "Doctor ஐ Book செய்யுங்கள்",
@@ -71,7 +72,7 @@ export const reachIntro =
 
 export const messageIntro = "ஒரு வேலை நாளுக்குள் நாங்கள் உங்களைத் தொடர்பு கொள்வோம்.";
 
-export const mapIntro = "நீர்கொழும்பு புனித ஜோசப் மருத்துவமனையின் இருப்பிடத்தைக் காட்டும் map.";
+export const mapIntro = "St. Joseph Hospital, Negombo இருப்பிடத்தைக் காட்டும் map.";
 
 export const heroStandfirst = "24 மணி நேரமும், ஒவ்வொரு நாளின் ஒவ்வொரு மணி நேரமும் திறந்திருக்கும்.";
 

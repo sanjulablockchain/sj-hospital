@@ -47,11 +47,12 @@ export const jumpCards = [
     note: "අපි එක් වැඩ කරන දිනක් ඇතුළත පිළිතුරු දෙනවා.",
   },
   {
-    // The street name is transliterated so the line reads as one Sinhala
-    // sentence. The authoritative address is still the English one in
-    // contactRows, which this only restates.
+    // The street stays in English. It is the address a driver is shown and
+    // the one printed on the building, and contactRows holds the same string
+    // verbatim. The city is written in Sinhala because that is a place name,
+    // not a proper noun belonging to the hospital.
     label: "අප සොයා ගන්න",
-    note: "229/10, ශාන්ත ජෝසප් වීදිය, මීගමුව.",
+    note: "229/10 St. Joseph Street, මීගමුව.",
   },
   {
     label: "වෛද්‍යවරයෙක් Book කරන්න",
@@ -70,7 +71,7 @@ export const reachIntro = "ඔබට පහසුම විදිහට call ක
 
 export const messageIntro = "අපි එක් වැඩ කරන දිනක් ඇතුළත ඔබ හා සම්බන්ධ වෙනවා.";
 
-export const mapIntro = "ශාන්ත ජෝසප් රෝහල, මීගමුව පිහිටි ස්ථානය පෙන්වන map එක.";
+export const mapIntro = "St. Joseph Hospital, Negombo පිහිටි ස්ථානය පෙන්වන map එක.";
 
 export const heroStandfirst = "පැය 24 පුරාම, සෑම දිනකම සෑම පැයකම විවෘතයි.";
 
