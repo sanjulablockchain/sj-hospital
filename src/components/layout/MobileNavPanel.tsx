@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { ThemeMenuToggle } from "@/components/theme/ThemeMenuToggle";
 import type { NavItem } from "@/config/navigation";
+import { useLocale } from "@/lib/i18n/useLocale";
+import { localeHref } from "@/lib/i18n/paths";
 
 type MobileNavPanelProps = {
   items: NavItem[];
@@ -10,6 +12,7 @@ type MobileNavPanelProps = {
 
 export function MobileNavPanel({ items }: MobileNavPanelProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const locale = useLocale();
 
   return (
     // ThemedHeader decides when this is on screen and keeps it last in the row,
@@ -36,7 +39,7 @@ export function MobileNavPanel({ items }: MobileNavPanelProps) {
             {items.map((item) => (
               <a
                 key={item.href}
-                href={item.href}
+                href={localeHref(item.href, locale)}
                 onClick={() => setIsOpen(false)}
                 className="px-2 py-3 text-[15px] font-semibold text-[var(--home-body)] hover:text-[var(--home-heading)]"
               >

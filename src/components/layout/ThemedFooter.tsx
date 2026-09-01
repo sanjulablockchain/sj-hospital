@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { FacebookIcon, InstagramIcon, LinkedInIcon, WhatsAppIcon } from "@/components/ui/BrandIcons";
 import { LOGO_MARK } from "@/config/brand";
+import { LocaleLink } from "@/components/i18n/LocaleLink";
 
 export type FooterColumn = {
   heading: string;
@@ -85,9 +86,9 @@ export function ThemedFooter({ columns, id = "contact" }: ThemedFooterProps) {
               {column.heading}
             </span>
             {column.links.map((item) => (
-              <a key={item.href} href={item.href} className="sj-link text-[var(--home-body)]">
+              <LocaleLink key={item.href} href={item.href} className="sj-link text-[var(--home-body)]">
                 {item.label}
-              </a>
+              </LocaleLink>
             ))}
           </div>
         ))}

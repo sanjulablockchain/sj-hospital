@@ -6,6 +6,8 @@ import { ThemeToggleButton } from "@/components/theme/ThemeToggleButton";
 import { MobileNavPanel } from "@/components/layout/MobileNavPanel";
 import { LOGO_MARK } from "@/config/brand";
 import type { NavItem } from "@/config/navigation";
+import { useLocale } from "@/lib/i18n/useLocale";
+import { localeHref } from "@/lib/i18n/paths";
 
 type ThemedHeaderProps = {
   navItems: NavItem[];
@@ -38,6 +40,11 @@ export function ThemedHeader({ navItems, bookHref = "#book", homeHref = "#top" }
 
   // null until measured, which is what FALLBACK_WIDE covers.
   const [isCompact, setIsCompact] = useState<boolean | null>(null);
+
+  // Nav items, the logo target and Book now all arrive as English paths from
+  // src/config/*Navigation.ts. Prefixing them here rather than at each of the
+  // twenty call sites keeps the heroes unchanged.
+  const locale = useLocale();
 
   /* The header row never wraps (see the render below), so the desktop nav has
      to give way to the hamburger at exactly the width where the row would have
@@ -121,7 +128,7 @@ export function ThemedHeader({ navItems, bookHref = "#book", homeHref = "#top" }
       ref={headerRef}
       className="relative z-20 mx-auto flex w-full max-w-[1440px] items-center gap-3 px-4 py-5 sm:gap-5 sm:px-8 lg:px-11"
     >
-      <a ref={logoRef} href={homeHref} className="flex shrink-0 items-center gap-2.5 sm:gap-3.25">
+      <a ref={logoRef} href={localeHref(homeHref, locale)} className="flex shrink-0 items-center gap-2.5 sm:gap-3.25">
         <Image
           src={LOGO_MARK.src}
           alt="St. Joseph Hospital"
@@ -158,7 +165,7 @@ export function ThemedHeader({ navItems, bookHref = "#book", homeHref = "#top" }
           className={`items-center gap-5 text-[13px] font-semibold max-[1399px]:gap-4 max-[1399px]:text-[12px] ${wideOnly}`}
         >
           {navItems.map((item) => (
-            <a key={item.href} href={item.href} className="text-white/82 hover:text-white">
+            <a key={item.href} href={localeHref(item.href, locale)} className="text-white/82 hover:text-white">
               {item.label}
             </a>
           ))}
@@ -170,7 +177,7 @@ export function ThemedHeader({ navItems, bookHref = "#book", homeHref = "#top" }
 
         <a
           ref={bookRef}
-          href={bookHref}
+          href={localeHref(bookHref, locale)}
           className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap bg-[var(--home-accent)] px-3.5 py-2.5 text-[12.5px] font-bold text-[var(--home-on-accent)] sm:gap-2.5 sm:px-5 sm:py-3.5 sm:text-[13.5px]"
         >
           Book now{" "}
