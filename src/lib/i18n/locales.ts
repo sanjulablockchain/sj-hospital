@@ -8,7 +8,13 @@ export const LOCALES = ["en", "si", "ta"] as const;
 
 export type Locale = (typeof LOCALES)[number];
 
-export const DEFAULT_LOCALE: Locale = "en";
+/**
+ * `satisfies` rather than a `: Locale` annotation, deliberately. An annotation
+ * widens the type to the whole union, which stops TypeScript narrowing
+ * `locale` to "si" | "ta" after an early return on the default. Every feature's
+ * content getter relies on exactly that narrowing to index its overlay map.
+ */
+export const DEFAULT_LOCALE = "en" satisfies Locale;
 
 /** The locales that appear in a URL. `en` is served from the bare path. */
 export const PREFIXED_LOCALES = ["si", "ta"] as const;

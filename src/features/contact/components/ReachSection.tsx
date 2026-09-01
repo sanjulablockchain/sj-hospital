@@ -1,7 +1,7 @@
 import { RevealStagger } from "@/components/ui/RevealStagger";
 import { ClockIcon, MailIcon, MapPinIcon, PhoneIcon, SmartphoneIcon } from "@/components/ui/Icons";
 import { SectionHead } from "./SectionHead";
-import { contactRows, jumpCards, reachIntro } from "../data/content";
+import type { ContactContent } from "../data/getContent";
 
 // Icons are JSX, so they stay here rather than in `data/content.ts`, keyed by
 // the same `label` each row already carries.
@@ -21,10 +21,11 @@ const ICONS: Record<string, React.ReactNode> = {
  * destination-heading pattern the about-us sections use. `intro` is
  * `reachIntro`, distinct from `jumpCards[0].note`.
  */
-export function ReachSection() {
+export function ReachSection({ content }: { content: ContactContent }) {
+  const { contactRows, jumpCards, reachIntro, sectionEyebrows } = content;
   return (
     <section id="reach" className="mx-auto max-w-[1440px] px-5 pt-26 sm:px-8 lg:px-11 max-[640px]:pt-18">
-      <SectionHead eyebrow="01 / Reach us" heading={jumpCards[0].label} intro={reachIntro} />
+      <SectionHead eyebrow={sectionEyebrows.reach} heading={jumpCards[0].label} intro={reachIntro} />
 
       <RevealStagger
         stepMs={80}

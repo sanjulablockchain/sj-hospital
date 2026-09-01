@@ -5,7 +5,7 @@ import { ThemedHeader } from "@/components/layout/ThemedHeader";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { Ticker } from "@/components/ui/Ticker";
 import { contactNavigation } from "@/config/contactNavigation";
-import { heroFacts, heroStandfirst, tickerItems } from "../data/content";
+import type { ContactContent } from "../data/getContent";
 
 /**
  * `#top`: the reception desk behind the themed header and the page's only
@@ -15,7 +15,8 @@ import { heroFacts, heroStandfirst, tickerItems } from "../data/content";
  * hero blocks: this sits on a photograph in both themes, and the light theme
  * swaps that token to a deep `#0B6FC0` that would sink into the image.
  */
-export function ContactHero() {
+export function ContactHero({ content }: { content: ContactContent }) {
+  const { heroFacts, heroStandfirst, tickerItems } = content;
   return (
     <section
       id="top"

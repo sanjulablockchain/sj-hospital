@@ -98,3 +98,15 @@ export const mapIntro = "Interactive map showing St. Joseph Hospital Negombo loc
 // it is distinct from `reachIntro`, `messageIntro` and `mapIntro` above, so no
 // section's standfirst repeats what the hero already said.
 export const heroStandfirst = "Open 24/7, every hour of every day.";
+
+/**
+ * The three section eyebrows, moved here out of ReachSection, MessageSection
+ * and MapSection so they can be translated with the rest of the page's copy.
+ * The leading number is structural and stays the same in every language; only
+ * the words after it change.
+ */
+export const sectionEyebrows = {
+  reach: "01 / Reach us",
+  message: "02 / Send a message",
+  map: "03 / Find us",
+};
