@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ThemeMenuToggle } from "@/components/theme/ThemeMenuToggle";
+import { LanguageMenuToggle } from "@/components/i18n/LanguageMenuToggle";
 import type { NavItem } from "@/config/navigation";
 import { useLocale } from "@/lib/i18n/useLocale";
 import { localeHref } from "@/lib/i18n/paths";
@@ -51,6 +52,7 @@ export function MobileNavPanel({ items }: MobileNavPanelProps) {
           {/* Book now is not repeated here: it now sits in the header row at
               every width, so the menu carries the theme switch instead. */}
           <div className="mt-3 border-t border-[var(--home-hairline)] pt-2">
+            <LanguageMenuToggle />
             <ThemeMenuToggle />
           </div>
         </div>

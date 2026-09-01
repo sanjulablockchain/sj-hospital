@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { ThemeToggleButton } from "@/components/theme/ThemeToggleButton";
+import { LanguageToggleButton } from "@/components/i18n/LanguageToggleButton";
 import { MobileNavPanel } from "@/components/layout/MobileNavPanel";
 import { LOGO_MARK } from "@/config/brand";
 import type { NavItem } from "@/config/navigation";
@@ -172,6 +173,7 @@ export function ThemedHeader({ navItems, bookHref = "#book", homeHref = "#top" }
         </nav>
 
         <div ref={toggleRef} className={wideOnly}>
+          <LanguageToggleButton />
           <ThemeToggleButton />
         </div>
 
