@@ -12,18 +12,27 @@ export const VALIDATION_MESSAGES = {
     lastNameRequired: "Last name is required",
     emailRequired: "Email is required",
     emailInvalid: "Enter a valid email address",
+    fixFields: "Please fix the highlighted fields and try again.",
+    sendFailed: "We couldn't send your message right now. Please call us at {phone} instead.",
+    sendSuccess: "Thanks for reaching out. We'll get back to you within one business day.",
   },
   si: {
     firstNameRequired: "මුල් නම අවශ්‍යයි",
     lastNameRequired: "වාසගම අවශ්‍යයි",
     emailRequired: "Email එක අවශ්‍යයි",
     emailInvalid: "වලංගු Email එකක් ඇතුළත් කරන්න",
+    fixFields: "කරුණාකර සලකුණු කර ඇති කොටස් නිවැරදි කර නැවත උත්සාහ කරන්න.",
+    sendFailed: "දැනට ඔබේ message එක යැවීමට නොහැකි විය. කරුණාකර {phone} අමතන්න.",
+    sendSuccess: "සම්බන්ධ වීම ගැන ස්තුතියි. අපි එක් වැඩ කරන දිනක් ඇතුළත ඔබ හා සම්බන්ධ වෙනවා.",
   },
   ta: {
     firstNameRequired: "முதல் பெயர் தேவை",
     lastNameRequired: "கடைசிப் பெயர் தேவை",
     emailRequired: "Email தேவை",
     emailInvalid: "சரியான Email ஒன்றை உள்ளிடுங்கள்",
+    fixFields: "தயவுசெய்து குறிக்கப்பட்ட புலங்களைச் சரிசெய்து மீண்டும் முயற்சிக்கவும்.",
+    sendFailed: "தற்போது உங்கள் message ஐ அனுப்ப முடியவில்லை. தயவுசெய்து {phone} ஐ அழையுங்கள்.",
+    sendSuccess: "தொடர்பு கொண்டதற்கு நன்றி. ஒரு வேலை நாளுக்குள் நாங்கள் உங்களைத் தொடர்பு கொள்வோம்.",
   },
 } satisfies Record<Locale, Record<string, string>>;
 
