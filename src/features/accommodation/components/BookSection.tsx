@@ -1,7 +1,8 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { ClockIcon, MailIcon, PhoneIcon, SmartphoneIcon } from "@/components/ui/Icons";
-import { ContactForm } from "@/features/contact";
+import { ContactForm, getContactContent } from "@/features/contact";
+import { DEFAULT_LOCALE } from "@/lib/i18n/locales";
 import { SectionHead } from "./SectionHead";
 import { bookHeading, bookIntro, bookRail } from "../data/content";
 
@@ -25,15 +26,21 @@ const rail = bookRail.map((row) => ({ ...row, icon: railIcons[row.label] }));
  *
  * `heading` and `intro` are `bookHeading` and `bookIntro`, the old
  * index.tsx's own booking panel copy, so this section states nothing new.
+ *
+ * `ContactForm` takes its copy as a prop rather than importing it, so this
+ * fetches the English copy directly: the accommodation feature is not itself
+ * localized yet, and `AccommodationPage` has no locale to hand down.
  */
-export function BookSection() {
+export async function BookSection() {
+  const { form } = await getContactContent(DEFAULT_LOCALE);
+
   return (
     <section id="book" className="mx-auto max-w-[1440px] px-5 pt-26 pb-26 sm:px-8 lg:px-11 max-[640px]:pt-18">
       <SectionHead eyebrow="03 / Book a room" heading={bookHeading} intro={bookIntro} />
 
       <div className="mt-10.5 grid gap-10 min-[900px]:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
         <div className="border border-[var(--home-hairline)] bg-[var(--home-surface)] px-6 py-8 sm:px-9 sm:py-10">
-          <ContactForm />
+          <ContactForm copy={form} />
         </div>
 
         {/* The grid column stretches this rail to the form's own height (grid

@@ -3,6 +3,7 @@
 import { useActionState } from "react";
 import { sendContactMessage } from "../actions/sendContactMessage";
 import { initialContactFormState } from "../types";
+import type { ContactContent } from "../data/getContent";
 
 const inputClasses =
   "w-full border border-[var(--home-hairline)] bg-[var(--home-surface)] px-4 py-2.5 text-sm text-[var(--home-body)] outline-none placeholder:text-[var(--home-muted)] transition focus:border-[var(--home-accent)] focus:ring-2 focus:ring-[var(--home-accent)]/20";

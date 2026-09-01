@@ -7,6 +7,8 @@ import { LanguageToggleButton } from "@/components/i18n/LanguageToggleButton";
 import { MobileNavPanel } from "@/components/layout/MobileNavPanel";
 import { LOGO_MARK } from "@/config/brand";
 import type { NavItem } from "@/config/navigation";
+import { navLabel } from "@/config/navigationLabels";
+import { chromeCopyFor } from "@/components/layout/chromeCopy";
 import { useLocale } from "@/lib/i18n/useLocale";
 import { localeHref } from "@/lib/i18n/paths";
 
@@ -46,6 +48,7 @@ export function ThemedHeader({ navItems, bookHref = "#book", homeHref = "#top" }
   // src/config/*Navigation.ts. Prefixing them here rather than at each of the
   // twenty call sites keeps the heroes unchanged.
   const locale = useLocale();
+  const copy = chromeCopyFor(locale);
 
   /* The header row never wraps (see the render below), so the desktop nav has
      to give way to the hamburger at exactly the width where the row would have
@@ -167,7 +170,7 @@ export function ThemedHeader({ navItems, bookHref = "#book", homeHref = "#top" }
         >
           {navItems.map((item) => (
             <a key={item.href} href={localeHref(item.href, locale)} className="text-white/82 hover:text-white">
-              {item.label}
+              {navLabel(item.label, locale)}
             </a>
           ))}
         </nav>
@@ -182,7 +185,7 @@ export function ThemedHeader({ navItems, bookHref = "#book", homeHref = "#top" }
           href={localeHref(bookHref, locale)}
           className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap bg-[var(--home-accent)] px-3.5 py-2.5 text-[12.5px] font-bold text-[var(--home-on-accent)] sm:gap-2.5 sm:px-5 sm:py-3.5 sm:text-[13.5px]"
         >
-          Book now{" "}
+          {copy.bookNow}{" "}
           <span aria-hidden className="hidden sm:inline">
             &rarr;
           </span>

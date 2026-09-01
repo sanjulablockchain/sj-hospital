@@ -2,6 +2,7 @@ import Image from "next/image";
 import { FacebookIcon, InstagramIcon, LinkedInIcon, WhatsAppIcon } from "@/components/ui/BrandIcons";
 import { LOGO_MARK } from "@/config/brand";
 import { LocaleLink } from "@/components/i18n/LocaleLink";
+import { NavLabel } from "@/components/i18n/NavLabel";
 
 export type FooterColumn = {
   heading: string;
@@ -83,18 +84,20 @@ export function ThemedFooter({ columns, id = "contact" }: ThemedFooterProps) {
         {columns.map((column) => (
           <div key={column.heading} className="flex flex-col gap-2.5 text-[15px]">
             <span className="mb-2 text-[11.5px] tracking-[0.22em] text-[var(--home-accent)] uppercase">
-              {column.heading}
+              <NavLabel text={column.heading} kind="heading" />
             </span>
             {column.links.map((item) => (
               <LocaleLink key={item.href} href={item.href} className="sj-link text-[var(--home-body)]">
-                {item.label}
+                <NavLabel text={item.label} />
               </LocaleLink>
             ))}
           </div>
         ))}
 
         <div className="flex flex-col gap-2.5 text-[15px]">
-          <span className="mb-2 text-[11.5px] tracking-[0.22em] text-[var(--home-accent)] uppercase">Reach us</span>
+          <span className="mb-2 text-[11.5px] tracking-[0.22em] text-[var(--home-accent)] uppercase">
+            <NavLabel text="Reach us" />
+          </span>
           <span className="text-[var(--home-body)] opacity-90">229/10 St. Joseph Street, Negombo</span>
           <a href="tel:+94117848484" className="sj-link text-[var(--home-body)] tabular-nums">
             0117 84 84 84

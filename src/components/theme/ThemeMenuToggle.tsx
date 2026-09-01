@@ -1,6 +1,8 @@
 "use client";
 
 import { useSiteTheme } from "./useSiteTheme";
+import { chromeCopyFor } from "@/components/layout/chromeCopy";
+import { useLocale } from "@/lib/i18n/useLocale";
 
 /**
  * The theme switch as a menu row. ThemeToggleButton is styled for the dark hero
@@ -10,6 +12,7 @@ import { useSiteTheme } from "./useSiteTheme";
 export function ThemeMenuToggle() {
   const { theme, toggle } = useSiteTheme();
   const isDark = theme === "dark";
+  const copy = chromeCopyFor(useLocale());
 
   return (
     <button
@@ -17,7 +20,7 @@ export function ThemeMenuToggle() {
       onClick={toggle}
       className="flex w-full items-center justify-between gap-3 px-2 py-3 text-left text-[15px] font-semibold text-[var(--home-body)] hover:text-[var(--home-heading)]"
     >
-      <span>{isDark ? "Switch to light mode" : "Switch to dark mode"}</span>
+      <span>{isDark ? copy.toLightMode : copy.toDarkMode}</span>
       <span
         aria-hidden
         className="inline-flex h-9 w-9 shrink-0 items-center justify-center border border-[var(--home-hairline)] text-[15px] text-[var(--home-heading)]"
