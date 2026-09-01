@@ -1485,15 +1485,17 @@ export async function generateMetadata({ params }: LayoutProps<'/[locale]'>): Pr
 | `school-wellness/layout.tsx` | `/school-wellness` |
 | `services/layout.tsx` | `/services` |
 
-Two of these already export something metadata-shaped. Where a layout already has a `metadata` object or a `generateMetadata`, do not add a second export: fold `alternates` into the one that is there, keeping its existing title and description untouched. Run `grep -rn "export const metadata\|export async function generateMetadata" "src/app/[locale]"` first and read what each one has.
+**The layouts are the right home for this, and the pages are not.** Every route's title and description live in its `page.tsx`, as a static `export const metadata` object; none of the 15 route layouts exports metadata at all. Leave those page exports exactly as they are. Next merges metadata down the tree and a page only overrides the keys it actually declares, so `alternates` declared in the layout survives into the page. Putting it in the layouts means 15 small additions instead of converting 16 static objects into async functions, and no risk of disturbing a title.
 
-The services detail page is the one dynamic route and needs the slug in its path. In `src/app/[locale]/services/[slug]/page.tsx`, extend the existing `generateMetadata` return value with:
+The one exception is the services detail route. `src/app/[locale]/services/[slug]/` has no layout of its own, so it would inherit `services/layout.tsx` and wrongly claim `/services` as its canonical. It already has a `generateMetadata`, so fold the alternates into that one, using the slug:
 
 ```ts
 alternates: localeAlternates(`/services/${slug}`, locale as Locale),
 ```
 
 taking `locale` from the same `await params` the previous task added there, and importing `type Locale` from `@/lib/i18n/locales`.
+
+The merge behaviour above is an assumption about Next 16 that the verification step must actually confirm, not take on trust. If the curl checks show a page's own metadata has replaced rather than merged with the layout's alternates, stop and report it: the fallback is to fold `alternates` into each page's metadata instead, converting those static objects to `generateMetadata`.
 
 - [ ] **Step 7: Add the sitemap**
 
