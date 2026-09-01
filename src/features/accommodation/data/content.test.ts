@@ -79,7 +79,7 @@ const allCopy: string[] = Object.values(content).flatMap((value) => collectStrin
 // route file's source directly so a price introduced there fails this suite
 // too.
 const pageSource = readFileSync(
-  fileURLToPath(new URL("../../../app/accommodation/page.tsx", import.meta.url)),
+  fileURLToPath(new URL("../../../app/[locale]/accommodation/page.tsx", import.meta.url)),
   "utf8"
 );
 const metadataDescriptionMatch = pageSource.match(/description:\s*\n?\s*"((?:[^"\\]|\\.)*)"/);
