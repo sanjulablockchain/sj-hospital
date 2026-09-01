@@ -1,11 +1,10 @@
 import Image from "next/image";
-import Link from "next/link";
 import { LocaleLink } from "@/components/i18n/LocaleLink";
 import { ThemedHeader } from "@/components/layout/ThemedHeader";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { Ticker } from "@/components/ui/Ticker";
 import { aboutNavigation } from "@/config/aboutNavigation";
-import { heroFacts, heroStandfirst, tickerItems } from "../data/content";
+import type { AboutContent } from "../data/getContent";
 
 /**
  * `#top`: the hospital building behind the themed header and the page's only
@@ -16,7 +15,8 @@ import { heroFacts, heroStandfirst, tickerItems } from "../data/content";
  * hero blocks: this sits on a photograph in both themes, and the light theme
  * swaps that token to a deep `#0B6FC0` that would sink into the image.
  */
-export function AboutHero() {
+export function AboutHero({ content }: { content: AboutContent }) {
+  const { hero, heroFacts, heroStandfirst, tickerItems } = content;
   return (
     <section
       id="top"
@@ -63,7 +63,7 @@ export function AboutHero() {
             className="text-[11px] tracking-[0.3em] text-white/50 uppercase"
             style={{ writingMode: "vertical-rl" }}
           >
-            Who we are
+            {hero.strapline}
           </span>
           <span className="w-px flex-1 bg-gradient-to-b from-white/40 to-transparent" />
         </div>
@@ -71,17 +71,17 @@ export function AboutHero() {
         <div className="flex-1 pb-11">
           <div className="animate-sj-up inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
             <span aria-hidden className="h-px w-11 bg-[#2CA6F0]" />
-            <Link href="/" className="text-[#7FCBFF] hover:text-white">
-              Home
-            </Link>
+            <LocaleLink href="/" className="text-[#7FCBFF] hover:text-white">
+              {hero.breadcrumbHome}
+            </LocaleLink>
             <span aria-hidden className="opacity-50">
               /
             </span>
-            About Us
+            {hero.breadcrumbCurrent}
           </div>
 
           <h1 className="font-display animate-sj-up mt-4.5 text-[clamp(38px,6.4vw,100px)] leading-[0.9] font-extrabold tracking-[-0.045em] text-white uppercase">
-            US standard,
+            {hero.headingLead}
             <br />
             {/* Outlined rather than filled, so the line steps from solid to
                 hollow to accent across the three lines. */}
@@ -89,9 +89,9 @@ export function AboutHero() {
               className="text-transparent"
               style={{ WebkitTextStroke: "1.4px rgba(242,246,255,0.75)" }}
             >
-              high-quality
+              {hero.headingOutline}
             </span>{" "}
-            <span className="text-[#2CA6F0]">healthcare.</span>
+            <span className="text-[#2CA6F0]">{hero.headingAccent}</span>
           </h1>
 
           <div className="animate-sj-up mt-8 flex flex-col items-start gap-5.5">
@@ -106,14 +106,14 @@ export function AboutHero() {
                 href="/e-channeling"
                 className="sj-invert inline-flex items-center gap-2.5 bg-[#2CA6F0] px-6 py-4 text-[15px] font-bold text-[#04122B]"
               >
-                Book a doctor <span aria-hidden>&rarr;</span>
+                {hero.bookCta} <span aria-hidden>&rarr;</span>
               </LocaleLink>
               <a
                 href="#story"
                 className="inline-flex items-center gap-3 border border-white/30 px-6 py-4 text-[15px] font-bold whitespace-nowrap text-white transition-colors hover:bg-white hover:text-[#060B1F]"
               >
                 <span aria-hidden className="animate-sj-pulse h-2 w-2 rounded-full bg-[#2CA6F0]" />
-                Who we are
+                {hero.strapline}
               </a>
             </div>
           </div>
