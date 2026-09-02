@@ -293,9 +293,13 @@ export const careUnits: CareUnit[] = [
     code: "ICU",
     name: "Intensive care",
     desc: "Monitored beds for patients who need ventilation or close observation, placed beside the theatres and the emergency department.",
-    // Reuses `theatreSpecs[3].v` ("Anaesthesia": "Consultant led") rather than
-    // a second copy of the same phrase: a string used twice has one home.
-    lead: theatreSpecs[3].v,
+    // Own literal, not a reference to `theatreSpecs[3].v`. Both currently
+    // read "Consultant led", but that is a coincidence of wording, not one
+    // fact: `theatreSpecs[3]` is about who leads anaesthesia during surgery,
+    // this is about who leads the ICU. Two different clinical facts about
+    // two different units. If either were reworded independently, a shared
+    // reference would silently change the wrong one.
+    lead: "Consultant led",
   },
   {
     code: "PACU",

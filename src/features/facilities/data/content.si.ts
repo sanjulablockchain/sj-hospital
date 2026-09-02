@@ -6,11 +6,13 @@
 // replaced by literary coinages nobody says out loud. "Consultant",
 // "Anaesthesia", "Anaesthetist", "Surgical", "Recovery", "Theatre",
 // "Obstetric", "Instrument", "Consumables", "Digital", "Fleet", "Dispatch",
-// "Bay" and the named equipment and procedures below stay in English
-// throughout, the same way `network`'s, `pharmacy`'s and
+// "Bay" and the named equipment and procedures below stay in English inside
+// sentences, the same way `network`'s, `pharmacy`'s and
 // `international-care`'s own content.si.ts already keep them. "Call" and
 // "Track" stay verbs exactly like they are in `contact`'s and `home-care`'s
-// own content.si.ts.
+// own content.si.ts. "Instrument" and "Consumables" do NOT extend to the
+// bare `theatreSpecs`/`hygieneRows` table labels: see the "Protocol"
+// paragraph below, which now covers those two labels as well.
 //
 // "The building", "Operating theatres", "Critical care", "Rooms & wards",
 // "Diagnostics" and "Ambulance & transfers" already have a site-wide
@@ -33,12 +35,18 @@
 // clinical unit abbreviations, kept English the same way "OPD" is. See
 // KEEPS_ENGLISH in content.i18n.test.ts for the exact list.
 //
-// "Protocol" translates to "ක්‍රමවේදය" here rather than staying English:
-// unlike `network`'s own use of the word inside a full sentence, this is a
-// bare table label sitting beside seven fully translated siblings
-// (Instrument Sets, Consumables, Anaesthesia, Recovery Bay, Recovery Nursing,
-// Obstetric Theatre, Emergency Cover), so leaving it alone would be the
-// sibling-test miss the recipe warns about, not a genuine exception.
+// "Protocol", "Instrument sets" and "Consumables" translate to "ක්‍රමවේදය",
+// "උපකරණ කට්ටල" and "පරිභෝජ්‍ය ද්‍රව්‍ය" here rather than staying English:
+// unlike `network`'s own use of "Protocol" (and this file's own use of
+// "Instrument Set"/"Consumables") inside a full sentence, these are bare
+// table labels in `theatreSpecs`/`hygieneRows`, sitting beside fully
+// translated siblings (Anaesthesia, Obstetric Theatre, Emergency Cover;
+// "Recovery Bay" and "Recovery Nursing" keep their English noun but
+// translate the qualifier before it), so leaving any of them alone would be
+// the sibling-test miss the recipe warns about, not a genuine exception. An
+// earlier pass shipped "Instrument Set" and "Consumables Stock" for these
+// two labels, which differ from the English by a dropped bracket or a
+// singularised word but translate nothing; fixed to real Sinhala.
 //
 // Sentence forms use the polite plural ("කරන්න"), which is how a hospital
 // addresses a patient it has not met, the same register `contact`'s own
@@ -218,8 +226,18 @@ export const theatreFigures = [
 
 export const theatreSpecs = [
   { k: "ක්‍රමවේදය", v: "US ප්‍රමිතිය" },
-  { k: "Instrument Set", v: "Set එකකට Track කරයි" },
-  { k: "Consumables Stock", v: "රෝගියෙකුට එක් වතාවක් Use කරයි" },
+  // Was "Instrument Set": a plural-to-singular change with no actual
+  // translation. As a bare table label (not the sentence usage of
+  // "Instrument Set" elsewhere in this file), it sits beside four fully
+  // translated siblings (ක්‍රමවේදය, නිර්වින්දනය, ප්‍රසව ශල්‍යාගාරය,
+  // හදිසි ආවරණය), the same sibling-test miss the file's own comment above
+  // already flags for "Protocol". Translated fully: "instrument sets".
+  { k: "උපකරණ කට්ටල", v: "Set එකකට Track කරයි" },
+  // Was "Consumables Stock": "Stock" does not appear in the English base at
+  // all, it was added to make the string differ from "Consumables" without
+  // translating anything. Translated fully: "consumable materials", the
+  // standard Sinhala technical term.
+  { k: "පරිභෝජ්‍ය ද්‍රව්‍ය", v: "රෝගියෙකුට එක් වතාවක් Use කරයි" },
   { k: "නිර්වින්දනය", v: "Consultant විසින් මෙහෙයවනු ලැබේ" },
   { k: "සුවය ලබන Bay එක", v: "ශල්‍යාගාර අසලින්ම" },
   // Same translated phrase as `theatreFigures[0].label`, which content.ts's
@@ -243,9 +261,11 @@ export const careUnits = [
     code: "ICU",
     name: "දැඩි සත්කාර ඒකකය",
     desc: "Ventilation එකක් හෝ ළඟින් නිරීක්ෂණයක් ඕන රෝගීන් සඳහා Monitor කරන ඇඳන්, ශල්‍යාගාර සහ හදිසි අංශය අසලින්ම.",
-    // Same translated phrase as `theatreSpecs[3].v`, which content.ts's own
-    // `lead: theatreSpecs[3].v` reuses in English: a string used twice has
-    // one home, so both must read the same way here too.
+    // Own literal, matching content.ts's own `lead: "Consultant led"`. Reads
+    // the same as `theatreSpecs[3].v`'s translation by coincidence of
+    // wording, not because it is the same fact: this is who leads the ICU,
+    // `theatreSpecs[3]` is who leads anaesthesia during surgery. Do not
+    // re-weld these into a shared reference.
     lead: "Consultant විසින් මෙහෙයවනු ලැබේ",
   },
   {
@@ -435,8 +455,11 @@ export const hygieneCaption = "Consumables එක් වතාවක් Use ක�
 export const hygieneRows = [
   { k: "පිරිසිදු කිරීමේ Cycle එක", v: "සෑම පැය 2කට වතාවක්" },
   { k: "ප්‍රමිතිය", v: "US Specification එකකට" },
-  { k: "Consumables Stock", v: "එක් වතාවක් Use කරයි, කවදාවත් නැවත නෑ" },
-  { k: "Instrument Set", v: "Set එකකට Track කරයි" },
+  // Same fix, and the same reasoning, as `theatreSpecs`' own two entries
+  // above: a real Sinhala translation, not just a dropped bracket or a
+  // singularised word.
+  { k: "පරිභෝජ්‍ය ද්‍රව්‍ය", v: "එක් වතාවක් Use කරයි, කවදාවත් නැවත නෑ" },
+  { k: "උපකරණ කට්ටල", v: "Set එකකට Track කරයි" },
   { k: "ප්‍රසව ශල්‍යාගාරය", v: "සාමාන්‍ය List වලින් වෙනම" },
   { k: "රසායනාගාර Reports", v: "වෛද්‍යවරු දෙදෙනෙක් Check කරයි" },
 ];
