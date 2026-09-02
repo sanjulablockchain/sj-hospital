@@ -353,14 +353,48 @@ export const hero = {
 export const heroStandfirst =
   "Board ஐ படிக்க முடியாத குழந்தை மந்தமானவன் அல்ல. வகுப்பில் தூங்கும் குழந்தைக்கு இரத்த சோகை இருக்கலாம். எங்கள் குழு உங்கள் பள்ளிக்கு வந்து, ஒவ்வொரு மாணவரையும் பரிசோதித்து, யாருக்கு மருத்துவர் தேவை என்று உங்களுக்குச் சொல்கிறது.";
 
-// "குழந்தை", not "குழந்தையும்", and "பார்வை.", not "பரிசோதிக்கப்படும்" or
-// "பார்க்கப்படும்": the longer forms are each a single token wider than a
-// 360px column at this heading's font size, and wrap-break-word split them
-// mid-word rather than wrapping them whole. "பார்வை." ("a look.") is a
-// one-word noun fragment, the same telegraphic register as the English
-// "seen." itself, which is a participle standing alone rather than a full
-// clause.
-export const bookHeading = { line1: "ஒரு காலை.", line2: "ஒவ்வொரு குழந்தை", line3: "பார்வை." };
+// "குழந்தை", not "குழந்தையும்": the fuller form is a single token wider than
+// a 360px column at this heading's font size, and wrap-break-word split it
+// mid-word rather than wrapping it whole.
+//
+// line3 was previously shortened to "பார்வை." ("a look."), a noun that
+// does not carry the sense of a clinical exam the English "seen." and the
+// Sinhala "පරීක්ෂා කරනවා." ("examines.") both make; a reviewer caught this
+// as a meaning change, not a register choice, on a children's health page.
+// "பரிசோதிக்கப்படும்." ("will be examined/screened.") is the correct sense,
+// but measured 407.5px against this heading's 232px column at 360px: wider
+// than every shorter alternative tried and measured here (all still too
+// wide to hold as one line at 360px): "சோதிக்கப்படும்." 335.1px, "பரிசோதிக்
+// கப்பட்டது." 436.8px, "பரிசோதிப்பு." 272.2px, "பரிசோதனை." 310.2px, and the
+// noun-only "சோதனை." at 237.9px, which still overflows the 232px column by
+// ~6px and, worse, alone (without the "பரி" that ties it to "examination")
+// reads more like "trial/ordeal" than "clinical exam" in everyday Tamil, so
+// it is not a safe substitute either. No verb or verbal noun that keeps
+// the clinical sense fits on one line, so this is a layout problem, not a
+// word problem: the full verb is kept, and wrap-break-word is left to wrap
+// it across two lines.
+//
+// Measured (not guessed) where it actually breaks, at both widths, because
+// a forced break point (a zero-width space) turned out to be unnecessary:
+// the browser's own line-breaking already refuses to split inside a
+// grapheme cluster (CSS Text: overflow-wrap must not break a character
+// sequence that forms a single grapheme cluster), so it lands on a clean
+// syllable boundary on its own, confirmed against the real rendered DOM,
+// not a synthetic off-screen probe (an isolated probe estimated a
+// different, wrong split point; only the in-context measurement below is
+// trustworthy). At 360px it breaks as "பரிசோதி" (203.3px) / "க்கப்படும்."
+// (204.2px), both under the 232px column. At 1280px, where the font is
+// much larger (64px vs. 36px) but the column is wider too, it breaks
+// later, as "பரிசோதிக்கப்படு" (552.3px) / "ம்." (68.7px), both under that
+// width's 597px column; "ம்." (m + virama) is a complete grapheme, not a
+// severed vowel sign, so the short trailing line is a plain word-wrap, not
+// a glyph split. Confirmed by screenshot at both widths, not just by these
+// measurements.
+export const bookHeading = {
+  line1: "ஒரு காலை.",
+  line2: "ஒவ்வொரு குழந்தை",
+  line3: "பரிசோதிக்கப்படும்.",
+};
 export const bookIntro =
   "உங்கள் மாணவர் எண்ணிக்கை மற்றும் ஏற்ற Term தேதிகளை எங்களுக்குச் சொல்லுங்கள். நாங்கள் முதலில் வந்து Hall ஐ பார்த்து, பின்னர் ஒரு தேதியை உறுதி செய்கிறோம். நீர்கொழும்பு, கட்டானை மற்றும் கொச்சிக்கடை பிரிவுகளில் உள்ள பள்ளிகள் எங்கள் முன்னுரிமை.";
 
