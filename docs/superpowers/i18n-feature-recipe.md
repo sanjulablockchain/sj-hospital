@@ -28,6 +28,16 @@ Worked examples, from the committed contact overlays:
 | Book a doctor | වෛද්‍යවරයෙක් Book කරන්න | Doctor ஐ Book செய்யுங்கள் |
 | Reception, 24 hours | Reception, පැය 24 | Reception, 24 மணி நேரம் |
 
+## De-duplicate only what is genuinely one fact
+
+Pattern 4 says a string used twice has one home. That is about the SAME fact appearing twice. It is not licence to weld together two fields that merely read alike today.
+
+`facilities` pointed the ICU unit's `lead` badge at the anaesthesia row's value, because both read "Consultant led". They are different clinical facts about different units. A later edit to either would silently change the other, with nothing in the tests or the compiler to notice. Its sibling units held independent literals describing genuinely different things, which was the clue.
+
+Before replacing a literal with a reference, ask: if one of these two changed next year, would the other have to change with it? If the answer is no, leave two literals and say in a comment that they match on purpose.
+
+And note what no automated check can catch: `facilities` also shipped "Instrument Set" as the "translation" of "Instrument Set(s)". It differs from the English, so the normalised identity assertion passes, but nothing was translated. The sibling test is the only thing that finds that, and the sibling test is read by a person.
+
 ## The sibling test, for deciding what stays English
 
 The keep-English exception is for words people genuinely say in English: drug classes, brands, dispensing tags, product and company names, `Email`, `WhatsApp`, `OPD`, `X-ray`. It is NOT for any English-looking category label, and it has now been stretched twice.
