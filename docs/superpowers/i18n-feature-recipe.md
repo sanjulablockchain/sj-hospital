@@ -90,6 +90,9 @@ Copy `src/features/contact/data/content.i18n.test.ts` and adapt: the imports, th
 Run `npm test`. It must fail with `Cannot find module './content.si.ts'`. That is the gate proving it works before you rely on it.
 
 ### Step C: write the overlays
+**Check the nav dictionary before you invent a translation.** `src/config/navigationLabels.si.ts` and `.ta.ts` already translate every nav label and footer heading on the site, and several of those are phrases your feature also uses in its own headings and jump cards. Reuse the exact string rather than coining a second one: the header and the page body saying the same thing two different ways is the kind of thing a reader notices immediately. `school-wellness` found five of its own phrases already translated there.
+
+
 **One detail of the parity test is not optional.** The "no translated string is still the English string" assertion must compare NORMALISED, not raw: `translated.trim().toLowerCase()` against the same of the English. Raw comparison is case-sensitive, so `"Bank Transfer"` against `"Bank transfer"` reads as a translation when it is the English string with one capital letter changed. `international-care` shipped two such fields past a green suite. Keep the `KEEPS_ENGLISH` escape hatch checked first, and make the failure message say that the difference was only case or whitespace, so the next person reading a red suite understands it at once.
 
 
