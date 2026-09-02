@@ -11,10 +11,10 @@
 // own content.si.ts. "WhatsApp" and "Email" are the product names, kept the
 // same way contact and accommodation already keep them.
 //
-// The one deliberate exception is `contactRows[0].label`, the hospital's own
-// phone number: digits have nothing to translate, so it repeats the English
-// value and is recorded in KEEPS_ENGLISH in content.i18n.test.ts rather than
-// being a silently forgotten string.
+// `contactRows[0].value` is the one field this file never carries: the
+// hospital's own phone number has nothing to translate, so it is excluded in
+// `isUntranslatable` in content.i18n.test.ts rather than repeated here as a
+// second copy of the same digits.
 //
 // Sentence forms use the polite plural ("කරන්න"), which is how a hospital
 // addresses a patient it has not met.
@@ -191,12 +191,10 @@ export const faq = [
   },
 ];
 
-/**
- * `contactRows[0].label` repeats the English digits on purpose: see
- * KEEPS_ENGLISH in content.i18n.test.ts.
- */
+// `contactRows[0].value` (the phone number) is absent here on purpose: see
+// the file header and `isUntranslatable` in content.i18n.test.ts.
 export const contactRows = [
-  { label: "0117 84 84 84" },
+  { label: "අපට Call කරන්න" },
   { label: "අපට WhatsApp කරන්න" },
   { label: "රෝහලට Email කරන්න" },
   { label: "Online වෛද්‍යවරයෙක් Book කරන්න" },

@@ -49,9 +49,30 @@ export function BookSection({ content }: { content: HomeCareContent }) {
             const rowClassName = `sj-invert font-display flex flex-1 items-center justify-between gap-5 px-8 py-6.5 text-[22px] font-semibold tracking-[-0.02em] text-[var(--home-heading)] ${
               index === contactRows.length - 1 ? "" : "border-b border-[var(--home-hairline)]"
             } ${row.glyph === "phone" ? "tabular-nums" : ""}`;
+            // `min-w-0` on the text cluster, not `whitespace-nowrap` alone on
+            // `row.value`: without it this flex row has only one other item
+            // (the glyph) to share space with, so a nowrap value on a long
+            // Sinhala/Tamil label pushed the whole row (and the page) wider
+            // than the viewport rather than wrapping, the same flex-shrink
+            // trap Step E2 of the i18n recipe names for a heading group.
+            // `whitespace-nowrap` still guards `row.value` itself, so the
+            // phone number can drop to its own line under the label but
+            // never breaks apart mid-number.
             const label = (
               <>
-                {row.label} <span aria-hidden>{row.glyph === "phone" ? "☎" : "→"}</span>
+                {row.value ? (
+                  <span className="flex min-w-0 flex-wrap items-baseline gap-x-2">
+                    <span>{row.label}</span>
+                    <span className="whitespace-nowrap font-normal tabular-nums opacity-70">
+                      {row.value}
+                    </span>
+                  </span>
+                ) : (
+                  row.label
+                )}
+                <span aria-hidden className="shrink-0">
+                  {row.glyph === "phone" ? "☎" : "→"}
+                </span>
               </>
             );
             return row.internal ? (

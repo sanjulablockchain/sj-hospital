@@ -265,9 +265,15 @@ export const faq = [
  * The published hospital contacts, matching components/layout/ThemedFooter.
  * There is no home-visit line: content.test.ts fails on an invented mailbox or
  * phone number, and config/contactEmails.ts allows two addresses site wide.
+ *
+ * The phone row carries a `label` action phrase plus the number itself in
+ * `value`, the same split `contact`'s and `accommodation`'s own contact rows
+ * already use: previously `label` held the bare digits, which left this row
+ * with no action phrase in any language (English included) while its three
+ * siblings all had one. The number itself still has exactly one home, here.
  */
 export const contactRows: ContactRow[] = [
-  { label: "0117 84 84 84", href: "tel:+94117848484", glyph: "phone" },
+  { label: "Call us", value: "0117 84 84 84", href: "tel:+94117848484", glyph: "phone" },
   { label: "WhatsApp us", href: "https://wa.me/94742223334", glyph: "arrow" },
   { label: "Email the hospital", href: "mailto:info@sjhospital.lk", glyph: "arrow" },
   { label: "Book a doctor online", href: "/e-channeling", glyph: "arrow", internal: true },

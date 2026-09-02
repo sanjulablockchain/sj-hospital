@@ -11,10 +11,10 @@
 // own content.ta.ts. "WhatsApp" and "Email" are the product names, kept the
 // same way contact and accommodation already keep them.
 //
-// The one deliberate exception is `contactRows[0].label`, the hospital's own
-// phone number: digits have nothing to translate, so it repeats the English
-// value and is recorded in KEEPS_ENGLISH in content.i18n.test.ts rather than
-// being a silently forgotten string.
+// `contactRows[0].value` is the one field this file never carries: the
+// hospital's own phone number has nothing to translate, so it is excluded in
+// `isUntranslatable` in content.i18n.test.ts rather than repeated here as a
+// second copy of the same digits.
 //
 // Sentence forms use the polite plural ("செய்யுங்கள்"), which is how a
 // hospital addresses a patient it has not met.
@@ -191,12 +191,10 @@ export const faq = [
   },
 ];
 
-/**
- * `contactRows[0].label` repeats the English digits on purpose: see
- * KEEPS_ENGLISH in content.i18n.test.ts.
- */
+// `contactRows[0].value` (the phone number) is absent here on purpose: see
+// the file header and `isUntranslatable` in content.i18n.test.ts.
 export const contactRows = [
-  { label: "0117 84 84 84" },
+  { label: "எங்களை Call செய்யுங்கள்" },
   { label: "எங்களை WhatsApp செய்யுங்கள்" },
   { label: "மருத்துவமனைக்கு Email செய்யுங்கள்" },
   { label: "Online ஆக Doctor ஐ Book செய்யுங்கள்" },
@@ -211,10 +209,19 @@ export const hero = {
   headingAccent: "வருகிறது.",
   bookCta: "Visit ஒன்றை கேளுங்கள்",
   // Keep this short: a whitespace-nowrap pill at 360px (see the file header).
-  // The full sentence ("யார் வருவார்கள், என்ன செய்வார்கள்") overflowed the
-  // pill by a wide margin at 360px, the same trap that hit e-channeling's
-  // helpRail.heading; shortened to a punchier phrase instead.
-  visitsCta: "யார் வருகிறார்கள்?",
+  // Measured live in Chromium at a 360px viewport (see task-6 fix report):
+  // the fully plural, two-clause "யார் வருவார்கள், என்ன செய்வார்கள்?"
+  // rendered 390px wide, 30px past the viewport; the previously shipped
+  // "யார் வருகிறார்கள்?" (just "who is coming") rendered short enough but
+  // dropped "and what they do" entirely, understating the #visits section
+  // this button opens (both halves must carry, same as the Sinhala pill
+  // does). This phrasing keeps an explicit verb for each half, "வந்து"
+  // ("comes") and "செய்கிறார்" ("does"), in the singular polite form Tamil
+  // uses number-neutrally for this kind of respectful reference (the same
+  // way Sinhala's "එන්නේ"/"කරන්නේ" in hero.visitsCta above do not mark
+  // number either), and rendered 320px wide, comfortably inside the pill at
+  // 360px with the "Request a visit" button wrapped above it.
+  visitsCta: "யார் வந்து, என்ன செய்கிறார்",
 };
 
 export const heroStandfirst =

@@ -14,9 +14,13 @@ import { assertTranslationParity, stringPaths } from "../../../lib/i18n/stringPa
  * a `#book` contact row shows, a name the code switches on rather than copy
  * (the same fix accommodation's `bookRail.icon` and contact's
  * `contactRows.icon` already made, so keying it off `label` cannot blank an
- * icon the way the pilot did). `PLACEHOLDER_NOTICE` is excluded entirely: it
- * is internal review documentation asserted verbatim by content.test.ts, and
- * no component on this page ever renders it to a reader.
+ * icon the way the pilot did). `value` is the fact a contact row carries
+ * alongside its own translatable `label` (only the phone row has one: the
+ * hospital's own number), the same role `contact`'s and `accommodation`'s own
+ * `value` fields play, so it stays untranslated the same way `href` does.
+ * `PLACEHOLDER_NOTICE` is excluded entirely: it is internal review
+ * documentation asserted verbatim by content.test.ts, and no component on
+ * this page ever renders it to a reader.
  */
 function isUntranslatable(path: string): boolean {
   return (
@@ -24,7 +28,8 @@ function isUntranslatable(path: string): boolean {
     path.endsWith(".href") ||
     path.endsWith(".count") ||
     path.endsWith(".no") ||
-    path.endsWith(".glyph")
+    path.endsWith(".glyph") ||
+    path.endsWith(".value")
   );
 }
 
@@ -39,10 +44,15 @@ function isUntranslatable(path: string): boolean {
  * Listing exact strings by path rather than waving through any English
  * looking string keeps each one a decision somebody made, so a genuinely
  * forgotten translation still fails the suite.
+ *
+ * Empty: the one former entry here, `contactRows[0].label`, held the
+ * hospital's own phone number only because `ContactRow` had nowhere else to
+ * put a fact. Now that the number lives in `contactRows[0].value` (excluded
+ * above, by path, the same way `href` is) and `label` carries a real
+ * translatable action phrase ("Call us"), nothing on this page needs a
+ * deliberate English exception any more.
  */
-const KEEPS_ENGLISH = new Set([
-  "contactRows[0].label", // "0117 84 84 84": the hospital's own phone number, not a sentence
-]);
+const KEEPS_ENGLISH = new Set<string>([]);
 
 test("every translatable string in home-care has Sinhala", () => {
   const missing = assertTranslationParity(base, si, isUntranslatable);

@@ -36,7 +36,7 @@ const allCopy = [
   ...steps.flatMap((s) => [s.no, s.title, s.desc]),
   ...faq.flatMap((f) => [f.q, f.a]),
   ...prepPoints,
-  ...contactRows.map((c) => c.label),
+  ...contactRows.flatMap((c) => (c.value ? [c.label, c.value] : [c.label])),
 ].join("\n");
 
 /** The `home-visits` service, which is where every checkable fact here comes from. */
@@ -232,10 +232,11 @@ test("every faq row is a real question with a real answer", () => {
 // pins them: a later edit to the copy must not be able to invent a home-visit
 // hotline.
 test("the contact rail uses the hospital's published details", () => {
-  const byLabel = Object.fromEntries(contactRows.map((row) => [row.label, row.href]));
-  assert.equal(byLabel["0117 84 84 84"], "tel:+94117848484");
-  assert.equal(byLabel["Email the hospital"], "mailto:info@sjhospital.lk");
-  assert.equal(byLabel["WhatsApp us"], "https://wa.me/94742223334");
+  const byLabel = new Map(contactRows.map((row) => [row.label, row]));
+  assert.equal(byLabel.get("Call us")?.value, "0117 84 84 84");
+  assert.equal(byLabel.get("Call us")?.href, "tel:+94117848484");
+  assert.equal(byLabel.get("Email the hospital")?.href, "mailto:info@sjhospital.lk");
+  assert.equal(byLabel.get("WhatsApp us")?.href, "https://wa.me/94742223334");
 });
 
 // A dedicated home-visit line or mailbox would be a new fact about the
