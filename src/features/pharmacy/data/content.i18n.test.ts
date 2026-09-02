@@ -64,12 +64,21 @@ const KEEPS_ENGLISH = new Set<string>([
   // the label sitting right beside it.
   "jumpCards[3].count",
 
-  // `stock[].name` and `stock[].tag`: the ten stocked categories and their
-  // four dispensing-status tags (On file, Rx only, Refillable, No Rx) are
-  // medicine names, dosage-form categories and standard dispensing labels.
-  // This is how a Sri Lankan pharmacist writes and says them, and how they
-  // print on the label a patient is handed, so they are not recast into
-  // Sinhala or Tamil coinages nobody reads at the counter.
+  // `stock[0..5].name` and `stock[].tag` (all ten): six of the ten stocked
+  // rows are genuine medicine names or dosage-form categories (Prescription
+  // medicine, Antibiotics, Chronic medicine, Paediatric medicine, Discharge
+  // medicine, Over the counter), and all ten tags are the standard
+  // dispensing labels (On file, Rx only, Refillable, No Rx). This is how a
+  // Sri Lankan pharmacist writes and says them, and how they print on the
+  // label a patient is handed, so they are not recast into Sinhala or Tamil
+  // coinages nobody reads at the counter.
+  //
+  // `stock[6..9].name` ("Wound care and dressings", "First aid supplies",
+  // "Home health devices", "Baby and mother care") are NOT in this list:
+  // they are generic retail/supply category descriptions, not medicine
+  // names or dispensing tags, and are translated below the same way
+  // `counters[].name` ("Delivery orders" -> "Delivery කරන Orders") already
+  // is on this same page.
   "stock[0].name",
   "stock[0].tag",
   "stock[1].name",
@@ -82,13 +91,9 @@ const KEEPS_ENGLISH = new Set<string>([
   "stock[4].tag",
   "stock[5].name",
   "stock[5].tag",
-  "stock[6].name",
   "stock[6].tag",
-  "stock[7].name",
   "stock[7].tag",
-  "stock[8].name",
   "stock[8].tag",
-  "stock[9].name",
   "stock[9].tag",
 
   // `refills[].name`: the seven repeat-prescription conditions and medicines

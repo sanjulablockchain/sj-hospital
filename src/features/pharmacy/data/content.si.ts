@@ -191,22 +191,22 @@ export const stock = [
     tag: "No Rx",
   },
   {
-    name: "Wound care and dressings",
+    name: "තුවාල සත්කාරය සහ Dressings",
     note: "නිවසේදී Dressing එකක් මාරු කරගන්න Dressings, Tapes සහ Antiseptics",
     tag: "No Rx",
   },
   {
-    name: "First aid supplies",
+    name: "First Aid දේවල්",
     note: "නිවසක හෝ Workplace එකක First Aid Kit එකේ තියෙන දේවල්",
     tag: "No Rx",
   },
   {
-    name: "Home health devices",
+    name: "නිවසේ සෞඛ්‍ය Devices",
     note: "නිවසේදී Monitor කරන්න Devices, Blood Pressure Monitors සහ Thermometers වගේ",
     tag: "No Rx",
   },
   {
-    name: "Baby and mother care",
+    name: "බබා සහ අම්මාගේ සත්කාරය",
     note: "Feeding Supplies, Nappy Care සහ Postnatal ට ඕන දේවල්",
     tag: "No Rx",
   },

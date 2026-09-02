@@ -195,22 +195,22 @@ export const stock = [
     tag: "No Rx",
   },
   {
-    name: "Wound care and dressings",
+    name: "காயப் பராமரிப்பு மற்றும் Dressings",
     note: "வீட்டில் Dressing ஒன்றை மாற்றுவதற்கான Dressings, Tapes மற்றும் Antiseptics",
     tag: "No Rx",
   },
   {
-    name: "First aid supplies",
+    name: "First Aid பொருட்கள்",
     note: "வீடு அல்லது Workplace ஒன்றின் First Aid Kit இல் உள்ள பொருட்கள்",
     tag: "No Rx",
   },
   {
-    name: "Home health devices",
+    name: "வீட்டு சுகாதார Devices",
     note: "வீட்டில் கண்காணிக்க Devices, Blood pressure Monitors மற்றும் Thermometers போன்றவை",
     tag: "No Rx",
   },
   {
-    name: "Baby and mother care",
+    name: "குழந்தை மற்றும் தாயின் பராமரிப்பு",
     note: "Feeding Supplies, Nappy Care மற்றும் Postnatal க்கு தேவையானவை",
     tag: "No Rx",
   },
