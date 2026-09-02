@@ -136,6 +136,23 @@ Each feature has its own `SectionHead` (there are seven, plus career's `SectionH
 
 `min-w-0` is already the idiom for this elsewhere in the codebase (`Modal.tsx`, `BookSection.tsx`). Fix the layout rather than rephrasing the translation around it: rephrasing works, but it means every future translator has to rediscover the trap.
 
+### Step E3: let grid tracks shrink too
+
+The same trap as Step E2, one layer out. A track declared as a bare `fr` will not shrink below the intrinsic width of its content, so a long Sinhala or Tamil token pushes the whole column out. `minmax(0, 1fr)` fixes it, and is already the convention in `about` and parts of `accommodation`.
+
+```
+ grid-cols-[1.1fr_0.9fr]        <- a long token overflows this
+ grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]   <- this shrinks
+```
+
+Before you screenshot, grep your feature for it:
+
+```bash
+grep -rnE "grid-cols-[[0-9.]+fr" src/features/<feature>/components/
+```
+
+This is not hypothetical: `home-care` had three such grids, and the pattern is still present in `career`, `health-tips`, `home` and `accommodation`. English never reveals it, because English breaks at spaces.
+
 ### Step F: verify, including with your eyes
 
 ```bash
