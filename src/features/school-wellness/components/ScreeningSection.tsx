@@ -1,7 +1,7 @@
 import { RevealStagger } from "@/components/ui/RevealStagger";
 import { SectionHead } from "./SectionHead";
 import { HoverTile } from "./HoverTile";
-import { stations } from "../data/content";
+import type { SchoolWellnessContent } from "../data/getContent";
 
 /**
  * `#programme`: the nine screening stations, three to a row, each hiding what
@@ -10,22 +10,23 @@ import { stations } from "../data/content";
  * Every clinical detail in `stations` is unverified copy. See
  * PLACEHOLDER_NOTICE in `data/content.ts`.
  */
-export function ScreeningSection() {
+export function ScreeningSection({ content }: { content: SchoolWellnessContent }) {
+  const { screeningHeading, screeningIntro, sectionEyebrows, stations } = content;
   return (
     <section
       id="programme"
       className="mx-auto max-w-[1440px] px-5 pt-26 sm:px-8 lg:px-11 max-[640px]:pt-18"
     >
       <SectionHead
-        eyebrow="02 / The screening"
+        eyebrow={sectionEyebrows.programme}
         heading={
           <>
-            Nine stations,
+            {screeningHeading.line1}
             <br />
-            one morning
+            {screeningHeading.line2}
           </>
         }
-        intro="Set up in a hall or two classrooms. Children move through in class groups, so no lesson loses more than half an hour."
+        intro={screeningIntro}
       />
       <RevealStagger
         stepMs={60}

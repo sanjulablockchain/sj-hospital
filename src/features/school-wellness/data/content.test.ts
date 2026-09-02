@@ -4,20 +4,40 @@ import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import {
   PLACEHOLDER_NOTICE,
-  breedingSites,
+  bookHeading,
+  bookIntro,
   bookingChecklist,
+  breedingSites,
   contactRows,
+  dengueFindingsLabel,
+  dengueHeading,
+  dengueIntro,
+  dengueNote,
   disclaimer,
   faq,
+  faqHeading,
   findings,
   followUp,
+  followUpCta,
+  followUpHeading,
+  followUpIntro,
   gradeBands,
+  gradeBandsHeading,
+  gradeBandsIntro,
+  hero,
   heroFacts,
+  heroStandfirst,
   jumpCards,
+  screeningHeading,
+  screeningIntro,
+  sectionEyebrows,
   stations,
+  teacherHeading,
+  teacherIntro,
   tickerItems,
   training,
   whyBody,
+  whyFindingsLabel,
   whyHeading,
 } from "./content.ts";
 
@@ -27,18 +47,38 @@ const source = readFileSync(fileURLToPath(new URL("./content.ts", import.meta.ur
 const allCopy = [
   ...tickerItems,
   ...heroFacts.flatMap((f) => [f.k, f.v]),
+  ...Object.values(hero),
+  heroStandfirst,
+  ...Object.values(sectionEyebrows),
   ...jumpCards.flatMap((c) => [c.count, c.label, c.note]),
   whyHeading,
   whyBody,
+  whyFindingsLabel,
   ...findings,
+  ...Object.values(screeningHeading),
+  screeningIntro,
   ...stations.flatMap((s) => [s.kicker, s.title, s.body, s.more]),
+  ...Object.values(gradeBandsHeading),
+  gradeBandsIntro,
   ...gradeBands.flatMap((g) => [g.band, g.title, g.body]),
+  ...Object.values(teacherHeading),
+  teacherIntro,
   ...training.flatMap((t) => [t.kicker, t.title, t.body, t.more]),
+  ...Object.values(dengueHeading),
+  dengueIntro,
+  dengueNote,
+  dengueFindingsLabel,
   ...breedingSites,
+  ...Object.values(followUpHeading),
+  followUpIntro,
+  followUpCta,
   ...followUp.flatMap((f) => [f.when, f.what]),
+  ...Object.values(faqHeading),
   ...faq.flatMap((f) => [f.q, f.a]),
+  ...Object.values(bookHeading),
+  bookIntro,
   ...bookingChecklist,
-  ...contactRows.map((c) => c.label),
+  ...contactRows.flatMap((c) => [c.label, ...(c.value ? [c.value] : [])]),
   disclaimer,
 ].join("\n");
 
@@ -89,10 +129,11 @@ test("the notice names every unverified block still on the page", () => {
 // which is exactly why they are worth pinning: a later edit to the copy should
 // not be able to invent a school-programme hotline.
 test("the contact rail uses the hospital's published details", () => {
-  const byLabel = Object.fromEntries(contactRows.map((row) => [row.label, row.href]));
-  assert.equal(byLabel["0117 84 84 84"], "tel:+94117848484");
-  assert.equal(byLabel["Email the hospital"], "mailto:info@sjhospital.lk");
-  assert.equal(byLabel["WhatsApp us"], "https://wa.me/94742223334");
+  const byLabel = new Map(contactRows.map((row) => [row.label, row]));
+  assert.equal(byLabel.get("Call the hospital")?.value, "0117 84 84 84");
+  assert.equal(byLabel.get("Call the hospital")?.href, "tel:+94117848484");
+  assert.equal(byLabel.get("Email the hospital")?.href, "mailto:info@sjhospital.lk");
+  assert.equal(byLabel.get("WhatsApp us")?.href, "https://wa.me/94742223334");
 });
 
 // A dedicated schools address or phone line would be a new fact about the
