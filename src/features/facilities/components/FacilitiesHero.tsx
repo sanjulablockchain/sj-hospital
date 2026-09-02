@@ -1,10 +1,10 @@
 import Image from "next/image";
-import Link from "next/link";
+import { LocaleLink } from "@/components/i18n/LocaleLink";
 import { ThemedHeader } from "@/components/layout/ThemedHeader";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { Ticker } from "@/components/ui/Ticker";
 import { facilitiesNavigation } from "@/config/facilitiesNavigation";
-import { heroFacts, tickerItems } from "@/features/facilities/data/content";
+import type { FacilitiesContent } from "../data/getContent";
 
 /**
  * `#top`: a fixed-dark corridor photograph behind the themed header and the
@@ -13,8 +13,13 @@ import { heroFacts, tickerItems } from "@/features/facilities/data/content";
  * Content uses `animate-sj-up` rather than <Reveal> because it is already in
  * the first viewport on load, so waiting on an intersection observer would only
  * delay it. Same choice ServicesHero and the home hero make.
+ *
+ * The breadcrumb's "Home" link goes through `LocaleLink` rather than
+ * `next/link`, the same fix every other feature's own hero needed, so a
+ * translated reader is not dropped back into English.
  */
-export function FacilitiesHero() {
+export function FacilitiesHero({ content }: { content: FacilitiesContent }) {
+  const { hero, heroFacts, tickerItems } = content;
   return (
     <section id="top" className="relative flex flex-col overflow-hidden bg-[#060B1F]">
       {/* overflow-hidden is load bearing. The section below has its own, but
@@ -64,42 +69,40 @@ export function FacilitiesHero() {
         <ThemedHeader navItems={facilitiesNavigation} homeHref="/" bookHref="/e-channeling" />
 
         <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 flex-col justify-end gap-6 px-5 pb-14 sm:px-8 lg:px-11">
-          <div className="animate-sj-up flex flex-wrap items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
+          <div className="animate-sj-up flex min-w-0 flex-wrap items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
             <span className="h-px w-11 bg-[var(--home-accent)]" />
-            <Link href="/" className="hover:text-white">
-              Home
-            </Link>
+            <LocaleLink href="/" className="hover:text-white">
+              {hero.breadcrumbHome}
+            </LocaleLink>
             <span aria-hidden className="opacity-50">
               /
             </span>
-            <span>Facilities</span>
+            <span>{hero.breadcrumbCurrent}</span>
           </div>
-          <h1 className="font-display animate-sj-up text-[clamp(50px,8.6vw,146px)] leading-[0.86] font-extrabold tracking-[-0.045em] text-white uppercase">
-            Built like a
+          <h1 className="font-display animate-sj-up wrap-break-word text-[clamp(50px,8.6vw,146px)] leading-[0.86] font-extrabold tracking-[-0.045em] text-white uppercase">
+            {hero.headingLead}
             <br />
-            <span className="text-[var(--home-accent)]">US</span> facility.
+            <span className="text-[var(--home-accent)]">{hero.headingAccent}</span> {hero.headingTail}
           </h1>
           <div className="grid gap-9 min-[900px]:grid-cols-[minmax(0,1fr)_auto] min-[900px]:items-end">
             <p
               className="animate-sj-up max-w-[54ch] text-[18px] leading-[1.6] text-white/82"
               style={{ textWrap: "pretty" }}
             >
-              Six purpose built floors in Negombo: operating theatres with the recovery bay next door,
-              monitored critical care beside them, a laboratory that never closes, and rooms where your
-              family can actually stay the night.
+              {content.heroStandfirst}
             </p>
             <div className="animate-sj-up flex flex-wrap gap-3">
               <a
                 href="#floors"
                 className="inline-flex w-fit items-center gap-3 bg-[var(--home-accent)] px-6 py-4 text-[15px] font-bold text-[var(--home-on-accent)]"
               >
-                Walk the building <span aria-hidden>&rarr;</span>
+                {hero.walkCta} <span aria-hidden>&rarr;</span>
               </a>
               <a
                 href="tel:+94117848484"
                 className="inline-flex w-fit items-center gap-3 border border-white/30 px-6 py-4 text-[15px] font-bold text-white tabular-nums"
               >
-                0117 84 84 84
+                {hero.call.value}
               </a>
             </div>
           </div>

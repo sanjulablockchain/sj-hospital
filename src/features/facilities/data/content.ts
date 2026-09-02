@@ -44,6 +44,78 @@ export type EquipmentRow = { name: string; note: string; avail: string };
 /** A round-the-clock service in the support grid. */
 export type SupportRow = { no: string; name: string; desc: string };
 
+/** Two lines of a section heading. */
+export type Heading2 = { line1: string; line2: string };
+
+/** Three lines of a section heading. */
+export type Heading3 = { line1: string; line2: string; line3: string };
+
+/**
+ * One of the closing `#book` rows. `value` is a fact alongside its own
+ * translatable `label` (only the phone row has one, the hospital's own
+ * number), the same role `contact`'s, `network`'s, `accommodation`'s,
+ * `home-care`'s, `pharmacy`'s and `school-wellness`'s own `value` fields play.
+ * `internal` marks the one row that is a route on this site rather than a
+ * phone number or an external site, so BookSection can send it through
+ * `LocaleLink` and keep a reader in the language they are already reading.
+ */
+export type ContactRow = {
+  label: string;
+  value?: string;
+  href: string;
+  glyph: "arrow" | "phone";
+  internal?: boolean;
+};
+
+/**
+ * The hero's own copy, moved here out of FacilitiesHero so it can be
+ * translated. `call.value` is the hospital's own switchboard number: a fact,
+ * not a label, so it stays untranslated the same way `contactRows[2].value`
+ * and `ambulanceCall.value` do, and both of those read this field rather than
+ * repeating the digits as a second and third copy of the same string.
+ */
+export const hero = {
+  breadcrumbHome: "Home",
+  breadcrumbCurrent: "Facilities",
+  headingLead: "Built like a",
+  // Kept in English: the abbreviation for the surgical and cleaning standard
+  // this building is built to, the same way `theatreSpecs`' "US standard" and
+  // `hygieneRows`' "US specification" keep it, and the way `network`'s own
+  // content.si.ts and content.ta.ts keep "US" in "US Standard care" rather
+  // than spelling the country name out. See KEEPS_ENGLISH in
+  // content.i18n.test.ts.
+  headingAccent: "US",
+  headingTail: "facility.",
+  walkCta: "Walk the building",
+  call: { value: "0117 84 84 84" },
+};
+
+export const heroStandfirst =
+  "Six purpose built floors in Negombo: operating theatres with the recovery bay next door, monitored critical care beside them, a laboratory that never closes, and rooms where your family can actually stay the night.";
+
+/**
+ * Every value below is reused verbatim from navigationLabels.si.ts and
+ * navigationLabels.ta.ts, where that file already translates the same
+ * English phrase for this page's own header and footer links ("The
+ * building", "Operating theatres", "Critical care", "Rooms & wards",
+ * "Diagnostics", "Ambulance & transfers"): see the numbered comments beside
+ * each field in content.si.ts and content.ta.ts. "Around the clock",
+ * "Hygiene & safety", "For visitors" and "Come and look" have no nav
+ * equivalent and are translated fresh.
+ */
+export const sectionEyebrows = {
+  building: "01 / The building",
+  theatres: "02 / Operating theatres",
+  critical: "03 / Critical care",
+  rooms: "04 / Rooms & wards",
+  diagnostic: "05 / Diagnostics",
+  ambulance: "06 / Ambulance & transfers",
+  support: "07 / Around the clock",
+  hygiene: "08 / Hygiene & safety",
+  visiting: "09 / For visitors",
+  book: "10 / Come and look",
+};
+
 export const heroFacts: SpecRow[] = [
   { k: "Floors", v: "Six, purpose built" },
   { k: "Cleaning cycle", v: "Every two hours" },
@@ -93,6 +165,10 @@ export const jumpCards: { count: string; label: string; note: string; href: stri
  * department occupies which level, so these rows group departments that work
  * together instead of assigning each one a floor it may not be on.
  */
+export const buildingHeading: Heading2 = { line1: "Six floors, one", line2: "building" };
+export const buildingIntro =
+  "Departments that work together sit together, so a scan ordered in a clinic does not become a journey across town.";
+
 export const buildingZones: BuildingZone[] = [
   {
     no: "01",
@@ -162,7 +238,9 @@ export const showcaseCards: ShowcaseCard[] = [
   },
   {
     no: "04",
-    title: "Theatres & recovery",
+    // Reuses `buildingZones[3].name` rather than a second copy of the same
+    // phrase: a string used twice has one home.
+    title: buildingZones[3].name,
     body: "Operating suites with the recovery bay next door and one nurse assigned to each patient coming out of theatre.",
     linkLabel: "Inside the theatres",
     href: "#theatres",
@@ -177,6 +255,16 @@ export const showcaseCards: ShowcaseCard[] = [
  * Split into prefix / number / suffix so <AnimatedCounter> can count the
  * numeric part up when the section scrolls in: "1:" + 1, then 0, then 24 + "h".
  */
+export const theatresHeading: Heading3 = {
+  line1: "Tracked steel,",
+  line2: "single use,",
+  line3: "one nurse each",
+};
+export const theatresIntro1 =
+  "Our theatres run to US surgical protocol, with tracking on every instrument set. Instruments and consumables are single use for each patient, without exception.";
+export const theatresIntro2 =
+  "A recovery nurse is assigned to watch over you from the moment you leave theatre until you are ready for a ward bed or for home. Surgical and anaesthetic teams stay on call, so emergency surgery happens here rather than after a transfer.";
+
 export const theatreFigures: { prefix?: string; value: number; suffix?: string; label: string }[] = [
   { prefix: "1:", value: 1, label: "Recovery nursing" },
   { value: 0, label: "Reused consumables" },
@@ -189,17 +277,25 @@ export const theatreSpecs: SpecRow[] = [
   { k: "Consumables", v: "Single use, per patient" },
   { k: "Anaesthesia", v: "Consultant led" },
   { k: "Recovery bay", v: "Beside the theatres" },
-  { k: "Recovery nursing", v: "One to one" },
+  // Reuses `theatreFigures[0].label` rather than a second copy of the same
+  // phrase: a string used twice has one home.
+  { k: theatreFigures[0].label, v: "One to one" },
   { k: "Obstetric theatre", v: "Kept separate" },
   { k: "Emergency cover", v: "On call, 24 hours" },
 ];
+
+export const criticalHeading: Heading2 = { line1: "Beds that watch", line2: "you all night" };
+export const criticalIntro =
+  "Monitored beds for patients who need ventilation, close observation after surgery, or stabilising before anything else can happen.";
 
 export const careUnits: CareUnit[] = [
   {
     code: "ICU",
     name: "Intensive care",
     desc: "Monitored beds for patients who need ventilation or close observation, placed beside the theatres and the emergency department.",
-    lead: "Consultant led",
+    // Reuses `theatreSpecs[3].v` ("Anaesthesia": "Consultant led") rather than
+    // a second copy of the same phrase: a string used twice has one home.
+    lead: theatreSpecs[3].v,
   },
   {
     code: "PACU",
@@ -236,6 +332,10 @@ export const careNotes: { title: string; body: string }[] = [
  * carries a figure, because "private and semi private rooms from 10,000 LKR"
  * is the sole room price the repo publishes.
  */
+export const roomsHeading: Heading2 = { line1: "Four ways to", line2: "spend the night" };
+export const roomsIntro =
+  "Every category is cleaned on the same two hour cycle. What changes is space, privacy and how much room your family gets.";
+
 export const roomRows: RoomRow[] = [
   {
     name: "Super Deluxe Rooms",
@@ -265,6 +365,12 @@ export const roomRows: RoomRow[] = [
   },
 ];
 
+export const roomsStandardHeading = "In every category";
+export const roomsExtrasHeading = "Small things that help";
+export const roomsCta = "See the rooms";
+export const roomsNote =
+  "Room rates cover accommodation and nursing care. Doctor visits, medicine, tests and procedures are billed separately and appear on your interim bill.";
+
 /** Shared by every category, so the table above does not repeat them. */
 export const roomStandard: string[] = [
   "Hot & cool water",
@@ -283,6 +389,18 @@ export const roomExtras: string[] = [
   "A complimentary fruit or chocolate basket on discharge from the wards",
 ];
 
+export const diagnosticHeading: Heading3 = { line1: "The machines,", line2: "and who", line3: "reads them" };
+export const diagnosticIntro =
+  "Equipment is worth nothing without the discipline around it. Every laboratory report is checked by two doctors before it is released, and X-rays are read and reported by a radiologist within the hour.";
+export const diagnosticCta = "Diagnostic services";
+
+/**
+ * Every equipment name below stays in English in every translation: X-ray,
+ * Ultrasound, CT and MRI are how these are said in Sinhala and Tamil too, the
+ * same way `about`'s and `international-care`'s own overlays keep "Digital
+ * X-ray", "Ultrasound", "Biochemistry", "Gastroscopy", "Colonoscopy" and
+ * "Biopsy" in English throughout. See KEEPS_ENGLISH in content.i18n.test.ts.
+ */
 export const equipment: EquipmentRow[] = [
   { name: "Digital X-ray", note: "Read and reported by a radiologist", avail: "Within an hour" },
   { name: "Ultrasound", note: "Abdominal, antenatal and soft tissue scanning", avail: "At the visit" },
@@ -306,6 +424,28 @@ export const equipment: EquipmentRow[] = [
   },
 ];
 
+export const ambulanceHeading: Heading3 = {
+  line1: "Treatment",
+  line2: "starts in the",
+  line3: "vehicle",
+};
+export const ambulanceIntro1 =
+  "Our own ambulances are on call around the clock and dispatched from the same covered bay that patients arrive through, so care begins before you reach the door.";
+export const ambulanceIntro2 =
+  "The laboratory and digital X-ray sit metres from that bay, so bloods and films come back while you are still being assessed. We are ten minutes from Bandaranaike International, and our own ambulance is available for transfer.";
+
+/**
+ * The tel: CTA that closes the ambulance band. `value` reuses `hero.call`
+ * rather than repeating the hospital's own number as a third copy of the
+ * same digits (`contactRows[2].value` is the second).
+ */
+export const ambulanceCall: ContactRow = {
+  label: "Call an ambulance",
+  value: hero.call.value,
+  href: "tel:+94117848484",
+  glyph: "phone",
+};
+
 export const ambulanceSpecs: SpecRow[] = [
   { k: "Availability", v: "24 hours" },
   { k: "Fleet", v: "Our own" },
@@ -314,6 +454,10 @@ export const ambulanceSpecs: SpecRow[] = [
   { k: "Lab & X-ray", v: "Metres away" },
   { k: "Airport", v: "Ten minutes" },
 ];
+
+export const supportHeading: Heading2 = { line1: "Open when you", line2: "need it open" };
+export const supportIntro =
+  "A hospital is judged at three in the morning. These eight are staffed or on call whenever you arrive.";
 
 export const support: SupportRow[] = [
   {
@@ -358,6 +502,11 @@ export const support: SupportRow[] = [
   },
 ];
 
+export const hygieneHeading: Heading3 = { line1: "Cleaned every", line2: "two hours,", line3: "by the clock" };
+export const hygieneIntro =
+  "Infection control is a schedule, not a slogan. Every surface in the building is cleaned on a two hour cycle to US specification.";
+export const hygieneCaption = "Consumables are single use, and never reused";
+
 export const hygieneRows: SpecRow[] = [
   { k: "Cleaning cycle", v: "Every two hours" },
   { k: "Standard", v: "US specification" },
@@ -367,13 +516,20 @@ export const hygieneRows: SpecRow[] = [
   { k: "Laboratory reports", v: "Checked by two doctors" },
 ];
 
+export const visitorsHeading: Heading2 = { line1: "Getting here,", line2: "and waiting well" };
+export const visitorsIntro =
+  "Ten minutes from Bandaranaike International Airport, on St. Joseph Street in central Negombo.";
+
+export const visitingCardHeading = "Visiting";
 export const visitingRows: SpecRow[] = [
   { k: "General wards", v: "Day visiting" },
   { k: "Critical care", v: "Fixed hours" },
   { k: "Family update", v: "Once a day from the unit" },
   { k: "Attendant", v: "May stay overnight" },
 ];
+export const visitingNote = "The ward or unit desk will confirm the current times before you travel.";
 
+export const gettingHereHeading = "Getting here";
 export const gettingHere: string[] = [
   "229/10 St. Joseph Street, Negombo",
   "Ten minutes from Bandaranaike International Airport",
@@ -381,6 +537,7 @@ export const gettingHere: string[] = [
   "Our own ambulance available for transfer",
 ];
 
+export const whileYouWaitHeading = "While you wait";
 export const comforts: string[] = [
   "Free parking",
   "Free wifi",
@@ -390,4 +547,24 @@ export const comforts: string[] = [
   "24 hour pharmacy",
   "Card payments",
   "Quiet visiting hours",
+];
+
+export const bookHeading: Heading3 = { line1: "See the rooms", line2: "before you", line3: "need them." };
+export const bookIntro =
+  "Ask at reception and we will show you a room and the ward. No appointment, and no sales talk.";
+
+/**
+ * The three rows closing `#book`. `contactRows[2]` used to carry the
+ * hospital's own number as its whole `label`, with no separate action
+ * phrase, so it rendered as bare digits with no translatable text at all, in
+ * every language including English, the same bug `contact`'s,
+ * `accommodation`'s, `home-care`'s, `pharmacy`'s, `network`'s and
+ * `school-wellness`'s own contact rows had. `label` now carries the action
+ * ("Call the hospital"), and the digits live in `value`, reusing `hero.call`
+ * rather than a fourth copy of the same string.
+ */
+export const contactRows: ContactRow[] = [
+  { label: "Reserve a room", href: "/accommodation", glyph: "arrow", internal: true },
+  { label: "Message on WhatsApp", href: "https://wa.me/94742223334", glyph: "arrow" },
+  { label: "Call the hospital", value: hero.call.value, href: "tel:+94117848484", glyph: "phone" },
 ];

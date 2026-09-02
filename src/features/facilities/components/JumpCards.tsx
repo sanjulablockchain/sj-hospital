@@ -1,5 +1,5 @@
 import { RevealStagger } from "@/components/ui/RevealStagger";
-import { jumpCards } from "@/features/facilities/data/content";
+import type { FacilitiesContent } from "../data/getContent";
 
 /**
  * `#jump`: four anchor cards into the sections below.
@@ -9,7 +9,8 @@ import { jumpCards } from "@/features/facilities/data/content";
  * whole card fills with accent on hover (`sj-fill`), which is why the three
  * lines inherit their colour on hover rather than keeping their own.
  */
-export function JumpCards() {
+export function JumpCards({ content }: { content: FacilitiesContent }) {
+  const { jumpCards } = content;
   return (
     <section id="jump" className="mx-auto max-w-[1440px] px-5 pt-16 sm:px-8 lg:px-11">
       <RevealStagger

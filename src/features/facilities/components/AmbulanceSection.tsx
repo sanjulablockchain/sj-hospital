@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { LOGO_MARK } from "@/config/brand";
-import { ambulanceSpecs } from "@/features/facilities/data/content";
+import type { FacilitiesContent } from "../data/getContent";
 
 /**
  * `#ambulance`: the second full-bleed dark band, fixed-dark in both themes for
@@ -12,7 +12,15 @@ import { ambulanceSpecs } from "@/features/facilities/data/content";
  * leaf mark drifts behind the copy at 12% instead. That also keeps the two dark
  * bands distinct, since the theatre band above is the one carrying a photo.
  */
-export function AmbulanceSection() {
+export function AmbulanceSection({ content }: { content: FacilitiesContent }) {
+  const {
+    ambulanceCall,
+    ambulanceHeading,
+    ambulanceIntro1,
+    ambulanceIntro2,
+    ambulanceSpecs,
+    sectionEyebrows,
+  } = content;
   return (
     <section id="ambulance" className="relative mt-30 overflow-hidden bg-[#08123A]">
       <ParallaxLayer
@@ -31,32 +39,25 @@ export function AmbulanceSection() {
       </ParallaxLayer>
 
       <div className="relative z-10 mx-auto max-w-[1440px] px-5 py-26 sm:px-8 lg:px-11">
-        <div className="grid gap-10 min-[900px]:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] min-[900px]:gap-16">
-          <Reveal>
+        <div className="grid min-w-0 gap-10 min-[900px]:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] min-[900px]:gap-16">
+          <Reveal className="min-w-0">
             <div className="text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
-              06 / Ambulance &amp; transfers
+              {sectionEyebrows.ambulance}
             </div>
-            <h2 className="font-display mt-4.5 text-[clamp(36px,4.2vw,62px)] leading-[0.94] font-extrabold tracking-[-0.035em] text-white uppercase">
-              Treatment
+            <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(36px,4.2vw,62px)] leading-[0.94] font-extrabold tracking-[-0.035em] text-white uppercase">
+              {ambulanceHeading.line1}
               <br />
-              starts in the
+              {ambulanceHeading.line2}
               <br />
-              vehicle
+              {ambulanceHeading.line3}
             </h2>
-            <p className="mt-6 max-w-[56ch] text-[16px] leading-[1.65] text-white/80">
-              Our own ambulances are on call around the clock and dispatched from the same covered bay that
-              patients arrive through, so care begins before you reach the door.
-            </p>
-            <p className="mt-4 max-w-[56ch] text-[16px] leading-[1.65] text-white/80">
-              The laboratory and digital X-ray sit metres from that bay, so bloods and films come back while
-              you are still being assessed. We are ten minutes from Bandaranaike International, and our own
-              ambulance is available for transfer.
-            </p>
+            <p className="mt-6 max-w-[56ch] text-[16px] leading-[1.65] text-white/80">{ambulanceIntro1}</p>
+            <p className="mt-4 max-w-[56ch] text-[16px] leading-[1.65] text-white/80">{ambulanceIntro2}</p>
             <a
-              href="tel:+94117848484"
+              href={ambulanceCall.href}
               className="animate-sj-pulse mt-9 inline-flex w-fit items-center gap-3 bg-[var(--home-accent)] px-6 py-4 text-[15px] font-bold text-[var(--home-on-accent)] tabular-nums"
             >
-              Call an ambulance: 0117 84 84 84
+              {ambulanceCall.label}: {ambulanceCall.value}
             </a>
           </Reveal>
 

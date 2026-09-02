@@ -1,5 +1,5 @@
 import { Reveal } from "@/components/ui/Reveal";
-import { comforts, gettingHere, visitingRows } from "@/features/facilities/data/content";
+import type { FacilitiesContent } from "../data/getContent";
 
 /**
  * `#visiting`: three tinted cards, visiting arrangements, how to get here, and
@@ -9,21 +9,33 @@ import { comforts, gettingHere, visitingRows } from "@/features/facilities/data/
  * fixed hours confirmed at the unit desk, and nothing more specific, so nothing
  * more specific is stated here.
  */
-export function VisitorsSection() {
+export function VisitorsSection({ content }: { content: FacilitiesContent }) {
+  const {
+    comforts,
+    gettingHere,
+    gettingHereHeading,
+    sectionEyebrows,
+    visitingCardHeading,
+    visitingNote,
+    visitingRows,
+    visitorsHeading,
+    visitorsIntro,
+    whileYouWaitHeading,
+  } = content;
   return (
     <section id="visiting" className="mx-auto max-w-[1440px] px-5 pt-30 sm:px-8 lg:px-11">
       <Reveal>
         <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
-          09 / For visitors
+          {sectionEyebrows.visiting}
         </div>
-        <div className="mt-4.5 grid gap-6 min-[900px]:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] min-[900px]:items-end min-[900px]:gap-14">
-          <h2 className="font-display text-[clamp(38px,4.4vw,66px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
-            Getting here,
+        <div className="mt-4.5 grid min-w-0 gap-6 min-[900px]:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] min-[900px]:items-end min-[900px]:gap-14">
+          <h2 className="font-display wrap-break-word min-w-0 text-[clamp(38px,4.4vw,66px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
+            {visitorsHeading.line1}
             <br />
-            and waiting well
+            {visitorsHeading.line2}
           </h2>
           <p className="text-[16px] leading-[1.6] text-[var(--home-muted)]" style={{ textWrap: "pretty" }}>
-            Ten minutes from Bandaranaike International Airport, on St. Joseph Street in central Negombo.
+            {visitorsIntro}
           </p>
         </div>
       </Reveal>
@@ -35,7 +47,7 @@ export function VisitorsSection() {
         <Reveal className="h-full">
           <div className="sj-tint h-full bg-[var(--home-surface-2)] p-7.5">
             <h3 className="text-[11.5px] font-bold tracking-[0.2em] text-[var(--home-accent)] uppercase">
-              Visiting
+              {visitingCardHeading}
             </h3>
             <dl className="mt-5 flex flex-col gap-3">
               {visitingRows.map((row) => (
@@ -47,16 +59,14 @@ export function VisitorsSection() {
                 </div>
               ))}
             </dl>
-            <p className="mt-5 text-[13.5px] leading-[1.55] text-[var(--home-muted)]">
-              The ward or unit desk will confirm the current times before you travel.
-            </p>
+            <p className="mt-5 text-[13.5px] leading-[1.55] text-[var(--home-muted)]">{visitingNote}</p>
           </div>
         </Reveal>
 
         <Reveal className="h-full">
           <div className="sj-tint h-full bg-[var(--home-surface-2)] p-7.5">
             <h3 className="text-[11.5px] font-bold tracking-[0.2em] text-[var(--home-accent)] uppercase">
-              Getting here
+              {gettingHereHeading}
             </h3>
             <ul className="mt-5 flex flex-col gap-3">
               {gettingHere.map((item) => (
@@ -74,7 +84,7 @@ export function VisitorsSection() {
         <Reveal className="h-full">
           <div className="sj-tint h-full bg-[var(--home-surface-2)] p-7.5">
             <h3 className="text-[11.5px] font-bold tracking-[0.2em] text-[var(--home-accent)] uppercase">
-              While you wait
+              {whileYouWaitHeading}
             </h3>
             <ul className="mt-5 flex flex-wrap gap-2.5">
               {comforts.map((item) => (

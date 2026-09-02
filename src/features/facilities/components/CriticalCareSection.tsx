@@ -1,6 +1,6 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
-import { careNotes, careUnits } from "@/features/facilities/data/content";
+import type { FacilitiesContent } from "../data/getContent";
 
 /**
  * `#critical`: the monitored units, then three notes on how the unit runs.
@@ -9,22 +9,22 @@ import { careNotes, careUnits } from "@/features/facilities/data/content";
  * only three are backed by anything the hospital publishes, so the grid is
  * three across at desktop instead of four.
  */
-export function CriticalCareSection() {
+export function CriticalCareSection({ content }: { content: FacilitiesContent }) {
+  const { careNotes, careUnits, criticalHeading, criticalIntro, sectionEyebrows } = content;
   return (
     <section id="critical" className="mx-auto max-w-[1440px] px-5 pt-30 sm:px-8 lg:px-11">
       <Reveal>
         <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
-          03 / Critical care
+          {sectionEyebrows.critical}
         </div>
-        <div className="mt-4.5 grid gap-6 min-[900px]:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] min-[900px]:items-end min-[900px]:gap-14">
-          <h2 className="font-display text-[clamp(38px,4.4vw,66px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
-            Beds that watch
+        <div className="mt-4.5 grid min-w-0 gap-6 min-[900px]:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] min-[900px]:items-end min-[900px]:gap-14">
+          <h2 className="font-display wrap-break-word min-w-0 text-[clamp(38px,4.4vw,66px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
+            {criticalHeading.line1}
             <br />
-            you all night
+            {criticalHeading.line2}
           </h2>
           <p className="text-[16px] leading-[1.6] text-[var(--home-muted)]" style={{ textWrap: "pretty" }}>
-            Monitored beds for patients who need ventilation, close observation after surgery, or
-            stabilising before anything else can happen.
+            {criticalIntro}
           </p>
         </div>
       </Reveal>
