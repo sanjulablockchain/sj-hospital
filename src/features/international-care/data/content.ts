@@ -58,6 +58,11 @@ import type {
 
 const INTERNATIONAL_EMAIL = "appointments@sjhospital.lk";
 const WHATSAPP_HREF = "https://wa.me/94742223334";
+/** The hospital's own phone number, as shown to a reader. A fact, not copy:
+ *  referenced by both `practical[9].v` and `enquiryContactRows[2].value` so
+ *  it has one home, the same way `INTERNATIONAL_EMAIL` and `WHATSAPP_HREF`
+ *  already do. */
+const PHONE_DISPLAY = "0117 84 84 84";
 
 /** The desk's WhatsApp number, as a `wa.me` link. A fact, not copy: used by
  *  both the hero CTA and the `#enquiry` contact row so it has one home. */
@@ -399,7 +404,7 @@ export const practical: FactRow[] = [
   { k: "Climate", v: "Warm and humid the year round" },
   { k: "Pharmacy", v: "On site and open at every hour" },
   { k: "Attendant", v: "One may stay overnight in every room category" },
-  { k: "Any hour", v: "0117 84 84 84 reaches the hospital" },
+  { k: "Any hour", v: `${PHONE_DISPLAY} reaches the hospital` },
 ];
 
 export const faqHeading = "The questions we always get";
@@ -466,7 +471,7 @@ export const enquiryChips: string[] = [
 export const enquiryContactRows: EnquiryContactRow[] = [
   { label: "Email the desk", href: `mailto:${INTERNATIONAL_EMAIL}`, glyph: "arrow" },
   { label: "WhatsApp your reports", href: WHATSAPP_HREF, glyph: "arrow" },
-  { label: "Call the desk", value: "0117 84 84 84", href: "tel:+94117848484", glyph: "phone" },
+  { label: "Call the desk", value: PHONE_DISPLAY, href: "tel:+94117848484", glyph: "phone" },
 ];
 
 /** The last row in `#enquiry`, a next/link to the services directory. */

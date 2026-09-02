@@ -62,7 +62,7 @@ export const heroFacts = [
 
 export const jumpCards = [
   { count: "6 படிகள்", label: "பயணம்", note: "முதல் Email முதல் திரும்பும் Flight வரை." },
-  { count: "10 சேவைகள்", label: "Desk", note: "Transfers, Interpreters, Insurance, Records." },
+  { count: "10 சேவைகள்", label: "Desk", note: "போக்குவரத்து, Interpreters, Insurance, பதிவுகள்." },
   { count: "எழுத்துப்பூர்வமாக", label: "Estimate ஒன்று", note: "மக்கள் ஏன் இங்கு வருகிறார்கள், எவ்வளவு காலம்." },
   { count: "10 பதில்கள்", label: "பறப்பதற்கு முன்", note: "வருகை, Insurance, Records, வீடு திரும்புதல்." },
 ];
@@ -310,7 +310,7 @@ export const payChips: readonly string[] = [
   "சிகிச்சைக்கு முன் எழுத்துப்பூர்வ Estimate",
   "Cash ஏற்கப்படும்",
   "Card செலுத்துதல்",
-  "Bank Transfer",
+  "Bank பரிமாற்றம்",
   "Desk இல் Insurance ஆவணங்கள்",
   "Outpatients க்கு Laboratory கட்டணங்களில் 10% தள்ளுபடி",
 ];

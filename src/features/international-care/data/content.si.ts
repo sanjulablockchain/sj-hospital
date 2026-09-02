@@ -65,7 +65,7 @@ export const heroFacts = [
 
 export const jumpCards = [
   { count: "පියවර 6ක්", label: "ගමන", note: "පළමු Email එකේ සිට ආපසු Flight එක දක්වා." },
-  { count: "සේවා 10ක්", label: "Desk එක", note: "Transfers, Interpreters, Insurance, Records." },
+  { count: "සේවා 10ක්", label: "Desk එක", note: "ප්‍රවාහනය, Interpreters ලා, Insurance, වාර්තා." },
   { count: "ලිඛිතව", label: "Estimate එක", note: "මිනිසුන් මෙහි එන්නේ ඇයි, කොපමණ කාලයක්ද." },
   { count: "පිළිතුරු 10ක්", label: "පියාසර කිරීමට කලින්", note: "පැමිණීම, Insurance, Records, ආපසු යාම." },
 ];
@@ -313,7 +313,7 @@ export const payChips: readonly string[] = [
   "Treatment එකට කලින් ලිඛිත Estimate එකක්",
   "Cash පිළිගැනේ",
   "Card ගෙවීම්",
-  "Bank Transfer",
+  "Bank මාරුව",
   "Insurance ලේඛන Desk එකේදීම",
   "Outpatients ලාට Laboratory ගාස්තු වලින් 10%ක වට්ටමක්",
 ];
