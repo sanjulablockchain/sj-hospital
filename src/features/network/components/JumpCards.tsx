@@ -1,5 +1,5 @@
 import { RevealStagger } from "@/components/ui/RevealStagger";
-import { jumpCards } from "../data/content";
+import type { NetworkContent } from "../data/getContent";
 
 /**
  * `#jump`: four in-page shortcuts sitting directly under the hero. The hairline
@@ -13,7 +13,8 @@ import { jumpCards } from "../data/content";
  * behind `@media (hover: hover)` so a touch device does not latch a card into
  * the filled state.
  */
-export function JumpCards() {
+export function JumpCards({ content }: { content: NetworkContent }) {
+  const { jumpCards } = content;
   return (
     <section id="jump" className="mx-auto max-w-[1440px] px-5 pt-20 sm:px-8 lg:px-11">
       <RevealStagger

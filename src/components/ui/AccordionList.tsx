@@ -73,7 +73,11 @@ function AccordionRow({ item, isOpen, onToggle, idPrefix }: AccordionRowProps) {
         onClick={onToggle}
         className="flex w-full items-center justify-between gap-6 px-1 py-6.5 text-left"
       >
-        <span className="font-display text-[clamp(17px,1.7vw,22px)] leading-[1.25] font-semibold tracking-[-0.01em] text-[var(--home-heading)]">
+        {/* `min-w-0`: without it, a long Sinhala or Tamil question with no
+            natural break point does not shrink below its content width in
+            this flex row, and pushes the row (and the page) past the
+            viewport rather than wrapping. */}
+        <span className="font-display min-w-0 text-[clamp(17px,1.7vw,22px)] leading-[1.25] font-semibold tracking-[-0.01em] text-[var(--home-heading)]">
           {item.q}
         </span>
         {/* Decorative only: the button's accessible name is the question

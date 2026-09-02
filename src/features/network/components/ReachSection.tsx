@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
-import { reachRows } from "../data/content";
+import type { NetworkContent } from "../data/getContent";
 
 /**
  * `#reach`: the group's published figures, over a ward round at 20% opacity.
@@ -21,7 +21,8 @@ import { reachRows } from "../data/content";
  * `who` cell keep their natural order. That renders number, key, who without
  * ever placing a `dd` before its `dt` in the markup.
  */
-export function ReachSection() {
+export function ReachSection({ content }: { content: NetworkContent }) {
+  const { reachEyebrow, reachHeading, reachIntro, reachRows } = content;
   return (
     <section id="reach" className="relative mt-26 overflow-hidden bg-[#08123A]">
       <ParallaxLayer factor={0.12} maxOffsetPx={90} className="absolute inset-x-0 -top-[10%] h-[120%]">
@@ -41,21 +42,24 @@ export function ReachSection() {
       />
 
       <div className="relative mx-auto max-w-[1440px] px-5 py-23 sm:px-8 lg:px-11">
-        <Reveal className="grid grid-cols-[0.85fr_1.15fr] items-start gap-14.5 max-[899px]:grid-cols-1 max-[899px]:gap-10">
-          <div className="sticky top-10 max-[899px]:static">
+        {/* `minmax(0, ...)` on both tracks: a bare `fr` track cannot shrink
+            below its content's intrinsic width, and Sinhala/Tamil form long
+            unbreakable tokens where English would have a space, so without
+            this the grid (and the page) overflows a 360px viewport. */}
+        <Reveal className="grid grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] items-start gap-14.5 max-[899px]:grid-cols-1 max-[899px]:gap-10">
+          <div className="sticky top-10 min-w-0 max-[899px]:static">
             <div className="text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
-              03 / The numbers
+              {reachEyebrow}
             </div>
-            <h2 className="font-display mt-4.5 text-[clamp(36px,4.6vw,66px)] leading-[0.9] font-extrabold tracking-[-0.04em] text-white uppercase">
-              What the
+            <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(36px,4.6vw,66px)] leading-[0.9] font-extrabold tracking-[-0.04em] text-white uppercase">
+              {reachHeading.line1}
               <br />
-              network
+              {reachHeading.line2}
               <br />
-              adds up to
+              {reachHeading.line3}
             </h2>
             <p className="mt-5.5 max-w-[40ch] text-[17px] leading-[1.65] text-white/78">
-              Figures as published by the group companies. We would rather show you a small honest
-              number than an impressive vague one.
+              {reachIntro}
             </p>
           </div>
 
@@ -63,13 +67,13 @@ export function ReachSection() {
             {reachRows.map((row) => (
               <div
                 key={row.k}
-                className="grid grid-cols-[0.5fr_1fr_0.5fr] items-baseline gap-5.5 border-b border-white/16 px-1 py-5 max-[1023px]:grid-cols-[1fr_0.6fr] max-[899px]:grid-cols-1 max-[899px]:gap-y-1.5"
+                className="grid grid-cols-[minmax(0,0.5fr)_minmax(0,1fr)_minmax(0,0.5fr)] items-baseline gap-5.5 border-b border-white/16 px-1 py-5 max-[1023px]:grid-cols-[minmax(0,1fr)_minmax(0,0.6fr)] max-[899px]:grid-cols-1 max-[899px]:gap-y-1.5"
               >
-                <dt className="text-[16px] font-bold text-white">{row.k}</dt>
+                <dt className="wrap-break-word text-[16px] font-bold text-white">{row.k}</dt>
                 <dd className="font-display order-first text-[34px] leading-none font-extrabold tracking-[-0.04em] text-[#2CA6F0] tabular-nums">
                   {row.n}
                 </dd>
-                <dd className="text-right text-[13.5px] leading-[1.5] text-white/60 max-[1023px]:hidden">
+                <dd className="wrap-break-word text-right text-[13.5px] leading-[1.5] text-white/60 max-[1023px]:hidden">
                   {row.who}
                 </dd>
               </div>

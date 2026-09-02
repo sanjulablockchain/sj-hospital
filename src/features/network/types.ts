@@ -32,5 +32,19 @@ export type OrgGroup = { name: string; note: string; orgs: Org[] };
 /** One row of the numbers section. */
 export type ReachRow = { n: string; k: string; who: string };
 
-/** One row of the contact panel. */
-export type ContactRow = { label: string; href: string; glyph: "phone" | "arrow" };
+/**
+ * One row of the contact panel. `value` is optional: only the phone row
+ * carries a fact distinct from its own action phrase (the hospital's own
+ * number). `internal` marks the one row that is a route on this site rather
+ * than a phone number, a mailbox or an external site, so ContactSection can
+ * send it through `LocaleLink` and keep a reader in the language they are
+ * already reading. Matches `contact`'s, `accommodation`'s, `pharmacy`'s and
+ * `home-care`'s own `ContactRow`/`bookRail`/`bookActions` shape.
+ */
+export type ContactRow = {
+  label: string;
+  value?: string;
+  href: string;
+  glyph: "phone" | "arrow";
+  internal?: boolean;
+};
