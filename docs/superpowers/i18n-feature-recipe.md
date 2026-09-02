@@ -61,6 +61,18 @@ grep -rnoE '>[A-Z][a-z][^<>{}]{3,70}<|"[A-Z][a-z][^"]{3,70}"' src/features/<feat
 
 Anything that is user-visible copy moves into `content.ts` as a new export, the way `sectionEyebrows`, `hero` and `form` did for contact. Anything structural stays.
 
+### Step A2: check whether a fact is sitting in a copy field
+
+Three features have now shipped a contact row whose `label` held the phone number itself, with no separate `value`. The row then renders as bare digits with no action phrase, in every language INCLUDING English, and it forces the parity test to carry a one-off exception for a fact that is sitting in a field meant for copy.
+
+`contact` and `accommodation` model it correctly: a translatable `label` such as "Call us", plus a `value` holding the fact. Fix the shape rather than special-casing the test.
+
+```bash
+grep -rnE 'label: "(0117|074|+94|[a-z.]+@)' src/features/<feature>/data/
+```
+
+As of this writing that grep still hits `network` and `school-wellness`. If it hits yours, fixing it improves the English page too, which is worth saying in the commit.
+
 ### Step B: write the parity test first, and watch it fail
 
 Copy `src/features/contact/data/content.i18n.test.ts` and adapt: the imports, the `isUntranslatable` predicate for this feature's facts and structural keys, and the array-length assertions for this feature's arrays. Leave `KEEPS_ENGLISH` empty at first.
