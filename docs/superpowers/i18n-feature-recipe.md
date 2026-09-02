@@ -159,7 +159,7 @@ This is not hypothetical: `home-care` had three such grids, and the pattern is s
 npm test && npm run lint && npm run build
 ```
 
-Then restart the dev server and screenshot. **The dev server does not reliably pick up data-file changes on Windows: restart it, or you will screenshot stale English and believe it.** If port 3000 is in use, do NOT kill the process using it; take the fallback port and stop only the server you started.
+Then restart the dev server and screenshot. **The dev server does not reliably pick up changes on Windows: restart it, or you will screenshot stale output and believe it.** This affects component edits as well as data files, and it has already produced a false clean overflow measurement in this plan. If a measurement surprises you, restart and measure again before drawing a conclusion from it. If port 3000 is in use, do NOT kill the process using it; take the fallback port and stop only the server you started.
 
 ```js
 // shot.tmp.mjs at the worktree root, deleted afterwards
