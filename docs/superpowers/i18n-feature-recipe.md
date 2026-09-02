@@ -90,6 +90,9 @@ Copy `src/features/contact/data/content.i18n.test.ts` and adapt: the imports, th
 Run `npm test`. It must fail with `Cannot find module './content.si.ts'`. That is the gate proving it works before you rely on it.
 
 ### Step C: write the overlays
+**One detail of the parity test is not optional.** The "no translated string is still the English string" assertion must compare NORMALISED, not raw: `translated.trim().toLowerCase()` against the same of the English. Raw comparison is case-sensitive, so `"Bank Transfer"` against `"Bank transfer"` reads as a translation when it is the English string with one capital letter changed. `international-care` shipped two such fields past a green suite. Keep the `KEEPS_ENGLISH` escape hatch checked first, and make the failure message say that the difference was only case or whitespace, so the next person reading a red suite understands it at once.
+
+
 
 Create `content.si.ts` and `content.ta.ts`. Each starts with the review marker:
 

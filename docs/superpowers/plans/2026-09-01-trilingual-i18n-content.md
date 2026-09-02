@@ -1008,16 +1008,20 @@ By now they do: every one of the 17 routes threads a locale into its Page compon
 
 Verify with a production build that neither `navigationLabels.si` nor `navigationLabels.ta` appears in any client chunk.
 
-- [ ] **Step 4: Fix what the sweep found**
+- [ ] **Step 4: Retrofit the normalised identity check**
+
+Only `international-care` compares normalised in its "not still English" assertion; every earlier feature compares raw and so cannot see a recapitalised English string. An audit across 2,220 overlay strings found zero current violations, so this is defensive rather than corrective, but the gate should be uniform. Change each feature test to compare `.trim().toLowerCase()` on both sides, keeping `KEEPS_ENGLISH` checked first, and run the suite: any new failure is a real string that was hiding.
+
+- [ ] **Step 5: Fix what the sweep found**
 
 One commit per class of problem, not one per screenshot.
 
-- [ ] **Step 5: Confirm the gate still refuses**
+- [ ] **Step 6: Confirm the gate still refuses**
 
 Run: `npm run i18n:status`
 Expected: every overlay listed as DRAFT, and `-- --require-reviewed` exits 1. Roughly 30 overlay files by now.
 
-- [ ] **Step 6: Hand over for review**
+- [ ] **Step 7: Hand over for review**
 
 Report to the user: the count of overlays awaiting sign-off, the register decisions their reviewer should confirm, and every string deliberately left in English. **Do not flip any `__review` status yourself.** That is the reviewer's act, and the whole gate exists to make it one.
 
