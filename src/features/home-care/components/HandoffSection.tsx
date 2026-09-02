@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { LocaleLink } from "@/components/i18n/LocaleLink";
 import { Reveal } from "@/components/ui/Reveal";
 import type { Handoff } from "../types";
 
@@ -11,9 +11,11 @@ import type { Handoff } from "../types";
  * point is content this page owns, and these two are windows onto pages that
  * own their own. The box says so before the reader reaches the link.
  *
- * The link is a `Link`, not an `<a>`: both destinations are routes, so this
- * gets client navigation and prefetch, and /pharmacy#delivery still lands on
- * the delivery band.
+ * The link is a `LocaleLink`, not an `<a>` or `next/link`'s `Link`: both
+ * destinations are routes elsewhere on the site, so a Sinhala or Tamil reader
+ * following either one needs the locale prefix carried across, the same as
+ * every other cross-page link this plan has translated, and /pharmacy#delivery
+ * still lands on the delivery band.
  */
 export function HandoffSection({ id, band }: { id: string; band: Handoff }) {
   return (
@@ -21,7 +23,10 @@ export function HandoffSection({ id, band }: { id: string; band: Handoff }) {
       id={id}
       className="mx-auto max-w-[1440px] px-5 pt-24 sm:px-8 lg:px-11 max-[640px]:pt-16"
     >
-      <Reveal className="grid grid-cols-[1fr_0.85fr] gap-x-12 gap-y-8 border border-[var(--home-hairline)] px-9 py-9 max-[899px]:grid-cols-1 max-[640px]:px-6">
+      {/* `minmax(0, ...)` on both tracks: without it, a plain `fr` track
+          cannot shrink below its content's intrinsic width, and Sinhala/Tamil
+          form long unbreakable tokens where English would have a space. */}
+      <Reveal className="grid grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] gap-x-12 gap-y-8 border border-[var(--home-hairline)] px-9 py-9 max-[899px]:grid-cols-1 max-[640px]:px-6">
         <div>
           <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
             {band.eyebrow}
@@ -48,12 +53,12 @@ export function HandoffSection({ id, band }: { id: string; band: Handoff }) {
               </li>
             ))}
           </ul>
-          <Link
+          <LocaleLink
             href={band.href}
             className="sj-invert font-display inline-flex items-center justify-between gap-5 border border-[var(--home-hairline)] px-6 py-4.5 text-[18px] font-semibold tracking-[-0.02em] text-[var(--home-heading)]"
           >
             {band.linkLabel} <span aria-hidden>&rarr;</span>
-          </Link>
+          </LocaleLink>
         </div>
       </Reveal>
     </section>

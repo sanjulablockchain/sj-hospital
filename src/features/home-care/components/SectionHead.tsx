@@ -10,6 +10,11 @@ import { Reveal } from "@/components/ui/Reveal";
  * `heading` is a node rather than a string because the callers hard-break their
  * headings, and where the line falls is a typographic decision that belongs
  * beside the markup rather than in `data/content.ts`.
+ *
+ * `min-w-0` on the heading group: Sinhala and Tamil form long unbreakable
+ * tokens where English would have a space, and a flex item does not shrink
+ * below its content width by default, so without this a long token pushes
+ * straight out of a 360px column.
  */
 export function SectionHead({
   eyebrow,
@@ -22,7 +27,7 @@ export function SectionHead({
 }) {
   return (
     <Reveal className="flex flex-wrap items-end justify-between gap-10">
-      <div>
+      <div className="min-w-0">
         <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
           {eyebrow}
         </div>

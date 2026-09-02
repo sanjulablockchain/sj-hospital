@@ -9,7 +9,8 @@ import { BookSection } from "./BookSection";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
 import { ThemedFooter } from "@/components/layout/ThemedFooter";
 import { homeCareFooterColumns } from "@/config/homeCareNavigation";
-import { faq, handoffs } from "../data/content";
+import type { Locale } from "@/lib/i18n/locales";
+import { getHomeCareContent } from "../data/getContent";
 
 /**
  * The care at home page: hero, jump cards, the four bands this page owns, the
@@ -27,31 +28,39 @@ import { faq, handoffs } from "../data/content";
  * `FaqAccordion` is the shared section, so `#faq` is not built here. It renders
  * the same one-open-at-a-time rows the pharmacy, international care and service
  * detail pages use, with its own eyebrow.
+ *
+ * The copy is fetched once here and handed down, rather than each section
+ * importing the English module directly. That is what makes the page
+ * translatable: this is the only component on the route that knows which
+ * language it is rendering.
  */
-export function HomeCarePage() {
+export async function HomeCarePage({ locale }: { locale: Locale }) {
+  const content = await getHomeCareContent(locale);
+  const { faq, faqHeading, handoffs, sectionEyebrows } = content;
+
   return (
     <>
       <main>
-        <HomeCareHero />
-        <JumpCards />
-        <VisitsSection />
-        <WhoSection />
-        <SamplingSection />
-        <HowSection />
+        <HomeCareHero content={content} />
+        <JumpCards content={content} />
+        <VisitsSection content={content} />
+        <WhoSection content={content} />
+        <SamplingSection content={content} />
+        <HowSection content={content} />
         <HandoffSection id="medicine" band={handoffs[0]} />
         <HandoffSection id="telemedicine" band={handoffs[1]} />
         <FaqAccordion
           faq={faq}
           heading={
             <>
-              Before you
+              {faqHeading.line1}
               <br />
-              call us
+              {faqHeading.line2}
             </>
           }
-          eyebrow="07 / Fair questions"
+          eyebrow={sectionEyebrows.faq}
         />
-        <BookSection />
+        <BookSection content={content} />
       </main>
       <ThemedFooter columns={homeCareFooterColumns} id="footer" />
     </>

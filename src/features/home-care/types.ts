@@ -35,5 +35,10 @@ export type Handoff = {
   href: string;
 };
 
-/** One of the rows in the `#book` contact rail. */
-export type ContactRow = { label: string; href: string; glyph: "phone" | "arrow" };
+/**
+ * One of the rows in the `#book` contact rail. `internal` marks the one row
+ * that is a route on this site rather than a phone number or a mailbox, so
+ * BookSection can send it through `LocaleLink` and keep a reader in the
+ * language they are already reading; the other rows stay a plain `<a>`.
+ */
+export type ContactRow = { label: string; href: string; glyph: "phone" | "arrow"; internal?: boolean };
