@@ -1,6 +1,6 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
-import { counters } from "../data/content";
+import type { PharmacyContent } from "../data/getContent";
 
 /**
  * `#counters`: what the ground floor counter does, in three cards.
@@ -11,26 +11,29 @@ import { counters } from "../data/content";
  * so this keeps the reference's three-card grid but splits it by job rather
  * than by invented geography.
  */
-export function CountersSection() {
+export function CountersSection({ content }: { content: PharmacyContent }) {
+  const { counters, countersHeading, countersIntro, sectionEyebrows } = content;
   return (
     <section id="counters" className="mx-auto max-w-[1440px] px-5 pt-30 sm:px-8 lg:px-11 max-[640px]:pt-18">
       <Reveal className="flex flex-wrap items-end justify-between gap-8">
-        <div>
+        {/* `min-w-0`: without it a long Sinhala/Tamil token in the heading
+            pushes this flex item (and the page) wider than the viewport,
+            the same flex-shrink trap Step E2 of the i18n recipe names. */}
+        <div className="min-w-0">
           <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
-            01 / Where to find us
+            {sectionEyebrows.counters}
           </div>
-          <h2 className="font-display mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
-            One counter,
+          <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
+            {countersHeading.line1}
             <br />
-            one record
+            {countersHeading.line2}
           </h2>
         </div>
         <p
           className="max-w-[36ch] text-[16.5px] leading-[1.6] text-[var(--home-muted)]"
           style={{ textWrap: "pretty" }}
         >
-          However your order reaches us, at the counter, from a consultation or by phone, the pharmacist
-          reads the same prescription history, so nothing gets dispensed twice.
+          {countersIntro}
         </p>
       </Reveal>
 

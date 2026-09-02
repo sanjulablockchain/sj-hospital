@@ -1,6 +1,6 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
-import { deliveryFacts, sendingWell, steps } from "../data/content";
+import type { PharmacyContent } from "../data/getContent";
 
 /**
  * `#delivery`: the four steps of a delivery order, then a two-up panel pairing
@@ -9,17 +9,26 @@ import { deliveryFacts, sendingWell, steps } from "../data/content";
  * The 2px grid gaps show the parent's hairline colour through, which is what
  * draws the rules between cells; each cell paints `--home-bg` over the top.
  */
-export function DeliverySection() {
+export function DeliverySection({ content }: { content: PharmacyContent }) {
+  const {
+    deliveryDetailHeading,
+    deliveryFacts,
+    deliveryHeading,
+    sectionEyebrows,
+    sendingWell,
+    sendingWellHeading,
+    steps,
+  } = content;
   return (
     <section id="delivery" className="mx-auto max-w-[1440px] px-5 pt-26 sm:px-8 lg:px-11 max-[640px]:pt-18">
-      <Reveal>
+      <Reveal className="min-w-0">
         <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
-          04 / Delivery
+          {sectionEyebrows.delivery}
         </div>
-        <h2 className="font-display mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
-          Photograph it,
+        <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
+          {deliveryHeading.line1}
           <br />
-          send it, done
+          {deliveryHeading.line2}
         </h2>
       </Reveal>
 
@@ -53,7 +62,7 @@ export function DeliverySection() {
       <Reveal className="mt-0.5 grid grid-cols-2 gap-0.5 bg-[var(--home-hairline)] max-[899px]:grid-cols-1">
         <div className="bg-[var(--home-bg)] border-t border-[var(--home-hairline)] pt-7 pr-6 pb-7 max-[899px]:px-0">
           <h3 className="text-[12.5px] font-bold tracking-[0.2em] text-[var(--home-accent-soft)] uppercase">
-            Sending a prescription well
+            {sendingWellHeading}
           </h3>
           <ul className="mt-4 flex flex-col gap-2.75 text-[15px] leading-[1.5]">
             {sendingWell.map((tip) => (
@@ -69,7 +78,7 @@ export function DeliverySection() {
 
         <div className="bg-[var(--home-bg)] border-t border-[var(--home-hairline)] pt-7 pb-7 pl-6.5 max-[899px]:px-0">
           <h3 className="text-[12.5px] font-bold tracking-[0.2em] text-[var(--home-accent-soft)] uppercase">
-            Delivery detail
+            {deliveryDetailHeading}
           </h3>
           <dl className="mt-4 flex flex-col gap-px bg-[var(--home-hairline)]">
             {deliveryFacts.map((fact) => (

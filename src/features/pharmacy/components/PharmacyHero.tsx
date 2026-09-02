@@ -1,11 +1,11 @@
 import Image from "next/image";
-import Link from "next/link";
+import { LocaleLink } from "@/components/i18n/LocaleLink";
 import { ThemedHeader } from "@/components/layout/ThemedHeader";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { Ticker } from "@/components/ui/Ticker";
 import { WhatsAppIcon } from "@/components/ui/BrandIcons";
 import { pharmacyNavigation } from "@/config/pharmacyNavigation";
-import { heroFacts, tickerItems } from "../data/content";
+import type { PharmacyContent } from "../data/getContent";
 
 /**
  * `#top`: the dispensary photo behind the themed header and the page's only
@@ -20,7 +20,8 @@ import { heroFacts, tickerItems } from "../data/content";
  * Copy animates with `animate-sj-up` rather than `Reveal`, since it is already
  * in the first viewport and should not wait on an intersection observer.
  */
-export function PharmacyHero() {
+export function PharmacyHero({ content }: { content: PharmacyContent }) {
+  const { hero, heroFacts, heroStandfirst, tickerItems } = content;
   return (
     <section
       id="top"
@@ -68,25 +69,29 @@ export function PharmacyHero() {
             className="text-[11px] tracking-[0.3em] text-white/50 uppercase"
             style={{ writingMode: "vertical-rl" }}
           >
-            The counter never closes
+            {hero.strapline}
           </span>
           <span className="w-px flex-1 bg-gradient-to-b from-white/40 to-transparent" />
         </div>
 
-        <div className="flex-1 pb-11">
+        <div className="min-w-0 flex-1 pb-11">
           <div className="animate-sj-up inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
             <span aria-hidden className="h-px w-11 bg-[#2CA6F0]" />
-            <Link href="/" className="text-[#7FCBFF] hover:text-white">
-              Home
-            </Link>
+            <LocaleLink href="/" className="text-[#7FCBFF] hover:text-white">
+              {hero.breadcrumbHome}
+            </LocaleLink>
             <span aria-hidden className="opacity-50">
               /
             </span>
-            Pharmacy
+            {hero.breadcrumbCurrent}
           </div>
 
-          <h1 className="font-display animate-sj-up mt-4.5 text-[clamp(44px,7.6vw,126px)] leading-[0.86] font-extrabold tracking-[-0.045em] text-white uppercase">
-            Authorized
+          {/* `wrap-break-word`: Sinhala and Tamil can put a single
+              unbreakable token in `headingLead`, with nothing beside it on
+              that line for the browser to reflow around, the same trap
+              home-care's own heading hit at 360px and fixed the same way. */}
+          <h1 className="font-display animate-sj-up wrap-break-word mt-4.5 text-[clamp(44px,7.6vw,126px)] leading-[0.86] font-extrabold tracking-[-0.045em] text-white uppercase">
+            {hero.headingLead}
             <br />
             {/* Outlined rather than filled, so the three lines read as one
                 phrase stepping from solid to hollow to accent. */}
@@ -94,10 +99,10 @@ export function PharmacyHero() {
               className="text-transparent"
               style={{ WebkitTextStroke: "1.4px rgba(242,246,255,0.75)" }}
             >
-              medicine.
+              {hero.headingOutline}
             </span>
             <br />
-            <span className="text-[#2CA6F0]">Nothing else.</span>
+            <span className="text-[#2CA6F0]">{hero.headingAccent}</span>
           </h1>
 
           <div className="animate-sj-up mt-8 flex flex-col items-start gap-5.5">
@@ -105,8 +110,7 @@ export function PharmacyHero() {
               className="max-w-[52ch] text-[18px] leading-[1.6] text-white/82"
               style={{ textWrap: "pretty" }}
             >
-              Verified stock only, dispensed by pharmacists who can read your file, at any hour of the
-              night. No substitutes without asking you first, and no grey market supply, ever.
+              {heroStandfirst}
             </p>
             <div className="flex flex-wrap gap-3">
               <a
@@ -114,14 +118,14 @@ export function PharmacyHero() {
                 className="inline-flex items-center gap-2.75 bg-[#1FAF54] px-6 py-4 text-[15px] font-bold text-[#04220F] transition-colors hover:bg-white hover:text-[#060B1F]"
               >
                 <WhatsAppIcon />
-                Send a prescription
+                {hero.sendCta}
               </a>
               <a
                 href="tel:+94742223334"
                 className="inline-flex items-center gap-3 border border-white/30 px-6 py-4 text-[15px] font-bold whitespace-nowrap text-white tabular-nums transition-colors hover:bg-white hover:text-[#060B1F]"
               >
                 <span aria-hidden className="animate-sj-pulse h-2 w-2 rounded-full bg-[#2CA6F0]" />
-                074 222 333 4
+                {hero.call.value}
               </a>
             </div>
           </div>

@@ -52,3 +52,23 @@ export type PharmacyFaq = {
   q: string;
   a: string;
 };
+
+/**
+ * One of the three actions in `#book`'s contact rail. `internal` marks the
+ * one row that is a route on this site rather than a phone number or a
+ * WhatsApp link, so BookSection can send it through `LocaleLink` and keep a
+ * reader in the language they are already reading; the other rows stay a
+ * plain `<a>`. `value` is optional: only the phone row carries a fact
+ * distinct from its own action phrase (the counter's own number). The
+ * WhatsApp and "All services" rows have nothing else to show beyond their
+ * label, so they leave it unset rather than repeating their `href` as a
+ * second string with a second home. Matches `home-care`'s own `ContactRow`
+ * shape and `contact`'s and `accommodation`'s `contactRows`/`bookRail`.
+ */
+export type BookAction = {
+  label: string;
+  value?: string;
+  href: string;
+  glyph: "phone" | "arrow";
+  internal?: boolean;
+};

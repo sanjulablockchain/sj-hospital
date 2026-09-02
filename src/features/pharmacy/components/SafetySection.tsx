@@ -1,6 +1,6 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
-import { safety } from "../data/content";
+import type { PharmacyContent } from "../data/getContent";
 
 /**
  * `#safety`: eight cards on what happens to an order before it is handed over.
@@ -11,24 +11,25 @@ import { safety } from "../data/content";
  * the catalog, and a storage claim is not one to invent, so the grid keeps its
  * shape and the eight cards now cover the checks the repo does describe.
  */
-export function SafetySection() {
+export function SafetySection({ content }: { content: PharmacyContent }) {
+  const { safety, safetyHeading, safetyIntro, sectionEyebrows } = content;
   return (
     <section id="safety" className="mx-auto max-w-[1440px] px-5 pt-26 sm:px-8 lg:px-11 max-[640px]:pt-18">
       <Reveal className="flex flex-wrap items-end justify-between gap-10">
-        <div>
+        {/* `min-w-0`: without it a long Sinhala/Tamil token in the heading
+            pushes this flex item (and the page) wider than the viewport,
+            the same flex-shrink trap Step E2 of the i18n recipe names. */}
+        <div className="min-w-0">
           <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
-            06 / Safety &amp; records
+            {sectionEyebrows.safety}
           </div>
-          <h2 className="font-display mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
-            Checked before
+          <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
+            {safetyHeading.line1}
             <br />
-            it reaches you
+            {safetyHeading.line2}
           </h2>
         </div>
-        <p className="max-w-[36ch] text-[16.5px] leading-[1.6] text-[var(--home-muted)]">
-          Nothing is handed over on the strength of the paper alone. Every order is read against your
-          record first, and everything on the shelf is authorized stock.
-        </p>
+        <p className="max-w-[36ch] text-[16.5px] leading-[1.6] text-[var(--home-muted)]">{safetyIntro}</p>
       </Reveal>
 
       <RevealStagger
