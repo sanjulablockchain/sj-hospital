@@ -64,16 +64,26 @@ function isUntranslatable(path: string): boolean {
  * ("acig.lk", "ktdoctor.com", and so on), which content.test.ts pins against
  * the href on the same row and so can never be recast either.
  *
- * The last group of entries is a handful of individual chips: "Telemedicine"
- * and "Telehealth" are the same single-service loanword pharmacy's own
- * `hero.breadcrumbCurrent` keeps for "Pharmacy", with no natural one-word
- * Sinhala or Tamil equivalent that is not just a paraphrase of the "care"
- * word sitting right next to it elsewhere on the same card. "Speech
- * therapy", "Occupational therapy" and "Sensory integration" are clinical
+ * The last group of entries is a handful of individual chips. "Telemedicine",
+ * "Telehealth" (x3) and "Speech therapy" were excused here too until a
+ * review applied the sibling test: every other chip in each of those arrays
+ * gets a translation or a code-mixed connector, and this page's own
+ * `reachRows[6].who` translates "Speech" to "කථන" / "பேச்சு" two sections
+ * further down the same overlay file while the LAIPT chip claimed "Speech
+ * therapy" had no equivalent. Both claims did not hold, so all five are now
+ * translated in the code-mixed register their siblings use ("Telemedicine
+ * සත්කාර" / "Telemedicine சிகிச்சை", "Telehealth සත්කාර" / "Telehealth
+ * சிகிச்சை", "කථන Therapy" / "பேச்சு Therapy") and removed from this set.
+ *
+ * "Occupational therapy" and "Sensory integration" are clinical
  * therapy-service names a Sri Lankan therapist says in English, the same
  * reason pharmacy's `stock[].name` keeps dosage-form English names
- * ("Antibiotics", "Chronic medicine"). "Paediatric HMO/IPA" is a US
- * insurance-scheme acronym with nothing to translate.
+ * ("Antibiotics", "Chronic medicine"). "Occupational" is a more specialised
+ * clinical modifier than "Speech" or "Developmental", without the same
+ * everyday one-word equivalent, which is why `reachRows[6].who` also keeps
+ * it in English while translating its two neighbours: the chip and the
+ * reach row agree with each other now, rather than contradicting. "Paediatric
+ * HMO/IPA" is a US insurance-scheme acronym with nothing to translate.
  */
 const KEEPS_ENGLISH = new Set<string>([
   // The other eight companies in the group, exactly as ktdoctor.com/network
@@ -123,16 +133,12 @@ const KEEPS_ENGLISH = new Set<string>([
   "orgGroups[2].orgs[1].name",
   "orgGroups[2].orgs[1].cta",
 
-  // A handful of individual chips: single-service loanwords and clinical
-  // therapy-service names with nothing to translate. See the comment above.
-  "orgGroups[0].orgs[0].chips[2]", // Telemedicine, St. Joseph Hospital
-  "orgGroups[1].orgs[0].chips[2]", // Telehealth, Kids & Teens
-  "orgGroups[1].orgs[1].chips[2]", // Telehealth, St. Gianna
-  "orgGroups[1].orgs[2].chips[0]", // Speech therapy, LAIPT
+  // A handful of individual chips: clinical therapy-service names and a US
+  // insurance-scheme acronym with nothing to translate. See the comment
+  // above.
   "orgGroups[1].orgs[2].chips[1]", // Occupational therapy, LAIPT
   "orgGroups[1].orgs[2].chips[2]", // Sensory integration, LAIPT
   "orgGroups[1].orgs[3].chips[0]", // Paediatric HMO/IPA, Serendib Healthways
-  "orgGroups[1].orgs[3].chips[2]", // Telehealth, Serendib Healthways
 ]);
 
 test("every translatable string in network has Sinhala", () => {

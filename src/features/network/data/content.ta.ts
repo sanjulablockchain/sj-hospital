@@ -113,7 +113,7 @@ export const orgGroups = [
         name: "St. Joseph Hospital Negombo",
         tagline: "நீர்கொழும்பில் US தரத்திலான சிகிச்சை.",
         body: "Kids & Teens Medical Group, USA ஆல் இயக்கப்படும், சர்வதேச Airport இலிருந்து பத்து நிமிடத் தொலைவில், அமெரிக்க சுகாதார Standards ஐ, ஏற்புடைய, அணுகக்கூடிய சிகிச்சைக்குக் கொண்டு வருகிறது.",
-        chips: ["Emergency மற்றும் OPD", "Inpatient சிகிச்சை", "Telemedicine", "Pharmacy மற்றும் Diagnostics"],
+        chips: ["Emergency மற்றும் OPD", "Inpatient சிகிச்சை", "Telemedicine சிகிச்சை", "Pharmacy மற்றும் Diagnostics"],
         // A statement of fact rather than a company's own domain, so it is
         // translated: see KEEPS_ENGLISH for why the other eight `cta`s are
         // not.
@@ -142,7 +142,7 @@ export const orgGroups = [
         name: "Kids & Teens Medical Group",
         tagline: "முதன்மை Paediatric Network.",
         body: "Greater LA இல் 25 Clinics முழுவதும், வயது 0 முதல் 21 வரை குழந்தைகளுக்கு Board Certified Paediatric சிகிச்சை, மற்றும் இந்த மருத்துவமனையை இயக்கும் Group.",
-        chips: ["முதன்மை சிகிச்சை", "அவசர சிகிச்சை", "Telehealth", "பிறந்த குழந்தை சிகிச்சை"],
+        chips: ["முதன்மை சிகிச்சை", "அவசர சிகிச்சை", "Telehealth சிகிச்சை", "பிறந்த குழந்தை சிகிச்சை"],
         cta: "ktdoctor.com",
       },
       {
@@ -151,7 +151,7 @@ export const orgGroups = [
         name: "St. Gianna Medical Group",
         tagline: "அனைத்து வயதினருக்கும் குடும்ப மருத்துவம்.",
         body: "அன்றே Appointments மற்றும் 24 மணி நேர Booking உடன் பெரியவர்கள் மற்றும் குழந்தைகளுக்கான முழுமையான சிகிச்சை, Group ஐ Paediatrics ஐ தாண்டி விரிவாக்குகிறது.",
-        chips: ["அன்றே Appointments", "24 மணி நேர Booking", "Telehealth", "மேம்பட்ட காயச் சிகிச்சை"],
+        chips: ["அன்றே Appointments", "24 மணி நேர Booking", "Telehealth சிகிச்சை", "மேம்பட்ட காயச் சிகிச்சை"],
         cta: "sgmdoctor.com",
       },
       {
@@ -160,11 +160,12 @@ export const orgGroups = [
         name: "LA Intensive Pediatric Therapy",
         tagline: "நிபுணர் Paediatric Therapy.",
         body: "குழந்தைகளுக்கான Individual மற்றும் Centre அடிப்படையிலான Speech, Occupational மற்றும் Developmental Therapy, மற்றும் Early Intervention க்கான Group இன் Reference இடம்.",
-        // These three are clinical therapy-service names without a natural
-        // Tamil equivalent Sri Lankans say out loud, the same reason
-        // pharmacy's `stock[].name` keeps dosage-form English names: see
-        // KEEPS_ENGLISH.
-        chips: ["Speech therapy", "Occupational therapy", "Sensory integration"],
+        // `chips[1]` and `chips[2]` are clinical therapy-service names
+        // without a natural Tamil equivalent Sri Lankans say out loud, the
+        // same reason pharmacy's `stock[].name` keeps dosage-form English
+        // names: see KEEPS_ENGLISH. `chips[0]` translates "Speech" the same
+        // way `reachRows` does further down this file.
+        chips: ["பேச்சு Therapy", "Occupational therapy", "Sensory integration"],
         cta: "laipt.org",
       },
       {
@@ -174,9 +175,8 @@ export const orgGroups = [
         tagline: "Greater LA முழுவதும் Paediatric சுகாதார Plans.",
         body: "20க்கும் மேற்பட்ட Clinic இடங்கள் மற்றும் 50க்கும் மேற்பட்ட Board Certified மருத்துவர்களுடன், Los Angeles County முழுவதும் குழந்தைகளுக்கான ஏற்புடைய Coverage வழங்கும் Paediatric HMO மற்றும் IPA Network.",
         // `chips[0]` is a US insurance-scheme acronym with no Tamil
-        // equivalent, and `chips[2]` is the same loanword `chips[2]` is
-        // elsewhere on this page: see KEEPS_ENGLISH.
-        chips: ["Paediatric HMO/IPA", "அன்றே Appointments", "Telehealth", "நேரத்திற்குப் பின் அவசர சிகிச்சை"],
+        // equivalent: see KEEPS_ENGLISH.
+        chips: ["Paediatric HMO/IPA", "அன்றே Appointments", "Telehealth சிகிச்சை", "நேரத்திற்குப் பின் அவசர சிகிச்சை"],
         cta: "serendibhealthways.com",
       },
       {
