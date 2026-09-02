@@ -1,6 +1,6 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
-import { estimateNote, treatments } from "../data/content";
+import type { InternationalCareContent } from "../data/getContent";
 
 /**
  * `#estimates`: what people travel here for, as hairline rows of treatment,
@@ -15,7 +15,8 @@ import { estimateNote, treatments } from "../data/content";
  * `stay` never carries a night count the hospital has not published. Where the
  * repo says a stay is confirmed at consultation, that is what the row says.
  */
-export function EstimatesSection() {
+export function EstimatesSection({ content }: { content: InternationalCareContent }) {
+  const { estimateNote, estimatesHeading, estimatesIntro, sectionEyebrows, treatments } = content;
   return (
     <section
       id="estimates"
@@ -23,19 +24,20 @@ export function EstimatesSection() {
     >
       <Reveal>
         <div className="flex flex-wrap items-end justify-between gap-10">
-          <div>
+          {/* min-w-0: see JourneySection for why a long Sinhala or Tamil
+              token needs this to avoid pushing the row past 360px. */}
+          <div className="min-w-0">
             <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
-              03 / What people travel for
+              {sectionEyebrows.estimates}
             </div>
-            <h2 className="font-display mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
-              Written estimates,
+            <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
+              {estimatesHeading.line1}
               <br />
-              before you book
+              {estimatesHeading.line2}
             </h2>
           </div>
           <p className="max-w-[38ch] text-[16.5px] leading-[1.6] text-[var(--home-muted)]">
-            Send your reports and the estimate comes back in writing, covering the likely course of
-            care. It follows your scans rather than a price list, because your scans decide.
+            {estimatesIntro}
           </p>
         </div>
       </Reveal>

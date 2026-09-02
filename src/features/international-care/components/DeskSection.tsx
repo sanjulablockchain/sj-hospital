@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
-import { deskServices } from "../data/content";
+import type { InternationalCareContent } from "../data/getContent";
 
 /**
  * `#services`: the full-bleed dark band, fixed-dark in both themes because it
@@ -19,7 +19,8 @@ import { deskServices } from "../data/content";
  * reference's "beside the main lobby, staffed 7am to 9pm with a duty number"
  * is not backed anywhere in this repo.
  */
-export function DeskSection() {
+export function DeskSection({ content }: { content: InternationalCareContent }) {
+  const { deskServices, sectionEyebrows, servicesEmail, servicesHeading, servicesIntro } = content;
   return (
     <section id="services" className="relative mt-26 overflow-hidden bg-[#08123A]">
       <ParallaxLayer
@@ -48,25 +49,23 @@ export function DeskSection() {
         <div className="grid items-start gap-14.5 min-[900px]:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] max-[899px]:gap-10">
           <Reveal className="min-[900px]:sticky min-[900px]:top-10">
             <div className="text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
-              02 / What the desk handles
+              {sectionEyebrows.services}
             </div>
-            <h2 className="font-display mt-4.5 text-[clamp(36px,4.6vw,66px)] leading-[0.9] font-extrabold tracking-[-0.04em] text-white uppercase">
-              Everything
+            <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(36px,4.6vw,66px)] leading-[0.9] font-extrabold tracking-[-0.04em] text-white uppercase">
+              {servicesHeading.line1}
               <br />
-              except the
+              {servicesHeading.line2}
               <br />
-              flight
+              {servicesHeading.line3}
             </h2>
             <p className="mt-5.5 max-w-[40ch] text-[17px] leading-[1.65] text-white/78">
-              One desk carries the transfer, the estimate, the insurance paperwork, the interpreter
-              and the records you leave with. Ask for the international desk at the main entrance, or
-              write ahead and it is arranged before you land.
+              {servicesIntro}
             </p>
             <a
-              href="mailto:appointments@sjhospital.lk"
+              href={`mailto:${servicesEmail}`}
               className="sj-invert mt-6.5 inline-flex w-fit items-center gap-2.5 bg-[#2CA6F0] px-5.5 py-3.75 text-[14.5px] font-bold text-[#04122B]"
             >
-              appointments@sjhospital.lk
+              {servicesEmail}
             </a>
           </Reveal>
 

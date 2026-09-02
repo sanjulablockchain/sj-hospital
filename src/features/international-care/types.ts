@@ -49,3 +49,16 @@ export type InternationalFaq = {
   q: string;
   a: string;
 };
+
+/** One of the direct-contact rows in `#enquiry`. `value` carries a fact (the
+ *  hospital's own phone number) that sits beside its own translatable
+ *  `label`, rather than the label holding the digits on their own with no
+ *  action phrase to translate. `glyph` is a structural name the component
+ *  switches on to choose the icon, never copy: see `network`'s own
+ *  `ContactRow` for the same fix to the same trap. */
+export type EnquiryContactRow = {
+  label: string;
+  value?: string;
+  href: string;
+  glyph: "phone" | "arrow";
+};

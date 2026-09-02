@@ -1,5 +1,6 @@
 import type {
   DeskService,
+  EnquiryContactRow,
   FactRow,
   InternationalFaq,
   JourneyStep,
@@ -32,7 +33,50 @@ import type {
  * Two rows in `practical` are general travel facts rather than hospital claims
  * (the time zone and the climate), which is why they are phrased without a
  * figure the hospital would have to stand behind.
+ *
+ * `hero`, `sectionEyebrows` and every `*Heading`/`*Intro`/`*Note` export below
+ * were moved here out of the section components so they can be translated:
+ * before this they were literals inside `InternationalHero.tsx`,
+ * `JourneySection.tsx`, `DeskSection.tsx`, `EstimatesSection.tsx`,
+ * `RoomsSection.tsx`, `BillingSection.tsx`, `NegomboSection.tsx`,
+ * `EnquirySection.tsx` and `InternationalCarePage.tsx`.
+ *
+ * `enquiryContactRows[2]` used to carry the hospital's own phone number as its
+ * whole `label`, with no separate translatable action phrase, the same A2
+ * trap `contact`, `accommodation` and `network` each had to fix: the row now
+ * has a `label` ("Call the desk") and a `value` (the number), the same shape
+ * `network`'s own `ContactRow` uses.
+ *
+ * "Bandaranaike International Airport" stays in English wherever it appears,
+ * the same way `contact`'s own "St. Joseph Street" does: it is the airport's
+ * official name, the one a traveller's ticket and a taxi driver both show, not
+ * a place name a Sinhala or Tamil reader would expect rewritten in another
+ * script. "Katunayake", the town the airport sits in, is not that: it
+ * translates like any other Sri Lankan place name, the same way "Negombo" and
+ * "Colombo" do elsewhere in this file.
  */
+
+const INTERNATIONAL_EMAIL = "appointments@sjhospital.lk";
+const WHATSAPP_HREF = "https://wa.me/94742223334";
+
+/** The desk's WhatsApp number, as a `wa.me` link. A fact, not copy: used by
+ *  both the hero CTA and the `#enquiry` contact row so it has one home. */
+export const whatsappHref = WHATSAPP_HREF;
+
+/** `#top`: the hero copy, moved out of InternationalHero so it can be
+ *  translated. */
+export const hero = {
+  strapline: "Ten minutes from the airport",
+  breadcrumbHome: "Home",
+  breadcrumbCurrent: "International Patient Care",
+  headingLead: "You land at",
+  headingPlace: "Katunayake.",
+  headingTail: "We take it from there.",
+  standfirst:
+    "We are ten minutes from Bandaranaike International Airport, on St. Joseph Street in central Negombo. The international desk arranges the transfer, the estimate, the interpreter and the records you take home, from the first email to the flight back.",
+  estimateCta: "Get a written estimate",
+  whatsappCta: "WhatsApp the desk",
+};
 
 /** Scrolling strip along the bottom of the hero. */
 export const tickerItems = [
@@ -79,6 +123,22 @@ export const jumpCards: JumpCard[] = [
   },
 ];
 
+/** The numbered eyebrow above every section heading. */
+export const sectionEyebrows = {
+  journey: "01 / The journey",
+  services: "02 / What the desk handles",
+  estimates: "03 / What people travel for",
+  rooms: "04 / Where you stay",
+  insurance: "05 / Paying for it",
+  stay: "06 / Recovering in Negombo",
+  faq: "07 / Before you fly",
+  enquiry: "08 / Start here",
+};
+
+export const journeyHeading = { line1: "Six steps, one", line2: "coordinator" };
+export const journeyIntro =
+  "Nobody hands you between departments. The desk that answers your first email is the one that arranges your transfer and signs off the pack you take home.";
+
 /** `#journey`: the same six stages as the home page's international band, told
  *  in the order a travelling patient meets them. */
 export const journeySteps: JourneyStep[] = [
@@ -119,6 +179,13 @@ export const journeySteps: JourneyStep[] = [
     when: "Going home",
   },
 ];
+
+export const servicesHeading = { line1: "Everything", line2: "except the", line3: "flight" };
+export const servicesIntro =
+  "One desk carries the transfer, the estimate, the insurance paperwork, the interpreter and the records you leave with. Ask for the international desk at the main entrance, or write ahead and it is arranged before you land.";
+/** The desk's own address, shown as a mailto link in `#services`. A fact, not
+ *  copy: it never changes by locale. */
+export const servicesEmail = INTERNATIONAL_EMAIL;
 
 /** `#services`: what the international desk handles, on the dark band. */
 export const deskServices: DeskService[] = [
@@ -179,6 +246,10 @@ export const deskServices: DeskService[] = [
  * publishes appear, and `stay` uses the repo's own wording rather than a night
  * count the hospital has not committed to.
  */
+export const estimatesHeading = { line1: "Written estimates,", line2: "before you book" };
+export const estimatesIntro =
+  "Send your reports and the estimate comes back in writing, covering the likely course of care. It follows your scans rather than a price list, because your scans decide.";
+
 export const treatments: TreatmentRow[] = [
   {
     name: "Health check",
@@ -244,6 +315,10 @@ export const estimateNote =
 /** `#rooms`: the four categories the hospital actually offers, taken from
  *  `features/facilities/data/content`. Only the standard single carries a
  *  figure, because 10,000 LKR is the sole room price the repo publishes. */
+export const roomsHeading = { line1: "Your attendant", line2: "stays with you" };
+/** Sits under the shared amenity list in `#rooms`. */
+export const roomsNote = "Every category, from the wards up, carries the list above as standard.";
+
 export const roomTiles: RoomTile[] = [
   {
     tier: "One bed",
@@ -282,6 +357,12 @@ export const roomStandard: string[] = [
   "Medical support on call",
 ];
 
+export const billingHeading = "The estimate comes first";
+export const billingIntro =
+  "A written estimate is given before treatment starts, covering the likely course of care, so nothing begins until you have it in front of you. Send your policy details to the desk before you travel and the insurance paperwork is prepared alongside it.";
+/** Eyebrow above `insuranceNotes` in the narrow list panel. */
+export const billingSideLabel = "Insurance";
+
 /** Chips inside the accent panel in `#insurance`. */
 export const payChips: string[] = [
   "Written estimate before treatment",
@@ -301,6 +382,12 @@ export const insuranceNotes: string[] = [
   "In an emergency you are assessed and stabilised first, and billing is settled afterwards",
 ];
 
+export const stayHeading = { line1: "A good place", line2: "to get better" };
+export const stayIntro =
+  "Negombo is a coastal town, quiet and walkable, ten minutes from the airport and about an hour from Colombo. Most patients spend the week after a procedure here rather than travelling on.";
+export const stayNote =
+  "Ask your consultant before you plan anything. Flying, swimming and long drives after surgery each have their own timeline, and the answer depends on the operation.";
+
 /** `#stay`: the practical list beside the Negombo copy. */
 export const practical: FactRow[] = [
   { k: "From the airport", v: "Ten minutes from Bandaranaike International" },
@@ -314,6 +401,8 @@ export const practical: FactRow[] = [
   { k: "Attendant", v: "One may stay overnight in every room category" },
   { k: "Any hour", v: "0117 84 84 84 reaches the hospital" },
 ];
+
+export const faqHeading = "The questions we always get";
 
 export const faq: InternationalFaq[] = [
   {
@@ -358,6 +447,10 @@ export const faq: InternationalFaq[] = [
   },
 ];
 
+export const enquiryHeading = { line1: "Send your", line2: "reports. Get", line3: "a real answer." };
+export const enquiryIntro =
+  "Email or WhatsApp your scans, reports, current medicines and a short history. The desk arranges a consultation with the right doctor by video or by phone, and the written estimate follows before anything is booked.";
+
 /** Chips inside the accent panel in `#enquiry`. */
 export const enquiryChips: string[] = [
   "Scans and reports",
@@ -365,3 +458,16 @@ export const enquiryChips: string[] = [
   "Photo ID or passport",
   "Insurance details",
 ];
+
+/** The three direct contacts, in the order the reference stacks them. `[2]`
+ *  used to carry the hospital's own phone number as its whole `label`, with
+ *  no separate value: see the file header and `EnquiryContactRow` in
+ *  `types.ts`. */
+export const enquiryContactRows: EnquiryContactRow[] = [
+  { label: "Email the desk", href: `mailto:${INTERNATIONAL_EMAIL}`, glyph: "arrow" },
+  { label: "WhatsApp your reports", href: WHATSAPP_HREF, glyph: "arrow" },
+  { label: "Call the desk", value: "0117 84 84 84", href: "tel:+94117848484", glyph: "phone" },
+];
+
+/** The last row in `#enquiry`, a next/link to the services directory. */
+export const enquiryBrowseCta = "Browse all services";
