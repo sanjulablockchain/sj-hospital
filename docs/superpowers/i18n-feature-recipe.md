@@ -28,6 +28,16 @@ Worked examples, from the committed contact overlays:
 | Book a doctor | වෛද්‍යවරයෙක් Book කරන්න | Doctor ஐ Book செய்யுங்கள் |
 | Reception, 24 hours | Reception, පැය 24 | Reception, 24 மணி நேரம் |
 
+## The sibling test, for deciding what stays English
+
+The keep-English exception is for words people genuinely say in English: drug classes, brands, dispensing tags, product and company names, `Email`, `WhatsApp`, `OPD`, `X-ray`. It is NOT for any English-looking category label, and it has now been stretched twice.
+
+`pharmacy` swept four generic supply categories into it ("Wound care and dressings", "First aid supplies") and they had to be pulled back out. `network` did the same with "Telemedicine", "Telehealth" and "Speech therapy", while the same overlay file translated "Speech" to `කථන` two sections further down.
+
+**The test: look at the siblings in the same array.** If every other entry beside it gets a translation or a code-mixed connector, and this one alone is byte-identical to the English, it is a miss and not an exception. Translate it, or write down why this member of the list is genuinely different from its neighbours.
+
+**And check the rest of your own file.** If you translate a word in one place and claim it has no equivalent in another, one of the two is wrong.
+
 ## The five patterns the pilot established
 
 Break any of these and the failure is silent in English and visible only in Sinhala and Tamil.
