@@ -41,6 +41,7 @@ export async function ServiceDetailPage({ slug, locale }: { slug: string; locale
           services={content.services}
           current={service.slug}
           ariaLabel={content.indexContent.allServicesLabel}
+          locale={locale}
         />
         <AboutSection service={service} content={content} />
         <JourneySection service={service} content={content} />

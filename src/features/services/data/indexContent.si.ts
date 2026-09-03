@@ -67,7 +67,7 @@ export const centres = [
   {
     name: "ළමා සත්කාර",
     desc: "වැඩිහිටි වාට්ටුවලින් වෙන් කර, විශේෂිත Protocol එකකට එරෙහිව Assess කරන ළමුන් සහ තරුණයින්.",
-    lead: "Kids & Teens Protocol",
+    lead: "Kids & Teens protocol",
   },
   {
     name: "රසායනාගාරය",

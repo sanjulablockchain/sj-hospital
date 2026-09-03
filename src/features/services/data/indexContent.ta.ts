@@ -66,7 +66,7 @@ export const centres = [
   {
     name: "குழந்தை சிகிச்சை",
     desc: "வயது வந்தோர் வார்டுகளிலிருந்து பிரிக்கப்பட்டு, ஒரு தனி Protocol க்கு எதிராக Assess செய்யப்படும் குழந்தைகள் மற்றும் இளையோர்.",
-    lead: "Kids & Teens Protocol",
+    lead: "Kids & Teens protocol",
   },
   {
     name: "ஆய்வுகூடம்",

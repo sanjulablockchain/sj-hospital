@@ -101,15 +101,16 @@ function isUntranslatable(moduleName: string, path: string): boolean {
  *   translates in full (Emergency, Surgical, Diagnostics, Women & children,
  *   At home), which is what makes this the sibling-test exception and not a
  *   miss.
- * - `indexContent:pharmacySection.eyebrow` ("08 / Pharmacy") and
- *   `indexContent:bookSection.eyebrow`/`.heading` are NOT here: the eyebrow
- *   numeral/slash is structural-looking but is one field with the
- *   translatable word riding along, so it is translated in full rather than
- *   excepted (see `indexContent.si.ts` / `.ta.ts`); only the bare word
- *   "Pharmacy" itself would qualify, and this repo's `groupLabels`/
- *   `navigationLabels` already establish "Pharmacy" as a keeps-English
- *   register word wherever it stands alone. `pharmacySection.eyebrow`
- *   keeps the English word "Pharmacy" for exactly that reason.
+ * - `indexContent:pharmacySection.eyebrow` ("08 / Pharmacy"): the eyebrow
+ *   numeral/slash is one field with the translatable word riding along, and
+ *   here that word is "Pharmacy", which this repo's `groupLabels`/
+ *   `navigationLabels` already establish as a keeps-English register word
+ *   wherever it stands alone. `indexContent:bookSection.eyebrow` (the "10 /"
+ *   sibling) is NOT in this set: its register word is "Book", which has no
+ *   such precedent, so it translates in full ("10 / වෙන් කිරීම" / "10 /
+ *   முன்பதிவு", reusing `navigationLabels`'s own `FOOTER_HEADINGS.Booking`),
+ *   which is the sibling-test evidence that `pharmacySection.eyebrow` is a
+ *   genuine exception and not a miss.
  * - `indexContent:centres[3].lead` ("Kids & Teens protocol", the Paediatric
  *   Care centre): this programme's own named protocol, the same proper-noun
  *   class `home`'s own content.i18n.test.ts keeps English for

@@ -116,7 +116,7 @@ export const emergencyServices = [
     tags: ["Ventilator සහාය", "අඛණ්ඩ Monitoring", "විශේෂඥ Rounds", "පවුලට Update"],
     facts: [
       { k: "Nursing Ratio එක", v: "Beds කුඩා, ස්ථිර පිරිසක්" },
-      { k: "විශේඥ Rounds", v: "දිනපතා" },
+      { k: "විශේෂඥ Rounds", v: "දිනපතා" },
       { k: "බැලීමට එන්න", v: "නියම වේලාවන්" },
       { k: "පවුලට Update", v: "දිනකට වරක් Phone එකෙන් හෝ මුහුණින්" },
     ],
