@@ -1,6 +1,8 @@
 import { ThemedFooter } from "@/components/layout/ThemedFooter";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
 import { careerFooterColumns } from "@/config/careerNavigation";
+import type { Locale } from "@/lib/i18n/locales";
+import { getCareerContent } from "../data/getContent";
 import { CareersHero } from "./CareersHero";
 import { JumpCards } from "./JumpCards";
 import { FeatureSplit } from "./FeatureSplit";
@@ -10,7 +12,6 @@ import { ProcessSection } from "./ProcessSection";
 import { StudentsSection } from "./StudentsSection";
 import { ApplicationSection } from "./ApplicationSection";
 import { ApplySection } from "./ApplySection";
-import { commitments, fraudChecks, faq } from "../data/content";
 
 /**
  * The careers page in the reference's order: hero, jump cards, then the nine
@@ -22,34 +23,46 @@ import { commitments, fraudChecks, faq } from "../data/content";
  * The footer keeps its default `#footer` id rather than the reference's
  * `#contact`, because `#apply` is this page's real contact section and two
  * elements cannot share one fragment.
+ *
+ * The copy is fetched once here and handed down, rather than each section
+ * importing the English module directly. That is what makes the page
+ * translatable: this is the only component on the route that knows which
+ * language it is rendering. `OpeningsSection` and `ApplicationForm` (via
+ * `ApplicationSection`) are the only Client Components on this page; every
+ * Server Component section still takes `content` as a prop rather than
+ * importing `../data/content` itself, the same as `media`'s and `contact`'s
+ * own pages.
  */
-export function CareersPage() {
+export async function CareersPage({ locale }: { locale: Locale }) {
+  const content = await getCareerContent(locale);
+  const { commitments, fraudChecks, faq, whySection, fraudSection, faqHeading, sectionEyebrows } = content;
+
   return (
     <>
       <main>
-        <CareersHero />
-        <JumpCards />
+        <CareersHero content={content} />
+        <JumpCards content={content} />
 
         <FeatureSplit
           id="why"
-          eyebrow="01 / Why here"
-          heading="The reasons people actually give for leaving"
-          body="When a nurse or a technologist leaves for the Gulf, it is rarely only about money. It is the twelve hour shift with no relief, the equipment that has been broken for a year, and the sense that nobody is going to train you into anything better. We cannot fix a national salary market. We can fix those three things, and we have set the hospital up to try."
-          listHeading="What we commit to"
+          eyebrow={sectionEyebrows.why}
+          heading={whySection.heading}
+          body={whySection.body}
+          listHeading={whySection.listHeading}
           items={commitments}
         />
 
-        <BenefitsSection />
-        <OpeningsSection />
-        <ProcessSection />
-        <StudentsSection />
+        <BenefitsSection content={content} />
+        <OpeningsSection content={content} />
+        <ProcessSection content={content} />
+        <StudentsSection content={content} />
 
         <FeatureSplit
           id="fraud"
-          eyebrow="06 / Recruitment fraud"
-          heading="Nobody here will ever ask you for money"
-          body="There is a real trade in fake hospital and overseas nursing jobs in Sri Lanka, and it targets exactly the people who can least afford it. We do not charge application fees, registration fees, training deposits, agent commissions or visa processing money at any stage. If someone claiming to be from this hospital asks you for a payment, it is a fraud. Call us on the number below and tell us."
-          listHeading="How to check a posting is ours"
+          eyebrow={sectionEyebrows.fraud}
+          heading={fraudSection.heading}
+          body={fraudSection.body}
+          listHeading={fraudSection.listHeading}
           items={fraudChecks}
           headingMaxCh={26}
         />
@@ -60,16 +73,16 @@ export function CareersPage() {
           faq={[...faq]}
           heading={
             <>
-              Before you
+              {faqHeading.line1}
               <br />
-              apply
+              {faqHeading.line2}
             </>
           }
-          eyebrow="07 / Candidate questions"
+          eyebrow={sectionEyebrows.faq}
         />
 
-        <ApplicationSection />
-        <ApplySection />
+        <ApplicationSection content={content} locale={locale} />
+        <ApplySection content={content} />
       </main>
       <ThemedFooter columns={careerFooterColumns} id="footer" />
     </>

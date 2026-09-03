@@ -2,9 +2,10 @@
 
 import { useActionState, useId, useState } from "react";
 import { submitJobApplication } from "../actions/submitJobApplication";
-import { experienceOptions, roleOptions, sourceOptions } from "../data/content";
 import { initialJobApplicationFormState } from "../types";
 import type { JobApplicationFormState } from "../types";
+import type { CareerContent } from "../data/getContent";
+import type { Locale } from "@/lib/i18n/locales";
 
 const FIELD_CLASS =
   "w-full border-0 border-b border-[var(--home-hairline-strong)] bg-transparent py-2.5 text-[16px] text-[var(--home-heading)] outline-none transition-colors placeholder:text-[var(--home-muted)] focus:border-[var(--home-accent)]";
@@ -23,14 +24,37 @@ const LABEL_CLASS =
  * The selects use an empty first `option` rather than the reference's literal
  * "Select" string, so `required` catches an untouched select natively and the
  * schema never has to special-case a placeholder that looks like a real value.
+ *
+ * i18n (Task 13): every label, placeholder and status string is a prop from
+ * `content`, never an import, per the recipe's "client components take copy
+ * as a prop" rule. `roleOptions` for the "Applying for" select is built here
+ * from the already-localized `content.jobs` and `content.generalApplicationLabel`:
+ * the `value` on each `<option>` is the job's fixed `id`, and the visible text
+ * is its translated `title`, which is exactly what lets a Sinhala or Tamil
+ * reader pick from real words while the server still receives an id it can
+ * validate in every locale (see `data/content.ts`'s note above `jobs`).
+ * `experienceOptions` and `sourceOptions` get the same `id`/`label` split
+ * straight from `content`, with no extra work needed here.
+ *
+ * The hidden `locale` field is what lets `submitJobApplication` answer in the
+ * same language the applicant is reading, without trusting the browser for
+ * anything more than which language to reply in: the server still re-derives
+ * every other decision from validated input.
  */
-export function ApplicationForm() {
+export function ApplicationForm({ content, locale }: { content: CareerContent; locale: Locale }) {
+  const { form, jobs, generalApplicationLabel, GENERAL_APPLICATION_ROLE_ID, experienceOptions, sourceOptions } =
+    content;
   const [state, formAction, pending] = useActionState(
     submitJobApplication,
     initialJobApplicationFormState
   );
   const baseId = useId();
   const id = (name: string) => `${baseId}-${name}`;
+
+  const roleOptions = [
+    ...jobs.map((job) => ({ id: job.id, label: job.title })),
+    { id: GENERAL_APPLICATION_ROLE_ID, label: generalApplicationLabel },
+  ];
 
   // React empties an uncontrolled form as soon as its action resolves, so the
   // form is remounted on every response and repopulated from `state.values`.
@@ -55,12 +79,14 @@ export function ApplicationForm() {
 
   return (
     <form key={formKey} action={formAction}>
+      <input type="hidden" name="locale" value={locale} />
+
       <div className="grid grid-cols-2 gap-6.5 max-[899px]:grid-cols-1">
         <Field
           id={id("fullName")}
           name="fullName"
-          label="Full name"
-          placeholder="As it appears on your certificates"
+          label={form.fullNameLabel}
+          placeholder={form.fullNamePlaceholder}
           required
           autoComplete="name"
           defaultValue={kept.fullName ?? ""}
@@ -70,8 +96,8 @@ export function ApplicationForm() {
         <SelectField
           id={id("roleTitle")}
           name="roleTitle"
-          label="Applying for"
-          placeholder="Choose a role"
+          label={form.roleLabel}
+          placeholder={form.rolePlaceholder}
           options={roleOptions}
           required
           defaultValue={kept.roleTitle ?? ""}
@@ -82,8 +108,8 @@ export function ApplicationForm() {
           id={id("email")}
           name="email"
           type="email"
-          label="Email"
-          placeholder="you@example.com"
+          label={form.emailLabel}
+          placeholder={form.emailPlaceholder}
           required
           autoComplete="email"
           defaultValue={kept.email ?? ""}
@@ -94,8 +120,8 @@ export function ApplicationForm() {
           id={id("phone")}
           name="phone"
           type="tel"
-          label="Mobile"
-          placeholder="07X XXX XXXX"
+          label={form.phoneLabel}
+          placeholder={form.phonePlaceholder}
           required
           autoComplete="tel"
           className="tabular-nums"
@@ -106,8 +132,8 @@ export function ApplicationForm() {
         <Field
           id={id("registrationNumber")}
           name="registrationNumber"
-          label="Registration number"
-          placeholder="SLMC, Nurses Council, or not applicable"
+          label={form.registrationLabel}
+          placeholder={form.registrationPlaceholder}
           defaultValue={kept.registrationNumber ?? ""}
           errors={state.fieldErrors?.registrationNumber}
         />
@@ -115,8 +141,8 @@ export function ApplicationForm() {
         <SelectField
           id={id("experience")}
           name="experience"
-          label="Years of experience"
-          placeholder="Choose one"
+          label={form.experienceLabel}
+          placeholder={form.experiencePlaceholder}
           options={experienceOptions}
           defaultValue={kept.experience ?? ""}
           errors={state.fieldErrors?.experience}
@@ -125,8 +151,8 @@ export function ApplicationForm() {
         <Field
           id={id("startDate")}
           name="startDate"
-          label="Earliest start date"
-          placeholder="Immediately, or after one month's notice"
+          label={form.startDateLabel}
+          placeholder={form.startDatePlaceholder}
           defaultValue={kept.startDate ?? ""}
           errors={state.fieldErrors?.startDate}
         />
@@ -134,8 +160,8 @@ export function ApplicationForm() {
         <SelectField
           id={id("source")}
           name="source"
-          label="Where you saw this"
-          placeholder="Choose one"
+          label={form.sourceLabel}
+          placeholder={form.sourcePlaceholder}
           options={sourceOptions}
           defaultValue={kept.source ?? ""}
           errors={state.fieldErrors?.source}
@@ -144,14 +170,14 @@ export function ApplicationForm() {
 
       <div className="mt-6.5 flex flex-col gap-2.25">
         <label htmlFor={id("note")} className={LABEL_CLASS}>
-          Anything we should know
+          {form.noteLabel}
         </label>
         <textarea
           id={id("note")}
           name="note"
           defaultValue={kept.note ?? ""}
           rows={4}
-          placeholder="Study commitments, a shift pattern you need, or the unit you particularly want to work in. Optional."
+          placeholder={form.notePlaceholder}
           className="w-full resize-y border border-[var(--home-hairline-strong)] bg-transparent p-3.5 text-[16px] leading-[1.55] text-[var(--home-heading)] outline-none transition-colors placeholder:text-[var(--home-muted)] focus:border-[var(--home-accent)]"
         />
         <FieldErrors errors={state.fieldErrors?.note} id={id("note")} />
@@ -159,6 +185,7 @@ export function ApplicationForm() {
 
       <CvField
         id={id("cv")}
+        content={form}
         errors={state.fieldErrors?.cv}
         mustReattach={state.status === "error"}
       />
@@ -175,11 +202,7 @@ export function ApplicationForm() {
           defaultChecked={state.consentGiven ?? false}
           className="mt-0.5 h-[19px] w-[19px] shrink-0 accent-[var(--home-accent)]"
         />
-        <span>
-          I agree that St. Joseph Hospital may hold my application for six months and contact me
-          about this and comparable vacancies. My current employer will not be approached without my
-          written permission.
-        </span>
+        <span>{form.consentLabel}</span>
       </label>
       <FieldErrors errors={state.fieldErrors?.consent} id={id("consent")} />
 
@@ -189,24 +212,23 @@ export function ApplicationForm() {
           disabled={pending}
           className="sj-invert inline-flex items-center gap-2.5 bg-[var(--home-accent)] px-6.5 py-4.25 text-[15px] font-bold text-[var(--home-on-accent)] disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {submitLabel(state, pending)} <span aria-hidden>&rarr;</span>
+          {submitLabel(form, state, pending)} <span aria-hidden>&rarr;</span>
         </button>
         <p
           role="status"
           aria-live="polite"
           className={`max-w-[42ch] text-[14px] leading-[1.5] ${statusClass(state.status)}`}
         >
-          {state.message ||
-            "We reply to every application, including the ones we do not take forward."}
+          {state.message || form.defaultStatus}
         </p>
       </div>
     </form>
   );
 }
 
-function submitLabel(state: JobApplicationFormState, pending: boolean) {
-  if (pending) return "Sending";
-  return state.status === "success" ? "Application received" : "Submit application";
+function submitLabel(form: CareerContent["form"], state: JobApplicationFormState, pending: boolean) {
+  if (pending) return form.submitPending;
+  return state.status === "success" ? form.submitSuccess : form.submitIdle;
 }
 
 function statusClass(status: JobApplicationFormState["status"]) {
@@ -226,26 +248,24 @@ function statusClass(status: JobApplicationFormState["status"]) {
  */
 function CvField({
   id,
+  content,
   errors,
   mustReattach,
 }: {
   id: string;
+  content: CareerContent["form"];
   errors?: string[];
   mustReattach?: boolean;
 }) {
   const [fileName, setFileName] = useState("");
 
-  const hint = fileName
-    ? fileName
-    : mustReattach
-      ? "Please attach your CV again. A browser will not let us keep the file across a failed submission."
-      : "PDF preferred, under 5 MB. Do not send your NIC copy or a photograph at this stage.";
+  const hint = fileName ? fileName : mustReattach ? content.cvHintReattach : content.cvHintDefault;
 
   return (
     <div className="mt-6.5 flex flex-wrap items-center gap-5 border border-dashed border-[var(--home-hairline-strong)] px-6 py-5.5">
       <span className="min-w-[220px] flex-1">
         <span className="font-display block text-[18px] font-bold tracking-[-0.02em] text-[var(--home-heading)]">
-          Attach your CV as a PDF
+          {content.cvHeading}
         </span>
         <span className="mt-1.25 block text-[14.5px] leading-[1.55] text-[var(--home-muted)]">
           {hint}
@@ -254,12 +274,18 @@ function CvField({
       </span>
       {/* The input is `sr-only` rather than `display: none`, so it can still
           take keyboard focus and be reached by Tab; focus-within then styles
-          the label as though it were the focused control. */}
+          the label as though it were the focused control.
+
+          No `whitespace-nowrap` here (unlike the reference markup this
+          replaced): a translated "Choose file" is longer than the English
+          one and forced onto one unbreakable line, it pushed this box past
+          the viewport at 360px, the same trap the hero's own secondary CTA
+          needed fixing for. */}
       <label
         htmlFor={id}
-        className="inline-flex cursor-pointer items-center gap-2.25 border border-[var(--home-hairline-strong)] px-5 py-3.25 text-[13.5px] font-bold whitespace-nowrap text-[var(--home-heading)] transition-colors hover:bg-[var(--home-invert-bg)] hover:text-[var(--home-invert-fg)] focus-within:bg-[var(--home-invert-bg)] focus-within:text-[var(--home-invert-fg)]"
+        className="inline-flex cursor-pointer items-center gap-2.25 border border-[var(--home-hairline-strong)] px-5 py-3.25 text-[13.5px] font-bold text-[var(--home-heading)] transition-colors hover:bg-[var(--home-invert-bg)] hover:text-[var(--home-invert-fg)] focus-within:bg-[var(--home-invert-bg)] focus-within:text-[var(--home-invert-fg)]"
       >
-        {fileName ? "Change file" : "Choose file"}
+        {fileName ? content.cvChangeFile : content.cvChooseFile}
         <input
           id={id}
           name="cv"
@@ -328,7 +354,7 @@ type SelectFieldProps = {
   name: string;
   label: string;
   placeholder: string;
-  options: readonly string[];
+  options: readonly { id: string; label: string }[];
   required?: boolean;
   errors?: string[];
   /** Echoed back from the action after a rejection; "" on a fresh form. */
@@ -368,11 +394,11 @@ function SelectField({
         </option>
         {options.map((option) => (
           <option
-            key={option}
-            value={option}
+            key={option.id}
+            value={option.id}
             className="bg-[var(--home-bg)] text-[var(--home-heading)]"
           >
-            {option}
+            {option.label}
           </option>
         ))}
       </select>

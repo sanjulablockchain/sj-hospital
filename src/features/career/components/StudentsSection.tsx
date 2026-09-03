@@ -1,6 +1,6 @@
 import { RevealStagger } from "@/components/ui/RevealStagger";
 import { SectionHeading } from "./SectionHeading";
-import { students } from "../data/content";
+import type { CareerContent } from "../data/getContent";
 
 /**
  * `#students`: three routes in for people who have not qualified yet, or have
@@ -10,22 +10,23 @@ import { students } from "../data/content";
  * shared `sj-hover-reveal` helper inside `sj-tint`. That helper keeps the line
  * visible on touch devices, where the reference simply hides it forever.
  */
-export function StudentsSection() {
+export function StudentsSection({ content }: { content: CareerContent }) {
+  const { students, studentsHeading, studentsAside, sectionEyebrows } = content;
   return (
     <section
       id="students"
       className="mx-auto max-w-[1440px] px-5 pt-26 sm:px-8 lg:px-11 max-[640px]:pt-18"
     >
       <SectionHeading
-        eyebrow="05 / Starting out"
+        eyebrow={sectionEyebrows.students}
         heading={
           <>
-            Students and
+            {studentsHeading.line1}
             <br />
-            new graduates
+            {studentsHeading.line2}
           </>
         }
-        aside="The group supports students entering medicine, and we take trainees directly at the hospital."
+        aside={studentsAside}
       />
 
       <RevealStagger
