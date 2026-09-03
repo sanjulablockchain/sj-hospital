@@ -29,7 +29,7 @@ export function PressKitSection({ content }: { content: MediaContent }) {
             <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
               {sectionEyebrows.kit}
             </div>
-            <h2 className="font-display mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
+            <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
               {kitHeading.line1}
               <br />
               {kitHeading.line2}

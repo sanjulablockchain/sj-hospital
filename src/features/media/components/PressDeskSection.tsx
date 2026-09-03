@@ -48,7 +48,7 @@ export function PressDeskSection({ content }: { content: MediaContent }) {
             <div className="text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
               {sectionEyebrows.press}
             </div>
-            <h2 className="font-display mt-4.5 text-[clamp(36px,4.6vw,66px)] leading-[0.9] font-extrabold tracking-[-0.04em] text-white uppercase">
+            <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(36px,4.6vw,66px)] leading-[0.9] font-extrabold tracking-[-0.04em] text-white uppercase">
               {pressHeading.line1}
               <br />
               {pressHeading.line2}

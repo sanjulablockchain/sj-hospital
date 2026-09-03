@@ -87,7 +87,7 @@ export function MediaHero({ content }: { content: MediaContent }) {
           <span className="w-px flex-1 bg-gradient-to-b from-white/40 to-transparent" />
         </div>
 
-        <div className="flex-1 pb-11">
+        <div className="min-w-0 flex-1 pb-11">
           <div className="animate-sj-up flex min-w-0 flex-wrap items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
             <span aria-hidden className="h-px w-11 bg-[#2CA6F0]" />
             <LocaleLink href="/" className="text-[#7FCBFF] hover:text-white">

@@ -136,7 +136,7 @@ export const featured = {
   type: "පුවත් නිවේදනය",
   points: [
     "සම්පූර්ණ නිවේදනය, ඡායාරූප සහ Floor Plan එක ඉල්ලීම මත ලබාගත හැක",
-    "සම්මුඛ සාකච්ඡාවක් සඳහා විශේෂඥ Gastroenterologist කෙනෙක් ලබාගත හැක",
+    "සම්මුඛ සාකච්ඡාවක් සඳහා Consultant Gastroenterologist කෙනෙක් ලබාගත හැක",
     "Procedure වේලාවෙන් පිටත Suite එකේ රූගත කිරීමට අවසර ඇත",
     "කිසිදු Resolution එකකින් රෝගී ඡායාරූප නිකුත් නොකෙරේ",
   ],

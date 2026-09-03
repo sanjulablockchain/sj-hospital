@@ -21,11 +21,11 @@ export function SpokespeopleSection({ content }: { content: MediaContent }) {
       className="mx-auto max-w-[1440px] px-5 pt-26 sm:px-8 lg:px-11 max-[640px]:pt-18.5"
     >
       <div className="grid items-start gap-14.5 min-[900px]:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] max-[899px]:gap-10">
-        <Reveal className="min-[900px]:sticky min-[900px]:top-10">
+        <Reveal className="min-w-0 min-[900px]:sticky min-[900px]:top-10">
           <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
             {sectionEyebrows.spokespeople}
           </div>
-          <h2 className="font-display mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
+          <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
             {spokespeopleHeading.line1}
             <br />
             {spokespeopleHeading.line2}

@@ -26,11 +26,11 @@ export function EnquirySection({ content }: { content: MediaContent }) {
       className="mx-auto max-w-[1440px] px-5 pt-28 sm:px-8 lg:px-11 max-[640px]:pt-18.5"
     >
       <Reveal className="grid gap-px bg-[var(--home-hairline-strong)] min-[900px]:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
-        <div className="bg-[var(--home-accent)] px-11 py-13 text-[var(--home-on-accent)]">
+        <div className="min-w-0 bg-[var(--home-accent)] px-11 py-13 text-[var(--home-on-accent)]">
           <div className="text-[11.5px] font-bold tracking-[0.24em] uppercase opacity-70">
             {sectionEyebrows.enquiry}
           </div>
-          <h2 className="font-display mt-4.5 text-[clamp(36px,5vw,72px)] leading-[0.9] font-extrabold tracking-[-0.04em] uppercase max-[899px]:text-[42px]">
+          <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(36px,5vw,72px)] leading-[0.9] font-extrabold tracking-[-0.04em] uppercase max-[899px]:text-[42px]">
             {enquiryHeading.line1}
             <br />
             {enquiryHeading.line2}

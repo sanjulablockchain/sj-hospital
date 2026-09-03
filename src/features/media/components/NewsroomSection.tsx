@@ -62,7 +62,7 @@ export function NewsroomSection({ content }: { content: MediaContent }) {
             <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
               {sectionEyebrows.newsroom}
             </div>
-            <h2 className="font-display mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
+            <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
               {filter === "All" ? newsroomCopy.headingAll : filterLabel(filter)}
             </h2>
           </div>
