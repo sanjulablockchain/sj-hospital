@@ -92,13 +92,25 @@ function isUntranslatable(path: string): boolean {
  * `content.test.ts`'s own "the featured release is also in the newsroom
  * list" test already asserts on the English text.
  *
- * `topics[*].v` (all ten) is a job title, not prose: "Medical Director",
- * "Chief Pharmacist", "Director of Nursing" and the rest are institutional
- * position names, the same register that keeps "Consultant" itself in
- * English throughout this feature's own overlays. All ten rows get the
- * same treatment, so there is no odd one out translated beside nine that
- * are not; `topics[*].k`, the topic each role answers for, is ordinary
- * prose and is translated in full.
+ * `topics[*].v` is ten job titles, not prose, and only four of them are
+ * genuinely untranslatable. The word "Consultant" (see the comment above
+ * `featured` in content.ts) stays English only as a title sitting directly
+ * in front of a role, which is exactly what `topics[1].v` ("Medical
+ * Director", an institutional title with its own sitewide precedent in
+ * `network`'s overlay) and `topics[4].v` / `[5].v` / `[6].v` ("Consultant
+ * physician", "Consultant paediatrician", "Consultant obstetrician and
+ * gynaecologist") are: nothing but that pattern, nothing left to translate.
+ * The other six ("Chief Executive Officer, through Communications", "Head
+ * of Emergency Medicine", "Consultant surgeon in the relevant
+ * subspecialty", "Director of Nursing", "Chief Pharmacist", "Community
+ * Health Coordinator" in the base) were full job-title clauses with no such
+ * precedent, so their connectors and ordinary words are translated in the
+ * overlays (see the comment above `topics` in content.si.ts / content.ta.ts
+ * for the per-entry reasoning) and they are not listed here: a translation
+ * that only partly changes the English is still a translation, and the
+ * parity test below only needs an exception for the string that stays
+ * byte-identical. `topics[*].k`, the topic each role answers for, is
+ * ordinary prose and is translated in full.
  */
 const KEEPS_ENGLISH = new Set<string>([
   "hero.breadcrumbCurrent",
@@ -121,16 +133,17 @@ const KEEPS_ENGLISH = new Set<string>([
   "news[14].title",
   "news[15].title",
   "news[16].title",
-  "topics[0].v",
+  // "Medical Director": a fixed institutional title with no ordinary word
+  // riding along, and sitewide precedent (network's own overlay keeps this
+  // exact title English mid-sentence).
   "topics[1].v",
-  "topics[2].v",
-  "topics[3].v",
+  // "Consultant physician": nothing but "Consultant" directly in front of
+  // a role, the nameplate register.
   "topics[4].v",
+  // "Consultant paediatrician": same nameplate pattern as topics[4].v.
   "topics[5].v",
+  // "Consultant obstetrician and gynaecologist": same nameplate pattern.
   "topics[6].v",
-  "topics[7].v",
-  "topics[8].v",
-  "topics[9].v",
 ]);
 
 test("every translatable string in media has Sinhala", () => {

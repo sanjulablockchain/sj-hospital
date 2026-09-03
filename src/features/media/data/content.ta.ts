@@ -253,8 +253,13 @@ export const desk = [
   },
   {
     kind: "நேர்காணல்கள்",
-    title: "வேலை செய்யும் Consultant, ஒரு Script அல்ல",
-    body: "உண்மையில் அந்த வேலையைச் செய்யும் Consultant உடன் உங்களை இணைக்கிறோம். Topic மற்றும் Deadline ஐக் கொடுங்கள், யார் கிடைக்கிறார் என்பதை நாங்கள் நேர்மையாகச் சொல்வோம்.",
+    // "Consultant" here is an ordinary noun ("the specialist who does the
+    // work"), not a title sitting directly in front of a role, so it
+    // translates like heroFacts[1].v and tickerItems[1] do, not like
+    // featured.points[1]'s "Consultant Gastroenterologist". See the
+    // distinction recorded above `topics` below.
+    title: "வேலை செய்யும் நிபுணர், ஒரு Script அல்ல",
+    body: "உண்மையில் அந்த வேலையைச் செய்யும் நிபுணர் உடன் உங்களை இணைக்கிறோம். Topic மற்றும் Deadline ஐக் கொடுங்கள், யார் கிடைக்கிறார் என்பதை நாங்கள் நேர்மையாகச் சொல்வோம்.",
   },
   {
     kind: "அறிக்கைகள்",
@@ -310,7 +315,7 @@ export const kit = [
     note: "அறுவை சிகிச்சை அரங்குகள், தீவிர சிகிச்சை, ஆய்வுகூடம், Imaging, Pharmacy, நோயாளர்கள் இல்லாமல்",
   },
   {
-    name: "Consultant புகைப்படங்கள்",
+    name: "நிபுணர் புகைப்படங்கள்",
     note: "பேச்சாளர்களின் Headshots, அவர்களின் சம்மதம் File இல் இருந்து வெளியிடப்பட்டவை",
   },
   {
@@ -335,7 +340,7 @@ export const gallery = [
   },
   {
     tag: "மருத்துவ குழு",
-    title: "Consultants மற்றும் Nursing Staff",
+    title: "நிபுணர்கள் மற்றும் Nursing Staff",
     credit: "வழங்கியவர்: St. Joseph Hospital, Negombo",
   },
   {
@@ -351,22 +356,54 @@ export const spokespeopleIntro1 =
 export const spokespeopleIntro2 =
   "முதல் Email இலேயே Topic மற்றும் உங்கள் Deadline ஐக் கொடுங்கள். இரண்டும் யாரை வேகமாக வழங்க முடியும் என்பதை மாற்றுகின்றன.";
 
-// `topics[*].v` is a job title, an institutional position name, not prose:
-// kept English as a uniform category across all ten rows, the same
-// register that keeps "Consultant" itself in English throughout this
-// file. See KEEPS_ENGLISH in content.i18n.test.ts. `topics[*].k`, the topic
-// each role answers for, is ordinary prose and translates in full.
+// `topics[*].v` is a job title, not prose, and the rule for "Consultant" the
+// word (see the comment beside `featured.points` in content.ts, and its
+// application here) applies to it like everywhere else in this file: kept
+// English only where it sits as a title directly in front of a role
+// ("Consultant physician"), because that is how it reads on a nameplate;
+// translated where it is an ordinary noun. Four rows (`[4]`, `[5]`, `[6]`,
+// and `[3]`'s "Consultant Surgeon") are nothing but that nameplate pattern,
+// so nothing in them needs translating and they stay in KEEPS_ENGLISH in
+// content.i18n.test.ts, one entry each with its own reason, not one line
+// covering all ten. The other six were full job-title clauses with no such
+// precedent, so their connectors and ordinary words translate, keeping only
+// the role name itself and "Communications" (the department, same as
+// `spokespeopleIntro1`'s "Communications மூலம்") in English:
+// - `[0]`: "through" -> "மூலம்", matching `spokespeopleIntro1`'s own
+//   translation of the identical connector.
+// - `[2]`: "Head", "of" and "Medicine" translate; "Emergency" translates to
+//   "அவசர" to match its own sibling `[2].k` two words to the left, rather
+//   than sitting untranslated beside a Tamil word for the same fact.
+// - `[3]`: "Consultant Surgeon" is the nameplate and stays English; "in the
+//   relevant subspecialty" is ordinary qualifying prose and translates.
+//   "Subspecialty" itself stays English the same way this array's own
+//   `[1].k`'s "Accreditation" and `[2].k`'s "Trauma" do: an institutional
+//   term with no established Tamil rendering in this file, not a role name.
+// - `[7]`, `[8]`, `[9]`: "Nursing" and "Pharmacist" stay English because
+//   both are established site-wide loanwords (facilities' "Unit
+//   Coordinator", pharmacy's own register comment naming "Pharmacist"),
+//   the same class of word as "Doctor" or "OPD", not because they are job
+//   titles; "Director", "Chief", "Community" and "Health" are ordinary
+//   words and translate.
 export const topics = [
-  { k: "மருத்துவமனை உபாயமும் முதலீடும்", v: "Chief Executive Officer, through Communications" },
+  { k: "மருத்துவமனை உபாயமும் முதலீடும்", v: "Chief Executive Officer, Communications மூலம்" },
+  // "Medical Director" is the one job title that stays fully English with
+  // no ordinary word riding along: see KEEPS_ENGLISH in
+  // content.i18n.test.ts, which cites `network`'s own overlay keeping this
+  // exact title English mid-sentence.
   { k: "மருத்துவத் தரநிலைகள் மற்றும் Accreditation", v: "Medical Director" },
-  { k: "அவசர மற்றும் Trauma சிகிச்சை", v: "Head of Emergency Medicine" },
-  { k: "அறுவை சிகிச்சை மற்றும் Day Case Procedure", v: "Consultant surgeon in the relevant subspecialty" },
+  { k: "அவசர மற்றும் Trauma சிகிச்சை", v: "அவசர மருத்துவத் தலைவர்" },
+  { k: "அறுவை சிகிச்சை மற்றும் Day Case Procedure", v: "தொடர்புடைய Subspecialty இல் Consultant Surgeon" },
+  // "Consultant physician", "Consultant paediatrician" and "Consultant
+  // obstetrician and gynaecologist" below are each nothing but the
+  // nameplate pattern (Consultant directly in front of a role), so they
+  // stay fully English: see KEEPS_ENGLISH in content.i18n.test.ts.
   { k: "டெங்கு, சர்க்கரை நோய் மற்றும் பொது மருத்துவம்", v: "Consultant physician" },
   { k: "குழந்தைகளின் ஆரோக்கியம் மற்றும் தடுப்பூசி", v: "Consultant paediatrician" },
   { k: "பிரசவமும் பெண்கள் ஆரோக்கியமும்", v: "Consultant obstetrician and gynaecologist" },
-  { k: "Nursing, தொற்று கட்டுப்பாடு, நோயாளர் பாதுகாப்பு", v: "Director of Nursing" },
-  { k: "மருந்துகள், பற்றாக்குறைகள், Prescribing", v: "Chief Pharmacist" },
-  { k: "சமூக மற்றும் பள்ளி திட்டங்கள்", v: "Community Health Coordinator" },
+  { k: "Nursing, தொற்று கட்டுப்பாடு, நோயாளர் பாதுகாப்பு", v: "Nursing இயக்குநர்" },
+  { k: "மருந்துகள், பற்றாக்குறைகள், Prescribing", v: "தலைமை Pharmacist" },
+  { k: "சமூக மற்றும் பள்ளி திட்டங்கள்", v: "சமூக ஆரோக்கிய Coordinator" },
 ];
 
 export const rulesHeading = { line1: "படமாக்கல், பெயர்கள்", line2: "மற்றும் நோயாளர்", line3: "தனியுரிமை" };
@@ -385,7 +422,7 @@ export const rules = [
     a: "ஒரு Mass Casualty அல்லது பொது சம்பவத்தில், பெயர்கள் அல்லது அடையாளம் காணும் விவரங்கள் இல்லாமல் பெறப்பட்ட Casualty எண்ணிக்கை மற்றும் அவர்களின் பொது நிலையை உள்ளடக்கிய உண்மையான Holding Statement ஐ நாங்கள் வெளியிட்டு, படம் தெளிவாகும் போது அதை Update செய்கிறோம். கோரிக்கைகள் Corridor இல் Clinicians ஆல் அல்ல, மையமாகக் கையாளப்படுகின்றன, அதனால் சிகிச்சை தடைபடாமல் உங்களுக்குக் கிடைக்கும் தகவல் துல்லியமாக இருக்கும்.",
   },
   {
-    q: "ஒரு Consultant பொது மருத்துவ Topic ஒன்றில் Comment செய்யலாமா?",
+    q: "ஒரு நிபுணர் பொது மருத்துவ Topic ஒன்றில் Comment செய்யலாமா?",
     a: "பொதுவாக ஆம், இது நாங்கள் பெறுவதற்கு மிகவும் மகிழ்ச்சியான கோரிக்கை. Topic மற்றும் உங்கள் Deadline ஐச் சொல்லுங்கள், உண்மையில் அந்த வேலையைச் செய்யும் Clinician ஐ நாங்கள் Offer செய்வோம். அவர்கள் பொது மருத்துவ நடைமுறை, தடுப்பு மற்றும் நோயாளர்கள் கவனிக்க வேண்டியவை பற்றி பேசுவார்கள். அவர்கள் மற்றொரு மருத்துவமனையின் Case, நடைபெறும் சட்ட விஷயம் அல்லது ஒரு பெயரிடப்பட்ட நபரின் சிகிச்சை பற்றி Comment செய்ய மாட்டார்கள்.",
   },
   {

@@ -167,6 +167,20 @@ export const newsroomCopy = {
   forJournalists: "For journalists",
 };
 
+/**
+ * The rule for translating "Consultant" (and its plural) anywhere in this
+ * feature's overlays, `points[1]` below included: as a title sitting
+ * directly in front of a role ("Consultant gastroenterologist", "Consultant
+ * physician"), it stays English, because that is how it reads on a
+ * nameplate. As an ordinary noun ("Named consultants" in `heroFacts[1].v`,
+ * "Consultant interviews" in `tickerItems[1]`, "cardiology consultants" in
+ * `news[10].lede`, "the consultant" in `desk[3].body`, "a consultant" in
+ * `rules[3].q`, "Consultant portraits" in `kit[6].name`, "Consultants" in
+ * `gallery[1].title`), it is just the word for a specialist doctor and
+ * translates like any other noun. `topics[*].v`, the ten job titles, get
+ * the same distinction applied per entry; see the comment above that array
+ * in content.si.ts / content.ta.ts.
+ */
 export const featured: FeaturedRelease = {
   kickerDate: "August 2026",
   title: "New endoscopy suite opens on the second floor",
