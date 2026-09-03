@@ -324,10 +324,10 @@ export const pharmacySection = {
 
 export const pharmacyFacts = [
   { name: "நேரம்", note: "24 மணி நேரமும் திறந்திருக்கும்" },
-  { name: "இருப்பு", note: "Authorized மருந்து மட்டுமே" },
+  { name: "எங்களிடம் உள்ள Stock", note: "Authorized மருந்து மட்டுமே" },
   { name: "Dispatch சரிபார்ப்பு", note: "முதலில் ஒரு Pharmacist உறுதிப்படுத்துவார்" },
-  { name: "விநியோகம்", note: "நீர்கொழும்பு முழுவதும்" },
-  { name: "மருந்து பரிந்துரைகள்", note: "Digital ஆக File செய்யப்பட்டுள்ளது" },
+  { name: "Delivery சேவை", note: "நீர்கொழும்பு முழுவதும்" },
+  { name: "மீண்டும் Prescriptions", note: "Digital ஆக File செய்யப்பட்டுள்ளது" },
 ];
 
 export const internationalSection = {

@@ -3,13 +3,26 @@
 //
 // See atHome.si.ts's header for the full register rationale (reused here
 // for Tamil): "Pharmacy", "Pharmacist(s)", "Order", "Counter", "File",
-// "Digital" and "WhatsApp" stay English throughout, matching
-// pharmacy/data/content.ta.ts's own header; "Stock" -> "இருப்பு",
-// "Delivery" -> "விநியோகம்" and "Prescriptions" -> "மருந்து பரிந்துரைகள்"
-// translate in full, matching indexContent.ta.ts's own `pharmacyFacts`
-// (the closer, same-feature sibling this detail page links from) and
-// navigationLabels.ta.ts's own "Delivery" entry. "Dispensing" (the noun)
-// translates the same way; "Dispense" (the verb, in flowing prose) keeps
+// "Digital", "Stock", "Delivery", "Prescription(s)" and "WhatsApp" stay
+// English throughout, matching pharmacy/data/content.ta.ts's own header,
+// and its body carries it out for every one of them. An earlier draft of
+// this file pointed at `indexContent.ta.ts`'s own `pharmacyFacts` instead,
+// which had fully translated "Stock" -> "இருப்பு" and "Delivery" ->
+// "விநியோகம்". That was wrong for the same reason atHome.si.ts's header
+// now explains: `pharmacy` owns this vocabulary and states the rule
+// explicitly, the literary coinages are exactly what this project's
+// code-mixed register exists to avoid, and this file already kept most of
+// the same pharmacy-register words in English elsewhere ("Counter",
+// "Pharmacist", "Authorized", "Digital", "File", "Order"). Fixed: every
+// "Stock"/"Delivery"/"Prescription(s)" instance below now stays English
+// with a particle where the grammar wants one ("எங்கள் Stock", "Stock
+// தான்"/"இலிருந்து", "Prescription குறிப்புகள்", bare "Prescriptions" in
+// flowing prose), reusing `pharmacy/data/content.ta.ts`'s own exact forms
+// (`heroFacts`/`sectionEyebrows`/prose) rather than inventing new ones, and
+// `indexContent.ta.ts`'s `pharmacyFacts` was corrected the same way as part
+// of this fix. "Dispensing" (the noun) translates in full, to avoid a
+// `facts` array where most labels are silently swept into English with no
+// individual justification; "Dispense" (the verb, in flowing prose) keeps
 // the pharmacy feature's own established English verb form. "Telemedicine"
 // reuses navigationLabels.ta.ts's own exact entry ("தொலை மருத்துவம்").
 // "Request a visit" reuses navigationLabels.ta.ts's own exact entry
@@ -26,20 +39,20 @@ export const atHomeServices = [
     hours: "24 மணி நேரம்",
     cta: "மருந்தை Order செய்யுங்கள்",
     desc: "24 மணி நேரமும் திறந்திருக்கும் Pharmacy Counter, Authorized மருந்து மட்டுமே வைத்திருக்கும், உங்கள் Hospital File ஐ Read செய்யக்கூடிய Pharmacists ஆல் Dispense செய்யப்படும். Substitute இல்லை, Grey-market Supply இல்லை, மீண்டும் Order செய்ய Digital Prescriptions File இல் வைக்கப்பட்டுள்ளன.",
-    tags: ["24 மணி நேர Counter", "Authorized இருப்பு மட்டும்", "ஒரு Pharmacist Dispensing", "Digital ஆக Prescriptions"],
+    tags: ["24 மணி நேர Counter", "Authorized Stock மட்டும்", "ஒரு Pharmacist Dispensing", "Digital ஆக Prescriptions"],
     facts: [
       { k: "நேரம்", v: "24 மணி நேரம்" },
-      { k: "இருப்பு", v: "Authorized மருந்து மட்டும்" },
+      { k: "எங்கள் Stock", v: "Authorized மருந்து மட்டும்" },
       { k: "மருந்தளித்தல்", v: "Pharmacist மூலம்" },
-      { k: "மருந்து பரிந்துரைகள்", v: "Digital ஆக File செய்யப்பட்டுள்ளன" },
+      { k: "Prescription குறிப்புகள்", v: "Digital ஆக File செய்யப்பட்டுள்ளன" },
     ],
     lede: "ஒவ்வொரு நேரமும் திறந்திருக்கும் Pharmacy Counter, Authorized மருந்து மட்டுமே வைத்திருக்கும், உங்கள் Hospital File ஐ பார்க்கக்கூடிய Pharmacists ஆல் Dispense செய்யப்படும்.",
     aboutHead: "ஒவ்வொரு நேரமும் திறந்திருக்கும், Substitute இல்லை",
-    body1: "Pharmacy Counter இல் 24 மணி நேரமும் பணியாளர்கள் இருக்கிறார்கள். வைத்திருக்கும் ஒவ்வொன்றும் Authorized இருப்பு மட்டுமே; Substitute இல்லை, Grey-market Supply இல்லை, ஒவ்வொரு Order ஐயும் கொடுப்பதற்கு முன் ஒரு Pharmacist உங்கள் File உடன் Check செய்வார்.",
-    body2: "உங்கள் மருந்தை Dispense செய்யும் Pharmacists உங்கள் Hospital File ஐ Read செய்யக்கூடியதால், நீங்கள் எடுக்கும் மற்றொன்றுடன் ஏற்படும் Interaction ஐ Flag செய்யவோ, உங்கள் மருத்துவர் பரிந்துரைத்த Dose உடன் Confirm செய்யவோ முடியும். மருந்து பரிந்துரைகள் Digital ஆக File இல் வைக்கப்பட்டிருப்பதால், மீண்டும் ஒரு Order அல்லது மற்றொரு துறையிலிருந்து வரும் கேள்வி எளிதாகிறது.",
+    body1: "Pharmacy Counter இல் 24 மணி நேரமும் பணியாளர்கள் இருக்கிறார்கள். வைத்திருக்கும் ஒவ்வொன்றும் Authorized Stock மட்டுமே; Substitute இல்லை, Grey-market Supply இல்லை, ஒவ்வொரு Order ஐயும் கொடுப்பதற்கு முன் ஒரு Pharmacist உங்கள் File உடன் Check செய்வார்.",
+    body2: "உங்கள் மருந்தை Dispense செய்யும் Pharmacists உங்கள் Hospital File ஐ Read செய்யக்கூடியதால், நீங்கள் எடுக்கும் மற்றொன்றுடன் ஏற்படும் Interaction ஐ Flag செய்யவோ, உங்கள் மருத்துவர் பரிந்துரைத்த Dose உடன் Confirm செய்யவோ முடியும். Prescriptions Digital ஆக File இல் வைக்கப்பட்டிருப்பதால், மீண்டும் ஒரு Order அல்லது மற்றொரு துறையிலிருந்து வரும் கேள்வி எளிதாகிறது.",
     strip: [
       { k: "நேரம்", v: "24 மணி நேரம்" },
-      { k: "இருப்பு", v: "Authorized மட்டும்" },
+      { k: "எங்கள் Stock", v: "Authorized மட்டும்" },
       { k: "மருந்தளித்தல்", v: "Pharmacist Check செய்யும்" },
       { k: "பதிவுகள்", v: "Digital, File இல்" },
     ],
@@ -47,7 +60,7 @@ export const atHomeServices = [
       "எந்த நேரத்திலும் Prescription மருந்தை Dispense செய்தல்",
       "Over-the-counter மருந்து மற்றும் பொருட்கள்",
       "புதிய Order ஐ உங்கள் Hospital File உடன் Check செய்தல்",
-      "உங்கள் மருந்து பரிந்துரைகளை Digital ஆக Record செய்து வைத்திருத்தல்",
+      "உங்கள் Prescriptions ஐ Digital ஆக Record செய்து வைத்திருத்தல்",
     ],
     conditions: [
       "நேரத்திற்குப் பின் அவசர Prescription",
@@ -70,38 +83,38 @@ export const atHomeServices = [
     ],
     team: [
       { role: "எங்கள் Pharmacists", note: "ஒவ்வொரு Order ஐயும் Dispense செய்து, முதலில் உங்கள் Hospital File உடன் Check செய்வர்." },
-      { role: "எங்கள் Pharmacy Assistants", note: "இருப்பு மற்றும் Over-the-counter பொருட்களுடன் Counter க்கு உதவுவர்." },
+      { role: "எங்கள் Pharmacy Assistants", note: "Stock மற்றும் Over-the-counter பொருட்களுடன் Counter க்கு உதவுவர்." },
       { role: "Pharmacy Coordinator ஒருவர்", note: "Repeat Orders க்காக Digital Prescription Records ஐ புதுப்பித்து வைப்பார்." },
     ],
     faq: [
       { q: "இரவிலும் Pharmacy திறந்திருக்குமா?", a: "ஆம். Counter 24 மணி நேரமும் திறந்திருக்கும்." },
       { q: "பரிந்துரைத்த மருந்தே எப்போதும் கிடைக்குமா?", a: "ஆம். Counter இல் Authorized மருந்து மட்டுமே உள்ளது, Substitute இல்லை, Grey-market Supply இல்லை." },
       { q: "நான் எடுக்கும் மற்றவை Pharmacists க்குத் தெரியுமா?", a: "உங்கள் மருந்தை Dispense செய்யும் Pharmacists உங்கள் Hospital File ஐ Read செய்யக்கூடியதால், Order ஐ கொடுப்பதற்கு முன் Interaction ஐ Check செய்ய உதவுகிறது." },
-      { q: "Repeat Prescription ஐ மீண்டும் எளிதாக Order செய்யலாமா?", a: "ஆம். மருந்து பரிந்துரைகள் Digital ஆக File இல் வைக்கப்பட்டிருப்பதால், Repeat Order எளிதாகிறது." },
+      { q: "Repeat Prescription ஐ மீண்டும் எளிதாக Order செய்யலாமா?", a: "ஆம். Prescriptions Digital ஆக File இல் வைக்கப்பட்டிருப்பதால், Repeat Order எளிதாகிறது." },
     ],
   },
   {
-    title: "மருந்து விநியோகம்",
-    directoryTitle: "மருந்து விநியோகம்",
+    title: "மருந்து Delivery",
+    directoryTitle: "மருந்து Delivery",
     hours: "தினமும்",
     cta: "ஒரு Prescription ஐ அனுப்புங்கள்",
     desc: "Prescription மற்றும் Over-the-counter மருந்து எங்கள் சொந்த Pharmacy Counter இலிருந்து நீர்கொழும்பு முழுவதும் விநியோகிக்கப்படுகிறது, Dispatch செய்யும் முன் Pharmacist Check ஒன்றுடன், Photo Prescriptions ஏற்கப்படும்.",
-    tags: ["நீர்கொழும்பு முழுவதும் விநியோகம்", "எங்கள் சொந்த Counter இலிருந்து", "Dispatch க்கு முன் Pharmacist Check", "Photo Prescriptions ஏற்கப்படும்"],
+    tags: ["நீர்கொழும்பு முழுவதும் Delivery", "எங்கள் சொந்த Counter இலிருந்து", "Dispatch க்கு முன் Pharmacist Check", "Photo Prescriptions ஏற்கப்படும்"],
     facts: [
       { k: "நேரம்", v: "தினமும்" },
       { k: "பரப்பு", v: "நீர்கொழும்பு முழுவதும்" },
       { k: "மூலம்", v: "எங்கள் சொந்த Pharmacy Counter" },
-      { k: "மருந்து பரிந்துரைகள்", v: "Photos ஏற்கப்படும்" },
+      { k: "Prescription குறிப்புகள்", v: "Photos ஏற்கப்படும்" },
     ],
     lede: "Prescription மற்றும் Over-the-counter மருந்து எங்கள் சொந்த Pharmacy Counter இலிருந்து நீர்கொழும்பு முழுவதும் விநியோகிக்கப்படுகிறது, ஒவ்வொரு Order ஐயும் Dispatch செய்யும் முன் ஒரு Pharmacist Check உடன்.",
     aboutHead: "எங்கள் சொந்த Counter இலிருந்து விநியோகிக்கப்பட்டு, செல்வதற்கு முன் Check செய்யப்படும்",
-    body1: "மருந்து விநியோகம் நீர்கொழும்பை உள்ளடக்கியது, மருத்துவமனையின் சொந்த Pharmacy Counter இலிருந்தே நிரப்பப்படுகிறது, அதனால் நேரடியாக வரும் Order களுக்குப் பயன்படுத்தப்படும் அதே Authorized இருப்பே Delivery க்கும் செல்கிறது. Dispatch செய்யும் முன் ஒரு Pharmacist ஒவ்வொரு Order ஐயும் Check செய்வார், Counter இல் ஒரு Over-the-counter Order ஐ Check செய்வது போலவே.",
+    body1: "மருந்து Delivery நீர்கொழும்பை உள்ளடக்கியது, மருத்துவமனையின் சொந்த Pharmacy Counter இலிருந்தே நிரப்பப்படுகிறது, அதனால் நேரடியாக வரும் Order களுக்குப் பயன்படுத்தப்படும் அதே Authorized Stock தான் Delivery க்கும் செல்கிறது. Dispatch செய்யும் முன் ஒரு Pharmacist ஒவ்வொரு Order ஐயும் Check செய்வார், Counter இல் ஒரு Over-the-counter Order ஐ Check செய்வது போலவே.",
     body2: "ஒரு Order ஐத் தொடங்க உங்கள் Prescription இன் Photo ஐ அனுப்பலாம், Original ஐ நேரடியாக கொண்டு வர முடியாவிட்டால் இது பயனுள்ளது. அதே Delivery இல் Over-the-counter Items ஐயும் சேர்க்கலாம், Orders தினமும் இயங்கும்.",
     strip: [
       { k: "பரப்பு", v: "நீர்கொழும்பு" },
       { k: "மூலம்", v: "எங்கள் சொந்த Counter" },
       { k: "Check செய்தல்", v: "Dispatch க்கு முன்" },
-      { k: "மருந்து பரிந்துரைகள்", v: "Photo ஏற்கப்படும்" },
+      { k: "Prescription குறிப்புகள்", v: "Photo ஏற்கப்படும்" },
     ],
     covers: [
       "Prescription மருந்து Delivery",
@@ -131,7 +144,7 @@ export const atHomeServices = [
     team: [
       { role: "எங்கள் Pharmacists", note: "Dispatch செய்யும் முன் ஒவ்வொரு Delivery Order ஐயும் Check செய்வர்." },
       { role: "Delivery Coordinator ஒருவர்", note: "நீர்கொழும்பு முழுவதும் Dispatch மற்றும் Delivery ஏற்பாடு செய்வார்." },
-      { role: "எங்கள் Pharmacy Assistants", note: "மருத்துவமனையின் சொந்த Counter இருப்பிலிருந்து Orders ஐ தயார் செய்வர்." },
+      { role: "எங்கள் Pharmacy Assistants", note: "மருத்துவமனையின் சொந்த Counter Stock இலிருந்து Orders ஐ தயார் செய்வர்." },
     ],
     faq: [
       { q: "என் Prescription இன் Photo ஐ அனுப்பலாமா?", a: "ஆம். Delivery Order ஐத் தொடங்க Photo Prescriptions ஏற்கப்படும்." },
@@ -211,7 +224,7 @@ export const atHomeServices = [
     facts: [
       { k: "நேரம்", v: "தினமும்" },
       { k: "வகை", v: "Video அல்லது Phone" },
-      { k: "மருந்து பரிந்துரைகள்", v: "Pharmacy க்கு அனுப்பப்படும்" },
+      { k: "Prescription குறிப்புகள்", v: "Pharmacy க்கு அனுப்பப்படும்" },
       { k: "ஒரு Follow-up", v: "வீட்டிற்குச் சென்ற நோயாளர்களுக்கு" },
     ],
     lede: "எங்கள் மருத்துவர்களுடன் Video மற்றும் Phone Consultations, எந்த Prescription உம் Delivery க்காக நேரடியாக Pharmacy க்கு அனுப்பப்படும்.",
@@ -221,7 +234,7 @@ export const atHomeServices = [
     strip: [
       { k: "வகை", v: "Video அல்லது Phone" },
       { k: "முன்பதிவு", v: "தினமும்" },
-      { k: "மருந்து பரிந்துரைகள்", v: "Pharmacy க்கு" },
+      { k: "Prescription குறிப்புகள்", v: "Pharmacy க்கு" },
       { k: "ஒரு Follow-up", v: "வீட்டிற்குச் சென்ற பின்" },
     ],
     covers: [
@@ -240,7 +253,7 @@ export const atHomeServices = [
     steps: [
       { title: "Book செய்தல்", desc: "ஒரு Consultation ஐ Book செய்து Video அல்லது Phone தேர்ந்துகொள்ளுங்கள்." },
       { title: "இணைதல்", desc: "Book செய்த நேரத்தில் Video அல்லது Phone மூலம் ஒரு மருத்துவருடன் இணைவீர்கள்." },
-      { title: "Consultation", desc: "மருத்துவர் உங்கள் கவலையைப் பற்றி பேசி, Follow-up Review தேவைப்பட்டால் அதை ஏற்பாடு செய்வார்." },
+      { title: "Consult செய்தல்", desc: "மருத்துவர் உங்கள் கவலையைப் பற்றி பேசி, Follow-up Review தேவைப்பட்டால் அதை ஏற்பாடு செய்வார்." },
       { title: "Prescribe செய்தல்", desc: "எந்த Prescription உம் Collection அல்லது Delivery க்காக Pharmacy க்கு அனுப்பப்படும்." },
     ],
     prep: [

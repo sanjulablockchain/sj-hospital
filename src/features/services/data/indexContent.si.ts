@@ -325,10 +325,10 @@ export const pharmacySection = {
 
 export const pharmacyFacts = [
   { name: "වේලාවන්", note: "පැය 24ම විවෘතයි" },
-  { name: "තොග", note: "Authorized බෙහෙත් විතරයි" },
+  { name: "Stock එක", note: "Authorized බෙහෙත් විතරයි" },
   { name: "Dispatch පරීක්ෂාව", note: "මුලින්ම Pharmacist කෙනෙක් තහවුරු කරනවා" },
-  { name: "ගෙන්වා දීම", note: "මීගමුව පුරාම" },
-  { name: "බෙහෙත් වට්ටෝරු", note: "Digital ලෙස File කරලා තියෙනවා" },
+  { name: "Delivery එක", note: "මීගමුව පුරාම" },
+  { name: "නැවත Prescriptions", note: "Digital ලෙස File කරලා තියෙනවා" },
 ];
 
 export const internationalSection = {

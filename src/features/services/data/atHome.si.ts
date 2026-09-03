@@ -4,25 +4,35 @@
 // Register matches the rest of the site and, specifically, this hospital's
 // own `pharmacy` feature, which describes the identical real-world pharmacy
 // counter and delivery service these two atHome entries also cover:
-// "Pharmacy", "Pharmacist(s)", "Order", "Counter", "File", "Digital" and
-// "WhatsApp" stay English throughout (pharmacy/data/content.si.ts's own
-// header states this). For the short k/v fact labels specifically, this
-// file instead follows the CLOSER sibling: `indexContent.si.ts`'s own
-// `pharmacyFacts` (reviewed in part 1 of this task), which translates
-// "Stock" -> "තොග", "Delivery" -> "ගෙන්වා දීම" (matching
-// navigationLabels.si.ts's own "Delivery" entry exactly) and
-// "Prescriptions" -> "බෙහෙත් වට්ටෝරු" in full, because a reader who follows
-// the homepage's own Pharmacy teaser into this exact detail page should see
-// the same word for the same fact, not a different one. "Dispensing" (the
-// noun) translates the same way, to avoid a `facts` array where 3 of 4
-// labels are silently swept into English with no individual justification
-// (the sibling-test trap the recipe names twice); "Dispense" (the verb, in
-// flowing prose) keeps the pharmacy feature's own established English verb
-// form. "Telemedicine" reuses navigationLabels.si.ts's own exact entry
-// ("දුරස්ථ වෛද්‍ය සේවා"). "Request a visit" reuses navigationLabels.si.ts's
-// own exact entry ("පැමිණීමක් ඉල්ලන්න"). "Doctor"/"Physician" translate in
-// full (වෛද්‍යවරයා), matching emergency.si.ts; "Nurse" and "Coordinator"
-// stay English, also matching emergency.si.ts.
+// "Pharmacy", "Pharmacist(s)", "Order", "Counter", "File", "Digital",
+// "Stock", "Delivery", "Prescription(s)" and "WhatsApp" stay English
+// throughout (pharmacy/data/content.si.ts's own header states this, and its
+// body carries it out for every one of them). An earlier draft of this file
+// pointed the short k/v fact labels at `indexContent.si.ts`'s own
+// `pharmacyFacts` instead, which had fully translated "Stock" -> "තොග" and
+// "Delivery" -> "ගෙන්වා දීම". That was wrong: `pharmacy` is the feature that
+// owns this vocabulary and states the rule explicitly, "තොග"/"ගෙන්වා දීම"
+// are exactly the literary coinage this project's code-mixed register
+// exists to avoid, and this very file already kept six of the same eight
+// pharmacy-register words in English elsewhere ("Counter", "Pharmacist",
+// "Authorized", "Digital", "File", "Order"), so translating only these
+// three was inconsistent with itself as well as with `pharmacy`. Fixed:
+// every "Stock"/"Delivery"/"Prescription(s)" instance below now stays
+// English with a particle where the grammar wants one ("Stock එක",
+// "Delivery එක", "Prescription ටික", "නැවත Prescriptions"), reusing
+// `pharmacy/data/content.si.ts`'s own exact forms
+// (`heroFacts`/`jumpCards`/`tickerItems`) rather than inventing new ones,
+// and `indexContent.si.ts`'s `pharmacyFacts` was corrected the same way as
+// part of this fix. "Dispensing" (the noun) translates in full, to avoid a
+// `facts` array where most labels are silently swept into English with no
+// individual justification (the sibling-test trap the recipe names twice);
+// "Dispense" (the verb, in flowing prose) keeps the pharmacy feature's own
+// established English verb form. "Telemedicine" reuses
+// navigationLabels.si.ts's own exact entry ("දුරස්ථ වෛද්‍ය සේවා"). "Request
+// a visit" reuses navigationLabels.si.ts's own exact entry ("පැමිණීමක්
+// ඉල්ලන්න"). "Doctor"/"Physician" translate in full (වෛද්‍යවරයා), matching
+// emergency.si.ts; "Nurse" and "Coordinator" stay English, also matching
+// emergency.si.ts.
 
 export const __review = { status: "draft", reviewer: null, date: null } as const;
 
@@ -33,20 +43,20 @@ export const atHomeServices = [
     hours: "පැය 24",
     cta: "බෙහෙත් Order කරන්න",
     desc: "පැය 24ම විවෘත Pharmacy Counter එකක්, තියෙන්නේ Authorized බෙහෙත් විතරයි, ඔබේ Hospital File එක Read කරන්න පුළුවන් Pharmacist ලා විසින්ම Dispense කරනවා. Substitute නෑ, Grey-market Supply එකක්වත් නෑ, නැවත Order සඳහා Digital Prescriptions File කරලා තියෙනවා.",
-    tags: ["පැය 24 Counter එක", "Authorized තොග විතරයි", "Pharmacist Dispensing එක", "Digital Prescriptions තිබීම"],
+    tags: ["පැය 24 Counter එක", "Authorized Stock විතරයි", "Pharmacist Dispensing එක", "Digital Prescriptions තිබීම"],
     facts: [
       { k: "වේලාවන්", v: "පැය 24" },
-      { k: "තොග", v: "Authorized බෙහෙත් විතරයි" },
+      { k: "Stock එක", v: "Authorized බෙහෙත් විතරයි" },
       { k: "බෙහෙත් සැපයීම", v: "Pharmacist ලා අතින්" },
-      { k: "බෙහෙත් වට්ටෝරු", v: "Digital ලෙස File කර තියෙනවා" },
+      { k: "Prescription ටික", v: "Digital ලෙස File කර තියෙනවා" },
     ],
     lede: "හැම වේලාවකම විවෘත Pharmacy Counter එකක්, Authorized බෙහෙත් විතරයි තියෙන්නේ, ඔබේ Hospital File එක බලන්න පුළුවන් Pharmacist ලා විසින්ම Dispense කරනවා.",
     aboutHead: "හැම වේලාවකම විවෘත, Substitute නෑ",
-    body1: "Pharmacy Counter එකේ පැය 24ම කාර්ය මණ්ඩලය ඉන්නවා. තියෙන හැම දේකම Authorized තොග විතරයි; Substitute නෑ, Grey-market Supply එකක්වත් නෑ, Pharmacist කෙනෙක් හැම Order එකක්ම දෙන්න කලින් ඔබේ File එකට එරෙහිව Check කරනවා.",
-    body2: "ඔබේ බෙහෙත් Dispense කරන Pharmacist ලාට ඔබේ Hospital File එක Read කරන්න පුළුවන් නිසා, ඔබ ගන්න අනිත් දේකින් Interaction එකක් තියෙනවනම් ඒක Flag කරන්න, නැත්නම් ඔබේ වෛද්‍යවරයා ලියපු Dose එකට එරෙහිව Confirm කරන්න පුළුවන්. බෙහෙත් වට්ටෝරු Digital ලෙස File කරලා තියෙන නිසා, නැවත Order එකක් හෝ අනිත් අංශයකින් එන ප්‍රශ්නයක් ලේසියි.",
+    body1: "Pharmacy Counter එකේ පැය 24ම කාර්ය මණ්ඩලය ඉන්නවා. තියෙන හැම දේකම Authorized Stock විතරයි; Substitute නෑ, Grey-market Supply එකක්වත් නෑ, Pharmacist කෙනෙක් හැම Order එකක්ම දෙන්න කලින් ඔබේ File එකට එරෙහිව Check කරනවා.",
+    body2: "ඔබේ බෙහෙත් Dispense කරන Pharmacist ලාට ඔබේ Hospital File එක Read කරන්න පුළුවන් නිසා, ඔබ ගන්න අනිත් දේකින් Interaction එකක් තියෙනවනම් ඒක Flag කරන්න, නැත්නම් ඔබේ වෛද්‍යවරයා ලියපු Dose එකට එරෙහිව Confirm කරන්න පුළුවන්. Prescriptions ම Digital ලෙස File කරලා තියෙන නිසා, නැවත Order එකක් හෝ අනිත් අංශයකින් එන ප්‍රශ්නයක් ලේසියි.",
     strip: [
       { k: "වේලාවන්", v: "පැය 24" },
-      { k: "තොග", v: "Authorized විතරයි" },
+      { k: "Stock එක", v: "Authorized විතරයි" },
       { k: "බෙහෙත් සැපයීම", v: "Pharmacist Check කරයි" },
       { k: "වාර්තා", v: "Digital, File කර" },
     ],
@@ -54,7 +64,7 @@ export const atHomeServices = [
       "ඕන වේලාවක Prescription බෙහෙත් Dispense කිරීම",
       "Over-the-counter බෙහෙත් සහ ද්‍රව්‍ය",
       "අලුත් Order එකක් ඔබේ Hospital File එකට එරෙහිව Check කිරීම",
-      "ඔබේ බෙහෙත් වට්ටෝරු Digital ලෙස Record කරගෙන තිබීම",
+      "ඔබේ Prescriptions ම Digital ලෙස Record කරගෙන තිබීම",
     ],
     conditions: [
       "වේලාවෙන් පස්සේ හදිසි Prescription එකක්",
@@ -66,7 +76,7 @@ export const atHomeServices = [
     steps: [
       { title: "අරගෙන එන්න හෝ එවන්න", desc: "ඔබේ Prescription එක Counter එකට අරගෙන එන්න, නැත්නම් ඔබේ Consultation එකෙන්ම එවන්න." },
       { title: "Check කිරීම", desc: "සකස් කරන්න කලින් Pharmacist කෙනෙක් Order එක ඔබේ File එකට එරෙහිව Check කරනවා." },
-      { title: "Dispense කිරීම", desc: "ඔබේ බෙහෙත් Authorized තොගයෙන් Dispense කරනවා, Substitute කිසිවක් යොදාගන්නේ නෑ." },
+      { title: "Dispense කිරීම", desc: "ඔබේ බෙහෙත් Authorized Stock එකෙන් Dispense කරනවා, Substitute කිසිවක් යොදාගන්නේ නෑ." },
       { title: "Record කිරීම", desc: "ඕන Repeat Order එකකට හෝ ප්‍රශ්නයකට Prescription එක Digital ලෙස File එකේ තියෙනවා." },
     ],
     prep: [
@@ -77,38 +87,38 @@ export const atHomeServices = [
     ],
     team: [
       { role: "Pharmacist ලා", note: "හැම Order එකක්ම Dispense කරලා, පලවෙනුව ඔබේ Hospital File එකට එරෙහිව Check කරනවා." },
-      { role: "Pharmacy Assistants ලා", note: "තොග සහ Over-the-counter ද්‍රව්‍ය සමඟ Counter එකට සහාය වෙනවා." },
+      { role: "Pharmacy Assistants ලා", note: "Stock එක සහ Over-the-counter ද්‍රව්‍ය සමඟ Counter එකට සහාය වෙනවා." },
       { role: "Pharmacy Coordinator කෙනා", note: "Repeat Orders සඳහා Digital Prescription Records අලුත් කරගෙන යනවා." },
     ],
     faq: [
       { q: "රාත්‍රියේත් Pharmacy එක විවෘතද?", a: "ඔව්. Counter එක පැය 24ම විවෘතයි." },
       { q: "ලියපු බෙහෙතම හැමවෙලේම ලැබෙයිද?", a: "ඔව්. Counter එකේ තියෙන්නේ Authorized බෙහෙත් විතරයි, Substitute නෑ, Grey-market Supply එකක්වත් නෑ." },
       { q: "මම ගන්න අනිත් දේවල් Pharmacist ලා දන්නවද?", a: "ඔබේ බෙහෙත් Dispense කරන Pharmacist ලාට ඔබේ Hospital File එක Read කරන්න පුළුවන්, ඒකෙන් Order එකක් දෙන්න කලින් Interaction Check කරන්න පුළුවන් වෙනවා." },
-      { q: "Repeat Prescription එකක් ලේසියෙන් නැවත Order කරන්න පුළුවන්ද?", a: "ඔව්. බෙහෙත් වට්ටෝරු Digital ලෙස File කරලා තියෙන නිසා, Repeat Order එකක් ලේසියි." },
+      { q: "Repeat Prescription එකක් ලේසියෙන් නැවත Order කරන්න පුළුවන්ද?", a: "ඔව්. Prescriptions ම Digital ලෙස File කරලා තියෙන නිසා, Repeat Order එකක් ලේසියි." },
     ],
   },
   {
-    title: "බෙහෙත් ගෙන්වා දීම",
-    directoryTitle: "බෙහෙත් ගෙන්වා දීම",
+    title: "බෙහෙත් Delivery",
+    directoryTitle: "බෙහෙත් Delivery",
     hours: "දිනපතා",
     cta: "Prescription එකක් යවන්න",
     desc: "Prescription සහ Over-the-counter බෙහෙත් අපේම Pharmacy Counter එකෙන් මීගමුව පුරාම ගෙන්වා දෙනවා, Dispatch කරන්න කලින් Pharmacist Check එකක් සහ Photo Prescriptions පිලිගන්නවා.",
-    tags: ["මීගමුව පුරාම ගෙන්වා දීම", "අපේම Counter එකෙන්", "Dispatch කරන්න කලින් Pharmacist Check", "Photo Prescriptions පිලිගන්නවා"],
+    tags: ["මීගමුව පුරාම Delivery", "අපේම Counter එකෙන්", "Dispatch කරන්න කලින් Pharmacist Check", "Photo Prescriptions පිලිගන්නවා"],
     facts: [
       { k: "වේලාවන්", v: "දිනපතා" },
       { k: "ආවරණය", v: "මීගමුව පුරාම" },
       { k: "මූලාශ්‍රය", v: "අපේම Pharmacy Counter එක" },
-      { k: "බෙහෙත් වට්ටෝරු", v: "Photos පිලිගන්නවා" },
+      { k: "Prescription ටික", v: "Photos පිලිගන්නවා" },
     ],
     lede: "Prescription සහ Over-the-counter බෙහෙත් අපේම Pharmacy Counter එකෙන් මීගමුව පුරාම ගෙන්වා දෙනවා, හැම Order එකක්ම Dispatch කරන්න කලින් Pharmacist Check එකකුත් සමඟ.",
     aboutHead: "අපේම Counter එකෙන් ගෙන්වන, යන්න කලින් Check කරන",
-    body1: "බෙහෙත් ගෙන්වා දීම මීගමුව ආවරණය කරන අතර රෝහලේම Pharmacy Counter එකෙන්ම සකස් වෙනවා, එහෙනම් කෙලින්ම එන අයට යොදාගන්න Authorized තොගම Delivery සඳහාත් යනවා. Pharmacist කෙනෙක් Dispatch කරන්න කලින් හැම Order එකක්ම Check කරනවා, Counter එකේදී Over-the-counter Order එකක් Check කරන විදිහටම.",
+    body1: "බෙහෙත් Delivery මීගමුව ආවරණය කරන අතර රෝහලේම Pharmacy Counter එකෙන්ම සකස් වෙනවා, එහෙනම් කෙලින්ම එන අයට යොදාගන්න Authorized Stock එකම Delivery සඳහාත් යනවා. Pharmacist කෙනෙක් Dispatch කරන්න කලින් හැම Order එකක්ම Check කරනවා, Counter එකේදී Over-the-counter Order එකක් Check කරන විදිහටම.",
     body2: "Order එකක් පටන් ගන්න ඔබේ Prescription එකේ Photo එකක් යවන්න පුළුවන්, Original එක කෙලින්ම අරගෙන එන්න බැරි වුනොත් ඒක ප්‍රයෝජනවත්. එකම Delivery එකට Over-the-counter Items එකතු කරගන්නත් පුළුවන්, Orders දිනපතා ධාවනය වෙනවා.",
     strip: [
       { k: "ආවරණය", v: "මීගමුව" },
       { k: "මූලාශ්‍රය", v: "අපේම Counter එක" },
       { k: "Check කිරීම", v: "Dispatch කරන්න කලින්" },
-      { k: "බෙහෙත් වට්ටෝරු", v: "Photo පිලිගන්නවා" },
+      { k: "Prescription ටික", v: "Photo පිලිගන්නවා" },
     ],
     covers: [
       "Prescription බෙහෙත් Delivery",
@@ -138,7 +148,7 @@ export const atHomeServices = [
     team: [
       { role: "Pharmacist ලා", note: "Dispatch කරන්න කලින් හැම Delivery Order එකක්ම Check කරනවා." },
       { role: "Delivery Coordinator කෙනා", note: "මීගමුව පුරාම Dispatch සහ Delivery සංවිධානය කරනවා." },
-      { role: "Pharmacy Assistants ලා", note: "රෝහලේම Counter තොගයෙන් Orders සකස් කරනවා." },
+      { role: "Pharmacy Assistants ලා", note: "රෝහලේම Counter Stock එකෙන් Orders සකස් කරනවා." },
     ],
     faq: [
       { q: "Prescription එකේ Photo එකක් යවන්න පුළුවන්ද?", a: "ඔව්. Delivery Order එකක් පටන් ගන්න Photo Prescriptions පිලිගන්නවා." },
@@ -218,7 +228,7 @@ export const atHomeServices = [
     facts: [
       { k: "වේලාවන්", v: "දිනපතා" },
       { k: "ආකාරය", v: "Video හෝ Phone" },
-      { k: "බෙහෙත් වට්ටෝරු", v: "Pharmacy එකට යවනවා" },
+      { k: "Prescription ටික", v: "Pharmacy එකට යවනවා" },
       { k: "Follow-up එක", v: "ගෙදර ගිය රෝගීන් සඳහා" },
     ],
     lede: "අපේ වෛද්‍යවරු සමඟ Video සහ Phone Consultations, ඕන Prescription එකක් Delivery සඳහා කෙලින්ම Pharmacy එකට යවනවා.",
@@ -228,7 +238,7 @@ export const atHomeServices = [
     strip: [
       { k: "ආකාරය", v: "Video හෝ Phone" },
       { k: "වෙන් කිරීම", v: "දිනපතා" },
-      { k: "බෙහෙත් වට්ටෝරු", v: "Pharmacy එකට" },
+      { k: "Prescription ටික", v: "Pharmacy එකට" },
       { k: "Follow-up එක", v: "ගෙදර ගිය පසු" },
     ],
     covers: [
