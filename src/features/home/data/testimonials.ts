@@ -24,3 +24,13 @@ export const testimonials: Testimonial[] = [
     role: "Surgical patient",
   },
 ];
+
+/**
+ * `#voices`'s own copy, stranded in `TestimonialsSection.tsx` until now.
+ * `testimonials[*].name` is the patient's own name and never translates; the
+ * quote and the role do. See the commit message for how the quotes were
+ * translated: as quoted speech, not paraphrase.
+ */
+export const sectionEyebrow = "14 / Patient voices";
+export const ariaPrev = "Previous testimonial";
+export const ariaNext = "Next testimonial";

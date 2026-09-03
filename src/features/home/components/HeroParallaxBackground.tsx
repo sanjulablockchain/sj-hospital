@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useParallax } from "../hooks/useParallax";
 
-export function HeroParallaxBackground() {
+export function HeroParallaxBackground({ photoAlt }: { photoAlt: string }) {
   const { ref, offset } = useParallax(0.16, 130);
 
   return (
@@ -14,7 +14,7 @@ export function HeroParallaxBackground() {
     >
       <Image
         src="/images/hero-exterior.png"
-        alt="St. Joseph Hospital building at dusk"
+        alt={photoAlt}
         fill
         priority
         /* The building carries the hospital name and leaf on its right-hand

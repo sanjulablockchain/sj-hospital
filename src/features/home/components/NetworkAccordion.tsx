@@ -4,7 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useId, useRef, useState } from "react";
 import type { KeyboardEvent } from "react";
-import { networkNodes } from "../data/network";
+import type { NetworkNode } from "../data/network";
+
+/** Fills a `{name}` token into a translated screen-reader sentence. */
+function fillName(template: string, name: string): string {
+  return template.replace("{name}", name);
+}
 
 /**
  * Horizontal accordion across the network nodes: the open panel widens to show
@@ -23,13 +28,19 @@ import { networkNodes } from "../data/network";
  * navigates straight away. The button sits before the content in the DOM so
  * tabbing runs open, then follow, then on to the next panel.
  */
-export function NetworkAccordion() {
+export function NetworkAccordion({
+  nodes,
+  aria,
+}: {
+  nodes: readonly NetworkNode[];
+  aria: { show: string; open: string };
+}) {
   const [activeIndex, setActiveIndex] = useState(0);
   const buttonRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const baseId = useId();
 
   const handleKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
-    const lastIndex = networkNodes.length - 1;
+    const lastIndex = nodes.length - 1;
     let nextIndex: number;
 
     switch (event.key) {
@@ -58,13 +69,13 @@ export function NetworkAccordion() {
 
   return (
     <ul className="flex h-[610px] flex-col gap-px bg-[var(--home-hairline)] min-[640px]:h-[540px] min-[640px]:flex-row">
-      {networkNodes.map((node, index) => {
+      {nodes.map((node, index) => {
         const isActive = index === activeIndex;
         const contentId = `${baseId}-network-${index}`;
 
         return (
           <li
-            key={node.name}
+            key={index}
             // Collapsed panels hold a fixed spine width (height on mobile) and
             // the open one takes whatever is left, which reads far better than
             // splitting the row proportionally.
@@ -105,7 +116,7 @@ export function NetworkAccordion() {
               className="absolute inset-0 z-10 flex items-center px-6 text-left focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-[var(--home-accent)] min-[640px]:justify-center min-[640px]:px-0"
             >
               <span className="sr-only">
-                {isActive ? `${node.name}, open` : `Show ${node.name}`}
+                {isActive ? fillName(aria.open, node.name) : fillName(aria.show, node.name)}
               </span>
               <span
                 aria-hidden
@@ -132,7 +143,7 @@ export function NetworkAccordion() {
               <span className="text-[12px] font-bold tracking-[0.2em] text-[#7FCBFF] uppercase">
                 {node.index} &nbsp;/&nbsp; {node.location}
               </span>
-              <h3 className="font-display mt-3 text-[clamp(24px,2.6vw,38px)] leading-[1.04] font-semibold tracking-[-0.03em] text-white">
+              <h3 className="font-display mt-3 wrap-break-word text-[clamp(24px,2.6vw,38px)] leading-[1.04] font-semibold tracking-[-0.03em] text-white">
                 {node.name}
               </h3>
               <p className="mt-3 max-w-[42ch] text-[14.5px] leading-[1.55] text-white/78">{node.body}</p>

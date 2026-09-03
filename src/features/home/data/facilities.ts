@@ -55,3 +55,7 @@ export const facilities: FacilityCard[] = [
     accent: true,
   },
 ];
+
+/** `#facilities`'s own copy, stranded in `FacilitiesSection.tsx` until now. */
+export const sectionEyebrow = "04 / Facilities";
+export const heading = { line1: "Built like a", line2: "US facility" };

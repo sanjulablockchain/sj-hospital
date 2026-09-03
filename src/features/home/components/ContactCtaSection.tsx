@@ -2,12 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { LOGO_MARK } from "@/config/brand";
+import type { HomeContent } from "../data/getContent";
 
-export function ContactCtaSection() {
+export function ContactCtaSection({ content }: { content: HomeContent["content"]["contactCta"] }) {
+  const { eyebrow, heading, body, ctaSurgical, ctaRooms } = content;
+
   return (
     <section id="book" className="mx-auto max-w-[1440px] px-5 pt-31.5 sm:px-8 lg:px-11">
-      <div className="grid grid-cols-1 gap-px bg-[var(--home-hairline)] min-[900px]:grid-cols-[1.15fr_0.85fr]">
-        <div className="relative overflow-hidden bg-[var(--home-accent)] p-9 py-13 text-[var(--home-on-accent)] sm:p-11">
+      <div className="grid grid-cols-1 gap-px bg-[var(--home-hairline)] min-[900px]:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
+        <div className="relative min-w-0 overflow-hidden bg-[var(--home-accent)] p-9 py-13 text-[var(--home-on-accent)] sm:p-11">
           <ParallaxLayer
             factor={0.09}
             maxOffsetPx={52}
@@ -21,30 +24,28 @@ export function ContactCtaSection() {
               className="h-auto w-full"
             />
           </ParallaxLayer>
-          <div className="relative text-[11.5px] font-bold tracking-[0.24em] uppercase opacity-70">15 / Come see us</div>
-          <h2 className="font-display relative mt-4.5 text-[clamp(36px,5vw,72px)] leading-[0.9] font-extrabold tracking-[-0.04em] uppercase">
-            Open right
+          <div className="relative text-[11.5px] font-bold tracking-[0.24em] uppercase opacity-70">{eyebrow}</div>
+          <h2 className="font-display relative mt-4.5 wrap-break-word text-[clamp(36px,5vw,72px)] leading-[0.9] font-extrabold tracking-[-0.04em] uppercase">
+            {heading.line1}
             <br />
-            now. Yes,
+            {heading.line2}
             <br />
-            right now.
+            {heading.line3}
           </h2>
-          <p className="relative mt-5.5 max-w-[40ch] text-[17px] leading-[1.6] opacity-85">
-            229/10 St. Joseph Street, Negombo. Walk in, call us, or send a message on WhatsApp.
-          </p>
+          <p className="relative mt-5.5 max-w-[40ch] text-[17px] leading-[1.6] opacity-85">{body}</p>
         </div>
-        <div className="flex flex-col bg-[var(--home-bg)]">
+        <div className="flex min-w-0 flex-col bg-[var(--home-bg)]">
           <Link
             href="/services/general-surgery"
             className="sj-invert font-display flex flex-1 items-center justify-between gap-5 border-b border-[var(--home-hairline)] px-8 py-7 text-[25px] font-semibold tracking-[-0.02em] text-[var(--home-heading)]"
           >
-            Surgical care <span aria-hidden>&rarr;</span>
+            <span className="wrap-break-word">{ctaSurgical}</span> <span aria-hidden className="shrink-0">&rarr;</span>
           </Link>
           <Link
             href="/accommodation#book"
             className="sj-invert font-display flex flex-1 items-center justify-between gap-5 border-b border-[var(--home-hairline)] px-8 py-7 text-[25px] font-semibold tracking-[-0.02em] text-[var(--home-heading)]"
           >
-            Reserve a room <span aria-hidden>&rarr;</span>
+            <span className="wrap-break-word">{ctaRooms}</span> <span aria-hidden className="shrink-0">&rarr;</span>
           </Link>
           <a
             href="tel:+94117848484"
