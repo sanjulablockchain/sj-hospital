@@ -174,6 +174,18 @@ Each feature has its own `SectionHead` (there are seven, plus career's `SectionH
 
 `min-w-0` is already the idiom for this elsewhere in the codebase (`Modal.tsx`, `BookSection.tsx`). Fix the layout rather than rephrasing the translation around it: rephrasing works, but it means every future translator has to rediscover the trap.
 
+### Step E2b: put wrap-break-word on every section heading, not just the h1
+
+Five features have now needed this, and `media` shipped a 92px page-level horizontal scroll in Tamil because seven of its section headings lacked it while its own `<h1>` had it.
+
+`min-w-0` lets the container shrink. It does not help when a single Sinhala or Tamil token is itself wider than the column, and both scripts produce those routinely where English has a space. `wrap-break-word` is what allows the break.
+
+```bash
+grep -rn "<h2" src/features/<feature>/components/ | grep -v "wrap-break-word"
+```
+
+The trade is a mid-word break instead of an overflow, and the site accepts that everywhere. If a specific heading looks bad broken, shorten that translation, but do not remove the class: without it the page scrolls sideways.
+
 ### Step E3: let grid tracks shrink too
 
 The same trap as Step E2, one layer out. A track declared as a bare `fr` will not shrink below the intrinsic width of its content, so a long Sinhala or Tamil token pushes the whole column out. `minmax(0, 1fr)` fixes it, and is already the convention in `about` and parts of `accommodation`.
