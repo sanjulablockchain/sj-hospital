@@ -60,6 +60,14 @@ So the reader who most needs the translation, the one arriving on a shared `/si/
 
 Prefix the href. If the component needs anchor props that `LocaleLink` does not forward, such as `aria-current`, do not widen `LocaleLink` for one caller and do not drop the prefix: pass the locale down and call `localePath` or `localeHref` yourself, keeping the component a Server Component and its existing markup intact.
 
+## The identity check can be dodged with a different English word
+
+The normalised assertion compares a translation against the English at ITS OWN path. Substitute a different English word and it passes while nothing is translated.
+
+`services` shipped Tamil `"Consultation"` for an English base of `"Consult"`. Not identical, so green, and bare English on an otherwise fully Tamil page. `facilities` did the same with `"Instrument Set"` for `"Instrument Set(s)"`.
+
+The check that finds these is mechanical and worth running on your own overlays before you finish: **grep every string literal that contains no Sinhala or Tamil script character at all.** Anything it returns is either a declared `KEEPS_ENGLISH` entry or a miss.
+
 ## The sibling test, for deciding what stays English
 
 The keep-English exception is for words people genuinely say in English: drug classes, brands, dispensing tags, product and company names, `Email`, `WhatsApp`, `OPD`, `X-ray`. It is NOT for any English-looking category label, and it has now been stretched twice.
