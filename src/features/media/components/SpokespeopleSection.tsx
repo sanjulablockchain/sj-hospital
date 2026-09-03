@@ -1,6 +1,6 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
-import { topics } from "../data/content";
+import type { MediaContent } from "../data/getContent";
 
 /**
  * `#spokespeople`: which topic reaches which role.
@@ -13,7 +13,8 @@ import { topics } from "../data/content";
  * The heading column sticks while the rows scroll past it, and goes static
  * below 900px where the grid collapses to one column.
  */
-export function SpokespeopleSection() {
+export function SpokespeopleSection({ content }: { content: MediaContent }) {
+  const { topics, spokespeopleHeading, spokespeopleIntro1, spokespeopleIntro2, sectionEyebrows } = content;
   return (
     <section
       id="spokespeople"
@@ -22,20 +23,18 @@ export function SpokespeopleSection() {
       <div className="grid items-start gap-14.5 min-[900px]:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] max-[899px]:gap-10">
         <Reveal className="min-[900px]:sticky min-[900px]:top-10">
           <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
-            05 / Who speaks
+            {sectionEyebrows.spokespeople}
           </div>
           <h2 className="font-display mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
-            Ask for the
+            {spokespeopleHeading.line1}
             <br />
-            right person
+            {spokespeopleHeading.line2}
           </h2>
           <p className="mt-5 max-w-[38ch] text-[16.5px] leading-[1.65] text-[var(--home-muted)]">
-            Requests go through Communications, who will put you with the clinician who actually
-            does the work rather than a general spokesperson reading a statement.
+            {spokespeopleIntro1}
           </p>
           <p className="mt-3.5 max-w-[38ch] text-[15px] leading-[1.6] text-[var(--home-muted)]">
-            Give us the topic and your deadline in the first email. Both change who we can offer and
-            how fast.
+            {spokespeopleIntro2}
           </p>
         </Reveal>
 

@@ -1,10 +1,10 @@
 import Image from "next/image";
-import Link from "next/link";
+import { LocaleLink } from "@/components/i18n/LocaleLink";
 import { ThemedHeader } from "@/components/layout/ThemedHeader";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { Ticker } from "@/components/ui/Ticker";
 import { mediaNavigation } from "@/config/mediaNavigation";
-import { heroFacts, tickerItems } from "../data/content";
+import type { MediaContent } from "../data/getContent";
 
 /**
  * `#top`: the clinical team photograph behind the themed header and the page's
@@ -28,8 +28,13 @@ import { heroFacts, tickerItems } from "../data/content";
  *
  * Copy animates with `animate-sj-up` rather than `Reveal`, since it is already
  * in the first viewport and should not wait on an intersection observer.
+ *
+ * The breadcrumb's "Home" link goes through `LocaleLink` rather than a plain
+ * anchor, the same fix every other feature's own hero needed, so a
+ * translated reader is not dropped back into English.
  */
-export function MediaHero() {
+export function MediaHero({ content }: { content: MediaContent }) {
+  const { hero, heroFacts, tickerItems } = content;
   return (
     <section
       id="top"
@@ -77,25 +82,25 @@ export function MediaHero() {
             className="text-[11px] tracking-[0.3em] text-white/50 uppercase"
             style={{ writingMode: "vertical-rl" }}
           >
-            Press desk answers same day
+            {hero.strapline}
           </span>
           <span className="w-px flex-1 bg-gradient-to-b from-white/40 to-transparent" />
         </div>
 
         <div className="flex-1 pb-11">
-          <div className="animate-sj-up inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
+          <div className="animate-sj-up flex min-w-0 flex-wrap items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
             <span aria-hidden className="h-px w-11 bg-[#2CA6F0]" />
-            <Link href="/" className="text-[#7FCBFF] hover:text-white">
-              Home
-            </Link>
+            <LocaleLink href="/" className="text-[#7FCBFF] hover:text-white">
+              {hero.breadcrumbHome}
+            </LocaleLink>
             <span aria-hidden className="opacity-50">
               /
             </span>
-            Media
+            <span>{hero.breadcrumbCurrent}</span>
           </div>
 
-          <h1 className="font-display animate-sj-up mt-4.5 text-[clamp(44px,7.6vw,126px)] leading-[0.86] font-extrabold tracking-[-0.045em] text-white uppercase">
-            On the
+          <h1 className="font-display animate-sj-up mt-4.5 wrap-break-word text-[clamp(44px,7.6vw,126px)] leading-[0.86] font-extrabold tracking-[-0.045em] text-white uppercase">
+            {hero.headingLine1}
             <br />
             {/* Outlined then accent, so the three words step from solid to
                 hollow to accent across two lines. */}
@@ -103,9 +108,9 @@ export function MediaHero() {
               className="text-transparent"
               style={{ WebkitTextStroke: "1.4px rgba(242,246,255,0.75)" }}
             >
-              record.
+              {hero.headingOutline}
             </span>{" "}
-            <span className="text-[#2CA6F0]">Always.</span>
+            <span className="text-[#2CA6F0]">{hero.headingAccent}</span>
           </h1>
 
           <div className="animate-sj-up mt-8 flex flex-col items-start gap-5.5">
@@ -113,26 +118,30 @@ export function MediaHero() {
               className="max-w-[54ch] text-[18px] leading-[1.6] text-white/82"
               style={{ textWrap: "pretty" }}
             >
-              Hospital news, clinical milestones, community programmes and everything a journalist
-              needs to file accurately: named spokespeople, approved logos, high resolution
-              photographs and a desk that replies the same working day.
+              {hero.standfirst}
             </p>
             <div className="flex flex-wrap gap-3">
               <a
                 href="#newsroom"
                 className="sj-invert inline-flex items-center gap-2.5 bg-[#2CA6F0] px-6 py-4 text-[15px] font-bold text-[#04122B]"
               >
-                Read the newsroom <span aria-hidden>&rarr;</span>
+                {hero.ctaPrimary} <span aria-hidden>&rarr;</span>
               </a>
               {/* The reference labels this "Download the press kit", but no kit
                   file exists to download. It goes to the section that lists what
-                  the kit holds and how to ask for it. */}
+                  the kit holds and how to ask for it.
+
+                  No `whitespace-nowrap` here (unlike the reference markup this
+                  replaced): a translated label is longer than the English one,
+                  and forcing it onto one line risked pushing this button past
+                  the viewport at 360px. Wrapping onto a second line inside the
+                  button is a smaller cost than an overflow. */}
               <a
                 href="#kit"
-                className="inline-flex items-center gap-3 border border-white/30 px-6 py-4 text-[15px] font-bold whitespace-nowrap text-white transition-colors hover:bg-white hover:text-[#060B1F]"
+                className="inline-flex items-center gap-3 border border-white/30 px-6 py-4 text-[15px] font-bold text-white transition-colors hover:bg-white hover:text-[#060B1F]"
               >
-                <span aria-hidden className="animate-sj-pulse h-2 w-2 rounded-full bg-[#2CA6F0]" />
-                See the press kit
+                <span aria-hidden className="animate-sj-pulse h-2 w-2 shrink-0 rounded-full bg-[#2CA6F0]" />
+                {hero.ctaSecondary}
               </a>
             </div>
           </div>

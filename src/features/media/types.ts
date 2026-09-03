@@ -34,7 +34,16 @@ export type NewsCategory =
 
 /** The accent-filled lead item at the top of the newsroom. */
 export type FeaturedRelease = {
-  kicker: string;
+  /**
+   * Month and year only ("August 2026"), separate from the full `date`
+   * below: the kicker line reads `{kickerDate} · {type}`, composed in
+   * NewsroomSection rather than baked into one string, so `type` (a
+   * translatable label) is not welded to a date fact that must stay in
+   * English. See content.ts's own history: this used to be one baked
+   * "August 2026 · Press release" string, which glued a fact to a
+   * translatable word inside a single field.
+   */
+  kickerDate: string;
   title: string;
   lede: string;
   date: string;
