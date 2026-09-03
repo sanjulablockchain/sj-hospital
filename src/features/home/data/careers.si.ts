@@ -24,8 +24,14 @@
 // keeps "Shift Roster" English throughout.
 //
 // `department` values reuse the site's own vocabulary: "Emergency", "Pharmacy"
-// and "Imaging" are KEEPS_ENGLISH (see content.i18n.test.ts), matching
-// career's own `departmentLabels` and navigationLabels.si.ts precedents.
+// and "Imaging" are KEEPS_ENGLISH (see content.i18n.test.ts). Of the three,
+// only "Pharmacy" actually has an entry in career's own `departmentLabels`
+// (an English-identity key there); that map's own taxonomy is All / Medical
+// / Nursing / Allied health / Pharmacy / Administration / Support services,
+// with no Emergency, Surgical, Laboratory or Imaging entry at all, so
+// "Emergency" and "Imaging" here rest on the site's independent
+// register-word precedent (the same class as "Digital X-ray", "OPD" in
+// navigationLabels.si.ts), not on any match in that map.
 // "Surgical" and "Laboratory" translate. "Laboratory" here uses "විද්‍යාගාර"
 // rather than facilities'/home-care's "රසායනාගාරය", to match the word this
 // same row's own job title already uses for "Medical Laboratory

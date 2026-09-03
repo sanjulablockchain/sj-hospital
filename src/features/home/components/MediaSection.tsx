@@ -37,9 +37,9 @@ export function MediaSection({
         </div>
       </Reveal>
       <RevealStagger className="mt-11.5 border-t border-[var(--home-hairline)]">
-        {items.map((item, index) => (
+        {items.map((item) => (
           <Link
-            key={index}
+            key={item.date}
             href="/media#newsroom"
             className="sj-row-fill grid grid-cols-1 gap-3 border-b border-[var(--home-hairline)] px-1 py-6.5 text-inherit min-[640px]:grid-cols-[minmax(0,0.5fr)_minmax(0,1.6fr)_minmax(0,0.9fr)] min-[640px]:items-baseline min-[640px]:gap-6"
           >

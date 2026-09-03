@@ -75,7 +75,7 @@ export function NetworkAccordion({
 
         return (
           <li
-            key={index}
+            key={node.index}
             // Collapsed panels hold a fixed spine width (height on mobile) and
             // the open one takes whatever is left, which reads far better than
             // splitting the row proportionally.

@@ -40,7 +40,7 @@ export function HeroSection({
       <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 gap-10 px-5 pb-13 sm:px-8 lg:px-11">
         <div className="hidden min-w-0 flex-col items-center gap-4.5 pb-2.5 min-[900px]:flex" style={{ flex: "0 0 44px" }}>
           <span
-            className="text-[11px] tracking-[0.3em] whitespace-nowrap text-white/50 uppercase"
+            className="text-[11px] tracking-[0.3em] text-white/50 uppercase"
             style={{ writingMode: "vertical-rl" }}
           >
             {hero.locationLabel}

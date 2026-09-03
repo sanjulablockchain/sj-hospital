@@ -94,6 +94,17 @@ function isUntranslatable(moduleName: string, path: string): boolean {
  *   "12 / Media"): "Pharmacy" and "Media" are KEEPS_ENGLISH in
  *   navigationLabels.si.ts / .ta.ts for this exact word, and this eyebrow is
  *   that same word.
+ * - `content:servicesBento.tiles[3].heading` ("Authorized stock, 24/7") is
+ *   NOT in this set: "Authorized" here is part of the fixed compound
+ *   "Authorized Stock", the same noun phrase `pharmacy`'s own standalone
+ *   feature keeps English throughout its ticker, fact rows and safety cards
+ *   ("Authorized Stock විතරයි", "Authorized Stock மட்டும்"). That is
+ *   different from `pharmacy.heading.line1` below, where "Authorized" stands
+ *   alone as one full segment of a three-segment heading whose other two
+ *   segments both translate: pharmacy's own hero heading has the identical
+ *   shape and translates that segment (see `content.si.ts` / `content.ta.ts`
+ *   for the reused string), so home's copy of the same heading shape must
+ *   too, and is translated rather than excepted here.
  * - `content:schoolWellness.photoCaption` ("Kids & Teens Pediatric
  *   Protocol"): this programme's own named protocol, the same proper-noun
  *   class as "Kids & Teens Medical Group" itself.
@@ -114,12 +125,6 @@ const KEEPS_ENGLISH = new Set<string>([
   "content:servicesBento.tiles[3].badge",
   "content:servicesBento.tiles[4].badge",
   "content:pharmacy.eyebrow",
-  // "Authorized": the first word of a three-line heading whose other two
-  // lines ("medicine." / "Nothing else.") both translate in full; "Authorized
-  // Stock" is this site's own established English compound (pharmacy's own
-  // standalone feature keeps it English throughout: "Authorized Stock
-  // විතරයි"), and this heading's own body sentence keeps it English too.
-  "content:pharmacy.heading.line1",
   "content:schoolWellness.photoCaption",
   "media:sectionEyebrow",
   "careers:jobOpenings[0].department",

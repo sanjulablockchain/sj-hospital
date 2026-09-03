@@ -142,7 +142,11 @@ export const surgical = {
 export const pharmacy = {
   // "Pharmacy": KEEPS_ENGLISH, same as navigationLabels.ta.ts's own entry.
   eyebrow: "05 / Pharmacy",
-  heading: { line1: "Authorized", line2: "மருந்து மட்டும்.", line3: "வேறு எதுவும் இல்லை." },
+  // `heading.line1` reused byte-for-byte from pharmacy's own standalone
+  // feature (`src/features/pharmacy/data/content.ta.ts`'s `hero.headingLead`):
+  // same three-segment heading shape, same first word, so the two pages
+  // agree rather than one translating "Authorized" and the other not.
+  heading: { line1: "அங்கீகரிக்கப்பட்ட", line2: "மருந்து மட்டும்.", line3: "வேறு எதுவும் இல்லை." },
   body: "எங்கள் House Pharmacy இல் இருப்பது Verified, Authorized Stock மட்டும், உங்கள் File ஐ படிக்கக்கூடிய Pharmacists இரவின் எந்த நேரத்திலும் Dispense செய்வார்கள்.",
   ctaPrimary: "ஒரு Delivery ஐ Order செய்யுங்கள்",
   ctaSecondary: "ஒரு Pharmacist இடம் கேளுங்கள்",
