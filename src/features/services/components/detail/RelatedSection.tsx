@@ -1,23 +1,27 @@
-import Link from "next/link";
+import { LocaleLink } from "@/components/i18n/LocaleLink";
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
-import { relatedServices } from "@/features/services/data/services";
+import type { Service } from "@/features/services/types";
+import type { ServicesContent } from "@/features/services/data/getContent";
 
 /**
- * `#related`: three sibling services (same group first, see
- * `relatedServices`), each a full-card link into its own detail page. Hover
- * lift mirrors `CentresSection`'s card idiom, just with the arrow reveal
- * instead of a lead-fact reveal since there's no equivalent short fact here.
+ * `#related`: three sibling services (same group first, computed by
+ * `ServiceDetailPage` via `relatedInCatalog` and passed down as `related`,
+ * rather than this component calling `data/services`'s `relatedServices`
+ * itself, which would return the unlocalized English catalog), each a full
+ * card link into its own detail page. Hover lift mirrors `CentresSection`'s
+ * card idiom, just with the arrow reveal instead of a lead-fact reveal since
+ * there's no equivalent short fact here.
  */
-export function RelatedSection({ slug }: { slug: string }) {
-  const related = relatedServices(slug);
+export function RelatedSection({ related, content }: { related: Service[]; content: ServicesContent }) {
   if (related.length === 0) return null;
+  const { groupLabels } = content.groups;
 
   return (
     <section id="related" className="mx-auto max-w-[1440px] px-5 pt-30 sm:px-8 lg:px-11">
       <Reveal>
-        <h2 className="font-display text-[clamp(34px,3.8vw,54px)] leading-[1.02] font-extrabold tracking-[-0.03em] text-[var(--home-heading)] uppercase">
-          Related services
+        <h2 className="font-display wrap-break-word text-[clamp(34px,3.8vw,54px)] leading-[1.02] font-extrabold tracking-[-0.03em] text-[var(--home-heading)] uppercase">
+          {content.indexContent.detailChrome.relatedHeading}
         </h2>
       </Reveal>
 
@@ -28,15 +32,15 @@ export function RelatedSection({ slug }: { slug: string }) {
         {related.map((service) => {
           const meta = service.strip[0];
           return (
-            <Link
+            <LocaleLink
               key={service.slug}
               href={`/services/${service.slug}`}
               className="group flex flex-col bg-[var(--home-bg)] p-7.5 transition-transform duration-[400ms] hover:-translate-y-1.5"
             >
               <div className="text-[11.5px] font-bold tracking-[0.18em] text-[var(--home-accent)] uppercase">
-                {service.group}
+                {groupLabels[service.group] ?? service.group}
               </div>
-              <h3 className="font-display mt-3 text-[21px] leading-[1.15] font-semibold tracking-[-0.02em] text-[var(--home-heading)]">
+              <h3 className="font-display wrap-break-word mt-3 text-[21px] leading-[1.15] font-semibold tracking-[-0.02em] text-[var(--home-heading)]">
                 {service.directoryTitle}
               </h3>
               <div className="mt-3.5 flex items-baseline gap-2 text-[13px] font-bold">
@@ -49,7 +53,7 @@ export function RelatedSection({ slug }: { slug: string }) {
               >
                 &rarr;
               </span>
-            </Link>
+            </LocaleLink>
           );
         })}
       </RevealStagger>

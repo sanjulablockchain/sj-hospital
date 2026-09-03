@@ -1,9 +1,10 @@
 import Image from "next/image";
-import Link from "next/link";
+import { LocaleLink } from "@/components/i18n/LocaleLink";
 import { ThemedHeader } from "@/components/layout/ThemedHeader";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { servicesDetailNavigation } from "@/config/servicesNavigation";
 import type { Service } from "@/features/services/types";
+import type { ServicesContent } from "@/features/services/data/getContent";
 
 /**
  * `#top` hero for a single service's detail page. Same fixed-dark gradient
@@ -14,8 +15,14 @@ import type { Service } from "@/features/services/types";
  * Each service supplies its own illustrative heroImage/heroAlt (equipment,
  * clinical detail) rather than sharing one building render, so the image
  * matches the subject of the page it sits on.
+ *
+ * `service.group` is a structural key (never translated, see `groups.ts`'s
+ * header comment), so the eyebrow shows `content.groups.groupLabels` for it
+ * rather than the raw key.
  */
-export function ServiceHero({ service }: { service: Service }) {
+export function ServiceHero({ service, content }: { service: Service; content: ServicesContent }) {
+  const groupLabel = content.groups.groupLabels[service.group] ?? service.group;
+
   return (
     <section
       id="top"
@@ -47,19 +54,19 @@ export function ServiceHero({ service }: { service: Service }) {
       <ThemedHeader navItems={servicesDetailNavigation} homeHref="/" bookHref="/e-channeling" />
 
       <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 flex-col justify-end gap-6 px-5 pb-14 sm:px-8 lg:px-11">
-        <Link
+        <LocaleLink
           href="/services"
           className="animate-sj-up inline-flex w-fit items-center gap-2 text-[13px] font-semibold text-white/70 hover:text-white"
         >
-          <span aria-hidden>&larr;</span> All services
-        </Link>
+          <span aria-hidden>&larr;</span> {content.indexContent.allServicesLabel}
+        </LocaleLink>
 
         <div className="animate-sj-up inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
           <span className="h-px w-11 bg-[var(--home-accent)]" />
-          {service.group}
+          {groupLabel}
         </div>
 
-        <h1 className="font-display animate-sj-up text-[clamp(40px,7vw,108px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-white uppercase">
+        <h1 className="font-display animate-sj-up wrap-break-word text-[clamp(40px,7vw,108px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-white uppercase">
           {service.title}
         </h1>
 

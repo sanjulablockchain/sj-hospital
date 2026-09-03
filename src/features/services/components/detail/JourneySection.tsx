@@ -1,7 +1,7 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
 import type { Service } from "@/features/services/types";
-import { bringWithYou } from "@/features/services/data/indexContent";
+import type { ServicesContent } from "@/features/services/data/getContent";
 
 /**
  * `#journey`: the service's four-step visit, on a `--home-surface-2` band
@@ -9,8 +9,14 @@ import { bringWithYou } from "@/features/services/data/indexContent";
  * followed by what to prepare and what to bring. The step numerals reuse
  * `AdmissionsSection`'s exact size ramp (56px, growing past 900px) rather
  * than inventing a new one.
+ *
+ * `bringWithYou` and its heading (`admissionsSection.bringWithYouHeading`)
+ * are the same values `AdmissionsSection` on the index page renders: one
+ * fact, one home, not a second copy that could drift (i18n recipe pattern 4).
  */
-export function JourneySection({ service }: { service: Service }) {
+export function JourneySection({ service, content }: { service: Service; content: ServicesContent }) {
+  const { bringWithYou, admissionsSection, detailChrome } = content.indexContent;
+
   return (
     // mt-30 matches the home page's banded sections (SurgicalSection,
     // PharmacySection). Without it the tinted band starts flush against the
@@ -20,8 +26,8 @@ export function JourneySection({ service }: { service: Service }) {
     <section id="journey" className="mt-30 bg-[var(--home-surface-2)]">
       <div className="mx-auto max-w-[1440px] px-5 py-26 sm:px-8 lg:px-11">
         <Reveal>
-          <h2 className="font-display text-[clamp(34px,3.8vw,54px)] leading-[1.02] font-extrabold tracking-[-0.03em] text-[var(--home-heading)] uppercase">
-            Your visit, step by step
+          <h2 className="font-display wrap-break-word text-[clamp(34px,3.8vw,54px)] leading-[1.02] font-extrabold tracking-[-0.03em] text-[var(--home-heading)] uppercase">
+            {detailChrome.journeyHeading}
           </h2>
         </Reveal>
 
@@ -34,7 +40,7 @@ export function JourneySection({ service }: { service: Service }) {
               <div className="font-display text-[56px] leading-[0.85] font-extrabold tracking-[-0.04em] text-[var(--home-accent)] tabular-nums min-[900px]:text-[clamp(64px,6vw,92px)]">
                 {step.no}
               </div>
-              <h3 className="font-display mt-3.5 text-[19px] leading-[1.15] font-semibold tracking-[-0.02em] text-[var(--home-heading)]">
+              <h3 className="font-display wrap-break-word mt-3.5 text-[19px] leading-[1.15] font-semibold tracking-[-0.02em] text-[var(--home-heading)]">
                 {step.title}
               </h3>
               <p className="mt-2.5 text-[14px] leading-[1.55] text-[var(--home-muted)]">{step.desc}</p>
@@ -43,9 +49,9 @@ export function JourneySection({ service }: { service: Service }) {
         </RevealStagger>
 
         <div className="mt-13 grid grid-cols-1 gap-11 min-[900px]:grid-cols-2 min-[900px]:gap-16">
-          <Reveal>
-            <h3 className="font-display text-[19px] leading-[1.15] font-semibold tracking-[-0.02em] text-[var(--home-heading)]">
-              How to prepare
+          <Reveal className="min-w-0">
+            <h3 className="font-display wrap-break-word text-[19px] leading-[1.15] font-semibold tracking-[-0.02em] text-[var(--home-heading)]">
+              {detailChrome.prepHeading}
             </h3>
             <ul className="mt-4.5 flex flex-col gap-2.5">
               {service.prep.map((item) => (
@@ -59,9 +65,9 @@ export function JourneySection({ service }: { service: Service }) {
             </ul>
           </Reveal>
 
-          <Reveal>
-            <h3 className="font-display text-[19px] leading-[1.15] font-semibold tracking-[-0.02em] text-[var(--home-heading)]">
-              Bring with you
+          <Reveal className="min-w-0">
+            <h3 className="font-display wrap-break-word text-[19px] leading-[1.15] font-semibold tracking-[-0.02em] text-[var(--home-heading)]">
+              {admissionsSection.bringWithYouHeading}
             </h3>
             <ul className="mt-4.5 flex flex-col gap-2.5">
               {bringWithYou.map((item) => (

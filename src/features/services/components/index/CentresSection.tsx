@@ -1,6 +1,6 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
-import { centres } from "@/features/services/data/indexContent";
+import type { ServicesContent } from "@/features/services/data/getContent";
 
 /**
  * `#centres`: the nine centres of excellence, each card linking into the full
@@ -8,15 +8,17 @@ import { centres } from "@/features/services/data/indexContent";
  * as calm scan-copy first, with the extra detail as a reward for lingering;
  * screen readers still get it regardless of hover state.
  */
-export function CentresSection() {
+export function CentresSection({ content }: { content: ServicesContent }) {
+  const { centres, centresSection } = content.indexContent;
+
   return (
     <section id="centres" className="mx-auto max-w-[1440px] px-5 pt-30 sm:px-8 lg:px-11">
       <Reveal>
         <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
-          01 / Centres of excellence
+          {centresSection.eyebrow}
         </div>
-        <h2 className="font-display mt-4.5 text-[clamp(38px,4.4vw,66px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
-          Nine units built around one problem
+        <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(38px,4.4vw,66px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
+          {centresSection.heading}
         </h2>
       </Reveal>
 
@@ -38,7 +40,7 @@ export function CentresSection() {
               <div className="text-[13px] font-bold tracking-[0.14em] text-[var(--home-accent)] uppercase tabular-nums">
                 {centre.no}
               </div>
-              <h3 className="font-display mt-3 text-[22px] leading-[1.1] font-semibold tracking-[-0.02em] text-[var(--home-heading)]">
+              <h3 className="font-display wrap-break-word mt-3 text-[22px] leading-[1.1] font-semibold tracking-[-0.02em] text-[var(--home-heading)]">
                 {centre.name}
               </h3>
               <p className="mt-2.5 text-[14px] leading-[1.55] text-[var(--home-muted)]">{centre.desc}</p>

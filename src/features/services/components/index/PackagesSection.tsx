@@ -1,6 +1,6 @@
 import { RevealStagger } from "@/components/ui/RevealStagger";
 import { Reveal } from "@/components/ui/Reveal";
-import { packages } from "@/features/services/data/indexContent";
+import type { ServicesContent } from "@/features/services/data/getContent";
 
 /**
  * `#packages`: three health-check tiers. Deliberately carries no price:
@@ -8,15 +8,17 @@ import { packages } from "@/features/services/data/indexContent";
  * only `tier`, `name`, a ticked `items` list and `ctaLabel`. Do not add a
  * price element, placeholder, dash or "POA" back in; see indexContent.test.ts.
  */
-export function PackagesSection() {
+export function PackagesSection({ content }: { content: ServicesContent }) {
+  const { packages, packagesSection } = content.indexContent;
+
   return (
     <section id="packages" className="mx-auto max-w-[1440px] px-5 pt-30 sm:px-8 lg:px-11">
       <Reveal>
         <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
-          05 / Health checks
+          {packagesSection.eyebrow}
         </div>
-        <h2 className="font-display mt-4.5 text-[clamp(38px,4.4vw,66px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
-          Screening in a single morning
+        <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(38px,4.4vw,66px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
+          {packagesSection.heading}
         </h2>
       </Reveal>
 
@@ -40,7 +42,7 @@ export function PackagesSection() {
             >
               {tier.tier}
             </div>
-            <h3 className="font-display mt-3 text-[26px] leading-[1.08] font-semibold tracking-[-0.025em]">
+            <h3 className="font-display wrap-break-word mt-3 text-[26px] leading-[1.08] font-semibold tracking-[-0.025em]">
               {tier.name}
             </h3>
             <ul className="mt-6 flex flex-1 flex-col gap-3">

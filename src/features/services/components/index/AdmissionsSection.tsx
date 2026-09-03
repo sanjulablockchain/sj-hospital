@@ -1,21 +1,28 @@
-import Link from "next/link";
+import { LocaleLink } from "@/components/i18n/LocaleLink";
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
-import { admissionSteps, bringWithYou, paymentNotes } from "@/features/services/data/indexContent";
+import type { ServicesContent } from "@/features/services/data/getContent";
 
 /**
  * `#admissions`: the four-step journey, then what to bring, how payment and
  * insurance work, and a short pointer to the rooms themselves.
+ *
+ * `admissionsSection.bringWithYouHeading` is reused verbatim by the detail
+ * page's own `JourneySection`, which renders the exact same `bringWithYou`
+ * list: one heading for one fact, not two copies that would drift apart
+ * (i18n recipe pattern 4).
  */
-export function AdmissionsSection() {
+export function AdmissionsSection({ content }: { content: ServicesContent }) {
+  const { admissionSteps, bringWithYou, paymentNotes, admissionsSection } = content.indexContent;
+
   return (
     <section id="admissions" className="mx-auto max-w-[1440px] px-5 pt-30 sm:px-8 lg:px-11">
       <Reveal>
         <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
-          06 / Admissions
+          {admissionsSection.eyebrow}
         </div>
-        <h2 className="font-display mt-4.5 text-[clamp(38px,4.4vw,66px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
-          Four steps, no surprises
+        <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(38px,4.4vw,66px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
+          {admissionsSection.heading}
         </h2>
       </Reveal>
 
@@ -28,7 +35,7 @@ export function AdmissionsSection() {
             <div className="font-display text-[56px] leading-[0.85] font-extrabold tracking-[-0.04em] text-[var(--home-accent)] tabular-nums min-[900px]:text-[clamp(64px,6vw,92px)]">
               {step.no}
             </div>
-            <h3 className="font-display mt-3.5 text-[20px] leading-[1.15] font-semibold tracking-[-0.02em] text-[var(--home-heading)]">
+            <h3 className="font-display wrap-break-word mt-3.5 text-[20px] leading-[1.15] font-semibold tracking-[-0.02em] text-[var(--home-heading)]">
               {step.title}
             </h3>
             <p className="mt-2.5 text-[14px] leading-[1.55] text-[var(--home-muted)]">{step.desc}</p>
@@ -38,8 +45,8 @@ export function AdmissionsSection() {
 
       <div className="mt-11.5 grid grid-cols-1 gap-px bg-[var(--home-hairline)] min-[900px]:grid-cols-3">
         <Reveal className="bg-[var(--home-surface-2)] p-7.5">
-          <h3 className="font-display text-[19px] leading-[1.15] font-semibold tracking-[-0.02em] text-[var(--home-heading)]">
-            Bring with you
+          <h3 className="font-display wrap-break-word text-[19px] leading-[1.15] font-semibold tracking-[-0.02em] text-[var(--home-heading)]">
+            {admissionsSection.bringWithYouHeading}
           </h3>
           <ul className="mt-4.5 flex flex-col gap-2.5">
             {bringWithYou.map((item) => (
@@ -54,8 +61,8 @@ export function AdmissionsSection() {
         </Reveal>
 
         <Reveal className="bg-[var(--home-surface-2)] p-7.5">
-          <h3 className="font-display text-[19px] leading-[1.15] font-semibold tracking-[-0.02em] text-[var(--home-heading)]">
-            Payment & insurance
+          <h3 className="font-display wrap-break-word text-[19px] leading-[1.15] font-semibold tracking-[-0.02em] text-[var(--home-heading)]">
+            {admissionsSection.paymentHeading}
           </h3>
           <ul className="mt-4.5 flex flex-col gap-2.5">
             {paymentNotes.map((note) => (
@@ -70,18 +77,16 @@ export function AdmissionsSection() {
         </Reveal>
 
         <Reveal className="bg-[var(--home-surface-2)] p-7.5">
-          <h3 className="font-display text-[19px] leading-[1.15] font-semibold tracking-[-0.02em] text-[var(--home-heading)]">
-            The rooms
+          <h3 className="font-display wrap-break-word text-[19px] leading-[1.15] font-semibold tracking-[-0.02em] text-[var(--home-heading)]">
+            {admissionsSection.roomsHeading}
           </h3>
-          <p className="mt-4.5 text-[14px] leading-[1.55] text-[var(--home-muted)]">
-            Private and semi-private rooms with attendant space, sanitised on a two hour cycle.
-          </p>
-          <Link
+          <p className="mt-4.5 text-[14px] leading-[1.55] text-[var(--home-muted)]">{admissionsSection.roomsBody}</p>
+          <LocaleLink
             href="/accommodation"
             className="sj-invert mt-5.5 inline-flex w-fit items-center gap-2.5 bg-[var(--home-accent)] px-5.5 py-3.5 text-[14px] font-bold text-[var(--home-on-accent)]"
           >
-            See the rooms <span aria-hidden>&rarr;</span>
-          </Link>
+            {admissionsSection.roomsCta} <span aria-hidden>&rarr;</span>
+          </LocaleLink>
         </Reveal>
       </div>
     </section>

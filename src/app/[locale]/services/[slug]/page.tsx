@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import { getService, serviceSlugs } from "@/features/services/data/services";
 import { ServiceDetailPage } from "@/features/services";
 import { localeAlternates } from "@/lib/i18n/alternates";
@@ -9,6 +8,12 @@ export function generateStaticParams() {
   return serviceSlugs.map((slug) => ({ slug }));
 }
 
+/**
+ * Metadata stays sourced from the ENGLISH catalog (`getService`, unchanged),
+ * matching every other route's `export const metadata` on this site, which
+ * is English-only regardless of locale; only `alternates` varies by locale,
+ * which is what tells a search engine the other two languages exist.
+ */
 export async function generateMetadata({
   params,
 }: {
@@ -31,8 +36,6 @@ export default async function Page({
 }: {
   params: Promise<{ locale: string; slug: string }>;
 }) {
-  const { slug } = await params;
-  const service = getService(slug);
-  if (!service) notFound();
-  return <ServiceDetailPage service={service} />;
+  const { locale, slug } = await params;
+  return <ServiceDetailPage slug={slug} locale={locale as Locale} />;
 }
