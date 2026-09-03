@@ -149,7 +149,7 @@ export const standards = [
   { k: "Substitute බෙහෙත්", v: "පාවිච්චි කරන්නේ නෑ" },
   { k: "Supply එක", v: "Authorized Stock විතරයි" },
   { k: "Grey Market එක", v: "කවදාවත්ම නෑ" },
-  { k: "වාර්තා", v: "Digital, File එකේ" },
+  { k: "Records", v: "Digital, File එකේ" },
   { k: "Counselling එක", v: "Counter එකේදී ලබාදෙනවා" },
   { k: "Delivery Orders සඳහා", v: "Dispatch කරන්න කලින් Check කරනවා" },
 ];
@@ -299,7 +299,7 @@ export const safety = [
     desc: "Dose එකක් ඔබේ වෛද්‍යවරයා ලියපු දෙයට එරෙහිව Confirm කරනවා, ඒකයි Duplicate එකක් හෝ වැරදි Strength එකක් Paper එකේදීම අහුවෙන්නේ.",
   },
   {
-    name: "Digital වාර්තා",
+    name: "Digital Records",
     desc: "Prescriptions ම Digital ලෙස File එකේ තියෙනවා, ඒ නිසා නැවත Order එකක් හෝ අනිත් Department එකකින් එන Query එකක් ඔබේ Paperwork එක මත රඳා නෑ.",
   },
   {

@@ -64,6 +64,15 @@ const KEEPS_ENGLISH = new Set<string>([
   // the label sitting right beside it.
   "jumpCards[3].count",
 
+  // `standards[6].k` is "Record" from the header's own kept-English list,
+  // standing alone the same way `jumpCards[3].count` does: a bare one-word
+  // fact-row label with no natural Sinhala or Tamil equivalent that would not
+  // just be a paraphrase of the `v` sitting beside it ("Digital, on file").
+  // `sectionEyebrows.safety` ("Safety & records") already keeps this same
+  // word English in the same file, so this is the established form, not a
+  // one-off.
+  "standards[6].k",
+
   // `stock[0..5].name` and `stock[].tag` (all ten): six of the ten stocked
   // rows are genuine medicine names or dosage-form categories (Prescription
   // medicine, Antibiotics, Chronic medicine, Paediatric medicine, Discharge

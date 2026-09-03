@@ -82,7 +82,7 @@ export const tickerItems: readonly string[] = [
 
 export const heroFacts = [
   { k: "Counter நேரம்", v: "24 மணி நேரமும் Open" },
-  { k: "இருப்பு", v: "Authorized மட்டும்" },
+  { k: "Stock நிலை", v: "Authorized மட்டும்" },
   { k: "Prescription குறிப்புகள்", v: "File இல் உள்ளது" },
   { k: "Delivery சேவை", v: "நீர்கொழும்பு முழுவதும்" },
 ];
@@ -153,9 +153,9 @@ export const standards = [
   { k: "மாற்று மருந்து", v: "பயன்படுத்தப்படாது" },
   { k: "வழங்கல்", v: "Authorized Stock மட்டும்" },
   { k: "கள்ள சந்தை", v: "எப்போதுமே இல்லை" },
-  { k: "பதிவுகள்", v: "Digital, File இல்" },
+  { k: "Records", v: "Digital, File இல்" },
   { k: "ஆலோசனை", v: "Counter இல் தரப்படுகிறது" },
-  { k: "விநியோக Orders", v: "அனுப்பும் முன் சரிபார்க்கப்படும்" },
+  { k: "Delivery Orders", v: "அனுப்பும் முன் சரிபார்க்கப்படும்" },
 ];
 
 export const stockHeading = { line1: "இன்று இரவு", line2: "அலமாரிகள்", line3: "இல் உள்ளது" };
@@ -303,7 +303,7 @@ export const safety = [
     desc: "Dose ஒன்று உங்கள் Doctor Prescribe செய்ததற்கு எதிராக உறுதிப்படுத்தப்படுகிறது, இதனால்தான் ஒரு Duplicate அல்லது தவறான Strength காகிதத்திலேயே கண்டறியப்படுகிறது.",
   },
   {
-    name: "Digital பதிவுகள்",
+    name: "Digital Records",
     desc: "Prescriptions Digital ஆக File இல் வைக்கப்படுகிறது, அதனால் மீண்டும் ஒரு Order அல்லது மற்றொரு Department இலிருந்து வரும் Query உங்கள் Paperwork ஐ சார்ந்திருக்காது.",
   },
   {
