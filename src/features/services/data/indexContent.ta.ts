@@ -11,6 +11,18 @@
 // "Pharmacy" is KEEPS_ENGLISH there for the same reason it is here. `.no`,
 // `.href`, `.accent`, `.index`, `.photo` and `.photoAlt` are omitted
 // throughout, matching content.i18n.test.ts's `isUntranslatable`.
+//
+// `internationalSteps[4].title` had fully translated "Records" ->
+// "பதிவுகள்", contradicting `pharmacySection.body`'s own bare "Digital
+// Records" two screens up in this same file, and
+// `pharmacy/data/content.ta.ts`'s declared English-stays list for
+// "Record"/"Records". Fixed to keep "Records" bare English.
+// `internationalSteps[5].title` was bare English ("Online Follow Up", a
+// reordered, recapitalised form of the base "Follow up online") with no
+// Tamil at all, unlike every other sibling in this six-entry array; fixed
+// to "Online ஆக Follow-up", keeping "Follow-up" English the way
+// `atHome.ta.ts`'s telemedicine service already does throughout, with a
+// Tamil connector so the title is not bare English.
 
 export const __review = { status: "draft", reviewer: null, date: null } as const;
 
@@ -378,11 +390,11 @@ export const internationalSteps = [
     desc: "உங்கள் வருகை முழுவதும் கோரிக்கையின் பேரில் மொழிபெயர்ப்பாளர்கள் கிடைப்பர்.",
   },
   {
-    title: "வீட்டிற்குக் கொண்டு செல்ல பதிவுகள்",
+    title: "வீட்டிற்குக் கொண்டு செல்ல Records",
     desc: "உங்கள் Reports, Imaging Referrals மற்றும் Discharge Summary இன் பிரதிகளை உங்களுடன் கொண்டு செல்ல.",
   },
   {
-    title: "Online Follow Up",
+    title: "Online ஆக Follow-up",
     desc: "நீங்கள் வீடு திரும்பியதும் ஒரு Telemedicine Consultation உங்கள் சிகிச்சையைத் தொடரும்.",
   },
 ];

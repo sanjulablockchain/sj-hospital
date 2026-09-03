@@ -188,6 +188,25 @@ function isUntranslatable(moduleName: string, path: string): boolean {
  *   charges", and `strip[3].v`, the bare number alone): the first DOES
  *   translate the words around the number, which is the sibling-test
  *   evidence that the second is a genuine exception, not a miss.
+ * - `atHome:[0].strip[3].k`, `atHome:[2].facts[3].k` and
+ *   `atHome:[2].strip[2].k` (all "Records"): "Record"/"Records" is on
+ *   `pharmacy/data/content.si.ts`/`.ta.ts`'s own declared English-stays
+ *   list (its header names "Counter", "Prescription", "Delivery",
+ *   "Pharmacist", "Order", "Record", "File", "Stock" and "WhatsApp"), and
+ *   this file's own header states that the pharmacy service mirrors it.
+ *   `pharmacy` itself keeps a bare one-word "Records" fact-row label the
+ *   same way (`standards[6].k`, also its own `KEEPS_ENGLISH` entry, with
+ *   no natural Sinhala/Tamil equivalent that would not just paraphrase the
+ *   `v` beside it), so these three short `k` labels follow the same
+ *   established form rather than inventing a new one. Every other
+ *   "Record"/"Records" occurrence in this file (the pharmacy service's
+ *   `covers`/`steps`/`prep`/`team`, and the home-visits service's own
+ *   `body2` sentence) instead carries a Sinhala/Tamil particle or verb
+ *   ending ("Record කිරීම", "Record එක", "Record செய்தல்"), which is the
+ *   sibling-test evidence that a bare bilingual-particle form was
+ *   preferred everywhere it was grammatically possible, and these three
+ *   short `k` labels are the same shape `pharmacy:standards[6].k` already
+ *   is: a one-word fact-row label with nothing to hang a particle on.
  */
 const KEEPS_ENGLISH = new Set<string>([
   "groups:groupLabels.Clinics",
@@ -202,6 +221,9 @@ const KEEPS_ENGLISH = new Set<string>([
   "emergency:[0].steps[1].title",
   "emergency:[0].facts[0].k",
   "emergency:[0].strip[3].k",
+  "atHome:[0].strip[3].k",
+  "atHome:[2].facts[3].k",
+  "atHome:[2].strip[2].k",
 ]);
 
 for (const { name, base, si, ta } of MODULES) {

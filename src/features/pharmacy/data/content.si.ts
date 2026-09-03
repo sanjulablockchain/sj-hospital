@@ -299,7 +299,7 @@ export const safety = [
     desc: "Dose එකක් ඔබේ වෛද්‍යවරයා ලියපු දෙයට එරෙහිව Confirm කරනවා, ඒකයි Duplicate එකක් හෝ වැරදි Strength එකක් Paper එකේදීම අහුවෙන්නේ.",
   },
   {
-    name: "Digital Records",
+    name: "ඔබේ Digital Records එක",
     desc: "Prescriptions ම Digital ලෙස File එකේ තියෙනවා, ඒ නිසා නැවත Order එකක් හෝ අනිත් Department එකකින් එන Query එකක් ඔබේ Paperwork එක මත රඳා නෑ.",
   },
   {

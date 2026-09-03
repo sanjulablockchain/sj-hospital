@@ -12,6 +12,17 @@
 // how a Sri Lankan reader actually sees the word. `.no`, `.href`, `.accent`,
 // `.index`, `.photo` and `.photoAlt` are omitted throughout, matching
 // content.i18n.test.ts's `isUntranslatable`.
+//
+// `internationalSteps[4].title` had fully translated "Records" -> "වාර්තා",
+// contradicting `pharmacySection.body`'s own bare "Digital Records" two
+// screens up in this same file, and `pharmacy/data/content.si.ts`'s
+// declared English-stays list for "Record"/"Records". Fixed to keep
+// "Records" bare English. `internationalSteps[5].title` was bare English
+// ("Online Follow Up", a reordered, recapitalised form of the base "Follow
+// up online") with no Sinhala at all, unlike every other sibling in this
+// six-entry array; fixed to "Online ලෙස Follow-up", keeping "Follow-up"
+// English the way `atHome.si.ts`'s telemedicine service already does
+// throughout, with a Sinhala connector so the title is not bare English.
 
 export const __review = { status: "draft", reviewer: null, date: null } as const;
 
@@ -379,11 +390,11 @@ export const internationalSteps = [
     desc: "ඔබේ පැමිණීම පුරාම ඉල්ලුවහොත් භාෂා පරිවර්තකයින් ලබාගත හැක.",
   },
   {
-    title: "ගෙදර ගෙනියන්න වාර්තා",
+    title: "ගෙදර ගෙනියන්න Records",
     desc: "ඔබ සමඟ ගෙනියන්න ඔබේ Reports, Imaging Referrals සහ Discharge Summary එකේ පිටපත්.",
   },
   {
-    title: "Online Follow Up",
+    title: "Online ලෙස Follow-up",
     desc: "ඔබ ගෙදර ගිය පසුවත් Telemedicine Consultation එකක් ඔබේ සත්කාරය දිගටම කරගෙන යනවා.",
   },
 ];

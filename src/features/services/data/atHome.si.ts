@@ -32,7 +32,13 @@
 // a visit" reuses navigationLabels.si.ts's own exact entry ("පැමිණීමක්
 // ඉල්ලන්න"). "Doctor"/"Physician" translate in full (වෛද්‍යවරයා), matching
 // emergency.si.ts; "Nurse" and "Coordinator" stay English, also matching
-// emergency.si.ts.
+// emergency.si.ts. "Record"/"Records" is also on `pharmacy`'s declared
+// English-stays list and stays bare English here too, including in the
+// home-visits service's own facts/strip labels and its "same record is
+// seen" sentence: a fix caught the pharmacy service's own `strip[3].k`
+// fully translating it ("වාර්තා") while the same object's steps/covers/prep
+// kept "Record"/"Records" English, and the home-visits service two entries
+// down had made the identical mistake independently.
 
 export const __review = { status: "draft", reviewer: null, date: null } as const;
 
@@ -58,7 +64,7 @@ export const atHomeServices = [
       { k: "වේලාවන්", v: "පැය 24" },
       { k: "Stock එක", v: "Authorized විතරයි" },
       { k: "බෙහෙත් සැපයීම", v: "Pharmacist Check කරයි" },
-      { k: "වාර්තා", v: "Digital, File කර" },
+      { k: "Records", v: "Digital, File කර" },
     ],
     covers: [
       "ඕන වේලාවක Prescription බෙහෙත් Dispense කිරීම",
@@ -168,16 +174,16 @@ export const atHomeServices = [
       { k: "වෙන් කිරීම", v: "Appointment එකකින්" },
       { k: "Vehicles ගණන", v: "කැපවුනු 6ක්" },
       { k: "Sampling කිරීම", v: "නිවසේදීම කරයි" },
-      { k: "වාර්තා", v: "ඔබේ File එකට ලියනවා" },
+      { k: "Records", v: "ඔබේ File එකට ලියනවා" },
     ],
     lede: "වයෝවෘද්ධ අය, බිළිඳුන් සහ Post-operative සත්කාරය සඳහා වෛද්‍යවරු, Nurse ලා සහ රසායනාගාර Technician ලා ඔබේ නිවසටම එනවා, කැපවුනු Vehicles 6න් එකකින්.",
     aboutHead: "රෝහලේ සත්කාරය ඔබේ දොරටුවටම",
     body1: "නිවසේ පැමිණීම් වෛද්‍යවරු, Nurse ලා සහ රසායනාගාර Technician ලා ඔබේ දොරටුවටම ගෙනෙනවා, Travel කරන්න අපහසු වයෝවෘද්ධ අය, බිළිඳුන් සහ ශල්‍යකර්මයකින් පසු සුවවෙන රෝගීන් ඉලක්ක කරගෙන. පැමිණීම් මේ සඳහාම කැපවුනු Vehicles 6ක් මත ධාවනය වන අතර, Appointment එකකින් සංවිධානය කරනවා.",
-    body2: "රුධිර නියැදියක් හෝ අනිත් Sample එකක් අවශ්‍ය නම්, Travel කරන්න කියලා ඉල්ලනවා වෙනුවට Sampling නිවසේදීම කරනවා. පැමිණීමේදී හම්බුවුනු හෝ කතා කරපු ඕන දෙයක් කෙලින්ම ඔබේ Hospital File එකට ලියනවා, එහෙනම් වෙන තැනක ඔබව බලන කණ්ඩායමටත් එකම වාර්තාව පේනවා.",
+    body2: "රුධිර නියැදියක් හෝ අනිත් Sample එකක් අවශ්‍ය නම්, Travel කරන්න කියලා ඉල්ලනවා වෙනුවට Sampling නිවසේදීම කරනවා. පැමිණීමේදී හම්බුවුනු හෝ කතා කරපු ඕන දෙයක් කෙලින්ම ඔබේ Hospital File එකට ලියනවා, එහෙනම් වෙන තැනක ඔබව බලන කණ්ඩායමටත් එකම Record එක පේනවා.",
     strip: [
       { k: "Vehicles ගණන", v: "කැපවුනු 6ක්" },
       { k: "Sampling කිරීම", v: "නිවසේදීම" },
-      { k: "වාර්තා", v: "ඔබේ File එකේ" },
+      { k: "Records", v: "ඔබේ File එකේ" },
       { k: "වෙන් කිරීම", v: "Appointment එකකින්" },
     ],
     covers: [

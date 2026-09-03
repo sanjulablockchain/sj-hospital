@@ -73,6 +73,14 @@ const KEEPS_ENGLISH = new Set<string>([
   // one-off.
   "standards[6].k",
 
+  // `safety[5].name`'s English base is "Digital records" (lowercase r). The
+  // translated forms ("ඔබේ Digital Records එක" / "உங்கள் Digital Records")
+  // add a real Sinhala/Tamil possessive rather than just recasing the
+  // English, so neither needs a KEEPS_ENGLISH entry: they differ from the
+  // base by more than case or whitespace, the same "your <English noun>"
+  // shape `safety[3].name`'s own "ඔබේ Hospital File එක" / "உங்கள் Hospital
+  // File" already uses two rows above in the same array.
+
   // `stock[0..5].name` and `stock[].tag` (all ten): six of the ten stocked
   // rows are genuine medicine names or dosage-form categories (Prescription
   // medicine, Antibiotics, Chronic medicine, Paediatric medicine, Discharge
@@ -154,7 +162,16 @@ test("the overlays keep the base's array lengths", () => {
 // A translation that is still the English sentence is not a translation. This
 // catches a copy-paste that was never actually translated, which a parity
 // check alone would happily pass.
-test("no translated string is left identical to its English source", () => {
+// A translation that is still the English sentence is not a translation. The
+// comparison normalises case and surrounding whitespace before comparing, so
+// a translation that differs from English only by capitalisation or by
+// stray leading/trailing space still fails: JS string comparison is
+// case-sensitive, and that gap is how `safety[5].name` shipped "Digital
+// Records" as a "translation" of "Digital records" past a strict, raw
+// `assert.notEqual` (the same gap `international-care` shipped "Bank
+// Transfer" for "Bank transfer" through, and the same normalised form
+// `services`'s own content.i18n.test.ts already uses).
+test("no translated string is left identical to its English source, ignoring case and whitespace", () => {
   const englishByPath = new Map<string, string>();
   collect(base, "", englishByPath);
 
@@ -168,10 +185,12 @@ test("no translated string is left identical to its English source", () => {
     for (const [path, translated] of translatedByPath) {
       if (isUntranslatable(path)) continue;
       if (KEEPS_ENGLISH.has(path)) continue;
+      const english = englishByPath.get(path);
+      const normalize = (s: string | undefined) => s?.trim().toLowerCase();
       assert.notEqual(
-        translated,
-        englishByPath.get(path),
-        `${name} ${path} is still the English string. If that is deliberate, add it to KEEPS_ENGLISH with a reason.`
+        normalize(translated),
+        normalize(english),
+        `${name} ${path} differs from the English only by case or whitespace, which is not a translation. If that is deliberate, add it to KEEPS_ENGLISH with a reason.`
       );
     }
   }

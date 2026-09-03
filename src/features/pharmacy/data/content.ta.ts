@@ -155,7 +155,7 @@ export const standards = [
   { k: "கள்ள சந்தை", v: "எப்போதுமே இல்லை" },
   { k: "Records", v: "Digital, File இல்" },
   { k: "ஆலோசனை", v: "Counter இல் தரப்படுகிறது" },
-  { k: "Delivery Orders", v: "அனுப்பும் முன் சரிபார்க்கப்படும்" },
+  { k: "Delivery Orders க்காக", v: "அனுப்பும் முன் சரிபார்க்கப்படும்" },
 ];
 
 export const stockHeading = { line1: "இன்று இரவு", line2: "அலமாரிகள்", line3: "இல் உள்ளது" };
@@ -303,7 +303,7 @@ export const safety = [
     desc: "Dose ஒன்று உங்கள் Doctor Prescribe செய்ததற்கு எதிராக உறுதிப்படுத்தப்படுகிறது, இதனால்தான் ஒரு Duplicate அல்லது தவறான Strength காகிதத்திலேயே கண்டறியப்படுகிறது.",
   },
   {
-    name: "Digital Records",
+    name: "உங்கள் Digital Records",
     desc: "Prescriptions Digital ஆக File இல் வைக்கப்படுகிறது, அதனால் மீண்டும் ஒரு Order அல்லது மற்றொரு Department இலிருந்து வரும் Query உங்கள் Paperwork ஐ சார்ந்திருக்காது.",
   },
   {

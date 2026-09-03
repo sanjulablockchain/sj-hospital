@@ -28,7 +28,14 @@
 // "Request a visit" reuses navigationLabels.ta.ts's own exact entry
 // ("வருகைக்கு கோரிக்கை"). "Doctor"/"Physician" translate in full
 // (மருத்துவர்), matching emergency.ta.ts; "Nurse" and "Coordinator" stay
-// English, also matching emergency.ta.ts.
+// English, also matching emergency.ta.ts. "Record"/"Records" is also on
+// `pharmacy`'s declared English-stays list and stays bare English here
+// too, including in the home-visits service's own facts/strip labels and
+// its "same record is seen" sentence: a fix caught the pharmacy service's
+// own `strip[3].k` fully translating it ("பதிவுகள்") while the same
+// object's steps/covers/prep kept "Record"/"Records" English, and the
+// home-visits service two entries down had made the identical mistake
+// independently.
 
 export const __review = { status: "draft", reviewer: null, date: null } as const;
 
@@ -54,7 +61,7 @@ export const atHomeServices = [
       { k: "நேரம்", v: "24 மணி நேரம்" },
       { k: "எங்கள் Stock", v: "Authorized மட்டும்" },
       { k: "மருந்தளித்தல்", v: "Pharmacist Check செய்யும்" },
-      { k: "பதிவுகள்", v: "Digital, File இல்" },
+      { k: "Records", v: "Digital, File இல்" },
     ],
     covers: [
       "எந்த நேரத்திலும் Prescription மருந்தை Dispense செய்தல்",
@@ -164,16 +171,16 @@ export const atHomeServices = [
       { k: "முன்பதிவு", v: "Appointment மூலம்" },
       { k: "Vehicles எண்ணிக்கை", v: "அர்ப்பணிக்கப்பட்ட 6" },
       { k: "Sampling செய்தல்", v: "வீட்டிலேயே செய்யப்படும்" },
-      { k: "பதிவுகள்", v: "உங்கள் File இல் எழுதப்படும்" },
+      { k: "Records", v: "உங்கள் File இல் எழுதப்படும்" },
     ],
     lede: "முதியவர்கள், குழந்தைகள் மற்றும் Post-operative சிகிச்சைக்காக மருத்துவர்கள், Nurses மற்றும் ஆய்வுகூட Technicians உங்கள் வீட்டிற்கு வருகை தருவர், அர்ப்பணிக்கப்பட்ட 6 Vehicles இல் ஒன்றில் வருவர்.",
     aboutHead: "மருத்துவமனை சிகிச்சை உங்கள் வீட்டு வாசலுக்கே",
     body1: "வீட்டு வருகைகள் மருத்துவர்கள், Nurses மற்றும் ஆய்வுகூட Technicians ஐ உங்கள் வீட்டு வாசலுக்கே கொண்டுவருகின்றன, பயணிக்க சிரமப்படும் முதியவர்கள், குழந்தைகள் மற்றும் அறுவை சிகிச்சைக்குப் பிறகு குணமடையும் நோயாளர்களை நோக்கமாகக் கொண்டு. வருகைகள் இதற்காகவே அர்ப்பணிக்கப்பட்ட 6 Vehicles இல் இயங்குகின்றன, Appointment மூலம் ஏற்பாடு செய்யப்படும்.",
-    body2: "இரத்த மாதிரி அல்லது வேறு ஏதேனும் Sample தேவைப்பட்டால், பயணிக்கச் சொல்வதற்குப் பதிலாக Sampling வீட்டிலேயே செய்யப்படும். வருகையின்போது கண்டறியப்பட்ட அல்லது பேசப்பட்ட எதுவும் நேரடியாக உங்கள் Hospital File இல் எழுதப்படும், அதனால் வேறு இடத்தில் உங்களைப் பார்க்கும் குழுவும் அதே பதிவைப் பார்க்கும்.",
+    body2: "இரத்த மாதிரி அல்லது வேறு ஏதேனும் Sample தேவைப்பட்டால், பயணிக்கச் சொல்வதற்குப் பதிலாக Sampling வீட்டிலேயே செய்யப்படும். வருகையின்போது கண்டறியப்பட்ட அல்லது பேசப்பட்ட எதுவும் நேரடியாக உங்கள் Hospital File இல் எழுதப்படும், அதனால் வேறு இடத்தில் உங்களைப் பார்க்கும் குழுவும் அதே Record ஐப் பார்க்கும்.",
     strip: [
       { k: "Vehicles எண்ணிக்கை", v: "அர்ப்பணிக்கப்பட்ட 6" },
       { k: "Sampling செய்தல்", v: "வீட்டிலேயே" },
-      { k: "பதிவுகள்", v: "உங்கள் File இல்" },
+      { k: "Records", v: "உங்கள் File இல்" },
       { k: "முன்பதிவு", v: "Appointment மூலம்" },
     ],
     covers: [
