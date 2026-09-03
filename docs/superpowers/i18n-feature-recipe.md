@@ -28,6 +28,18 @@ Worked examples, from the committed contact overlays:
 | Book a doctor | වෛද්‍යවරයෙක් Book කරන්න | Doctor ஐ Book செய்யுங்கள் |
 | Reception, 24 hours | Reception, පැය 24 | Reception, 24 மணி நேரம் |
 
+## Before you declare a word stays English, grep every form of it
+
+`media` shipped a comment saying the file kept "Consultant" in English throughout. Two separate audits then tried to verify that by checking a handful of sites: the first found three, the second found two more it had missed, and an exhaustive case-insensitive grep including the plural finally turned up twelve.
+
+```bash
+grep -rni 'word' src/features/<feature>/data/
+```
+
+Case-insensitive, and include plurals and inflections. List every hit with its verdict before you write the justifying comment, because a comment asserting a rule the file contradicts is worse than no comment: the next person trusts it and stops checking.
+
+A rule that survives the grep is usually more precise than the one you started with. In `media` the real rule was not "Consultant stays English" but "as a title prefix before a role it stays English, as an ordinary noun it translates", which is what the data had been doing all along.
+
 ## De-duplicate only what is genuinely one fact
 
 Pattern 4 says a string used twice has one home. That is about the SAME fact appearing twice. It is not licence to weld together two fields that merely read alike today.
