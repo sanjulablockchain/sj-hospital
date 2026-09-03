@@ -112,8 +112,14 @@ function isUntranslatable(moduleName: string, path: string): boolean {
  *   `.department` / `.type` entries below: reused verbatim from `career`'s
  *   own already-reviewed KEEPS_ENGLISH reasoning for the same four titles
  *   this teaser shares with it (see the file header in careers.si.ts /
- *   careers.ta.ts), and from career's own `departmentLabels` and
- *   `navigationLabels`'s "Emergency" / "Pharmacy" / "Imaging" precedents.
+ *   careers.ta.ts). Of the three department values "Emergency", "Pharmacy"
+ *   and "Imaging", only "Pharmacy" actually has an entry in career's own
+ *   `departmentLabels` (an English-identity key there); that map's taxonomy is
+ *   All / Medical / Nursing / Allied health / Pharmacy / Administration /
+ *   Support services, with no Emergency or Imaging entry at all, so
+ *   "Emergency" and "Imaging" here rest on the site's independent
+ *   register-word precedent (the same class as "Digital X-ray"), not on any
+ *   match in that map.
  *   "Full time" and "Shift" match career's own `jobs[*].line`, which keeps
  *   "Full Time" and "Shift Roster" English throughout.
  * - `network:networkNodes[0].name` ("St. Joseph Hospital"): the hospital's
