@@ -50,6 +50,16 @@ Before replacing a literal with a reference, ask: if one of these two changed ne
 
 And note what no automated check can catch: `facilities` also shipped "Instrument Set" as the "translation" of "Instrument Set(s)". It differs from the English, so the normalised identity assertion passes, but nothing was translated. The sibling test is the only thing that finds that, and the sibling test is read by a person.
 
+## The locale cookie is not a backstop for an unprefixed link
+
+`services` left a navigation picker on plain `next/link` with unprefixed hrefs, reasoning that the proxy would catch it via the `sj-locale` cookie. That reasoning is false, and it is worth knowing exactly why.
+
+`rememberLocale` is called from precisely two places: `LanguageToggleButton` and `LanguageMenuToggle`. **Only an explicit click on the switcher ever writes that cookie.** Landing on a `/si/...` URL does not: `src/proxy.ts` only READS it.
+
+So the reader who most needs the translation, the one arriving on a shared `/si/services/cardiology` link, carries no cookie. Their first click on an unprefixed href takes the proxy's rewrite branch straight into English, silently, at a URL that shows no prefix. Same for a crawler.
+
+Prefix the href. If the component needs anchor props that `LocaleLink` does not forward, such as `aria-current`, do not widen `LocaleLink` for one caller and do not drop the prefix: pass the locale down and call `localePath` or `localeHref` yourself, keeping the component a Server Component and its existing markup intact.
+
 ## The sibling test, for deciding what stays English
 
 The keep-English exception is for words people genuinely say in English: drug classes, brands, dispensing tags, product and company names, `Email`, `WhatsApp`, `OPD`, `X-ray`. It is NOT for any English-looking category label, and it has now been stretched twice.
