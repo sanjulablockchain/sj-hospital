@@ -271,8 +271,8 @@ function DirectoryRow({ service, index, isOpen, onToggle, idPrefix, readMoreLabe
 function Fact({ k, v }: { k: string; v: ReactNode }) {
   return (
     <div className="flex items-baseline justify-between gap-4 border-b border-[var(--home-hairline)] pb-2">
-      <dt className="text-[13px] text-[var(--home-muted)]">{k}</dt>
-      <dd className="text-right text-[13.5px] font-bold text-[var(--home-heading)]">{v}</dd>
+      <dt className="wrap-break-word min-w-0 text-[13px] text-[var(--home-muted)]">{k}</dt>
+      <dd className="wrap-break-word min-w-0 text-right text-[13.5px] font-bold text-[var(--home-heading)]">{v}</dd>
     </div>
   );
 }

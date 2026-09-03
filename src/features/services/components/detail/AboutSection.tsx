@@ -86,8 +86,8 @@ export function AboutSection({ service, content }: { service: Service; content: 
             <dl className="mt-7 flex flex-col gap-3.5 border-t border-[var(--home-hairline)] pt-6">
               {service.facts.map((fact) => (
                 <div key={fact.k} className="flex items-baseline justify-between gap-4">
-                  <dt className="text-[13px] text-[var(--home-muted)]">{fact.k}</dt>
-                  <dd className="text-right text-[13.5px] font-bold text-[var(--home-heading)]">{fact.v}</dd>
+                  <dt className="wrap-break-word min-w-0 text-[13px] text-[var(--home-muted)]">{fact.k}</dt>
+                  <dd className="wrap-break-word min-w-0 text-right text-[13.5px] font-bold text-[var(--home-heading)]">{fact.v}</dd>
                 </div>
               ))}
             </dl>

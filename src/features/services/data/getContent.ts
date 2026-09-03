@@ -82,6 +82,8 @@ type OverlayLoader = { si: () => Promise<unknown>; ta: () => Promise<unknown> };
  */
 export const GROUP_OVERLAYS: Partial<Record<string, OverlayLoader>> = {
   emergency: { si: () => import("./emergency.si"), ta: () => import("./emergency.ta") },
+  diagnostics: { si: () => import("./diagnostics.si"), ta: () => import("./diagnostics.ta") },
+  atHome: { si: () => import("./atHome.si"), ta: () => import("./atHome.ta") },
 };
 
 async function localizedServices(locale: Locale): Promise<Service[]> {

@@ -9,30 +9,40 @@ import * as indexContentTa from "./indexContent.ta.ts";
 import { emergencyServices } from "./emergency.ts";
 import { emergencyServices as emergencySi } from "./emergency.si.ts";
 import { emergencyServices as emergencyTa } from "./emergency.ta.ts";
+import { diagnosticServices } from "./diagnostics.ts";
+import { diagnosticServices as diagnosticsSi } from "./diagnostics.si.ts";
+import { diagnosticServices as diagnosticsTa } from "./diagnostics.ta.ts";
+import { atHomeServices } from "./atHome.ts";
+import { atHomeServices as atHomeSi } from "./atHome.si.ts";
+import { atHomeServices as atHomeTa } from "./atHome.ta.ts";
 import { assertTranslationParity, stringPaths } from "../../../lib/i18n/stringPaths.ts";
 
 /**
- * The three data files this part of the task (15, part 1 of 4) actually
- * translates: `groups.ts`, `indexContent.ts`, and the first of the six
- * group-of-services files, `emergency.ts`. `services.ts` is not here: it
- * carries no copy (see the header comment in `getContent.ts`).
+ * The data files this task (15) translates across its four parts:
+ * `groups.ts`, `indexContent.ts`, and the six group-of-services files
+ * (`emergency.ts` in part 1; `atHome.ts` and `diagnostics.ts` in part 2;
+ * `womenChildren.ts` and `surgical.ts` in part 3; `clinics.ts` in part 4).
+ * `services.ts` is not here: it carries no copy (see the header comment in
+ * `getContent.ts`).
  *
- * The other five group files (`surgical.ts`, `diagnostics.ts`, `clinics.ts`,
- * `womenChildren.ts`, `atHome.ts`) are OUT of scope for this part on
- * purpose and have no `.si.ts` / `.ta.ts` yet. That is not a gap this suite
- * flags: they are simply absent from `MODULES` below, the same way a
- * feature with nine data files but only one translated would list one
- * module, not nine. Parts 2 to 4 each add their own group here (see
- * `getContent.ts`'s own "TO ADD A GROUP'S TRANSLATION" comment): write
- * `<file>.si.ts` / `<file>.ta.ts`, import them at the top of this file the
- * same way `emergencyServices` is imported twice below (English, then each
- * overlay under an alias), and add one `{ name, base, si, ta }` entry to
- * `MODULES`. No other part of this file changes.
+ * `surgical.ts`, `clinics.ts` and `womenChildren.ts` are OUT of scope for
+ * this part (2 of 4) on purpose and have no `.si.ts` / `.ta.ts` yet. That
+ * is not a gap this suite flags: they are simply absent from `MODULES`
+ * below, the same way a feature with nine data files but only some
+ * translated would list only those, not all nine. Parts 3 and 4 each add
+ * their own group here (see `getContent.ts`'s own "TO ADD A GROUP'S
+ * TRANSLATION" comment): write `<file>.si.ts` / `<file>.ta.ts`, import them
+ * at the top of this file the same way `diagnosticServices` and
+ * `atHomeServices` are imported twice below (English, then each overlay
+ * under an alias), and add one `{ name, base, si, ta }` entry to `MODULES`.
+ * No other part of this file changes.
  */
 const MODULES = [
   { name: "groups", base: groups, si: groupsSi, ta: groupsTa },
   { name: "indexContent", base: indexContent, si: indexContentSi, ta: indexContentTa },
   { name: "emergency", base: emergencyServices, si: emergencySi, ta: emergencyTa },
+  { name: "diagnostics", base: diagnosticServices, si: diagnosticsSi, ta: diagnosticsTa },
+  { name: "atHome", base: atHomeServices, si: atHomeSi, ta: atHomeTa },
 ] as const;
 
 /**
@@ -65,6 +75,15 @@ const MODULES = [
  * merged with its fact (see the i18n recipe's Step A2): the label
  * ("Ambulance") DOES translate/keep-English normally, only the digits are
  * excluded here.
+ *
+ * `diagnostics` and `atHome` are the two group files this part (2 of 4)
+ * adds. Both are `Service[]`, the exact same shape `emergency` is, so they
+ * share its four structural exclusions (`.slug`, `.heroImage`, `.heroAlt`,
+ * `.group`) and its `steps[*].no` ordinal exclusion. Neither file has a
+ * bare fact-in-a-label the way accident-emergency's `facts[0].v` does
+ * (checked per the recipe's Step A2 grep,
+ * `grep -rnE 'label: "(0117|074|\+94|[a-z.]+@)'`, zero hits), so neither
+ * needs a value-level exception.
  */
 function isUntranslatable(moduleName: string, path: string): boolean {
   if (moduleName === "groups") {
@@ -86,6 +105,13 @@ function isUntranslatable(moduleName: string, path: string): boolean {
     if (path.endsWith(".group")) return true;
     if (/\.steps\[\d+\]\.no$/.test(path)) return true;
     if (path === "[0].facts[0].v") return true;
+  }
+  if (moduleName === "diagnostics" || moduleName === "atHome") {
+    if (path.endsWith(".slug")) return true;
+    if (path.endsWith(".heroImage")) return true;
+    if (path.endsWith(".heroAlt")) return true;
+    if (path.endsWith(".group")) return true;
+    if (/\.steps\[\d+\]\.no$/.test(path)) return true;
   }
   return false;
 }
@@ -155,6 +181,13 @@ function isUntranslatable(moduleName: string, path: string): boolean {
  *   `facts[*].k` and `strip[*].k` on both services in this file DOES
  *   translate, which is what makes this the sibling-test exception and not
  *   a miss.
+ * - `diagnostics:[0].strip[3].v` ("10%", the laboratory service's OPD
+ *   discount stat): the exact same class `emergency:[0].strip[0].v` is,
+ *   purely numeral notation with no word to translate. The discount
+ *   appears twice in this same service (`facts[3].v`, "10% off laboratory
+ *   charges", and `strip[3].v`, the bare number alone): the first DOES
+ *   translate the words around the number, which is the sibling-test
+ *   evidence that the second is a genuine exception, not a miss.
  */
 const KEEPS_ENGLISH = new Set<string>([
   "groups:groupLabels.Clinics",
@@ -165,6 +198,7 @@ const KEEPS_ENGLISH = new Set<string>([
   "indexContent:packages[2].tier",
   "emergency:[0].strip[0].v",
   "emergency:[0].strip[2].k",
+  "diagnostics:[0].strip[3].v",
   "emergency:[0].steps[1].title",
   "emergency:[0].facts[0].k",
   "emergency:[0].strip[3].k",
