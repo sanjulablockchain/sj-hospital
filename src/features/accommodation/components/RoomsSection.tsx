@@ -59,9 +59,15 @@ export function RoomsSection({ content }: { content: AccommodationContent }) {
           <div className="flex flex-col gap-16">
             {roomTypes.map((room, index) => (
               <RevealOnScroll key={room.id} delayMs={index * 60}>
+                {/* Both tracks are `minmax(0, ...)`: a bare `fr` track cannot
+                    shrink below its content's intrinsic width, and the left
+                    column carries a room name, description and a flex-wrap
+                    row of amenity chips, any of which could be one long
+                    Sinhala/Tamil compound word away from pushing this column,
+                    and the page, wider than the viewport. */}
                 <div
                   id={room.id}
-                  className="scroll-mt-[88px] grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center"
+                  className="scroll-mt-[88px] grid gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-center"
                 >
                   <div className={index % 2 === 1 ? "lg:order-2" : undefined}>
                     <div className="mb-2.5 flex flex-wrap items-baseline gap-x-3 gap-y-1">

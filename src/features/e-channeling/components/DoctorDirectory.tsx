@@ -168,7 +168,12 @@ export function DoctorDirectory({ doctors, copy }: DoctorDirectoryProps) {
         </div>
       </div>
 
-      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[260px_1fr] lg:gap-8">
+      {/* Only the second track is `minmax(0, 1fr)`: the first column is a
+          fixed 260px, so it never grows past that regardless of content, but
+          the second holds the (also translated) doctor-card grid, and a bare
+          `fr` track there could still be forced wider by a long specialisation
+          or name inside it. */}
+      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[260px_minmax(0,1fr)] lg:gap-8">
         <aside className="hidden lg:block">
           <div className="themed-scrollbar sticky top-28 max-h-[calc(100vh-140px)] overflow-y-auto rounded-2xl border border-[var(--home-hairline)] bg-[var(--home-bg)] p-2">
             <p className="px-3 py-2 text-[11px] font-bold uppercase tracking-wider text-[var(--home-muted)]">

@@ -23,7 +23,12 @@ export function GroupSection({ content }: { content: AboutContent }) {
     >
       <SectionHead eyebrow={sectionEyebrows.group} heading={groupHeading} intro={groupIntro} />
 
-      <Reveal className="mt-10.5 grid gap-10 min-[900px]:grid-cols-[auto_1fr] min-[900px]:items-center">
+      {/* Only the second track is `minmax(0, 1fr)`: the first column is a
+          fixed-size logo image with no translatable text, so it carries none
+          of the risk a bare `fr` track has, but the second column holds
+          `groupBody`'s paragraphs, the same shape `StorySection` treats this
+          way in this feature already. */}
+      <Reveal className="mt-10.5 grid gap-10 min-[900px]:grid-cols-[auto_minmax(0,1fr)] min-[900px]:items-center">
         <Image
           src="/images/kids-teens-logo.png"
           alt="Kids & Teens Medical Group logo"
