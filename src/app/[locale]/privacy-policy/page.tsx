@@ -13,10 +13,15 @@ export const metadata: Metadata = {
 };
 
 /**
- * The page's own copy stays English throughout (a legal document, deliberately
- * not translated, per the recorded exceptions list), but the chrome around it
- * is not: the header nav and footer still need the reader's locale, the same
- * as every other route, so this becomes async to read it from `params`.
+ * The legal document itself stays English (deliberately, per the recorded
+ * exceptions list), but everything framing it does not: the header nav, the
+ * footer, and the hero's own breadcrumb and `<h1>`, which are chrome rather
+ * than legal text and reuse `navigationLabels`'s existing translations of
+ * "Home" and "Privacy policy" rather than coining new ones. So this route is
+ * async, to read the reader's locale from `params` like every other route.
+ *
+ * The dividing line is the document, not the page: `policyLastUpdated` and
+ * every block in `PolicyContent` are part of the policy and stay English.
  */
 export default async function Page({ params }: PageProps<'/[locale]'>) {
   const { locale } = await params;

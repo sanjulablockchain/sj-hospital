@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { ThemedHeader } from "@/components/layout/ThemedHeader";
 import { privacyNavigation } from "@/config/privacyNavigation";
-import { translateNavItems } from "@/config/navigationLabels";
+import { navLabel, translateNavItems } from "@/config/navigationLabels";
 import type { Locale } from "@/lib/i18n/locales";
+import { localePath } from "@/lib/i18n/paths";
 import { policyLastUpdated } from "./PolicyContent";
 
 /**
@@ -36,17 +37,17 @@ export function PolicyHero({ locale }: { locale: Locale }) {
         <div className="flex-1">
           <div className="animate-sj-up inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
             <span aria-hidden className="h-px w-11 bg-[#2CA6F0]" />
-            <Link href="/" className="text-[#7FCBFF] hover:text-white">
-              Home
+            <Link href={localePath("/", locale)} className="text-[#7FCBFF] hover:text-white">
+              {navLabel("Home", locale)}
             </Link>
             <span aria-hidden className="opacity-50">
               /
             </span>
-            Privacy policy
+            {navLabel("Privacy policy", locale)}
           </div>
 
           <h1 className="font-display animate-sj-up wrap-break-word mt-4.5 text-[clamp(38px,6.4vw,100px)] leading-[0.9] font-extrabold tracking-[-0.045em] text-white uppercase">
-            Privacy policy
+            {navLabel("Privacy policy", locale)}
           </h1>
 
           <p
