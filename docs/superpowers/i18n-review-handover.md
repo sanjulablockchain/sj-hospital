@@ -148,9 +148,16 @@ So you can spend your attention on meaning rather than on mechanics:
 - **No translation is still its English source**, compared case- and
   whitespace-insensitively. That check exists because `"Bank Transfer"` for
   `"Bank transfer"` once shipped past a case-sensitive one.
-- **No number was changed by any translation.** Verified per string: phone
-  numbers, doses, ages, prices and counts are identical across all three
-  languages.
+- **Numbers: NOT guaranteed by any test. Please check them yourself.** This
+  was listed here as a machine guarantee and that was wrong. Numbers were
+  checked by hand, feature by feature, as each was translated, and every check
+  came back clean. But no test enforces it, so nothing stops a later edit from
+  changing one. Proven, not assumed: changing the ambulance number in the
+  Sinhala heart-attack instruction from `0117 84 84 84` to `0117 84 84 48`
+  passes all 469 tests. **Read every phone number, dose, age, price and count
+  in the Sinhala and Tamil copy against the English.** A test that closes this
+  is being added; until this line says otherwise, the numbers rest on your
+  read, not on the suite.
 - **Structural keys are never translated.** Icon lookups, `<option value>`s and
   validation match lists use keys that are separate from display text, so
   translating a label can no longer blank an icon or break a form.
