@@ -41,7 +41,14 @@ export function BookSection({ pageContent }: { pageContent: HealthTipsContent["p
                 index < bookSection.actions.length - 1 ? "border-b border-[var(--home-hairline-strong)]" : ""
               }`;
               const glyph = action.glyph === "phone" ? "☎" : "→";
-              const label = <span className="wrap-break-word min-w-0">{action.label}</span>;
+              const label = action.value ? (
+                <span className="flex min-w-0 flex-wrap items-baseline gap-x-2.5">
+                  <span className="wrap-break-word min-w-0">{action.label}</span>
+                  <span className="whitespace-nowrap font-normal tabular-nums opacity-70">{action.value}</span>
+                </span>
+              ) : (
+                <span className="wrap-break-word min-w-0">{action.label}</span>
+              );
 
               return action.internal ? (
                 <LocaleLink key={action.href} href={action.href} className={className}>

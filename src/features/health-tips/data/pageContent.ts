@@ -98,24 +98,36 @@ export const hero = {
  * the fact, matching `facilities/data/content.ts`'s own `contactRows` shape;
  * only the first action is internal, so it alone goes through `LocaleLink`.
  */
-export const bookSection = {
+export const bookSection: {
+  eyebrow: string;
+  heading: { line1: string; line2: string; line3: string };
+  body: string;
+  actions: {
+    label: string;
+    /** Present only for the action that carries a fact (the phone number) alongside its label. */
+    value?: string;
+    href: string;
+    internal: boolean;
+    glyph: "arrow" | "phone";
+  }[];
+} = {
   eyebrow: "06 / Still unsure",
   heading: { line1: "Reading is", line2: "not the same", line3: "as asking." },
   body: "Nothing on this page replaces a doctor who can examine you. If something has been worrying you for a fortnight, book the consultation.",
   actions: [
-    { label: "Book a consultation", href: "/services", internal: true, glyph: "arrow" as const },
+    { label: "Book a consultation", href: "/services", internal: true, glyph: "arrow" },
     {
       label: "Ask on WhatsApp",
       href: "https://wa.me/94742223334",
       internal: false,
-      glyph: "arrow" as const,
+      glyph: "arrow",
     },
     {
       label: "Call us",
       value: "0117 84 84 84",
       href: "tel:+94117848484",
       internal: false,
-      glyph: "phone" as const,
+      glyph: "phone",
     },
   ],
 };
