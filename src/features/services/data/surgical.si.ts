@@ -13,12 +13,17 @@
 // "Anaesthesia"/"Anaesthetist" stay English in flowing prose, the
 // established site-wide register (facilities.si.ts's own header, reused by
 // network/pharmacy/international-care, and emergency.si.ts's own bare
-// "Anaesthetic"). "Theatre" and "Surgical" translate in full here
-// ("ශල්‍යාගාරය", "ශල්‍ය"), following THIS feature's own closest sibling,
-// emergency.si.ts, which translates both throughout its own body prose
-// rather than keeping them bare (its "ශල්‍යාගාර ස්ථානයේම", "ශල්‍යකර්ම"): the
-// same-feature sibling takes precedence over a different feature's header
-// note. "Recovery" stays English only in the fixed compound "Recovery Bay"/
+// "Anaesthetic"). "Surgical" translates in full here ("ශල්‍ය"/"ශල්‍යකර්ම"),
+// consistently across all five occurrences, matching emergency.si.ts's own
+// practice for the same adjective. "Theatre" does NOT translate here: every
+// occurrence in this file (body prose, a step description, and two
+// team[*].role fields, five in total) stays bare English "Theatre". This
+// diverges from emergency.si.ts, which translates "Theatre" throughout its
+// own body prose as "ශල්‍යාගාරය"/"ශල්‍යාගාර ස්ථානයේම" (grep-verified: zero
+// occurrences of "ශල්‍යාගාර" anywhere in this file's content). The two
+// files' handling of "Theatre" has not been reconciled; treat that as an
+// open question, not a precedent either way. "Recovery" stays English only
+// in the fixed compound "Recovery Bay"/
 // "Recovery nurse(s)", the same shape emergency.si.ts's own "Resuscitation
 // Bay" already uses for a named ward area, not as a free-standing adjective
 // elsewhere.

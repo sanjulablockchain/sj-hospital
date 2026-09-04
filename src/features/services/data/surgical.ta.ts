@@ -9,11 +9,19 @@
 // Record, and translate as ordinary prose.
 //
 // "Anaesthesia"/"Anaesthetist" stay English in flowing prose (established
-// site-wide register, facilities.ta.ts's own header). "Theatre" and
-// "Surgical" translate in full here ("அறுவை சிகிச்சை அறை", "அறுவை
-// சிகிச்சை"), following this feature's own closest sibling, emergency.ta.ts,
-// which translates both throughout its own body prose. "Recovery" stays
-// English only in the fixed compound "Recovery Bay"/"Recovery nurse(s)",
+// site-wide register, facilities.ta.ts's own header). "Surgical" translates
+// in full here ("அறுவை சிகிச்சை"), consistently across all five
+// occurrences, matching emergency.ta.ts's own practice for the same
+// adjective. "Theatre" does NOT translate here: every occurrence in this
+// file (body prose, a step description, and two team[*].role fields, five
+// in total) stays bare English "Theatre". This diverges from
+// emergency.ta.ts, which translates "Theatre" throughout its own body
+// prose, as "அறுவை சிகிச்சை அரங்கு"/"அறுவை சிகிச்சை அரங்கம்" (not "அறுவை
+// சிகிச்சை அறை" as an earlier version of this comment claimed; grep-verified:
+// neither form occurs anywhere in this file's content). The two files'
+// handling of "Theatre" has not been reconciled; treat that as an open
+// question, not a precedent either way. "Recovery" stays English only in
+// the fixed compound "Recovery Bay"/"Recovery nurse(s)",
 // the same shape emergency.ta.ts's own "Resuscitation Bay" already uses.
 //
 // "Consultant" translates to நிபுணர் மருத்துவர் as an ordinary noun
