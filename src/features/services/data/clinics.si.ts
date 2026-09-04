@@ -19,12 +19,17 @@
 // - `outpatient-department.faq[1].a` ("Your doctor orders only the tests"):
 //   the ordinary verb "to order [a test]", not the pharmacy Order noun.
 //   Translated as prose ("Order කරනවා").
-// - `inpatient-rooms` ×3 ("Meals to dietary orders" / "dietary orders"):
-//   a catering/clinical instruction ("dietary orders" = the diet a patient
-//   is prescribed on the ward), a different domain from the pharmacy
-//   counter's medicine Order. Translated in full ("ආහාර Orders" keeping the
-//   established loanword "Orders" but as an ordinary translated compound,
-//   not the pharmacy register).
+// - `inpatient-rooms` ×3 ("Meals to dietary orders" / "dietary orders", at
+//   `tags[3]`, `strip[3].v` and `steps[3].desc`): a catering/clinical
+//   instruction ("dietary orders" = the diet a patient is prescribed on the
+//   ward), a different domain from the pharmacy counter's medicine Order.
+//   Corrected on review: an earlier pass here left the English word
+//   "Orders" bare, reasoning it was a translated compound rather than the
+//   pharmacy register, but never actually translated it. This service
+//   fully translates the near-identical concept "dietary requirements" in
+//   `body2`, `covers` and `prep` (si: "ආහාර අවශ්‍යතා"), so "dietary orders"
+//   now reuses that exact noun rather than coining a second, English form
+//   for the same idea: "ආහාර අවශ්‍යතාවලට".
 // No "Counter", "Delivery" (pharmacy sense), "Pharmacist", "File", "Stock"
 // or "WhatsApp" occurrence exists anywhere in clinics.ts (grepped clean).
 //
@@ -912,7 +917,7 @@ export const clinicServices = [
     hours: "අඛණ්ඩව",
     cta: "කාමරයක් වෙන්කර ගන්න",
     desc: "Standard, Deluxe සහ Super Deluxe පුද්ගලික කාමර ඇතුළුව සාමාන්‍ය වාට්ටු, හැම එකක්ම පැය දෙකකට වතාවක් Sanitise කරනවා, නවාතැන් ගන්න Attendant කෙනෙකුට ඉඩක් සමඟ සහ ඔබේ ආහාර අවශ්‍යතාවලට සකසන ආහාර සමඟින්. කාමර රුපියල් 10,000 සිට එක් රාත්‍රියකට ලබාගත හැක.",
-    tags: ["Standard, Deluxe සහ Super Deluxe කාමර", "පැය දෙකකට Sanitise කරයි", "Attendant ඉඩ", "ආහාර Orders වලට ආහාර"],
+    tags: ["Standard, Deluxe සහ Super Deluxe කාමර", "පැය දෙකකට Sanitise කරයි", "Attendant ඉඩ", "ආහාර අවශ්‍යතාවලට ආහාර"],
     facts: [
       { k: "කාමර වර්ග", v: "Standard, Deluxe, Super Deluxe සහ වාට්ටු" },
       { k: "සිට", v: "රුපියල් 10,000 එක් රාත්‍රියකට" },
@@ -927,7 +932,7 @@ export const clinicServices = [
       { k: "සිට", v: "රුපියල් 10,000 / රාත්‍රිය" },
       { k: "පිරිසිදුකරණය", v: "පැය දෙකකට වතාවක්" },
       { k: "Attendant ඉඩ", v: "ඇතුළත්" },
-      { k: "ආහාර", v: "ආහාර Orders වලට" },
+      { k: "ආහාර", v: "ආහාර අවශ්‍යතාවලට" },
     ],
     covers: [
       "Standard කාමර ඇතුළත් වීම",
@@ -947,7 +952,7 @@ export const clinicServices = [
       { no: "01", title: "වෙන්කර ගැනීම", desc: "සැලසුම් කළ ඇතුළත් වීමකට කලින් කාමරයක් වෙන්කර ගන්න, එහෙමත් නැත්තම් හදිසි නවාතැනකට පැමිණි විට එකක් හදාරයි." },
       { no: "02", title: "තෝරාගැනීම", desc: "ඔබේ අවශ්‍යතා අනුව Standard, Deluxe, Super Deluxe හෝ වාට්ටු නවාතැන් අතරින් තෝරාගන්න." },
       { no: "03", title: "පහසුවෙන් පදිංචි වීම", desc: "ඔබට කාමරය, Attendant ඉඩ පෙන්වා, ඔබේ ආහාරවල ආහාර අවශ්‍යතා ගැන අහනවා." },
-      { no: "04", title: "නවාතැන්ගැනීම", desc: "ඔබේ ඇතුළත් වීම පුරාවටම ඔබේ කාමරය පැය දෙකකට වතාවක් Sanitise කරනවා, ආහාර ඔබේ ආහාර Orders වලට ලබාදෙනවා." },
+      { no: "04", title: "නවාතැන්ගැනීම", desc: "ඔබේ ඇතුළත් වීම පුරාවටම ඔබේ කාමරය පැය දෙකකට වතාවක් Sanitise කරනවා, ආහාර ඔබේ ආහාර අවශ්‍යතාවලට ලබාදෙනවා." },
     ],
     prep: [
       "ඔබේ නවාතැන් සඳහා පුද්ගලික Toiletries සහ Comfortable ඇඳුම් ගෙන එන්න",

@@ -14,9 +14,16 @@
 //   matching womenChildren.ta.ts's own distinction for its record entries.
 // - `outpatient-department.faq[1].a` ("orders only the tests"): the
 //   ordinary verb "to order [a test]", translated as prose.
-// - `inpatient-rooms` ×3 ("dietary orders"): a catering/clinical
-//   instruction, a different domain from the pharmacy counter's medicine
-//   Order, translated as an ordinary compound ("உணவு Orders").
+// - `inpatient-rooms` ×3 ("dietary orders", at `tags[3]`, `strip[3].v` and
+//   `steps[3].desc`): a catering/clinical instruction, a different domain
+//   from the pharmacy counter's medicine Order. Corrected on review: an
+//   earlier pass here left the English word "Orders" bare ("உணவு
+//   Orders"), reasoning it was an ordinary compound rather than the
+//   pharmacy register, but never actually translated it. This service
+//   fully translates the near-identical concept "dietary requirements" in
+//   `body2`, `covers` and `prep` (ta: "உணவு தேவைகள்"), so "dietary orders"
+//   now reuses that exact noun rather than coining a second, English form
+//   for the same idea: "உணவு தேவைகளுக்கு ஏற்ப".
 // No "Counter", "Delivery" (pharmacy sense), "Pharmacist", "File", "Stock"
 // or "WhatsApp" occurrence exists anywhere in clinics.ts.
 //
@@ -889,7 +896,7 @@ export const clinicServices = [
     hours: "தொடர்ச்சியாக",
     cta: "ஒரு அறையை முன்பதிவு செய்யுங்கள்",
     desc: "Standard, Deluxe மற்றும் Super Deluxe தனியார் அறைகள் மற்றும் பொது வார்டுகள், ஒவ்வொன்றும் இரண்டு மணி நேரத்திற்கு ஒருமுறை Sanitise செய்யப்படும், தங்க ஒரு Attendant க்கு இடத்துடன் மற்றும் உங்கள் உணவு தேவைகளுக்கு ஏற்ப தயார் செய்யப்படும் உணவுகளுடன். அறைகள் ரூபாய் 10,000 முதல் ஒரு இரவுக்கு கிடைக்கும்.",
-    tags: ["Standard, Deluxe மற்றும் Super Deluxe அறைகள்", "இரண்டு மணி நேரத்திற்கு Sanitise", "Attendant இடம்", "உணவு Orders க்கு ஏற்ப உணவு"],
+    tags: ["Standard, Deluxe மற்றும் Super Deluxe அறைகள்", "இரண்டு மணி நேரத்திற்கு Sanitise", "Attendant இடம்", "உணவு தேவைகளுக்கு ஏற்ப உணவு"],
     facts: [
       { k: "அறை வகைகள்", v: "Standard, Deluxe, Super Deluxe மற்றும் வார்டுகள்" },
       { k: "தொடக்கம்", v: "ரூபாய் 10,000 ஒரு இரவுக்கு" },
@@ -904,7 +911,7 @@ export const clinicServices = [
       { k: "தொடக்கம்", v: "ரூபாய் 10,000 / இரவு" },
       { k: "சுத்தம்", v: "இரண்டு மணி நேரத்திற்கு ஒருமுறை" },
       { k: "Attendant இடம்", v: "சேர்க்கப்பட்டுள்ளது" },
-      { k: "உணவு", v: "உணவு Orders க்கு ஏற்ப" },
+      { k: "உணவு", v: "உணவு தேவைகளுக்கு ஏற்ப" },
     ],
     covers: [
       "Standard அறை அனுமதி",
@@ -924,7 +931,7 @@ export const clinicServices = [
       { no: "01", title: "முன்பதிவு செய்தல்", desc: "திட்டமிடப்பட்ட அனுமதிக்கு முன் ஒரு அறையை முன்பதிவு செய்யுங்கள், அல்லது அவசர தங்குதலுக்கு வந்தவுடன் ஒன்று ஒதுக்கப்படும்." },
       { no: "02", title: "தேர்ந்தெடுத்தல்", desc: "உங்கள் தேவைகளின் அடிப்படையில் Standard, Deluxe, Super Deluxe அல்லது வார்டு தங்குமிடத்தில் இருந்து தேர்ந்தெடுங்கள்." },
       { no: "03", title: "குடியேறுதல்", desc: "உங்களுக்கு அறை, Attendant இடம் காட்டப்பட்டு, உங்கள் உணவுக்கான உணவு தேவைகள் பற்றி கேட்கப்படும்." },
-      { no: "04", title: "தங்குதல்", desc: "உங்கள் அனுமதி முழுவதும் உங்கள் அறை இரண்டு மணி நேரத்திற்கு ஒருமுறை Sanitise செய்யப்படும், உணவு உங்கள் உணவு Orders க்கு ஏற்ப வழங்கப்படும்." },
+      { no: "04", title: "தங்குதல்", desc: "உங்கள் அனுமதி முழுவதும் உங்கள் அறை இரண்டு மணி நேரத்திற்கு ஒருமுறை Sanitise செய்யப்படும், உணவு உங்கள் உணவு தேவைகளுக்கு ஏற்ப வழங்கப்படும்." },
     ],
     prep: [
       "உங்கள் தங்குதலுக்கு தனிப்பட்ட Toiletries மற்றும் வசதியான ஆடைகளைக் கொண்டு வாருங்கள்",
