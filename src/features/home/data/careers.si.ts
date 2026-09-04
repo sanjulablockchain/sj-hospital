@@ -2,10 +2,11 @@
 //
 // Four of the five `jobOpenings[*].title` values are the exact same open
 // positions as four of `career`'s own six `jobs[*].title` values (see the
-// header comment in content.ts). Reused verbatim from
-// `src/features/career/data/content.si.ts`'s own already-reviewed file
-// header, which explains the per-title split between the occupational noun
-// that stays English and the ordinary word that translates:
+// header comment in content.ts), so they are read from `career`'s own
+// `sharedJobTitlesSi`, exported through its `index.ts`, rather than a second
+// copy of its already-reviewed Sinhala typed out again here. That file's own
+// header explains the per-title split between the occupational noun that
+// stays English and the ordinary word that translates:
 //
 // - "Medical Officer, Emergency": translates "Medical", keeps "Officer" and
 //   "Emergency" (a register word) English.
@@ -37,14 +38,18 @@
 // same row's own job title already uses for "Medical Laboratory
 // Technologist" rather than saying the same thing two ways on one row.
 
+// See the header comment in careers.ts for why this is a relative import to
+// career's own overlay file rather than through its `index.ts`.
+import { sharedJobTitles as sharedJobTitlesSi } from "../../career/data/content.si.ts";
+
 export const __review = { status: "draft", reviewer: null, date: null } as const;
 
 export const jobOpenings = [
-  { title: "වෛද්‍ය Officer, Emergency", department: "Emergency", type: "Full time" },
-  { title: "ශල්‍යාගාර Nurse", department: "ශල්‍ය", type: "Full time" },
+  { title: sharedJobTitlesSi.medicalOfficerEmergency, department: "Emergency", type: "Full time" },
+  { title: sharedJobTitlesSi.theatreNurse, department: "ශල්‍ය", type: "Full time" },
   { title: "Pharmacist (රාත්‍රී Shift)", department: "Pharmacy", type: "Shift" },
-  { title: "වෛද්‍ය විද්‍යාගාර Technologist", department: "විද්‍යාගාර", type: "Full time" },
-  { title: "Radiographer, Digital X-ray", department: "Imaging", type: "Full time" },
+  { title: sharedJobTitlesSi.medicalLaboratoryTechnologist, department: "විද්‍යාගාර", type: "Full time" },
+  { title: sharedJobTitlesSi.radiographerDigitalXray, department: "Imaging", type: "Full time" },
 ];
 
 // Reused verbatim from navigationLabels.si.ts's "Careers" -> "රැකියා".

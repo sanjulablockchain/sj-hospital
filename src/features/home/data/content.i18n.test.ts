@@ -109,10 +109,12 @@ function isUntranslatable(moduleName: string, path: string): boolean {
  *   Protocol"): this programme's own named protocol, the same proper-noun
  *   class as "Kids & Teens Medical Group" itself.
  * - `careers:jobOpenings[4].title` ("Radiographer, Digital X-ray"), and the
- *   `.department` / `.type` entries below: reused verbatim from `career`'s
- *   own already-reviewed KEEPS_ENGLISH reasoning for the same four titles
- *   this teaser shares with it (see the file header in careers.si.ts /
- *   careers.ta.ts). Of the three department values "Emergency", "Pharmacy"
+ *   `.department` / `.type` entries below: `.title` is now imported from
+ *   `career`'s own `sharedJobTitlesSi` / `sharedJobTitlesTa` (see
+ *   `careers.ts`'s own header), carrying that feature's own already-reviewed
+ *   KEEPS_ENGLISH reasoning for the same four titles this teaser shares with
+ *   it (see the file header in careers.si.ts / careers.ta.ts). Of the three
+ *   department values "Emergency", "Pharmacy"
  *   and "Imaging", only "Pharmacy" actually has an entry in career's own
  *   `departmentLabels` (an English-identity key there); that map's taxonomy is
  *   All / Medical / Nursing / Allied health / Pharmacy / Administration /

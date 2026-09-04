@@ -29,6 +29,18 @@
 // "St. Joseph Street" keeps the hospital's own address in English, the same
 // rule `contact`'s own content.ts states (see content.ts's header note on
 // `contactCta`).
+//
+// `servicesBento.tiles[6].heading` ("We come to you") is `home-care`'s own
+// hero tagline (`hero.strapline`), imported through its `index.ts` rather
+// than typed here a second time: same fact, exactly one home. `pharmacy`'s
+// own `heading.line1` is imported the same way from `pharmacy`'s own
+// `hero.headingLead`; see the header comment on `pharmacy` for why `line2`
+// and `line3` are not.
+
+// See the header comment in content.ts for why these are relative imports to
+// each feature's own overlay file rather than through its `index.ts`.
+import { hero as homeCareHeroSi } from "../../home-care/data/content.si.ts";
+import { hero as pharmacyHeroSi } from "../../pharmacy/data/content.si.ts";
 
 export const __review = { status: "draft", reviewer: null, date: null } as const;
 
@@ -106,7 +118,9 @@ export const servicesBento = {
     },
     {
       badge: "/07 නිවසේ සේවා",
-      heading: "අපි ඔබ ලඟට එනවා",
+      // `home-care`'s own hero tagline (`hero.strapline`), read back through
+      // its `index.ts` rather than typed here a second time.
+      heading: homeCareHeroSi.strapline,
       body: "වෛද්‍යවරු, Nurses සහ Lab Technicians ඔබේ දොරටුවට.",
     },
     {
@@ -143,11 +157,19 @@ export const surgical = {
 export const pharmacy = {
   // "Pharmacy": KEEPS_ENGLISH, same as navigationLabels.si.ts's own entry.
   eyebrow: "05 / Pharmacy",
-  // `heading.line1` reused byte-for-byte from pharmacy's own standalone
-  // feature (`src/features/pharmacy/data/content.si.ts`'s `hero.headingLead`):
-  // same three-segment heading shape, same first word, so the two pages
-  // agree rather than one translating "Authorized" and the other not.
-  heading: { line1: "අනුමත", line2: "බෙහෙත් විතරයි.", line3: "අනිත් කිසිම එකක් නෑ." },
+  // `line1` is now read from `pharmacy`'s own standalone feature
+  // (`hero.headingLead`, via its `index.ts`) rather than typed here a second
+  // time: same three-segment heading shape, same first word, so the two
+  // pages agree rather than one translating "Authorized" and the other not.
+  // `line2` and `line3` stay this file's own independent literals: they
+  // translate the same English words ("medicine." / "Nothing else.") as
+  // pharmacy's own `headingOutline` / `headingAccent`, but the two overlays
+  // already diverged in wording before this task ("බෙහෙත් විතරයි." here vs
+  // pharmacy's own "බෙහෙත්.", "අනිත් කිසිම එකක් නෑ." here vs pharmacy's own
+  // "වෙන කිසිවක් නෑ."). Consolidating them would change what this page
+  // renders, which this step does not do; flagged for a translation review
+  // rather than silently picked one way.
+  heading: { line1: pharmacyHeroSi.headingLead, line2: "බෙහෙත් විතරයි.", line3: "අනිත් කිසිම එකක් නෑ." },
   body: "අපේ House Pharmacy එකේ තියෙන්නේ Verified, Authorized Stock විතරයි, ඔබේ File එක කියවන්න පුළුවන් Pharmacists ලා විසින් රාත්‍රියේ ඕන වෙලාවක Dispense කරනවා.",
   ctaPrimary: "Delivery එකක් Order කරන්න",
   ctaSecondary: "Pharmacist කෙනෙක්ගෙන් අහන්න",

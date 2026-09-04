@@ -28,6 +28,18 @@
 // "St. Joseph Street" keeps the hospital's own address in English, the same
 // rule `contact`'s own content.ts states (see content.ts's header note on
 // `contactCta`).
+//
+// `servicesBento.tiles[6].heading` ("We come to you") is `home-care`'s own
+// hero tagline (`hero.strapline`), imported through its `index.ts` rather
+// than typed here a second time: same fact, exactly one home. `pharmacy`'s
+// own `heading.line1` is imported the same way from `pharmacy`'s own
+// `hero.headingLead`; see the header comment on `pharmacy` for why `line2`
+// and `line3` are not.
+
+// See the header comment in content.ts for why these are relative imports to
+// each feature's own overlay file rather than through its `index.ts`.
+import { hero as homeCareHeroTa } from "../../home-care/data/content.ta.ts";
+import { hero as pharmacyHeroTa } from "../../pharmacy/data/content.ta.ts";
 
 export const __review = { status: "draft", reviewer: null, date: null } as const;
 
@@ -105,7 +117,9 @@ export const servicesBento = {
     },
     {
       badge: "/07 வீட்டு வருகை சேவைகள்",
-      heading: "நாங்கள் உங்களிடம் வருகிறோம்",
+      // `home-care`'s own hero tagline (`hero.strapline`), read back through
+      // its `index.ts` rather than typed here a second time.
+      heading: homeCareHeroTa.strapline,
       body: "மருத்துவர்கள், Nurses மற்றும் Lab Technicians உங்கள் வாசலுக்கு.",
     },
     {
@@ -142,11 +156,17 @@ export const surgical = {
 export const pharmacy = {
   // "Pharmacy": KEEPS_ENGLISH, same as navigationLabels.ta.ts's own entry.
   eyebrow: "05 / Pharmacy",
-  // `heading.line1` reused byte-for-byte from pharmacy's own standalone
-  // feature (`src/features/pharmacy/data/content.ta.ts`'s `hero.headingLead`):
-  // same three-segment heading shape, same first word, so the two pages
-  // agree rather than one translating "Authorized" and the other not.
-  heading: { line1: "அங்கீகரிக்கப்பட்ட", line2: "மருந்து மட்டும்.", line3: "வேறு எதுவும் இல்லை." },
+  // `line1` and `line3` are now read from `pharmacy`'s own standalone
+  // feature (`hero.headingLead` / `.headingAccent`, via its `index.ts`)
+  // rather than typed here a second time: both already matched that file's
+  // own Tamil byte for byte. `line2` stays this file's own independent
+  // literal: it translates the same English word ("medicine.") as pharmacy's
+  // own `headingOutline`, but the two overlays already diverged in wording
+  // before this task ("மருந்து மட்டும்." here vs pharmacy's own "மருந்து.").
+  // Consolidating it would change what this page renders, which this step
+  // does not do; flagged for a translation review rather than silently
+  // picked one way.
+  heading: { line1: pharmacyHeroTa.headingLead, line2: "மருந்து மட்டும்.", line3: pharmacyHeroTa.headingAccent },
   body: "எங்கள் House Pharmacy இல் இருப்பது Verified, Authorized Stock மட்டும், உங்கள் File ஐ படிக்கக்கூடிய Pharmacists இரவின் எந்த நேரத்திலும் Dispense செய்வார்கள்.",
   ctaPrimary: "ஒரு Delivery ஐ Order செய்யுங்கள்",
   ctaSecondary: "ஒரு Pharmacist இடம் கேளுங்கள்",

@@ -18,6 +18,17 @@
  * from. Flagged in the task report rather than left unexplained.
  */
 
+// Relative imports straight to each feature's own data file, not its
+// `index.ts`: `index.ts` also re-exports that feature's Page component from
+// a `.tsx` file, and `node --test` (which loads this file directly, through
+// content.i18n.test.ts's import graph) has no JSX transform, only
+// TypeScript type-stripping. This file still needs to load under plain
+// node, so it reaches past each barrel to the same file its `index.ts`
+// re-exports `homeCareHero` / `pharmacyHero` from, rather than duplicating
+// either fact a second time.
+import { hero as homeCareHero } from "../../home-care/data/content.ts";
+import { hero as pharmacyHero } from "../../pharmacy/data/content.ts";
+
 /**
  * Not yet read by a Sinhala or Tamil speaker. `npm run i18n:status` lists
  * every file still in this state.
@@ -122,7 +133,10 @@ export const servicesBento = {
     },
     {
       badge: "/07 Home visits",
-      heading: "We come to you",
+      // `home-care`'s own hero tagline (`hero.strapline`), read back through
+      // its `index.ts` rather than typed here a second time: same fact,
+      // exactly one home.
+      heading: homeCareHero.strapline,
       body: "Doctors, nurses and lab technicians at your door.",
     },
     {
@@ -171,7 +185,14 @@ export const surgical = {
  */
 export const pharmacy = {
   eyebrow: "05 / Pharmacy",
-  heading: { line1: "Authorized", line2: "medicine.", line3: "Nothing else." },
+  // `pharmacy`'s own hero heading (`hero.headingLead` / `.headingOutline` /
+  // `.headingAccent`), read back through its `index.ts` rather than typed
+  // here a second time: same fact, exactly one home.
+  heading: {
+    line1: pharmacyHero.headingLead,
+    line2: pharmacyHero.headingOutline,
+    line3: pharmacyHero.headingAccent,
+  },
   body: "Our in-house pharmacy stocks only verified, authorized stock, dispensed by pharmacists who can read your file, at any hour of the night.",
   ctaPrimary: "Order a delivery",
   ctaSecondary: "Ask a pharmacist",

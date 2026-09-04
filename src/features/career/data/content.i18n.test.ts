@@ -122,6 +122,9 @@ const KEEPS_ENGLISH = new Set<string>([
   // Laboratory Technologists, Insurance and billing) does translate.
   "tickerItems[2]",
   "tickerItems[4]",
+  // `sharedJobTitles.radiographerDigitalXray` is `jobs[5].title`, read back
+  // through the derived export: the same KEEPS_ENGLISH reason applies.
+  "sharedJobTitles.radiographerDigitalXray",
 ]);
 
 test("every translatable string in career has Sinhala", () => {

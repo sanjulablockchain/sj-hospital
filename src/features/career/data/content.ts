@@ -238,6 +238,24 @@ export const jobs: readonly Job[] = [
 ];
 
 /**
+ * The English title for the four vacancies here that
+ * `features/home/data/careers.ts` also advertises on the home page's own
+ * teaser (see that file's own header comment). Derived from `jobs` rather
+ * than a second literal, so the fact has exactly one home in this file;
+ * exported through this feature's `index.ts` so the teaser imports the
+ * string instead of carrying its own copy of it (Pattern 4 in the i18n
+ * recipe: a string used twice has one home). Task 14 copied these four
+ * titles' reviewed translations byte-for-byte instead of importing across
+ * the boundary; this is the fix.
+ */
+export const sharedJobTitles = {
+  medicalOfficerEmergency: jobs[2].title,
+  theatreNurse: jobs[3].title,
+  medicalLaboratoryTechnologist: jobs[4].title,
+  radiographerDigitalXray: jobs[5].title,
+} as const;
+
+/**
  * Every department the site recognises, clinical first, in the reference's own
  * order. This is the ordering only: a department appears as a filter chip when
  * a vacancy actually sits in it, never otherwise.

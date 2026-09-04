@@ -156,6 +156,16 @@ export const jobs = [
   },
 ];
 
+// The same four titles as content.ts's own `sharedJobTitles`, derived from
+// `jobs` rather than a second literal, so `features/home/data/careers.ta.ts`
+// can import the already-reviewed Tamil instead of carrying its own copy.
+export const sharedJobTitles = {
+  medicalOfficerEmergency: jobs[2].title,
+  theatreNurse: jobs[3].title,
+  medicalLaboratoryTechnologist: jobs[4].title,
+  radiographerDigitalXray: jobs[5].title,
+};
+
 export const departmentLabels: Record<string, string> = {
   All: "அனைத்தும்",
   Medical: "மருத்துவம்",

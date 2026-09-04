@@ -159,6 +159,16 @@ export const jobs = [
   },
 ];
 
+// The same four titles as content.ts's own `sharedJobTitles`, derived from
+// `jobs` rather than a second literal, so `features/home/data/careers.si.ts`
+// can import the already-reviewed Sinhala instead of carrying its own copy.
+export const sharedJobTitles = {
+  medicalOfficerEmergency: jobs[2].title,
+  theatreNurse: jobs[3].title,
+  medicalLaboratoryTechnologist: jobs[4].title,
+  radiographerDigitalXray: jobs[5].title,
+};
+
 export const departmentLabels: Record<string, string> = {
   All: "සියල්ල",
   Medical: "වෛද්‍ය",
