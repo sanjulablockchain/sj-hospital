@@ -4,9 +4,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { useParallax } from "../hooks/useParallax";
+import { localeHref } from "@/lib/i18n/paths";
+import type { Locale } from "@/lib/i18n/locales";
 import type { HomeContent } from "../data/getContent";
 
-export function SchoolWellnessSection({ content }: { content: HomeContent["content"]["schoolWellness"] }) {
+export function SchoolWellnessSection({
+  content,
+  locale,
+}: {
+  content: HomeContent["content"]["schoolWellness"];
+  locale: Locale;
+}) {
   const { eyebrow, heading, body, rows, cta, photoAlt, photoCaption } = content;
   const { ref: photoRef, offset: photoOffset } = useParallax(0.08, 50);
 
@@ -37,7 +45,7 @@ export function SchoolWellnessSection({ content }: { content: HomeContent["conte
               network teaser links to /network: the school wellness page's own
               #book section is where a principal starts. */}
           <Link
-            href="/school-wellness"
+            href={localeHref("/school-wellness", locale)}
             className="sj-invert mt-7 inline-flex items-center gap-2.5 bg-[var(--home-accent)] px-6 py-4 text-[15px] font-bold text-[var(--home-on-accent)]"
           >
             {cta} <span aria-hidden>&rarr;</span>

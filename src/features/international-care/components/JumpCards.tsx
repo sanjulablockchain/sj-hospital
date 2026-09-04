@@ -1,4 +1,6 @@
 import { RevealStagger } from "@/components/ui/RevealStagger";
+import { localeHref } from "@/lib/i18n/paths";
+import type { Locale } from "@/lib/i18n/locales";
 import type { InternationalCareContent } from "../data/getContent";
 
 /**
@@ -14,7 +16,7 @@ import type { InternationalCareContent } from "../data/getContent";
  * `@media (hover: hover)` so a touch device does not latch a card into the
  * filled state.
  */
-export function JumpCards({ content }: { content: InternationalCareContent }) {
+export function JumpCards({ content, locale }: { content: InternationalCareContent; locale: Locale }) {
   const { jumpCards } = content;
   return (
     <section id="jump" className="mx-auto max-w-[1440px] px-5 pt-20 sm:px-8 lg:px-11">
@@ -25,7 +27,7 @@ export function JumpCards({ content }: { content: InternationalCareContent }) {
         {jumpCards.map((card) => (
           <a
             key={card.href}
-            href={card.href}
+            href={localeHref(card.href, locale)}
             className="sj-fill flex flex-col gap-2.5 bg-[var(--home-bg)] px-6 py-6.5"
           >
             <span className="text-[11.5px] font-bold tracking-[0.2em] text-[var(--home-accent-soft)] uppercase">

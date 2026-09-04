@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useId, useRef, useState } from "react";
 import type { KeyboardEvent } from "react";
+import { localeHref } from "@/lib/i18n/paths";
+import type { Locale } from "@/lib/i18n/locales";
 import type { NetworkNode } from "../data/network";
 
 /** Fills a `{name}` token into a translated screen-reader sentence. */
@@ -31,9 +33,11 @@ function fillName(template: string, name: string): string {
 export function NetworkAccordion({
   nodes,
   aria,
+  locale,
 }: {
   nodes: readonly NetworkNode[];
   aria: { show: string; open: string };
+  locale: Locale;
 }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const buttonRefs = useRef<Array<HTMLButtonElement | null>>([]);
@@ -153,7 +157,7 @@ export function NetworkAccordion({
                   takes no clicks and is out of the tab order; its own button
                   is how you reach it. */}
               <Link
-                href={node.href}
+                href={localeHref(node.href, locale)}
                 tabIndex={isActive ? undefined : -1}
                 className={`mt-4.5 inline-flex w-fit items-center gap-2 border-b border-[#7FCBFF]/40 pb-0.5 text-[14px] font-bold text-[#7FCBFF] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--home-accent)] ${
                   isActive ? "pointer-events-auto" : ""

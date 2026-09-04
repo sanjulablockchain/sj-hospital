@@ -43,23 +43,25 @@ export async function HomePage({ locale }: { locale: Locale }) {
     <ThemedShell flowHeader>
       <main>
         <HeroSection hero={content.hero} tickerItems={content.statTickerItems} locale={locale} />
-        <WhoWeAreSection content={content.whoWeAre} />
-        <ServicesBentoSection content={content.servicesBento} />
-        <SurgicalSection content={content.surgical} />
+        <WhoWeAreSection content={content.whoWeAre} locale={locale} />
+        <ServicesBentoSection content={content.servicesBento} locale={locale} />
+        <SurgicalSection content={content.surgical} locale={locale} />
         <FacilitiesSection
           items={home.facilities.facilities}
           eyebrow={home.facilities.sectionEyebrow}
           heading={home.facilities.heading}
+          locale={locale}
         />
-        <PharmacySection content={content.pharmacy} />
+        <PharmacySection content={content.pharmacy} locale={locale} />
         <HomeCareSection
           items={home.homeCare.homeCareCards}
           eyebrow={home.homeCare.sectionEyebrow}
           heading={home.homeCare.heading}
           body={home.homeCare.body}
           cta={home.homeCare.cta}
+          locale={locale}
         />
-        <RoomsSection content={content.rooms} />
+        <RoomsSection content={content.rooms} locale={locale} />
         <InternationalCareSection
           items={home.internationalCare.internationalCareItems}
           eyebrow={home.internationalCare.sectionEyebrow}
@@ -67,14 +69,16 @@ export async function HomePage({ locale }: { locale: Locale }) {
           body={home.internationalCare.body}
           ctaPrimary={home.internationalCare.ctaPrimary}
           ctaSecondary={home.internationalCare.ctaSecondary}
+          locale={locale}
         />
         <HealthTipsSection
           items={home.healthTips.healthTips}
           eyebrow={home.healthTips.sectionEyebrow}
           heading={home.healthTips.heading}
           cta={home.healthTips.cta}
+          locale={locale}
         />
-        <SchoolWellnessSection content={content.schoolWellness} />
+        <SchoolWellnessSection content={content.schoolWellness} locale={locale} />
         <NetworkSection
           nodes={home.network.networkNodes}
           eyebrow={home.network.sectionEyebrow}
@@ -82,12 +86,14 @@ export async function HomePage({ locale }: { locale: Locale }) {
           body={home.network.body}
           cta={home.network.cta}
           accordionAria={home.network.accordionAria}
+          locale={locale}
         />
         <MediaSection
           items={home.media.mediaItems}
           eyebrow={home.media.sectionEyebrow}
           heading={home.media.heading}
           cta={home.media.cta}
+          locale={locale}
         />
         <CareersSection
           jobs={home.careers.jobOpenings}
@@ -95,6 +101,7 @@ export async function HomePage({ locale }: { locale: Locale }) {
           heading={home.careers.heading}
           body={home.careers.body}
           cta={home.careers.cta}
+          locale={locale}
         />
         <TestimonialsSection
           items={home.testimonials.testimonials}
@@ -102,7 +109,7 @@ export async function HomePage({ locale }: { locale: Locale }) {
           ariaPrev={home.testimonials.ariaPrev}
           ariaNext={home.testimonials.ariaNext}
         />
-        <ContactCtaSection content={content.contactCta} />
+        <ContactCtaSection content={content.contactCta} locale={locale} />
       </main>
       <HomeFooter locale={locale} />
       <FloatingActions />

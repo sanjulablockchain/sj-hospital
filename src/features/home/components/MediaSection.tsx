@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
+import { localeHref } from "@/lib/i18n/paths";
+import type { Locale } from "@/lib/i18n/locales";
 import type { MediaItem } from "../data/media";
 
 export function MediaSection({
@@ -8,11 +10,13 @@ export function MediaSection({
   eyebrow,
   heading,
   cta,
+  locale,
 }: {
   items: readonly MediaItem[];
   eyebrow: string;
   heading: { line1: string; line2: string };
   cta: string;
+  locale: Locale;
 }) {
   return (
     <section id="media" className="mx-auto max-w-[1440px] px-5 pt-30 sm:px-8 lg:px-11">
@@ -29,7 +33,7 @@ export function MediaSection({
             </h2>
           </div>
           <Link
-            href="/media#contactdesk"
+            href={localeHref("/media#contactdesk", locale)}
             className="sj-invert inline-flex items-center gap-2.5 border border-[var(--home-hairline-strong)] px-5.5 py-3.5 text-[14.5px] font-bold text-[var(--home-heading)]"
           >
             {cta} <span aria-hidden>&rarr;</span>
@@ -40,7 +44,7 @@ export function MediaSection({
         {items.map((item) => (
           <Link
             key={item.date}
-            href="/media#newsroom"
+            href={localeHref("/media#newsroom", locale)}
             className="sj-row-fill grid grid-cols-1 gap-3 border-b border-[var(--home-hairline)] px-1 py-6.5 text-inherit min-[640px]:grid-cols-[minmax(0,0.5fr)_minmax(0,1.6fr)_minmax(0,0.9fr)] min-[640px]:items-baseline min-[640px]:gap-6"
           >
             <span className="text-[13.5px] font-bold tracking-[0.1em] text-[var(--home-muted)] tabular-nums">

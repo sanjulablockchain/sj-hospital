@@ -2,9 +2,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { LOGO_MARK } from "@/config/brand";
+import { localeHref } from "@/lib/i18n/paths";
+import type { Locale } from "@/lib/i18n/locales";
 import type { HomeContent } from "../data/getContent";
 
-export function ContactCtaSection({ content }: { content: HomeContent["content"]["contactCta"] }) {
+export function ContactCtaSection({
+  content,
+  locale,
+}: {
+  content: HomeContent["content"]["contactCta"];
+  locale: Locale;
+}) {
   const { eyebrow, heading, body, ctaSurgical, ctaRooms } = content;
 
   return (
@@ -36,13 +44,13 @@ export function ContactCtaSection({ content }: { content: HomeContent["content"]
         </div>
         <div className="flex min-w-0 flex-col bg-[var(--home-bg)]">
           <Link
-            href="/services/general-surgery"
+            href={localeHref("/services/general-surgery", locale)}
             className="sj-invert font-display flex flex-1 items-center justify-between gap-5 border-b border-[var(--home-hairline)] px-8 py-7 text-[25px] font-semibold tracking-[-0.02em] text-[var(--home-heading)]"
           >
             <span className="wrap-break-word">{ctaSurgical}</span> <span aria-hidden className="shrink-0">&rarr;</span>
           </Link>
           <Link
-            href="/accommodation#book"
+            href={localeHref("/accommodation#book", locale)}
             className="sj-invert font-display flex flex-1 items-center justify-between gap-5 border-b border-[var(--home-hairline)] px-8 py-7 text-[25px] font-semibold tracking-[-0.02em] text-[var(--home-heading)]"
           >
             <span className="wrap-break-word">{ctaRooms}</span> <span aria-hidden className="shrink-0">&rarr;</span>

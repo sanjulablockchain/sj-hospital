@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { NetworkAccordion } from "./NetworkAccordion";
+import { localeHref } from "@/lib/i18n/paths";
+import type { Locale } from "@/lib/i18n/locales";
 import type { NetworkNode } from "../data/network";
 
 export function NetworkSection({
@@ -10,6 +12,7 @@ export function NetworkSection({
   body,
   cta,
   accordionAria,
+  locale,
 }: {
   nodes: readonly NetworkNode[];
   eyebrow: string;
@@ -17,6 +20,7 @@ export function NetworkSection({
   body: string;
   cta: string;
   accordionAria: { show: string; open: string };
+  locale: Locale;
 }) {
   return (
     <section id="network" className="mx-auto max-w-[1440px] px-5 pt-30 sm:px-8 lg:px-11">
@@ -35,7 +39,7 @@ export function NetworkSection({
           <div className="min-w-0">
             <p className="max-w-[36ch] text-[16.5px] leading-[1.6] text-[var(--home-muted)]">{body}</p>
             <Link
-              href="/network"
+              href={localeHref("/network", locale)}
               className="mt-5 sj-invert inline-flex items-center gap-2.5 border border-[var(--home-hairline-strong)] px-5.5 py-3.5 text-[14.5px] font-bold text-[var(--home-heading)]"
             >
               {cta} <span aria-hidden>&rarr;</span>
@@ -44,7 +48,7 @@ export function NetworkSection({
         </div>
       </Reveal>
       <Reveal className="mt-11.5">
-        <NetworkAccordion nodes={nodes} aria={accordionAria} />
+        <NetworkAccordion nodes={nodes} aria={accordionAria} locale={locale} />
       </Reveal>
     </section>
   );

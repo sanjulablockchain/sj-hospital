@@ -5,6 +5,7 @@ import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { Ticker } from "@/components/ui/Ticker";
 import { internationalNavigation } from "@/config/internationalNavigation";
 import { translateNavItems } from "@/config/navigationLabels";
+import { localeHref } from "@/lib/i18n/paths";
 import type { Locale } from "@/lib/i18n/locales";
 import type { InternationalCareContent } from "../data/getContent";
 
@@ -101,7 +102,7 @@ export function InternationalHero({ content, locale }: { content: InternationalC
         <div className="min-w-0 flex-1 pb-11">
           <div className="animate-sj-up inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
             <span aria-hidden className="h-px w-11 bg-[#2CA6F0]" />
-            <Link href="/" className="text-[#7FCBFF] hover:text-white">
+            <Link href={localeHref("/", locale)} className="text-[#7FCBFF] hover:text-white">
               {hero.breadcrumbHome}
             </Link>
             <span aria-hidden className="opacity-50">

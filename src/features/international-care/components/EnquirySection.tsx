@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
+import { localeHref } from "@/lib/i18n/paths";
+import type { Locale } from "@/lib/i18n/locales";
 import type { InternationalCareContent } from "../data/getContent";
 
 /**
@@ -33,7 +35,13 @@ const ROW =
  * row has only the glyph to share space with, so a long Sinhala or Tamil
  * `label` pushes the whole row past a 360px viewport instead of wrapping.
  */
-export function EnquirySection({ content }: { content: InternationalCareContent }) {
+export function EnquirySection({
+  content,
+  locale,
+}: {
+  content: InternationalCareContent;
+  locale: Locale;
+}) {
   const { enquiryBrowseCta, enquiryChips, enquiryContactRows, enquiryHeading, enquiryIntro, sectionEyebrows } =
     content;
   return (
@@ -88,7 +96,7 @@ export function EnquirySection({ content }: { content: InternationalCareContent 
                 </span>
               </a>
             ))}
-            <Link href="/services" className={ROW}>
+            <Link href={localeHref("/services", locale)} className={ROW}>
               {enquiryBrowseCta}
               <span aria-hidden>&rarr;</span>
             </Link>

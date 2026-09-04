@@ -4,9 +4,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { useParallax } from "../hooks/useParallax";
+import { localeHref } from "@/lib/i18n/paths";
+import type { Locale } from "@/lib/i18n/locales";
 import type { HomeContent } from "../data/getContent";
 
-export function SurgicalSection({ content }: { content: HomeContent["content"]["surgical"] }) {
+export function SurgicalSection({
+  content,
+  locale,
+}: {
+  content: HomeContent["content"]["surgical"];
+  locale: Locale;
+}) {
   const { eyebrow, heading, body, ctaPrimary, ctaSecondary, procedures } = content;
   const { ref: bgRef, offset: bgOffset } = useParallax(0.12, 80);
 
@@ -37,7 +45,7 @@ export function SurgicalSection({ content }: { content: HomeContent["content"]["
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
-                href="/e-channeling"
+                href={localeHref("/e-channeling", locale)}
                 className="sj-invert inline-flex items-center gap-2.5 bg-[var(--home-accent)] px-6 py-4 text-[15px] font-bold text-[var(--home-on-accent)]"
               >
                 {ctaPrimary} <span aria-hidden>&rarr;</span>

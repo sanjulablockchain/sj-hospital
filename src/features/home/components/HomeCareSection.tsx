@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
+import { localeHref } from "@/lib/i18n/paths";
+import type { Locale } from "@/lib/i18n/locales";
 import type { HomeCareCard } from "../data/homeCare";
 
 /**
@@ -25,12 +27,14 @@ export function HomeCareSection({
   heading,
   body,
   cta,
+  locale,
 }: {
   items: readonly HomeCareCard[];
   eyebrow: string;
   heading: { line1: string; line2: string };
   body: string;
   cta: string;
+  locale: Locale;
 }) {
   return (
     <section id="home-care" className="mx-auto max-w-[1440px] px-5 pt-30 sm:px-8 lg:px-11">
@@ -60,7 +64,7 @@ export function HomeCareSection({
         {items.map((card) => (
           <Link
             key={card.href}
-            href={card.href}
+            href={localeHref(card.href, locale)}
             className="sj-fill flex flex-col gap-3 bg-[var(--home-bg)] px-7 py-8"
           >
             <span
@@ -83,7 +87,7 @@ export function HomeCareSection({
 
       <Reveal>
         <Link
-          href="/home-care"
+          href={localeHref("/home-care", locale)}
           className="sj-invert mt-8 inline-flex items-center gap-2.5 bg-[var(--home-accent)] px-6 py-4 text-[15px] font-bold text-[var(--home-on-accent)]"
         >
           {cta} <span aria-hidden>&rarr;</span>

@@ -1,5 +1,7 @@
-import { LocaleLink } from "@/components/i18n/LocaleLink";
+import Link from "next/link";
 import { RevealStagger } from "@/components/ui/RevealStagger";
+import { localeHref } from "@/lib/i18n/paths";
+import type { Locale } from "@/lib/i18n/locales";
 import type { JobOpening } from "../data/careers";
 
 export function CareersSection({
@@ -8,12 +10,14 @@ export function CareersSection({
   heading,
   body,
   cta,
+  locale,
 }: {
   jobs: readonly JobOpening[];
   eyebrow: string;
   heading: { line1: string; line2: string; line3: string };
   body: string;
   cta: string;
+  locale: Locale;
 }) {
   return (
     <section id="career" className="mx-auto max-w-[1440px] px-5 pt-30 sm:px-8 lg:px-11">
@@ -33,15 +37,18 @@ export function CareersSection({
           {/* Was a bare mailto. /careers now carries the application form, the
               full role detail and the recruitment-fraud warning, so the teaser
               sends people there instead of straight into their mail client. */}
-          <LocaleLink href="/careers#form" className="sj-invert mt-6 inline-flex items-center gap-2.5 bg-[var(--home-accent)] px-5.5 py-3.5 text-[14.5px] font-bold text-[var(--home-on-accent)]">
+          <Link
+            href={localeHref("/careers#form", locale)}
+            className="sj-invert mt-6 inline-flex items-center gap-2.5 bg-[var(--home-accent)] px-5.5 py-3.5 text-[14.5px] font-bold text-[var(--home-on-accent)]"
+          >
             {cta} <span aria-hidden>&rarr;</span>
-          </LocaleLink>
+          </Link>
         </div>
         <RevealStagger className="min-w-0 border-t border-[var(--home-hairline)]">
           {jobs.map((job, index) => (
-            <LocaleLink
+            <Link
               key={index}
-              href="/careers#openings"
+              href={localeHref("/careers#openings", locale)}
               className="sj-row-fill grid grid-cols-1 gap-2 border-b border-[var(--home-hairline)] px-1 py-6 text-inherit min-[640px]:grid-cols-[minmax(0,1.4fr)_minmax(0,0.8fr)_minmax(0,0.7fr)_auto] min-[640px]:items-center min-[640px]:gap-5"
             >
               <span className="font-display wrap-break-word text-[clamp(20px,2vw,29px)] leading-[1.08] font-semibold tracking-[-0.025em] text-[var(--home-heading)]">
@@ -52,7 +59,7 @@ export function CareersSection({
               <span className="text-[20px] opacity-60 min-[640px]:justify-self-end" aria-hidden>
                 &rarr;
               </span>
-            </LocaleLink>
+            </Link>
           ))}
         </RevealStagger>
       </div>

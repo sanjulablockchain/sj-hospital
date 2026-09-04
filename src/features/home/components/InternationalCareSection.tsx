@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { RevealStagger } from "@/components/ui/RevealStagger";
+import { localeHref } from "@/lib/i18n/paths";
+import type { Locale } from "@/lib/i18n/locales";
 import type { InternationalCareItem } from "../data/internationalCare";
 
 /**
@@ -17,6 +19,7 @@ export function InternationalCareSection({
   body,
   ctaPrimary,
   ctaSecondary,
+  locale,
 }: {
   items: readonly InternationalCareItem[];
   eyebrow: string;
@@ -24,6 +27,7 @@ export function InternationalCareSection({
   body: string;
   ctaPrimary: string;
   ctaSecondary: string;
+  locale: Locale;
 }) {
   return (
     <section id="international" className="mx-auto max-w-[1440px] px-5 pt-30 sm:px-8 lg:px-11">
@@ -42,7 +46,7 @@ export function InternationalCareSection({
           <p className="mt-5.5 max-w-[40ch] text-[17px] leading-[1.65] text-[var(--home-muted)]">{body}</p>
           <div className="mt-7 flex flex-wrap gap-3">
             <Link
-              href="/international-care"
+              href={localeHref("/international-care", locale)}
               className="sj-invert inline-flex items-center gap-2.5 bg-[var(--home-accent)] px-5.5 py-3.5 text-[14.5px] font-bold text-[var(--home-on-accent)]"
             >
               {ctaPrimary} <span aria-hidden>&rarr;</span>

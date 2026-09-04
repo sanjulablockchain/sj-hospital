@@ -5,9 +5,17 @@ import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { useParallax } from "../hooks/useParallax";
 import { CountUp } from "./CountUp";
+import { localeHref } from "@/lib/i18n/paths";
+import type { Locale } from "@/lib/i18n/locales";
 import type { HomeContent } from "../data/getContent";
 
-export function RoomsSection({ content }: { content: HomeContent["content"]["rooms"] }) {
+export function RoomsSection({
+  content,
+  locale,
+}: {
+  content: HomeContent["content"]["rooms"];
+  locale: Locale;
+}) {
   const { eyebrow, heading, body, cta, fromLabel, priceCaption, perks } = content;
   const { ref: bgRef, offset: bgOffset } = useParallax(0.14, 90);
 
@@ -37,7 +45,7 @@ export function RoomsSection({ content }: { content: HomeContent["content"]["roo
               {body}
             </p>
             <Link
-              href="/accommodation#book"
+              href={localeHref("/accommodation#book", locale)}
               className="sj-accentify mt-8 inline-flex items-center gap-3 bg-white px-6.5 py-4.5 text-[15px] font-bold text-[#060B1F]"
             >
               {cta} <span aria-hidden>&rarr;</span>

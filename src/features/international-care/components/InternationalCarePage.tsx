@@ -30,7 +30,7 @@ export async function InternationalCarePage({ locale }: { locale: Locale }) {
     <>
       <main>
         <InternationalHero content={content} locale={locale} />
-        <JumpCards content={content} />
+        <JumpCards content={content} locale={locale} />
         <JourneySection content={content} />
         <DeskSection content={content} />
         <EstimatesSection content={content} />
@@ -38,7 +38,7 @@ export async function InternationalCarePage({ locale }: { locale: Locale }) {
         <BillingSection content={content} />
         <NegomboSection content={content} />
         <FaqAccordion faq={faq} heading={faqHeading} eyebrow={sectionEyebrows.faq} />
-        <EnquirySection content={content} />
+        <EnquirySection content={content} locale={locale} />
       </main>
       <ThemedFooter
         columns={translateFooterColumns(internationalFooterColumns, locale)}

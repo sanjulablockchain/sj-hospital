@@ -2,9 +2,17 @@ import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
 import { CountUp } from "./CountUp";
+import { localeHref } from "@/lib/i18n/paths";
+import type { Locale } from "@/lib/i18n/locales";
 import type { HomeContent } from "../data/getContent";
 
-export function WhoWeAreSection({ content }: { content: HomeContent["content"]["whoWeAre"] }) {
+export function WhoWeAreSection({
+  content,
+  locale,
+}: {
+  content: HomeContent["content"]["whoWeAre"];
+  locale: Locale;
+}) {
   const { eyebrow, heading, intro, body, cta, stats } = content;
 
   return (
@@ -33,7 +41,7 @@ export function WhoWeAreSection({ content }: { content: HomeContent["content"]["
           </Reveal>
           <Reveal className="mt-8">
             <Link
-              href="/about-us"
+              href={localeHref("/about-us", locale)}
               className="sj-invert inline-flex items-center gap-2.5 border border-[var(--home-hairline-strong)] px-5.5 py-3.5 text-[14.5px] font-bold text-[var(--home-heading)]"
             >
               {cta} <span aria-hidden>&rarr;</span>

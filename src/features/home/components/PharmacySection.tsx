@@ -7,9 +7,17 @@ import { useParallax } from "../hooks/useParallax";
 import { RevealStagger } from "@/components/ui/RevealStagger";
 import { CountUp } from "./CountUp";
 import { LOGO_MARK } from "@/config/brand";
+import { localeHref } from "@/lib/i18n/paths";
+import type { Locale } from "@/lib/i18n/locales";
 import type { HomeContent } from "../data/getContent";
 
-export function PharmacySection({ content }: { content: HomeContent["content"]["pharmacy"] }) {
+export function PharmacySection({
+  content,
+  locale,
+}: {
+  content: HomeContent["content"]["pharmacy"];
+  locale: Locale;
+}) {
   const { eyebrow, heading, body, ctaPrimary, ctaSecondary, stats } = content;
   const { ref: watermarkRef, offset: watermarkOffset } = useParallax(0.1, 60);
 
@@ -44,7 +52,7 @@ export function PharmacySection({ content }: { content: HomeContent["content"]["
             </p>
             <div className="mt-7.5 flex flex-wrap gap-3">
               <Link
-                href="/pharmacy#delivery"
+                href={localeHref("/pharmacy#delivery", locale)}
                 className="sj-invert inline-flex items-center gap-2.5 bg-[var(--home-accent)] px-6 py-4 text-[15px] font-bold text-[var(--home-on-accent)]"
               >
                 {ctaPrimary} <span aria-hidden>&rarr;</span>

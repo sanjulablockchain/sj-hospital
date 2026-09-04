@@ -2,9 +2,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { services } from "@/features/services/data/services";
+import { localeHref } from "@/lib/i18n/paths";
+import type { Locale } from "@/lib/i18n/locales";
 import type { HomeContent } from "../data/getContent";
 
-export function ServicesBentoSection({ content }: { content: HomeContent["content"]["servicesBento"] }) {
+export function ServicesBentoSection({
+  content,
+  locale,
+}: {
+  content: HomeContent["content"]["servicesBento"];
+  locale: Locale;
+}) {
   const { eyebrow, heading, tilesNote, tiles, footer } = content;
   const viewAllLabel = footer.viewAllTemplate.replace("{count}", String(services.length));
 
@@ -32,7 +40,7 @@ export function ServicesBentoSection({ content }: { content: HomeContent["conten
           style={{ gridAutoRows: "minmax(178px, auto)" }}
         >
           <Link
-            href="/services/accident-emergency"
+            href={localeHref("/services/accident-emergency", locale)}
             className="sj-bento sj-bento-accent group relative col-span-2 row-span-2 flex flex-col justify-between overflow-hidden bg-[var(--home-accent)] p-8 text-[var(--home-on-accent)] max-[639px]:col-span-1"
           >
             <span className="flex flex-wrap items-center justify-between gap-4 text-[12px] font-bold tracking-[0.2em] uppercase opacity-72">
@@ -55,7 +63,7 @@ export function ServicesBentoSection({ content }: { content: HomeContent["conten
           </Link>
 
           <Link
-            href="/services/general-surgery"
+            href={localeHref("/services/general-surgery", locale)}
             className="sj-bento relative col-span-2 flex min-h-[178px] flex-col justify-end overflow-hidden bg-[#0B1846] p-7 text-white max-[639px]:col-span-1"
           >
             <Image
@@ -90,7 +98,7 @@ export function ServicesBentoSection({ content }: { content: HomeContent["conten
           </Link>
 
           <Link
-            href="/services/inpatient-rooms"
+            href={localeHref("/services/inpatient-rooms", locale)}
             className="sj-bento relative row-span-2 flex flex-col justify-between overflow-hidden border border-[var(--home-hairline)] bg-[#0B1846] p-6.5 text-inherit"
           >
             <Image
@@ -116,7 +124,7 @@ export function ServicesBentoSection({ content }: { content: HomeContent["conten
           </Link>
 
           <Link
-            href="/services/pharmacy"
+            href={localeHref("/services/pharmacy", locale)}
             className="sj-bento relative flex flex-col justify-between overflow-hidden border border-[var(--home-hairline)] bg-[#0B1846] p-6.5 text-inherit"
           >
             <Image
@@ -142,7 +150,7 @@ export function ServicesBentoSection({ content }: { content: HomeContent["conten
           </Link>
 
           <Link
-            href="/services/radiology"
+            href={localeHref("/services/radiology", locale)}
             className="sj-bento relative flex flex-col justify-between overflow-hidden border border-[var(--home-hairline)] bg-[#0B1846] p-6.5 text-inherit"
           >
             <Image
@@ -168,7 +176,7 @@ export function ServicesBentoSection({ content }: { content: HomeContent["conten
           </Link>
 
           <Link
-            href="/services/laboratory"
+            href={localeHref("/services/laboratory", locale)}
             className="sj-bento relative col-span-2 flex min-h-[178px] items-end overflow-hidden bg-[#08123A] p-6.5 text-inherit max-[639px]:col-span-1"
           >
             <Image
@@ -196,7 +204,7 @@ export function ServicesBentoSection({ content }: { content: HomeContent["conten
           </Link>
 
           <Link
-            href="/services/home-visits"
+            href={localeHref("/services/home-visits", locale)}
             className="sj-bento relative flex flex-col justify-between overflow-hidden border border-[var(--home-hairline)] bg-[#0B1846] p-6.5 text-inherit"
           >
             <Image
@@ -222,7 +230,7 @@ export function ServicesBentoSection({ content }: { content: HomeContent["conten
           </Link>
 
           <Link
-            href="/services/medicine-delivery"
+            href={localeHref("/services/medicine-delivery", locale)}
             className="sj-bento relative flex flex-col justify-between overflow-hidden border border-[var(--home-hairline)] bg-[#0B1846] p-6.5 text-inherit"
           >
             <Image
@@ -251,7 +259,7 @@ export function ServicesBentoSection({ content }: { content: HomeContent["conten
 
       <Reveal>
         <Link
-          href="/services"
+          href={localeHref("/services", locale)}
           className="mt-8.5 flex flex-wrap items-center justify-between gap-7.5 bg-[var(--home-accent)] px-9 py-8.5 text-[var(--home-on-accent)] sj-invert"
         >
           <span className="block min-w-0">

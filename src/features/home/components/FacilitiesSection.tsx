@@ -3,6 +3,8 @@ import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
+import { localeHref } from "@/lib/i18n/paths";
+import type { Locale } from "@/lib/i18n/locales";
 import type { FacilityCard } from "../data/facilities";
 
 /**
@@ -14,10 +16,12 @@ export function FacilitiesSection({
   items,
   eyebrow,
   heading,
+  locale,
 }: {
   items: readonly FacilityCard[];
   eyebrow: string;
   heading: { line1: string; line2: string };
+  locale: Locale;
 }) {
   return (
     <section id="facilities" className="mx-auto max-w-[1440px] pt-30">
@@ -40,7 +44,7 @@ export function FacilitiesSection({
           card.accent ? (
             <Link
               key={card.index}
-              href={card.href}
+              href={localeHref(card.href, locale)}
               className="group relative flex min-h-[430px] flex-col justify-end overflow-hidden bg-[var(--home-accent)] focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-[var(--home-on-accent)]"
             >
               <div className="absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-[var(--home-on-accent)] transition-transform duration-[450ms] group-hover:scale-x-100" />
@@ -58,7 +62,7 @@ export function FacilitiesSection({
           ) : (
             <Link
               key={card.index}
-              href={card.href}
+              href={localeHref(card.href, locale)}
               className="group relative flex min-h-[430px] items-end overflow-hidden bg-[#08123A] focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-[var(--home-accent)]"
             >
               {card.photo && (
