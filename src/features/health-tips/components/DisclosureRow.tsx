@@ -70,7 +70,11 @@ export function DisclosureRow({
         onClick={onToggle}
         className="flex w-full items-center justify-between gap-5.5 py-5.5 pr-1.5 text-left"
       >
-        {heading}
+        {/* `min-w-0`: this is a flex item next to the fixed-width `+` glyph, and
+            without it a long unbreakable Sinhala or Tamil token in the heading
+            (the badge in `WarningSection`'s own heading, in particular) pushes
+            the row wider than the viewport instead of shrinking to wrap. */}
+        <span className="min-w-0">{heading}</span>
         {/* Decorative: the button's accessible name is the heading text. */}
         <span
           aria-hidden

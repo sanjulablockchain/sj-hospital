@@ -61,3 +61,16 @@ export const emergencyNumbers: EmergencyNumber[] = [
   { label: "National ambulance", number: "1990" },
   { label: "National Poisons Centre", number: "011 268 6143" },
 ];
+
+/**
+ * `#firstaid`'s own copy, moved here out of `FirstAidSection.tsx`. `neverLabel`
+ * is printed ahead of each step's `avoid`, so it stays a separate token rather
+ * than being glued onto every `avoid` string (Pattern 3: a token, not a split).
+ */
+export const firstAidSection = {
+  eyebrow: "04 / First aid at home",
+  heading: { line1: "The four minutes", line2: "before you reach us" },
+  neverLabel: "Never:",
+  homeKitHeading: "Keep in the house",
+  numbersHeading: "Save these numbers",
+};

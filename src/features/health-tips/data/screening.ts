@@ -65,3 +65,17 @@ export const screening: ScreeningCheck[] = [
     freq: "As advised",
   },
 ];
+
+/**
+ * `#screening`'s own copy, moved here out of `ScreeningSection.tsx` so the
+ * component takes it as a prop rather than importing it.
+ */
+export const screeningSection = {
+  eyebrow: "03 / Screening by age",
+  heading: { line1: "The checks", line2: "worth doing" },
+  body1:
+    "Most useful screening is cheap and boring. This is what our physicians actually order, and roughly how often, for someone with no symptoms and no family history.",
+  body2:
+    "A family history of diabetes, heart disease or cancer moves everything earlier. Ask us rather than guessing.",
+  cta: "Health check packages",
+};

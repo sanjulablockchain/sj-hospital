@@ -43,10 +43,13 @@ test("four jump cards, each anchoring a section on this page", () => {
 });
 
 test("jump card counts stay consistent with the data behind them", () => {
-  const byHref = Object.fromEntries(jumpCards.map((c) => [c.href, c.count]));
-  assert.equal(byHref["#library"], `${articles.length} articles`);
-  assert.equal(byHref["#warning"], `${warnings.length} signs`);
-  assert.equal(byHref["#firstaid"], `${firstAidSteps.length} basics`);
+  const byHref = Object.fromEntries(jumpCards.map((c) => [c.href, c]));
+  assert.equal(byHref["#library"].count, articles.length);
+  assert.equal(byHref["#library"].countTemplate, "{n} articles");
+  assert.equal(byHref["#warning"].count, warnings.length);
+  assert.equal(byHref["#warning"].countTemplate, "{n} signs");
+  assert.equal(byHref["#firstaid"].count, firstAidSteps.length);
+  assert.equal(byHref["#firstaid"].countTemplate, "{n} basics");
 });
 
 test("the disclaimer states the page is not a diagnosis", () => {
@@ -58,7 +61,7 @@ test("the disclaimer states the page is not a diagnosis", () => {
 const everyString = [
   ...factStrip.flatMap((t) => [t.label, t.value]),
   ...tickerLines,
-  ...jumpCards.flatMap((c) => [c.count, c.label, c.note]),
+  ...jumpCards.flatMap((c) => [c.countTemplate, c.label, c.note]),
   disclaimer,
   ...articles.flatMap((a) => [a.tag, a.title, a.lede, a.by]),
   ...warnings.flatMap((w) => [w.level, w.symptom, w.advice]),

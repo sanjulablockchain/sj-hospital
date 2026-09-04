@@ -5,12 +5,31 @@ import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
 import type { Article, Category, FeaturedArticle } from "../types";
 
+type LibrarySectionCopy = {
+  eyebrow: string;
+  allHeading: string;
+  filterAriaLabel: string;
+  /** "{shown} of {total} articles": both counts are substituted, never split. */
+  countTemplate: string;
+  takeAwayHeading: string;
+};
+
 type LibrarySectionProps = {
   categories: readonly Category[];
+  /**
+   * Display text for each category, keyed by the same English structural
+   * value `categories`, `article.tag` and `featured.tag` carry. Neither
+   * `categories` nor a `tag` is ever displayed directly: the English value is
+   * only ever used to filter and to look up its label here, which is what
+   * lets it stay untranslated (`counts` is keyed by it too) while the reader
+   * still sees a translated word.
+   */
+  categoryLabels: Record<Category, string>;
   articles: Article[];
   counts: Record<Category, number>;
   featured: FeaturedArticle;
   featuredKicker: string;
+  copy: LibrarySectionCopy;
 };
 
 /**
@@ -26,25 +45,30 @@ type LibrarySectionProps = {
  */
 export function LibrarySection({
   categories,
+  categoryLabels,
   articles,
   counts,
   featured,
   featuredKicker,
+  copy,
 }: LibrarySectionProps) {
   const [filter, setFilter] = useState<Category>("All");
 
   const shown = filter === "All" ? articles : articles.filter((a) => a.tag === filter);
-  const heading = filter === "All" ? "Everything worth reading" : filter;
+  const heading = filter === "All" ? copy.allHeading : categoryLabels[filter];
+  const countText = copy.countTemplate
+    .replace("{shown}", String(shown.length))
+    .replace("{total}", String(articles.length));
 
   return (
     <section id="library" className="mx-auto max-w-[1440px] px-5 pt-18.5 sm:px-8 min-[641px]:pt-26 lg:px-11">
       <Reveal>
         <div className="flex flex-wrap items-end justify-between gap-10">
-          <div>
+          <div className="min-w-0">
             <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
-              01 / The library
+              {copy.eyebrow}
             </div>
-            <h2 className="font-display mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
+            <h2 className="font-display mt-4.5 wrap-break-word text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
               {heading}
             </h2>
           </div>
@@ -52,7 +76,7 @@ export function LibrarySection({
             aria-live="polite"
             className="text-[13px] tracking-[0.12em] text-[var(--home-muted)] uppercase tabular-nums"
           >
-            {shown.length} of {articles.length} articles
+            {countText}
           </p>
         </div>
       </Reveal>
@@ -60,7 +84,7 @@ export function LibrarySection({
       <Reveal className="mt-8">
         <div
           role="group"
-          aria-label="Filter health tips by topic"
+          aria-label={copy.filterAriaLabel}
           className="flex flex-nowrap gap-2.5 overflow-x-auto pb-1.5 min-[1025px]:flex-wrap min-[1025px]:overflow-visible"
         >
           {categories.map((category) => {
@@ -77,7 +101,7 @@ export function LibrarySection({
                     : "border-[var(--home-hairline-strong)] text-[var(--home-heading)] hover:border-[var(--home-accent)]"
                 }`}
               >
-                {category} ({counts[category]})
+                {categoryLabels[category]} ({counts[category]})
               </button>
             );
           })}
@@ -85,25 +109,25 @@ export function LibrarySection({
       </Reveal>
 
       <Reveal className="mt-7.5">
-        <article className="grid grid-cols-1 gap-px bg-[var(--home-hairline)] min-[900px]:grid-cols-[1.35fr_0.65fr]">
-          <div className="bg-[var(--home-accent)] px-9.5 py-10 text-[var(--home-on-accent)]">
-            <p className="text-[11.5px] font-bold tracking-[0.2em] uppercase opacity-[0.68]">
-              {featured.tag} &middot; {featuredKicker}
+        <article className="grid grid-cols-1 gap-px bg-[var(--home-hairline)] min-[900px]:grid-cols-[minmax(0,1.35fr)_minmax(0,0.65fr)]">
+          <div className="min-w-0 bg-[var(--home-accent)] px-9.5 py-10 text-[var(--home-on-accent)]">
+            <p className="wrap-break-word text-[11.5px] font-bold tracking-[0.2em] uppercase opacity-[0.68]">
+              {categoryLabels[featured.tag]} &middot; {featuredKicker}
             </p>
-            <h3 className="font-display mt-4 max-w-[24ch] text-[clamp(30px,3.6vw,50px)] leading-[0.96] font-extrabold tracking-[-0.035em] uppercase">
+            <h3 className="font-display mt-4 max-w-[24ch] wrap-break-word text-[clamp(30px,3.6vw,50px)] leading-[0.96] font-extrabold tracking-[-0.035em] uppercase">
               {featured.title}
             </h3>
-            <p className="mt-4.5 max-w-[54ch] text-[17px] leading-[1.6] opacity-[0.85]">
+            <p className="mt-4.5 max-w-[54ch] wrap-break-word text-[17px] leading-[1.6] opacity-[0.85]">
               {featured.lede}
             </p>
             <p className="mt-6.5 flex flex-wrap gap-5 text-[13px] font-bold tracking-[0.12em] uppercase opacity-[0.7]">
-              <span>{featured.by}</span>
-              <span>{featured.read}</span>
+              <span className="wrap-break-word">{featured.by}</span>
+              <span className="wrap-break-word">{featured.read}</span>
             </p>
           </div>
-          <div className="flex flex-col bg-[var(--home-bg)] px-7.5 py-8.5">
-            <h4 className="text-[11.5px] font-bold tracking-[0.2em] text-[var(--home-accent-soft)] uppercase">
-              Take away
+          <div className="flex min-w-0 flex-col bg-[var(--home-bg)] px-7.5 py-8.5">
+            <h4 className="wrap-break-word text-[11.5px] font-bold tracking-[0.2em] text-[var(--home-accent-soft)] uppercase">
+              {copy.takeAwayHeading}
             </h4>
             <ul className="mt-4.5 flex flex-col gap-3.25">
               {featured.points.map((point) => (
@@ -133,21 +157,21 @@ export function LibrarySection({
         {shown.map((article) => (
           <article
             key={article.title}
-            className="group flex min-h-[268px] flex-col bg-[var(--home-bg)] px-6.5 pt-7.5 pb-7 transition-[background-color,transform] duration-[450ms] hover:-translate-y-1.5 hover:bg-[rgba(44,166,240,0.1)] motion-reduce:transform-none"
+            className="group flex min-h-[268px] min-w-0 flex-col bg-[var(--home-bg)] px-6.5 pt-7.5 pb-7 transition-[background-color,transform] duration-[450ms] hover:-translate-y-1.5 hover:bg-[rgba(44,166,240,0.1)] motion-reduce:transform-none"
           >
-            <p className="text-[11.5px] font-bold tracking-[0.2em] text-[var(--home-accent-soft)] uppercase">
-              {article.tag}
+            <p className="wrap-break-word text-[11.5px] font-bold tracking-[0.2em] text-[var(--home-accent-soft)] uppercase">
+              {categoryLabels[article.tag]}
             </p>
-            <h3 className="font-display mt-3.5 text-[25px] leading-[1.06] font-semibold tracking-[-0.03em] text-[var(--home-heading)]">
+            <h3 className="font-display mt-3.5 wrap-break-word text-[25px] leading-[1.06] font-semibold tracking-[-0.03em] text-[var(--home-heading)]">
               {article.title}
             </h3>
-            <p className="mt-3 text-[15px] leading-[1.55] text-[var(--home-muted)]">
+            <p className="mt-3 wrap-break-word text-[15px] leading-[1.55] text-[var(--home-muted)]">
               {article.lede}
             </p>
             {/* The byline slides up on hover in the reference. It must stay
                 readable without hover (touch, keyboard), so it is only faded
                 on devices that actually have a hover-capable pointer. */}
-            <p className="mt-auto pt-4.5 text-[13.5px] font-bold text-[var(--home-accent-soft)] transition-[opacity,transform] duration-[450ms] motion-reduce:transform-none [@media(hover:hover)]:translate-y-2 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:translate-y-0 [@media(hover:hover)]:group-hover:opacity-100">
+            <p className="mt-auto pt-4.5 wrap-break-word text-[13.5px] font-bold text-[var(--home-accent-soft)] transition-[opacity,transform] duration-[450ms] motion-reduce:transform-none [@media(hover:hover)]:translate-y-2 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:translate-y-0 [@media(hover:hover)]:group-hover:opacity-100">
               {article.by}
             </p>
           </article>

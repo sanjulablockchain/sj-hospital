@@ -18,6 +18,21 @@ export const LEVEL_TONE: Record<WarningLevel, "hot" | "warm" | "cool"> = {
   "Book routinely": "cool",
 };
 
+/**
+ * The badge text for each level, kept apart from `WARNING_LEVELS` itself.
+ * `WARNING_LEVELS` stays the English structural key every `Warning.level`
+ * carries and `LEVEL_TONE` is looked up by (the exact trap `groups.ts`'s own
+ * `groupLabels` already exists to avoid): translating it in place would break
+ * that lookup in every locale but English. `WarningSection` displays
+ * `LEVEL_LABELS[warning.level]` instead of the row's own `level`.
+ */
+export const LEVEL_LABELS: Record<WarningLevel, string> = {
+  "Come in now": "Come in now",
+  "Same day": "Same day",
+  "This week": "This week",
+  "Book routinely": "Book routinely",
+};
+
 export const warnings: Warning[] = [
   {
     level: "Come in now",
@@ -86,3 +101,14 @@ export const warnings: Warning[] = [
       "This is exactly the right time to come. Blood pressure, blood sugar and a lipid profile are cheap, quick and catch the conditions that cause the most harm precisely because they have no symptoms. A structured health check takes one morning.",
   },
 ];
+
+/**
+ * `#warning`'s own copy, moved here out of `WarningSection.tsx` so the
+ * component takes it as a prop rather than importing it.
+ */
+export const warningSection = {
+  eyebrow: "02 / When to come in",
+  heading: { line1: "Wait, or walk", line2: "in tonight" },
+  intro:
+    "Open a symptom for the honest answer. When in doubt, come in. We would rather see you and send you home.",
+};
