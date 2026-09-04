@@ -1,6 +1,12 @@
 import type { Locale } from "@/lib/i18n/locales";
-import { chromeCopy as si } from "./chromeCopy.si";
-import { chromeCopy as ta } from "./chromeCopy.ta";
+// Explicit extensions on the two value imports: `chromeCopy.i18n.test.ts`
+// imports this module, and `npm test` runs the files through Node's own type
+// stripping, which resolves ESM specifiers literally and will not guess at
+// `.ts`. tsconfig has `allowImportingTsExtensions` and Turbopack resolves it
+// the same way, so the app build is unaffected. Same reason
+// `career/schemas.ts` imports `./data/content.ts` with its extension.
+import { chromeCopy as si } from "./chromeCopy.si.ts";
+import { chromeCopy as ta } from "./chromeCopy.ta.ts";
 
 /**
  * The chrome's own hardcoded strings: the header, the mobile panel, the
