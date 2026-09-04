@@ -25,12 +25,14 @@ import { assertTranslationParity, stringPaths } from "../../../lib/i18n/stringPa
  * plays elsewhere. `.format` is a kit row's file format list ("SVG, PNG,
  * EPS"), which is a set of format codes rather than a sentence.
  *
- * `.date` covers `news[*].date` and `featured.date`: a press date is a fact
- * with a fixed value, the same role `.price` plays in `accommodation`'s own
- * content.i18n.test.ts ("On request", "From 10,000 LKR" are facts, not
- * sentences); `featured.kickerDate` is `featured.date` at month precision
- * and shares the same reasoning, but the field is not named `.date` so it
- * is listed by its own exact path below rather than by suffix.
+ * `.date` and `featured.kickerDate` are NOT excluded. A press date here is
+ * "August 2026": the year is a fact, but the month is a word, and both
+ * overlays translate all 19 of them (`අගෝස්තු 2026`, `ஆகஸ்ட் 2026`). They
+ * were excluded when this file was written, which left this comment
+ * contradicting its own data: the paths were named as facts an overlay must
+ * not restate while both overlays restated every one of them. Requiring the
+ * translation is the stronger reading, and `overlayNumerals.test.ts` is what
+ * keeps the year from drifting.
  *
  * `newsCategories` (the whole array, every index) and `news[*].tag` are the
  * structural category identity `NewsroomSection`'s own filter state and
@@ -47,13 +49,11 @@ function isUntranslatable(path: string): boolean {
     path === "SWITCHBOARD" ||
     path === "SWITCHBOARD_TEL" ||
     path === "kitRequestSubject" ||
-    path === "featured.kickerDate" ||
     path.endsWith(".href") ||
     path.endsWith(".src") ||
     path.endsWith(".alt") ||
     path.endsWith(".fit") ||
     path.endsWith(".format") ||
-    path.endsWith(".date") ||
     path.startsWith("newsCategories[") ||
     /^news\[\d+\]\.tag$/.test(path)
   );
@@ -236,3 +236,26 @@ function read(root: unknown, path: string): string {
   }
   return current as string;
 }
+
+// `isUntranslatable` names the paths that are facts and structural keys
+// rather than copy, and until now it was only ever used to EXCUSE an overlay
+// from filling them. Nothing stopped an overlay from SUPPLYING one, and
+// `localize` merges by key, so an overlay carrying a `.value`, an `.href`, an
+// `.id` or an `.icon` wins over the base and reaches the page: final review 3
+// put `value: "+94 11 000 0000"` into a contact row and watched a Sinhala
+// page print a phone number the English page does not have, with the suite
+// green. Every comment in this file saying a fact has exactly one home is
+// true because of this test.
+test("no overlay supplies a value at an untranslatable path", () => {
+  for (const [name, overlay] of [
+    ["si", si],
+    ["ta", ta],
+  ] as const) {
+    const supplied = stringPaths(overlay).filter(isUntranslatable);
+    assert.deepEqual(
+      supplied,
+      [],
+      `${name} overlay restates ${supplied.join(", ")}, which the base owns. A fact, an href, an anchor id or a structural key has exactly one home, in the English module, and a second copy in an overlay drifts out of step with it.`
+    );
+  }
+});

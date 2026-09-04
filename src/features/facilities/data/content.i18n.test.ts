@@ -231,3 +231,26 @@ function read(root: unknown, path: string): string {
   }
   return current as string;
 }
+
+// `isUntranslatable` names the paths that are facts and structural keys
+// rather than copy, and until now it was only ever used to EXCUSE an overlay
+// from filling them. Nothing stopped an overlay from SUPPLYING one, and
+// `localize` merges by key, so an overlay carrying a `.value`, an `.href`, an
+// `.id` or an `.icon` wins over the base and reaches the page: final review 3
+// put `value: "+94 11 000 0000"` into a contact row and watched a Sinhala
+// page print a phone number the English page does not have, with the suite
+// green. Every comment in this file saying a fact has exactly one home is
+// true because of this test.
+test("no overlay supplies a value at an untranslatable path", () => {
+  for (const [name, overlay] of [
+    ["si", si],
+    ["ta", ta],
+  ] as const) {
+    const supplied = stringPaths(overlay).filter(isUntranslatable);
+    assert.deepEqual(
+      supplied,
+      [],
+      `${name} overlay restates ${supplied.join(", ")}, which the base owns. A fact, an href, an anchor id or a structural key has exactly one home, in the English module, and a second copy in an overlay drifts out of step with it.`
+    );
+  }
+});

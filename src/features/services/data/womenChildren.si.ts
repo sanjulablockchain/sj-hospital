@@ -103,10 +103,10 @@ export const womenChildrenServices = [
     ],
     location: "දෙවන මහල, මාතෘ ඒකකය",
     steps: [
-      { no: "01", title: "Book කිරීම", desc: "ඔබේ ගැබ්ගැනීම විශේෂඥ වෛද්‍යවරයා සමඟ Register කරන්න, එතුමා ප්‍රසූතිය දක්වාම ඔබේ සත්කාරය බලාගන්නවා." },
-      { no: "02", title: "සහභාගී වීම", desc: "Antenatal Visits සියල්ලේදීම Consultation එකයි Clinic එකේදීම Scanning එකයි ගැබ්ගැනීමේ හැම අදියරකදීම එකට එකතු වෙනවා." },
-      { no: "03", title: "ප්‍රසූතිය", desc: "දරු වෙදනාවයි ප්‍රසූතියයි වෙන් වූ Obstetric Theatre එකේදී සිදු වෙනවා, අවශ්‍ය නම් Neonatal සහායත් ළඟින්ම ඉන්නවා." },
-      { no: "04", title: "සුවවීම", desc: "ඔබ සුවවෙන්නේ Private Room එකක, මාතෘ Desk එකට ඕන වෙලාවක ලගාවෙන්නත් පුළුවන්." },
+      { title: "Book කිරීම", desc: "ඔබේ ගැබ්ගැනීම විශේෂඥ වෛද්‍යවරයා සමඟ Register කරන්න, එතුමා ප්‍රසූතිය දක්වාම ඔබේ සත්කාරය බලාගන්නවා." },
+      { title: "සහභාගී වීම", desc: "Antenatal Visits සියල්ලේදීම Consultation එකයි Clinic එකේදීම Scanning එකයි ගැබ්ගැනීමේ හැම අදියරකදීම එකට එකතු වෙනවා." },
+      { title: "ප්‍රසූතිය", desc: "දරු වෙදනාවයි ප්‍රසූතියයි වෙන් වූ Obstetric Theatre එකේදී සිදු වෙනවා, අවශ්‍ය නම් Neonatal සහායත් ළඟින්ම ඉන්නවා." },
+      { title: "සුවවීම", desc: "ඔබ සුවවෙන්නේ Private Room එකක, මාතෘ Desk එකට ඕන වෙලාවක ලගාවෙන්නත් පුළුවන්." },
     ],
     prep: [
       "හැම Visit එකකදීම ඔබේ Antenatal වාර්තා පොත අරගෙන එන්න",
@@ -166,10 +166,10 @@ export const womenChildrenServices = [
     ],
     location: "දෙවන මහල, Gynaecology Clinic",
     steps: [
-      { no: "01", title: "Book කිරීම", desc: "Gynaecology Book කරලා, කාන්තා Staff ලා කැමති නම් සඳහන් කරන්න." },
-      { no: "02", title: "තක්සේරු කිරීම", desc: "Gynaecologist කෙනෙක් ඔබේ History ගෙන ඔබව පරීක්ෂා කරනවා, එකම Visit එකේදීම Ultrasound ලබාගත හැක." },
-      { no: "03", title: "සැලසුම් කිරීම", desc: "සොයාගැනීම් සාකච්ඡා කර, කළමනාකරණ හෝ ක්‍රියාපටිපාටි සැලැස්මක් ඔබ සමඟ එකඟ වෙනවා." },
-      { no: "04", title: "ප්‍රතිකාර කිරීම", desc: "අවශ්‍ය නම්, Day-case ක්‍රියාපටිපාටියක් Book කරලා, එදිනම ගෙදර යනවා." },
+      { title: "Book කිරීම", desc: "Gynaecology Book කරලා, කාන්තා Staff ලා කැමති නම් සඳහන් කරන්න." },
+      { title: "තක්සේරු කිරීම", desc: "Gynaecologist කෙනෙක් ඔබේ History ගෙන ඔබව පරීක්ෂා කරනවා, එකම Visit එකේදීම Ultrasound ලබාගත හැක." },
+      { title: "සැලසුම් කිරීම", desc: "සොයාගැනීම් සාකච්ඡා කර, කළමනාකරණ හෝ ක්‍රියාපටිපාටි සැලැස්මක් ඔබ සමඟ එකඟ වෙනවා." },
+      { title: "ප්‍රතිකාර කිරීම", desc: "අවශ්‍ය නම්, Day-case ක්‍රියාපටිපාටියක් Book කරලා, එදිනම ගෙදර යනවා." },
     ],
     prep: [
       "Visit එකට කලින් ඔබේ අවසාන ඔසප් දිනය සටහන් කරගන්න",
@@ -230,10 +230,10 @@ export const womenChildrenServices = [
     ],
     location: "දෙවන මහල, ළමා ඒකකය",
     steps: [
-      { no: "01", title: "Book කිරීම", desc: "නියමිත Review එකක් සඳහා ළමා රෝග විශේෂඥ Book කරන්න, නැත්නම් තියුණු අසනීපයක් සඳහා ඕන වෙලාවක කෙලින්ම එන්න." },
-      { no: "02", title: "තක්සේරු කිරීම", desc: "ළමා රෝග විශේෂඥයෙක් Kids & Teens Medical Group Protocol එකට අනුව Structured Review එකක් සඳහා දරුවා පරීක්ෂා කරනවා." },
-      { no: "03", title: "Track කිරීම", desc: "වර්ධනය, සංවර්ධනය සහ එන්නත් තත්ත්වය කාලයාන්තරයේදී වාර්තා කර Track කරනවා." },
-      { no: "04", title: "Follow up කිරීම", desc: "දරුවාගේ අවශ්‍යතාවයට අනුව Follow-up Review එකක් හෝ Home Visit එකක් සලසනවා." },
+      { title: "Book කිරීම", desc: "නියමිත Review එකක් සඳහා ළමා රෝග විශේෂඥ Book කරන්න, නැත්නම් තියුණු අසනීපයක් සඳහා ඕන වෙලාවක කෙලින්ම එන්න." },
+      { title: "තක්සේරු කිරීම", desc: "ළමා රෝග විශේෂඥයෙක් Kids & Teens Medical Group Protocol එකට අනුව Structured Review එකක් සඳහා දරුවා පරීක්ෂා කරනවා." },
+      { title: "Track කිරීම", desc: "වර්ධනය, සංවර්ධනය සහ එන්නත් තත්ත්වය කාලයාන්තරයේදී වාර්තා කර Track කරනවා." },
+      { title: "Follow up කිරීම", desc: "දරුවාගේ අවශ්‍යතාවයට අනුව Follow-up Review එකක් හෝ Home Visit එකක් සලසනවා." },
     ],
     prep: [
       "ඔබේ දරුවාගේ සෞඛ්‍ය සහ එන්නත් වාර්තාව අරගෙන එන්න",
@@ -291,10 +291,10 @@ export const womenChildrenServices = [
     ],
     location: "දෙවන මහල, Fertility Clinic",
     steps: [
-      { no: "01", title: "Book කිරීම", desc: "ආරම්භක Fertility තක්සේරුවක් සඳහා Consultation එකක් Book කරන්න." },
-      { no: "02", title: "තක්සේරු කිරීම", desc: "History එකක් සහ තක්සේරුවක් සිදු කර, සොයාගැනීම් සාකච්ඡා කරන උපදේශනයකුත් සමඟ; Partners දෙදෙනෙක් සිටින නම්, තක්සේරුව දෙදෙනාවම ආවරණය කරනවා." },
-      { no: "03", title: "Monitor කිරීම", desc: "සුදුසු නම්, Cycle Monitoring එක ආරම්භ වී, ඒ සමඟින්ම Embryology සහායද ලබාගත හැක." },
-      { no: "04", title: "Review කිරීම", desc: "ඔබේ විශේෂඥ වෛද්‍යවරයා හැම අදියරකදීම ඔබ සමඟ ප්‍රගතිය Review කර ඊළඟ පියවර සාකච්ඡා කරනවා." },
+      { title: "Book කිරීම", desc: "ආරම්භක Fertility තක්සේරුවක් සඳහා Consultation එකක් Book කරන්න." },
+      { title: "තක්සේරු කිරීම", desc: "History එකක් සහ තක්සේරුවක් සිදු කර, සොයාගැනීම් සාකච්ඡා කරන උපදේශනයකුත් සමඟ; Partners දෙදෙනෙක් සිටින නම්, තක්සේරුව දෙදෙනාවම ආවරණය කරනවා." },
+      { title: "Monitor කිරීම", desc: "සුදුසු නම්, Cycle Monitoring එක ආරම්භ වී, ඒ සමඟින්ම Embryology සහායද ලබාගත හැක." },
+      { title: "Review කිරීම", desc: "ඔබේ විශේෂඥ වෛද්‍යවරයා හැම අදියරකදීම ඔබ සමඟ ප්‍රගතිය Review කර ඊළඟ පියවර සාකච්ඡා කරනවා." },
     ],
     prep: [
       "Partner කෙනෙක් සිටින නම්, පලමු Consultation එකට එකට එන එක සම්පූර්ණ පින්තූරයක් ගොඩනගාගන්න උදව් වෙනවා",
@@ -353,10 +353,10 @@ export const womenChildrenServices = [
     ],
     location: "බිම් මහල, එන්නත් Clinic එක",
     steps: [
-      { no: "01", title: "Book කිරීම", desc: "දරුවෙකුට, වැඩිහිටියෙකුට හෝ එන Travel අවශ්‍යතාවයකට එන්නතක් Book කරන්න." },
-      { no: "02", title: "Review කිරීම", desc: "කාර්ය මණ්ඩලය නියමිත Schedule එක බලා Visit එකට සුදුසු එන්නත් තහවුරු කරනවා." },
-      { no: "03", title: "එන්නත් කිරීම", desc: "Dose ලබාදෙන්නේ Cold-Chain-Monitor කරන තොගයෙන්, එතැනම වාර්තා කරලා." },
-      { no: "04", title: "වාර්තා කර මතක් කිරීම", desc: "මුද්‍රිත වාර්තා Card එකක් සමඟ යනවා, ඊළඟ නියමිත Dose එකට SMS මතක් කිරීමකුත් සලසනවා." },
+      { title: "Book කිරීම", desc: "දරුවෙකුට, වැඩිහිටියෙකුට හෝ එන Travel අවශ්‍යතාවයකට එන්නතක් Book කරන්න." },
+      { title: "Review කිරීම", desc: "කාර්ය මණ්ඩලය නියමිත Schedule එක බලා Visit එකට සුදුසු එන්නත් තහවුරු කරනවා." },
+      { title: "එන්නත් කිරීම", desc: "Dose ලබාදෙන්නේ Cold-Chain-Monitor කරන තොගයෙන්, එතැනම වාර්තා කරලා." },
+      { title: "වාර්තා කර මතක් කිරීම", desc: "මුද්‍රිත වාර්තා Card එකක් සමඟ යනවා, ඊළඟ නියමිත Dose එකට SMS මතක් කිරීමකුත් සලසනවා." },
     ],
     prep: [
       "දැනට තියෙන එන්නත් වාර්තා Card එකක් තියෙනවා නම් අරගෙන එන්න",

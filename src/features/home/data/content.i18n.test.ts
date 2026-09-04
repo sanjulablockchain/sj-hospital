@@ -54,11 +54,18 @@ const MODULES = [
  * - `.index` is the ordinal numeral each teaser card counts itself with
  *   ("01".."06"), the same class of literal `process[*].n` is in career.
  * - `.href` is a route, and `.photo` an image path: neither is prose.
- * - `.photoAlt` stays in English on every page, the same rule the standalone
- *   `facilities` feature's own content.i18n.test.ts states in its header.
- * - `mediaItems[*].date` is a press date, a fact rather than copy, the same
- *   exclusion the standalone `media` feature's own content.i18n.test.ts uses
- *   for every `.date` path.
+ * - `.photoAlt` stays in English, the same rule the standalone `facilities`
+ *   feature's own content.i18n.test.ts states in its header, with one
+ *   exception: `content:hero.photoAlt` IS translated in both overlays, being
+ *   the alt text of the front page's own hero photograph, so it is required
+ *   rather than excused. Left on the suffix rule, an overlay could restate it
+ *   instead, which the "no overlay supplies a value at an untranslatable
+ *   path" test below forbids.
+ * - `mediaItems[*].date` ("August 2026") is left in English on the home
+ *   page's media teaser. This differs from the standalone `media` feature,
+ *   which translates the month name in all 19 of its own dates; the two have
+ *   not been reconciled, so this exclusion records what the data does today
+ *   rather than endorsing it.
  * - `testimonials[*].name` is the patient's own name and never translates
  *   (see content.ts's header note on `network`'s `hero`, and this file's own
  *   header note on `testimonials`).
@@ -70,7 +77,7 @@ function isUntranslatable(moduleName: string, path: string): boolean {
   if (path.endsWith(".index")) return true;
   if (path.endsWith(".href")) return true;
   if (path.endsWith(".photo")) return true;
-  if (path.endsWith(".photoAlt")) return true;
+  if (path.endsWith(".photoAlt") && !(moduleName === "content" && path === "hero.photoAlt")) return true;
   if (path.endsWith(".date")) return true;
   if (/^testimonials\[\d+\]\.name$/.test(path)) return true;
   if (moduleName === "content") {
@@ -248,3 +255,28 @@ function read(root: unknown, path: string): string {
   }
   return current as string;
 }
+
+// `isUntranslatable` names the paths that are facts and structural keys
+// rather than copy, and until now it was only ever used to EXCUSE an overlay
+// from filling them. Nothing stopped an overlay from SUPPLYING one, and
+// `localize` merges by key, so an overlay carrying a `.value`, an `.href`, an
+// `.id` or an `.icon` wins over the base and reaches the page: final review 3
+// put `value: "+94 11 000 0000"` into a contact row and watched a Sinhala
+// page print a phone number the English page does not have, with the suite
+// green. Every comment in this file saying a fact has exactly one home is
+// true because of this test.
+test("no overlay supplies a value at an untranslatable path", () => {
+  for (const { name, si, ta } of MODULES) {
+    for (const [locale, overlay] of [
+      ["si", si],
+      ["ta", ta],
+    ] as const) {
+      const supplied = stringPaths(overlay).filter((path) => isUntranslatable(name, path));
+      assert.deepEqual(
+        supplied,
+        [],
+        `${name}:${locale} overlay restates ${supplied.join(", ")}, which the base owns. A fact, an href, an anchor id or a structural key has exactly one home, in the English module, and a second copy in an overlay drifts out of step with it.`
+      );
+    }
+  }
+});

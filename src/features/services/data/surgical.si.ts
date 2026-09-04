@@ -126,10 +126,10 @@ export const surgicalServices = [
     ],
     location: "තුන්වන මහල, සාමාන්‍ය ශල්‍ය ඒකකය",
     steps: [
-      { no: "01", title: "Consult කිරීම", desc: "Surgeon කෙනෙක් ඔබව පරීක්ෂා කර, ඕන Scans Review කර, ඔබේ තත්ත්වයට Laparoscopic හෝ Open ප්‍රවේශය සුදුසුද කියලා පැහැදිලි කරනවා." },
-      { no: "02", title: "Book කිරීම", desc: "ඔබේ ශල්‍යකර්මය List එකකට Schedule කරලා, ඉස්සරහ දින කීපයකදී Pre-operative පරීක්ෂණ සලසනවා." },
-      { no: "03", title: "ශල්‍යකර්මය", desc: "විශේෂඥ නිර්වින්දනයයි කැපවුනු Theatre කණ්ඩායමයි ක්‍රියාපටිපාටිය පුරාවටම ඔබව රැගෙන යනවා." },
-      { no: "04", title: "සුවවීම", desc: "Assign කරපු Recovery Nurse කෙනෙක් ඉන් පස්සේ ඔබව Monitor කරනවා, ලිඛිත Wound-care සහ Follow-up උපදෙස් සමඟ යනවා." },
+      { title: "Consult කිරීම", desc: "Surgeon කෙනෙක් ඔබව පරීක්ෂා කර, ඕන Scans Review කර, ඔබේ තත්ත්වයට Laparoscopic හෝ Open ප්‍රවේශය සුදුසුද කියලා පැහැදිලි කරනවා." },
+      { title: "Book කිරීම", desc: "ඔබේ ශල්‍යකර්මය List එකකට Schedule කරලා, ඉස්සරහ දින කීපයකදී Pre-operative පරීක්ෂණ සලසනවා." },
+      { title: "ශල්‍යකර්මය", desc: "විශේෂඥ නිර්වින්දනයයි කැපවුනු Theatre කණ්ඩායමයි ක්‍රියාපටිපාටිය පුරාවටම ඔබව රැගෙන යනවා." },
+      { title: "සුවවීම", desc: "Assign කරපු Recovery Nurse කෙනෙක් ඉන් පස්සේ ඔබව Monitor කරනවා, ලිඛිත Wound-care සහ Follow-up උපදෙස් සමඟ යනවා." },
     ],
     prep: [
       "ඇතුළත් වන වේලාවට කලින් උපදෙස් අනුව උපවාසය කරන්න",
@@ -189,10 +189,10 @@ export const surgicalServices = [
     ],
     location: "පලමු මහල, අස්ථි ඒකකය",
     steps: [
-      { no: "01", title: "තක්සේරු කිරීම", desc: "අස්ථි Surgeon කෙනෙක් තුවාලය පරීක්ෂා කර ඒම Corridor එකේම Imaging සලසනවා." },
-      { no: "02", title: "සැලසුම් කිරීම", desc: "ඇටකැඩීම හෝ තුවාලයට ඕන දේට අනුව ශල්‍යකර්මය Day Case හෝ Inpatient විදිහට Book කරනවා." },
-      { no: "03", title: "ශල්‍යකර්මය", desc: "Fixation, Arthroscopy හෝ Repair අස්ථි Theatre කණ්ඩායම විසින් සිදු කරනවා." },
-      { no: "04", title: "Rehabilitate කිරීම", desc: "ඔබ යන්න කලින් Physiotherapist කෙනෙක් ඔබ සමඟ ගමන් සහ Exercise සැලැස්මකට එකඟ වෙනවා." },
+      { title: "තක්සේරු කිරීම", desc: "අස්ථි Surgeon කෙනෙක් තුවාලය පරීක්ෂා කර ඒම Corridor එකේම Imaging සලසනවා." },
+      { title: "සැලසුම් කිරීම", desc: "ඇටකැඩීම හෝ තුවාලයට ඕන දේට අනුව ශල්‍යකර්මය Day Case හෝ Inpatient විදිහට Book කරනවා." },
+      { title: "ශල්‍යකර්මය", desc: "Fixation, Arthroscopy හෝ Repair අස්ථි Theatre කණ්ඩායම විසින් සිදු කරනවා." },
+      { title: "Rehabilitate කිරීම", desc: "ඔබ යන්න කලින් Physiotherapist කෙනෙක් ඔබ සමඟ ගමන් සහ Exercise සැලැස්මකට එකඟ වෙනවා." },
     ],
     prep: [
       "කලින් තිබූ Scans හෝ X-rays ඔබ සමඟ අරගෙන එන්න",
@@ -252,10 +252,10 @@ export const surgicalServices = [
     ],
     location: "දෙවන මහල, ENT ඒකකය",
     steps: [
-      { no: "01", title: "Consult කිරීම", desc: "ENT Surgeon කෙනෙක් ඔබව පරීක්ෂා කර, ශ්‍රවණය සම්බන්ධ නම් ශ්‍රවණවේද තක්සේරුවක් සලසනවා." },
-      { no: "02", title: "තක්සේරු කිරීම", desc: "ඔබේ ක්‍රියාපටිපාටිය Book කරන්න කලින් Baseline ශ්‍රවණ පරීක්ෂණ වාර්තා කරනවා." },
-      { no: "03", title: "ශල්‍යකර්මය", desc: "ශල්‍යකර්මය සුදුසු ලෙස සතිපතා වැඩිහිටි හෝ ළමා List එකක් මත සිදු කරනවා." },
-      { no: "04", title: "Review කිරීම", desc: "Follow-up ශ්‍රවණවේද පරීක්ෂාවක් සහ Consultation එකක් සුවවීම සහ ශ්‍රවණ ප්‍රතිඵලය තහවුරු කරයි." },
+      { title: "Consult කිරීම", desc: "ENT Surgeon කෙනෙක් ඔබව පරීක්ෂා කර, ශ්‍රවණය සම්බන්ධ නම් ශ්‍රවණවේද තක්සේරුවක් සලසනවා." },
+      { title: "තක්සේරු කිරීම", desc: "ඔබේ ක්‍රියාපටිපාටිය Book කරන්න කලින් Baseline ශ්‍රවණ පරීක්ෂණ වාර්තා කරනවා." },
+      { title: "ශල්‍යකර්මය", desc: "ශල්‍යකර්මය සුදුසු ලෙස සතිපතා වැඩිහිටි හෝ ළමා List එකක් මත සිදු කරනවා." },
+      { title: "Review කිරීම", desc: "Follow-up ශ්‍රවණවේද පරීක්ෂාවක් සහ Consultation එකක් සුවවීම සහ ශ්‍රවණ ප්‍රතිඵලය තහවුරු කරයි." },
     ],
     prep: [
       "කලින් තිබූ ශ්‍රවණ පරීක්ෂණ ප්‍රතිඵල අරගෙන එන්න",
@@ -315,10 +315,10 @@ export const surgicalServices = [
     ],
     location: "පලමු මහල, Urology Clinic",
     steps: [
-      { no: "01", title: "Consult කිරීම", desc: "Urologist කෙනෙක් පලමු Visit එකේදීම ඔබේ History ගෙන ඔබව පරීක්ෂා කරනවා." },
-      { no: "02", title: "විමර්ශනය කිරීම", desc: "Ultrasound සහ මුත්‍රා Flow Studies එදිනම සිදු කරනවා." },
-      { no: "03", title: "සැලසුම් කිරීම", desc: "ඔබේ Surgeon සොයාගැනීම් සාකච්ඡා කර ප්‍රතිකාර හෝ ශල්‍ය සැලැස්මකට ඔබ සමඟ එකඟ වෙනවා." },
-      { no: "04", title: "ප්‍රතිකාර කිරීම", desc: "අවශ්‍ය නම් ශල්‍යකර්මය සතිපතා List එකකට Book කරලා, පස්සේ Follow-up එකකුත් සලසනවා." },
+      { title: "Consult කිරීම", desc: "Urologist කෙනෙක් පලමු Visit එකේදීම ඔබේ History ගෙන ඔබව පරීක්ෂා කරනවා." },
+      { title: "විමර්ශනය කිරීම", desc: "Ultrasound සහ මුත්‍රා Flow Studies එදිනම සිදු කරනවා." },
+      { title: "සැලසුම් කිරීම", desc: "ඔබේ Surgeon සොයාගැනීම් සාකච්ඡා කර ප්‍රතිකාර හෝ ශල්‍ය සැලැස්මකට ඔබ සමඟ එකඟ වෙනවා." },
+      { title: "ප්‍රතිකාර කිරීම", desc: "අවශ්‍ය නම් ශල්‍යකර්මය සතිපතා List එකකට Book කරලා, පස්සේ Follow-up එකකුත් සලසනවා." },
     ],
     prep: [
       "Flow Study එකක් සැලසුම් කරලා තියෙනවනම් සුවපහසුව පිරුණු මුත්‍රාශයක් සමඟ එන්න",
@@ -378,10 +378,10 @@ export const surgicalServices = [
     ],
     location: "බිම් මහල, Ophthalmology Clinic",
     steps: [
-      { no: "01", title: "තක්සේරු කිරීම", desc: "Ophthalmologist කෙනෙක් ඔබේ පලමු Visit එකේදීම Refraction, අක්ෂි Pressure සහ Retina පරීක්ෂා කරනවා." },
-      { no: "02", title: "සාකච්ඡා කිරීම", desc: "සොයාගැනීම් සහ Lens Options සාකච්ඡා කර, සුදුසු නම් ශල්‍යකර්මය Book කරනවා." },
-      { no: "03", title: "ශල්‍යකර්මය", desc: "Cataract ශල්‍යකර්මය සතිපතා List එකක Day Case එකක් විදිහට සිදු කරනවා." },
-      { no: "04", title: "Review කිරීම", desc: "දෘෂ්ටිය සහ සුවවීම පරීක්ෂා කරගන්න ඔබ පසුදින ආපහු එනවා." },
+      { title: "තක්සේරු කිරීම", desc: "Ophthalmologist කෙනෙක් ඔබේ පලමු Visit එකේදීම Refraction, අක්ෂි Pressure සහ Retina පරීක්ෂා කරනවා." },
+      { title: "සාකච්ඡා කිරීම", desc: "සොයාගැනීම් සහ Lens Options සාකච්ඡා කර, සුදුසු නම් ශල්‍යකර්මය Book කරනවා." },
+      { title: "ශල්‍යකර්මය", desc: "Cataract ශල්‍යකර්මය සතිපතා List එකක Day Case එකක් විදිහට සිදු කරනවා." },
+      { title: "Review කිරීම", desc: "දෘෂ්ටිය සහ සුවවීම පරීක්ෂා කරගන්න ඔබ පසුදින ආපහු එනවා." },
     ],
     prep: [
       "ශල්‍යකර්මයෙන් පස්සේ ගෙදර ගෙනියන්න කෙනෙකුට Drive කරන්න සලසාගන්න",
@@ -440,10 +440,10 @@ export const surgicalServices = [
     ],
     location: "දෙවන මහල, ස්නායු Consultation Suite",
     steps: [
-      { no: "01", title: "Refer කිරීම", desc: "ඔබේ Referral එකයි දැනට තියෙන ඕන Imaging එකයි ඔබේ Consultation එකට කලින් Review කරනවා." },
-      { no: "02", title: "තක්සේරු කිරීම", desc: "ස්නායු Surgeon කෙනෙක් ඔබව පරීක්ෂා කර ඔබ සමඟ එකට Imaging Review කරනවා." },
-      { no: "03", title: "සැලසුම් කිරීම", desc: "සොයාගැනීම් සාකච්ඡා කර, අවශ්‍ය නම් තව Imaging එකකුත් සමඟ සැලැස්මකට එකඟ වෙනවා." },
-      { no: "04", title: "Follow up කිරීම", desc: "ඕන ශල්‍යකර්මයකින් පසු, Review Appointments සුවවීම Track කර ඊළඟ පියවර තහවුරු කරනවා." },
+      { title: "Refer කිරීම", desc: "ඔබේ Referral එකයි දැනට තියෙන ඕන Imaging එකයි ඔබේ Consultation එකට කලින් Review කරනවා." },
+      { title: "තක්සේරු කිරීම", desc: "ස්නායු Surgeon කෙනෙක් ඔබව පරීක්ෂා කර ඔබ සමඟ එකට Imaging Review කරනවා." },
+      { title: "සැලසුම් කිරීම", desc: "සොයාගැනීම් සාකච්ඡා කර, අවශ්‍ය නම් තව Imaging එකකුත් සමඟ සැලැස්මකට එකඟ වෙනවා." },
+      { title: "Follow up කිරීම", desc: "ඕන ශල්‍යකර්මයකින් පසු, Review Appointments සුවවීම Track කර ඊළඟ පියවර තහවුරු කරනවා." },
     ],
     prep: [
       "ඔබේ වෛද්‍යවරයාගෙන් Referral Letter එකක් අරගෙන එන්න",
@@ -503,10 +503,10 @@ export const surgicalServices = [
     ],
     location: "පලමු මහල, Endoscopy Suite",
     steps: [
-      { no: "01", title: "Book කිරීම", desc: "ඔබේ ක්‍රියාපටිපාටිය Schedule කරලා, කලින්ම සූදානම් වීමේ උපදෙස් දෙනවා." },
-      { no: "02", title: "සූදානම් වීම", desc: "ඇතුළත් වන්න කලින් උපවාස හෝ බඩවැල් සූදානම් කිරීමේ උපදෙස් අනුගමනය කරනවා." },
-      { no: "03", title: "ක්‍රියාපටිපාටිය", desc: "Sedation එකක් යටතේ Gastroscopy හෝ Colonoscopy සිදු කරනවා, අවශ්‍ය නම් Biopsy හෝ Polypectomy එකකුත් සමඟ." },
-      { no: "04", title: "සුවවී වාර්තා ලබාගැනීම", desc: "Suite එකට යාබද Bay එකේ සුවවී, Discharge එකට කලින් එදින Reporting එකක් ලබාගන්නවා." },
+      { title: "Book කිරීම", desc: "ඔබේ ක්‍රියාපටිපාටිය Schedule කරලා, කලින්ම සූදානම් වීමේ උපදෙස් දෙනවා." },
+      { title: "සූදානම් වීම", desc: "ඇතුළත් වන්න කලින් උපවාස හෝ බඩවැල් සූදානම් කිරීමේ උපදෙස් අනුගමනය කරනවා." },
+      { title: "ක්‍රියාපටිපාටිය", desc: "Sedation එකක් යටතේ Gastroscopy හෝ Colonoscopy සිදු කරනවා, අවශ්‍ය නම් Biopsy හෝ Polypectomy එකකුත් සමඟ." },
+      { title: "සුවවී වාර්තා ලබාගැනීම", desc: "Suite එකට යාබද Bay එකේ සුවවී, Discharge එකට කලින් එදින Reporting එකක් ලබාගන්නවා." },
     ],
     prep: [
       "දුන් උපවාස හෝ බඩවැල් සූදානම් කිරීමේ උපදෙස් හරියටම අනුගමනය කරන්න",
