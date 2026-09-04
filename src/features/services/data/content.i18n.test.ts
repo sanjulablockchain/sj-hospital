@@ -21,6 +21,9 @@ import { surgicalServices as surgicalTa } from "./surgical.ta.ts";
 import { womenChildrenServices } from "./womenChildren.ts";
 import { womenChildrenServices as womenChildrenSi } from "./womenChildren.si.ts";
 import { womenChildrenServices as womenChildrenTa } from "./womenChildren.ta.ts";
+import { clinicServices } from "./clinics.ts";
+import { clinicServices as clinicsSi } from "./clinics.si.ts";
+import { clinicServices as clinicsTa } from "./clinics.ta.ts";
 import { assertTranslationParity, stringPaths } from "../../../lib/i18n/stringPaths.ts";
 
 /**
@@ -31,16 +34,14 @@ import { assertTranslationParity, stringPaths } from "../../../lib/i18n/stringPa
  * `services.ts` is not here: it carries no copy (see the header comment in
  * `getContent.ts`).
  *
- * `clinics.ts` is OUT of scope for this part (3 of 4) on purpose and has no
- * `.si.ts` / `.ta.ts` yet. That is not a gap this suite flags: it is simply
- * absent from `MODULES` below, the same way a feature with nine data files
- * but only some translated would list only those, not all nine. Part 4
- * adds it here (see `getContent.ts`'s own "TO ADD A GROUP'S TRANSLATION"
- * comment): write `clinics.si.ts` / `clinics.ta.ts`, import them at the top
- * of this file the same way `surgicalServices` and `womenChildrenServices`
- * are imported twice below (English, then each overlay under an alias),
- * and add one `{ name, base, si, ta }` entry to `MODULES`. No other part of
- * this file changes.
+ * `clinics.ts` (14 services, the general clinics group) is part 4's own
+ * addition: `clinics.si.ts` / `clinics.ta.ts` were written beside it,
+ * imported at the top of this file the same way `surgicalServices` and
+ * `womenChildrenServices` are (English, then each overlay under an alias),
+ * and registered as a `{ name, base, si, ta }` entry in `MODULES`. With
+ * this file's addition, every one of the six group-of-services files now
+ * has a Sinhala and Tamil overlay, and the whole `services` feature is
+ * translated.
  */
 const MODULES = [
   { name: "groups", base: groups, si: groupsSi, ta: groupsTa },
@@ -50,6 +51,7 @@ const MODULES = [
   { name: "atHome", base: atHomeServices, si: atHomeSi, ta: atHomeTa },
   { name: "surgical", base: surgicalServices, si: surgicalSi, ta: surgicalTa },
   { name: "womenChildren", base: womenChildrenServices, si: womenChildrenSi, ta: womenChildrenTa },
+  { name: "clinics", base: clinicServices, si: clinicsSi, ta: clinicsTa },
 ] as const;
 
 /**
@@ -117,7 +119,8 @@ function isUntranslatable(moduleName: string, path: string): boolean {
     moduleName === "diagnostics" ||
     moduleName === "atHome" ||
     moduleName === "surgical" ||
-    moduleName === "womenChildren"
+    moduleName === "womenChildren" ||
+    moduleName === "clinics"
   ) {
     if (path.endsWith(".slug")) return true;
     if (path.endsWith(".heroImage")) return true;
@@ -259,6 +262,14 @@ function isUntranslatable(moduleName: string, path: string): boolean {
  *   abbreviation with no Sinhala/Tamil form anyone uses, the same
  *   never-translate class as "OPD"/"ICU"/"X-ray". Every other `strip[*].v`
  *   on this service translates in full.
+ * - `clinics:[0].strip[3].v` ("10%", the outpatient department's own lab
+ *   discount stat): the exact same class `emergency:[0].strip[0].v` and
+ *   `diagnostics:[0].strip[3].v` already are, purely numeral notation with
+ *   no word to translate. The discount appears twice on this same service
+ *   (`facts[3].v`, "OPD රෝගීන්ට 10%" / "OPD நோயாளர்களுக்கு 10%", and
+ *   `strip[3].v`, the bare number alone): the first DOES translate the
+ *   words around the number, which is the sibling-test evidence that the
+ *   second is a genuine exception, not a miss.
  */
 const KEEPS_ENGLISH = new Set<string>([
   "groups:groupLabels.Clinics",
@@ -286,6 +297,7 @@ const KEEPS_ENGLISH = new Set<string>([
   "womenChildren:[2].facts[1].v",
   "womenChildren:[2].strip[1].v",
   "womenChildren:[4].strip[3].v",
+  "clinics:[0].strip[3].v",
 ]);
 
 for (const { name, base, si, ta } of MODULES) {

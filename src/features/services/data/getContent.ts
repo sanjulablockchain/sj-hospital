@@ -86,6 +86,7 @@ export const GROUP_OVERLAYS: Partial<Record<string, OverlayLoader>> = {
   diagnostics: { si: () => import("./diagnostics.si"), ta: () => import("./diagnostics.ta") },
   womenChildren: { si: () => import("./womenChildren.si"), ta: () => import("./womenChildren.ta") },
   atHome: { si: () => import("./atHome.si"), ta: () => import("./atHome.ta") },
+  clinics: { si: () => import("./clinics.si"), ta: () => import("./clinics.ta") },
 };
 
 async function localizedServices(locale: Locale): Promise<Service[]> {
