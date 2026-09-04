@@ -4,6 +4,8 @@ import { ThemedHeader } from "@/components/layout/ThemedHeader";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { Ticker } from "@/components/ui/Ticker";
 import { mediaNavigation } from "@/config/mediaNavigation";
+import { translateNavItems } from "@/config/navigationLabels";
+import type { Locale } from "@/lib/i18n/locales";
 import type { MediaContent } from "../data/getContent";
 
 /**
@@ -33,7 +35,7 @@ import type { MediaContent } from "../data/getContent";
  * anchor, the same fix every other feature's own hero needed, so a
  * translated reader is not dropped back into English.
  */
-export function MediaHero({ content }: { content: MediaContent }) {
+export function MediaHero({ content, locale }: { content: MediaContent; locale: Locale }) {
   const { hero, heroFacts, tickerItems } = content;
   return (
     <section
@@ -69,7 +71,7 @@ export function MediaHero({ content }: { content: MediaContent }) {
         }}
       />
 
-      <ThemedHeader navItems={mediaNavigation} homeHref="/" bookHref="/e-channeling" />
+      <ThemedHeader navItems={translateNavItems(mediaNavigation, locale)} homeHref="/" bookHref="/e-channeling" />
 
       <div className="relative z-10 mx-auto mt-auto flex w-full max-w-[1440px] gap-10 px-5 sm:px-8 lg:px-11">
         {/* Decorative vertical strapline, dropped below 900px where there is no

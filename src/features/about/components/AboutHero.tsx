@@ -4,6 +4,8 @@ import { ThemedHeader } from "@/components/layout/ThemedHeader";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { Ticker } from "@/components/ui/Ticker";
 import { aboutNavigation } from "@/config/aboutNavigation";
+import { translateNavItems } from "@/config/navigationLabels";
+import type { Locale } from "@/lib/i18n/locales";
 import type { AboutContent } from "../data/getContent";
 
 /**
@@ -15,7 +17,7 @@ import type { AboutContent } from "../data/getContent";
  * hero blocks: this sits on a photograph in both themes, and the light theme
  * swaps that token to a deep `#0B6FC0` that would sink into the image.
  */
-export function AboutHero({ content }: { content: AboutContent }) {
+export function AboutHero({ content, locale }: { content: AboutContent; locale: Locale }) {
   const { hero, heroFacts, heroStandfirst, tickerItems } = content;
   return (
     <section
@@ -50,7 +52,7 @@ export function AboutHero({ content }: { content: AboutContent }) {
         }}
       />
 
-      <ThemedHeader navItems={aboutNavigation} homeHref="/" bookHref="/e-channeling" />
+      <ThemedHeader navItems={translateNavItems(aboutNavigation, locale)} homeHref="/" bookHref="/e-channeling" />
 
       <div className="relative z-10 mx-auto mt-auto flex w-full max-w-[1440px] gap-5.5 px-5 sm:px-8 lg:px-11">
         {/* Decorative vertical strapline, dropped below 900px where there is no

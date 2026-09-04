@@ -7,12 +7,12 @@ import { LanguageToggleButton } from "@/components/i18n/LanguageToggleButton";
 import { MobileNavPanel } from "@/components/layout/MobileNavPanel";
 import { LOGO_MARK } from "@/config/brand";
 import type { NavItem } from "@/config/navigation";
-import { navLabel } from "@/config/navigationLabels";
 import { chromeCopyFor } from "@/components/layout/chromeCopy";
 import { useLocale } from "@/lib/i18n/useLocale";
 import { localeHref } from "@/lib/i18n/paths";
 
 type ThemedHeaderProps = {
+  /** Already translated: the caller passes `translateNavItems(...)`'s result. */
   navItems: NavItem[];
   bookHref?: string;
   homeHref?: string;
@@ -170,7 +170,7 @@ export function ThemedHeader({ navItems, bookHref = "#book", homeHref = "#top" }
         >
           {navItems.map((item) => (
             <a key={item.href} href={localeHref(item.href, locale)} className="text-white/82 hover:text-white">
-              {navLabel(item.label, locale)}
+              {item.label}
             </a>
           ))}
         </nav>

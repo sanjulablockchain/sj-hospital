@@ -14,6 +14,7 @@ import { groupCounts } from "@/features/services/data/services";
 import { getServicesContent } from "@/features/services/data/getContent";
 import { ThemedFooter } from "@/components/layout/ThemedFooter";
 import { servicesFooterColumns } from "@/config/servicesNavigation";
+import { navLabel, translateFooterColumns } from "@/config/navigationLabels";
 import type { Locale } from "@/lib/i18n/locales";
 
 /**
@@ -38,7 +39,7 @@ export async function ServicesIndexPage({ locale }: { locale: Locale }) {
   return (
     <>
       <main>
-        <ServicesHero content={content} />
+        <ServicesHero content={content} locale={locale} />
         <JumpCards content={content} />
         <CentresSection content={content} />
         <ServiceDirectory services={content.services} counts={counts} groupLabels={content.groups.groupLabels} copy={content.indexContent.directory} />
@@ -51,7 +52,11 @@ export async function ServicesIndexPage({ locale }: { locale: Locale }) {
         <InternationalSection content={content} />
         <BookSection content={content} />
       </main>
-      <ThemedFooter columns={servicesFooterColumns} id="contact" />
+      <ThemedFooter
+        columns={translateFooterColumns(servicesFooterColumns, locale)}
+        reachUsLabel={navLabel("Reach us", locale)}
+        id="contact"
+      />
     </>
   );
 }

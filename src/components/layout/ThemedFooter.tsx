@@ -2,7 +2,6 @@ import Image from "next/image";
 import { FacebookIcon, InstagramIcon, LinkedInIcon, WhatsAppIcon } from "@/components/ui/BrandIcons";
 import { LOGO_MARK } from "@/config/brand";
 import { LocaleLink } from "@/components/i18n/LocaleLink";
-import { NavLabel } from "@/components/i18n/NavLabel";
 import { ChromeText } from "@/components/i18n/ChromeText";
 
 export type FooterColumn = {
@@ -11,7 +10,10 @@ export type FooterColumn = {
 };
 
 type ThemedFooterProps = {
+  /** Already translated: the caller passes `translateFooterColumns(...)`'s result. */
   columns: FooterColumn[];
+  /** Already translated: the caller passes `navLabel("Reach us", locale)`. */
+  reachUsLabel: string;
   id?: string;
 };
 
@@ -43,7 +45,7 @@ const socials = [
   },
 ];
 
-export function ThemedFooter({ columns, id = "contact" }: ThemedFooterProps) {
+export function ThemedFooter({ columns, reachUsLabel, id = "contact" }: ThemedFooterProps) {
   return (
     <footer id={id} className="mx-auto max-w-[1440px] px-5 pb-10 pt-26 sm:px-8 lg:px-11">
       <div className="flex flex-wrap items-start justify-between gap-13">
@@ -85,11 +87,11 @@ export function ThemedFooter({ columns, id = "contact" }: ThemedFooterProps) {
         {columns.map((column) => (
           <div key={column.heading} className="flex flex-col gap-2.5 text-[15px]">
             <span className="mb-2 text-[11.5px] tracking-[0.22em] text-[var(--home-accent)] uppercase">
-              <NavLabel text={column.heading} kind="heading" />
+              {column.heading}
             </span>
             {column.links.map((item) => (
               <LocaleLink key={item.href} href={item.href} className="sj-link text-[var(--home-body)]">
-                <NavLabel text={item.label} />
+                {item.label}
               </LocaleLink>
             ))}
           </div>
@@ -97,7 +99,7 @@ export function ThemedFooter({ columns, id = "contact" }: ThemedFooterProps) {
 
         <div className="flex flex-col gap-2.5 text-[15px]">
           <span className="mb-2 text-[11.5px] tracking-[0.22em] text-[var(--home-accent)] uppercase">
-            <NavLabel text="Reach us" />
+            {reachUsLabel}
           </span>
           <span className="text-[var(--home-body)] opacity-90">229/10 St. Joseph Street, Negombo</span>
           <a href="tel:+94117848484" className="sj-link text-[var(--home-body)] tabular-nums">

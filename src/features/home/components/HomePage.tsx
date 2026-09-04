@@ -42,7 +42,7 @@ export async function HomePage({ locale }: { locale: Locale }) {
   return (
     <ThemedShell flowHeader>
       <main>
-        <HeroSection hero={content.hero} tickerItems={content.statTickerItems} />
+        <HeroSection hero={content.hero} tickerItems={content.statTickerItems} locale={locale} />
         <WhoWeAreSection content={content.whoWeAre} />
         <ServicesBentoSection content={content.servicesBento} />
         <SurgicalSection content={content.surgical} />
@@ -104,7 +104,7 @@ export async function HomePage({ locale }: { locale: Locale }) {
         />
         <ContactCtaSection content={content.contactCta} />
       </main>
-      <HomeFooter />
+      <HomeFooter locale={locale} />
       <FloatingActions />
     </ThemedShell>
   );

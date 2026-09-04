@@ -1,5 +1,6 @@
 import { ThemedFooter } from "@/components/layout/ThemedFooter";
 import { channelingFooterColumns } from "@/config/channelingNavigation";
+import { navLabel, translateFooterColumns } from "@/config/navigationLabels";
 import type { Locale } from "@/lib/i18n/locales";
 import { getEChannelingContent, getLocalizedDoctors } from "../data/getContent";
 import { ChannelingHero } from "./ChannelingHero";
@@ -26,11 +27,15 @@ export async function EChannelingPage({ locale }: { locale: Locale }) {
   return (
     <>
       <main>
-        <ChannelingHero content={content} />
+        <ChannelingHero content={content} locale={locale} />
         <DirectorySection content={content} doctors={doctors} />
         <HelpSection content={content} />
       </main>
-      <ThemedFooter columns={channelingFooterColumns} id="footer" />
+      <ThemedFooter
+        columns={translateFooterColumns(channelingFooterColumns, locale)}
+        reachUsLabel={navLabel("Reach us", locale)}
+        id="footer"
+      />
     </>
   );
 }

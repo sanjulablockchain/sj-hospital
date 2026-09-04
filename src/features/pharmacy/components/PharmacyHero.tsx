@@ -5,6 +5,8 @@ import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { Ticker } from "@/components/ui/Ticker";
 import { WhatsAppIcon } from "@/components/ui/BrandIcons";
 import { pharmacyNavigation } from "@/config/pharmacyNavigation";
+import { translateNavItems } from "@/config/navigationLabels";
+import type { Locale } from "@/lib/i18n/locales";
 import type { PharmacyContent } from "../data/getContent";
 
 /**
@@ -20,7 +22,7 @@ import type { PharmacyContent } from "../data/getContent";
  * Copy animates with `animate-sj-up` rather than `Reveal`, since it is already
  * in the first viewport and should not wait on an intersection observer.
  */
-export function PharmacyHero({ content }: { content: PharmacyContent }) {
+export function PharmacyHero({ content, locale }: { content: PharmacyContent; locale: Locale }) {
   const { hero, heroFacts, heroStandfirst, tickerItems } = content;
   return (
     <section
@@ -56,7 +58,7 @@ export function PharmacyHero({ content }: { content: PharmacyContent }) {
         }}
       />
 
-      <ThemedHeader navItems={pharmacyNavigation} homeHref="/" bookHref="/e-channeling" />
+      <ThemedHeader navItems={translateNavItems(pharmacyNavigation, locale)} homeHref="/" bookHref="/e-channeling" />
 
       <div className="relative z-10 mx-auto mt-auto flex w-full max-w-[1440px] gap-10 px-5 sm:px-8 lg:px-11">
         {/* Decorative vertical strapline, dropped below 900px where there is no

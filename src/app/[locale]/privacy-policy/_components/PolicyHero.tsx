@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { ThemedHeader } from "@/components/layout/ThemedHeader";
 import { privacyNavigation } from "@/config/privacyNavigation";
+import { translateNavItems } from "@/config/navigationLabels";
+import type { Locale } from "@/lib/i18n/locales";
 import { policyLastUpdated } from "./PolicyContent";
 
 /**
@@ -14,7 +16,7 @@ import { policyLastUpdated } from "./PolicyContent";
  * hero has no photograph, but it is still a dark band in both themes for the
  * header to sit on, so the same reasoning applies.
  */
-export function PolicyHero() {
+export function PolicyHero({ locale }: { locale: Locale }) {
   return (
     <section
       id="top"
@@ -28,7 +30,7 @@ export function PolicyHero() {
         }}
       />
 
-      <ThemedHeader navItems={privacyNavigation} homeHref="/" bookHref="/e-channeling" />
+      <ThemedHeader navItems={translateNavItems(privacyNavigation, locale)} homeHref="/" bookHref="/e-channeling" />
 
       <div className="relative z-10 mx-auto mt-auto flex w-full max-w-[1440px] px-5 pb-11 sm:px-8 lg:px-11">
         <div className="flex-1">

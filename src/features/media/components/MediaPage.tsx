@@ -9,6 +9,7 @@ import { RulesSection } from "./RulesSection";
 import { EnquirySection } from "./EnquirySection";
 import { ThemedFooter } from "@/components/layout/ThemedFooter";
 import { mediaFooterColumns } from "@/config/mediaNavigation";
+import { navLabel, translateFooterColumns } from "@/config/navigationLabels";
 import type { Locale } from "@/lib/i18n/locales";
 import { getMediaContent } from "../data/getContent";
 
@@ -34,7 +35,7 @@ export async function MediaPage({ locale }: { locale: Locale }) {
   return (
     <>
       <main>
-        <MediaHero content={content} />
+        <MediaHero content={content} locale={locale} />
         <JumpCards content={content} />
         <NewsroomSection content={content} />
         <PressDeskSection content={content} />
@@ -44,7 +45,11 @@ export async function MediaPage({ locale }: { locale: Locale }) {
         <RulesSection content={content} />
         <EnquirySection content={content} />
       </main>
-      <ThemedFooter columns={mediaFooterColumns} id="contact" />
+      <ThemedFooter
+        columns={translateFooterColumns(mediaFooterColumns, locale)}
+        reachUsLabel={navLabel("Reach us", locale)}
+        id="contact"
+      />
     </>
   );
 }

@@ -1,5 +1,6 @@
 import { ThemedFooter } from "@/components/layout/ThemedFooter";
 import { aboutFooterColumns } from "@/config/aboutNavigation";
+import { navLabel, translateFooterColumns } from "@/config/navigationLabels";
 import type { Locale } from "@/lib/i18n/locales";
 import { getAboutContent } from "../data/getContent";
 import { AboutHero } from "./AboutHero";
@@ -24,14 +25,18 @@ export async function AboutPage({ locale }: { locale: Locale }) {
   return (
     <>
       <main>
-        <AboutHero content={content} />
+        <AboutHero content={content} locale={locale} />
         <JumpCards content={content} />
         <StorySection content={content} />
         <DifferentSection content={content} />
         <MissionSection content={content} />
         <GroupSection content={content} />
       </main>
-      <ThemedFooter columns={aboutFooterColumns} id="footer" />
+      <ThemedFooter
+        columns={translateFooterColumns(aboutFooterColumns, locale)}
+        reachUsLabel={navLabel("Reach us", locale)}
+        id="footer"
+      />
     </>
   );
 }

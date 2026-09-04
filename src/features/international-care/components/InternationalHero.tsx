@@ -4,6 +4,8 @@ import { ThemedHeader } from "@/components/layout/ThemedHeader";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { Ticker } from "@/components/ui/Ticker";
 import { internationalNavigation } from "@/config/internationalNavigation";
+import { translateNavItems } from "@/config/navigationLabels";
+import type { Locale } from "@/lib/i18n/locales";
 import type { InternationalCareContent } from "../data/getContent";
 
 /**
@@ -25,7 +27,7 @@ import type { InternationalCareContent } from "../data/getContent";
  * Copy animates with `animate-sj-up` rather than `Reveal`, since it is already
  * in the first viewport and should not wait on an intersection observer.
  */
-export function InternationalHero({ content }: { content: InternationalCareContent }) {
+export function InternationalHero({ content, locale }: { content: InternationalCareContent; locale: Locale }) {
   const { hero, heroFacts, tickerItems, whatsappHref } = content;
   return (
     <section
@@ -73,7 +75,7 @@ export function InternationalHero({ content }: { content: InternationalCareConte
         }}
       />
 
-      <ThemedHeader navItems={internationalNavigation} homeHref="/" bookHref="/e-channeling" />
+      <ThemedHeader navItems={translateNavItems(internationalNavigation, locale)} homeHref="/" bookHref="/e-channeling" />
 
       <div className="relative z-10 mx-auto mt-auto flex w-full max-w-[1440px] gap-10 px-5 sm:px-8 lg:px-11">
         {/* Decorative vertical strapline, dropped below 900px where there is no

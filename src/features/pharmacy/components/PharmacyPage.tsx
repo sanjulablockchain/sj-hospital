@@ -10,6 +10,7 @@ import { BookSection } from "./BookSection";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
 import { ThemedFooter } from "@/components/layout/ThemedFooter";
 import { pharmacyFooterColumns } from "@/config/pharmacyNavigation";
+import { navLabel, translateFooterColumns } from "@/config/navigationLabels";
 import type { Locale } from "@/lib/i18n/locales";
 import { getPharmacyContent } from "../data/getContent";
 
@@ -30,7 +31,7 @@ export async function PharmacyPage({ locale }: { locale: Locale }) {
   return (
     <>
       <main>
-        <PharmacyHero content={content} />
+        <PharmacyHero content={content} locale={locale} />
         <JumpCards content={content} />
         <CountersSection content={content} />
         <StandardsSection content={content} />
@@ -41,7 +42,11 @@ export async function PharmacyPage({ locale }: { locale: Locale }) {
         <FaqAccordion faq={faq} heading={faqHeading} eyebrow={sectionEyebrows.faq} />
         <BookSection content={content} />
       </main>
-      <ThemedFooter columns={pharmacyFooterColumns} id="contact" />
+      <ThemedFooter
+        columns={translateFooterColumns(pharmacyFooterColumns, locale)}
+        reachUsLabel={navLabel("Reach us", locale)}
+        id="contact"
+      />
     </>
   );
 }

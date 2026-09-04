@@ -10,6 +10,7 @@ import { EnquirySection } from "./EnquirySection";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
 import { ThemedFooter } from "@/components/layout/ThemedFooter";
 import { internationalFooterColumns } from "@/config/internationalNavigation";
+import { navLabel, translateFooterColumns } from "@/config/navigationLabels";
 import type { Locale } from "@/lib/i18n/locales";
 import { getInternationalCareContent } from "../data/getContent";
 
@@ -28,7 +29,7 @@ export async function InternationalCarePage({ locale }: { locale: Locale }) {
   return (
     <>
       <main>
-        <InternationalHero content={content} />
+        <InternationalHero content={content} locale={locale} />
         <JumpCards content={content} />
         <JourneySection content={content} />
         <DeskSection content={content} />
@@ -39,7 +40,11 @@ export async function InternationalCarePage({ locale }: { locale: Locale }) {
         <FaqAccordion faq={faq} heading={faqHeading} eyebrow={sectionEyebrows.faq} />
         <EnquirySection content={content} />
       </main>
-      <ThemedFooter columns={internationalFooterColumns} id="contact" />
+      <ThemedFooter
+        columns={translateFooterColumns(internationalFooterColumns, locale)}
+        reachUsLabel={navLabel("Reach us", locale)}
+        id="contact"
+      />
     </>
   );
 }

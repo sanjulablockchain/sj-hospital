@@ -1,5 +1,6 @@
 import { ThemedFooter } from "@/components/layout/ThemedFooter";
 import { healthTipsFooterColumns } from "@/config/healthTipsNavigation";
+import { navLabel, translateFooterColumns } from "@/config/navigationLabels";
 import type { Locale } from "@/lib/i18n/locales";
 import { getHealthTipsContent } from "../data/getContent";
 import { TipsHero } from "./TipsHero";
@@ -31,7 +32,7 @@ export async function HealthTipsPage({ locale }: { locale: Locale }) {
   return (
     <>
       <main>
-        <TipsHero pageContent={pageContent} />
+        <TipsHero pageContent={pageContent} locale={locale} />
         <JumpCards jumpCards={pageContent.jumpCards} />
         <SeasonalSection dengue={dengue} />
         <LibrarySection
@@ -54,7 +55,11 @@ export async function HealthTipsPage({ locale }: { locale: Locale }) {
         <MythsSection myths={myths.myths} copy={myths.mythsSection} />
         <BookSection pageContent={pageContent} />
       </main>
-      <ThemedFooter columns={healthTipsFooterColumns} id="contact" />
+      <ThemedFooter
+        columns={translateFooterColumns(healthTipsFooterColumns, locale)}
+        reachUsLabel={navLabel("Reach us", locale)}
+        id="contact"
+      />
     </>
   );
 }

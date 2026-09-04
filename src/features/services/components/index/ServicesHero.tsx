@@ -3,6 +3,8 @@ import { ThemedHeader } from "@/components/layout/ThemedHeader";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { Ticker } from "@/components/ui/Ticker";
 import { servicesNavigation } from "@/config/servicesNavigation";
+import { translateNavItems } from "@/config/navigationLabels";
+import type { Locale } from "@/lib/i18n/locales";
 import { groupCounts } from "@/features/services/data/services";
 import type { ServicesContent } from "@/features/services/data/getContent";
 
@@ -17,7 +19,7 @@ import type { ServicesContent } from "@/features/services/data/getContent";
  * English word order: word order moves between English, Sinhala and Tamil
  * (i18n recipe pattern 3).
  */
-export function ServicesHero({ content }: { content: ServicesContent }) {
+export function ServicesHero({ content, locale }: { content: ServicesContent; locale: Locale }) {
   const { hero, tickerItems } = content.indexContent;
   const totalServices = groupCounts().All;
   const body = hero.body.replace("{count}", String(totalServices));
@@ -56,7 +58,7 @@ export function ServicesHero({ content }: { content: ServicesContent }) {
         }}
       />
 
-      <ThemedHeader navItems={servicesNavigation} homeHref="/" bookHref="/e-channeling" />
+      <ThemedHeader navItems={translateNavItems(servicesNavigation, locale)} homeHref="/" bookHref="/e-channeling" />
 
       <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 flex-col justify-end gap-6 px-5 pb-12 sm:px-8 lg:px-11">
         <div className="animate-sj-up inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">

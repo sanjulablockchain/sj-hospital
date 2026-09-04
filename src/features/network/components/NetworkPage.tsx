@@ -7,6 +7,7 @@ import { ReferralSection } from "./ReferralSection";
 import { ContactSection } from "./ContactSection";
 import { ThemedFooter } from "@/components/layout/ThemedFooter";
 import { networkFooterColumns } from "@/config/networkNavigation";
+import { navLabel, translateFooterColumns } from "@/config/navigationLabels";
 import type { Locale } from "@/lib/i18n/locales";
 import { getNetworkContent } from "../data/getContent";
 
@@ -27,7 +28,7 @@ export async function NetworkPage({ locale }: { locale: Locale }) {
   return (
     <>
       <main>
-        <NetworkHero content={content} />
+        <NetworkHero content={content} locale={locale} />
         <JumpCards content={content} />
         <MattersSection content={content} />
         <FamilySection content={content} />
@@ -35,7 +36,11 @@ export async function NetworkPage({ locale }: { locale: Locale }) {
         <ReferralSection content={content} />
         <ContactSection content={content} />
       </main>
-      <ThemedFooter columns={networkFooterColumns} id="footer" />
+      <ThemedFooter
+        columns={translateFooterColumns(networkFooterColumns, locale)}
+        reachUsLabel={navLabel("Reach us", locale)}
+        id="footer"
+      />
     </>
   );
 }

@@ -13,6 +13,7 @@ import { VisitorsSection } from "./VisitorsSection";
 import { BookSection } from "./BookSection";
 import { ThemedFooter } from "@/components/layout/ThemedFooter";
 import { facilitiesFooterColumns } from "@/config/facilitiesNavigation";
+import { navLabel, translateFooterColumns } from "@/config/navigationLabels";
 import type { Locale } from "@/lib/i18n/locales";
 import { getFacilitiesContent } from "../data/getContent";
 
@@ -32,7 +33,7 @@ export async function FacilitiesPage({ locale }: { locale: Locale }) {
   return (
     <>
       <main>
-        <FacilitiesHero content={content} />
+        <FacilitiesHero content={content} locale={locale} />
         <JumpCards content={content} />
         <BuildingSection content={content} />
         <ShowcaseSection content={content} />
@@ -46,7 +47,11 @@ export async function FacilitiesPage({ locale }: { locale: Locale }) {
         <VisitorsSection content={content} />
         <BookSection content={content} />
       </main>
-      <ThemedFooter columns={facilitiesFooterColumns} id="contact" />
+      <ThemedFooter
+        columns={translateFooterColumns(facilitiesFooterColumns, locale)}
+        reachUsLabel={navLabel("Reach us", locale)}
+        id="contact"
+      />
     </>
   );
 }

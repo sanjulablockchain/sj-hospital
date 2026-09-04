@@ -1,14 +1,17 @@
 import { HomeHeader } from "./HomeHeader";
 import { HeroParallaxBackground } from "./HeroParallaxBackground";
 import { StatTicker } from "./StatTicker";
+import type { Locale } from "@/lib/i18n/locales";
 import type { HomeContent } from "../data/getContent";
 
 export function HeroSection({
   hero,
   tickerItems,
+  locale,
 }: {
   hero: HomeContent["content"]["hero"];
   tickerItems: readonly string[];
+  locale: Locale;
 }) {
   return (
     <section id="top" className="relative flex min-h-screen flex-col overflow-hidden bg-[#060B1F]">
@@ -35,7 +38,7 @@ export function HeroSection({
         }}
       />
 
-      <HomeHeader />
+      <HomeHeader locale={locale} />
 
       <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 gap-10 px-5 pb-13 sm:px-8 lg:px-11">
         <div className="hidden min-w-0 flex-col items-center gap-4.5 pb-2.5 min-[900px]:flex" style={{ flex: "0 0 44px" }}>

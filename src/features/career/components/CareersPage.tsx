@@ -1,6 +1,7 @@
 import { ThemedFooter } from "@/components/layout/ThemedFooter";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
 import { careerFooterColumns } from "@/config/careerNavigation";
+import { navLabel, translateFooterColumns } from "@/config/navigationLabels";
 import type { Locale } from "@/lib/i18n/locales";
 import { getCareerContent } from "../data/getContent";
 import { CareersHero } from "./CareersHero";
@@ -40,7 +41,7 @@ export async function CareersPage({ locale }: { locale: Locale }) {
   return (
     <>
       <main>
-        <CareersHero content={content} />
+        <CareersHero content={content} locale={locale} />
         <JumpCards content={content} />
 
         <FeatureSplit
@@ -84,7 +85,11 @@ export async function CareersPage({ locale }: { locale: Locale }) {
         <ApplicationSection content={content} locale={locale} />
         <ApplySection content={content} />
       </main>
-      <ThemedFooter columns={careerFooterColumns} id="footer" />
+      <ThemedFooter
+        columns={translateFooterColumns(careerFooterColumns, locale)}
+        reachUsLabel={navLabel("Reach us", locale)}
+        id="footer"
+      />
     </>
   );
 }

@@ -9,6 +9,7 @@ import { BookSection } from "./BookSection";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
 import { ThemedFooter } from "@/components/layout/ThemedFooter";
 import { homeCareFooterColumns } from "@/config/homeCareNavigation";
+import { navLabel, translateFooterColumns } from "@/config/navigationLabels";
 import type { Locale } from "@/lib/i18n/locales";
 import { getHomeCareContent } from "../data/getContent";
 
@@ -41,7 +42,7 @@ export async function HomeCarePage({ locale }: { locale: Locale }) {
   return (
     <>
       <main>
-        <HomeCareHero content={content} />
+        <HomeCareHero content={content} locale={locale} />
         <JumpCards content={content} />
         <VisitsSection content={content} />
         <WhoSection content={content} />
@@ -62,7 +63,11 @@ export async function HomeCarePage({ locale }: { locale: Locale }) {
         />
         <BookSection content={content} />
       </main>
-      <ThemedFooter columns={homeCareFooterColumns} id="footer" />
+      <ThemedFooter
+        columns={translateFooterColumns(homeCareFooterColumns, locale)}
+        reachUsLabel={navLabel("Reach us", locale)}
+        id="footer"
+      />
     </>
   );
 }

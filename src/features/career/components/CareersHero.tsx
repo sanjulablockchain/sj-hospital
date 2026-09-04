@@ -4,6 +4,8 @@ import { ThemedHeader } from "@/components/layout/ThemedHeader";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { Ticker } from "@/components/ui/Ticker";
 import { careerNavigation } from "@/config/careerNavigation";
+import { translateNavItems } from "@/config/navigationLabels";
+import type { Locale } from "@/lib/i18n/locales";
 import type { CareerContent } from "../data/getContent";
 
 /**
@@ -28,7 +30,7 @@ import type { CareerContent } from "../data/getContent";
  * anchor, the same fix every other feature's own hero needed, so a
  * translated reader is not dropped back into English.
  */
-export function CareersHero({ content }: { content: CareerContent }) {
+export function CareersHero({ content, locale }: { content: CareerContent; locale: Locale }) {
   const { hero, heroFacts, tickerItems } = content;
   return (
     <section
@@ -70,7 +72,7 @@ export function CareersHero({ content }: { content: CareerContent }) {
         }}
       />
 
-      <ThemedHeader navItems={careerNavigation} homeHref="/" bookHref="/e-channeling" />
+      <ThemedHeader navItems={translateNavItems(careerNavigation, locale)} homeHref="/" bookHref="/e-channeling" />
 
       <div className="relative z-10 mx-auto mt-auto flex w-full max-w-[1440px] gap-10 px-5 sm:px-8 lg:px-11">
         {/* Decorative vertical strapline, dropped below 900px where there is no

@@ -4,6 +4,8 @@ import { ThemedHeader } from "@/components/layout/ThemedHeader";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { Ticker } from "@/components/ui/Ticker";
 import { wellnessNavigation } from "@/config/wellnessNavigation";
+import { translateNavItems } from "@/config/navigationLabels";
+import type { Locale } from "@/lib/i18n/locales";
 import type { SchoolWellnessContent } from "../data/getContent";
 
 /**
@@ -27,7 +29,7 @@ import type { SchoolWellnessContent } from "../data/getContent";
  * fixes `home-care`'s own hero needed: without `min-w-0` a long Sinhala or
  * Tamil token in the heading pushes the column past the viewport at 360px.
  */
-export function WellnessHero({ content }: { content: SchoolWellnessContent }) {
+export function WellnessHero({ content, locale }: { content: SchoolWellnessContent; locale: Locale }) {
   const { hero, heroFacts, heroStandfirst, tickerItems } = content;
   return (
     <section
@@ -63,7 +65,7 @@ export function WellnessHero({ content }: { content: SchoolWellnessContent }) {
         }}
       />
 
-      <ThemedHeader navItems={wellnessNavigation} homeHref="/" bookHref="/e-channeling" />
+      <ThemedHeader navItems={translateNavItems(wellnessNavigation, locale)} homeHref="/" bookHref="/e-channeling" />
 
       <div className="relative z-10 mx-auto mt-auto flex w-full max-w-[1440px] gap-5.5 px-5 sm:px-8 lg:px-11">
         {/* Decorative vertical strapline, dropped below 900px where there is no

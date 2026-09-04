@@ -4,12 +4,12 @@ import { useState } from "react";
 import { ThemeMenuToggle } from "@/components/theme/ThemeMenuToggle";
 import { LanguageMenuToggle } from "@/components/i18n/LanguageMenuToggle";
 import type { NavItem } from "@/config/navigation";
-import { navLabel } from "@/config/navigationLabels";
 import { chromeCopyFor } from "@/components/layout/chromeCopy";
 import { useLocale } from "@/lib/i18n/useLocale";
 import { localeHref } from "@/lib/i18n/paths";
 
 type MobileNavPanelProps = {
+  /** Already translated: forwarded as-is from `ThemedHeader`'s own `navItems`. */
   items: NavItem[];
 };
 
@@ -47,7 +47,7 @@ export function MobileNavPanel({ items }: MobileNavPanelProps) {
                 onClick={() => setIsOpen(false)}
                 className="px-2 py-3 text-[15px] font-semibold text-[var(--home-body)] hover:text-[var(--home-heading)]"
               >
-                {navLabel(item.label, locale)}
+                {item.label}
               </a>
             ))}
           </nav>

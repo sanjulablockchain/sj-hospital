@@ -10,6 +10,7 @@ import { BookSection } from "./BookSection";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
 import { ThemedFooter } from "@/components/layout/ThemedFooter";
 import { wellnessFooterColumns } from "@/config/wellnessNavigation";
+import { navLabel, translateFooterColumns } from "@/config/navigationLabels";
 import type { Locale } from "@/lib/i18n/locales";
 import { getSchoolWellnessContent } from "../data/getContent";
 
@@ -38,7 +39,7 @@ export async function SchoolWellnessPage({ locale }: { locale: Locale }) {
   return (
     <>
       <main>
-        <WellnessHero content={content} />
+        <WellnessHero content={content} locale={locale} />
         <JumpCards content={content} />
         <WhySchoolSection content={content} />
         <ScreeningSection content={content} />
@@ -59,7 +60,11 @@ export async function SchoolWellnessPage({ locale }: { locale: Locale }) {
         />
         <BookSection content={content} />
       </main>
-      <ThemedFooter columns={wellnessFooterColumns} id="footer" />
+      <ThemedFooter
+        columns={translateFooterColumns(wellnessFooterColumns, locale)}
+        reachUsLabel={navLabel("Reach us", locale)}
+        id="footer"
+      />
     </>
   );
 }

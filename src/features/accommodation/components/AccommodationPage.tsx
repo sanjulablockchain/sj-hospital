@@ -1,5 +1,6 @@
 import { ThemedFooter } from "@/components/layout/ThemedFooter";
 import { accommodationFooterColumns } from "@/config/accommodationNavigation";
+import { navLabel, translateFooterColumns } from "@/config/navigationLabels";
 import type { Locale } from "@/lib/i18n/locales";
 import { getAccommodationContent } from "../data/getContent";
 import { RoomsHero } from "./RoomsHero";
@@ -24,13 +25,17 @@ export async function AccommodationPage({ locale }: { locale: Locale }) {
   return (
     <>
       <main>
-        <RoomsHero content={content} />
+        <RoomsHero content={content} locale={locale} />
         <JumpCards content={content} />
         <RoomsSection content={content} />
         <SpecialtiesSection content={content} />
         <BookSection content={content} locale={locale} />
       </main>
-      <ThemedFooter columns={accommodationFooterColumns} id="footer" />
+      <ThemedFooter
+        columns={translateFooterColumns(accommodationFooterColumns, locale)}
+        reachUsLabel={navLabel("Reach us", locale)}
+        id="footer"
+      />
     </>
   );
 }

@@ -9,6 +9,7 @@ import { RelatedSection } from "./detail/RelatedSection";
 import { DetailBookSection } from "./detail/DetailBookSection";
 import { ThemedFooter } from "@/components/layout/ThemedFooter";
 import { servicesFooterColumns } from "@/config/servicesNavigation";
+import { navLabel, translateFooterColumns } from "@/config/navigationLabels";
 import { getServicesContent, findService, relatedInCatalog } from "@/features/services/data/getContent";
 import type { Locale } from "@/lib/i18n/locales";
 
@@ -36,7 +37,7 @@ export async function ServiceDetailPage({ slug, locale }: { slug: string; locale
   return (
     <>
       <main>
-        <ServiceHero service={service} content={content} />
+        <ServiceHero service={service} content={content} locale={locale} />
         <ServicePicker
           services={content.services}
           current={service.slug}
@@ -50,7 +51,11 @@ export async function ServiceDetailPage({ slug, locale }: { slug: string; locale
         <RelatedSection related={related} content={content} />
         <DetailBookSection service={service} content={content} />
       </main>
-      <ThemedFooter columns={servicesFooterColumns} id="contact" />
+      <ThemedFooter
+        columns={translateFooterColumns(servicesFooterColumns, locale)}
+        reachUsLabel={navLabel("Reach us", locale)}
+        id="contact"
+      />
     </>
   );
 }

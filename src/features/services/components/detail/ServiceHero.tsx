@@ -3,6 +3,8 @@ import { LocaleLink } from "@/components/i18n/LocaleLink";
 import { ThemedHeader } from "@/components/layout/ThemedHeader";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { servicesDetailNavigation } from "@/config/servicesNavigation";
+import { translateNavItems } from "@/config/navigationLabels";
+import type { Locale } from "@/lib/i18n/locales";
 import type { Service } from "@/features/services/types";
 import type { ServicesContent } from "@/features/services/data/getContent";
 
@@ -20,7 +22,15 @@ import type { ServicesContent } from "@/features/services/data/getContent";
  * header comment), so the eyebrow shows `content.groups.groupLabels` for it
  * rather than the raw key.
  */
-export function ServiceHero({ service, content }: { service: Service; content: ServicesContent }) {
+export function ServiceHero({
+  service,
+  content,
+  locale,
+}: {
+  service: Service;
+  content: ServicesContent;
+  locale: Locale;
+}) {
   const groupLabel = content.groups.groupLabels[service.group] ?? service.group;
 
   return (
@@ -51,7 +61,7 @@ export function ServiceHero({ service, content }: { service: Service; content: S
         }}
       />
 
-      <ThemedHeader navItems={servicesDetailNavigation} homeHref="/" bookHref="/e-channeling" />
+      <ThemedHeader navItems={translateNavItems(servicesDetailNavigation, locale)} homeHref="/" bookHref="/e-channeling" />
 
       <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 flex-col justify-end gap-6 px-5 pb-14 sm:px-8 lg:px-11">
         <LocaleLink

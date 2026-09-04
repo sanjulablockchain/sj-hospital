@@ -1,5 +1,6 @@
 import { ThemedFooter } from "@/components/layout/ThemedFooter";
 import { contactFooterColumns } from "@/config/contactNavigation";
+import { navLabel, translateFooterColumns } from "@/config/navigationLabels";
 import type { Locale } from "@/lib/i18n/locales";
 import { getContactContent } from "../data/getContent";
 import { ContactHero } from "./ContactHero";
@@ -23,13 +24,17 @@ export async function ContactPage({ locale }: { locale: Locale }) {
   return (
     <>
       <main>
-        <ContactHero content={content} />
+        <ContactHero content={content} locale={locale} />
         <JumpCards content={content} />
         <ReachSection content={content} />
         <MessageSection content={content} />
         <MapSection content={content} />
       </main>
-      <ThemedFooter columns={contactFooterColumns} id="footer" />
+      <ThemedFooter
+        columns={translateFooterColumns(contactFooterColumns, locale)}
+        reachUsLabel={navLabel("Reach us", locale)}
+        id="footer"
+      />
     </>
   );
 }
