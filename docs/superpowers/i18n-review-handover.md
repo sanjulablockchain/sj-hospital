@@ -61,11 +61,22 @@ that fails if a string leaves the set without being translated:
 | services | 26 | | e-channeling | 1 |
 | home | 17 | | school-wellness | 1 |
 
-Two further categories stay English by design, beyond those 251:
+Further categories stay English by design, beyond those 251:
 
 - **The hospital's own name and brand strings**, in every language.
 - **URL slugs.** `/si/contact-us`, not a transliterated path.
 - **The privacy policy's legal text.**
+- **The motto, where it is set as a brand mark.** The rule the site follows is
+  that "To live is a privilege" is translated where it appears as a *sentence*
+  (the home hero, which composes its own phrase across three segments in each
+  locale) and stays English where it is set as a *mark*: the footer's logo
+  lockup and the footer's bottom bar, both uppercase and letterspaced, plus the
+  page `<title>` and the email signature. **This one is worth your explicit
+  yes or no**, because it is a judgement about your brand rather than about
+  language: an independent reader of the site flagged the bottom-bar instance as
+  an untranslated string. It was kept English and the reasoning written at the
+  site. Say the word and it becomes translated copy.
+- **The footer copyright line**, being the registered name and a year.
 
 If you disagree with the register itself, say so before reading further: it
 would change every one of the 74 feature overlay files, and it is much cheaper

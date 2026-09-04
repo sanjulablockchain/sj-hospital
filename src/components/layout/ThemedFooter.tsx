@@ -114,6 +114,21 @@ export function ThemedFooter({ columns, reachUsLabel, id = "contact" }: ThemedFo
         </div>
       </div>
 
+      {/*
+       * Both strings in this bar stay English in every locale, and both are
+       * deliberate rather than missed.
+       *
+       * The motto is translated where it is set as a sentence and kept in
+       * English where it is set as a brand mark. The home hero is the sentence
+       * form: it composes its own coherent phrase across three segments in
+       * each locale (see home/data/content.ts). Here it is a mark, uppercase
+       * and letterspaced to match the lockup above, so it reads as the
+       * hospital's signature next to its copyright line, exactly as the
+       * lockup's own TO LIVE IS A PRIVILEGE does. Translating only this one
+       * would give the site a third rendering of one motto.
+       *
+       * The copyright line is the hospital's registered name and a year.
+       */}
       <div className="mt-15 flex flex-wrap items-center justify-between gap-5 border-t border-[var(--home-hairline)] pt-5 text-[13px]">
         <span className="text-[var(--home-muted)]">&copy; 2026 St. Joseph Hospital, Negombo</span>
         <span className="tracking-[0.18em] text-[var(--home-muted)] uppercase">To live is a privilege</span>
