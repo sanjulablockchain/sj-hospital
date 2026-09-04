@@ -15,6 +15,12 @@ import { diagnosticServices as diagnosticsTa } from "./diagnostics.ta.ts";
 import { atHomeServices } from "./atHome.ts";
 import { atHomeServices as atHomeSi } from "./atHome.si.ts";
 import { atHomeServices as atHomeTa } from "./atHome.ta.ts";
+import { surgicalServices } from "./surgical.ts";
+import { surgicalServices as surgicalSi } from "./surgical.si.ts";
+import { surgicalServices as surgicalTa } from "./surgical.ta.ts";
+import { womenChildrenServices } from "./womenChildren.ts";
+import { womenChildrenServices as womenChildrenSi } from "./womenChildren.si.ts";
+import { womenChildrenServices as womenChildrenTa } from "./womenChildren.ta.ts";
 import { assertTranslationParity, stringPaths } from "../../../lib/i18n/stringPaths.ts";
 
 /**
@@ -25,17 +31,16 @@ import { assertTranslationParity, stringPaths } from "../../../lib/i18n/stringPa
  * `services.ts` is not here: it carries no copy (see the header comment in
  * `getContent.ts`).
  *
- * `surgical.ts`, `clinics.ts` and `womenChildren.ts` are OUT of scope for
- * this part (2 of 4) on purpose and have no `.si.ts` / `.ta.ts` yet. That
- * is not a gap this suite flags: they are simply absent from `MODULES`
- * below, the same way a feature with nine data files but only some
- * translated would list only those, not all nine. Parts 3 and 4 each add
- * their own group here (see `getContent.ts`'s own "TO ADD A GROUP'S
- * TRANSLATION" comment): write `<file>.si.ts` / `<file>.ta.ts`, import them
- * at the top of this file the same way `diagnosticServices` and
- * `atHomeServices` are imported twice below (English, then each overlay
- * under an alias), and add one `{ name, base, si, ta }` entry to `MODULES`.
- * No other part of this file changes.
+ * `clinics.ts` is OUT of scope for this part (3 of 4) on purpose and has no
+ * `.si.ts` / `.ta.ts` yet. That is not a gap this suite flags: it is simply
+ * absent from `MODULES` below, the same way a feature with nine data files
+ * but only some translated would list only those, not all nine. Part 4
+ * adds it here (see `getContent.ts`'s own "TO ADD A GROUP'S TRANSLATION"
+ * comment): write `clinics.si.ts` / `clinics.ta.ts`, import them at the top
+ * of this file the same way `surgicalServices` and `womenChildrenServices`
+ * are imported twice below (English, then each overlay under an alias),
+ * and add one `{ name, base, si, ta }` entry to `MODULES`. No other part of
+ * this file changes.
  */
 const MODULES = [
   { name: "groups", base: groups, si: groupsSi, ta: groupsTa },
@@ -43,6 +48,8 @@ const MODULES = [
   { name: "emergency", base: emergencyServices, si: emergencySi, ta: emergencyTa },
   { name: "diagnostics", base: diagnosticServices, si: diagnosticsSi, ta: diagnosticsTa },
   { name: "atHome", base: atHomeServices, si: atHomeSi, ta: atHomeTa },
+  { name: "surgical", base: surgicalServices, si: surgicalSi, ta: surgicalTa },
+  { name: "womenChildren", base: womenChildrenServices, si: womenChildrenSi, ta: womenChildrenTa },
 ] as const;
 
 /**
@@ -106,7 +113,12 @@ function isUntranslatable(moduleName: string, path: string): boolean {
     if (/\.steps\[\d+\]\.no$/.test(path)) return true;
     if (path === "[0].facts[0].v") return true;
   }
-  if (moduleName === "diagnostics" || moduleName === "atHome") {
+  if (
+    moduleName === "diagnostics" ||
+    moduleName === "atHome" ||
+    moduleName === "surgical" ||
+    moduleName === "womenChildren"
+  ) {
     if (path.endsWith(".slug")) return true;
     if (path.endsWith(".heroImage")) return true;
     if (path.endsWith(".heroAlt")) return true;
@@ -207,6 +219,46 @@ function isUntranslatable(moduleName: string, path: string): boolean {
  *   preferred everywhere it was grammatically possible, and these three
  *   short `k` labels are the same shape `pharmacy:standards[6].k` already
  *   is: a one-word fact-row label with nothing to hang a particle on.
+ * - `womenChildren:[0].team[0].role` ("Consultant obstetrician"): the exact
+ *   nameplate-title pattern media/data/content.si.ts's own KEEPS_ENGLISH
+ *   already keeps English for "Consultant obstetrician and gynaecologist",
+ *   "Consultant physician" and "Consultant paediatrician": a title sitting
+ *   directly in front of one named role, not the ordinary plural noun
+ *   ("on-call consultants") that this feature's own emergency.si.ts
+ *   translates to විශේෂඥ වෛද්‍යවරු. Every other `team[*].role` in this
+ *   service and its siblings DOES translate or carry a Sinhala/Tamil
+ *   particle, which is the sibling-test evidence this one is a genuine
+ *   exception.
+ * - `womenChildren:[0].facts[2].k`, `womenChildren:[0].strip[2].k` (both
+ *   "Theatre"): this service's own body prose keeps the compound "Obstetric
+ *   Theatre" bare English throughout (matching facilities.si.ts's and
+ *   international-care's own established "Obstetric Theatre"), and these
+ *   two bare `k` labels are shorthand for that same named facility, not a
+ *   different, untranslated word.
+ * - `womenChildren:[1].title`, `womenChildren:[1].directoryTitle` (both
+ *   "Gynaecology"): the established site-wide department name that stays
+ *   English everywhere it appears (facilities.si.ts's/.ta.ts's own
+ *   "Gynaecology ක්‍රියාපටිපාටි"/"Gynaecology செயல்முறைகள்",
+ *   international-care's own "Gynaecology ක්‍රියාපටිපාටි"/"Gynaecology
+ *   செயல்முறைகள்"), the same class "ENT" and "Clinic" already are.
+ * - `womenChildren:[1].strip[1].k` ("Ultrasound"): the established bare
+ *   equipment/modality register word this whole feature already uses
+ *   (diagnostics.si.ts's/.ta.ts's own header states "Ultrasound" stays
+ *   English throughout), here appearing as a bare `strip` label rather
+ *   than inside a sentence.
+ * - `womenChildren:[2].tags[0]`, `womenChildren:[2].facts[1].v`,
+ *   `womenChildren:[2].strip[1].v` ("Kids & Teens Medical Group protocol",
+ *   "Kids & Teens Medical Group", "Kids & Teens"): this programme's own
+ *   named protocol, the same proper-noun class `indexContent.si.ts`'s/
+ *   `.ta.ts`'s own KEEPS_ENGLISH already keeps English for
+ *   `centres[3].lead` ("Kids & Teens protocol"). `[2].facts[1].k`
+ *   ("Protocol එක"/"ஒரு Protocol") and every other field on this service
+ *   DOES translate, which is the sibling-test evidence this is the
+ *   programme's own name, not a miss.
+ * - `womenChildren:[4].strip[3].v` ("SMS"): a universal technical
+ *   abbreviation with no Sinhala/Tamil form anyone uses, the same
+ *   never-translate class as "OPD"/"ICU"/"X-ray". Every other `strip[*].v`
+ *   on this service translates in full.
  */
 const KEEPS_ENGLISH = new Set<string>([
   "groups:groupLabels.Clinics",
@@ -224,6 +276,16 @@ const KEEPS_ENGLISH = new Set<string>([
   "atHome:[0].strip[3].k",
   "atHome:[2].facts[3].k",
   "atHome:[2].strip[2].k",
+  "womenChildren:[0].team[0].role",
+  "womenChildren:[0].facts[2].k",
+  "womenChildren:[0].strip[2].k",
+  "womenChildren:[1].title",
+  "womenChildren:[1].directoryTitle",
+  "womenChildren:[1].strip[1].k",
+  "womenChildren:[2].tags[0]",
+  "womenChildren:[2].facts[1].v",
+  "womenChildren:[2].strip[1].v",
+  "womenChildren:[4].strip[3].v",
 ]);
 
 for (const { name, base, si, ta } of MODULES) {
