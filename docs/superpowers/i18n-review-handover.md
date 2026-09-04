@@ -9,12 +9,19 @@ does so. This document is what that reviewer needs.
 ## What to do first
 
 ```bash
-npm run i18n:status                        # lists all 78 overlays and their state
+npm run i18n:status                        # lists all 82 overlays and their state
 npm run i18n:status -- --require-reviewed  # the gate: exits 1 while any is a draft
 ```
 
-Today the gate exits 1, and that is correct: **78 overlays, 39 Sinhala and 39
+Today the gate exits 1, and that is correct: **82 overlays, 41 Sinhala and 41
 Tamil, 0 reviewed.** Nothing ships until that changes.
+
+Four of those 82 are new to the list rather than new copy: the contact and
+careers form validation messages (`schemas.si.ts` / `schemas.ta.ts` in each
+feature). They were drafted alongside everything else but were sitting inline in
+a file the gate could not see, so no earlier version of this document told you
+they existed. They are the words a patient or an applicant reads when a form
+rejects what they typed, and they need your read like any other page copy.
 
 Read the pages, not the files. Start the site and click through:
 
@@ -27,8 +34,12 @@ npm run dev        # then / for English, /si for Sinhala, /ta for Tamil
 Each overlay file carries a `__review` marker:
 
 ```ts
-export const __review = { status: "draft", reviewer: null };
+export const __review = { status: "draft", reviewer: null, date: null };
 ```
+
+Name yourself in `reviewer`. The gate requires it: `status: "reviewed"` with
+`reviewer: null` counts as outstanding and still exits 1, because a sign-off with
+nobody's name on it is not a sign-off.
 
 Flipping `status` to `"reviewed"` and naming yourself is **the reviewer's act,
 and only the reviewer's**. No agent has flipped a single one, deliberately: the
@@ -148,16 +159,28 @@ So you can spend your attention on meaning rather than on mechanics:
 - **No translation is still its English source**, compared case- and
   whitespace-insensitively. That check exists because `"Bank Transfer"` for
   `"Bank transfer"` once shipped past a case-sensitive one.
-- **Numbers: NOT guaranteed by any test. Please check them yourself.** This
-  was listed here as a machine guarantee and that was wrong. Numbers were
-  checked by hand, feature by feature, as each was translated, and every check
-  came back clean. But no test enforces it, so nothing stops a later edit from
-  changing one. Proven, not assumed: changing the ambulance number in the
-  Sinhala heart-attack instruction from `0117 84 84 84` to `0117 84 84 48`
-  passes all 469 tests. **Read every phone number, dose, age, price and count
-  in the Sinhala and Tamil copy against the English.** A test that closes this
-  is being added; until this line says otherwise, the numbers rest on your
-  read, not on the suite.
+- **Every number in an English string still appears in its translation.** This
+  line previously said the opposite, and said so correctly at the time: nothing
+  enforced it, and changing the ambulance number in the Sinhala heart-attack
+  instruction from `0117 84 84 84` to `0117 84 84 48` passed the whole suite.
+  That is now a test failure, on every one of the 82 overlays. So is a dropped
+  digit (`160/100` to `160/10`), an altered range (`25-65` to `52-56`), a
+  changed magnitude in a mixed sentence (`USD 1 million` to `මිලියන 10`), and a
+  Sinhala or Tamil numeral written where the English has an ASCII one (`40` to
+  `௪௦`), which the site's register does not use anywhere. A number is allowed
+  to MOVE within a sentence, because word order differs; its value is not.
+  Each of those five was verified by mutation before and after.
+
+  Two boundaries worth knowing while you read. First, a translation may still
+  ADD a number the English does not have, because 71 strings legitimately do
+  ("around the clock" reads naturally as `පැය 24`); an invented number in
+  translated prose would therefore pass. Second, `24/7` rendered as "24 hours"
+  is the one English idiom whose `7` is allowed to disappear. Everything else
+  numeric is enforced.
+- **No overlay carries a second copy of a fact.** Phone numbers, prices, hrefs,
+  anchor ids and structural keys live in exactly one place, the English module,
+  and a translation that restated one now fails. Before this, an overlay could
+  put its own phone number on a Sinhala page and the suite stayed green.
 - **Structural keys are never translated.** Icon lookups, `<option value>`s and
   validation match lists use keys that are separate from display text, so
   translating a label can no longer blank an icon or break a form.
