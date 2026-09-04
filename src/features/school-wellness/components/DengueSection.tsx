@@ -25,7 +25,7 @@ export function DengueSection({ content }: { content: SchoolWellnessContent }) {
           <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
             {sectionEyebrows.dengue}
           </div>
-          <h2 className="font-display mt-4.5 text-[clamp(32px,4vw,54px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
+          <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(32px,4vw,54px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
             {dengueHeading.line1}
             <br />
             {dengueHeading.line2}

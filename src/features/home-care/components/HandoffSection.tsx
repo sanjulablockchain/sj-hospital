@@ -31,7 +31,7 @@ export function HandoffSection({ id, band }: { id: string; band: Handoff }) {
           <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
             {band.eyebrow}
           </div>
-          <h2 className="font-display mt-4 text-[clamp(28px,3vw,42px)] leading-[1.02] font-extrabold tracking-[-0.03em] text-[var(--home-heading)] uppercase">
+          <h2 className="font-display wrap-break-word mt-4 text-[clamp(28px,3vw,42px)] leading-[1.02] font-extrabold tracking-[-0.03em] text-[var(--home-heading)] uppercase">
             {band.heading}
           </h2>
           <p

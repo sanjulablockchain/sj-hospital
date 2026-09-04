@@ -45,7 +45,7 @@ export function PolicyHero({ locale }: { locale: Locale }) {
             Privacy policy
           </div>
 
-          <h1 className="font-display animate-sj-up mt-4.5 text-[clamp(38px,6.4vw,100px)] leading-[0.9] font-extrabold tracking-[-0.045em] text-white uppercase">
+          <h1 className="font-display animate-sj-up wrap-break-word mt-4.5 text-[clamp(38px,6.4vw,100px)] leading-[0.9] font-extrabold tracking-[-0.045em] text-white uppercase">
             Privacy policy
           </h1>
 

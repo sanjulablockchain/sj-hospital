@@ -36,7 +36,7 @@ export function VisitsSection({ content }: { content: HomeCareContent }) {
           {sectionEyebrows.visits}
         </div>
         <h2
-          className="font-display mt-6 max-w-[30ch] text-[clamp(27px,3.2vw,44px)] leading-[1.12] font-semibold tracking-[-0.03em] text-[var(--home-heading)]"
+          className="font-display wrap-break-word mt-6 max-w-[30ch] text-[clamp(27px,3.2vw,44px)] leading-[1.12] font-semibold tracking-[-0.03em] text-[var(--home-heading)]"
           style={{ textWrap: "pretty" }}
         >
           {visitLede}

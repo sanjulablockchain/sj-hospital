@@ -10,7 +10,7 @@ export default function ServiceNotFound() {
         <span className="h-px w-11 bg-[var(--home-accent)]" />
         Service not found
       </div>
-      <h1 className="font-display max-w-[18ch] text-[clamp(34px,6vw,64px)] leading-[0.95] font-extrabold tracking-[-0.03em] text-[var(--home-heading)] uppercase">
+      <h1 className="font-display wrap-break-word max-w-[18ch] text-[clamp(34px,6vw,64px)] leading-[0.95] font-extrabold tracking-[-0.03em] text-[var(--home-heading)] uppercase">
         We don&rsquo;t have that service.
       </h1>
       <p className="max-w-[52ch] text-[16px] leading-[1.6] text-[var(--home-body)]">

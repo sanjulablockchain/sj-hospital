@@ -188,7 +188,7 @@ export function PolicyContent() {
       {blocks.map((block, index) => {
         if (block.type === "h2") {
           return (
-            <h2 key={index} className="font-display pt-4 text-xl font-bold text-[var(--home-heading)]">
+            <h2 key={index} className="font-display wrap-break-word pt-4 text-xl font-bold text-[var(--home-heading)]">
               {block.text}
             </h2>
           );
