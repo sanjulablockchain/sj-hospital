@@ -45,7 +45,13 @@ test("the doctor overlays keep the base's array length", () => {
 // A translated speciality that is still the English word is not a
 // translation. Names are expected to stay identical (that is the point), so
 // this only walks the paths the parity check above did not exclude.
-test("no translated speciality is left identical to its English source", () => {
+//
+// The comparison normalises case and surrounding whitespace before comparing,
+// so a translation that differs from English only by capitalisation or by
+// stray leading/trailing space still fails: JS string comparison is
+// case-sensitive, and that gap let untranslated fields through elsewhere in
+// this project despite this test already existing.
+test("no translated speciality is left identical to its English source, ignoring case and whitespace", () => {
   const englishByPath = new Map<string, string>();
   collect(doctorsBase, "", englishByPath);
 
@@ -58,10 +64,12 @@ test("no translated speciality is left identical to its English source", () => {
 
     for (const [path, translated] of translatedByPath) {
       if (isDoctorUntranslatable(path)) continue;
+      const english = englishByPath.get(path);
+      const normalize = (s: string | undefined) => s?.trim().toLowerCase();
       assert.notEqual(
-        translated,
-        englishByPath.get(path),
-        `${name} ${path} is still the English string. If that is deliberate, add it to KEEPS_ENGLISH with a reason.`
+        normalize(translated),
+        normalize(english),
+        `${name} ${path} differs from the English only by case or whitespace, which is not a translation. If that is deliberate, add it to KEEPS_ENGLISH with a reason.`
       );
     }
   }
@@ -128,7 +136,13 @@ test("the content overlays keep the base's array lengths", () => {
 // A translation that is still the English sentence is not a translation. This
 // catches a copy-paste that was never actually translated, which a parity
 // check alone would happily pass.
-test("no translated string in content is left identical to its English source", () => {
+//
+// The comparison normalises case and surrounding whitespace before comparing,
+// so a translation that differs from English only by capitalisation or by
+// stray leading/trailing space still fails: JS string comparison is
+// case-sensitive, and that gap let untranslated fields through elsewhere in
+// this project despite this test already existing.
+test("no translated string in content is left identical to its English source, ignoring case and whitespace", () => {
   const englishByPath = new Map<string, string>();
   collect(base, "", englishByPath);
 
@@ -142,10 +156,12 @@ test("no translated string in content is left identical to its English source", 
     for (const [path, translated] of translatedByPath) {
       if (isContentUntranslatable(path)) continue;
       if (KEEPS_ENGLISH.has(path)) continue;
+      const english = englishByPath.get(path);
+      const normalize = (s: string | undefined) => s?.trim().toLowerCase();
       assert.notEqual(
-        translated,
-        englishByPath.get(path),
-        `${name} ${path} is still the English string. If that is deliberate, add it to KEEPS_ENGLISH with a reason.`
+        normalize(translated),
+        normalize(english),
+        `${name} ${path} differs from the English only by case or whitespace, which is not a translation. If that is deliberate, add it to KEEPS_ENGLISH with a reason.`
       );
     }
   }
