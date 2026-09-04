@@ -15,6 +15,16 @@ import type { EChannelingContent } from "../data/getContent";
  * number split, so word order can move between languages; the whole
  * interpolated string sits inside one clickable `<a>`, unlike the
  * emergency-note pattern elsewhere that has to keep a link mid-sentence.
+ *
+ * The button wrapper is `min-w-0 flex-wrap`, not `shrink-0`: in the
+ * `sm:flex-row` band (roughly 640-1023px) `shrink-0` forbade the wrapper from
+ * giving up any width, and the Tamil `callCta` (its `{phone}` interpolation
+ * makes it the longest of the three locales) plus the Email button no longer
+ * fit beside the text block, overflowing the row and the page by 41px at
+ * 768px. `min-w-0` lets the wrapper shrink so the two buttons drop to their
+ * own line instead; each `<a>` keeps `whitespace-nowrap` so its own label
+ * never breaks mid-word, the same split this feature's own hero CTA row
+ * (`ChannelingHero.tsx`) and `pharmacy`/`home-care`'s `BookSection.tsx` use.
  */
 export function HelpSection({ content }: { content: EChannelingContent }) {
   const { helpRail } = content;
@@ -28,7 +38,7 @@ export function HelpSection({ content }: { content: EChannelingContent }) {
           </p>
           <p className="mt-2 max-w-[46ch] text-[15px] leading-relaxed opacity-85">{helpRail.body}</p>
         </div>
-        <div className="flex shrink-0 flex-wrap justify-center gap-3">
+        <div className="flex min-w-0 flex-wrap justify-center gap-3">
           <a
             href={helpRail.phoneHref}
             className="sj-invert inline-flex h-12 items-center bg-[var(--home-on-accent)] px-6 text-sm font-bold whitespace-nowrap text-[var(--home-accent)]"
