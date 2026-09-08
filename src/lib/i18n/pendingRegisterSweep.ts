@@ -79,6 +79,19 @@ export function sweepScope(relativePath: string): string {
  *   needed no code change; only the policy (ruling 3: a route's `<title>` is
  *   English) and the overlay content moved.
  *
+ * `services` was swept on 2026-09-09, needing no code change: its getter
+ * (`src/features/services/data/getContent.ts`) already reads every overlay
+ * through `localize`. 372 Sinhala and 372 Tamil strings were deleted across
+ * its 16 overlays (`atHome`, `clinics`, `diagnostics`, `emergency`, `groups`,
+ * `indexContent`, `surgical`, `womenChildren`, each `.si.ts` / `.ta.ts`),
+ * every one of them a `title` / `directoryTitle` / `cta` / `aboutHead` /
+ * `steps[].title` on a catalog service, a section eyebrow or heading, a
+ * card title, a link label, or a filter chip (`groupLabels`). No overlay
+ * file was deleted: every one still exports the same names, some now with
+ * an emptied object (`{}`) or dictionary where every key was English, which
+ * `localize` treats identically to a missing key. FAQ questions and answers,
+ * body paragraphs and descriptions were left translated throughout.
+ *
  * A future scope may need a similar check before it is swept: read the
  * feature's own getter (`getContent.ts` or equivalent) for whether it reads
  * an overlay directly or through `localize` before deleting from it.
@@ -98,5 +111,4 @@ export const PENDING_REGISTER_SWEEP: ReadonlySet<string> = new Set([
   "network",
   "pharmacy",
   "school-wellness",
-  "services",
 ]);
