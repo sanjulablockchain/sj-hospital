@@ -12,26 +12,58 @@ Sinhala site with English words in it. The owner's correction is the opposite
 emphasis: **the page's structure stays English, and the explanation is
 translated.** A reader scans in English and reads in their own language.
 
+## Six rulings, 2026-09-09
+
+`register-policy-report.md` (the policy build) raised six ambiguities in the
+table below. The owner ruled on all six, and the tables in this document
+already reflect the outcome; this section is the record of what changed and
+why.
+
+1. **`heroFacts` goes English.** "Hero sections, entirely" reaches the fact
+   strip beside the hero (`heroFacts[].k` / `.v`, "Refurbishment" / "USD 1
+   million") even though it is not the eyebrow, heading, or standfirst by
+   name: it sits inside the hero. Moved roughly 91 strings per language.
+2. **Display `tag` values go English** on media items and gallery items
+   (`mediaItems[].tag`, `gallery[].tag`). They are the same kind of short
+   category label as the filter chips, which are already English; left
+   translated, a Sinhala tag would sit directly under an English chip meaning
+   the same thing.
+3. **Page `<title>` goes English** (`pageMetadata.*.title`). A page name is a
+   topic, and a tab title must not disagree with the menu label for the same
+   page.
+4. **Page `description` stays translated** (`pageMetadata.*.description`). It
+   is prose, and it is what a Sinhala reader sees in a search result.
+5. **All CTA and link labels go English**, not only the Book CTA. The
+   broad category the policy already encoded (~211 strings per language)
+   stands: a CTA is scaffolding, the same as nav, and the reader scans and
+   navigates in English before reading in their own language.
+6. **Filter controls go English**: `clearFilters`, `allSpecialities`, and the
+   filter row's `searchPlaceholder`. They belong to the filter row, which is
+   now English, not to a patient-facing data-entry form. Form labels and
+   error messages on the contact and career forms stay translated, per the
+   row above.
+
 ## Stays English, in every language
 
 | What | Examples |
 |---|---|
-| **The Book CTA** | `bookNow`, every "Book now" button, in the header, the rail and in-page |
+| **CTA and link labels** | not only the Book CTA: every link label and every button, `bookNow`, "Book now" in the header, the rail and in-page, jump cards, contact rows, apply rows |
 | **Nav bar** | every menu label, in the header, the mobile panel and breadcrumbs |
 | **Footer** | column headings, link labels, the tagline, "Reach us", "Call us" |
-| **Hero sections, entirely** | eyebrow, heading, and the descriptive paragraph under it, on every page |
+| **Hero sections, entirely, including the fact strip** | eyebrow, heading, the descriptive paragraph under it, and the `k`/`v` fact chips beside it ("Refurbishment / USD 1 million"), on every page |
 | **Section eyebrows** | `/01 EMERGENCY and OPD`, `08 / Cleanliness and safety` |
 | **Section headings** | the large display headings inside every page section |
 | **Card and article titles** | service cards, health-tip articles, job openings, news items |
-| **Filter and category chips** | `All`, `Emergency`, `Surgical`, `Diagnostics`, `Clinic`, `Women & Children`, `At home` |
+| **Filter and category chips, and the filter row around them** | `All`, `Emergency`, `Surgical`, `Diagnostics`, `Clinic`, `Women & Children`, `At home`; also each card's own display tag when it sits under a chip meaning the same thing (`mediaItems[].tag`, `gallery[].tag`); also the filter row's own controls (`clearFilters`, `allSpecialities`, `searchPlaceholder`), which are not form fields |
+| **Page `<title>`** | `pageMetadata.*.title`: a page name, and a tab title must not disagree with the menu label for the same page |
 
 ## Gets translated
 
 | What | Why |
 |---|---|
-| **Body paragraphs and descriptions** | the explanation a reader actually reads |
+| **Body paragraphs and descriptions, including page meta descriptions** | the explanation a reader actually reads; `pageMetadata.*.description` is prose and what a Sinhala or Tamil reader sees in a search result, unlike the `<title>` beside it |
 | **Health-tips clinical content** | symptoms, first aid steps, dengue warning signs, screening advice: the highest-consequence copy on the site |
-| **Form labels and error messages** | what a patient reads when a form rejects what they typed |
+| **Form labels and error messages** | what a patient reads when a form rejects what they typed; this is the contact and career forms specifically, not the filter row above, which looks similar but is chrome now that its chips are English |
 | **FAQ questions and answers** | the accordion Q&A on service pages |
 
 ## The consequence for an article, spelled out

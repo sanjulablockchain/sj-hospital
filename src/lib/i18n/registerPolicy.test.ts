@@ -68,11 +68,28 @@ const ENGLISH: [string, string, string][] = [
   ["categoryLabels.All", "chip", "All"],
   ["departmentLabels.Nursing", "chip", "Nursing"],
   ["newsroomCopy.allLabel", "chip", "All"],
+  // Ruling 2: display tags on media items and gallery items are the same
+  // kind of short category label as the filter chips above.
+  ["mediaItems[0].tag", "chip", "News"],
+  ["gallery[0].tag", "chip", "Exterior"],
+  // Ruling 6: filter controls that are not chips by name, but belong to the
+  // same now-English filter row.
+  ["directory.clearFilters", "chip", "Clear filters"],
+  ["directory.allSpecialities", "chip", "All specialities"],
+  ["directory.searchPlaceholder", "chip", "Search a doctor or speciality…"],
 
   ["NAV_LABELS.About us", "nav", "About us"],
   ["chromeCopy.language", "nav", "Language"],
   ["FOOTER_HEADINGS.Booking", "footer", "Booking"],
   ["chromeCopy.tagline", "footer", "Compassionate, patient centered care..."],
+
+  // Ruling 1: heroFacts is hero content, "hero sections, entirely".
+  ["heroFacts[0].k", "hero", "Refurbishment"],
+  ["heroFacts[0].v", "hero", "USD 1 million"],
+
+  // Ruling 3: a route's <title> is a page name and must match its nav label.
+  ["pageMetadata.aboutUs.title", "pageTitle", "About Us | St. Joseph Hospital Negombo"],
+  ["pageMetadata.home.title", "pageTitle", "St. Joseph Hospital Negombo | To Live Is a Privilege"],
 ];
 
 const TRANSLATED: [string, string][] = [
@@ -103,16 +120,15 @@ const TRANSLATED: [string, string][] = [
   ["myths[0].a", "myth answer, clinical body copy"],
 
   ["contactCta.body", "the contactCta SECTION's paragraph, not a CTA label"],
-  ["heroFacts[0].k", "a hero fact chip, not the eyebrow, heading or standfirst"],
-  ["heroFacts[0].v", "a hero fact chip"],
   ["factStrip[1].label", "a fact strip caption: 'Written by'"],
   ["pharmacy.stats[0].label", "a stat caption: 'Counter hours'"],
   ["theatreFigures[0].label", "a stat caption: 'Recovery nursing'"],
   ["stations[4].more", "descriptive copy despite the key name: 'Catches: the back row problem'"],
   ["articles[0].lede", "body copy"],
+  ["articles[0].tag", "a per-card tag that doubles as the health-tips filter key, isUntranslatable, not this policy's concern; also not mediaItems or gallery"],
   ["clinicServices[0].tags[1]", "a per-card chip describing the card, not a filter chip"],
-  ["pageMetadata.aboutUs.title", "a route <title>, not a card or article title"],
-  ["pageMetadata.home.description", "a meta description, which is prose"],
+  ["pageMetadata.home.description", "a meta description, which is prose (ruling 4)"],
+  ["pageMetadata.aboutUs.description", "a meta description, which is prose (ruling 4)"],
 ];
 
 test("every path the policy calls English is classified with the right reason", () => {

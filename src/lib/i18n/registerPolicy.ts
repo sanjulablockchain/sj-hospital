@@ -48,7 +48,8 @@ export type RegisterReason =
   | "cta"
   | "chip"
   | "nav"
-  | "footer";
+  | "footer"
+  | "pageTitle";
 
 /** Human wording for each reason, used in the audit output and failures. */
 export const REGISTER_REASONS: Record<RegisterReason, string> = {
@@ -60,6 +61,7 @@ export const REGISTER_REASONS: Record<RegisterReason, string> = {
   chip: "filter or category chip",
   nav: "nav label",
   footer: "footer heading, link label or tagline",
+  pageTitle: "route <title> (a page name, must match its nav label)",
 };
 
 /**
@@ -140,12 +142,20 @@ const CLINICAL_ROOTS = new Set([
 ]);
 
 /**
- * `pageMetadata` is a route's `<title>` and meta `description`. A `<title>` is
- * not a card or an article title, and a meta description is prose, so neither
- * row of the rule table reaches this module. See the report for why this is
- * left as an open question rather than decided here.
+ * `pageMetadata` is a route's `<title>` and meta `description`, in
+ * `src/config/pageMetadata.ts`. The owner ruled on both, 2026-09-09:
+ *
+ * - The `<title>` goes English (ruling 3). A page name is a topic, not a
+ *   sentence, and a tab title must not disagree with the menu label for the
+ *   same page: `NAV_LABELS` is now English, so `pageMetadata.*.title` has to
+ *   match.
+ * - The `description` stays translated (ruling 4). It is prose, and it is
+ *   what a Sinhala or Tamil reader actually sees under the link in a search
+ *   result.
  */
-const METADATA_ROOTS = new Set(["pageMetadata"]);
+function pageMetadataReason(leaf: string): RegisterReason | null {
+  return leaf === "title" ? "pageTitle" : null;
+}
 
 /* ------------------------------------------------------------------ *
  * The rule table itself.
@@ -160,13 +170,13 @@ const METADATA_ROOTS = new Set(["pageMetadata"]);
  * instead, and that paragraph is literally the "descriptive paragraph under
  * it" the rule names, so it belongs here.
  *
- * `heroFacts` is deliberately NOT here. It is the strip of `k`/`v` fact chips
- * beside the hero ("Refurbishment / USD 1 million"), which is neither the
- * eyebrow, the heading, nor the descriptive paragraph the rule enumerates.
- * Flipping that decision means adding "heroFacts" to this set and nothing
- * else; it moves 91 Sinhala and 91 Tamil strings.
+ * `heroFacts` is here too, per the owner's ruling on 2026-09-09: it is the
+ * strip of `k`/`v` fact chips beside the hero ("Refurbishment / USD 1
+ * million"), and "hero sections, entirely" reaches a fact strip that sits
+ * inside the hero even though it is not the eyebrow, the heading, or the
+ * standfirst by name. This moved 91 Sinhala and 91 Tamil strings.
  */
-const HERO_ROOTS = new Set(["hero", "heroStandfirst"]);
+const HERO_ROOTS = new Set(["hero", "heroStandfirst", "heroFacts"]);
 
 /**
  * Section eyebrows: the small `/01 Emergency & OPD` line above a heading.
@@ -266,15 +276,24 @@ const LINK_LABEL_PARENTS = new Set([
  * CTA and link labels. The Book CTA is called out in its own row of the rule
  * table and is the same thing.
  *
+ * Ruling 5 (2026-09-09): the owner confirmed the broad category, not only the
+ * Book CTA. "All CTA and link labels go English." A CTA is scaffolding, the
+ * same as nav: the reader scans and navigates in English and reads in their
+ * own language. This keeps the ~211 per-language total the policy already
+ * encoded rather than shrinking it to the ~20 that would be left if only
+ * `bookNow` and its siblings qualified.
+ *
  * The `cta` test is on the LEAF only, on purpose: `contactCta` is also the
  * name of a whole section object whose `body` is a paragraph and whose
  * `heading` is a heading, and a segment-wide test would have deleted that
  * paragraph.
  *
- * Not here, and translated: `form.submit` and its siblings, which are the
- * submit button of a form the rule table protects; `clearFilters`; and
- * `stations[].more`, which despite its name holds descriptive copy rather
- * than a "more" link.
+ * Not here: `form.submit` and its siblings, which are the submit button of a
+ * form the rule table protects and stay translated; `stations[].more`, which
+ * despite its name holds descriptive copy rather than a "more" link, and also
+ * stays translated; and `clearFilters` / `allSpecialities` /
+ * `searchPlaceholder`, which go English under ruling 6 but as `isChip` below,
+ * not here, because they belong to the filter row rather than to a CTA.
  */
 const CTA_LEAVES = new Set([
   "linkLabel",
@@ -312,11 +331,26 @@ function isCta(segs: string[], leaf: string): boolean {
  * `groupLabels` in services, `departmentLabels` in career. `newsroomCopy.allLabel`
  * is the "All" chip of a list whose other chips come from such a dictionary.
  *
- * Per-card chips are NOT here: `articles[].tag`, `news[].tag`,
+ * Per-card chips are mostly NOT here: `articles[].tag`, `news[].tag`,
  * `<x>Services[].tags[]` and `orgGroups[].orgs[].chips[]` describe the card
- * they sit on. See the report: `articles[].tag` holds the same string as the
- * chip above the list, so this split is the one place the policy may need the
- * owner's word.
+ * they sit on and stay translated. The one exception is ruling 2, below.
+ *
+ * Ruling 2 (2026-09-09): `mediaItems[].tag` (home's media teaser, "News",
+ * "Report", "Press", "Gallery") and `gallery[].tag` (the media page's photo
+ * grid, "Exterior", "Clinical team", "Brand") are display chips of the exact
+ * same kind as the filter chips above, not a fact the card is reporting on
+ * itself the way `articles[].tag` is (that one doubles as the health-tips
+ * filter key and is already `isUntranslatable`). Left translated, a Sinhala
+ * tag would sit directly under an English filter chip meaning the same
+ * thing, which is the mixed row the rule document warns against. This moved
+ * 7 Sinhala and 7 Tamil strings.
+ *
+ * Ruling 6 (2026-09-09): `clearFilters`, `allSpecialities` and
+ * `searchPlaceholder` (e-channeling's directory filter row) go English too.
+ * They sit in the same control row as the chips above, which are now
+ * English, and the ruling is explicit that this is about the filter row, not
+ * about form fields: the contact and career forms' own labels and error
+ * messages are unaffected, and stay translated by the `form` guard above.
  */
 function isChip(segs: string[], leaf: string): boolean {
   if (
@@ -326,15 +360,21 @@ function isChip(segs: string[], leaf: string): boolean {
   ) {
     return true;
   }
-  return leaf === "allLabel";
+  if (leaf === "allLabel") return true;
+  if (leaf === "tag") return segs[0] === "mediaItems" || segs[0] === "gallery";
+  return leaf === "clearFilters" || leaf === "allSpecialities" || leaf === "searchPlaceholder";
 }
 
 /**
  * Why this path is English, or `null` if it is translated.
  *
- * Order matters: the guards come first so that assistive text, clinical
- * content and page metadata cannot be reached by a later rule, and the nav and
- * footer dictionaries come next because they are whole-file decisions.
+ * Order matters: the guards come first so that assistive text and clinical
+ * content cannot be reached by a later rule. `pageMetadata` is resolved as
+ * its own root right after them, before any generic rule, so that its
+ * `description` (translated) cannot fall through to a rule that would
+ * misclassify it and its `title` (English) does not depend on also matching
+ * `isCardTitle` below. The nav and footer dictionaries come next because they
+ * are whole-file decisions.
  */
 export function registerReason(path: string): RegisterReason | null {
   const segs = segments(path);
@@ -345,7 +385,11 @@ export function registerReason(path: string): RegisterReason | null {
   // Guards.
   if (isAssistiveText(segs, leaf)) return null;
   if (CLINICAL_ROOTS.has(root)) return null;
-  if (METADATA_ROOTS.has(root)) return null;
+  // `pageMetadata` splits between the two rulings above: `title` English,
+  // `description` (and everything else under the root) translated. Handled
+  // as its own root, before the generic rules below, because `description`
+  // must never fall through to a later rule by accident.
+  if (root === "pageMetadata") return pageMetadataReason(leaf);
   // "Form labels and error messages" is its own row of the "gets translated"
   // table. Every form field label, placeholder, status line and validation
   // message in this codebase sits under a `form` object or in a
