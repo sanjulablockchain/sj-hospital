@@ -5,46 +5,34 @@
 // site-wide terms stay in English rather than being replaced by a literary
 // coinage nobody says out loud.
 //
-// "Media", "Press desk", "Newsroom", "Image library" and "Filming and
-// privacy" already have a site-wide translation in navigationLabels.si.ts for
-// this exact page's own header and footer links, so `hero.breadcrumbCurrent`,
-// `sectionEyebrows.press`, `sectionEyebrows.newsroom`,
-// `sectionEyebrows.gallery`, `jumpCards[0].label`, `jumpCards[1].label`,
-// `jumpCards[3].label` and `enquiryKitCta` reuse those exact strings rather
-// than inventing a second translation of the same English phrase; "Media"
-// itself is also KEEPS_ENGLISH there for the same reason and stays KEEPS_
-// ENGLISH here at `hero.breadcrumbCurrent`. "Press kit" (this page's own
-// eyebrow and `jumpCards[2].label`) is a different, shorter English phrase
-// from the nav dictionary's "Press kit and logos", so it is its own
-// translation, built from the same root word ("මාධ්‍ය කට්ටලය") rather than a
-// second unrelated coinage.
-//
 // "Logo" stays in English throughout, the same way the nav dictionary's own
 // "Press kit and logos" -> "මාධ්‍ය කට්ටලය සහ Logo" keeps it. "Communications"
 // stays in English as the shorthand for the press desk's own department
 // inside a sentence (`pressIntro`, `spokespeopleIntro1`, `rules[0].a`,
 // `rules[6].a`), the same register that keeps "Reception" and "OPD" in
-// English elsewhere on the site; `desk[0].title`, which is the bare
-// department name "Corporate Communications" with nothing else in the
-// field, is recorded in KEEPS_ENGLISH in content.i18n.test.ts rather than
-// silently swept in, since a bare proper noun is exactly the kind of string
-// the sibling test is there to catch.
+// English elsewhere on the site.
 //
-// Press release and news item titles are quoted material: `news[*].title`
-// and `featured.title` (the same fact, restated per the recipe's own
-// "restate rather than omit" rule) are left exactly as written and recorded
-// in KEEPS_ENGLISH, because translating a quotation misrepresents it.
-// Everything around a quotation, the framing and the descriptions, does
-// translate: every `news[*].lede`, `featured.lede` and `featured.kickerDate`'s
-// sibling `featured.type` translate in full.
+// The register sweep (2026-09-09) deleted `hero` entirely, every
+// `sectionEyebrows` entry, every `jumpCards[*].label`, `enquiryKitCta` and
+// `enquiryInterviewCta`, every `desk[*].title`/`news[*].title`/
+// `featured.title`/`gallery[*].title` (card titles, the policy's own naming
+// for them; this also supersedes the file's former "quoted material, kept
+// English" framing for `news[*].title`/`featured.title`, since those paths
+// now render from the base regardless of locale rather than being an
+// overlay decision at all) and `gallery[*].tag` (ruling 2 in
+// docs/superpowers/i18n-register-rule.md: a display chip of the same kind
+// as a filter chip). Everything around a former quotation, the framing and
+// the descriptions, is untouched and still translates: every `news[*].lede`,
+// `featured.lede` and `featured.type`.
 //
 // `newsCategories` and `news[*].tag` are excluded from parity entirely
 // (content.i18n.test.ts): they are the structural category identity
 // `NewsroomSection`'s own filter state and `===` comparisons key off, not
 // copy, the same role `.glyph` plays elsewhere. `categoryLabels` right next
-// to them carries the six translated words a reader actually sees for the
-// same six categories, so every one of those does translate, keeping this
-// file consistent with itself.
+// to them used to carry the six translated words a reader actually sees for
+// the same six categories; the sweep emptied it too, since the filter chip
+// row is English throughout (the same "Filter and category chips" rule row
+// as `library.si.ts`'s own `categoryLabels` in health-tips).
 //
 // Sentence forms use the polite plural ("කරන්න"), the same register
 // `contact`'s own content.si.ts uses throughout.
@@ -60,39 +48,9 @@
  */
 export const __review = { status: "draft", reviewer: null, date: null } as const;
 
-export const hero = {
-  breadcrumbHome: "මුල් පිටුව",
-  // Reused verbatim from navigationLabels.si.ts's "Media", which is itself
-  // KEEPS_ENGLISH there for the same reason: this is how a Sri Lankan reader
-  // actually sees the word, in English, on an otherwise Sinhala page, and
-  // this page's own header nav already prints it untranslated.
-  breadcrumbCurrent: "Media",
-  // Reused root word from navigationLabels.si.ts's "Press desk" -> "මාධ්‍ය
-  // මේසය".
-  strapline: "මාධ්‍ය මේසය එදිනම උත්තර දෙනවා",
-  headingLine1: "අප කියන දේ",
-  headingOutline: "නිල වශයෙන්.",
-  headingAccent: "සැමවිටම.",
-  standfirst:
-    "රෝහලේ පුවත්, සායනික සන්ධිස්ථාන, ප්‍රජා වැඩසටහන් සහ මාධ්‍යවේදියෙකුට නිවැරදිව වාර්තා කරන්න අවශ්‍ය හැම දෙයක්ම: නම් සහිත කථිකයන්, අනුමත Logo, High Resolution ඡායාරූප සහ එදිනම උත්තර දෙන මේසයක්.",
-  ctaPrimary: "පුවත් කාමරය බලන්න",
-  ctaSecondary: "මාධ්‍ය කට්ටලය බලන්න",
-};
+export const hero = {};
 
-export const sectionEyebrows = {
-  // Reused verbatim from navigationLabels.si.ts's "Newsroom" -> "පුවත් කාමරය".
-  newsroom: "01 / පුවත් කාමරය",
-  // Reused verbatim from navigationLabels.si.ts's "Press desk" -> "මාධ්‍ය
-  // මේසය".
-  press: "02 / මාධ්‍ය මේසය",
-  kit: "03 / මාධ්‍ය කට්ටලය",
-  // Reused verbatim from navigationLabels.si.ts's "Image library" -> "රූප
-  // එකතුව".
-  gallery: "04 / රූප එකතුව",
-  spokespeople: "05 / කතා කරන්නේ කවුද",
-  usage: "06 / මූලික නීති",
-  enquiry: "07 / අවසන් දිනට",
-};
+export const sectionEyebrows = {};
 
 export const tickerItems: readonly string[] = [
   "පුවත් නිවේදන",
@@ -104,33 +62,21 @@ export const tickerItems: readonly string[] = [
 ];
 
 export const heroFacts = [
-  { k: "මාධ්‍ය මේසයේ Reply", v: "එදිනම" },
-  { k: "සම්මුඛ සාකච්ඡා", v: "නම් සහිත විශේෂඥයන්" },
-  { k: "රෝගී තොරතුරු", v: "කැමැත්තෙන් තොරව කවදාවත් නෑ" },
-  { k: "සම්පත්", v: "Print Resolution, නොමිලේ" },
+  {},
+  {},
+  {},
+  {},
 ];
 
-export const categoryLabels = {
-  "Press releases": "පුවත් නිවේදන",
-  Clinical: "සායනික",
-  Community: "ප්‍රජා",
-  Awards: "සම්මාන",
-  Events: "සිදුවීම්",
-  "In the news": "පුවත්වල",
-};
+export const categoryLabels = {};
 
 export const newsroomCopy = {
-  headingAll: "රෝහලේ නවතම පුවත්",
-  allLabel: "සියල්ල",
   itemsCountTemplate: "අයිතම {total} න් {shown}ක්",
   forJournalists: "මාධ්‍යවේදීන් සඳහා",
 };
 
 export const featured = {
   kickerDate: "අගෝස්තු 2026",
-  // Quoted material: restated rather than translated. See KEEPS_ENGLISH in
-  // content.i18n.test.ts, and note `news[0].title` restates the same fact.
-  title: "New endoscopy suite opens on the second floor",
   lede: "වෙන් වූ Procedure කාමර දෙකක් සහ වෙනම Recovery Bay එකක් සමඟ, රෝග විනිශ්චය සඳහා වන Gastroscopy සහ Colonoscopy සඳහා රැඳී සිටින කාලය සතියකට වඩා අඩුවෙයි. Suite එක දින හයක් ක්‍රියාත්මක වන අතර, Sedation එක Anaesthetic කණ්ඩායම විසින් හසුරුවනු ලබන අතර, Procedure එකේදී ලබාගත් Biopsy සඳහා එදිනම Report කිරීමකි.",
   date: "14 අගෝස්තු 2026",
   type: "පුවත් නිවේදනය",
@@ -145,93 +91,75 @@ export const featured = {
 export const news = [
   {
     date: "අගෝස්තු 2026",
-    // Quoted material: restated rather than translated, matching featured.title.
-    title: "New endoscopy suite opens on the second floor",
     lede: "වෙන් වූ Procedure කාමර දෙකක් සහ වෙනම Recovery Bay එකක්, රෝග විනිශ්චය Gastroscopy සහ Colonoscopy සඳහා රැඳී සිටින කාලය සතියකට වඩා අඩු කරයි.",
   },
   {
     date: "ජූලි 2026",
-    title: "24 hour pharmacy service extended to the outpatient wing",
     lede: "OPD පිවිසුම අසල Dispensary කවුන්ටරය දැන් රාත්‍රිය පුරාම විවෘතව පවතින නිසා, Discharge Prescription එකකට උදෑසන එනතුරු රැඳී සිටින්න අවශ්‍ය නෑ.",
   },
   {
     date: "ජූලි 2026",
-    title: "One thousandth laparoscopic gallbladder removal",
     lede: "සාමාන්‍ය ශල්‍ය අංශය තම දහසවන Keyhole Cholecystectomy සම්පූර්ණ කළේ, සාමාන්‍ය ශල්‍යකර්මයෙන් පසු රැඳී සිටීම රාත්‍රි දෙකකි.",
   },
   {
     date: "ජූනි 2026",
-    title: "Diabetic foot clinic reports fewer amputations",
     lede: "Vascular සහ Podiatry දායකත්වය සහිත සතිපතා ඒකාබද්ධ Clinic එකක් නිසා, සුව නොවන තුවාල ඇති රෝගීන් යොමු කරන ආකාරය වෙනස් වී ඇත.",
   },
   {
     date: "මැයි 2026",
-    title: "Round the clock echocardiography for chest pain",
     lede: "හෘද රූප ගැනීම දැන් හදිසි අංශයේ රාත්‍රියේත් ලබාගත හැකි වී ඇත, ඊළඟ වැඩ කරන උදෑසන එනතුරු රැඳී සිටීම වෙනුවට.",
   },
   {
     date: "අගෝස්තු 2026",
-    title: "School wellness programme reaches its fortieth school",
     lede: "මීගමුව සහ කටාන අධ්‍යාපන කලාප පුරා පාසල් දරුවන් සඳහා දෘෂ්ටි, ශ්‍රවණ, දන්ත සහ වර්ධන පරීක්ෂණ, පාසලට නොමිලේ.",
   },
   {
     date: "ජූලි 2026",
-    title: "Dengue prevention drive with the Municipal Council",
     lede: "Monsoon උච්චතමයට පෙර, නිවාස පරීක්ෂණ කණ්ඩායම් සහ වාට්ටු හයක් පුරා භාජන ඉවත් කිරීමේ ව්‍යාපාරයකි.",
   },
   {
     date: "ජූනි 2026",
-    title: "Free blood pressure and sugar camp at the fish market",
     lede: "සති අන්ත දෙකක් තුළ පුද්ගලයන් නවසීයක් පරීක්ෂා කරන ලද අතර, ඔවුන්ගේ ප්‍රතිඵල පිළිබඳ පළමු නිසි උපදේශනයක් සඳහා පස්වන කොටසක් යොමු කරන ලදී.",
   },
   {
     date: "අප්‍රේල් 2026",
-    title: "Blood donation drive with the parish",
     lede: "St. Mary's පල්ලිය සමඟ ඒකාබද්ධ ව්‍යාපාරයක් රෝහල සහ ජාතික රුධිර පාරවිලයන සේවය සඳහා ඒකක එකතු කළේය.",
   },
   {
     date: "ජූනි 2026",
-    title: "Recognition for infection prevention practice",
     lede: "ආසාදන පාලන කණ්ඩායම, අත් සනීපාරක්ෂාව සහ ශල්‍ය ස්ථාන ආසාදන අධීක්ෂණය සම්බන්ධයෙන් පිළිගැනීමට ලක් විය.",
   },
   {
     date: "මාර්තු 2026",
-    title: "Nursing excellence award for the critical care unit",
     lede: "දැඩි සත්කාර Nursing කණ්ඩායමට රෝගී ආරක්ෂාව සහ පවුල් සන්නිවේදනය සම්බන්ධයෙන් ජාතික සම්මානයක් හිමි විය.",
   },
   {
     date: "සැප්තැම්බර් 2026",
-    title: "World Heart Day open clinic",
     lede: "ප්‍රධාන Lobby එකේ නොමිලේ අවදානම් තක්සේරුව, රුධිර පීඩන සහ Lipid පරීක්ෂණ, දවස පුරාම හෘද විශේෂඥයන් සමඟ.",
   },
   {
     date: "අගෝස්තු 2026",
-    title: "Antenatal education series begins",
     lede: "ප්‍රසූතිය, පෝෂණය, අලුත උපන් සත්කාරය සහ ගෙදර පළමු සති හය ආවරණය කරන අපේක්ෂිත දෙමාපියන් සඳහා සති හයක පාඨමාලාවකි.",
   },
   {
     date: "මැයි 2026",
-    title: "Nurses Day and long service recognition",
     lede: "Nursing නිලධාරීන් හතළිස් දෙනෙක් සේවය සම්බන්ධයෙන් පිළිගැනුනු අතර, තිදෙනෙක් රෝහලේ අවුරුදු විස්සකට වඩා සේවය කර ඇත.",
   },
   {
     date: "ජූලි 2026",
-    title: "Consultant physician on the monsoon dengue rise",
     lede: "අපගේ Physicians වන් ජාතික රූපවාහිනී සහ මුද්‍රිත මාධ්‍ය සමඟ මුල් අවවාද ලක්ෂණ සහ හතරවන දින Platelet පහත වැටීම ගැන සාකච්ඡා කළහ.",
   },
   {
     date: "ජූනි 2026",
-    title: "Comment on kidney disease in outdoor workers",
     lede: "පුනරාවර්තන ජල හිඟය සහ ක්ෂේත්‍ර සහ ඉදිකිරීම් සේවකයන් අතර නිදන්ගත වකුගඩු රෝගය පිළිබඳ Nephrology දෘෂ්ටිකෝණයකි.",
   },
   {
     date: "පෙබරවාරි 2026",
-    title: "Interview: what an accredited hospital actually means",
     lede: "Accreditation ගුණාත්මක ප්‍රමිතීන්, Audit සහ එදිනෙදා සායනික භාවිතය වෙනස් කරන්නේ කෙසේද යන්න පිළිබඳ අපගේ Medical Director.",
   },
 ];
 
-export const pressHeading = { line1: "අංකයක්,", line2: "Inbox එකක්,", line3: "දුවගෙන යාමක් නෑ" };
+export const pressHeading = {};
 export const pressIntro =
   "Corporate Communications, සතියේ දිනවල උදේ 8 සිට හවස 5 දක්වා Staff කරලා, ඒ වේලාවෙන් පිටත වන හදිසි පුවත් සඳහා Duty Phone එකක් සමඟ. අපට Comment කරන්න බැරි වෙලාවක් ඔබට කියනවා, ඇයි කියලත් කියනවා, නිහඬව ඉන්නවා වෙනුවට.";
 export const pressPhoneTemplate = "{phone}, Communications එක ඉල්ලන්න";
@@ -239,58 +167,41 @@ export const pressPhoneTemplate = "{phone}, Communications එක ඉල්ල�
 export const desk = [
   {
     kind: "පළමු සම්බන්ධතාවය",
-    // Bare department name: kept English. See KEEPS_ENGLISH in
-    // content.i18n.test.ts.
-    title: "Corporate Communications",
     body: "සම්මුඛ සාකච්ඡා ඉල්ලීම්, රූගත කිරීම්, ප්‍රකාශ සහ කරුණු පරීක්ෂා කිරීම් ඇතුළුව සෑම Media ඉල්ලීමක්ම පටන් ගන්නේ මෙතනින්. අපි එය යොමු කරලා, ඔබ File කරනතුරු එම Thread එකේම ඉන්නවා.",
   },
   {
     kind: "වේලාවන්",
-    title: "සතියේ දිනවල උදේ 8 සිට හවස 5",
     body: "වැඩ කරන දවස පුරාම Staff කරලා, රාත්‍රියේ සහ සති අන්තවල හදිසි පුවත් සඳහා ප්‍රධාන රෝහල් අංකය හරහා ලබාගත හැකි Duty Phone එකක් සමඟ.",
   },
   {
     kind: "Reply",
-    title: "එදිනම",
     body: "ඔබේ Deadline එක Subject Line එකේ දාන්න, අපි වැඩ කරන දවස තුළම Reply කරන්නම්, හරිම වෛද්‍යවරයා ලබාගන්න හෙට වෙනකන් ඕන කියලා Reply එක වුනත්.",
   },
   {
     kind: "සම්මුඛ සාකච්ඡා",
-    // "Consultant" here is an ordinary noun ("the specialist who does the
-    // work"), not a title sitting directly in front of a role, so it
-    // translates like heroFacts[1].v and tickerItems[1] do, not like
-    // featured.points[1]'s "Consultant Gastroenterologist". See the
-    // distinction recorded above `topics` below.
-    title: "වැඩේ කරන විශේෂඥයා, Script එකක් නෙවෙයි",
     body: "ඇත්තටම වැඩේ කරන විශේෂඥයා සමඟ ඔබව සම්බන්ධ කරනවා. Topic එකයි Deadline එකයි දෙන්න, ලබාගත හැක්කේ කවුද කියලා අපි අවංකවම කියන්නම්.",
   },
   {
     kind: "ප්‍රකාශ",
-    title: "වගකිව හැකි සහ දිනගත කළ",
     body: "ප්‍රකාශ ලිඛිතව නිකුත් කරලා, Title එකත් සමඟ නම් සහිත පුද්ගලයෙකුට Attribute කරලා, දිනගත කරලා. අපි Background එකේ කතා කරලා පස්සේ ප්‍රතික්ෂේප කරන්නේ නෑ.",
   },
   {
     kind: "කරුණු පරීක්ෂාව",
-    title: "කොටස අපිට එවන්න",
     body: "Publish කරන්න කලින් අපි Quotation එකක්, සායනික Claim එකක්, නමක් හෝ Title එකක් Check කරන්නම්. ඔබට Correction එකකට වඩා ඉක්මන්, අපිටත් හොඳයි.",
   },
   {
     kind: "අනතුරු",
-    title: "පළමුව Holding Statement එකක්",
     body: "පොදු අනතුරක දී, හඳුනාගැනීමේ විස්තර නොමැතිව සත්‍ය සංඛ්‍යා සහ පොදු තත්ත්වය අපි නිකුත් කරලා, පින්තූරය පැහැදිලි වෙනකොට Update කරනවා. Clinicians වරු රෝගීන් සමඟම ඉන්නවා.",
   },
   {
     kind: "මේ මේසය නෙවෙයි",
-    title: "Commercial ඉල්ලීම්",
     body: "Advertising, Sponsorship සහ Supplier යෝජනා Marketing කණ්ඩායමට යවන්න, මාධ්‍ය මේසයට නෙවෙයි. Deadline එකේ ඉන්න Journalist කෙනෙක්ට ඒක ප්‍රමාද කරනවා.",
   },
 ];
 
-export const kitHeading = { line1: "ඔබට ඕන දේ", line2: "අරගන්න" };
+export const kitHeading = {};
 export const kitIntro =
   "St. Joseph Hospital, Negombo ට Credit දෙමින්, වෙනස් නොකර Editorial ආවරණයේදී නොමිලේ භාවිතා කරන්න. Advertising එකකදී හෝ භාණ්ඩයක Use කරන්න කලින් අපෙන් අහන්න.";
-export const kitRequestCta = "සම්පූර්ණ කට්ටලය ඉල්ලන්න";
-export const kitRulesCta = "භාවිත නීති කියවන්න";
 
 export const kit = [
   {
@@ -331,29 +242,23 @@ export const kit = [
   },
 ];
 
-export const galleryHeading = { line1: "ප්‍රකාශනයට", line2: "අනුමතයි" };
+export const galleryHeading = {};
 export const galleryIntro =
   "මෙතන තියෙන හැම ඡායාරූපයක්ම Editorial භාවිතය සඳහා අනුමතයි. ලිඛිත කැමැත්තක් File එකේ නැතුව, කිසිදු Resolution එකකින් හඳුනාගත හැකි රෝගියෙක් පෙන්වන කිසිවක් නිකුත් නොකෙරේ.";
 
 export const gallery = [
   {
-    tag: "බාහිර දර්ශනය",
-    title: "රාත්‍රියේ ප්‍රධාන ගොඩනැගිල්ල",
     credit: "සපයන ලද්දේ: St. Joseph Hospital, Negombo",
   },
   {
-    tag: "සායනික කණ්ඩායම",
-    title: "විශේෂඥයන් සහ Nursing Staff",
     credit: "සපයන ලද්දේ: St. Joseph Hospital, Negombo",
   },
   {
-    tag: "සන්නාමය",
-    title: "රෝහලේ Mark එක",
     credit: "වෙනස් නොකර Reproduce කරන්න, සම්පූර්ණ Mark එක පමණයි",
   },
 ];
 
-export const spokespeopleHeading = { line1: "හරි කෙනාව", line2: "ඉල්ලන්න" };
+export const spokespeopleHeading = {};
 export const spokespeopleIntro1 =
   "ඉල්ලීම් Communications හරහා යනවා, ඔවුන් ඔබව ඇත්තටම වැඩේ කරන Clinician සමඟ සම්බන්ධ කරනවා, ප්‍රකාශයක් කියවන පොදු කථිකයෙකු වෙනුවට.";
 export const spokespeopleIntro2 =
@@ -410,7 +315,7 @@ export const topics = [
   { k: "ප්‍රජා සහ පාසල් වැඩසටහන්", v: "ප්‍රජා සෞඛ්‍ය Coordinator" },
 ];
 
-export const rulesHeading = { line1: "රූගත කිරීම, නම්", line2: "සහ රෝගී", line3: "පුද්ගලිකත්වය" };
+export const rulesHeading = {};
 
 export const rules = [
   {
@@ -447,13 +352,9 @@ export const rules = [
   },
 ];
 
-export const enquiryHeading = { line1: "අද File කරනවද?", line2: "Subject එකේ", line3: "කියන්න." };
+export const enquiryHeading = {};
 export const enquiryIntro =
   "ඔබේ Outlet එක, Topic එක සහ Deadline එක පළමු පේළියේ දාන්න, අපි වැඩ කරන දවස ඇතුළත ආපහු එන්නම්. රාත්‍රී සහ සති අන්ත කතන්දර ප්‍රධාන රෝහල් අංකය හරහා Duty Phone එකට ළඟා වේ.";
-// Reused verbatim from navigationLabels.si.ts's "Press kit and logos" ->
-// "මාධ්‍ය කට්ටලය සහ Logo".
-export const enquiryKitCta = "මාධ්‍ය කට්ටලය සහ Logo";
-export const enquiryInterviewCta = "සම්මුඛ සාකච්ඡාවක් ඉල්ලන්න";
 
 export const jumpCards = [
   {
@@ -463,24 +364,20 @@ export const jumpCards = [
     // English derivation it protects against; there is no automated check
     // on the translated count itself.
     count: "අයිතම 17ක්",
-    label: "පුවත් කාමරය",
     note: "නිකුත් කිරීම්, සායනික සන්ධිස්ථාන, ප්‍රජා වැඩ.",
   },
   {
     count: "එක් Inbox එකක්",
-    label: "මාධ්‍ය මේසය",
     note: "කාටද කතා කරන්නේ, කොච්චර ඉක්මනින් Reply කරනවද.",
   },
   {
     // Derived from kit.length (9). Same staleness note as jumpCards[0].count.
     count: "සම්පත් 9ක්",
-    label: "මාධ්‍ය කට්ටලය",
     note: "Logo, ඡායාරූප, කරුණු පත්‍රිකාව, Boilerplate.",
   },
   {
     // Derived from rules.length (8). Same staleness note as jumpCards[0].count.
     count: "නීති 8ක්",
-    label: "රූගත කිරීම සහ පුද්ගලිකත්වය",
     note: "අපිට තහවුරු කරන්න පුළුවන් සහ බැරි දේ.",
   },
 ];
