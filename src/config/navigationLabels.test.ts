@@ -60,8 +60,9 @@ test("every footer heading in every config has Sinhala and Tamil", () => {
 //   hospitals and hotels alike print these in English rather than coining a
 //   Sinhala or Tamil equivalent nobody actually says.
 // - WhatsApp: kept for parity with the chrome's own KEEPS_ENGLISH in
-//   chromeCopy; it is not currently a nav label or a footer heading, but stays
-//   listed so one would not silently fail this test if it ever became one.
+//   chromeCopy.i18n.test.ts; it is not currently a nav label or a footer
+//   heading, but stays listed so one would not silently fail this test if it
+//   ever became one.
 const KEEPS_ENGLISH = new Set(["Media", "WhatsApp", "Pharmacy", "Standard", "Deluxe", "Super deluxe"]);
 
 const DICTIONARIES = [

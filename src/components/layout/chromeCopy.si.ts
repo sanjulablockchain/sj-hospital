@@ -1,8 +1,11 @@
 // Sinhala for the chrome's own hardcoded strings (header, mobile panel,
 // floating rail, both theme toggles, the language switcher). Written as a
-// full object rather than a partial: all twelve strings are translated, and
-// `chromeCopyFor` in chromeCopy.ts reads this synchronously without merging
-// through `localize`.
+// full object rather than a partial: all twelve keys are present, even
+// though one of the twelve values below is deliberately left identical to
+// its English source (see "WhatsApp" further down). `chromeCopyFor` in
+// chromeCopy.ts reads this synchronously without merging through
+// `localize`, so an object missing a key would render that string empty
+// rather than falling back to English.
 //
 // "WhatsApp" is left in English deliberately: it is the product name, the
 // same decision as everywhere else in the chrome and in the contact feature.

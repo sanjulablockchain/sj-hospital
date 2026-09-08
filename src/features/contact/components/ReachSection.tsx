@@ -4,7 +4,10 @@ import { SectionHead } from "./SectionHead";
 import type { ContactContent } from "../data/getContent";
 
 // Icons are JSX, so they stay here rather than in `data/content.ts`, keyed by
-// the same `label` each row already carries.
+// each row's structural `icon` field, never by its translatable `label`: the
+// pilot shipped exactly this file keying JSX off `label` once already, which
+// silently blanked four icons the moment the label was translated (recipe
+// pattern 1). `icon` is excluded from the parity test as a structural key.
 const ICONS: Record<string, React.ReactNode> = {
   location: <MapPinIcon className="h-5 w-5" />,
   phone: <PhoneIcon className="h-5 w-5" />,

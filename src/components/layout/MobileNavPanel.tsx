@@ -53,7 +53,10 @@ export function MobileNavPanel({ items }: MobileNavPanelProps) {
           </nav>
 
           {/* Book now is not repeated here: it now sits in the header row at
-              every width, so the menu carries the theme switch instead. */}
+              every width, so the menu carries the language and theme
+              switches instead. Since the server-side nav refactor (cf6d185),
+              `items` above arrives already translated (see the prop doc
+              above), so this component itself does no label translation. */}
           <div className="mt-3 border-t border-[var(--home-hairline)] pt-2">
             <LanguageMenuToggle onChoose={() => setIsOpen(false)} />
             <ThemeMenuToggle />

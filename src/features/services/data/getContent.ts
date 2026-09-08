@@ -32,21 +32,28 @@ import type { Service } from "../types";
  * ENGLISH order and structural lookups (slug, group), and this file layers
  * translated copy on top of it without changing its shape.
  *
- * TO ADD A GROUP'S TRANSLATION (parts 2 to 4, one of `surgical`,
- * `diagnostics`, `clinics`, `womenChildren`, `atHome`):
+ * TO ADD A GROUP'S TRANSLATION:
  *   1. Write `<file>.si.ts` and `<file>.ta.ts` beside the base file, each
  *      starting with the `__review` marker, the same shape `emergency.si.ts`
  *      / `emergency.ta.ts` already use.
  *   2. Add one entry to `GROUP_OVERLAYS` below:
  *      `<key>: { si: () => import("./<file>.si"), ta: () => import("./<file>.ta") }`.
- *   That is the only change this file needs. No component changes: every
- *   section already reads the combined, localized `services` array this
- *   getter returns, via `ServicesIndexPage` / `ServiceDetailPage`.
+ *   That is the only change THIS file needs for the translation to render:
+ *   every section already reads the combined, localized `services` array
+ *   this getter returns, via `ServicesIndexPage` / `ServiceDetailPage`.
  *
- * Add a group's translation and the parity test in
- * `content.i18n.test.ts` picks it up automatically too: its `MODULES` list
- * reads `GROUP_MODULES.map(...)` and `GROUP_OVERLAYS`, the same objects this
- * file exports, rather than a separately maintained list.
+ * That is NOT the only change the translation needs to be checked. Unlike
+ * `GROUP_MODULES` and `GROUP_OVERLAYS` here, `content.i18n.test.ts`'s
+ * `MODULES` is its own hand-maintained list of imports, not derived from
+ * either object this file exports, so step 2 above does not by itself make
+ * the parity/array-length/identity assertions run against the new overlay.
+ * What DOES catch a group registered here but never added to `MODULES` is
+ * `overlayCoverage.test.ts`: it walks the filesystem for every `.si.ts` /
+ * `.ta.ts` file and fails if no test file's imports name it, independent of
+ * which feature or list that test happens to be. So skipping the `MODULES`
+ * entry does not ship silently: the new overlay files show up there as
+ * "imported by no test" instead of passing the checks `content.i18n.test.ts`
+ * actually performs.
  */
 const MODULE_OVERLAYS = {
   groups: { si: () => import("./groups.si"), ta: () => import("./groups.ta") },
@@ -56,11 +63,12 @@ const MODULE_OVERLAYS = {
 /**
  * One entry per group-of-services data file, in the exact order
  * `services.ts` concatenates them (`services.ts`'s own `services` array is
- * `GROUP_MODULES.flatMap((m) => m.base)`, unlabelled). A group not yet in
- * `GROUP_OVERLAYS` (every one but `emergency`, until parts 2 to 4 add
- * theirs) simply has no overlay: `localize(base, undefined)` returns the
- * base array unchanged, so the group renders in English until its part
- * lands. That is expected, not an error; see `content.i18n.test.ts`.
+ * `GROUP_MODULES.flatMap((m) => m.base)`, unlabelled). All six groups now
+ * have an entry in `GROUP_OVERLAYS` below, so every group is translated.
+ * A group with no entry there would simply have no overlay:
+ * `localize(base, undefined)` returns the base array unchanged, so it would
+ * render in English rather than error, which is the fallback this shape
+ * exists for if a group is ever added here ahead of its translation.
  */
 export const GROUP_MODULES: { key: string; base: Service[]; exportName: string }[] = [
   { key: "emergency", base: emergencyServices, exportName: "emergencyServices" },

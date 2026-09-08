@@ -44,9 +44,13 @@ export function ThemedHeader({ navItems, bookHref = "#book", homeHref = "#top" }
   // null until measured, which is what FALLBACK_WIDE covers.
   const [isCompact, setIsCompact] = useState<boolean | null>(null);
 
-  // Nav items, the logo target and Book now all arrive as English paths from
-  // src/config/*Navigation.ts. Prefixing them here rather than at each of the
-  // twenty call sites keeps the heroes unchanged.
+  // Only HREFS arrive as English paths here (from src/config/*Navigation.ts,
+  // for the logo target and Book now too): `localeHref` below prefixes them.
+  // Labels do not: since the server-side nav refactor (cf6d185), `navItems`
+  // arrives already translated (`translateNavItems`'s result, see the prop
+  // doc above), so this component renders `item.label` as-is and must not
+  // reintroduce a client-side `navLabel` call. Prefixing hrefs here rather
+  // than at each of the twenty call sites keeps the heroes unchanged.
   const locale = useLocale();
   const copy = chromeCopyFor(locale);
 
