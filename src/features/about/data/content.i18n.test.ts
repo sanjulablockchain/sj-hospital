@@ -12,9 +12,10 @@ import { assertTranslationParity, stringPaths } from "../../../lib/i18n/stringPa
  * rather than copy. `jumpCards[].href` and `partnerLogos` are anchors and
  * image paths, never prose. `sectionEyebrows`' leading numbers live inside the
  * same strings as their words ("01 / Who we are"), so unlike contact's
- * `contactRows[].icon` there is no separate structural key to exclude here;
- * the eyebrow strings are translated whole, number and words together, the
- * same way `jumpCards[].label` and `.note` already are.
+ * `contactRows[].icon` there was never a separate structural key to exclude
+ * here. Moot since the register sweep: both `sectionEyebrows` and
+ * `jumpCards[].label` now render in English from the base, so the overlay
+ * carries no eyebrow or label text at all to worry about splitting.
  */
 function isUntranslatable(path: string): boolean {
   return (
@@ -34,7 +35,6 @@ function isUntranslatable(path: string): boolean {
  * translation still fails the suite.
  */
 const KEEPS_ENGLISH = new Set([
-  "heroFacts[3].k", // Reception
   "jumpCards[3].note", // "Kids & Teens Medical Group, USA." is the parent group's own name, not a sentence to translate
 ]);
 

@@ -32,27 +32,23 @@ export const tickerItems = [
 ];
 
 export const heroFacts = [
-  { k: "අලුත්වැඩියාව", v: "ඇමෙරිකානු ඩොලර් මිලියන 1" },
-  { k: "මෙහෙයවනු ලබන්නේ", v: "ලොස් ඇන්ජලීස් සිට" },
-  { k: "මීගමුවේ ප්‍රථමයා", v: "OPD ඉන්ෂුවරන්ස්" },
-  { k: "Reception", v: "පැය 24 පුරාම විවෘතයි" },
+  {},
+  {},
+  {},
+  {},
 ];
 
 export const jumpCards = [
   {
-    label: "අප කවුරුන්ද",
     note: "ඇමරිකානු ප්‍රමිතියේ සත්කාරය, මීගමුවට.",
   },
   {
-    label: "අප වෙනස් වන්නේ කෙසේද",
     note: "අප තමන්ටම බලාපොරොත්තු වන කරුණු හය.",
   },
   {
-    label: "මෙහෙවර සහ දැක්ම",
     note: "අප ලඟා වීමට බලාපොරොත්තු වන්නේ කුමක්ද.",
   },
   {
-    label: "අපගේ මාපිය සමූහය",
     // Left in English: this is the parent group's own name, in the register
     // that names always keep, not a sentence to translate.
     note: "Kids & Teens Medical Group, USA.",
@@ -68,50 +64,37 @@ export const storyParagraphs = [
 
 export const reasons = [
   {
-    title: "USA මගින් මෙහෙයවනු ලබන සහ පාලනය කරනු ලබන",
     description: "ඇමෙරිකානු සෞඛ්‍ය සේවා කළමනාකරණ ප්‍රවීණත්වයත් සමඟ ජාත්‍යන්තර ප්‍රමිතීන්.",
   },
   {
-    title: "දැරිය හැකි ඇමරිකානු ප්‍රමිතියේ සෞඛ්‍ය සේවා",
     description: "ශ්‍රී ලාංකික පවුල් සඳහා ලබාගත හැකි මිලකට උසස් තත්ත්වයේ සෞඛ්‍ය සේවා.",
   },
   {
-    title: "දියුණු තාක්ෂණය",
     description: "Digital X-ray සහ නවීන රසායනාගාරය ඇතුළු නවීනතම උපකරණ.",
   },
   {
-    title: "සුරක්ෂිතභාවය සහ පිරිසිදුකමට ඇති කැපවීම",
     description: "පිරිසිදුකම සහ රෝගී ආරක්ෂාව සම්බන්ධයෙන් ඉහළම ප්‍රමිතීන් පවත්වා ගැනීම.",
   },
   {
-    title: "පහසු ස්ථානයක් සහ සම්පූර්ණ සේවා",
     description: "මීගමුවේ පහසුවෙන් ලගා විය හැකි ස්ථානයක සම්පූර්ණ සෞඛ්‍ය සේවා.",
   },
   {
-    title: "සාක්ෂි මත පදනම් වූ බිල්පත් කිරීම",
     description: "Digital ලෙස file වලට පිවිසීමත් සමඟ විනිවිද පෙනෙන හා නිවැරදි බිල්පත් කිරීමේ ක්‍රියාපිළිවෙත්.",
   },
 ];
 
 export const mission = {
-  title: "අපගේ මෙහෙවර",
   body: "දියුණු තාක්ෂණය රෝගී කේන්ද්‍රීය සත්කාරය සමඟ ඒකාබද්ධ කරන සම්පූර්ණ සෞඛ්‍ය සේවා විසඳුම් අපගේ ප්‍රජාවට ලබා දීම, එමගින් ඔවුන්ට තමන්ගේම සෞඛ්‍යය භාරගැනීමට හැකි කිරීම අපගේ අරමුණයි.",
 };
 
 export const vision = {
-  title: "අපගේ දැක්ම",
   body: "එකමුතු වූ ප්‍රයත්නයන් තුළින් ශ්‍රී ලංකාවේ සියලුම දෙනාට ලබාගත හැකි උසස්ම තත්ත්වයේ සෞඛ්‍ය සේවාව ලබා දීමට අප බලාපොරොත්තු වෙනවා.",
 };
-
-export const groupHeading = "Kids & Teens Medical Group ගැන";
 
 export const groupBody = [
   "දකුණු කැලිෆෝනියාවේ ප්‍රමුඛ පෙළේ ළමා සත්කාර සපයන්නෙකු වන Kids & Teens Medical Group, දරුවන් හා යෞවනයන් සඳහා දයාන්විත හා සම්පූර්ණ සෞඛ්‍ය සේවා ලබා දීමට කැපවී සිටිනවා. board-certified pediatricians 50 කට වැඩි කණ්ඩායමක් සමඟ, ඔවුන් primary care, urgent care, telehealth consultations, සහ after-hours care ඇතුළු පුළුල් සේවා පරාසයක් ලබා දෙනවා, එමගින් තරුණ රෝගීන්ට කාලෝචිත හා පුද්ගලීකරණය කළ වෛද්‍ය සත්කාර ලැබෙන බව සහතික කරනවා.",
   "මෙම strategic ව්‍යාප්තිය Kids & Teens Medical Group හි ප්‍රවීණත්වය ඇමරිකාවෙන් ඔබ්බට ගෙන ගොස්, ඔවුන්ගේ රෝගී-කේන්ද්‍රීය ප්‍රවේශය සහ උසස් තත්ත්වයේ ළමා සත්කාරය ශ්‍රී ලංකාවේ පවුල් වෙත ගෙන එනවා යැයි කැපවීම පිළිබිඹු කරනවා. නැවත ප්‍රාණවත් කරන ලද St. Joseph Hospital, මීගමුවේ දරුවන් හා යෞවනයන් සඳහා නවීනතම වෛද්‍ය සේවා සහ පහසුකම් ලබා දෙන, ළමා සෞඛ්‍ය සේවාවේ මූලික ස්ථානයක් වීමට නියමිතයි.",
 ];
-
-export const heroStandfirst =
-  "St. Joseph Hospital, මීගමුවේ, ශ්‍රී ලාංකිකයන්ට දැරිය හැකි මිලකට ඇමරිකානු ප්‍රමිතියේ, උසස් තත්ත්වයේ සෞඛ්‍ය සේවා සපයයි.";
 
 export const storyIntro =
   "අපගේ රෝහල මෑතකදී Kids & Teens Pediatric Medical Group (Los Angeles) සහ Asia Corp විසින් මූලික කරගත් ඇමෙරිකානු ඩොලර් මිලියන 1ක ආයෝජනයකින් අලුත්වැඩියා කරන ලදී.";
@@ -125,19 +108,6 @@ export const missionIntro =
 export const groupIntro =
   "දකුණු කැලිෆෝනියාවේ ප්‍රමුඛ පෙළේ ළමා සත්කාර සපයන්නෙකු වන Kids & Teens Medical Group, දරුවන් හා යෞවනයන් සඳහා දයාන්විත හා සම්පූර්ණ සෞඛ්‍ය සේවා ලබා දීමට කැපවී සිටිනවා.";
 
-export const hero = {
-  strapline: "අප කවුරුන්ද",
-  breadcrumbHome: "මුල් පිටුව",
-  breadcrumbCurrent: "අප ගැන",
-  headingLead: "ඇමරිකානු ප්‍රමිතියේ,",
-  headingOutline: "උසස් තත්ත්වයේ",
-  headingAccent: "සෞඛ්‍ය සේවා.",
-  bookCta: "වෛද්‍යවරයෙක් Book කරන්න",
-};
+export const hero = {};
 
-export const sectionEyebrows = {
-  story: "01 / අප කවුරුන්ද",
-  different: "02 / අප වෙනස් වන්නේ ඇයි",
-  mission: "03 / අප ලඟා වීමට බලාපොරොත්තු වන්නේ",
-  group: "04 / අපගේ මාපිය සමූහය",
-};
+export const sectionEyebrows = {};

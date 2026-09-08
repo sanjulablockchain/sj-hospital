@@ -32,32 +32,23 @@ export const tickerItems = [
 ];
 
 export const heroFacts = [
-  { k: "புதுப்பித்தல்", v: "அமெரிக்க டாலர் 1 மில்லியன்" },
-  { k: "நிர்வகிக்கப்படுவது", v: "லாஸ் ஏஞ்சல்ஸ் இலிருந்து" },
-  { k: "நீர்கொழும்பில் முதன்மையானது", v: "OPD காப்பீடு" },
-  { k: "Reception", v: "24 மணி நேரமும் திறந்திருக்கும்" },
+  {},
+  {},
+  {},
+  {},
 ];
 
 export const jumpCards = [
   {
-    label: "நாங்கள் யார்",
     note: "அமெரிக்க தர சிகிச்சை, நீர்கொழும்புக்கு.",
   },
   {
-    label: "நாங்கள் வேறுபடுவது எப்படி",
     note: "நாங்கள் எங்களுக்கே நிர்ணயித்துக் கொண்ட ஆறு விடயங்கள்.",
   },
   {
-    // Rephrased with "மற்றும்" as a separate word rather than the "-உம்"
-    // enclitic ("...தொலைநோக்கும்"): the enclitic form is one long unbreakable
-    // token that overflowed the 360px column because nothing inside it can
-    // wrap. Splitting it into separate words fixes the overflow without
-    // shortening the meaning.
-    label: "பணி நோக்கம் மற்றும் தொலைநோக்கு",
     note: "நாங்கள் எதை நோக்கமாகக் கொண்டிருக்கிறோம்.",
   },
   {
-    label: "எங்கள் தாய் நிறுவனக் குழு",
     // Left in English: this is the parent group's own name, in the register
     // that names always keep, not a sentence to translate.
     note: "Kids & Teens Medical Group, USA.",
@@ -73,50 +64,37 @@ export const storyParagraphs = [
 
 export const reasons = [
   {
-    title: "USA ஆல் நிர்வகிக்கப்பட்டு இயக்கப்படுவது",
     description: "அமெரிக்க சுகாதார மேலாண்மை நிபுணத்துவத்துடன் சர்வதேச தரநிலைகள்.",
   },
   {
-    title: "ஏற்புடைய அமெரிக்க தர சுகாதார சேவைகள்",
     description: "இலங்கைக் குடும்பங்களுக்கு அணுகக்கூடிய விலையில் உயர்தர சுகாதார சேவை.",
   },
   {
-    title: "முன்னேறிய தொழில்நுட்பம்",
     description: "Digital X-ray மற்றும் நவீன ஆய்வுகூடம் உட்பட நவீன உபகரணங்கள்.",
   },
   {
-    title: "பாதுகாப்பு மற்றும் சுத்தத்திற்கான உறுதிப்பாடு",
     description: "சுத்தம் மற்றும் நோயாளி பாதுகாப்பில் உயர்ந்த தரநிலைகளைப் பேணுதல்.",
   },
   {
-    title: "வசதியான இருப்பிடம் மற்றும் முழுமையான சேவைகள்",
     description: "நீர்கொழும்பில் எளிதில் அணுகக்கூடிய இருப்பிடத்தில் முழுமையான சுகாதார சேவை.",
   },
   {
-    title: "ஆதாரத்தை அடிப்படையாகக் கொண்ட கட்டணமிடல்",
     description: "Digital ஆக file அணுகலுடன் வெளிப்படையான மற்றும் துல்லியமான கட்டணமிடல் நடைமுறைகள்.",
   },
 ];
 
 export const mission = {
-  title: "எங்கள் பணி நோக்கம்",
   body: "முன்னேறிய தொழில்நுட்பத்தை நோயாளி மையச் சிகிச்சையுடன் இணைக்கும் முழுமையான சுகாதார தீர்வுகளை எங்கள் சமூகத்திற்கு வழங்குவது, அதன்மூலம் அவர்கள் தங்கள் சுகாதாரப் பொறுப்பை ஏற்க அவர்களை ஊக்குவிப்பதே எங்கள் நோக்கம்.",
 };
 
 export const vision = {
-  title: "எங்கள் தொலைநோக்கு",
   body: "கூட்டு முயற்சிகள் மூலம் இலங்கையில் உள்ள அனைவருக்கும் மிக உயர்தரமான சுகாதார சேவையை அணுகக்கூடியதாக மாற்ற நாங்கள் நோக்கமாகக் கொண்டுள்ளோம்.",
 };
-
-export const groupHeading = "Kids & Teens Medical Group பற்றி";
 
 export const groupBody = [
   "தென் கலிபோர்னியாவின் முன்னணி குழந்தை சிகிச்சை வழங்குநரான Kids & Teens Medical Group, குழந்தைகள் மற்றும் இளைஞர்களுக்கு அன்பான மற்றும் முழுமையான சுகாதார சேவைகளை வழங்குவதில் அர்ப்பணிப்புடன் உள்ளது. 50 க்கும் அதிகமான board-certified pediatricians குழுவுடன், அவர்கள் primary care, urgent care, telehealth consultations மற்றும் after-hours care உட்பட பரந்த அளவிலான சேவைகளை வழங்குகிறார்கள், இதனால் இளம் நோயாளிகள் காலத்திற்குரிய மற்றும் தனிப்பயனாக்கப்பட்ட மருத்துவ கவனிப்பைப் பெறுவது உறுதி செய்யப்படுகிறது.",
   "இந்த strategic விரிவாக்கம் Kids & Teens Medical Group இன் நிபுணத்துவத்தை அமெரிக்காவைத் தாண்டி விரிவுபடுத்தும் அர்ப்பணிப்பை பிரதிபலிக்கிறது, அவர்களின் நோயாளி மைய அணுகுமுறையையும் உயர்தர குழந்தை சிகிச்சையையும் இலங்கையில் உள்ள குடும்பங்களுக்குக் கொண்டு வருகிறது. புதுப்பிக்கப்பட்ட St. Joseph Hospital, நீர்கொழும்பில் குழந்தைகள் மற்றும் இளைஞர்களுக்கான நவீன மருத்துவ சேவைகள் மற்றும் வசதிகளை வழங்கும் குழந்தை சுகாதாரத்தின் முக்கிய மையமாக மாற உள்ளது.",
 ];
-
-export const heroStandfirst =
-  "நீர்கொழும்பில் உள்ள St. Joseph Hospital, இலங்கையர்களுக்கு ஏற்புடைய விலையில் அமெரிக்க தரத்திலான, உயர்தர சுகாதார சேவைகளை வழங்குகிறது.";
 
 export const storyIntro =
   "எங்கள் மருத்துவமனை சமீபத்தில் Kids & Teens Pediatric Medical Group (Los Angeles) மற்றும் Asia Corp தலைமையிலான அமெரிக்க டாலர் 1 மில்லியன் முதலீட்டுடன் புதுப்பிக்கப்பட்டது.";
@@ -130,19 +108,6 @@ export const missionIntro =
 export const groupIntro =
   "தென் கலிபோர்னியாவின் முன்னணி குழந்தை சிகிச்சை வழங்குநரான Kids & Teens Medical Group, குழந்தைகள் மற்றும் இளைஞர்களுக்கு அன்பான மற்றும் முழுமையான சுகாதார சேவைகளை வழங்குவதில் அர்ப்பணிப்புடன் உள்ளது.";
 
-export const hero = {
-  strapline: "நாங்கள் யார்",
-  breadcrumbHome: "முகப்பு",
-  breadcrumbCurrent: "எங்களைப் பற்றி",
-  headingLead: "அமெரிக்க தரத்திலான,",
-  headingOutline: "உயர்தர",
-  headingAccent: "சுகாதாரம்.",
-  bookCta: "Doctor ஐ Book செய்யுங்கள்",
-};
+export const hero = {};
 
-export const sectionEyebrows = {
-  story: "01 / நாங்கள் யார்",
-  different: "02 / நாங்கள் வேறுபடுவது ஏன்",
-  mission: "03 / எங்கள் நோக்கம்",
-  group: "04 / எங்கள் தாய் நிறுவனக் குழு",
-};
+export const sectionEyebrows = {};

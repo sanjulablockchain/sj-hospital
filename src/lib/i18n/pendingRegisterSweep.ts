@@ -168,12 +168,20 @@ export function sweepScope(relativePath: string): string {
  * `roomRows[*].name` and every other body/intro paragraph are untouched
  * and stay translated.
  *
+ * `about` was swept on 2026-09-09, needing no code change: its getter
+ * already reads its overlay through `localize`. 33 Sinhala and 33 Tamil
+ * strings were deleted from its single content overlay (`content.si/ta.ts`):
+ * the hero (entirely, now `{}`), `sectionEyebrows` (now `{}`),
+ * `jumpCards[*].label`, `reasons[*].title`, `mission.title`, `vision.title`
+ * and the bare `groupHeading` export. `storyParagraphs`, `groupBody`, every
+ * `reasons[*].description`, `mission.body`, `vision.body` and every other
+ * body/intro paragraph are untouched and stay translated.
+ *
  * A future scope may need a similar check before it is swept: read the
  * feature's own getter (`getContent.ts` or equivalent) for whether it reads
  * an overlay directly or through `localize` before deleting from it.
  */
 export const PENDING_REGISTER_SWEEP: ReadonlySet<string> = new Set([
-  "about",
   "accommodation",
   "contact",
   "e-channeling",
