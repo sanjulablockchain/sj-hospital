@@ -23,10 +23,8 @@
 // of this fix. "Dispensing" (the noun) translates in full, to avoid a
 // `facts` array where most labels are silently swept into English with no
 // individual justification; "Dispense" (the verb, in flowing prose) keeps
-// the pharmacy feature's own established English verb form. "Telemedicine"
-// reuses navigationLabels.ta.ts's own exact entry ("தொலை மருத்துவம்").
-// "Request a visit" reuses navigationLabels.ta.ts's own exact entry
-// ("வருகைக்கு கோரிக்கை"). "Doctor"/"Physician" translate in full
+// the pharmacy feature's own established English verb form.
+// "Doctor"/"Physician" translate in full
 // (மருத்துவர்), matching emergency.ta.ts; "Nurse" and "Coordinator" stay
 // English, also matching emergency.ta.ts. "Record"/"Records" is also on
 // `pharmacy`'s declared English-stays list and stays bare English here
@@ -41,10 +39,7 @@ export const __review = { status: "draft", reviewer: null, date: null } as const
 
 export const atHomeServices = [
   {
-    title: "24 மணி நேர Pharmacy",
-    directoryTitle: "24 மணி நேர Pharmacy",
     hours: "24 மணி நேரம்",
-    cta: "மருந்தை Order செய்யுங்கள்",
     desc: "24 மணி நேரமும் திறந்திருக்கும் Pharmacy Counter, Authorized மருந்து மட்டுமே வைத்திருக்கும், உங்கள் Hospital File ஐ Read செய்யக்கூடிய Pharmacists ஆல் Dispense செய்யப்படும். Substitute இல்லை, Grey-market Supply இல்லை, மீண்டும் Order செய்ய Digital Prescriptions File இல் வைக்கப்பட்டுள்ளன.",
     tags: ["24 மணி நேர Counter", "Authorized Stock மட்டும்", "ஒரு Pharmacist Dispensing", "Digital ஆக Prescriptions"],
     facts: [
@@ -54,7 +49,6 @@ export const atHomeServices = [
       { k: "Prescription குறிப்புகள்", v: "Digital ஆக File செய்யப்பட்டுள்ளன" },
     ],
     lede: "ஒவ்வொரு நேரமும் திறந்திருக்கும் Pharmacy Counter, Authorized மருந்து மட்டுமே வைத்திருக்கும், உங்கள் Hospital File ஐ பார்க்கக்கூடிய Pharmacists ஆல் Dispense செய்யப்படும்.",
-    aboutHead: "ஒவ்வொரு நேரமும் திறந்திருக்கும், Substitute இல்லை",
     body1: "Pharmacy Counter இல் 24 மணி நேரமும் பணியாளர்கள் இருக்கிறார்கள். வைத்திருக்கும் ஒவ்வொன்றும் Authorized Stock மட்டுமே; Substitute இல்லை, Grey-market Supply இல்லை, ஒவ்வொரு Order ஐயும் கொடுப்பதற்கு முன் ஒரு Pharmacist உங்கள் File உடன் Check செய்வார்.",
     body2: "உங்கள் மருந்தை Dispense செய்யும் Pharmacists உங்கள் Hospital File ஐ Read செய்யக்கூடியதால், நீங்கள் எடுக்கும் மற்றொன்றுடன் ஏற்படும் Interaction ஐ Flag செய்யவோ, உங்கள் மருத்துவர் பரிந்துரைத்த Dose உடன் Confirm செய்யவோ முடியும். Prescriptions Digital ஆக File இல் வைக்கப்பட்டிருப்பதால், மீண்டும் ஒரு Order அல்லது மற்றொரு துறையிலிருந்து வரும் கேள்வி எளிதாகிறது.",
     strip: [
@@ -77,10 +71,10 @@ export const atHomeServices = [
     ],
     location: "தரைத் தளம், Pharmacy Counter",
     steps: [
-      { title: "கொண்டு வாருங்கள் அல்லது அனுப்புங்கள்", desc: "உங்கள் Prescription ஐ Counter க்கு கொண்டு வாருங்கள், அல்லது உங்கள் Consultation இலிருந்தே அனுப்புங்கள்." },
-      { title: "Check செய்தல்", desc: "தயார் செய்வதற்கு முன் ஒரு Pharmacist Order ஐ உங்கள் File உடன் Check செய்வார்." },
-      { title: "Dispense செய்தல்", desc: "உங்கள் மருந்து Authorized இருப்பிலிருந்து Dispense செய்யப்படும், Substitute எதுவும் பயன்படுத்தப்படாது." },
-      { title: "Record செய்தல்", desc: "எந்த Repeat Order அல்லது கேள்விக்கும் Prescription Digital ஆக File இல் வைக்கப்பட்டுள்ளது." },
+      { desc: "உங்கள் Prescription ஐ Counter க்கு கொண்டு வாருங்கள், அல்லது உங்கள் Consultation இலிருந்தே அனுப்புங்கள்." },
+      { desc: "தயார் செய்வதற்கு முன் ஒரு Pharmacist Order ஐ உங்கள் File உடன் Check செய்வார்." },
+      { desc: "உங்கள் மருந்து Authorized இருப்பிலிருந்து Dispense செய்யப்படும், Substitute எதுவும் பயன்படுத்தப்படாது." },
+      { desc: "எந்த Repeat Order அல்லது கேள்விக்கும் Prescription Digital ஆக File இல் வைக்கப்பட்டுள்ளது." },
     ],
     prep: [
       "உங்கள் Prescription அல்லது Hospital File எண்ணை கொண்டு வாருங்கள்",
@@ -101,10 +95,7 @@ export const atHomeServices = [
     ],
   },
   {
-    title: "மருந்து Delivery",
-    directoryTitle: "மருந்து Delivery",
     hours: "தினமும்",
-    cta: "ஒரு Prescription ஐ அனுப்புங்கள்",
     desc: "Prescription மற்றும் Over-the-counter மருந்து எங்கள் சொந்த Pharmacy Counter இலிருந்து நீர்கொழும்பு முழுவதும் விநியோகிக்கப்படுகிறது, Dispatch செய்யும் முன் Pharmacist Check ஒன்றுடன், Photo Prescriptions ஏற்கப்படும்.",
     tags: ["நீர்கொழும்பு முழுவதும் Delivery", "எங்கள் சொந்த Counter இலிருந்து", "Dispatch க்கு முன் Pharmacist Check", "Photo Prescriptions ஏற்கப்படும்"],
     facts: [
@@ -114,7 +105,6 @@ export const atHomeServices = [
       { k: "Prescription குறிப்புகள்", v: "Photos ஏற்கப்படும்" },
     ],
     lede: "Prescription மற்றும் Over-the-counter மருந்து எங்கள் சொந்த Pharmacy Counter இலிருந்து நீர்கொழும்பு முழுவதும் விநியோகிக்கப்படுகிறது, ஒவ்வொரு Order ஐயும் Dispatch செய்யும் முன் ஒரு Pharmacist Check உடன்.",
-    aboutHead: "எங்கள் சொந்த Counter இலிருந்து விநியோகிக்கப்பட்டு, செல்வதற்கு முன் Check செய்யப்படும்",
     body1: "மருந்து Delivery நீர்கொழும்பை உள்ளடக்கியது, மருத்துவமனையின் சொந்த Pharmacy Counter இலிருந்தே நிரப்பப்படுகிறது, அதனால் நேரடியாக வரும் Order களுக்குப் பயன்படுத்தப்படும் அதே Authorized Stock தான் Delivery க்கும் செல்கிறது. Dispatch செய்யும் முன் ஒரு Pharmacist ஒவ்வொரு Order ஐயும் Check செய்வார், Counter இல் ஒரு Over-the-counter Order ஐ Check செய்வது போலவே.",
     body2: "ஒரு Order ஐத் தொடங்க உங்கள் Prescription இன் Photo ஐ அனுப்பலாம், Original ஐ நேரடியாக கொண்டு வர முடியாவிட்டால் இது பயனுள்ளது. அதே Delivery இல் Over-the-counter Items ஐயும் சேர்க்கலாம், Orders தினமும் இயங்கும்.",
     strip: [
@@ -137,10 +127,10 @@ export const atHomeServices = [
     ],
     location: "தரைத் தளம், Pharmacy Counter",
     steps: [
-      { title: "அனுப்புங்கள்", desc: "ஒரு Prescription ஐ, அல்லது அதன் Photo ஐ Pharmacy Counter க்கு அனுப்புங்கள்." },
-      { title: "Check செய்தல்", desc: "Dispatch க்கு தயார் செய்வதற்கு முன் ஒரு Pharmacist Order ஐ Check செய்வார்." },
-      { title: "Dispatch செய்தல்", desc: "உங்கள் Order நீர்கொழும்பு முழுவதும் Delivery க்காக Dispatch செய்யப்படும்." },
-      { title: "பெறுதல்", desc: "உங்கள் Address இல் மருந்தைப் பெறுவீர்கள், கேள்வி இருந்தால் மீண்டும் Pharmacy Counter க்கு திருப்பப்படும்." },
+      { desc: "ஒரு Prescription ஐ, அல்லது அதன் Photo ஐ Pharmacy Counter க்கு அனுப்புங்கள்." },
+      { desc: "Dispatch க்கு தயார் செய்வதற்கு முன் ஒரு Pharmacist Order ஐ Check செய்வார்." },
+      { desc: "உங்கள் Order நீர்கொழும்பு முழுவதும் Delivery க்காக Dispatch செய்யப்படும்." },
+      { desc: "உங்கள் Address இல் மருந்தைப் பெறுவீர்கள், கேள்வி இருந்தால் மீண்டும் Pharmacy Counter க்கு திருப்பப்படும்." },
     ],
     prep: [
       "உங்கள் Prescription அல்லது அதன் தெளிவான Photo ஐ அனுப்ப தயாராக வையுங்கள்",
@@ -161,10 +151,7 @@ export const atHomeServices = [
     ],
   },
   {
-    title: "வீட்டு வருகைகள்",
-    directoryTitle: "வீட்டு வருகைகள்",
     hours: "Appointment மூலம்",
-    cta: "வருகைக்கு கோரிக்கை",
     desc: "முதியவர்கள், குழந்தைகள் மற்றும் Post-operative சிகிச்சைக்காக மருத்துவர்கள், Nurses மற்றும் ஆய்வுகூட Technicians உங்கள் வீட்டு வாசலுக்கே, அர்ப்பணிக்கப்பட்ட 6 Vehicles உடன், Sampling வீட்டிலேயே செய்யப்பட்டு, குறிப்புகள் நேரடியாக உங்கள் File இல் எழுதப்படும்.",
     tags: ["மருத்துவர்கள், Nurses மற்றும் Lab Technicians", "அர்ப்பணிக்கப்பட்ட 6 Vehicles", "வீட்டிலேயே Sampling", "உங்கள் File இல் குறிப்புகள்"],
     facts: [
@@ -174,7 +161,6 @@ export const atHomeServices = [
       { k: "Records", v: "உங்கள் File இல் எழுதப்படும்" },
     ],
     lede: "முதியவர்கள், குழந்தைகள் மற்றும் Post-operative சிகிச்சைக்காக மருத்துவர்கள், Nurses மற்றும் ஆய்வுகூட Technicians உங்கள் வீட்டிற்கு வருகை தருவர், அர்ப்பணிக்கப்பட்ட 6 Vehicles இல் ஒன்றில் வருவர்.",
-    aboutHead: "மருத்துவமனை சிகிச்சை உங்கள் வீட்டு வாசலுக்கே",
     body1: "வீட்டு வருகைகள் மருத்துவர்கள், Nurses மற்றும் ஆய்வுகூட Technicians ஐ உங்கள் வீட்டு வாசலுக்கே கொண்டுவருகின்றன, பயணிக்க சிரமப்படும் முதியவர்கள், குழந்தைகள் மற்றும் அறுவை சிகிச்சைக்குப் பிறகு குணமடையும் நோயாளர்களை நோக்கமாகக் கொண்டு. வருகைகள் இதற்காகவே அர்ப்பணிக்கப்பட்ட 6 Vehicles இல் இயங்குகின்றன, Appointment மூலம் ஏற்பாடு செய்யப்படும்.",
     body2: "இரத்த மாதிரி அல்லது வேறு ஏதேனும் Sample தேவைப்பட்டால், பயணிக்கச் சொல்வதற்குப் பதிலாக Sampling வீட்டிலேயே செய்யப்படும். வருகையின்போது கண்டறியப்பட்ட அல்லது பேசப்பட்ட எதுவும் நேரடியாக உங்கள் Hospital File இல் எழுதப்படும், அதனால் வேறு இடத்தில் உங்களைப் பார்க்கும் குழுவும் அதே Record ஐப் பார்க்கும்.",
     strip: [
@@ -197,10 +183,10 @@ export const atHomeServices = [
     ],
     location: "மருத்துவமனையிலிருந்து Dispatch செய்யப்படும், தரைத் தளம்",
     steps: [
-      { title: "கோரிக்கை", desc: "ஒரு வருகைக்கு கோரிக்கை வைத்து, யார் பார்க்கப்பட வேண்டும், ஏன் என்று விவரிக்கவும்." },
-      { title: "திட்டமிடல்", desc: "Appointment மூலம் வருகை ஏற்பாடு செய்யப்பட்டு, அர்ப்பணிக்கப்பட்ட Vehicle ஒன்று Assign செய்யப்படும்." },
-      { title: "வருகை", desc: "ஒரு மருத்துவர், Nurse அல்லது ஆய்வுகூட Technician வருகை தருவர், தேவைப்பட்டால் Sampling வீட்டிலேயே செய்யப்படும்." },
-      { title: "Record செய்தல்", desc: "வருகையின் குறிப்புகள் நேரடியாக உங்கள் Hospital File இல் எழுதப்படும்." },
+      { desc: "ஒரு வருகைக்கு கோரிக்கை வைத்து, யார் பார்க்கப்பட வேண்டும், ஏன் என்று விவரிக்கவும்." },
+      { desc: "Appointment மூலம் வருகை ஏற்பாடு செய்யப்பட்டு, அர்ப்பணிக்கப்பட்ட Vehicle ஒன்று Assign செய்யப்படும்." },
+      { desc: "ஒரு மருத்துவர், Nurse அல்லது ஆய்வுகூட Technician வருகை தருவர், தேவைப்பட்டால் Sampling வீட்டிலேயே செய்யப்படும்." },
+      { desc: "வருகையின் குறிப்புகள் நேரடியாக உங்கள் Hospital File இல் எழுதப்படும்." },
     ],
     prep: [
       "வருகைக்கு கோரிக்கை வைக்கும்போது உங்கள் Hospital File எண்ணை தயார் வையுங்கள்",
@@ -222,10 +208,7 @@ export const atHomeServices = [
     ],
   },
   {
-    title: "தொலை மருத்துவம்",
-    directoryTitle: "தொலை மருத்துவம்",
     hours: "தினமும்",
-    cta: "Consultation ஐ Book செய்யுங்கள்",
     desc: "எங்கள் மருத்துவர்களுடன் Video மற்றும் Phone Consultations, Prescriptions Pharmacy க்கு அனுப்பப்படும் Delivery க்காக, வீட்டிற்குச் சென்ற நோயாளர்களுக்கு Follow-up உடன்.",
     tags: ["Video Consultations வழங்குதல்", "Phone Consultations வழங்குதல்", "Pharmacy க்கு Prescriptions", "பயணத்திற்குப் பின் Follow-up"],
     facts: [
@@ -235,7 +218,6 @@ export const atHomeServices = [
       { k: "ஒரு Follow-up", v: "வீட்டிற்குச் சென்ற நோயாளர்களுக்கு" },
     ],
     lede: "எங்கள் மருத்துவர்களுடன் Video மற்றும் Phone Consultations, எந்த Prescription உம் Delivery க்காக நேரடியாக Pharmacy க்கு அனுப்பப்படும்.",
-    aboutHead: "பயணிக்காமலேயே ஒரு Consultation",
     body1: "தொலை மருத்துவம் எங்கள் மருத்துவர்களில் ஒருவருடன் Video அல்லது Phone மூலம் ஒரு Consultation வழங்குகிறது, தினமும் Book செய்யலாம். In-person Examination தேவையில்லாத Follow-up உரையாடலுக்கோ கவலைக்கோ இது பொருந்தும், மருத்துவமனைக்கு பயணிக்காமலேயே.",
     body2: "Prescription தேவைப்பட்டால், அது Pharmacy க்கு அனுப்பப்படும், பின்னர் அதை சேகரிக்கலாம் அல்லது Medicine Delivery மூலம் அனுப்பலாம். இங்கு பார்க்கப்பட்டு வீட்டிற்குச் சென்ற நோயாளர்களுடன் Follow-up க்கும் தொலை மருத்துவம் பயன்படுத்தப்படுகிறது, அவர்களின் சிகிச்சையின் அடுத்த கட்டத்திலும் அதே மருத்துவரே தொடர்கிறார்.",
     strip: [
@@ -258,10 +240,10 @@ export const atHomeServices = [
     ],
     location: "தொலைவிலிருந்து நடத்தப்படும், மருத்துவமனை மூலம் Book செய்யப்படும்",
     steps: [
-      { title: "Book செய்தல்", desc: "ஒரு Consultation ஐ Book செய்து Video அல்லது Phone தேர்ந்துகொள்ளுங்கள்." },
-      { title: "இணைதல்", desc: "Book செய்த நேரத்தில் Video அல்லது Phone மூலம் ஒரு மருத்துவருடன் இணைவீர்கள்." },
-      { title: "Consult செய்தல்", desc: "மருத்துவர் உங்கள் கவலையைப் பற்றி பேசி, Follow-up Review தேவைப்பட்டால் அதை ஏற்பாடு செய்வார்." },
-      { title: "Prescribe செய்தல்", desc: "எந்த Prescription உம் Collection அல்லது Delivery க்காக Pharmacy க்கு அனுப்பப்படும்." },
+      { desc: "ஒரு Consultation ஐ Book செய்து Video அல்லது Phone தேர்ந்துகொள்ளுங்கள்." },
+      { desc: "Book செய்த நேரத்தில் Video அல்லது Phone மூலம் ஒரு மருத்துவருடன் இணைவீர்கள்." },
+      { desc: "மருத்துவர் உங்கள் கவலையைப் பற்றி பேசி, Follow-up Review தேவைப்பட்டால் அதை ஏற்பாடு செய்வார்." },
+      { desc: "எந்த Prescription உம் Collection அல்லது Delivery க்காக Pharmacy க்கு அனுப்பப்படும்." },
     ],
     prep: [
       "வேலை செய்யும் Phone அல்லது Video Connection ஒன்றை தயார் வையுங்கள்",
