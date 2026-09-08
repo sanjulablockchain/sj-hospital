@@ -15,9 +15,10 @@ import { assertTranslationParity, stringPaths } from "../../../lib/i18n/stringPa
  * (the same fix accommodation's `bookRail.icon` and contact's
  * `contactRows.icon` already made, so keying it off `label` cannot blank an
  * icon the way the pilot did). `value` is the fact a contact row carries
- * alongside its own translatable `label` (only the phone row has one: the
- * hospital's own number), the same role `contact`'s and `accommodation`'s own
- * `value` fields play, so it stays untranslated the same way `href` does.
+ * alongside its own link label, now English like every CTA (only the phone
+ * row has one: the hospital's own number), the same role `contact`'s and
+ * `accommodation`'s own `value` fields play, so it stays untranslated the
+ * same way `href` does.
  * `PLACEHOLDER_NOTICE` is excluded entirely: it is internal review
  * documentation asserted verbatim by content.test.ts, and no component on
  * this page ever renders it to a reader.
