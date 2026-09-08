@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
-import { standards } from "../data/content";
+import type { PharmacyContent } from "../data/getContent";
 
 /**
  * `#standards`: a fixed-dark photo band making the page's central argument,
@@ -13,7 +13,9 @@ import { standards } from "../data/content";
  * `sj-invert` to hover to the light-on-dark treatment rather than following the
  * theme tokens.
  */
-export function StandardsSection() {
+export function StandardsSection({ content }: { content: PharmacyContent }) {
+  const { sectionEyebrows, standards, standardsCta, standardsHeading, standardsIntro, standardsNote } =
+    content;
   return (
     <section id="standards" className="relative mt-26 overflow-hidden bg-[#08123A]">
       <ParallaxLayer factor={0.12} maxOffsetPx={80} className="absolute inset-x-0 -top-[10%] h-[120%]">
@@ -38,34 +40,29 @@ export function StandardsSection() {
 
       <div className="relative mx-auto max-w-[1440px] px-5 py-24 sm:px-8 lg:px-11">
         <div className="grid grid-cols-2 items-center gap-14 max-[899px]:grid-cols-1 max-[899px]:gap-10">
-          <Reveal>
+          <Reveal className="min-w-0">
             <div className="text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
-              02 / How we dispense
+              {sectionEyebrows.standards}
             </div>
-            <h2 className="font-display mt-4.5 text-[clamp(38px,5.2vw,74px)] leading-[0.9] font-extrabold tracking-[-0.04em] text-white uppercase">
-              A pharmacist
+            <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(38px,5.2vw,74px)] leading-[0.9] font-extrabold tracking-[-0.04em] text-white uppercase">
+              {standardsHeading.line1}
               <br />
-              reads it, not
+              {standardsHeading.line2}
               <br />
-              just a shelf
+              {standardsHeading.line3}
             </h2>
             <p
               className="mt-5.5 max-w-[46ch] text-[17.5px] leading-[1.65] text-white/80"
               style={{ textWrap: "pretty" }}
             >
-              Every prescription is checked by a pharmacist against your hospital record before anything
-              is packed. Because they can read your file, they can flag an interaction with something else
-              you are taking, or confirm a dose against what your doctor prescribed.
+              {standardsIntro}
             </p>
-            <p className="mt-4 max-w-[48ch] text-[16px] leading-[1.7] text-white/60">
-              We hold authorized stock only, with no substitutes and no grey market supply, so what your
-              consultant wrote is what you are handed.
-            </p>
+            <p className="mt-4 max-w-[48ch] text-[16px] leading-[1.7] text-white/60">{standardsNote}</p>
             <a
               href="#refills"
               className="sj-invert mt-7 inline-flex items-center gap-2.5 bg-[var(--home-accent)] px-6 py-4 text-[15px] font-bold text-[var(--home-on-accent)]"
             >
-              Set up a repeat prescription <span aria-hidden>&rarr;</span>
+              {standardsCta} <span aria-hidden>&rarr;</span>
             </a>
           </Reveal>
 

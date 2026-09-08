@@ -1,10 +1,12 @@
 import Image from "next/image";
-import Link from "next/link";
+import { LocaleLink } from "@/components/i18n/LocaleLink";
 import { ThemedHeader } from "@/components/layout/ThemedHeader";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { Ticker } from "@/components/ui/Ticker";
 import { wellnessNavigation } from "@/config/wellnessNavigation";
-import { heroFacts, tickerItems } from "../data/content";
+import { translateNavItems } from "@/config/navigationLabels";
+import type { Locale } from "@/lib/i18n/locales";
+import type { SchoolWellnessContent } from "../data/getContent";
 
 /**
  * `#top`: a school assembly behind the themed header and the page's only <h1>,
@@ -21,8 +23,14 @@ import { heroFacts, tickerItems } from "../data/content";
  * Accent colours are literal rather than `var(--home-accent)`, as on the other
  * hero blocks: this sits on a photograph in both themes, and the light theme
  * swaps that token to a deep `#0B6FC0` that would sink into the image.
+ *
+ * The breadcrumb's "Home" link goes through `LocaleLink` rather than
+ * `next/link`, and the heading column carries `min-w-0`, the same pair of
+ * fixes `home-care`'s own hero needed: without `min-w-0` a long Sinhala or
+ * Tamil token in the heading pushes the column past the viewport at 360px.
  */
-export function WellnessHero() {
+export function WellnessHero({ content, locale }: { content: SchoolWellnessContent; locale: Locale }) {
+  const { hero, heroFacts, heroStandfirst, tickerItems } = content;
   return (
     <section
       id="top"
@@ -57,7 +65,7 @@ export function WellnessHero() {
         }}
       />
 
-      <ThemedHeader navItems={wellnessNavigation} homeHref="/" bookHref="/e-channeling" />
+      <ThemedHeader navItems={translateNavItems(wellnessNavigation, locale)} homeHref="/" bookHref="/e-channeling" />
 
       <div className="relative z-10 mx-auto mt-auto flex w-full max-w-[1440px] gap-5.5 px-5 sm:px-8 lg:px-11">
         {/* Decorative vertical strapline, dropped below 900px where there is no
@@ -70,25 +78,28 @@ export function WellnessHero() {
             className="text-[11px] tracking-[0.3em] text-white/50 uppercase"
             style={{ writingMode: "vertical-rl" }}
           >
-            We come to the school
+            {hero.strapline}
           </span>
           <span className="w-px flex-1 bg-gradient-to-b from-white/40 to-transparent" />
         </div>
 
-        <div className="flex-1 pb-11">
+        <div className="min-w-0 flex-1 pb-11">
           <div className="animate-sj-up inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
             <span aria-hidden className="h-px w-11 bg-[#2CA6F0]" />
-            <Link href="/" className="text-[#7FCBFF] hover:text-white">
-              Home
-            </Link>
+            <LocaleLink href="/" className="text-[#7FCBFF] hover:text-white">
+              {hero.breadcrumbHome}
+            </LocaleLink>
             <span aria-hidden className="opacity-50">
               /
             </span>
-            School Wellness
+            {hero.breadcrumbCurrent}
           </div>
 
-          <h1 className="font-display animate-sj-up mt-4.5 text-[clamp(42px,7vw,116px)] leading-[0.86] font-extrabold tracking-[-0.045em] text-white uppercase">
-            The problem
+          {/* `wrap-break-word`: Sinhala and Tamil can put a single unbreakable
+              token in `headingLead`, with nothing beside it on that line for
+              the browser to reflow around. */}
+          <h1 className="font-display animate-sj-up wrap-break-word mt-4.5 text-[clamp(42px,7vw,116px)] leading-[0.86] font-extrabold tracking-[-0.045em] text-white uppercase">
+            {hero.headingLead}
             <br />
             {/* Outlined rather than filled, so the line steps from solid to
                 hollow to accent across the three words. */}
@@ -96,9 +107,9 @@ export function WellnessHero() {
               className="text-transparent"
               style={{ WebkitTextStroke: "1.4px rgba(242,246,255,0.75)" }}
             >
-              nobody
+              {hero.headingOutline}
             </span>{" "}
-            <span className="text-[#2CA6F0]">noticed.</span>
+            <span className="text-[#2CA6F0]">{hero.headingAccent}</span>
           </h1>
 
           <div className="animate-sj-up mt-8 flex flex-col items-start gap-5.5">
@@ -106,23 +117,21 @@ export function WellnessHero() {
               className="max-w-[54ch] text-[18px] leading-[1.6] text-white/82"
               style={{ textWrap: "pretty" }}
             >
-              A child who cannot read the board is not slow. A child who falls asleep in class may
-              be anaemic. Our team comes to your school, screens every student, and tells you which
-              ones need a doctor.
+              {heroStandfirst}
             </p>
             <div className="flex flex-wrap gap-3">
               <a
                 href="#book"
                 className="sj-invert inline-flex items-center gap-2.5 bg-[#2CA6F0] px-6 py-4 text-[15px] font-bold text-[#04122B]"
               >
-                Bring us to your school <span aria-hidden>&rarr;</span>
+                {hero.bookCta} <span aria-hidden>&rarr;</span>
               </a>
               <a
                 href="#programme"
                 className="inline-flex items-center gap-3 border border-white/30 px-6 py-4 text-[15px] font-bold whitespace-nowrap text-white transition-colors hover:bg-white hover:text-[#060B1F]"
               >
                 <span aria-hidden className="animate-sj-pulse h-2 w-2 rounded-full bg-[#2CA6F0]" />
-                What the screening covers
+                {hero.exploreCta}
               </a>
             </div>
           </div>

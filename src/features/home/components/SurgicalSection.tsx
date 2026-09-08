@@ -4,16 +4,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { useParallax } from "../hooks/useParallax";
+import { localeHref } from "@/lib/i18n/paths";
+import type { Locale } from "@/lib/i18n/locales";
+import type { HomeContent } from "../data/getContent";
 
-const procedures = [
-  { name: "General surgery", note: "Elective and emergency" },
-  { name: "Obstetric theatre", note: "Consultant led" },
-  { name: "Orthopaedic procedures", note: "Day case and inpatient" },
-  { name: "Endoscopy suite", note: "Same day reporting" },
-  { name: "Post-operative care", note: "Assigned recovery nurse" },
-];
-
-export function SurgicalSection() {
+export function SurgicalSection({
+  content,
+  locale,
+}: {
+  content: HomeContent["content"]["surgical"];
+  locale: Locale;
+}) {
+  const { eyebrow, heading, body, ctaPrimary, ctaSecondary, procedures } = content;
   const { ref: bgRef, offset: bgOffset } = useParallax(0.12, 80);
 
   return (
@@ -29,37 +31,34 @@ export function SurgicalSection() {
       />
       <div className="relative mx-auto max-w-[1440px] px-5 py-26 sm:px-8 lg:px-11">
         <div className="grid gap-15 min-[900px]:grid-cols-2 min-[900px]:items-center">
-          <Reveal>
-            <div className="text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
-              03 / Surgical care
-            </div>
-            <h2 className="font-display mt-4.5 text-[clamp(40px,5.2vw,78px)] leading-[0.9] font-extrabold tracking-[-0.04em] text-white uppercase">
-              Theatres run
+          <Reveal className="min-w-0">
+            <div className="text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">{eyebrow}</div>
+            <h2 className="font-display mt-4.5 wrap-break-word text-[clamp(40px,5.2vw,78px)] leading-[0.9] font-extrabold tracking-[-0.04em] text-white uppercase">
+              {heading.line1}
               <br />
-              to protocol,
+              {heading.line2}
               <br />
-              not to habit
+              {heading.line3}
             </h2>
             <p className="mt-6 max-w-[46ch] text-[17.5px] leading-[1.65] text-white/80" style={{ textWrap: "pretty" }}>
-              Elective and emergency surgery with consultant anaesthesia, single use consumables, sterile
-              tracking on every instrument set and a nurse assigned to your recovery from theatre to discharge.
+              {body}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
-                href="/e-channeling"
+                href={localeHref("/e-channeling", locale)}
                 className="sj-invert inline-flex items-center gap-2.5 bg-[var(--home-accent)] px-6 py-4 text-[15px] font-bold text-[var(--home-on-accent)]"
               >
-                Request a surgical consult <span aria-hidden>&rarr;</span>
+                {ctaPrimary} <span aria-hidden>&rarr;</span>
               </Link>
               <a href="tel:+94117848484" className="sj-invert inline-flex items-center gap-2.5 border border-white/30 px-6 py-4 text-[15px] font-bold text-white">
-                Speak to the theatre desk
+                {ctaSecondary}
               </a>
             </div>
           </Reveal>
-          <Reveal>
+          <Reveal className="min-w-0">
             <div className="flex flex-col gap-px bg-white/18">
-              {procedures.map((item) => (
-                <div key={item.name} className="flex items-baseline justify-between gap-5 bg-[#08123A] px-7 py-5.5">
+              {procedures.map((item, index) => (
+                <div key={index} className="flex items-baseline justify-between gap-5 bg-[#08123A] px-7 py-5.5">
                   <span className="text-[17px] font-bold text-white">{item.name}</span>
                   <span className="text-right text-[14px] text-white/66">{item.note}</span>
                 </div>

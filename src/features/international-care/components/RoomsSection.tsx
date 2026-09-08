@@ -1,6 +1,6 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
-import { roomStandard, roomTiles } from "../data/content";
+import type { InternationalCareContent } from "../data/getContent";
 
 /**
  * `#rooms`: the four room categories, in the reference's 4-across tile grid
@@ -11,7 +11,8 @@ import { roomStandard, roomTiles } from "../data/content";
  * ladder with a semi private fourth tier, which the facilities page's own test
  * already rejects.
  */
-export function RoomsSection() {
+export function RoomsSection({ content }: { content: InternationalCareContent }) {
+  const { roomStandard, roomTiles, roomsHeading, roomsNote, sectionEyebrows } = content;
   return (
     <section
       id="rooms"
@@ -19,12 +20,12 @@ export function RoomsSection() {
     >
       <Reveal>
         <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
-          04 / Where you stay
+          {sectionEyebrows.rooms}
         </div>
-        <h2 className="font-display mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
-          Your attendant
+        <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
+          {roomsHeading.line1}
           <br />
-          stays with you
+          {roomsHeading.line2}
         </h2>
       </Reveal>
 
@@ -64,9 +65,7 @@ export function RoomsSection() {
             </li>
           ))}
         </ul>
-        <p className="mt-4 text-[13.5px] leading-[1.6] text-[var(--home-muted)]">
-          Every category, from the wards up, carries the list above as standard.
-        </p>
+        <p className="mt-4 text-[13.5px] leading-[1.6] text-[var(--home-muted)]">{roomsNote}</p>
       </Reveal>
     </section>
   );

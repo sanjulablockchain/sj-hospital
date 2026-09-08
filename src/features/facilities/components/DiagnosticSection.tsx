@@ -1,6 +1,6 @@
-import Link from "next/link";
+import { LocaleLink } from "@/components/i18n/LocaleLink";
 import { Reveal } from "@/components/ui/Reveal";
-import { equipment } from "@/features/facilities/data/content";
+import type { FacilitiesContent } from "../data/getContent";
 
 /**
  * `#diagnostic`: a sticky intro column beside the equipment rows.
@@ -10,32 +10,31 @@ import { equipment } from "@/features/facilities/data/content";
  * turnaround the hospital publishes for each test, taken from the services
  * diagnostics data rather than restated here.
  */
-export function DiagnosticSection() {
+export function DiagnosticSection({ content }: { content: FacilitiesContent }) {
+  const { diagnosticCta, diagnosticHeading, diagnosticIntro, equipment, sectionEyebrows } = content;
   return (
     <section id="diagnostic" className="mx-auto max-w-[1440px] px-5 pt-30 sm:px-8 lg:px-11">
       <div className="grid gap-10 min-[900px]:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] min-[900px]:items-start min-[900px]:gap-16">
-        <Reveal className="min-[900px]:sticky min-[900px]:top-16">
+        <Reveal className="min-w-0 min-[900px]:sticky min-[900px]:top-16">
           <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
-            05 / Diagnostics
+            {sectionEyebrows.diagnostic}
           </div>
-          <h2 className="font-display mt-4.5 text-[clamp(36px,4vw,58px)] leading-[0.94] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
-            The machines,
+          <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(36px,4vw,58px)] leading-[0.94] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
+            {diagnosticHeading.line1}
             <br />
-            and who
+            {diagnosticHeading.line2}
             <br />
-            reads them
+            {diagnosticHeading.line3}
           </h2>
           <p className="mt-6 max-w-[46ch] text-[16px] leading-[1.65] text-[var(--home-muted)]">
-            Equipment is worth nothing without the discipline around it. Every laboratory report is checked
-            by two doctors before it is released, and X-rays are read and reported by a radiologist within
-            the hour.
+            {diagnosticIntro}
           </p>
-          <Link
+          <LocaleLink
             href="/services#diagnostics"
             className="mt-7 inline-flex w-fit items-center gap-2.5 border border-[var(--home-hairline-strong)] px-5.5 py-3.5 text-[14px] font-bold text-[var(--home-heading)]"
           >
-            Diagnostic services <span aria-hidden>&rarr;</span>
-          </Link>
+            {diagnosticCta} <span aria-hidden>&rarr;</span>
+          </LocaleLink>
         </Reveal>
 
         <Reveal className="border-t border-[var(--home-hairline)]">

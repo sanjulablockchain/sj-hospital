@@ -13,6 +13,13 @@ import { Reveal } from "@/components/ui/Reveal";
  * `heading` is typed as a node rather than a string so a caller could
  * hard-break it if a heading ever needed to; none of the three callers here do
  * today, they all just pass a plain string.
+ *
+ * The heading block carries `min-w-0`: without it, a long unbreakable
+ * Sinhala or Tamil heading (a Tamil word ending in an enclitic is one token
+ * to the browser, with nothing inside it to wrap on) pushes past its share
+ * of the row and overflows a 360px viewport, since a flex item does not
+ * shrink below its content width by default. See the i18n feature recipe's
+ * Step E2.
  */
 export function SectionHead({
   eyebrow,
@@ -25,11 +32,11 @@ export function SectionHead({
 }) {
   return (
     <Reveal className="flex flex-wrap items-end justify-between gap-10">
-      <div>
+      <div className="min-w-0">
         <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
           {eyebrow}
         </div>
-        <h2 className="font-display mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
+        <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
           {heading}
         </h2>
       </div>

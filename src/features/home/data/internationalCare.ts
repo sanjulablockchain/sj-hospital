@@ -36,3 +36,11 @@ export const internationalCareItems: InternationalCareItem[] = [
     body: "Post treatment review by telemedicine once you have travelled back.",
   },
 ];
+
+/** `#international`'s own copy, stranded in `InternationalCareSection.tsx` until now. */
+export const sectionEyebrow = "08 / International patient care";
+export const heading = { line1: "Travelling", line2: "for care, or", line3: "just visiting" };
+export const body =
+  "Negombo sits ten minutes from the international airport. We look after visitors, expatriates and medical travellers from arrival to follow up at home.";
+export const ctaPrimary = "See international care";
+export const ctaSecondary = "Talk to the desk";

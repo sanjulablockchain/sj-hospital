@@ -5,10 +5,18 @@ import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { useParallax } from "../hooks/useParallax";
 import { CountUp } from "./CountUp";
+import { localeHref } from "@/lib/i18n/paths";
+import type { Locale } from "@/lib/i18n/locales";
+import type { HomeContent } from "../data/getContent";
 
-const perks = ["Private and semi private options", "Attendant space for family", "Meals prepared to dietary orders"];
-
-export function RoomsSection() {
+export function RoomsSection({
+  content,
+  locale,
+}: {
+  content: HomeContent["content"]["rooms"];
+  locale: Locale;
+}) {
+  const { eyebrow, heading, body, cta, fromLabel, priceCaption, perks } = content;
   const { ref: bgRef, offset: bgOffset } = useParallax(0.14, 90);
 
   return (
@@ -23,37 +31,36 @@ export function RoomsSection() {
         }}
       />
       <div className="relative mx-auto max-w-[1440px] px-5 py-26 sm:px-8 lg:px-11">
-        <div className="grid gap-15 min-[900px]:grid-cols-[1.1fr_0.9fr] min-[900px]:items-center">
-          <Reveal>
-            <div className="text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">07 / Stay with us</div>
-            <h2 className="font-display mt-4.5 text-[clamp(40px,5.4vw,82px)] leading-[0.9] font-extrabold tracking-[-0.04em] text-white uppercase">
-              A room that
+        <div className="grid gap-15 min-[900px]:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] min-[900px]:items-center">
+          <Reveal className="min-w-0">
+            <div className="text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">{eyebrow}</div>
+            <h2 className="font-display mt-4.5 wrap-break-word text-[clamp(40px,5.4vw,82px)] leading-[0.9] font-extrabold tracking-[-0.04em] text-white uppercase">
+              {heading.line1}
               <br />
-              feels like
+              {heading.line2}
               <br />
-              recovery
+              {heading.line3}
             </h2>
             <p className="mt-6 max-w-[46ch] text-[17.5px] leading-[1.65] text-white/78" style={{ textWrap: "pretty" }}>
-              Quiet, private and sanitised on a two hour cycle, with nursing that knows your name and a doctor
-              on the floor at all times.
+              {body}
             </p>
             <Link
-              href="/accommodation#book"
+              href={localeHref("/accommodation#book", locale)}
               className="sj-accentify mt-8 inline-flex items-center gap-3 bg-white px-6.5 py-4.5 text-[15px] font-bold text-[#060B1F]"
             >
-              Reserve a room <span aria-hidden>&rarr;</span>
+              {cta} <span aria-hidden>&rarr;</span>
             </Link>
           </Reveal>
-          <Reveal className="border-l border-white/24 pl-8">
-            <div className="text-[12px] tracking-[0.18em] text-white/55 uppercase">Rooms from</div>
+          <Reveal className="min-w-0 border-l border-white/24 pl-8">
+            <div className="text-[12px] tracking-[0.18em] text-white/55 uppercase">{fromLabel}</div>
             <div className="font-display mt-2.5 text-[clamp(62px,8vw,126px)] leading-[0.82] font-extrabold tracking-[-0.05em] text-[var(--home-accent)] tabular-nums">
               <CountUp to={10000} grouped durationMs={1700} />
             </div>
-            <div className="mt-3 text-[15px] text-white/70">LKR per night, all inclusive of nursing care</div>
+            <div className="mt-3 text-[15px] text-white/70">{priceCaption}</div>
             <div className="mt-7 flex flex-col gap-3 text-[15px] text-white/80">
-              {perks.map((perk) => (
-                <span key={perk} className="flex gap-3">
-                  <span className="text-[var(--home-accent)]">&#10022;</span> {perk}
+              {perks.map((perk, index) => (
+                <span key={index} className="flex gap-3">
+                  <span className="shrink-0 text-[var(--home-accent)]">&#10022;</span> {perk}
                 </span>
               ))}
             </div>

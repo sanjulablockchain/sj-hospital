@@ -288,6 +288,218 @@ export const comforts: string[] = [
   "Quiet visiting hours",
 ];
 
+/**
+ * Everything below this line is copy that used to sit as string literals
+ * directly inside the index and detail page components (eyebrows, headings,
+ * paragraphs, CTA labels, and two small local arrays: `facilityCards` and
+ * `pharmacyFacts`). None of it belongs with any one service group, so it
+ * lives here rather than in `emergency.ts` or a later part's group file, the
+ * same reasoning `content.ts` states for why `home`'s own bands with no data
+ * file of their own ended up there. See `getContent.ts` and each component
+ * for how this is threaded in.
+ */
+
+/** `ServicesHero`, the index page's `#top`. */
+export const hero = {
+  eyebrow: "Medical Services",
+  heading: { line1: "Every service,", accentPrefix: "under ", accent: "one roof." },
+  /** `{count}` is replaced with the live total from `groupCounts().All`. */
+  body: "{count} services across nine centres of excellence: emergency, surgical, diagnostic and family care, organised around the problem you came in with, not the department that happens to treat it.",
+  cta: "Open the directory",
+};
+
+/** `JumpCards`, the hover-reveal label on all four cards. */
+export const jumpCardsCopy = { exploreLabel: "Explore" };
+
+/** `CentresSection`, `#centres`. */
+export const centresSection = {
+  eyebrow: "01 / Centres of excellence",
+  heading: "Nine units built around one problem",
+};
+
+/**
+ * `ServiceDirectory`, `#directory`. `headingFiltered` and `countLine` carry a
+ * `{token}`, not a split: word order moves between English, Sinhala and
+ * Tamil, so the component interpolates rather than concatenating around a
+ * fixed English phrase (pattern 3 in the i18n recipe).
+ */
+export const directory = {
+  eyebrow: "02 / Full directory",
+  headingAll: "Everything we treat",
+  headingFiltered: "{group} services",
+  countLine: "{shown} of {total} services",
+  filterAriaLabel: "Filter services by group",
+  readMore: "Read more about {title}",
+};
+
+/** `SurgicalSection`, `#surgical`. */
+export const surgicalSection = {
+  eyebrow: "03 / Department of surgery",
+  heading: { line1: "Seven specialties,", line2: "one surgical standard" },
+  body: "Consultant-led lists across general, orthopaedic, ENT, urological, ophthalmic, neuro- and gastrointestinal surgery, each paired with its own anaesthesia service and a recovery nurse assigned from theatre to discharge.",
+  cta: "Request a surgical consult",
+};
+
+/** `DiagnosticsSection`, `#diagnostics`. */
+export const diagnosticsSection = {
+  eyebrow: "04 / Diagnostics & radiology",
+  heading: "Lab, imaging & endoscopy",
+  cta: "Book a test",
+};
+
+/** `PackagesSection`, `#packages`. */
+export const packagesSection = {
+  eyebrow: "05 / Health checks",
+  heading: "Screening in a single morning",
+};
+
+/** `AdmissionsSection`, `#admissions`. */
+export const admissionsSection = {
+  eyebrow: "06 / Admissions",
+  heading: "Four steps, no surprises",
+  bringWithYouHeading: "Bring with you",
+  paymentHeading: "Payment & insurance",
+  roomsHeading: "The rooms",
+  roomsBody: "Private and semi-private rooms with attendant space, sanitised on a two hour cycle.",
+  roomsCta: "See the rooms",
+};
+
+/** One of the four campus photo-cards in `FacilitiesSection`. */
+export type FacilityCard = {
+  /** Ordinal shown on the card ("01".."04"), not copy. */
+  index: string;
+  title: string;
+  body: string;
+  linkLabel: string;
+  /** Route or in-page anchor; never translated. */
+  href: string;
+  /** Public image path; never translated. */
+  photo: string;
+  /** Describes the photo, not the service; stays English on every page. */
+  photoAlt: string;
+};
+
+/** `FacilitiesSection`, `#facilities`. */
+export const facilitiesSection = {
+  eyebrow: "07 / Facilities",
+  heading: { line1: "A campus built", line2: "for the whole stay" },
+  comfortsHeading: "Everyday comforts",
+};
+
+export const facilityCards: FacilityCard[] = [
+  {
+    index: "01",
+    title: "One campus, six floors",
+    body: "A purpose-built hospital in Negombo, with covered arrival for both the ambulance bay and outpatients.",
+    linkLabel: "See Accident & Emergency",
+    href: "/services/accident-emergency",
+    photo: "/images/hero-exterior.png",
+    photoAlt: "St. Joseph Hospital exterior",
+  },
+  {
+    index: "02",
+    title: "Reception & OPD",
+    body: "A 24-hour outpatient department, staffed alongside the emergency entrance for whenever you arrive.",
+    linkLabel: "See admissions",
+    href: "#admissions",
+    photo: "/images/welcome.jpg",
+    photoAlt: "Hospital reception desk",
+  },
+  {
+    index: "03",
+    title: "Wards, rooms & ICU",
+    body: "Private and semi-private rooms from 10,000 LKR a night, backed by a full ICU for higher-dependency care.",
+    linkLabel: "See intensive & critical care",
+    href: "/services/intensive-critical-care",
+    photo: "/images/doctors.jpg",
+    photoAlt: "Doctor and nurse reviewing a patient's file at the bedside",
+  },
+  {
+    index: "04",
+    title: "Ambulance entrance",
+    body: "A covered entrance served by our own ambulance fleet, ten minutes from Bandaranaike International.",
+    linkLabel: "See international care",
+    href: "/international-care",
+    photo: "/images/services/exterior-dusk-b.png",
+    photoAlt: "Hospital exterior and ambulance entrance",
+  },
+];
+
+/** `PharmacySection`, `#pharmacy`. */
+export const pharmacySection = {
+  eyebrow: "08 / Pharmacy",
+  heading: { line1: "Medicine you can", line2: "trust, day or night" },
+  body: "The counter holds authorized stock only, with a pharmacist checking every order against your file before it is handed over or sent out for delivery. Digital records make a repeat order straightforward, and delivery reaches homes across Negombo.",
+  cta: "Visit the pharmacy",
+};
+
+/** One fact row in `PharmacySection`. */
+export type PharmacyFact = { name: string; note: string };
+
+export const pharmacyFacts: PharmacyFact[] = [
+  { name: "Hours", note: "Open 24 hours" },
+  { name: "Stock", note: "Authorized medicine only" },
+  { name: "Dispatch check", note: "Confirmed by a pharmacist first" },
+  { name: "Delivery", note: "Across Negombo" },
+  { name: "Prescriptions", note: "Kept on file digitally" },
+];
+
+/** `InternationalSection`, `#international`. */
+export const internationalSection = {
+  eyebrow: "09 / International patients",
+  heading: "Ten minutes from the airport",
+};
+
+/** `BookSection`, the index page's closing `#book`. */
+export const bookSection = {
+  eyebrow: "10 / Book",
+  heading: "Tell us what you need",
+  body: "Call the number below or send your details through. A coordinator will match you to the right department and confirm a plan before anything begins.",
+  contactCta: "Contact us",
+  browseServices: "Browse services",
+};
+
+/**
+ * The hospital's own switchboard number, shown on both `BookSection` (index)
+ * and `DetailBookSection` (every detail page). A fact, not copy: see
+ * `content.i18n.test.ts`'s `isUntranslatable`.
+ */
+export const phoneNumber = "0117 84 84 84";
+
+/**
+ * Shared across the detail page's `ServiceHero` (the "All services"
+ * breadcrumb) and `ServicePicker` (the same row's `aria-label`): one label
+ * for one destination, not two facts that merely read alike, so it has one
+ * home here rather than a literal in each component.
+ */
+export const allServicesLabel = "All services";
+
+/**
+ * Copy shared by every one of the 36 detail pages, independent of which
+ * service group a page belongs to, so it lives here rather than in any one
+ * group's data file (`emergency.ts` included).
+ */
+export const detailChrome = {
+  aboutCoversHeading: "What this covers",
+  aboutConditionsHeading: "Conditions we see most",
+  /**
+   * The exact street address a driver is shown, matching `contact`'s own
+   * `229/10 St. Joseph Street` fact: the street name never translates, but
+   * the city name does, the same split `contact/data/content.si.ts` and
+   * `.ta.ts` already make inside their own "229/10 St. Joseph Street,
+   * Negombo." note.
+   */
+  addressLine: "229/10 St. Joseph Street, Negombo",
+  journeyHeading: "Your visit, step by step",
+  prepHeading: "How to prepare",
+  teamHeading: "The team on this service",
+  relatedHeading: "Related services",
+  faqHeading: "Asked before you ask",
+  /** `{cta}` is the service's own `cta` field, e.g. "Come straight in today." */
+  bookHeading: "{cta} today.",
+  backToServices: "Back to all services",
+};
+
 export const internationalSteps: Step[] = [
   {
     no: "01",

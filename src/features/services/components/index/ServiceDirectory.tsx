@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { LocaleLink } from "@/components/i18n/LocaleLink";
 import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { Reveal } from "@/components/ui/Reveal";
@@ -8,9 +8,25 @@ import { RevealStagger } from "@/components/ui/RevealStagger";
 import { GROUPS } from "@/features/services/data/groups";
 import type { Service } from "@/features/services/types";
 
+/** The translatable copy this client component needs, passed as a prop rather than imported. */
+type DirectoryCopy = {
+  eyebrow: string;
+  headingAll: string;
+  /** Carries a `{group}` token. */
+  headingFiltered: string;
+  /** Carries `{shown}` and `{total}` tokens. */
+  countLine: string;
+  filterAriaLabel: string;
+  /** Carries a `{title}` token. */
+  readMore: string;
+};
+
 type ServiceDirectoryProps = {
   services: Service[];
   counts: Record<string, number>;
+  /** The translated word for each entry in `GROUPS`, keyed by the same structural English string. */
+  groupLabels: Record<string, string>;
+  copy: DirectoryCopy;
 };
 
 // The first row (or a filter's freshly mounted first row) opens by default:
@@ -30,18 +46,29 @@ const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffec
 /**
  * `#directory`: the page's only client component and its only stateful piece:
  * a group filter paired with a one-open-row-at-a-time accordion over the full
- * catalog. Data arrives as props (`services`, `counts`) rather than being
- * pulled from `data/services` here, so the rest of the page (and this
- * component's client bundle) never has to import that module's server-side
- * helpers.
+ * catalog. Data arrives as props (`services`, `counts`, `groupLabels`,
+ * `copy`) rather than being pulled from `data/services` or `data/getContent`
+ * here, so the rest of the page (and this component's client bundle) never
+ * has to import those modules' server-side helpers, and no translation data
+ * beyond this one section's own words reaches the browser.
+ *
+ * `GROUPS` (the structural English keys `filter`, `service.group` and
+ * `counts` are all indexed by) stays a direct import: it never translates
+ * (see its own header comment in `groups.ts`). `groupLabels` is the
+ * translated word shown for each of those keys, the same split `career`'s
+ * own `departmentLabels` uses.
  */
-export function ServiceDirectory({ services, counts }: ServiceDirectoryProps) {
+export function ServiceDirectory({ services, counts, groupLabels, copy }: ServiceDirectoryProps) {
   const [filter, setFilter] = useState<(typeof GROUPS)[number]>("All");
   const [open, setOpen] = useState(0);
   const baseId = useId();
 
   const shown = filter === "All" ? services : services.filter((service) => service.group === filter);
-  const heading = filter === "All" ? "Everything we treat" : `${filter} services`;
+  const heading =
+    filter === "All" ? copy.headingAll : copy.headingFiltered.replace("{group}", groupLabels[filter] ?? filter);
+  const countLine = copy.countLine
+    .replace("{shown}", String(shown.length))
+    .replace("{total}", String(services.length));
 
   const selectFilter = (group: (typeof GROUPS)[number]) => {
     setFilter(group);
@@ -52,20 +79,20 @@ export function ServiceDirectory({ services, counts }: ServiceDirectoryProps) {
     <section id="directory" className="mx-auto max-w-[1440px] px-5 pt-30 sm:px-8 lg:px-11">
       <Reveal>
         <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
-          02 / Full directory
+          {copy.eyebrow}
         </div>
-        <h2 className="font-display mt-4.5 text-[clamp(38px,4.4vw,66px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
+        <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(38px,4.4vw,66px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
           {heading}
         </h2>
         <p aria-live="polite" className="mt-4 text-[14px] font-bold tabular-nums text-[var(--home-muted)]">
-          {shown.length} of {services.length} services
+          {countLine}
         </p>
       </Reveal>
 
       <Reveal className="mt-8">
         <div
           role="group"
-          aria-label="Filter services by group"
+          aria-label={copy.filterAriaLabel}
           className="flex flex-nowrap gap-2.5 overflow-x-auto pb-1 min-[1024px]:flex-wrap min-[1024px]:overflow-visible"
         >
           {GROUPS.map((group) => {
@@ -76,13 +103,13 @@ export function ServiceDirectory({ services, counts }: ServiceDirectoryProps) {
                 type="button"
                 aria-pressed={isActive}
                 onClick={() => selectFilter(group)}
-                className={`shrink-0 border px-4.5 py-2.5 text-[13.5px] font-bold whitespace-nowrap transition-colors duration-300 ${
+                className={`shrink-0 border px-4.5 py-2.5 text-[13.5px] font-bold transition-colors duration-300 ${
                   isActive
                     ? "border-transparent bg-[var(--home-accent)] text-[var(--home-on-accent)]"
                     : "border-[var(--home-hairline-strong)] text-[var(--home-heading)] hover:border-[var(--home-accent)]"
                 }`}
               >
-                {group} ({counts[group]})
+                {groupLabels[group] ?? group} ({counts[group]})
               </button>
             );
           })}
@@ -98,6 +125,7 @@ export function ServiceDirectory({ services, counts }: ServiceDirectoryProps) {
             isOpen={open === index}
             onToggle={() => setOpen((current) => (current === index ? -1 : index))}
             idPrefix={`${baseId}-${index}`}
+            readMoreLabel={copy.readMore.replace("{title}", service.title)}
           />
         ))}
       </RevealStagger>
@@ -111,9 +139,10 @@ type DirectoryRowProps = {
   isOpen: boolean;
   onToggle: () => void;
   idPrefix: string;
+  readMoreLabel: string;
 };
 
-function DirectoryRow({ service, index, isOpen, onToggle, idPrefix }: DirectoryRowProps) {
+function DirectoryRow({ service, index, isOpen, onToggle, idPrefix, readMoreLabel }: DirectoryRowProps) {
   const contentRef = useRef<HTMLDivElement>(null);
   const [contentHeight, setContentHeight] = useState(0);
 
@@ -155,14 +184,14 @@ function DirectoryRow({ service, index, isOpen, onToggle, idPrefix }: DirectoryR
         aria-expanded={isOpen}
         aria-controls={panelId}
         onClick={onToggle}
-        className="grid w-full grid-cols-[50px_1fr_34px] items-center gap-4 px-1 py-6 text-left min-[900px]:grid-cols-[64px_1fr_auto_34px]"
+        className="grid w-full grid-cols-[50px_minmax(0,1fr)_34px] items-center gap-4 px-1 py-6 text-left min-[900px]:grid-cols-[64px_minmax(0,1fr)_auto_34px]"
       >
         {/* Decorative ordinal only: aria-hidden so the row's accessible name
             starts with the service name, not a leading "01". */}
         <span aria-hidden className="text-[13px] font-bold text-[var(--home-accent)] tabular-nums">
           /{orderLabel}
         </span>
-        <span className="font-display text-[clamp(18px,1.8vw,23px)] leading-[1.15] font-semibold tracking-[-0.02em] text-[var(--home-heading)]">
+        <span className="font-display wrap-break-word text-[clamp(18px,1.8vw,23px)] leading-[1.15] font-semibold tracking-[-0.02em] text-[var(--home-heading)]">
           {service.directoryTitle}
         </span>
         <span className="hidden text-[13px] font-bold tracking-[0.05em] text-[var(--home-muted)] uppercase min-[900px]:block">
@@ -226,12 +255,12 @@ function DirectoryRow({ service, index, isOpen, onToggle, idPrefix }: DirectoryR
             >
               {service.cta} <span aria-hidden>&rarr;</span>
             </a>
-            <Link
+            <LocaleLink
               href={`/services/${service.slug}`}
               className="inline-flex items-center gap-2 text-[14px] font-bold text-[var(--home-accent)]"
             >
-              Read more about {service.title} <span aria-hidden>&rarr;</span>
-            </Link>
+              {readMoreLabel} <span aria-hidden>&rarr;</span>
+            </LocaleLink>
           </div>
         </div>
       </div>
@@ -242,8 +271,8 @@ function DirectoryRow({ service, index, isOpen, onToggle, idPrefix }: DirectoryR
 function Fact({ k, v }: { k: string; v: ReactNode }) {
   return (
     <div className="flex items-baseline justify-between gap-4 border-b border-[var(--home-hairline)] pb-2">
-      <dt className="text-[13px] text-[var(--home-muted)]">{k}</dt>
-      <dd className="text-right text-[13.5px] font-bold text-[var(--home-heading)]">{v}</dd>
+      <dt className="wrap-break-word min-w-0 text-[13px] text-[var(--home-muted)]">{k}</dt>
+      <dd className="wrap-break-word min-w-0 text-right text-[13.5px] font-bold text-[var(--home-heading)]">{v}</dd>
     </div>
   );
 }

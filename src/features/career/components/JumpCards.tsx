@@ -1,5 +1,5 @@
 import { RevealStagger } from "@/components/ui/RevealStagger";
-import { jumpCards } from "../data/content";
+import type { CareerContent } from "../data/getContent";
 
 /**
  * `#jump`: four in-page shortcuts sitting directly under the hero. The hairline
@@ -10,7 +10,8 @@ import { jumpCards } from "../data/content";
  * shared `sj-fill` utility, which carries the `* { color: inherit }` needed to
  * pull the three spans (each with its own explicit colour) onto the fill.
  */
-export function JumpCards() {
+export function JumpCards({ content }: { content: CareerContent }) {
+  const { jumpCards } = content;
   return (
     <section id="jump" className="mx-auto max-w-[1440px] px-5 pt-20 sm:px-8 lg:px-11">
       <RevealStagger
@@ -26,7 +27,7 @@ export function JumpCards() {
             <span className="text-[11.5px] font-bold tracking-[0.2em] text-[var(--home-accent-soft)] uppercase">
               {card.count}
             </span>
-            <span className="font-display text-[25px] leading-[1.04] font-semibold tracking-[-0.03em] text-[var(--home-heading)]">
+            <span className="font-display wrap-break-word text-[25px] leading-[1.04] font-semibold tracking-[-0.03em] text-[var(--home-heading)]">
               {card.label}
             </span>
             <span className="text-[14px] leading-[1.5] text-[var(--home-muted)]">{card.note}</span>

@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
 import type { Map as LeafletMap } from "leaflet";
 import { HOSPITAL_COORDS } from "../data/content";
 
-export function LocationMap() {
+export function LocationMap({ ariaLabel }: { ariaLabel: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<LeafletMap | null>(null);
   const themeObserverRef = useRef<MutationObserver | null>(null);
@@ -101,7 +101,7 @@ export function LocationMap() {
   return (
     <div
       ref={containerRef}
-      aria-label="Interactive map showing St. Joseph Hospital Negombo location"
+      aria-label={ariaLabel}
       className="relative isolate h-72 w-full sm:h-80 md:h-95"
     />
   );

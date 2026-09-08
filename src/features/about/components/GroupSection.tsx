@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHead } from "./SectionHead";
-import { groupBody, groupHeading, groupIntro, partnerLogos } from "../data/content";
+import type { AboutContent } from "../data/getContent";
 
 /**
  * `#group`: the parent group copy ported verbatim from the deleted
@@ -14,15 +14,21 @@ import { groupBody, groupHeading, groupIntro, partnerLogos } from "../data/conte
  * `intro` is `groupIntro`, the first sentence of `groupBody[0]`, not the jump
  * card's `note` restated.
  */
-export function GroupSection() {
+export function GroupSection({ content }: { content: AboutContent }) {
+  const { groupBody, groupHeading, groupIntro, partnerLogos, sectionEyebrows } = content;
   return (
     <section
       id="group"
       className="mx-auto max-w-[1440px] px-5 pt-26 pb-26 sm:px-8 lg:px-11 max-[640px]:pt-18"
     >
-      <SectionHead eyebrow="04 / Our parent group" heading={groupHeading} intro={groupIntro} />
+      <SectionHead eyebrow={sectionEyebrows.group} heading={groupHeading} intro={groupIntro} />
 
-      <Reveal className="mt-10.5 grid gap-10 min-[900px]:grid-cols-[auto_1fr] min-[900px]:items-center">
+      {/* Only the second track is `minmax(0, 1fr)`: the first column is a
+          fixed-size logo image with no translatable text, so it carries none
+          of the risk a bare `fr` track has, but the second column holds
+          `groupBody`'s paragraphs, the same shape `StorySection` treats this
+          way in this feature already. */}
+      <Reveal className="mt-10.5 grid gap-10 min-[900px]:grid-cols-[auto_minmax(0,1fr)] min-[900px]:items-center">
         <Image
           src="/images/kids-teens-logo.png"
           alt="Kids & Teens Medical Group logo"

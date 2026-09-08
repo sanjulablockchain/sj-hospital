@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { FacebookIcon, InstagramIcon, LinkedInIcon, WhatsAppIcon } from "@/components/ui/BrandIcons";
 import { LOGO_MARK } from "@/config/brand";
+import { LocaleLink } from "@/components/i18n/LocaleLink";
+import { ChromeText } from "@/components/i18n/ChromeText";
 
 export type FooterColumn = {
   heading: string;
@@ -8,7 +10,10 @@ export type FooterColumn = {
 };
 
 type ThemedFooterProps = {
+  /** Already translated: the caller passes `translateFooterColumns(...)`'s result. */
   columns: FooterColumn[];
+  /** Already translated: the caller passes `navLabel("Reach us", locale)`. */
+  reachUsLabel: string;
   id?: string;
 };
 
@@ -40,7 +45,7 @@ const socials = [
   },
 ];
 
-export function ThemedFooter({ columns, id = "contact" }: ThemedFooterProps) {
+export function ThemedFooter({ columns, reachUsLabel, id = "contact" }: ThemedFooterProps) {
   return (
     <footer id={id} className="mx-auto max-w-[1440px] px-5 pb-10 pt-26 sm:px-8 lg:px-11">
       <div className="flex flex-wrap items-start justify-between gap-13">
@@ -63,7 +68,7 @@ export function ThemedFooter({ columns, id = "contact" }: ThemedFooterProps) {
             </span>
           </span>
           <p className="mt-4.5 text-[15px] leading-[1.62] text-[var(--home-muted)]">
-            Compassionate, patient centered care, bringing American healthcare standards to Sri Lanka.
+            <ChromeText id="tagline" />
           </p>
           <div className="mt-6 flex items-center gap-3">
             {socials.map((social) => (
@@ -85,15 +90,17 @@ export function ThemedFooter({ columns, id = "contact" }: ThemedFooterProps) {
               {column.heading}
             </span>
             {column.links.map((item) => (
-              <a key={item.href} href={item.href} className="sj-link text-[var(--home-body)]">
+              <LocaleLink key={item.href} href={item.href} className="sj-link text-[var(--home-body)]">
                 {item.label}
-              </a>
+              </LocaleLink>
             ))}
           </div>
         ))}
 
         <div className="flex flex-col gap-2.5 text-[15px]">
-          <span className="mb-2 text-[11.5px] tracking-[0.22em] text-[var(--home-accent)] uppercase">Reach us</span>
+          <span className="mb-2 text-[11.5px] tracking-[0.22em] text-[var(--home-accent)] uppercase">
+            {reachUsLabel}
+          </span>
           <span className="text-[var(--home-body)] opacity-90">229/10 St. Joseph Street, Negombo</span>
           <a href="tel:+94117848484" className="sj-link text-[var(--home-body)] tabular-nums">
             0117 84 84 84
@@ -107,6 +114,21 @@ export function ThemedFooter({ columns, id = "contact" }: ThemedFooterProps) {
         </div>
       </div>
 
+      {/*
+       * Both strings in this bar stay English in every locale, and both are
+       * deliberate rather than missed.
+       *
+       * The motto is translated where it is set as a sentence and kept in
+       * English where it is set as a brand mark. The home hero is the sentence
+       * form: it composes its own coherent phrase across three segments in
+       * each locale (see home/data/content.ts). Here it is a mark, uppercase
+       * and letterspaced to match the lockup above, so it reads as the
+       * hospital's signature next to its copyright line, exactly as the
+       * lockup's own TO LIVE IS A PRIVILEGE does. Translating only this one
+       * would give the site a third rendering of one motto.
+       *
+       * The copyright line is the hospital's registered name and a year.
+       */}
       <div className="mt-15 flex flex-wrap items-center justify-between gap-5 border-t border-[var(--home-hairline)] pt-5 text-[13px]">
         <span className="text-[var(--home-muted)]">&copy; 2026 St. Joseph Hospital, Negombo</span>
         <span className="tracking-[0.18em] text-[var(--home-muted)] uppercase">To live is a privilege</span>

@@ -1,10 +1,12 @@
 import Image from "next/image";
-import Link from "next/link";
+import { LocaleLink } from "@/components/i18n/LocaleLink";
 import { ThemedHeader } from "@/components/layout/ThemedHeader";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { Ticker } from "@/components/ui/Ticker";
 import { networkNavigation } from "@/config/networkNavigation";
-import { heroFacts, tickerItems } from "../data/content";
+import { translateNavItems } from "@/config/navigationLabels";
+import type { Locale } from "@/lib/i18n/locales";
+import type { NetworkContent } from "../data/getContent";
 
 /**
  * `#top`: the dusk exterior behind the themed header and the page's only <h1>,
@@ -18,7 +20,8 @@ import { heroFacts, tickerItems } from "../data/content";
  * Copy animates with `animate-sj-up` rather than `Reveal`, since it is already
  * in the first viewport and should not wait on an intersection observer.
  */
-export function NetworkHero() {
+export function NetworkHero({ content, locale }: { content: NetworkContent; locale: Locale }) {
+  const { hero, heroFacts, heroStandfirst, tickerItems } = content;
   return (
     <section
       id="top"
@@ -53,7 +56,7 @@ export function NetworkHero() {
         }}
       />
 
-      <ThemedHeader navItems={networkNavigation} homeHref="/" bookHref="/e-channeling" />
+      <ThemedHeader navItems={translateNavItems(networkNavigation, locale)} homeHref="/" bookHref="/e-channeling" />
 
       <div className="relative z-10 mx-auto mt-auto flex w-full max-w-[1440px] gap-10 px-5 sm:px-8 lg:px-11">
         {/* Decorative vertical strapline, dropped below 900px where there is no
@@ -66,25 +69,29 @@ export function NetworkHero() {
             className="text-[11px] tracking-[0.3em] text-white/50 uppercase"
             style={{ writingMode: "vertical-rl" }}
           >
-            Negombo to Los Angeles
+            {hero.strapline}
           </span>
           <span className="w-px flex-1 bg-gradient-to-b from-white/40 to-transparent" />
         </div>
 
-        <div className="flex-1 pb-11">
+        <div className="min-w-0 flex-1 pb-11">
           <div className="animate-sj-up inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
             <span aria-hidden className="h-px w-11 bg-[#2CA6F0]" />
-            <Link href="/" className="text-[#7FCBFF] hover:text-white">
-              Home
-            </Link>
+            <LocaleLink href="/" className="text-[#7FCBFF] hover:text-white">
+              {hero.breadcrumbHome}
+            </LocaleLink>
             <span aria-hidden className="opacity-50">
               /
             </span>
-            Our Network
+            {hero.breadcrumbCurrent}
           </div>
 
-          <h1 className="font-display animate-sj-up mt-4.5 text-[clamp(42px,7vw,118px)] leading-[0.86] font-extrabold tracking-[-0.045em] text-white uppercase">
-            A hospital in
+          {/* `wrap-break-word`: Sinhala and Tamil can put a single
+              unbreakable token in `headingLead`, with nothing beside it on
+              that line for the browser to reflow around, the same trap this
+              heading shape hit on home-care's own hero at 360px. */}
+          <h1 className="font-display animate-sj-up wrap-break-word mt-4.5 text-[clamp(42px,7vw,118px)] leading-[0.86] font-extrabold tracking-[-0.045em] text-white uppercase">
+            {hero.headingLead}
             <br />
             {/* Outlined rather than filled, so the three lines read as one
                 phrase stepping from solid to hollow to accent. */}
@@ -92,10 +99,10 @@ export function NetworkHero() {
               className="text-transparent"
               style={{ WebkitTextStroke: "1.4px rgba(242,246,255,0.75)" }}
             >
-              Negombo,
+              {hero.headingOutline}
             </span>
             <br />
-            <span className="text-[#2CA6F0]">backed from LA.</span>
+            <span className="text-[#2CA6F0]">{hero.headingAccent}</span>
           </h1>
 
           <div className="animate-sj-up mt-8 flex flex-col items-start gap-5.5">
@@ -103,23 +110,29 @@ export function NetworkHero() {
               className="max-w-[54ch] text-[18px] leading-[1.6] text-white/82"
               style={{ textWrap: "pretty" }}
             >
-              St. Joseph Hospital is operated by Kids &amp; Teens Medical Group, one of the largest
-              paediatric groups in California. That is where the clinical protocols, the training
-              and the second opinions come from.
+              {heroStandfirst}
             </p>
             <div className="flex flex-wrap gap-3">
               <a
                 href="#family"
                 className="sj-invert inline-flex items-center gap-2.5 bg-[#2CA6F0] px-6 py-4 text-[15px] font-bold text-[#04122B]"
               >
-                Meet the network <span aria-hidden>&rarr;</span>
+                {hero.familyCta} <span aria-hidden>&rarr;</span>
               </a>
+              {/* `whitespace-nowrap` dropped: a long Sinhala or Tamil
+                  translation of `mattersCta` does not fit one line at
+                  360px, and with the label kept nowrap the whole button (and
+                  the page) overflowed rather than wrapping to a second
+                  line. */}
               <a
                 href="#matters"
-                className="inline-flex items-center gap-3 border border-white/30 px-6 py-4 text-[15px] font-bold whitespace-nowrap text-white transition-colors hover:bg-white hover:text-[#060B1F]"
+                className="inline-flex items-center gap-3 border border-white/30 px-6 py-4 text-[15px] font-bold text-white transition-colors hover:bg-white hover:text-[#060B1F]"
               >
-                <span aria-hidden className="animate-sj-pulse h-2 w-2 rounded-full bg-[#2CA6F0]" />
-                What it means for you
+                <span
+                  aria-hidden
+                  className="animate-sj-pulse h-2 w-2 shrink-0 rounded-full bg-[#2CA6F0]"
+                />
+                {hero.mattersCta}
               </a>
             </div>
           </div>

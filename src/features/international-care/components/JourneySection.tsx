@@ -1,6 +1,6 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
-import { journeySteps } from "../data/content";
+import type { InternationalCareContent } from "../data/getContent";
 
 /**
  * `#journey`: the six stages a travelling patient meets, in a 3-column hairline
@@ -13,7 +13,8 @@ import { journeySteps } from "../data/content";
  * `@media (hover: hover)` so it stays readable on touch and keyboard, where
  * there is no hover to reveal it.
  */
-export function JourneySection() {
+export function JourneySection({ content }: { content: InternationalCareContent }) {
+  const { journeyHeading, journeyIntro, journeySteps, sectionEyebrows } = content;
   return (
     <section
       id="journey"
@@ -21,19 +22,22 @@ export function JourneySection() {
     >
       <Reveal>
         <div className="flex flex-wrap items-end justify-between gap-10">
-          <div>
+          {/* min-w-0: without it, a long Sinhala or Tamil heading token
+              pushes this flex item past its share of the row and out of a
+              360px viewport, since a flex item does not shrink below its
+              content width by default. */}
+          <div className="min-w-0">
             <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
-              01 / The journey
+              {sectionEyebrows.journey}
             </div>
-            <h2 className="font-display mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
-              Six steps, one
+            <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
+              {journeyHeading.line1}
               <br />
-              coordinator
+              {journeyHeading.line2}
             </h2>
           </div>
           <p className="max-w-[38ch] text-[16.5px] leading-[1.6] text-[var(--home-muted)]">
-            Nobody hands you between departments. The desk that answers your first email is the one
-            that arranges your transfer and signs off the pack you take home.
+            {journeyIntro}
           </p>
         </div>
       </Reveal>

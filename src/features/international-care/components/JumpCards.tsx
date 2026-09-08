@@ -1,5 +1,7 @@
 import { RevealStagger } from "@/components/ui/RevealStagger";
-import { jumpCards } from "../data/content";
+import { localeHref } from "@/lib/i18n/paths";
+import type { Locale } from "@/lib/i18n/locales";
+import type { InternationalCareContent } from "../data/getContent";
 
 /**
  * `#jump`: four in-page shortcuts sitting directly under the hero. The hairline
@@ -14,7 +16,8 @@ import { jumpCards } from "../data/content";
  * `@media (hover: hover)` so a touch device does not latch a card into the
  * filled state.
  */
-export function JumpCards() {
+export function JumpCards({ content, locale }: { content: InternationalCareContent; locale: Locale }) {
+  const { jumpCards } = content;
   return (
     <section id="jump" className="mx-auto max-w-[1440px] px-5 pt-20 sm:px-8 lg:px-11">
       <RevealStagger
@@ -24,7 +27,7 @@ export function JumpCards() {
         {jumpCards.map((card) => (
           <a
             key={card.href}
-            href={card.href}
+            href={localeHref(card.href, locale)}
             className="sj-fill flex flex-col gap-2.5 bg-[var(--home-bg)] px-6 py-6.5"
           >
             <span className="text-[11.5px] font-bold tracking-[0.2em] text-[var(--home-accent-soft)] uppercase">

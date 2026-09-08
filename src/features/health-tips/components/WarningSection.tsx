@@ -6,9 +6,25 @@ import { RevealStagger } from "@/components/ui/RevealStagger";
 import { DisclosureRow } from "./DisclosureRow";
 import type { Warning, WarningLevel } from "../types";
 
+type WarningSectionCopy = {
+  eyebrow: string;
+  heading: { line1: string; line2: string };
+  intro: string;
+};
+
 type WarningSectionProps = {
   warnings: Warning[];
   levelTone: Record<WarningLevel, "hot" | "warm" | "cool">;
+  /**
+   * Display text for each level, keyed by the same English structural value
+   * `warning.level` and `levelTone` carry. `warning.level` is never displayed
+   * directly: the badge shows `levelLabels[warning.level]`, which is what
+   * lets the English value stay untranslated while the reader still sees a
+   * translated word (the same split `library.ts`'s own `categoryLabels`
+   * makes for `Article.tag`).
+   */
+  levelLabels: Record<WarningLevel, string>;
+  copy: WarningSectionCopy;
 };
 
 // Only the top level gets the solid accent badge. "cool" reads as ordinary
@@ -26,7 +42,7 @@ const TONE_CLASS = {
  * for yet, and opening the most urgent row by default would put a heart attack
  * on screen before the reader has chosen to look.
  */
-export function WarningSection({ warnings, levelTone }: WarningSectionProps) {
+export function WarningSection({ warnings, levelTone, levelLabels, copy }: WarningSectionProps) {
   const [open, setOpen] = useState(-1);
   const baseId = useId();
 
@@ -34,20 +50,17 @@ export function WarningSection({ warnings, levelTone }: WarningSectionProps) {
     <section id="warning" className="mx-auto max-w-[1440px] px-5 pt-18.5 sm:px-8 min-[641px]:pt-26 lg:px-11">
       <Reveal>
         <div className="flex flex-wrap items-end justify-between gap-10">
-          <div>
+          <div className="min-w-0">
             <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
-              02 / When to come in
+              {copy.eyebrow}
             </div>
-            <h2 className="font-display mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
-              Wait, or walk
+            <h2 className="font-display mt-4.5 wrap-break-word text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
+              {copy.heading.line1}
               <br />
-              in tonight
+              {copy.heading.line2}
             </h2>
           </div>
-          <p className="max-w-[36ch] text-[16.5px] leading-[1.6] text-[var(--home-muted)]">
-            Open a symptom for the honest answer. When in doubt, come in. We would rather see you and
-            send you home.
-          </p>
+          <p className="max-w-[36ch] wrap-break-word text-[16.5px] leading-[1.6] text-[var(--home-muted)]">{copy.intro}</p>
         </div>
       </Reveal>
 
@@ -64,19 +77,19 @@ export function WarningSection({ warnings, levelTone }: WarningSectionProps) {
             heading={
               <span className="flex flex-wrap items-baseline gap-x-4.5 gap-y-2">
                 <span
-                  className={`px-2.75 py-1.5 text-[12px] font-bold tracking-[0.14em] whitespace-nowrap uppercase ${
+                  className={`px-2.75 py-1.5 text-[12px] font-bold tracking-[0.14em] wrap-break-word uppercase ${
                     TONE_CLASS[levelTone[warning.level]]
                   }`}
                 >
-                  {warning.level}
+                  {levelLabels[warning.level]}
                 </span>
-                <span className="font-display text-[clamp(19px,2.1vw,28px)] leading-[1.1] font-semibold tracking-[-0.025em] text-[var(--home-heading)]">
+                <span className="font-display wrap-break-word text-[clamp(19px,2.1vw,28px)] leading-[1.1] font-semibold tracking-[-0.025em] text-[var(--home-heading)]">
                   {warning.symptom}
                 </span>
               </span>
             }
           >
-            <p className="max-w-[76ch] text-[16.5px] leading-[1.65] text-[var(--home-muted)]">
+            <p className="max-w-[76ch] wrap-break-word text-[16.5px] leading-[1.65] text-[var(--home-muted)]">
               {warning.advice}
             </p>
           </DisclosureRow>

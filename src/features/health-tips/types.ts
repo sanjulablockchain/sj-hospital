@@ -68,7 +68,16 @@ export type FactTile = {
 };
 
 export type JumpCard = {
-  count: string;
+  /**
+   * "{n} unit" with `{n}` a token, never a split: Sinhala and Tamil put the
+   * counted word in a different place than English does, so the component
+   * substitutes `count` into `countTemplate` rather than gluing translated
+   * strings together itself. A template with no `{n}` (the "By age" card)
+   * is shown as written.
+   */
+  countTemplate: string;
+  /** The fact `countTemplate` counts. Absent for a card with no number ("By age"). */
+  count?: number;
   label: string;
   note: string;
   href: string;

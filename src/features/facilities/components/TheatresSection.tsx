@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
-import { theatreFigures, theatreSpecs } from "@/features/facilities/data/content";
+import type { FacilitiesContent } from "../data/getContent";
 
 /**
  * `#theatres`: a full-bleed band with a drifting theatre photograph behind it.
@@ -12,7 +12,9 @@ import { theatreFigures, theatreSpecs } from "@/features/facilities/data/content
  * than letting the two dark blocks fuse into one, the same spacing fix the
  * services page's tinted bands carry.
  */
-export function TheatresSection() {
+export function TheatresSection({ content }: { content: FacilitiesContent }) {
+  const { sectionEyebrows, theatresHeading, theatresIntro1, theatresIntro2, theatreFigures, theatreSpecs } =
+    content;
   return (
     <section id="theatres" className="relative mt-30 overflow-hidden bg-[#060B1F]">
       <ParallaxLayer factor={0.12} maxOffsetPx={80} className="absolute inset-x-0 -top-[12%] h-[124%]">
@@ -34,27 +36,20 @@ export function TheatresSection() {
       />
 
       <div className="relative z-10 mx-auto max-w-[1440px] px-5 py-26 sm:px-8 lg:px-11">
-        <div className="grid gap-10 min-[900px]:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] min-[900px]:gap-16">
-          <Reveal>
+        <div className="grid min-w-0 gap-10 min-[900px]:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] min-[900px]:gap-16">
+          <Reveal className="min-w-0">
             <div className="text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
-              02 / Operating theatres
+              {sectionEyebrows.theatres}
             </div>
-            <h2 className="font-display mt-4.5 text-[clamp(36px,4.2vw,62px)] leading-[0.94] font-extrabold tracking-[-0.035em] text-white uppercase">
-              Tracked steel,
+            <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(36px,4.2vw,62px)] leading-[0.94] font-extrabold tracking-[-0.035em] text-white uppercase">
+              {theatresHeading.line1}
               <br />
-              single use,
+              {theatresHeading.line2}
               <br />
-              one nurse each
+              {theatresHeading.line3}
             </h2>
-            <p className="mt-6 max-w-[56ch] text-[16px] leading-[1.65] text-white/80">
-              Our theatres run to US surgical protocol, with tracking on every instrument set. Instruments
-              and consumables are single use for each patient, without exception.
-            </p>
-            <p className="mt-4 max-w-[56ch] text-[16px] leading-[1.65] text-white/80">
-              A recovery nurse is assigned to watch over you from the moment you leave theatre until you are
-              ready for a ward bed or for home. Surgical and anaesthetic teams stay on call, so emergency
-              surgery happens here rather than after a transfer.
-            </p>
+            <p className="mt-6 max-w-[56ch] text-[16px] leading-[1.65] text-white/80">{theatresIntro1}</p>
+            <p className="mt-4 max-w-[56ch] text-[16px] leading-[1.65] text-white/80">{theatresIntro2}</p>
 
             <dl className="mt-11 grid grid-cols-1 gap-px bg-white/14 min-[640px]:grid-cols-3">
               {theatreFigures.map((figure) => (

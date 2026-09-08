@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
-import { gallery } from "../data/content";
+import type { MediaContent } from "../data/getContent";
 
 /**
  * `#gallery`: the three cleared photographs, each in a 4:3 frame that zooms on
@@ -16,21 +16,21 @@ import { gallery } from "../data/content";
  * (which the accommodation and facilities showcases already do) rather than a
  * card-level utility.
  */
-export function GallerySection() {
+export function GallerySection({ content }: { content: MediaContent }) {
+  const { gallery, galleryHeading, galleryIntro, sectionEyebrows } = content;
   return (
     <section id="gallery" className="mx-auto max-w-[1440px] px-5 pt-26 sm:px-8 lg:px-11 max-[640px]:pt-18.5">
       <Reveal>
         <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
-          04 / Image library
+          {sectionEyebrows.gallery}
         </div>
-        <h2 className="font-display mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
-          Approved for
+        <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
+          {galleryHeading.line1}
           <br />
-          publication
+          {galleryHeading.line2}
         </h2>
         <p className="mt-4.5 max-w-[54ch] text-[16.5px] leading-[1.6] text-[var(--home-muted)]">
-          Every photograph here is cleared for editorial use. Nothing showing an identifiable
-          patient is released, at any resolution, without written consent on file.
+          {galleryIntro}
         </p>
       </Reveal>
 

@@ -1,6 +1,6 @@
 import { SectionHead } from "./SectionHead";
 import { LocationMap } from "./LocationMapLazy";
-import { jumpCards, mapIntro } from "../data/content";
+import type { ContactContent } from "../data/getContent";
 
 /**
  * `#map`: `SectionHead` plus the lazy-loaded Leaflet map in a hairline frame.
@@ -9,15 +9,19 @@ import { jumpCards, mapIntro } from "../data/content";
  * nothing theme-specific to do beyond the frame.
  *
  * `heading` reuses `jumpCards[2].label`. `intro` is `mapIntro`, distinct from
- * `jumpCards[2].note`.
+ * `jumpCards[2].note`. `mapIntro` is also passed to `LocationMap` as its
+ * `aria-label`, verbatim: content.ts already documents that as one fact, and
+ * this is where it is threaded through, since `LocationMap` is a Client
+ * Component and takes no content import of its own.
  */
-export function MapSection() {
+export function MapSection({ content }: { content: ContactContent }) {
+  const { jumpCards, mapIntro, sectionEyebrows } = content;
   return (
     <section id="map" className="mx-auto max-w-[1440px] px-5 pt-26 pb-26 sm:px-8 lg:px-11 max-[640px]:pt-18">
-      <SectionHead eyebrow="03 / Find us" heading={jumpCards[2].label} intro={mapIntro} />
+      <SectionHead eyebrow={sectionEyebrows.map} heading={jumpCards[2].label} intro={mapIntro} />
 
       <div className="mt-10.5 overflow-hidden border border-[var(--home-hairline)]">
-        <LocationMap />
+        <LocationMap ariaLabel={mapIntro} />
       </div>
     </section>
   );

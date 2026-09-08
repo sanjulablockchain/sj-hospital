@@ -20,6 +20,26 @@ export const CATEGORIES = [
 export const TIP_CATEGORIES = CATEGORIES.slice(1) as readonly Exclude<Category, "All">[];
 
 /**
+ * Display text for each category, kept apart from `CATEGORIES` itself.
+ * `CATEGORIES` (and every `Article.tag`) stays the English structural value
+ * the filter buttons compare against and `categoryCounts()` keys its result
+ * by; translating it in place would break both in every locale but English,
+ * the same trap `groups.ts`'s own `groupLabels` exists to avoid.
+ * `LibrarySection` displays `categoryLabels[category]`, never `category`
+ * itself, for both the filter chips and each card's own tag.
+ */
+export const categoryLabels: Record<Category, string> = {
+  All: "All",
+  "Dengue & fever": "Dengue & fever",
+  Diabetes: "Diabetes",
+  "Heart & pressure": "Heart & pressure",
+  Children: "Children",
+  Women: "Women",
+  Kidney: "Kidney",
+  "Living well": "Living well",
+};
+
+/**
  * The library. Bylines name the team rather than an individual, so a
  * consultant leaving does not silently make the page wrong.
  *
@@ -206,3 +226,22 @@ export const featured: FeaturedArticle = {
 
 /** Editorial framing for the featured card, kept out of the component. */
 export const featuredKicker = "Start here";
+
+/**
+ * `#library`'s own copy, moved here out of `LibrarySection.tsx` so the
+ * component takes it as a prop rather than importing it.
+ *
+ * `countTemplate` carries `{shown}` and `{total}` tokens rather than a
+ * pre-built sentence: Sinhala and Tamil do not necessarily put "of" (or the
+ * numbers) where English does, so the component substitutes both counts into
+ * the one template instead of splitting a translated string in half
+ * (Pattern 3).
+ */
+export const librarySection = {
+  eyebrow: "01 / The library",
+  /** Shown as the heading when the filter is "All"; any other filter shows that category's own label instead. */
+  allHeading: "Everything worth reading",
+  filterAriaLabel: "Filter health tips by topic",
+  countTemplate: "{shown} of {total} articles",
+  takeAwayHeading: "Take away",
+};

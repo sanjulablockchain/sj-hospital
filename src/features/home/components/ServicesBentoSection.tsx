@@ -2,25 +2,35 @@ import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { services } from "@/features/services/data/services";
+import { localeHref } from "@/lib/i18n/paths";
+import type { Locale } from "@/lib/i18n/locales";
+import type { HomeContent } from "../data/getContent";
 
-export function ServicesBentoSection() {
+export function ServicesBentoSection({
+  content,
+  locale,
+}: {
+  content: HomeContent["content"]["servicesBento"];
+  locale: Locale;
+}) {
+  const { eyebrow, heading, tilesNote, tiles, footer } = content;
+  const viewAllLabel = footer.viewAllTemplate.replace("{count}", String(services.length));
+
   return (
     <section id="services" className="mx-auto max-w-[1440px] px-5 pt-30 sm:px-8 lg:px-11">
       <Reveal>
         <div className="flex flex-wrap items-end justify-between gap-10">
-          <div>
+          <div className="min-w-0">
             <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
-              02 / What we do
+              {eyebrow}
             </div>
-            <h2 className="font-display mt-4.5 text-[clamp(38px,4.4vw,66px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
-              Eight ways we
+            <h2 className="font-display mt-4.5 wrap-break-word text-[clamp(38px,4.4vw,66px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
+              {heading.line1}
               <br />
-              look after you
+              {heading.line2}
             </h2>
           </div>
-          <span className="text-[13px] tracking-[0.12em] text-[var(--home-muted)] uppercase">
-            Every tile opens a service
-          </span>
+          <span className="text-[13px] tracking-[0.12em] text-[var(--home-muted)] uppercase">{tilesNote}</span>
         </div>
       </Reveal>
 
@@ -30,31 +40,30 @@ export function ServicesBentoSection() {
           style={{ gridAutoRows: "minmax(178px, auto)" }}
         >
           <Link
-            href="/services/accident-emergency"
+            href={localeHref("/services/accident-emergency", locale)}
             className="sj-bento sj-bento-accent group relative col-span-2 row-span-2 flex flex-col justify-between overflow-hidden bg-[var(--home-accent)] p-8 text-[var(--home-on-accent)] max-[639px]:col-span-1"
           >
-            <span className="flex items-center justify-between gap-4 text-[12px] font-bold tracking-[0.2em] uppercase opacity-72">
-              <span>/01 Emergency &amp; OPD</span>
-              <span className="inline-flex items-center gap-2">
+            <span className="flex flex-wrap items-center justify-between gap-4 text-[12px] font-bold tracking-[0.2em] uppercase opacity-72">
+              <span className="wrap-break-word">{tiles[0].badge}</span>
+              <span className="inline-flex shrink-0 items-center gap-2">
                 <span className="animate-sj-pulse h-2 w-2 rounded-full bg-[var(--home-on-accent)]" />
-                Open now
+                {tiles[0].openNow}
               </span>
             </span>
             <span className="block">
-              <span className="font-display block text-[clamp(34px,4.2vw,62px)] leading-[0.92] font-extrabold tracking-[-0.04em] uppercase">
-                Walk in at
+              <span className="font-display block wrap-break-word text-[clamp(34px,4.2vw,62px)] leading-[0.92] font-extrabold tracking-[-0.04em] uppercase">
+                {tiles[0].heading.line1}
                 <br />
-                any hour
+                {tiles[0].heading.line2}
               </span>
               <span className="mt-3.5 block max-w-[34ch] text-[15.5px] leading-[1.55] opacity-85">
-                Emergency care, outpatient consultations, laboratory and digital X-ray, live around the clock
-                every day of the year.
+                {tiles[0].body}
               </span>
             </span>
           </Link>
 
           <Link
-            href="/services/general-surgery"
+            href={localeHref("/services/general-surgery", locale)}
             className="sj-bento relative col-span-2 flex min-h-[178px] flex-col justify-end overflow-hidden bg-[#0B1846] p-7 text-white max-[639px]:col-span-1"
           >
             <Image
@@ -71,26 +80,25 @@ export function ServicesBentoSection() {
               }}
             />
             <span className="relative flex flex-wrap items-end justify-between gap-5">
-              <span className="block">
-                <span className="block text-[12px] font-bold tracking-[0.2em] text-[#7FCBFF] uppercase">
-                  /02 Surgical care
+              <span className="block min-w-0">
+                <span className="block wrap-break-word text-[12px] font-bold tracking-[0.2em] text-[#7FCBFF] uppercase">
+                  {tiles[1].badge}
                 </span>
-                <span className="font-display mt-3 block text-[clamp(26px,2.8vw,38px)] leading-[0.98] font-bold tracking-[-0.03em] text-white">
-                  Theatres, consultant led
+                <span className="font-display mt-3 block wrap-break-word text-[clamp(26px,2.8vw,38px)] leading-[0.98] font-bold tracking-[-0.03em] text-white">
+                  {tiles[1].heading}
                 </span>
                 <span className="mt-2.5 block max-w-[40ch] text-[14.5px] leading-[1.5] text-white/72">
-                  Elective and emergency surgery with sterile instrument tracking and an assigned recovery
-                  nurse.
+                  {tiles[1].body}
                 </span>
               </span>
-              <span className="inline-flex items-center gap-2.5 text-[14px] font-bold whitespace-nowrap text-white">
-                Surgical services <span aria-hidden className="text-[18px]">&rarr;</span>
+              <span className="inline-flex items-center gap-2.5 text-[14px] font-bold text-white">
+                {tiles[1].linkLabel} <span aria-hidden className="text-[18px]">&rarr;</span>
               </span>
             </span>
           </Link>
 
           <Link
-            href="/services/inpatient-rooms"
+            href={localeHref("/services/inpatient-rooms", locale)}
             className="sj-bento relative row-span-2 flex flex-col justify-between overflow-hidden border border-[var(--home-hairline)] bg-[#0B1846] p-6.5 text-inherit"
           >
             <Image
@@ -104,19 +112,19 @@ export function ServicesBentoSection() {
               className="absolute inset-0"
               style={{ background: "linear-gradient(rgba(6,11,31,0.82) 0%, rgba(11,24,70,0.55) 46%, rgba(6,11,31,0.95) 100%)" }}
             />
-            <span className="relative text-[12px] font-bold tracking-[0.2em] text-[#7FCBFF] uppercase">/03 Rooms</span>
+            <span className="relative wrap-break-word text-[12px] font-bold tracking-[0.2em] text-[#7FCBFF] uppercase">
+              {tiles[2].badge}
+            </span>
             <span className="relative block">
               <span className="font-display block text-[clamp(38px,4vw,58px)] leading-[0.86] font-extrabold tracking-[-0.045em] text-[var(--home-accent)] tabular-nums">
                 10,000
               </span>
-              <span className="mt-2.5 block text-[14px] leading-[1.5] text-white/70">
-                LKR a night. Private and semi private, sanitised every two hours, nursing that knows your name.
-              </span>
+              <span className="mt-2.5 block text-[14px] leading-[1.5] text-white/70">{tiles[2].body}</span>
             </span>
           </Link>
 
           <Link
-            href="/services/pharmacy"
+            href={localeHref("/services/pharmacy", locale)}
             className="sj-bento relative flex flex-col justify-between overflow-hidden border border-[var(--home-hairline)] bg-[#0B1846] p-6.5 text-inherit"
           >
             <Image
@@ -130,19 +138,19 @@ export function ServicesBentoSection() {
               className="absolute inset-0"
               style={{ background: "linear-gradient(rgba(6,11,31,0.76) 0%, rgba(6,11,31,0.95) 100%)" }}
             />
-            <span className="relative text-[12px] font-bold tracking-[0.2em] text-[#7FCBFF] uppercase">/04 Pharmacy</span>
+            <span className="relative wrap-break-word text-[12px] font-bold tracking-[0.2em] text-[#7FCBFF] uppercase">
+              {tiles[3].badge}
+            </span>
             <span className="relative block">
-              <span className="font-display block text-[26px] leading-none font-bold tracking-[-0.03em] text-white">
-                Authorized stock, 24/7
+              <span className="font-display block wrap-break-word text-[26px] leading-none font-bold tracking-[-0.03em] text-white">
+                {tiles[3].heading}
               </span>
-              <span className="mt-2 block text-[14px] leading-[1.5] text-white/70">
-                Verified medicine only. No substitutes.
-              </span>
+              <span className="mt-2 block text-[14px] leading-[1.5] text-white/70">{tiles[3].body}</span>
             </span>
           </Link>
 
           <Link
-            href="/services/radiology"
+            href={localeHref("/services/radiology", locale)}
             className="sj-bento relative flex flex-col justify-between overflow-hidden border border-[var(--home-hairline)] bg-[#0B1846] p-6.5 text-inherit"
           >
             <Image
@@ -156,19 +164,19 @@ export function ServicesBentoSection() {
               className="absolute inset-0"
               style={{ background: "linear-gradient(rgba(6,11,31,0.76) 0%, rgba(6,11,31,0.95) 100%)" }}
             />
-            <span className="relative text-[12px] font-bold tracking-[0.2em] text-[#7FCBFF] uppercase">/05 Digital X-ray</span>
+            <span className="relative wrap-break-word text-[12px] font-bold tracking-[0.2em] text-[#7FCBFF] uppercase">
+              {tiles[4].badge}
+            </span>
             <span className="relative block">
-              <span className="font-display block text-[26px] leading-none font-bold tracking-[-0.03em] text-white">
-                Lower dose, sharper plates
+              <span className="font-display block wrap-break-word text-[26px] leading-none font-bold tracking-[-0.03em] text-white">
+                {tiles[4].heading}
               </span>
-              <span className="mt-2 block text-[14px] leading-[1.5] text-white/70">
-                Read within the hour, not the week.
-              </span>
+              <span className="mt-2 block text-[14px] leading-[1.5] text-white/70">{tiles[4].body}</span>
             </span>
           </Link>
 
           <Link
-            href="/services/laboratory"
+            href={localeHref("/services/laboratory", locale)}
             className="sj-bento relative col-span-2 flex min-h-[178px] items-end overflow-hidden bg-[#08123A] p-6.5 text-inherit max-[639px]:col-span-1"
           >
             <Image
@@ -183,20 +191,20 @@ export function ServicesBentoSection() {
               style={{ background: "linear-gradient(rgba(6,11,31,0.3) 20%, rgba(6,11,31,0.92) 100%)" }}
             />
             <span className="relative flex w-full flex-wrap items-end justify-between gap-5">
-              <span className="block">
-                <span className="block text-[12px] font-bold tracking-[0.2em] text-[#7FCBFF] uppercase">
-                  /06 Laboratory
+              <span className="block min-w-0">
+                <span className="block wrap-break-word text-[12px] font-bold tracking-[0.2em] text-[#7FCBFF] uppercase">
+                  {tiles[5].badge}
                 </span>
-                <span className="font-display mt-3 block text-[clamp(24px,2.6vw,34px)] leading-none font-bold tracking-[-0.03em] text-white">
-                  Two doctors read every report
+                <span className="font-display mt-3 block wrap-break-word text-[clamp(24px,2.6vw,34px)] leading-none font-bold tracking-[-0.03em] text-white">
+                  {tiles[5].heading}
                 </span>
               </span>
-              <span className="text-[14px] whitespace-nowrap text-white/75">10% off for OPD patients</span>
+              <span className="text-[14px] whitespace-nowrap text-white/75">{tiles[5].note}</span>
             </span>
           </Link>
 
           <Link
-            href="/services/home-visits"
+            href={localeHref("/services/home-visits", locale)}
             className="sj-bento relative flex flex-col justify-between overflow-hidden border border-[var(--home-hairline)] bg-[#0B1846] p-6.5 text-inherit"
           >
             <Image
@@ -210,19 +218,19 @@ export function ServicesBentoSection() {
               className="absolute inset-0"
               style={{ background: "linear-gradient(rgba(6,11,31,0.74) 0%, rgba(6,11,31,0.95) 100%)" }}
             />
-            <span className="relative text-[12px] font-bold tracking-[0.2em] text-[#7FCBFF] uppercase">/07 Home visits</span>
+            <span className="relative wrap-break-word text-[12px] font-bold tracking-[0.2em] text-[#7FCBFF] uppercase">
+              {tiles[6].badge}
+            </span>
             <span className="relative block">
-              <span className="font-display block text-[26px] leading-none font-bold tracking-[-0.03em] text-white">
-                We come to you
+              <span className="font-display block wrap-break-word text-[26px] leading-none font-bold tracking-[-0.03em] text-white">
+                {tiles[6].heading}
               </span>
-              <span className="mt-2 block text-[14px] leading-[1.5] text-white/70">
-                Doctors, nurses and lab technicians at your door.
-              </span>
+              <span className="mt-2 block text-[14px] leading-[1.5] text-white/70">{tiles[6].body}</span>
             </span>
           </Link>
 
           <Link
-            href="/services/medicine-delivery"
+            href={localeHref("/services/medicine-delivery", locale)}
             className="sj-bento relative flex flex-col justify-between overflow-hidden border border-[var(--home-hairline)] bg-[#0B1846] p-6.5 text-inherit"
           >
             <Image
@@ -236,14 +244,14 @@ export function ServicesBentoSection() {
               className="absolute inset-0"
               style={{ background: "linear-gradient(rgba(6,11,31,0.76) 0%, rgba(6,11,31,0.95) 100%)" }}
             />
-            <span className="relative text-[12px] font-bold tracking-[0.2em] text-[#7FCBFF] uppercase">/08 Delivery</span>
+            <span className="relative wrap-break-word text-[12px] font-bold tracking-[0.2em] text-[#7FCBFF] uppercase">
+              {tiles[7].badge}
+            </span>
             <span className="relative block">
-              <span className="font-display block text-[26px] leading-none font-bold tracking-[-0.03em] text-white">
-                Medicine to your door
+              <span className="font-display block wrap-break-word text-[26px] leading-none font-bold tracking-[-0.03em] text-white">
+                {tiles[7].heading}
               </span>
-              <span className="mt-2 block text-[14px] leading-[1.5] text-white/70">
-                Across Negombo, from our own counter.
-              </span>
+              <span className="mt-2 block text-[14px] leading-[1.5] text-white/70">{tiles[7].body}</span>
             </span>
           </Link>
         </div>
@@ -251,19 +259,19 @@ export function ServicesBentoSection() {
 
       <Reveal>
         <Link
-          href="/services"
+          href={localeHref("/services", locale)}
           className="mt-8.5 flex flex-wrap items-center justify-between gap-7.5 bg-[var(--home-accent)] px-9 py-8.5 text-[var(--home-on-accent)] sj-invert"
         >
-          <span className="block">
+          <span className="block min-w-0">
             <span className="block text-[11.5px] font-bold tracking-[0.24em] uppercase opacity-70">
-              Full service directory
+              {footer.label}
             </span>
-            <span className="font-display mt-2.5 block text-[clamp(28px,3.4vw,46px)] leading-none font-extrabold tracking-[-0.035em] uppercase">
-              Every service, in one place
+            <span className="font-display mt-2.5 block wrap-break-word text-[clamp(28px,3.4vw,46px)] leading-none font-extrabold tracking-[-0.035em] uppercase">
+              {footer.heading}
             </span>
           </span>
-          <span className="inline-flex items-center gap-3 text-[15px] font-bold whitespace-nowrap">
-            View all {services.length} services <span aria-hidden className="text-[22px]">&rarr;</span>
+          <span className="inline-flex items-center gap-3 text-[15px] font-bold">
+            {viewAllLabel} <span aria-hidden className="text-[22px]">&rarr;</span>
           </span>
         </Link>
       </Reveal>

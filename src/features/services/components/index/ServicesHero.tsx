@@ -3,8 +3,10 @@ import { ThemedHeader } from "@/components/layout/ThemedHeader";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { Ticker } from "@/components/ui/Ticker";
 import { servicesNavigation } from "@/config/servicesNavigation";
-import { tickerItems } from "@/features/services/data/indexContent";
+import { translateNavItems } from "@/config/navigationLabels";
+import type { Locale } from "@/lib/i18n/locales";
 import { groupCounts } from "@/features/services/data/services";
+import type { ServicesContent } from "@/features/services/data/getContent";
 
 /**
  * `#top` hero: a fixed-dark consultation photograph behind the themed header
@@ -12,9 +14,15 @@ import { groupCounts } from "@/features/services/data/services";
  * `animate-sj-up` (not Reveal) so it appears on load rather than waiting on an
  * intersection observer for what's already in the first viewport, the same
  * choice the home hero makes.
+ *
+ * `hero.body` carries a `{count}` token rather than being split around the
+ * English word order: word order moves between English, Sinhala and Tamil
+ * (i18n recipe pattern 3).
  */
-export function ServicesHero() {
+export function ServicesHero({ content, locale }: { content: ServicesContent; locale: Locale }) {
+  const { hero, tickerItems } = content.indexContent;
   const totalServices = groupCounts().All;
+  const body = hero.body.replace("{count}", String(totalServices));
 
   return (
     <section
@@ -50,31 +58,30 @@ export function ServicesHero() {
         }}
       />
 
-      <ThemedHeader navItems={servicesNavigation} homeHref="/" bookHref="/e-channeling" />
+      <ThemedHeader navItems={translateNavItems(servicesNavigation, locale)} homeHref="/" bookHref="/e-channeling" />
 
       <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 flex-col justify-end gap-6 px-5 pb-12 sm:px-8 lg:px-11">
         <div className="animate-sj-up inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
           <span className="h-px w-11 bg-[var(--home-accent)]" />
-          Medical Services
+          {hero.eyebrow}
         </div>
-        <h1 className="font-display animate-sj-up text-[clamp(52px,9vw,152px)] leading-[0.86] font-extrabold tracking-[-0.045em] text-white uppercase">
-          Every service,
+        <h1 className="font-display animate-sj-up wrap-break-word text-[clamp(52px,9vw,152px)] leading-[0.86] font-extrabold tracking-[-0.045em] text-white uppercase">
+          {hero.heading.line1}
           <br />
-          under <span className="text-[var(--home-accent)]">one roof.</span>
+          {hero.heading.accentPrefix}
+          <span className="text-[var(--home-accent)]">{hero.heading.accent}</span>
         </h1>
         <p
           className="animate-sj-up max-w-[52ch] text-[18px] leading-[1.6] text-white/82"
           style={{ textWrap: "pretty" }}
         >
-          {totalServices} services across nine centres of excellence: emergency, surgical, diagnostic and
-          family care, organised around the problem you came in with, not the department that happens to
-          treat it.
+          {body}
         </p>
         <a
           href="#directory"
           className="animate-sj-up inline-flex w-fit items-center gap-3 border border-white/30 px-6 py-4 text-[15px] font-bold text-white"
         >
-          Open the directory <span aria-hidden>&rarr;</span>
+          {hero.cta} <span aria-hidden>&rarr;</span>
         </a>
       </div>
 

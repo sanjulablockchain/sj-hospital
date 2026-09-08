@@ -44,3 +44,10 @@ export const homeCareCards: HomeCareCard[] = [
     href: "/services/telemedicine",
   },
 ];
+
+/** `#home-care`'s own copy, stranded in `HomeCareSection.tsx` until now. */
+export const sectionEyebrow = "06 / Care at home";
+export const heading = { line1: "Some patients", line2: "cannot come in" };
+export const body =
+  "Our doctors, nurses and laboratory technicians visit your home instead, for elders, infants and recovery after an operation. Notes from the visit go straight onto your hospital file.";
+export const cta = "How a home visit works";

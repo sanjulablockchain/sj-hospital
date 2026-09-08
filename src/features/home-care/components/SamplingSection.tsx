@@ -1,6 +1,6 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHead } from "./SectionHead";
-import { samplingFacts, samplingPoints } from "../data/content";
+import type { HomeCareContent } from "../data/getContent";
 
 /**
  * `#sampling`: the points on the left, the fact rows on the right.
@@ -10,30 +10,35 @@ import { samplingFacts, samplingPoints } from "../data/content";
  * settled. The 1px grid gap shows the parent hairline through, and each cell
  * paints `--home-bg` over the top.
  */
-export function SamplingSection() {
+export function SamplingSection({ content }: { content: HomeCareContent }) {
+  const { samplingFacts, samplingHeading, samplingIntro, samplingLabels, samplingPoints, sectionEyebrows } =
+    content;
   return (
     <section
       id="sampling"
       className="mx-auto max-w-[1440px] px-5 pt-28 sm:px-8 lg:px-11 max-[640px]:pt-18"
     >
       <SectionHead
-        eyebrow="03 / Sampling"
+        eyebrow={sectionEyebrows.sampling}
         heading={
           <>
-            The sample
+            {samplingHeading.line1}
             <br />
-            travels, not
+            {samplingHeading.line2}
             <br />
-            the patient
+            {samplingHeading.line3}
           </>
         }
-        intro="Where the only reason to come in was to give a sample, a laboratory technician comes instead."
+        intro={samplingIntro}
       />
 
-      <Reveal className="mt-11 grid grid-cols-[1.25fr_0.75fr] gap-px bg-[var(--home-hairline)] max-[899px]:grid-cols-1">
+      {/* `minmax(0, ...)` on both tracks: without it, a plain `fr` track
+          cannot shrink below its content's intrinsic width, and Sinhala/Tamil
+          form long unbreakable tokens where English would have a space. */}
+      <Reveal className="mt-11 grid grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] gap-px bg-[var(--home-hairline)] max-[899px]:grid-cols-1">
         <div className="bg-[var(--home-bg)] py-8 pr-8 max-[899px]:px-0">
           <h3 className="text-[12.5px] font-bold tracking-[0.2em] text-[var(--home-accent-soft)] uppercase">
-            How it works
+            {samplingLabels.howItWorks}
           </h3>
           <ul className="mt-5 flex flex-col gap-3.5 text-[15.5px] leading-[1.58]">
             {samplingPoints.map((point) => (
@@ -49,7 +54,7 @@ export function SamplingSection() {
 
         <div className="bg-[var(--home-bg)] py-8 pl-8 max-[899px]:px-0">
           <h3 className="text-[12.5px] font-bold tracking-[0.2em] text-[var(--home-accent-soft)] uppercase">
-            What is settled
+            {samplingLabels.whatIsSettled}
           </h3>
           <dl className="mt-5 flex flex-col gap-px bg-[var(--home-hairline)]">
             {samplingFacts.map((fact) => (

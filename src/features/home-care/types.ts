@@ -35,5 +35,24 @@ export type Handoff = {
   href: string;
 };
 
-/** One of the rows in the `#book` contact rail. */
-export type ContactRow = { label: string; href: string; glyph: "phone" | "arrow" };
+/**
+ * One of the rows in the `#book` contact rail. `internal` marks the one row
+ * that is a route on this site rather than a phone number or a mailbox, so
+ * BookSection can send it through `LocaleLink` and keep a reader in the
+ * language they are already reading; the other rows stay a plain `<a>`.
+ *
+ * `value` is optional, not required: only the phone row carries a fact
+ * distinct from its own action phrase (the number itself). The WhatsApp,
+ * email and e-channeling rows have nothing else to show beyond their label;
+ * their destination already is the fact (a WhatsApp link, a mailbox, a
+ * route), so they leave `value` unset rather than repeating their `href` as
+ * a second string with a second home. Matches `contact`'s and
+ * `accommodation`'s own `ContactRow`/`bookRail` shape.
+ */
+export type ContactRow = {
+  label: string;
+  value?: string;
+  href: string;
+  glyph: "phone" | "arrow";
+  internal?: boolean;
+};

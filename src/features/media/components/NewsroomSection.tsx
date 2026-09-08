@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
 import type { NewsCategory } from "../types";
-import { featured, news, newsCategories } from "../data/content";
+import type { MediaContent } from "../data/getContent";
 
 /** "All" is not a tag any item carries, so it is kept separate from the union. */
 type Filter = NewsCategory | "All";
@@ -24,27 +24,46 @@ type Filter = NewsCategory | "All";
  * Counts on the chips come from the data, so a chip can never advertise a
  * category that has emptied out. `content.test.ts` asserts none of them is
  * empty in the first place.
+ *
+ * `content` arrives as a prop, built by the Server Component parent
+ * (`MediaPage`) from the already localized data, rather than importing
+ * `../data/content` here: importing that module into a Client Component
+ * would pull all three locales' copy into the browser bundle.
+ *
+ * `newsCategories` stays the structural filter key every `NewsCategory`
+ * comparison and this component's own `filter` state runs on: translating it
+ * would silently break every chip's `===` check the moment a Sinhala or
+ * Tamil reader clicked one. `categoryLabels` is the translated word actually
+ * shown for each of those same six categories, so every chip, the active
+ * heading and each card's own badge read it rather than the bare `tag`.
  */
-export function NewsroomSection() {
+export function NewsroomSection({ content }: { content: MediaContent }) {
+  const { featured, news, newsCategories, categoryLabels, newsroomCopy, sectionEyebrows } = content;
   const [filter, setFilter] = useState<Filter>("All");
 
   const shown = useMemo(
     () => (filter === "All" ? news : news.filter((item) => item.tag === filter)),
-    [filter],
+    [filter, news],
   );
 
   const filters: Filter[] = ["All", ...newsCategories];
+
+  const filterLabel = (label: Filter) => (label === "All" ? newsroomCopy.allLabel : categoryLabels[label]);
+
+  const itemsCount = newsroomCopy.itemsCountTemplate
+    .replace("{shown}", String(shown.length))
+    .replace("{total}", String(news.length));
 
   return (
     <section id="newsroom" className="mx-auto max-w-[1440px] px-5 pt-26 sm:px-8 lg:px-11 max-[640px]:pt-18.5">
       <Reveal>
         <div className="flex flex-wrap items-end justify-between gap-10">
-          <div>
+          <div className="min-w-0">
             <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
-              01 / Newsroom
+              {sectionEyebrows.newsroom}
             </div>
-            <h2 className="font-display mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
-              {filter === "All" ? "Latest from the hospital" : filter}
+            <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
+              {filter === "All" ? newsroomCopy.headingAll : filterLabel(filter)}
             </h2>
           </div>
           {/* Polite rather than assertive: the count is useful confirmation
@@ -53,7 +72,7 @@ export function NewsroomSection() {
             aria-live="polite"
             className="text-[13px] tracking-[0.12em] text-[var(--home-muted)] uppercase"
           >
-            {shown.length} of {news.length} items
+            {itemsCount}
           </span>
         </div>
       </Reveal>
@@ -76,7 +95,7 @@ export function NewsroomSection() {
                   : "border-[var(--home-hairline-strong)] text-[var(--home-heading)]"
               }`}
             >
-              {label} ({count})
+              {filterLabel(label)} ({count})
             </button>
           );
         })}
@@ -85,7 +104,7 @@ export function NewsroomSection() {
       <Reveal className="mt-7.5 grid gap-px bg-[var(--home-hairline)] min-[900px]:grid-cols-[minmax(0,1.35fr)_minmax(0,0.65fr)]">
         <div className="bg-[var(--home-accent)] px-9.5 pt-10 pb-9.5 text-[var(--home-on-accent)]">
           <span className="text-[11.5px] font-bold tracking-[0.2em] uppercase opacity-68">
-            {featured.kicker}
+            {featured.kickerDate} &middot; {featured.type}
           </span>
           <h3 className="font-display mt-4 max-w-[26ch] text-[clamp(30px,3.6vw,50px)] leading-[0.96] font-extrabold tracking-[-0.035em] uppercase">
             {featured.title}
@@ -101,7 +120,7 @@ export function NewsroomSection() {
 
         <div className="flex flex-col bg-[var(--home-bg)] px-7.5 py-8.5">
           <span className="text-[11.5px] font-bold tracking-[0.2em] text-[var(--home-accent-soft)] uppercase">
-            For journalists
+            {newsroomCopy.forJournalists}
           </span>
           <ul className="mt-4.5 flex flex-col gap-3.25">
             {featured.points.map((point) => (
@@ -132,7 +151,7 @@ export function NewsroomSection() {
             className="sj-tint flex min-h-[272px] flex-col bg-[var(--home-bg)] px-6.5 pt-7.5 pb-7"
           >
             <span className="text-[11.5px] font-bold tracking-[0.2em] text-[var(--home-accent-soft)] uppercase">
-              {item.tag}
+              {categoryLabels[item.tag]}
             </span>
             <h3 className="font-display mt-3.5 text-[24px] leading-[1.07] font-semibold tracking-[-0.03em] text-[var(--home-heading)]">
               {item.title}

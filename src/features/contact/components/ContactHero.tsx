@@ -1,10 +1,12 @@
 import Image from "next/image";
-import Link from "next/link";
+import { LocaleLink } from "@/components/i18n/LocaleLink";
 import { ThemedHeader } from "@/components/layout/ThemedHeader";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { Ticker } from "@/components/ui/Ticker";
 import { contactNavigation } from "@/config/contactNavigation";
-import { heroFacts, heroStandfirst, tickerItems } from "../data/content";
+import { translateNavItems } from "@/config/navigationLabels";
+import type { Locale } from "@/lib/i18n/locales";
+import type { ContactContent } from "../data/getContent";
 
 /**
  * `#top`: the reception desk behind the themed header and the page's only
@@ -14,7 +16,8 @@ import { heroFacts, heroStandfirst, tickerItems } from "../data/content";
  * hero blocks: this sits on a photograph in both themes, and the light theme
  * swaps that token to a deep `#0B6FC0` that would sink into the image.
  */
-export function ContactHero() {
+export function ContactHero({ content, locale }: { content: ContactContent; locale: Locale }) {
+  const { hero, heroFacts, heroStandfirst, tickerItems } = content;
   return (
     <section
       id="top"
@@ -48,7 +51,7 @@ export function ContactHero() {
         }}
       />
 
-      <ThemedHeader navItems={contactNavigation} homeHref="/" bookHref="/e-channeling" />
+      <ThemedHeader navItems={translateNavItems(contactNavigation, locale)} homeHref="/" bookHref="/e-channeling" />
 
       <div className="relative z-10 mx-auto mt-auto flex w-full max-w-[1440px] gap-5.5 px-5 sm:px-8 lg:px-11">
         {/* Decorative vertical strapline, dropped below 900px where there is no
@@ -61,7 +64,7 @@ export function ContactHero() {
             className="text-[11px] tracking-[0.3em] text-white/50 uppercase"
             style={{ writingMode: "vertical-rl" }}
           >
-            Get in touch
+            {hero.strapline}
           </span>
           <span className="w-px flex-1 bg-gradient-to-b from-white/40 to-transparent" />
         </div>
@@ -69,17 +72,17 @@ export function ContactHero() {
         <div className="flex-1 pb-11">
           <div className="animate-sj-up inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
             <span aria-hidden className="h-px w-11 bg-[#2CA6F0]" />
-            <Link href="/" className="text-[#7FCBFF] hover:text-white">
-              Home
-            </Link>
+            <LocaleLink href="/" className="text-[#7FCBFF] hover:text-white">
+              {hero.breadcrumbHome}
+            </LocaleLink>
             <span aria-hidden className="opacity-50">
               /
             </span>
-            Contact Us
+            {hero.breadcrumbCurrent}
           </div>
 
-          <h1 className="font-display animate-sj-up mt-4.5 text-[clamp(38px,6.4vw,100px)] leading-[0.9] font-extrabold tracking-[-0.045em] text-white uppercase">
-            Get in <span className="text-[#2CA6F0]">touch.</span>
+          <h1 className="font-display animate-sj-up wrap-break-word mt-4.5 text-[clamp(38px,6.4vw,100px)] leading-[0.9] font-extrabold tracking-[-0.045em] text-white uppercase">
+            {hero.headingLead} <span className="text-[#2CA6F0]">{hero.headingAccent}</span>
           </h1>
 
           <div className="animate-sj-up mt-8 flex flex-col items-start gap-5.5">
@@ -90,18 +93,18 @@ export function ContactHero() {
               {heroStandfirst}
             </p>
             <div className="flex flex-wrap gap-3">
-              <a
+              <LocaleLink
                 href="/e-channeling"
                 className="sj-invert inline-flex items-center gap-2.5 bg-[#2CA6F0] px-6 py-4 text-[15px] font-bold text-[#04122B]"
               >
-                Book a doctor <span aria-hidden>&rarr;</span>
-              </a>
+                {hero.bookCta} <span aria-hidden>&rarr;</span>
+              </LocaleLink>
               <a
                 href="#reach"
                 className="inline-flex items-center gap-3 border border-white/30 px-6 py-4 text-[15px] font-bold whitespace-nowrap text-white transition-colors hover:bg-white hover:text-[#060B1F]"
               >
                 <span aria-hidden className="animate-sj-pulse h-2 w-2 rounded-full bg-[#2CA6F0]" />
-                Reach us
+                {hero.reachCta}
               </a>
             </div>
           </div>

@@ -1,5 +1,6 @@
 import { Reveal } from "@/components/ui/Reveal";
 import type { Service } from "@/features/services/types";
+import type { ServicesContent } from "@/features/services/data/getContent";
 
 /**
  * `#about`: the per-service explainer. Left column carries the service's own
@@ -10,13 +11,15 @@ import type { Service } from "@/features/services/types";
  * side) so `facts` and the visit location stay visible while scanning the
  * longer left column.
  */
-export function AboutSection({ service }: { service: Service }) {
+export function AboutSection({ service, content }: { service: Service; content: ServicesContent }) {
+  const { detailChrome } = content.indexContent;
+
   return (
     <section id="about" className="mx-auto max-w-[1440px] px-5 pt-30 sm:px-8 lg:px-11">
-      <div className="grid grid-cols-1 items-start gap-14 min-[900px]:grid-cols-[1.15fr_0.85fr] min-[900px]:gap-18">
-        <div>
+      <div className="grid grid-cols-1 items-start gap-14 min-[900px]:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] min-[900px]:gap-18">
+        <div className="min-w-0">
           <Reveal>
-            <h2 className="font-display text-[clamp(34px,3.8vw,54px)] leading-[1.02] font-extrabold tracking-[-0.03em] text-[var(--home-heading)] uppercase">
+            <h2 className="font-display wrap-break-word text-[clamp(34px,3.8vw,54px)] leading-[1.02] font-extrabold tracking-[-0.03em] text-[var(--home-heading)] uppercase">
               {service.aboutHead}
             </h2>
             <p
@@ -31,8 +34,8 @@ export function AboutSection({ service }: { service: Service }) {
           </Reveal>
 
           <Reveal className="mt-11">
-            <h3 className="font-display text-[19px] leading-[1.15] font-semibold tracking-[-0.02em] text-[var(--home-heading)]">
-              What this covers
+            <h3 className="font-display wrap-break-word text-[19px] leading-[1.15] font-semibold tracking-[-0.02em] text-[var(--home-heading)]">
+              {detailChrome.aboutCoversHeading}
             </h3>
             <ul className="mt-4.5 grid grid-cols-1 gap-px bg-[var(--home-hairline)] sm:grid-cols-2">
               {service.covers.map((item) => (
@@ -50,8 +53,8 @@ export function AboutSection({ service }: { service: Service }) {
           </Reveal>
 
           <Reveal className="mt-9.5">
-            <h3 className="font-display text-[19px] leading-[1.15] font-semibold tracking-[-0.02em] text-[var(--home-heading)]">
-              Conditions we see most
+            <h3 className="font-display wrap-break-word text-[19px] leading-[1.15] font-semibold tracking-[-0.02em] text-[var(--home-heading)]">
+              {detailChrome.aboutConditionsHeading}
             </h3>
             <ul className="mt-4.5 flex flex-wrap gap-2.5">
               {service.conditions.map((condition) => (
@@ -66,10 +69,10 @@ export function AboutSection({ service }: { service: Service }) {
           </Reveal>
         </div>
 
-        <div className="min-[900px]:sticky min-[900px]:top-10">
+        <div className="min-w-0 min-[900px]:sticky min-[900px]:top-10">
           <Reveal className="bg-[var(--home-surface-2)] p-8">
             <a href="#book" className="group flex items-start justify-between gap-4">
-              <h3 className="font-display text-[24px] leading-[1.15] font-semibold tracking-[-0.02em] text-[var(--home-heading)] transition-colors duration-300 group-hover:text-[var(--home-accent)]">
+              <h3 className="font-display wrap-break-word text-[24px] leading-[1.15] font-semibold tracking-[-0.02em] text-[var(--home-heading)] transition-colors duration-300 group-hover:text-[var(--home-accent)]">
                 {service.cta}
               </h3>
               <span
@@ -83,15 +86,15 @@ export function AboutSection({ service }: { service: Service }) {
             <dl className="mt-7 flex flex-col gap-3.5 border-t border-[var(--home-hairline)] pt-6">
               {service.facts.map((fact) => (
                 <div key={fact.k} className="flex items-baseline justify-between gap-4">
-                  <dt className="text-[13px] text-[var(--home-muted)]">{fact.k}</dt>
-                  <dd className="text-right text-[13.5px] font-bold text-[var(--home-heading)]">{fact.v}</dd>
+                  <dt className="wrap-break-word min-w-0 text-[13px] text-[var(--home-muted)]">{fact.k}</dt>
+                  <dd className="wrap-break-word min-w-0 text-right text-[13.5px] font-bold text-[var(--home-heading)]">{fact.v}</dd>
                 </div>
               ))}
             </dl>
 
             <div className="mt-7 border-t border-[var(--home-hairline)] pt-6">
               <div className="text-[13.5px] font-bold text-[var(--home-heading)]">{service.location}</div>
-              <div className="mt-1.5 text-[13px] text-[var(--home-muted)]">229/10 St. Joseph Street, Negombo</div>
+              <div className="mt-1.5 text-[13px] text-[var(--home-muted)]">{detailChrome.addressLine}</div>
             </div>
           </Reveal>
         </div>

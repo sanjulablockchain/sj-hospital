@@ -42,3 +42,67 @@ test("the document and inner scrollbars share one thumb colour", () => {
 test("the retired purple scrollbar colour is gone", () => {
   assert.ok(!/74,\s*42,\s*130/.test(declarations), "the purple scrollbar thumb is back");
 });
+
+// [data-sj] and its .font-display heading utility must read the two custom
+// properties that actually vary by locale, --sj-body and --sj-display, rather
+// than a fixed font stack or the @theme inline --font-sans/--font-heading
+// pair (whose generated utilities bake in a value and are not used by the
+// site at all). Rebinding those two instead of these two is exactly the bug
+// this stylesheet shipped with.
+test("[data-sj] and its heading utility read the shared body/display variables", () => {
+  assert.match(
+    declarations,
+    /\[data-sj\]\s*\{[^}]*font-family:\s*var\(--sj-body\)/,
+    "[data-sj] does not paint with var(--sj-body)"
+  );
+  assert.match(
+    declarations,
+    /\[data-sj\]\s*\.font-display\s*\{[^}]*font-family:\s*var\(--sj-display\)/,
+    "[data-sj] .font-display does not paint with var(--sj-display)"
+  );
+});
+
+// Both html[lang="si"] and html[lang="ta"] must rebind both variables, each
+// with its own script's font first, so a Sinhala or Tamil page actually picks
+// up its own type instead of silently falling back to the English faces.
+test("Sinhala and Tamil each rebind both shared font variables with their own faces", () => {
+  const siBlockMatch = declarations.match(/html\[lang="si"\]\s*\{([^}]*)\}/);
+  const taBlockMatch = declarations.match(/html\[lang="ta"\]\s*\{([^}]*)\}/);
+  assert.ok(siBlockMatch, "no html[lang=\"si\"] rule");
+  assert.ok(taBlockMatch, "no html[lang=\"ta\"] rule");
+
+  const siBlock = siBlockMatch![1];
+  const taBlock = taBlockMatch![1];
+
+  assert.match(siBlock, /--sj-body:[^;]*--font-noto-sinhala/, "si does not rebind --sj-body with the Sinhala face");
+  assert.match(siBlock, /--sj-display:[^;]*--font-gemunu/, "si does not rebind --sj-display with the Sinhala display face");
+
+  assert.match(taBlock, /--sj-body:[^;]*--font-noto-tamil/, "ta does not rebind --sj-body with the Tamil face");
+  assert.match(taBlock, /--sj-display:[^;]*--font-catamaran/, "ta does not rebind --sj-display with the Tamil display face");
+
+  // The Latin face must come FIRST in every locale stack. A browser picks a
+  // font per character and falls through only on a missing glyph, and all four
+  // script faces ship Latin glyphs of their own, so script-first made them
+  // paint the English text too: the English hero heading rendered in Gemunu
+  // Libre on /si and Catamaran on /ta, and English body copy in Noto Sans
+  // Sinhala rather than Manrope. The assertions above pass either way, which
+  // is exactly why that shipped, so these pin the order rather than the
+  // membership.
+  const order: Array<[string, string, string, string]> = [
+    ["si", siBlock, "--sj-body", "--font-manrope"],
+    ["si", siBlock, "--sj-display", "--font-bricolage"],
+    ["ta", taBlock, "--sj-body", "--font-manrope"],
+    ["ta", taBlock, "--sj-display", "--font-bricolage"],
+  ];
+  for (const [locale, block, property, latin] of order) {
+    const value = block.match(new RegExp(property + ":([^;]*)"))?.[1];
+    assert.ok(value, `${locale} has no ${property}`);
+    const families = value!.split(",").map((part) => part.trim());
+    assert.ok(
+      families[0]?.includes(latin),
+      `${locale} ${property} must list ${latin} first so English keeps its own` +
+        ` typeface; found "${families[0]}". A script face first repaints every` +
+        ` English word on the page, which is most of it.`
+    );
+  }
+});

@@ -2,6 +2,12 @@
 export type Department = string;
 
 export type Job = {
+  /**
+   * Fixed English slug, never translated. Used as the "Applying for" select's
+   * `value`, the row's React key, and the state that tracks which row is
+   * open, so none of those break when `title` is translated.
+   */
+  id: string;
   title: string;
   /** The one-line meta under the title: contract, roster, location. */
   line: string;
@@ -16,6 +22,12 @@ export type Job = {
 export type FactRow = { k: string; v: string };
 
 export type JumpCard = { count: string; label: string; note: string; href: string };
+
+/**
+ * A `<select>` option whose `id` is the fixed value the form submits and the
+ * schema validates, and whose `label` is the translatable text a reader sees.
+ */
+export type SelectOption = { id: string; label: string };
 
 export type BenefitGroup = {
   kind: string;

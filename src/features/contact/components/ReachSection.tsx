@@ -1,15 +1,18 @@
 import { RevealStagger } from "@/components/ui/RevealStagger";
 import { ClockIcon, MailIcon, MapPinIcon, PhoneIcon, SmartphoneIcon } from "@/components/ui/Icons";
 import { SectionHead } from "./SectionHead";
-import { contactRows, jumpCards, reachIntro } from "../data/content";
+import type { ContactContent } from "../data/getContent";
 
 // Icons are JSX, so they stay here rather than in `data/content.ts`, keyed by
-// the same `label` each row already carries.
+// each row's structural `icon` field, never by its translatable `label`: the
+// pilot shipped exactly this file keying JSX off `label` once already, which
+// silently blanked four icons the moment the label was translated (recipe
+// pattern 1). `icon` is excluded from the parity test as a structural key.
 const ICONS: Record<string, React.ReactNode> = {
-  Location: <MapPinIcon className="h-5 w-5" />,
-  "Call us": <PhoneIcon className="h-5 w-5" />,
-  "WhatsApp / Mobile": <SmartphoneIcon className="h-5 w-5" />,
-  Email: <MailIcon className="h-5 w-5" />,
+  location: <MapPinIcon className="h-5 w-5" />,
+  phone: <PhoneIcon className="h-5 w-5" />,
+  whatsapp: <SmartphoneIcon className="h-5 w-5" />,
+  email: <MailIcon className="h-5 w-5" />,
 };
 
 /**
@@ -21,10 +24,11 @@ const ICONS: Record<string, React.ReactNode> = {
  * destination-heading pattern the about-us sections use. `intro` is
  * `reachIntro`, distinct from `jumpCards[0].note`.
  */
-export function ReachSection() {
+export function ReachSection({ content }: { content: ContactContent }) {
+  const { contactRows, heroStandfirst, jumpCards, reachIntro, sectionEyebrows } = content;
   return (
     <section id="reach" className="mx-auto max-w-[1440px] px-5 pt-26 sm:px-8 lg:px-11 max-[640px]:pt-18">
-      <SectionHead eyebrow="01 / Reach us" heading={jumpCards[0].label} intro={reachIntro} />
+      <SectionHead eyebrow={sectionEyebrows.reach} heading={jumpCards[0].label} intro={reachIntro} />
 
       <RevealStagger
         stepMs={80}
@@ -39,7 +43,7 @@ export function ReachSection() {
             className="sj-fill flex flex-col gap-3 bg-[var(--home-bg)] px-6 py-6.5"
           >
             <span className="flex h-11 w-11 items-center justify-center bg-[var(--home-accent)] text-[var(--home-on-accent)]">
-              {ICONS[row.label]}
+              {ICONS[row.icon]}
             </span>
             <span className="text-[11.5px] font-bold tracking-[0.2em] text-[var(--home-accent-soft)] uppercase">
               {row.label}
@@ -54,7 +58,7 @@ export function ReachSection() {
 
       <div className="mt-px flex items-center gap-2.5 bg-[var(--home-accent)] px-6 py-4.5 text-[var(--home-on-accent)]">
         <ClockIcon className="h-5 w-5 shrink-0" />
-        <span className="text-sm font-bold">Open 24/7, every hour of every day</span>
+        <span className="text-sm font-bold">{heroStandfirst}</span>
       </div>
     </section>
   );

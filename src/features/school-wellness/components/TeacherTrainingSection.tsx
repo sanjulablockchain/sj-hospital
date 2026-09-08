@@ -1,7 +1,7 @@
 import { RevealStagger } from "@/components/ui/RevealStagger";
 import { SectionHead } from "./SectionHead";
 import { HoverTile } from "./HoverTile";
-import { training } from "../data/content";
+import type { SchoolWellnessContent } from "../data/getContent";
 
 /**
  * `#teachers`: the four staff room sessions, four to a row, each hiding who it
@@ -11,24 +11,25 @@ import { training } from "../data/content";
  * sessions, their durations and their audiences are unverified copy. See
  * PLACEHOLDER_NOTICE in `data/content.ts`.
  */
-export function TeacherTrainingSection() {
+export function TeacherTrainingSection({ content }: { content: SchoolWellnessContent }) {
+  const { sectionEyebrows, teacherHeading, teacherIntro, training } = content;
   return (
     <section
       id="teachers"
       className="mx-auto max-w-[1440px] px-5 pt-26 sm:px-8 lg:px-11 max-[640px]:pt-18"
     >
       <SectionHead
-        eyebrow="04 / For the staff room"
+        eyebrow={sectionEyebrows.teachers}
         heading={
           <>
-            Train the adults
+            {teacherHeading.line1}
             <br />
-            who are there
+            {teacherHeading.line2}
             <br />
-            first
+            {teacherHeading.line3}
           </>
         }
-        intro="When a child collapses on a Tuesday afternoon, the person kneeling beside them is a teacher. These sessions run free of charge for schools on the programme."
+        intro={teacherIntro}
       />
       <RevealStagger
         stepMs={60}

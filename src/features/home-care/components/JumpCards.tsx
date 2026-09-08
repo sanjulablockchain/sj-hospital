@@ -1,5 +1,5 @@
 import { RevealStagger } from "@/components/ui/RevealStagger";
-import { jumpCards } from "../data/content";
+import type { HomeCareContent } from "../data/getContent";
 
 /**
  * `#jump`: four in-page shortcuts sitting directly under the hero. The hairline
@@ -12,7 +12,8 @@ import { jumpCards } from "../data/content";
  * and telemedicine, get no card: both hand off to another page, and a shortcut
  * to a summary of somewhere else is a detour.
  */
-export function JumpCards() {
+export function JumpCards({ content }: { content: HomeCareContent }) {
+  const { jumpCards } = content;
   return (
     <section id="jump" className="mx-auto max-w-[1440px] px-5 pt-20 sm:px-8 lg:px-11">
       <RevealStagger

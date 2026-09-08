@@ -1,14 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { roomTypes } from "../data/content";
 
-// Derived from `roomTypes` rather than a locally hardcoded list, so the ids
-// this component observes can never drift from the sections the page
-// actually renders. `shortName` (not `name`) keeps the chip labels matching
-// the short forms the jump cards and footer already use ("Standard", "Super
-// Deluxe"), not the fuller "Standard Rooms" / "Super Deluxe Rooms".
-const rooms = roomTypes.map(({ id, shortName }) => ({ id, label: shortName }));
+type Room = { id: string; label: string };
 
 /**
  * The sticky room-type bar sits at `top-0`: `ThemedHeader` is `relative`
@@ -17,9 +11,19 @@ const rooms = roomTypes.map(({ id, shortName }) => ({ id, label: shortName }));
  * `IntersectionObserver`'s `rootMargin` either. `RoomsSection.tsx`'s
  * `scroll-mt-[88px]` on each room wrapper is derived from this bar's own
  * rendered height; see the comment there for the arithmetic.
+ *
+ * `rooms` arrives as a prop rather than an import: this is a client
+ * component, so it never reads `data/content.ts` directly, and its parent
+ * (`RoomsSection`) builds it from the same localized `roomTypes` the room
+ * headings read, using `shortName` (not `name`) for the same short forms
+ * the jump cards and footer already use ("Standard", "Super Deluxe"). That
+ * is what keeps the chip labels and the headings they scroll to reading the
+ * same translated text: there is exactly one place this component's copy is
+ * translated, and `id` (never translated) is what the observer and the
+ * anchors below key off, not the label.
  */
-export function RoomTypeNav() {
-  const [activeId, setActiveId] = useState(rooms[0].id);
+export function RoomTypeNav({ rooms }: { rooms: Room[] }) {
+  const [activeId, setActiveId] = useState(rooms[0]?.id);
 
   useEffect(() => {
     const sections = rooms
@@ -42,7 +46,7 @@ export function RoomTypeNav() {
 
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
-  }, []);
+  }, [rooms]);
 
   return (
     <div className="sticky top-0 z-30 border-b border-[var(--home-hairline)] bg-[var(--home-bg)]/95 backdrop-blur-md">

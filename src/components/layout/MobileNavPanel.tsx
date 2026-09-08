@@ -2,14 +2,21 @@
 
 import { useState } from "react";
 import { ThemeMenuToggle } from "@/components/theme/ThemeMenuToggle";
+import { LanguageMenuToggle } from "@/components/i18n/LanguageMenuToggle";
 import type { NavItem } from "@/config/navigation";
+import { chromeCopyFor } from "@/components/layout/chromeCopy";
+import { useLocale } from "@/lib/i18n/useLocale";
+import { localeHref } from "@/lib/i18n/paths";
 
 type MobileNavPanelProps = {
+  /** Already translated: forwarded as-is from `ThemedHeader`'s own `navItems`. */
   items: NavItem[];
 };
 
 export function MobileNavPanel({ items }: MobileNavPanelProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const locale = useLocale();
+  const copy = chromeCopyFor(locale);
 
   return (
     // ThemedHeader decides when this is on screen and keeps it last in the row,
@@ -20,7 +27,7 @@ export function MobileNavPanel({ items }: MobileNavPanelProps) {
         type="button"
         aria-expanded={isOpen}
         aria-controls="home-mobile-nav-panel"
-        aria-label={isOpen ? "Close menu" : "Open menu"}
+        aria-label={isOpen ? copy.closeMenu : copy.openMenu}
         onClick={() => setIsOpen((open) => !open)}
         className="flex h-10 w-10 items-center justify-center border border-white/28 text-[16px] text-white sm:h-11 sm:w-11 sm:text-[17px]"
       >
@@ -36,7 +43,7 @@ export function MobileNavPanel({ items }: MobileNavPanelProps) {
             {items.map((item) => (
               <a
                 key={item.href}
-                href={item.href}
+                href={localeHref(item.href, locale)}
                 onClick={() => setIsOpen(false)}
                 className="px-2 py-3 text-[15px] font-semibold text-[var(--home-body)] hover:text-[var(--home-heading)]"
               >
@@ -46,8 +53,12 @@ export function MobileNavPanel({ items }: MobileNavPanelProps) {
           </nav>
 
           {/* Book now is not repeated here: it now sits in the header row at
-              every width, so the menu carries the theme switch instead. */}
+              every width, so the menu carries the language and theme
+              switches instead. Since the server-side nav refactor (cf6d185),
+              `items` above arrives already translated (see the prop doc
+              above), so this component itself does no label translation. */}
           <div className="mt-3 border-t border-[var(--home-hairline)] pt-2">
+            <LanguageMenuToggle onChoose={() => setIsOpen(false)} />
             <ThemeMenuToggle />
           </div>
         </div>

@@ -1,4 +1,5 @@
 import type {
+  BookAction,
   Counter,
   FactRow,
   JumpCard,
@@ -20,6 +21,38 @@ import type {
  * here, so none of it survived: the layout is the reference's, the facts are
  * the repo's.
  */
+
+/**
+ * The hero's own copy, moved here out of PharmacyHero so it can be
+ * translated. `call.value` is the counter's own phone number: a fact, not a
+ * label, so it stays untranslated the same way `bookActions[1].value` does,
+ * and `bookActions[1].value` reads this field rather than repeating the
+ * digits as a second string with a second home.
+ */
+export const hero = {
+  strapline: "The counter never closes",
+  breadcrumbHome: "Home",
+  breadcrumbCurrent: "Pharmacy",
+  headingLead: "Authorized",
+  headingOutline: "medicine.",
+  headingAccent: "Nothing else.",
+  sendCta: "Send a prescription",
+  call: { value: "074 222 333 4" },
+};
+
+export const heroStandfirst =
+  "Verified stock only, dispensed by pharmacists who can read your file, at any hour of the night. No substitutes without asking you first, and no grey market supply, ever.";
+
+export const sectionEyebrows = {
+  counters: "01 / Where to find us",
+  standards: "02 / How we dispense",
+  stock: "03 / What we stock",
+  delivery: "04 / Delivery",
+  refills: "05 / Repeat prescriptions",
+  safety: "06 / Safety & records",
+  faq: "07 / Questions",
+  book: "08 / Start here",
+};
 
 export const tickerItems = [
   "A pharmacist on the counter, at every hour",
@@ -64,6 +97,10 @@ export const jumpCards: JumpCard[] = [
   },
 ];
 
+export const countersHeading = { line1: "One counter,", line2: "one record" };
+export const countersIntro =
+  "However your order reaches us, at the counter, from a consultation or by phone, the pharmacist reads the same prescription history, so nothing gets dispensed twice.";
+
 /**
  * One counter doing three jobs, not the reference's three separate counters:
  * the catalog puts both pharmacy entries at "Ground floor, pharmacy counter"
@@ -90,6 +127,13 @@ export const counters: Counter[] = [
   },
 ];
 
+export const standardsHeading = { line1: "A pharmacist", line2: "reads it, not", line3: "just a shelf" };
+export const standardsIntro =
+  "Every prescription is checked by a pharmacist against your hospital record before anything is packed. Because they can read your file, they can flag an interaction with something else you are taking, or confirm a dose against what your doctor prescribed.";
+export const standardsNote =
+  "We hold authorized stock only, with no substitutes and no grey market supply, so what your consultant wrote is what you are handed.";
+export const standardsCta = "Set up a repeat prescription";
+
 export const standards: FactRow[] = [
   { k: "Prescription review", v: "By a pharmacist" },
   { k: "Checked against", v: "Your hospital file" },
@@ -101,6 +145,11 @@ export const standards: FactRow[] = [
   { k: "Counselling", v: "Offered at the counter" },
   { k: "Delivery orders", v: "Checked before dispatch" },
 ];
+
+export const stockHeading = { line1: "On the", line2: "shelves", line3: "tonight" };
+export const stockIntro =
+  "Prescription medicine, everyday over the counter items, and the dressings and supplies patients actually need at home after a procedure.";
+export const stockCta = "Check availability";
 
 export const stock: StockRow[] = [
   {
@@ -155,6 +204,10 @@ export const stock: StockRow[] = [
   },
 ];
 
+export const deliveryHeading = { line1: "Photograph it,", line2: "send it, done" };
+export const sendingWellHeading = "Sending a prescription well";
+export const deliveryDetailHeading = "Delivery detail";
+
 export const steps: Step[] = [
   {
     no: "01",
@@ -194,6 +247,14 @@ export const deliveryFacts: FactRow[] = [
   { k: "Order by", v: "WhatsApp or phone" },
 ];
 
+export const refillsHeading = { line1: "Chronic care", line2: "without the", line3: "paper chase" };
+export const refillsIntro =
+  "If you take medicine every day for blood pressure, diabetes, thyroid, asthma or heart disease, your prescription is kept on file digitally, so you do not have to carry the paper each time.";
+export const refillsNote =
+  "Ask for a repeat at the counter, by phone or on WhatsApp. A pharmacist checks it against your record before it is prepared, and it can go out with a delivery.";
+export const refillsCta = "Request a refill";
+export const refillsPhoneCta = "Ask a pharmacist";
+
 export const refills: Refill[] = [
   { name: "Blood pressure", note: "Daily maintenance medicine" },
   { name: "Diabetes", note: "Oral medicine and supplies" },
@@ -203,6 +264,10 @@ export const refills: Refill[] = [
   { name: "Cholesterol", note: "Daily maintenance medicine" },
   { name: "Discharge medicine", note: "The short course after an admission" },
 ];
+
+export const safetyHeading = { line1: "Checked before", line2: "it reaches you" };
+export const safetyIntro =
+  "Nothing is handed over on the strength of the paper alone. Every order is read against your record first, and everything on the shelf is authorized stock.";
 
 export const safety: SafetyCard[] = [
   {
@@ -287,4 +352,33 @@ export const faq: PharmacyFaq[] = [
     q: "Can I order over the counter items too?",
     a: "Yes. Over the counter medicine and supplies can be added to the same delivery order as a prescription. Antibiotics and controlled medicines still need a valid prescription.",
   },
+];
+
+export const faqHeading = "Asked at the counter";
+
+export const bookHeading = { line1: "Open right", line2: "now. Yes,", line3: "right now." };
+
+// "229/10 St. Joseph Street" never changes script: it is the address a driver
+// is shown, the same reason contact's own `contactRows[0].note` and `mapIntro`
+// keep it untranslated in Sinhala and Tamil. "Negombo" does translate there.
+export const bookIntro =
+  "Ground floor at 229/10 St. Joseph Street, Negombo. Walk up to the counter, call, or send your prescription on WhatsApp.";
+
+/**
+ * The three actions closing `#book`. `bookActions[0].label` reuses
+ * `hero.sendCta` and `bookActions[1].value` reuses `hero.call.value`, rather
+ * than each repeating its own copy of the same string: a string used twice
+ * has one home.
+ *
+ * `bookActions[1]` used to carry the counter's phone number as its own
+ * `label`, with no separate action phrase, so the row rendered as bare
+ * digits in every language including English, the same bug `home-care`'s
+ * `contactRows[0]` had. `label` now carries the action ("Call the counter"),
+ * and the digits live in `value`, excluded from parity the same way
+ * `hero.call.value` is.
+ */
+export const bookActions: BookAction[] = [
+  { label: hero.sendCta, href: "https://wa.me/94742223334", glyph: "arrow" },
+  { label: "Call the counter", value: hero.call.value, href: "tel:+94742223334", glyph: "phone" },
+  { label: "All services", href: "/services", glyph: "arrow", internal: true },
 ];

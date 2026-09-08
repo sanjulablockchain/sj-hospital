@@ -38,3 +38,12 @@ export const myths: Myth[] = [
     a: "It is high in saturated fat and raises LDL cholesterol, so the claims that it protects the heart are not supported. Used moderately as part of a diet with plenty of vegetables, fish and less fried food, it is not the main problem either. Total pattern beats any single ingredient.",
   },
 ];
+
+/**
+ * `#myths`'s own copy, moved here out of `MythsSection.tsx` so the component
+ * takes it as a prop rather than importing it.
+ */
+export const mythsSection = {
+  eyebrow: "05 / Straight answers",
+  heading: { line1: "Things we get", line2: "asked, and the", line3: "honest answer" },
+};

@@ -1,6 +1,6 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
-import { practical } from "../data/content";
+import type { InternationalCareContent } from "../data/getContent";
 
 /**
  * `#stay`: the sticky copy column and the practical list, the reference's
@@ -15,7 +15,8 @@ import { practical } from "../data/content";
  * climate. The reference's rows about a money changer, an ATM in the lobby and
  * negotiated guest house rates are not backed here and are gone.
  */
-export function NegomboSection() {
+export function NegomboSection({ content }: { content: InternationalCareContent }) {
+  const { practical, sectionEyebrows, stayHeading, stayIntro, stayNote } = content;
   return (
     <section
       id="stay"
@@ -24,21 +25,18 @@ export function NegomboSection() {
       <div className="grid items-start gap-14.5 min-[900px]:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] max-[899px]:gap-10">
         <Reveal className="min-[900px]:sticky min-[900px]:top-10">
           <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
-            06 / Recovering in Negombo
+            {sectionEyebrows.stay}
           </div>
-          <h2 className="font-display mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
-            A good place
+          <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
+            {stayHeading.line1}
             <br />
-            to get better
+            {stayHeading.line2}
           </h2>
           <p className="mt-5 max-w-[38ch] text-[16.5px] leading-[1.65] text-[var(--home-muted)]">
-            Negombo is a coastal town, quiet and walkable, ten minutes from the airport and about an
-            hour from Colombo. Most patients spend the week after a procedure here rather than
-            travelling on.
+            {stayIntro}
           </p>
           <p className="mt-3.5 max-w-[38ch] text-[15px] leading-[1.6] text-[var(--home-muted)]">
-            Ask your consultant before you plan anything. Flying, swimming and long drives after
-            surgery each have their own timeline, and the answer depends on the operation.
+            {stayNote}
           </p>
         </Reveal>
 

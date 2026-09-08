@@ -54,7 +54,7 @@ export function Modal({ open, onClose, title, labelledBy, children }: ModalProps
 
               <h3
                 id={labelledBy}
-                className="min-w-0 flex-1 line-clamp-2 text-center text-sm font-heading font-bold leading-tight text-ink lg:line-clamp-none lg:text-left lg:text-2xl lg:font-extrabold lg:leading-normal"
+                className="min-w-0 flex-1 line-clamp-2 text-center text-sm font-display font-bold leading-tight text-ink lg:line-clamp-none lg:text-left lg:text-2xl lg:font-extrabold lg:leading-normal"
               >
                 {title}
               </h3>

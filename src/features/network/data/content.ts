@@ -53,6 +53,29 @@ desk): the referral section's intro paragraph and its call to action assert
 that a referral desk exists at this hospital. That claim is not verified
 either.`;
 
+/**
+ * The hero's own copy, moved here out of NetworkHero so it can be translated.
+ * The heading is split in three because the middle third is drawn outlined
+ * rather than filled, and the last is drawn in accent: see NetworkHero for how
+ * the three are composed back into one `<h1>`.
+ *
+ * `familyCta` and `mattersCta` are the two buttons under the standfirst,
+ * anchoring `#family` and `#matters` respectively.
+ */
+export const hero = {
+  strapline: "Negombo to Los Angeles",
+  breadcrumbHome: "Home",
+  breadcrumbCurrent: "Our Network",
+  headingLead: "A hospital in",
+  headingOutline: "Negombo,",
+  headingAccent: "backed from LA.",
+  familyCta: "Meet the network",
+  mattersCta: "What it means for you",
+};
+
+export const heroStandfirst =
+  "St. Joseph Hospital is operated by Kids & Teens Medical Group, one of the largest paediatric groups in California. That is where the clinical protocols, the training and the second opinions come from.";
+
 /** Scrolling strip along the bottom of the hero: the other eight companies. */
 export const tickerItems = [
   "Kids & Teens Medical Group",
@@ -105,6 +128,10 @@ export const mattersHeading = "A network is only worth something to a patient";
 export const mattersBody =
   "Most hospital group pages are corporate wallpaper. This one is here because the connection changes specific things about your care: which protocols the doctors follow, who reviews a difficult case, and how a child treated in Los Angeles can be followed up in Negombo without starting the file again.";
 
+/** Heading over the right-hand list in `#matters`, moved out of MattersSection
+ * so it can be translated. */
+export const practiceHeading = "In practice";
+
 /** See PLACEHOLDER_NOTICE: none of these five is verified. */
 export const practice = [
   "Paediatric and emergency protocols inherited from the group, adapted to Sri Lankan guidelines",
@@ -113,6 +140,13 @@ export const practice = [
   "Prescriptions written in generic names so they can be dispensed on either side",
   "Nursing and technician training programmes run against group standards",
 ];
+
+/** `#family`'s eyebrow, heading and intro paragraph, moved out of
+ * FamilySection so they can be translated. */
+export const familyEyebrow = "02 / The family";
+export const familyHeading = { line1: "Nine companies,", line2: "two continents" };
+export const familyIntro =
+  "Paediatric and family care in California, hospital care and insurance in Sri Lanka, and the administrative companies that keep both running.";
 
 export const orgGroups: OrgGroup[] = [
   {
@@ -244,6 +278,13 @@ export const orgGroups: OrgGroup[] = [
   },
 ];
 
+/** `#reach`'s eyebrow, heading and intro paragraph, moved out of ReachSection
+ * so they can be translated. */
+export const reachEyebrow = "03 / The numbers";
+export const reachHeading = { line1: "What the", line2: "network", line3: "adds up to" };
+export const reachIntro =
+  "Figures as published by the group companies. We would rather show you a small honest number than an impressive vague one.";
+
 /** Figures as published by the group companies. See the test that pins them. */
 export const reachRows: ReachRow[] = [
   { n: "9", k: "Companies in the network", who: "Across the United States and Sri Lanka" },
@@ -256,6 +297,11 @@ export const reachRows: ReachRow[] = [
   { n: "2", k: "Countries with BPO teams", who: "Sri Lanka and Mexico" },
   { n: "1", k: "Hospital in Sri Lanka", who: "This one, in Negombo" },
 ];
+
+/** `#referrals`' eyebrow and heading, moved out of ReferralSection so they can
+ * be translated. */
+export const referralEyebrow = "04 / Moving between us";
+export const referralHeading = { line1: "One file,", line2: "wherever", line3: "you are" };
 
 /** See PLACEHOLDER_NOTICE: the referral desk this asserts is not verified. */
 export const referralIntro =
@@ -296,11 +342,36 @@ export const referrals: AccordionItem[] = [
   },
 ];
 
+/** `#contact`'s eyebrow, heading and intro paragraph, moved out of
+ * ContactSection so they can be translated. */
+export const contactEyebrow = "05 / Get in touch";
+export const contactHeading = { line1: "Wherever", line2: "in the network", line3: "you start." };
+export const contactIntro =
+  "Patients, partner hospitals, insurers and institutions looking to work with the group: reach the hospital directly and we will route you to the right company.";
+
+/**
+ * The phone row used to carry the hospital's own number as its whole `label`,
+ * with no separate action phrase, so the row rendered as bare digits with no
+ * translatable text at all, in every language including English, the same
+ * bug `contact`'s, `accommodation`'s, `home-care`'s and `pharmacy`'s own
+ * contact rows had. `label` now carries the action ("Call the hospital"), and
+ * the digits live in `value`, excluded from parity the same way `href` is.
+ *
+ * "Travelling for treatment" is the one row whose destination is a route on
+ * this site rather than a phone number, a mailbox or an external site, so it
+ * is marked `internal` and goes through `LocaleLink` in ContactSection to
+ * keep a reader in the language they are already reading.
+ */
 export const contactRows: ContactRow[] = [
-  { label: "0117 84 84 84", href: "tel:+94117848484", glyph: "phone" },
+  { label: "Call the hospital", value: "0117 84 84 84", href: "tel:+94117848484", glyph: "phone" },
   { label: "Email the hospital", href: "mailto:info@sjhospital.lk", glyph: "arrow" },
   { label: "The group network page", href: "https://www.ktdoctor.com/network", glyph: "arrow" },
-  { label: "Travelling for treatment", href: "/international-care#journey", glyph: "arrow" },
+  {
+    label: "Travelling for treatment",
+    href: "/international-care#journey",
+    glyph: "arrow",
+    internal: true,
+  },
 ];
 
 export const disclaimer =

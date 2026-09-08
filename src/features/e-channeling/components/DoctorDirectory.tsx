@@ -3,8 +3,40 @@
 import { useMemo, useState } from "react";
 import { CALENDLY_BASE, type Doctor } from "../data/doctors";
 
+/**
+ * The translatable copy this component needs, defined here rather than
+ * imported from `../data/content`: this is a Client Component, and importing
+ * that module would pull all three locales' copy into the browser bundle.
+ * DirectorySection (a Server Component) builds this object from the localized
+ * content and passes it down as a prop.
+ *
+ * `introTemplate` and `noResultsBodyTemplate` carry `{count}` / `{specialities}`
+ * / `{phone}` tokens rather than a fixed split: word order moves between
+ * languages. `phone` / `phoneHref` are the channelling desk's own number,
+ * threaded through from `helpRail` so it has one home rather than a second
+ * copy living here.
+ */
+type DirectoryCopy = {
+  introTemplate: string;
+  searchPlaceholder: string;
+  searchAriaLabel: string;
+  clearSearchAriaLabel: string;
+  allSpecialities: string;
+  specialitiesLabel: string;
+  clearFilters: string;
+  resultCountSingular: string;
+  resultCountPlural: string;
+  noResultsHeading: string;
+  noResultsBodyTemplate: string;
+  showAllDoctors: string;
+  bookAppointment: string;
+  phone: string;
+  phoneHref: string;
+};
+
 type DoctorDirectoryProps = {
   doctors: Doctor[];
+  copy: DirectoryCopy;
 };
 
 const MOBILE_CHIP_LIMIT = 6;
@@ -36,9 +68,10 @@ function countBadgeClass(active: boolean) {
   ].join(" ");
 }
 
-export function DoctorDirectory({ doctors }: DoctorDirectoryProps) {
+export function DoctorDirectory({ doctors, copy }: DoctorDirectoryProps) {
   const [query, setQuery] = useState("");
   const [activeSpec, setActiveSpec] = useState("All");
+  const [noResultsBefore, noResultsAfter] = copy.noResultsBodyTemplate.split("{phone}");
 
   const specs = useMemo(() => {
     const counts = new Map<string, number>();
@@ -67,16 +100,17 @@ export function DoctorDirectory({ doctors }: DoctorDirectoryProps) {
     setActiveSpec("All");
   }
 
-  const resultLabel = `${filtered.length} ${filtered.length === 1 ? "consultant" : "consultants"}${
-    activeSpec === "All" ? "" : ` · ${activeSpec}`
-  }`;
+  const resultLabel = `${filtered.length} ${
+    filtered.length === 1 ? copy.resultCountSingular : copy.resultCountPlural
+  }${activeSpec === "All" ? "" : ` · ${activeSpec}`}`;
+
+  const introText = copy.introTemplate
+    .replace("{count}", String(doctors.length))
+    .replace("{specialities}", String(specs.length));
 
   return (
     <div>
-      <div className="mb-4 text-sm text-[var(--home-muted)]">
-        {doctors.length} consultants across {specs.length} specialities. Search by name or
-        speciality, or browse the list below.
-      </div>
+      <div className="mb-4 text-sm text-[var(--home-muted)]">{introText}</div>
 
       <div className="rounded-2xl border border-[var(--home-hairline)] bg-[var(--home-bg)] p-3 shadow-sm sm:p-4">
         <div className="flex items-center gap-3 rounded-xl border border-[var(--home-hairline)] bg-[var(--home-surface)] px-4">
@@ -99,15 +133,15 @@ export function DoctorDirectory({ doctors }: DoctorDirectoryProps) {
             type="text"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Search a doctor or speciality&hellip;"
-            aria-label="Search doctors by name or speciality"
+            placeholder={copy.searchPlaceholder}
+            aria-label={copy.searchAriaLabel}
             className="h-12 flex-1 bg-transparent text-sm text-[var(--home-body)] outline-none placeholder:text-[var(--home-muted)] sm:h-13 sm:text-base"
           />
           {query && (
             <button
               type="button"
               onClick={() => setQuery("")}
-              aria-label="Clear search"
+              aria-label={copy.clearSearchAriaLabel}
               className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[var(--home-hairline)] text-[var(--home-muted)] transition hover:opacity-70"
             >
               &times;
@@ -121,7 +155,7 @@ export function DoctorDirectory({ doctors }: DoctorDirectoryProps) {
             onClick={() => setActiveSpec("All")}
             className={chipClass(activeSpec === "All")}
           >
-            All specialities
+            {copy.allSpecialities}
           </button>
           {specs.slice(0, MOBILE_CHIP_LIMIT).map((s) => (
             <button
@@ -136,11 +170,16 @@ export function DoctorDirectory({ doctors }: DoctorDirectoryProps) {
         </div>
       </div>
 
-      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[260px_1fr] lg:gap-8">
+      {/* Only the second track is `minmax(0, 1fr)`: the first column is a
+          fixed 260px, so it never grows past that regardless of content, but
+          the second holds the (also translated) doctor-card grid, and a bare
+          `fr` track there could still be forced wider by a long specialisation
+          or name inside it. */}
+      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[260px_minmax(0,1fr)] lg:gap-8">
         <aside className="hidden lg:block">
           <div className="themed-scrollbar sticky top-28 max-h-[calc(100vh-140px)] overflow-y-auto rounded-2xl border border-[var(--home-hairline)] bg-[var(--home-bg)] p-2">
             <p className="px-3 py-2 text-[11px] font-bold uppercase tracking-wider text-[var(--home-muted)]">
-              Specialities
+              {copy.specialitiesLabel}
             </p>
             <div className="flex flex-col gap-0.5">
               <button
@@ -148,7 +187,7 @@ export function DoctorDirectory({ doctors }: DoctorDirectoryProps) {
                 onClick={() => setActiveSpec("All")}
                 className={railButtonClass(activeSpec === "All")}
               >
-                <span>All specialities</span>
+                <span>{copy.allSpecialities}</span>
                 <span className={countBadgeClass(activeSpec === "All")}>{doctors.length}</span>
               </button>
               {specs.map((s) => (
@@ -175,7 +214,7 @@ export function DoctorDirectory({ doctors }: DoctorDirectoryProps) {
                 onClick={resetAll}
                 className="rounded-full border border-[var(--home-hairline)] px-4 py-1.5 text-xs font-semibold text-[var(--home-accent)] transition hover:border-[var(--home-accent)]"
               >
-                Clear filters
+                {copy.clearFilters}
               </button>
             )}
           </div>
@@ -197,7 +236,7 @@ export function DoctorDirectory({ doctors }: DoctorDirectoryProps) {
                     {doctor.name}
                   </span>
                   <span className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-[var(--home-accent)]">
-                    Book appointment
+                    {copy.bookAppointment}
                     <svg
                       width="16"
                       height="16"
@@ -223,21 +262,21 @@ export function DoctorDirectory({ doctors }: DoctorDirectoryProps) {
                 &#63;
               </span>
               <p className="font-display text-lg font-bold text-[var(--home-heading)]">
-                No consultant matched that search
+                {copy.noResultsHeading}
               </p>
               <p className="max-w-md text-sm leading-relaxed text-[var(--home-muted)]">
-                Try a different name or speciality, or call our channelling desk on{" "}
-                <a href="tel:+94117848484" className="font-semibold text-[var(--home-accent)]">
-                  0117 84 84 84
-                </a>{" "}
-                and we will find the right doctor for you.
+                {noResultsBefore}
+                <a href={copy.phoneHref} className="font-semibold text-[var(--home-accent)]">
+                  {copy.phone}
+                </a>
+                {noResultsAfter}
               </p>
               <button
                 type="button"
                 onClick={resetAll}
                 className="mt-1 rounded-full bg-[var(--home-accent)] px-5 py-2.5 text-sm font-semibold text-[var(--home-on-accent)] transition hover:opacity-90"
               >
-                Show all doctors
+                {copy.showAllDoctors}
               </button>
             </div>
           )}

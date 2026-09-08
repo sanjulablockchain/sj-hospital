@@ -17,6 +17,19 @@ export type Doctor = {
    */
 };
 
+/**
+ * Translation note (Sinhala and Tamil overlays live beside this file as
+ * `doctors.si.ts` / `doctors.ta.ts`): `name` is a proper noun, exactly like
+ * the hospital's own name, and never changes script. Several rows carry a
+ * title merged straight into the string ("Dr. ", "Prof. ", "Mrs. ", "Mr. ",
+ * "Ms. "), not as a separate field, so there is nothing to split the title
+ * off from without inventing structure this file never had; the whole string
+ * is treated as one untranslatable name. `specialization` is a common noun
+ * and does translate, so the overlay carries one entry per row with only
+ * `specialization` filled in. `content.i18n.test.ts` excludes `.name` and
+ * `.calendlySlug` by path rather than listing all 71 names in KEEPS_ENGLISH.
+ */
+
 export const doctors: Doctor[] = [
   // Gynecologist
   { name: "Dr. Athula Fernando", specialization: "Gynecologist", calendlySlug: "consultant-gynecologist-dr-m-i-k-naeem-clone" },

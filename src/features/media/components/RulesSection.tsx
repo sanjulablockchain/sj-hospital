@@ -5,7 +5,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
 import { useMeasuredHeight } from "@/hooks/useMeasuredHeight";
 import type { GroundRule } from "../types";
-import { rules } from "../data/content";
+import type { MediaContent } from "../data/getContent";
 
 /**
  * `#usage`: the eight filming, naming and patient privacy rules, one open at a
@@ -17,8 +17,14 @@ import { rules } from "../data/content";
  * part worth sharing, `useMeasuredHeight`, which is the awkward bit: a panel
  * animated on `max-height` needs a real pixel height, and the reference's fixed
  * 320px cap would clip half of these answers.
+ *
+ * `content` arrives as a prop, built by the Server Component parent
+ * (`MediaPage`) from the already localized data, rather than importing
+ * `../data/content` here: importing that module into a Client Component
+ * would pull all three locales' copy into the browser bundle.
  */
-export function RulesSection() {
+export function RulesSection({ content }: { content: MediaContent }) {
+  const { rules, rulesHeading, sectionEyebrows } = content;
   const [open, setOpen] = useState(-1);
   const baseId = useId();
 
@@ -26,14 +32,14 @@ export function RulesSection() {
     <section id="usage" className="mx-auto max-w-[1440px] px-5 pt-26 sm:px-8 lg:px-11 max-[640px]:pt-18.5">
       <Reveal>
         <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
-          06 / Ground rules
+          {sectionEyebrows.usage}
         </div>
-        <h2 className="font-display mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
-          Filming, names
+        <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
+          {rulesHeading.line1}
           <br />
-          and patient
+          {rulesHeading.line2}
           <br />
-          privacy
+          {rulesHeading.line3}
         </h2>
       </Reveal>
 

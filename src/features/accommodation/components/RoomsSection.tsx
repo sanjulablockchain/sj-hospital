@@ -2,7 +2,7 @@ import Image from "next/image";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { SectionHead } from "./SectionHead";
 import { RoomTypeNav } from "./RoomTypeNav";
-import { roomsHeading, roomsIntro, roomTypes } from "../data/content";
+import type { AccommodationContent } from "../data/getContent";
 
 /**
  * `#rooms`: the sticky `RoomTypeNav` plus the four room categories, ported
@@ -16,6 +16,14 @@ import { roomsHeading, roomsIntro, roomTypes } from "../data/content";
  *
  * `heading` and `intro` are `roomsHeading` and `roomsIntro`: RoomTypes.tsx's
  * own old h2 and meals sentence, so this section states nothing new.
+ *
+ * `RoomTypeNav` gets its `rooms` built here, from the same localized
+ * `roomTypes` the headings below read: `id` (never translated, so the
+ * observer and the anchors it scrolls to never drift) and `shortName` (the
+ * translated short form, matching the jump cards and footer). Reading both
+ * the nav chip and the heading off the same `roomTypes` entry is what keeps
+ * them in step; translating the nav labels separately from the headings is
+ * exactly how they would drift apart.
  *
  * `RoomTypeNav` and the four room sections share one wrapping `<div
  * className="mt-10.5">` rather than each getting their own: `position:
@@ -34,23 +42,32 @@ import { roomsHeading, roomsIntro, roomTypes } from "../data/content";
  * up. 88px adds about 24px of breathing room past that, so a hash jump to,
  * say, `#super-deluxe` leaves the heading clear of the bar.
  */
-export function RoomsSection() {
+export function RoomsSection({ content }: { content: AccommodationContent }) {
+  const { roomsHeading, roomsIntro, roomTypes, sectionEyebrows } = content;
+  const rooms = roomTypes.map(({ id, shortName }) => ({ id, label: shortName }));
+
   return (
     <section id="rooms">
       <div className="mx-auto max-w-[1440px] px-5 pt-26 sm:px-8 lg:px-11 max-[640px]:pt-18">
-        <SectionHead eyebrow="01 / Our rooms" heading={roomsHeading} intro={roomsIntro} />
+        <SectionHead eyebrow={sectionEyebrows.rooms} heading={roomsHeading} intro={roomsIntro} />
       </div>
 
       <div className="mt-10.5">
-        <RoomTypeNav />
+        <RoomTypeNav rooms={rooms} />
 
         <div className="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 lg:px-11">
           <div className="flex flex-col gap-16">
             {roomTypes.map((room, index) => (
               <RevealOnScroll key={room.id} delayMs={index * 60}>
+                {/* Both tracks are `minmax(0, ...)`: a bare `fr` track cannot
+                    shrink below its content's intrinsic width, and the left
+                    column carries a room name, description and a flex-wrap
+                    row of amenity chips, any of which could be one long
+                    Sinhala/Tamil compound word away from pushing this column,
+                    and the page, wider than the viewport. */}
                 <div
                   id={room.id}
-                  className="scroll-mt-[88px] grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center"
+                  className="scroll-mt-[88px] grid gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-center"
                 >
                   <div className={index % 2 === 1 ? "lg:order-2" : undefined}>
                     <div className="mb-2.5 flex flex-wrap items-baseline gap-x-3 gap-y-1">

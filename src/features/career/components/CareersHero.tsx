@@ -1,17 +1,19 @@
 import Image from "next/image";
-import Link from "next/link";
+import { LocaleLink } from "@/components/i18n/LocaleLink";
 import { ThemedHeader } from "@/components/layout/ThemedHeader";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { Ticker } from "@/components/ui/Ticker";
 import { careerNavigation } from "@/config/careerNavigation";
-import { heroFacts, tickerItems } from "../data/content";
+import { translateNavItems } from "@/config/navigationLabels";
+import type { Locale } from "@/lib/i18n/locales";
+import type { CareerContent } from "../data/getContent";
 
 /**
  * `#top`: the hospital's own clinical staff behind the themed header and the
  * page's only <h1>, closed off by a fact strip and the ticker of role families.
  *
  * The photograph is St. Joseph's own (five staff in the hospital's branded
- * scrubs and coat), not stock. The reference used `doctors.jpg` here, a
+ * scrubs and coat), not stock. The reference used `doctors.jpg`, a
  * 1200x1200 square with a patient in the frame; this one is 2560px wide, has
  * no patient in it, and is the only photograph on the site that shows what a
  * candidate would actually be joining.
@@ -23,8 +25,13 @@ import { heroFacts, tickerItems } from "../data/content";
  *
  * Copy animates with `animate-sj-up` rather than `Reveal`, since it is already
  * in the first viewport and should not wait on an intersection observer.
+ *
+ * The breadcrumb's "Home" link goes through `LocaleLink` rather than a plain
+ * anchor, the same fix every other feature's own hero needed, so a
+ * translated reader is not dropped back into English.
  */
-export function CareersHero() {
+export function CareersHero({ content, locale }: { content: CareerContent; locale: Locale }) {
+  const { hero, heroFacts, tickerItems } = content;
   return (
     <section
       id="top"
@@ -65,7 +72,7 @@ export function CareersHero() {
         }}
       />
 
-      <ThemedHeader navItems={careerNavigation} homeHref="/" bookHref="/e-channeling" />
+      <ThemedHeader navItems={translateNavItems(careerNavigation, locale)} homeHref="/" bookHref="/e-channeling" />
 
       <div className="relative z-10 mx-auto mt-auto flex w-full max-w-[1440px] gap-10 px-5 sm:px-8 lg:px-11">
         {/* Decorative vertical strapline, dropped below 900px where there is no
@@ -78,25 +85,25 @@ export function CareersHero() {
             className="text-[11px] tracking-[0.3em] text-white/50 uppercase"
             style={{ writingMode: "vertical-rl" }}
           >
-            We never charge candidates
+            {hero.strapline}
           </span>
           <span className="w-px flex-1 bg-gradient-to-b from-white/40 to-transparent" />
         </div>
 
-        <div className="flex-1 pb-11">
-          <div className="animate-sj-up inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
+        <div className="min-w-0 flex-1 pb-11">
+          <div className="animate-sj-up flex min-w-0 flex-wrap items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
             <span aria-hidden className="h-px w-11 bg-[#2CA6F0]" />
-            <Link href="/" className="text-[#7FCBFF] hover:text-white">
-              Home
-            </Link>
+            <LocaleLink href="/" className="text-[#7FCBFF] hover:text-white">
+              {hero.breadcrumbHome}
+            </LocaleLink>
             <span aria-hidden className="opacity-50">
               /
             </span>
-            Careers
+            {hero.breadcrumbCurrent}
           </div>
 
-          <h1 className="font-display animate-sj-up mt-4.5 text-[clamp(42px,7vw,118px)] leading-[0.86] font-extrabold tracking-[-0.045em] text-white uppercase">
-            Stay in
+          <h1 className="font-display animate-sj-up wrap-break-word mt-4.5 text-[clamp(42px,7vw,118px)] leading-[0.86] font-extrabold tracking-[-0.045em] text-white uppercase">
+            {hero.headingLine1}
             <br />
             {/* Outlined rather than filled, so the three lines read as one
                 phrase stepping from solid to hollow to accent. */}
@@ -104,10 +111,10 @@ export function CareersHero() {
               className="text-transparent"
               style={{ WebkitTextStroke: "1.4px rgba(242,246,255,0.75)" }}
             >
-              Sri Lanka.
+              {hero.headingOutline}
             </span>
             <br />
-            <span className="text-[#2CA6F0]">Practise properly.</span>
+            <span className="text-[#2CA6F0]">{hero.headingAccent}</span>
           </h1>
 
           <div className="animate-sj-up mt-8 flex flex-col items-start gap-5.5">
@@ -115,23 +122,26 @@ export function CareersHero() {
               className="max-w-[54ch] text-[18px] leading-[1.6] text-white/82"
               style={{ textWrap: "pretty" }}
             >
-              Too many good clinicians leave because the equipment is old, the rosters are punishing
-              and nobody invests in them. We are trying to be the hospital that gives you a reason to
-              stay.
+              {hero.standfirst}
             </p>
             <div className="flex flex-wrap gap-3">
               <a
                 href="#openings"
                 className="sj-invert inline-flex items-center gap-2.5 bg-[#2CA6F0] px-6 py-4 text-[15px] font-bold text-[#04122B]"
               >
-                See open roles <span aria-hidden>&rarr;</span>
+                {hero.ctaPrimary} <span aria-hidden>&rarr;</span>
               </a>
+              {/* No `whitespace-nowrap` here (unlike the reference markup
+                  this replaced), the same fix MediaHero's own secondary CTA
+                  needed: a translated label is longer than the English one,
+                  and forcing it onto one line risks pushing this button past
+                  the viewport at 360px. */}
               <a
                 href="#fraud"
-                className="inline-flex items-center gap-3 border border-white/30 px-6 py-4 text-[15px] font-bold whitespace-nowrap text-white transition-colors hover:bg-white hover:text-[#060B1F]"
+                className="inline-flex items-center gap-3 border border-white/30 px-6 py-4 text-[15px] font-bold text-white transition-colors hover:bg-white hover:text-[#060B1F]"
               >
-                <span aria-hidden className="animate-sj-pulse h-2 w-2 rounded-full bg-[#2CA6F0]" />
-                Beware of job scams
+                <span aria-hidden className="animate-sj-pulse h-2 w-2 shrink-0 rounded-full bg-[#2CA6F0]" />
+                {hero.ctaSecondary}
               </a>
             </div>
           </div>

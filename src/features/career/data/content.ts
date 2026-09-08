@@ -58,6 +58,31 @@
  *
  * `content.test.ts` pins this notice, the cut claims and the derived counts, so
  * none of it can quietly drift back.
+ *
+ * ---------------------------------------------------------------------------
+ * i18n note (Task 13): every reader-visible sentence on this page now lives
+ * here, including copy that used to sit directly inside `CareersHero.tsx`,
+ * `CareersPage.tsx`, `BenefitsSection.tsx`, `ProcessSection.tsx`,
+ * `StudentsSection.tsx`, `OpeningsSection.tsx`, `ApplicationSection.tsx`,
+ * `ApplySection.tsx` and `ApplicationForm.tsx`. See
+ * `docs/superpowers/i18n-feature-recipe.md` for why, and `getContent.ts` for
+ * how a locale is applied on top of it.
+ *
+ * Two structural traps this file works around, both flagged by the recipe's
+ * "never key JSX off translatable copy" pattern:
+ *
+ * - `jobs[*].department` is compared against `departments` to drive the
+ *   openings filter (`job.department === department`). If that string
+ *   translated, the filter would silently return nothing the moment a reader
+ *   switched language. It stays English and structural, the same role
+ *   `.icon`/`.glyph` play elsewhere; `departmentLabels` carries the words a
+ *   reader actually sees for the same department names.
+ * - `jobs[*].id`, `roleIds` and each option list's `.id` are the values that
+ *   travel through the "Applying for", "Years of experience" and "Where you
+ *   saw this" selects and the Zod schema that validates them. A translated
+ *   option's `value` attribute has to stay something the server can recognise
+ *   in every locale, so the value is this fixed English id and the option's
+ *   visible text is the translatable `.title` / `.label` beside it.
  */
 import type {
   BenefitGroup,
@@ -65,6 +90,7 @@ import type {
   Job,
   JumpCard,
   ProcessStep,
+  SelectOption,
   StudentRoute,
 } from "../types";
 import type { FaqItem } from "@/components/ui/FaqAccordion";
@@ -97,9 +123,23 @@ export const LINKEDIN_URL = "https://www.linkedin.com/company/sjhnegomb/";
  * their own application instructions preserved. The last four are the openings
  * `features/home/data/careers.ts` advertises; their titles, departments and
  * contract types are real, everything below that is placeholder (see header).
+ *
+ * `id` is new for Task 13: a fixed, never-translated slug that the "Applying
+ * for" select and `jobApplicationSchema` use as the option's `value` and the
+ * row's React key, so a translated `title` never has to double as a value the
+ * server matches against. `title`, `line`, `body`, `requirements` and `detail`
+ * are all translatable; `department` is not (see the header note).
+ *
+ * `detail[0][0]` for the Pharmacist post quotes the exact word ("Pharmacist")
+ * the candidate is asked to type into an email subject line, the same
+ * register the recipe uses for quoted material: the sentence around the quote
+ * translates, the quoted word itself does not, because Human Resources reads
+ * that subject line in English regardless of which language the applicant
+ * read the page in.
  */
 export const jobs: readonly Job[] = [
   {
+    id: "pharmacist",
     title: "Pharmacist",
     line: "Full time · Shift roster · Negombo",
     department: "Pharmacy",
@@ -117,6 +157,7 @@ export const jobs: readonly Job[] = [
     ],
   },
   {
+    id: "business-development-insurance-coordinator",
     title: "Business Development and Insurance Coordinator",
     line: "Full time · Day roster · Negombo",
     department: "Administration",
@@ -134,6 +175,7 @@ export const jobs: readonly Job[] = [
     ],
   },
   {
+    id: "medical-officer-emergency",
     title: "Medical Officer, Emergency",
     line: "Full time · Shift roster · Negombo",
     department: "Medical",
@@ -149,6 +191,7 @@ export const jobs: readonly Job[] = [
     ],
   },
   {
+    id: "theatre-nurse",
     title: "Theatre Nurse",
     line: "Full time · Shift roster · Negombo",
     department: "Nursing",
@@ -163,6 +206,7 @@ export const jobs: readonly Job[] = [
     ],
   },
   {
+    id: "medical-laboratory-technologist",
     title: "Medical Laboratory Technologist",
     line: "Full time · Shift roster · Negombo",
     department: "Allied health",
@@ -177,6 +221,7 @@ export const jobs: readonly Job[] = [
     ],
   },
   {
+    id: "radiographer-digital-xray",
     title: "Radiographer, Digital X-ray",
     line: "Full time · Shift roster · Negombo",
     department: "Allied health",
@@ -193,9 +238,31 @@ export const jobs: readonly Job[] = [
 ];
 
 /**
+ * The English title for the four vacancies here that
+ * `features/home/data/careers.ts` also advertises on the home page's own
+ * teaser (see that file's own header comment). Derived from `jobs` rather
+ * than a second literal, so the fact has exactly one home in this file;
+ * exported through this feature's `index.ts` so the teaser imports the
+ * string instead of carrying its own copy of it (Pattern 4 in the i18n
+ * recipe: a string used twice has one home). Task 14 copied these four
+ * titles' reviewed translations byte-for-byte instead of importing across
+ * the boundary; this is the fix.
+ */
+export const sharedJobTitles = {
+  medicalOfficerEmergency: jobs[2].title,
+  theatreNurse: jobs[3].title,
+  medicalLaboratoryTechnologist: jobs[4].title,
+  radiographerDigitalXray: jobs[5].title,
+} as const;
+
+/**
  * Every department the site recognises, clinical first, in the reference's own
  * order. This is the ordering only: a department appears as a filter chip when
  * a vacancy actually sits in it, never otherwise.
+ *
+ * Structural and never translated, because `jobs[*].department` is compared
+ * against these exact strings to build the openings filter. `departmentLabels`
+ * below carries the translated word a reader actually sees for each one.
  */
 export const DEPARTMENT_ORDER: readonly string[] = [
   "Medical",
@@ -211,32 +278,69 @@ export const DEPARTMENT_ORDER: readonly string[] = [
  * a vacancy, in DEPARTMENT_ORDER. Derived rather than hard-coded, so the row
  * grows on its own as roles are added and can never offer a filter that returns
  * nothing. The reference hard-coded all seven against seventeen invented jobs.
+ *
+ * Structural and never translated; see the note above `DEPARTMENT_ORDER`.
  */
 export const departments: readonly string[] = [
   "All",
   ...DEPARTMENT_ORDER.filter((department) => jobs.some((job) => job.department === department)),
 ];
 
-/** Role names for the application form's "Applying for" select. */
-export const roleOptions: readonly string[] = [
-  ...jobs.map((job) => job.title),
-  "General application, no specific role",
+/**
+ * The translated word for each entry in `departments`, keyed by the same
+ * structural English string. English is the identity mapping here (the key
+ * and the value are the same word) so a reader on the English site sees no
+ * change; `content.si.ts` and `content.ta.ts` replace the values, never the
+ * keys, which is what keeps the filter's own comparisons working in every
+ * locale.
+ */
+export const departmentLabels: Record<string, string> = {
+  All: "All",
+  Medical: "Medical",
+  Nursing: "Nursing",
+  "Allied health": "Allied health",
+  Pharmacy: "Pharmacy",
+  Administration: "Administration",
+  "Support services": "Support services",
+};
+
+/**
+ * The id of the "general application" option in the "Applying for" select,
+ * i.e. the one option that has no vacancy behind it. Fixed and never
+ * translated, the same role every `jobs[*].id` plays.
+ */
+export const GENERAL_APPLICATION_ROLE_ID = "general";
+
+/** The translatable label shown for `GENERAL_APPLICATION_ROLE_ID`. */
+export const generalApplicationLabel = "General application, no specific role";
+
+/**
+ * Every id the "Applying for" select and `jobApplicationSchema` accept.
+ * Structural: this is what actually travels in `FormData` and gets checked
+ * against, never displayed to a reader directly.
+ */
+export const roleIds: readonly string[] = [...jobs.map((job) => job.id), GENERAL_APPLICATION_ROLE_ID];
+
+/**
+ * The "Years of experience" select. `id` is the value the form submits and the
+ * schema validates, fixed in English forever; `label` is what a reader sees
+ * and is fully translatable.
+ */
+export const experienceOptions: readonly SelectOption[] = [
+  { id: "new-graduate", label: "New graduate" },
+  { id: "1-2-years", label: "1 to 2 years" },
+  { id: "3-5-years", label: "3 to 5 years" },
+  { id: "6-10-years", label: "6 to 10 years" },
+  { id: "10-plus-years", label: "More than 10 years" },
 ];
 
-export const experienceOptions: readonly string[] = [
-  "New graduate",
-  "1 to 2 years",
-  "3 to 5 years",
-  "6 to 10 years",
-  "More than 10 years",
-];
-
-export const sourceOptions: readonly string[] = [
-  "This website",
-  "Our Facebook or LinkedIn page",
-  "A job board",
-  "A colleague here",
-  "Returning to Sri Lanka",
+/** The "Where you saw this" select. Same id/label split as `experienceOptions`. */
+export const sourceOptions: readonly SelectOption[] = [
+  { id: "website", label: "This website" },
+  { id: "social", label: "Our Facebook or LinkedIn page" },
+  { id: "job-board", label: "A job board" },
+  { id: "colleague", label: "A colleague here" },
+  { id: "returning", label: "Returning to Sri Lanka" },
 ];
 
 /** Derived from `jobs` so the hero can never advertise a count that is wrong. */
@@ -464,12 +568,33 @@ export const applyChecklist: readonly string[] = [
   "Earliest start date",
 ];
 
-/** The four rows beside the closing call to action, each inverting on hover. */
-export const applyRows: readonly { label: string; href: string; glyph: "phone" | "arrow" }[] = [
+/**
+ * The four rows beside the closing call to action, each inverting on hover.
+ *
+ * The phone row used to carry the hospital's own number as its whole `label`,
+ * with no separate action phrase, so it rendered as bare digits with no
+ * translatable text at all, in every language including English; `label` is
+ * now the action phrase and `value` carries the number, the same fix
+ * `network`'s own `contactRows` needed. `internal` marks the one row that is
+ * a route on this site rather than `mailto:`, `tel:` or an external page, so
+ * `ApplySection` can send it through `LocaleLink`.
+ */
+export const applyRows: readonly {
+  label: string;
+  value?: string;
+  href: string;
+  glyph: "phone" | "arrow";
+  internal?: boolean;
+}[] = [
   { label: "Email your CV", href: `mailto:${CAREERS_EMAIL}`, glyph: "arrow" },
-  { label: SWITCHBOARD, href: `tel:${SWITCHBOARD_TEL}`, glyph: "phone" },
+  { label: "Call us", value: SWITCHBOARD, href: `tel:${SWITCHBOARD_TEL}`, glyph: "phone" },
   { label: "Follow us on LinkedIn", href: LINKEDIN_URL, glyph: "arrow" },
-  { label: "Roles elsewhere in the group", href: "/network#family", glyph: "arrow" },
+  {
+    label: "Roles elsewhere in the group",
+    href: "/network#family",
+    glyph: "arrow",
+    internal: true,
+  },
 ];
 
 /**
@@ -479,3 +604,137 @@ export const applyRows: readonly { label: string; href: string; glyph: "phone" |
  */
 export const equalOpportunity =
   "St. Joseph Hospital is an equal opportunity employer. We select on merit and do not discriminate by ethnicity, religion, gender, marital status, age or disability, and we will make reasonable adjustments to the recruitment process on request. Please do not include your NIC copy, photograph or health information in a first application; we ask for those only at offer stage.";
+
+/* ------------------------------------------------------------------------ */
+/* Copy that used to live directly inside a component, moved here for Task 13 */
+/* ------------------------------------------------------------------------ */
+
+/** `CareersHero`'s own strings. */
+export const hero = {
+  breadcrumbHome: "Home",
+  breadcrumbCurrent: "Careers",
+  strapline: "We never charge candidates",
+  headingLine1: "Stay in",
+  headingOutline: "Sri Lanka.",
+  headingAccent: "Practise properly.",
+  standfirst:
+    "Too many good clinicians leave because the equipment is old, the rosters are punishing and nobody invests in them. We are trying to be the hospital that gives you a reason to stay.",
+  ctaPrimary: "See open roles",
+  ctaSecondary: "Beware of job scams",
+};
+
+/** The numbered kicker above every section heading, in page order. */
+export const sectionEyebrows = {
+  why: "01 / Why here",
+  benefits: "02 / What you get",
+  openings: "03 / Open positions",
+  process: "04 / How hiring works",
+  students: "05 / Starting out",
+  fraud: "06 / Recruitment fraud",
+  faq: "07 / Candidate questions",
+  form: "08 / Submit your CV",
+  apply: "09 / Apply",
+};
+
+/** `#why`, the first `FeatureSplit`. `items` is `commitments`, above. */
+export const whySection = {
+  heading: "The reasons people actually give for leaving",
+  body: "When a nurse or a technologist leaves for the Gulf, it is rarely only about money. It is the twelve hour shift with no relief, the equipment that has been broken for a year, and the sense that nobody is going to train you into anything better. We cannot fix a national salary market. We can fix those three things, and we have set the hospital up to try.",
+  listHeading: "What we commit to",
+};
+
+/** `#fraud`, the second `FeatureSplit`. `items` is `fraudChecks`, above. */
+export const fraudSection = {
+  heading: "Nobody here will ever ask you for money",
+  body: "There is a real trade in fake hospital and overseas nursing jobs in Sri Lanka, and it targets exactly the people who can least afford it. We do not charge application fees, registration fees, training deposits, agent commissions or visa processing money at any stage. If someone claiming to be from this hospital asks you for a payment, it is a fraud. Call us on the number below and tell us.",
+  listHeading: "How to check a posting is ours",
+};
+
+/** `#benefits`. */
+export const benefitsHeading = { line1: "Benefits, stated", line2: "plainly" };
+export const benefitsAside =
+  "No vague talk of a rewarding environment. These are the specific things in the letter of appointment.";
+
+/** `#openings`, the one section besides the form with its own interactive state. */
+export const openings = {
+  headingAllRoles: "Every open role",
+  /** `{shown}` and `{total}` are replaced with numbers, never split on. */
+  positionsCountTemplate: "{shown} of {total} positions",
+  filterAriaLabel: "Filter positions by department",
+  requirementsHeading: "You will need",
+  detailHeading: "The detail",
+  applyForRoleCta: "Apply for this role",
+  emptyNote:
+    "Nothing here that fits? Send your CV anyway. We keep applications on file and a good nursing officer or technologist rarely waits long for a vacancy.",
+};
+
+/** `#process`. */
+export const processHeading = {
+  line1: "Five steps,",
+  line2: "and you hear",
+  line3: "back at",
+  line4: "each one",
+};
+export const processIntro =
+  "Being left in silence after an interview is the commonest complaint about hospital recruitment in this country. We answer everybody, including the people we do not take.";
+
+/** `#students`. */
+export const studentsHeading = { line1: "Students and", line2: "new graduates" };
+export const studentsAside =
+  "The group supports students entering medicine, and we take trainees directly at the hospital.";
+
+/** `#faq`'s own heading, hard-broken to the reference's two lines. */
+export const faqHeading = { line1: "Before you", line2: "apply" };
+
+/** `#form`. */
+export const applicationHeading = { line1: "Fill this in", line2: "once" };
+export const applicationAside =
+  "Nine fields, none of them decorative. We ask for a registration number because it is the first thing a department head looks for.";
+export const applicationSidebarHeading = "What happens to this";
+export const applicationEmailPrompt = "Rather email it?";
+export const applicationEmailNote =
+  "Put the role in the subject line. An email carries exactly the same weight as this form.";
+
+/** `#apply`. */
+export const applyHeading = { line1: "Send it in.", line2: "You will hear", line3: "from us." };
+export const applyBody =
+  "Use the form above, or email your CV with the role in the subject line. Put your registration number and available start date at the top: it saves a round of emails.";
+
+/**
+ * `ApplicationForm`'s own copy: field labels, placeholders, the consent
+ * sentence and the four status strings a submission can show. Moved here so
+ * the client component never imports content directly (see the header note
+ * above `jobs`); `ApplicationSection` reads this and passes it down as a prop.
+ */
+export const form = {
+  fullNameLabel: "Full name",
+  fullNamePlaceholder: "As it appears on your certificates",
+  roleLabel: "Applying for",
+  rolePlaceholder: "Choose a role",
+  emailLabel: "Email",
+  emailPlaceholder: "you@example.com",
+  phoneLabel: "Mobile",
+  phonePlaceholder: "07X XXX XXXX",
+  registrationLabel: "Registration number",
+  registrationPlaceholder: "SLMC, Nurses Council, or not applicable",
+  experienceLabel: "Years of experience",
+  experiencePlaceholder: "Choose one",
+  startDateLabel: "Earliest start date",
+  startDatePlaceholder: "Immediately, or after one month's notice",
+  sourceLabel: "Where you saw this",
+  sourcePlaceholder: "Choose one",
+  noteLabel: "Anything we should know",
+  notePlaceholder:
+    "Study commitments, a shift pattern you need, or the unit you particularly want to work in. Optional.",
+  cvHeading: "Attach your CV as a PDF",
+  cvHintDefault: "PDF preferred, under 5 MB. Do not send your NIC copy or a photograph at this stage.",
+  cvHintReattach: "Please attach your CV again. A browser will not let us keep the file across a failed submission.",
+  cvChooseFile: "Choose file",
+  cvChangeFile: "Change file",
+  consentLabel:
+    "I agree that St. Joseph Hospital may hold my application for six months and contact me about this and comparable vacancies. My current employer will not be approached without my written permission.",
+  submitIdle: "Submit application",
+  submitPending: "Sending",
+  submitSuccess: "Application received",
+  defaultStatus: "We reply to every application, including the ones we do not take forward.",
+};

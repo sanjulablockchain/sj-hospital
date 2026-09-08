@@ -1,6 +1,6 @@
 import { RevealStagger } from "@/components/ui/RevealStagger";
 import { SectionHead } from "./SectionHead";
-import { suitedCases } from "../data/content";
+import type { HomeCareContent } from "../data/getContent";
 
 /**
  * `#who`: the four cases a visit is meant for, two up.
@@ -10,22 +10,23 @@ import { suitedCases } from "../data/content";
  * each of these is a paragraph making an argument about a person's situation,
  * and four narrow columns would set them as labels instead.
  */
-export function WhoSection() {
+export function WhoSection({ content }: { content: HomeCareContent }) {
+  const { sectionEyebrows, suitedCases, whoHeading, whoIntro } = content;
   return (
     <section
       id="who"
       className="mx-auto max-w-[1440px] px-5 pt-28 sm:px-8 lg:px-11 max-[640px]:pt-18"
     >
       <SectionHead
-        eyebrow="02 / Who it suits"
+        eyebrow={sectionEyebrows.who}
         heading={
           <>
-            When getting there
+            {whoHeading.line1}
             <br />
-            is the hard part
+            {whoHeading.line2}
           </>
         }
-        intro="A visit is not a lesser version of coming in. It is the same team, for the patients whose obstacle was never the appointment."
+        intro={whoIntro}
       />
 
       <RevealStagger

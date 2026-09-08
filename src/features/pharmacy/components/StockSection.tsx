@@ -1,6 +1,6 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
-import { stock } from "../data/content";
+import type { PharmacyContent } from "../data/getContent";
 
 /**
  * `#stock`: the stocked categories as a three-column table, against a heading
@@ -9,30 +9,34 @@ import { stock } from "../data/content";
  * The sticky column goes static below 900px, where the two columns have already
  * collapsed into one and there is nothing left for it to stay beside.
  */
-export function StockSection() {
+export function StockSection({ content }: { content: PharmacyContent }) {
+  const { sectionEyebrows, stock, stockCta, stockHeading, stockIntro } = content;
   return (
     <section id="stock" className="mx-auto max-w-[1440px] px-5 pt-26 sm:px-8 lg:px-11 max-[640px]:pt-18">
-      <div className="grid grid-cols-[0.9fr_1.1fr] items-start gap-14 max-[899px]:grid-cols-1 max-[899px]:gap-10">
+      {/* `minmax(0, ...)` on both tracks: a bare `fr` track cannot shrink
+          below its content's intrinsic width, and Sinhala/Tamil form long
+          unbreakable tokens where English would have a space, so without
+          this the grid (and the page) overflows a 360px viewport. */}
+      <div className="grid grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] items-start gap-14 max-[899px]:grid-cols-1 max-[899px]:gap-10">
         <Reveal className="sticky top-10 max-[899px]:static">
           <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
-            03 / What we stock
+            {sectionEyebrows.stock}
           </div>
-          <h2 className="font-display mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
-            On the
+          <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
+            {stockHeading.line1}
             <br />
-            shelves
+            {stockHeading.line2}
             <br />
-            tonight
+            {stockHeading.line3}
           </h2>
           <p className="mt-5 max-w-[38ch] text-[16.5px] leading-[1.65] text-[var(--home-muted)]">
-            Prescription medicine, everyday over the counter items, and the dressings and supplies
-            patients actually need at home after a procedure.
+            {stockIntro}
           </p>
           <a
             href="https://wa.me/94742223334"
             className="sj-invert mt-6 inline-flex items-center gap-2.5 bg-[var(--home-accent)] px-5.5 py-3.75 text-[14.5px] font-bold text-[var(--home-on-accent)]"
           >
-            Check availability <span aria-hidden>&rarr;</span>
+            {stockCta} <span aria-hidden>&rarr;</span>
           </a>
         </Reveal>
 
@@ -40,7 +44,7 @@ export function StockSection() {
           {stock.map((row) => (
             <div
               key={row.name}
-              className="grid grid-cols-[1.15fr_1.15fr_0.55fr] items-baseline gap-5.5 border-b border-[var(--home-hairline)] px-1 py-5 max-[899px]:grid-cols-1 max-[899px]:gap-y-1.5"
+              className="grid grid-cols-[minmax(0,1.15fr)_minmax(0,1.15fr)_minmax(0,0.55fr)] items-baseline gap-5.5 border-b border-[var(--home-hairline)] px-1 py-5 max-[899px]:grid-cols-1 max-[899px]:gap-y-1.5"
             >
               <span className="text-[17.5px] font-bold text-[var(--home-heading)]">{row.name}</span>
               <span className="text-[14.5px] leading-[1.5] text-[var(--home-muted)]">{row.note}</span>

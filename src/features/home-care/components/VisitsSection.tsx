@@ -1,6 +1,6 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
-import { visitLede, visitRoles } from "../data/content";
+import type { HomeCareContent } from "../data/getContent";
 
 /**
  * `#visits`: the lead band, and the reason the page exists.
@@ -24,7 +24,8 @@ import { visitLede, visitRoles } from "../data/content";
  * so numbering them would imply a sequence that does not exist. What the kicker
  * says instead is what that role is there to do.
  */
-export function VisitsSection() {
+export function VisitsSection({ content }: { content: HomeCareContent }) {
+  const { sectionEyebrows, visitLede, visitRoles } = content;
   return (
     <section
       id="visits"
@@ -32,10 +33,10 @@ export function VisitsSection() {
     >
       <Reveal>
         <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
-          01 / Home visit services
+          {sectionEyebrows.visits}
         </div>
         <h2
-          className="font-display mt-6 max-w-[30ch] text-[clamp(27px,3.2vw,44px)] leading-[1.12] font-semibold tracking-[-0.03em] text-[var(--home-heading)]"
+          className="font-display wrap-break-word mt-6 max-w-[30ch] text-[clamp(27px,3.2vw,44px)] leading-[1.12] font-semibold tracking-[-0.03em] text-[var(--home-heading)]"
           style={{ textWrap: "pretty" }}
         >
           {visitLede}

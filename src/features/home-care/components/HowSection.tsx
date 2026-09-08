@@ -1,6 +1,6 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
-import { prepPoints, steps } from "../data/content";
+import type { HomeCareContent } from "../data/getContent";
 
 /**
  * `#how`: the four steps of arranging a visit, then what to have ready.
@@ -13,7 +13,8 @@ import { prepPoints, steps } from "../data/content";
  * The 1px grid gaps show the parent's hairline colour through, which is what
  * draws the rules between cells; each cell paints `--home-bg` over the top.
  */
-export function HowSection() {
+export function HowSection({ content }: { content: HomeCareContent }) {
+  const { howHeading, prepPoints, readyLabel, sectionEyebrows, steps } = content;
   return (
     <section
       id="how"
@@ -21,12 +22,12 @@ export function HowSection() {
     >
       <Reveal>
         <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
-          04 / Arranging a visit
+          {sectionEyebrows.how}
         </div>
-        <h2 className="font-display mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
-          Call, then
+        <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
+          {howHeading.line1}
           <br />
-          open the door
+          {howHeading.line2}
         </h2>
       </Reveal>
 
@@ -59,7 +60,7 @@ export function HowSection() {
 
       <Reveal className="mt-px border-t border-[var(--home-hairline)] pt-7">
         <h3 className="text-[12.5px] font-bold tracking-[0.2em] text-[var(--home-accent-soft)] uppercase">
-          Have this ready
+          {readyLabel}
         </h3>
         <ul className="mt-4.5 grid grid-cols-2 gap-x-10 gap-y-3 text-[15px] leading-[1.5] max-[899px]:grid-cols-1">
           {prepPoints.map((point) => (

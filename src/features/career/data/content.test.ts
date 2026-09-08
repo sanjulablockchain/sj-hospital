@@ -7,16 +7,19 @@ import {
   CAREERS_EMAIL,
   DEPARTMENT_ORDER,
   departments,
+  departmentLabels,
   experienceOptions,
   faq,
   formNotes,
   fraudChecks,
+  GENERAL_APPLICATION_ROLE_ID,
+  generalApplicationLabel,
   heroFacts,
   jobs,
   jumpCards,
   PLACEHOLDER_NOTICE,
   process as hiringProcess,
-  roleOptions,
+  roleIds,
   sourceOptions,
   students,
   SWITCHBOARD,
@@ -145,22 +148,48 @@ test("every jump card points at a section this page renders", () => {
   }
 });
 
-// The form's role select is what decides the subject line of the email to
-// Human Resources, and the schema rejects anything not in this list, so every
-// advertised vacancy has to be pickable.
+// The form's role select is what decides which vacancy the email to Human
+// Resources names, and the schema rejects anything not in `roleIds`, so every
+// advertised vacancy has to be pickable. `roleIds` carries the fixed English
+// id each job submits as its select value (see the note above `jobs`), not
+// the translatable title a reader sees, which is why this checks `.id` rather
+// than `.title`.
 test("the form offers every advertised role plus a general application", () => {
   for (const job of jobs) {
-    assert.ok(roleOptions.includes(job.title), `${job.title} cannot be selected on the form`);
+    assert.ok(roleIds.includes(job.id), `${job.title} (${job.id}) cannot be selected on the form`);
   }
-  assert.ok(roleOptions.includes("General application, no specific role"));
-  assert.equal(roleOptions.length, jobs.length + 1);
+  assert.ok(roleIds.includes(GENERAL_APPLICATION_ROLE_ID));
+  assert.equal(roleIds.length, jobs.length + 1);
+  assert.ok(generalApplicationLabel.trim().length > 0);
+});
+
+// Every job also needs a unique, non-empty id: it is the select's `value` and
+// the row's React key, so a blank or duplicate id would either silently merge
+// two roles in the "Applying for" list or break the schema's validation.
+test("every job has a unique, non-empty id", () => {
+  const ids = jobs.map((job) => job.id);
+  assert.ok(ids.every((id) => id.trim().length > 0), "a job id is blank");
+  assert.equal(new Set(ids).size, ids.length, "two jobs share the same id");
 });
 
 test("no select option is an empty string, which the schema treats as unanswered", () => {
-  for (const list of [roleOptions, experienceOptions, sourceOptions]) {
+  for (const list of [experienceOptions, sourceOptions]) {
     for (const option of list) {
-      assert.ok(option.trim().length > 0);
+      assert.ok(option.id.trim().length > 0);
+      assert.ok(option.label.trim().length > 0);
     }
+  }
+});
+
+// `departmentLabels` is the translated word a reader sees for each filter
+// chip; every structural department (including "All") needs an entry, or a
+// locale would silently show nothing for that chip.
+test("every department has a display label", () => {
+  for (const department of departments) {
+    assert.ok(
+      departmentLabels[department]?.trim().length,
+      `"${department}" has no entry in departmentLabels`
+    );
   }
 });
 

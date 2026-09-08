@@ -155,10 +155,12 @@ export const jumpCards: JumpCard[] = [
   },
 ];
 
-export const whyEyebrow = "01 / Why school, not clinic";
 export const whyHeading = "The children who need it most never come in";
 export const whyBody =
   "A family brings a child to hospital when something is obviously wrong. Nobody brings a child because they might need spectacles, or because their haemoglobin might be low. Those conditions are silent, they are common, and they quietly cost a child years of schooling. The only way to find them is to go where all the children already are.";
+
+/** Label over `findings` in `#why`'s right-hand panel, moved here out of WhySchoolSection. */
+export const whyFindingsLabel = "What we typically find";
 
 export const findings: readonly string[] = [
   "Children sitting at the back who cannot read the board, and nobody had tested them",
@@ -167,6 +169,11 @@ export const findings: readonly string[] = [
   "Growth outside the normal range in both directions, underweight and obese in the same classroom",
   "Hearing loss after untreated ear infections, mistaken for inattention",
 ];
+
+/** `#programme`'s SectionHead, moved here out of ScreeningSection. */
+export const screeningHeading = { line1: "Nine stations,", line2: "one morning" };
+export const screeningIntro =
+  "Set up in a hall or two classrooms. Children move through in class groups, so no lesson loses more than half an hour.";
 
 export const stations: HoverTileItem[] = [
   {
@@ -234,6 +241,11 @@ export const stations: HoverTileItem[] = [
   },
 ];
 
+/** `#grades`'s own heading (not the SectionHead component; see GradeBandsSection) and intro. */
+export const gradeBandsHeading = { line1: "Different", line2: "ages, different", line3: "worries" };
+export const gradeBandsIntro =
+  "The national school health programme concentrates on Grades 1, 4, 7 and 10. We follow that rhythm and add what the school asks for.";
+
 export const gradeBands: GradeBand[] = [
   {
     band: "Grade 1",
@@ -262,6 +274,11 @@ export const gradeBands: GradeBand[] = [
   },
 ];
 
+/** `#teachers`'s SectionHead, moved here out of TeacherTrainingSection. */
+export const teacherHeading = { line1: "Train the adults", line2: "who are there", line3: "first" };
+export const teacherIntro =
+  "When a child collapses on a Tuesday afternoon, the person kneeling beside them is a teacher. These sessions run free of charge for schools on the programme.";
+
 export const training: HoverTileItem[] = [
   {
     kicker: "Half a day",
@@ -289,6 +306,14 @@ export const training: HoverTileItem[] = [
   },
 ];
 
+/** `#dengue`'s own heading (not the SectionHead component; see DengueSection), its two paragraphs, and the label over `breedingSites`. */
+export const dengueHeading = { line1: "Dengue is a", line2: "school problem" };
+export const dengueIntro =
+  "The mosquito bites in daylight, which means children are bitten at school, not at home in bed. A single blocked gutter or a tray under a potted plant in the corridor can supply a whole class.";
+export const dengueNote =
+  "We walk the premises with your caretaker, mark the breeding sites on a plan, and hand you a checklist your own staff can repeat weekly without us.";
+export const dengueFindingsLabel = "Where we usually find it";
+
 export const breedingSites: readonly string[] = [
   "Roof gutters blocked with leaves after the monsoon",
   "Trays under potted plants in corridors and the office",
@@ -300,6 +325,17 @@ export const breedingSites: readonly string[] = [
   "Unused tanks, buckets and basins in the caretaker's store",
   "Construction debris and cement mixing trays left standing",
 ];
+
+/** `#referral`'s own heading (not the SectionHead component; see FollowUpSection), its intro, and the call-to-action beside it. */
+export const followUpHeading = {
+  line1: "A screening",
+  line2: "that ends in",
+  line3: "a report is",
+  line4: "half done",
+};
+export const followUpIntro =
+  "The point is not the data. The point is that the child with the low haemoglobin actually gets treated. Every flagged child is tracked until something happens.";
+export const followUpCta = "Talk to the coordinator";
 
 export const followUp: FollowUpStep[] = [
   {
@@ -327,6 +363,9 @@ export const followUp: FollowUpStep[] = [
     what: "Flagged children are rechecked at the school, so a spectacle prescription that was never filled does not disappear into the file.",
   },
 ];
+
+/** The heading FaqAccordion hard-breaks across two lines for this page, moved here out of SchoolWellnessPage. */
+export const faqHeading = { line1: "Fair questions", line2: "to ask us" };
 
 export const faq: FaqItem[] = [
   {
@@ -371,12 +410,29 @@ export const faq: FaqItem[] = [
  * The four ways in, in the reference's order. Each number and address is the
  * hospital's own and matches `components/layout/ThemedFooter`; only the last
  * row is this page's choice, pointing parents at the health tips library.
+ *
+ * The phone row used to carry the hospital's own number as its whole `label`,
+ * with no separate action phrase, so it rendered as bare digits with no
+ * translatable text at all, in every language including English, the same bug
+ * `contact`'s, `accommodation`'s, `home-care`'s, `pharmacy`'s and `network`'s
+ * own contact rows had. `label` now carries the action ("Call the hospital"),
+ * and the digits live in `value`, excluded from parity the same way `href` is.
+ *
+ * "Health tips for parents" is the one row whose destination is a route on
+ * this site rather than a phone number, a mailbox or an external site, so it
+ * is marked `internal` and goes through `LocaleLink` in BookSection to keep a
+ * reader in the language they are already reading.
  */
 export const contactRows: ContactRow[] = [
-  { label: "0117 84 84 84", href: "tel:+94117848484", glyph: "phone" },
+  { label: "Call the hospital", value: "0117 84 84 84", href: "tel:+94117848484", glyph: "phone" },
   { label: "Email the hospital", href: "mailto:info@sjhospital.lk", glyph: "arrow" },
   { label: "WhatsApp us", href: "https://wa.me/94742223334", glyph: "arrow" },
-  { label: "Health tips for parents", href: "/health-tips#library", glyph: "arrow" },
+  {
+    label: "Health tips for parents",
+    href: "/health-tips#library",
+    glyph: "arrow",
+    internal: true,
+  },
 ];
 
 /** The chips listing what the hospital needs from a school to quote a date. */
@@ -389,3 +445,51 @@ export const bookingChecklist: readonly string[] = [
 
 export const disclaimer =
   "School screening complements, and does not replace, the Ministry of Health school medical inspection and the Public Health Midwife and Medical Officer of Health services in your division. Findings are shared with the school and the parent; onward notification follows the school's own arrangements with the area MOH.";
+
+/**
+ * The hero's own copy, moved here out of WellnessHero so it can be
+ * translated. The heading is split in three because the middle third is drawn
+ * outlined rather than filled and the last third is painted in the accent
+ * colour, the same three-way split `home-care`'s and `about`'s own `hero` use:
+ * `headingLead` is solid white, `headingOutline` is the hollow "nobody",
+ * `headingAccent` is blue.
+ */
+export const hero = {
+  strapline: "We come to the school",
+  breadcrumbHome: "Home",
+  breadcrumbCurrent: "School Wellness",
+  headingLead: "The problem",
+  headingOutline: "nobody",
+  headingAccent: "noticed.",
+  bookCta: "Bring us to your school",
+  exploreCta: "What the screening covers",
+};
+
+export const heroStandfirst =
+  "A child who cannot read the board is not slow. A child who falls asleep in class may be anaemic. Our team comes to your school, screens every student, and tells you which ones need a doctor.";
+
+/**
+ * `#book`'s own heading and copy, moved here out of BookSection.
+ */
+export const bookHeading = { line1: "One morning.", line2: "Every child", line3: "seen." };
+export const bookIntro =
+  "Tell us your student numbers and the term dates that suit you. We come and look at the hall first, then confirm a date. Schools in the Negombo, Katana and Kochchikade divisions are our priority.";
+
+/**
+ * The eight numbered eyebrows, moved here out of WhySchoolSection,
+ * ScreeningSection, GradeBandsSection, TeacherTrainingSection, DengueSection,
+ * FollowUpSection, SchoolWellnessPage's FaqAccordion call and BookSection so
+ * they can be translated with the rest of the page's copy. The leading number
+ * is structural and stays the same in every language; only the words after it
+ * change.
+ */
+export const sectionEyebrows = {
+  why: "01 / Why school, not clinic",
+  programme: "02 / The screening",
+  grades: "03 / By age group",
+  teachers: "04 / For the staff room",
+  dengue: "05 / The school grounds",
+  referral: "06 / After the screening",
+  faq: "07 / For principals and parents",
+  book: "08 / Bring us in",
+};

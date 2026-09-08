@@ -7,6 +7,11 @@
 // `jumpCards`' notes: each restates a claim already present in the copy below,
 // so none of them is a new hospital fact.
 //
+// `hero` and `sectionEyebrows` near the bottom of this file are page furniture
+// rather than hospital facts too: they were stranded as literal JSX text in
+// AboutHero.tsx, StorySection.tsx, DifferentSection.tsx, MissionSection.tsx and
+// GroupSection.tsx, moved here so the i18n parity test can see them.
+//
 // `heroStandfirst` and the four `*Intro` constants near the bottom of this
 // file are not new copy either: each is a literal substring of the ported
 // paragraph or reason it introduces (`content.test.ts` asserts the substring
@@ -130,3 +135,42 @@ export const missionIntro =
 // `#group`'s SectionHead intro: the first sentence of `groupBody[0]`.
 export const groupIntro =
   "Kids & Teens Medical Group, a leading pediatric care provider in Southern California, is dedicated to delivering compassionate and comprehensive healthcare services for children and adolescents.";
+
+/**
+ * The hero's own copy, moved here out of AboutHero so it can be translated.
+ * The heading is split in three because the middle third is drawn outlined
+ * rather than filled and the last third is painted in the accent colour:
+ * `headingLead` is solid white, `headingOutline` is the hollow "high-quality",
+ * `headingAccent` is blue.
+ *
+ * `strapline` is deliberately one field rather than two: in the English JSX
+ * it read "Who we are" twice, once as the decorative vertical label and once
+ * as the "who we are" anchor CTA text, in the same component. Giving those
+ * two spots a single home means a translator only writes it once and the two
+ * spots can never drift apart the way the contact accent band once did.
+ *
+ * The CSS uppercases the heading, which is a no-op in Sinhala and Tamil since
+ * neither script has letter case, so the same rule can stay on all three.
+ */
+export const hero = {
+  strapline: "Who we are",
+  breadcrumbHome: "Home",
+  breadcrumbCurrent: "About Us",
+  headingLead: "US standard,",
+  headingOutline: "high-quality",
+  headingAccent: "healthcare.",
+  bookCta: "Book a doctor",
+};
+
+/**
+ * The four section eyebrows, moved here out of StorySection, DifferentSection,
+ * MissionSection and GroupSection so they can be translated with the rest of
+ * the page's copy. The leading number is structural and stays the same in
+ * every language; only the words after it change.
+ */
+export const sectionEyebrows = {
+  story: "01 / Who we are",
+  different: "02 / Why here",
+  mission: "03 / What we aim at",
+  group: "04 / Our parent group",
+};

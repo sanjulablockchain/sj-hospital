@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test \"src/**/*.test.ts\""
+    "test": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test \"src/**/*.test.ts\"",
+    "i18n:status": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/i18n-status.mjs",
+    "i18n:register-audit": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/i18n-register-audit.mjs"
   },
   "dependencies": {
     "leaflet": "^1.9.4",
@@ -27,6 +29,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.11",
+    "playwright": "^1.62.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

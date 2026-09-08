@@ -1,8 +1,8 @@
 import Image from "next/image";
-import Link from "next/link";
+import { LocaleLink } from "@/components/i18n/LocaleLink";
 import { RevealStagger } from "@/components/ui/RevealStagger";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
-import { showcaseCards } from "@/features/facilities/data/content";
+import type { FacilitiesContent } from "../data/getContent";
 
 /**
  * `#showcase`: four photo cards in the site's canonical card idiom, parallax
@@ -14,7 +14,8 @@ import { showcaseCards } from "@/features/facilities/data/content";
  * photograph needs a dark scrim for white text to stay legible, and that has to
  * hold in the light theme too.
  */
-export function ShowcaseSection() {
+export function ShowcaseSection({ content }: { content: FacilitiesContent }) {
+  const { showcaseCards } = content;
   return (
     <section id="showcase" className="mx-auto max-w-[1440px] pt-30">
       <RevealStagger
@@ -57,12 +58,12 @@ export function ShowcaseSection() {
                 </h3>
                 <p className="mt-2.5 text-[14.5px] leading-[1.55] text-white/78">{card.body}</p>
                 {isInternal ? (
-                  <Link
+                  <LocaleLink
                     href={card.href}
                     className="mt-3.5 inline-flex translate-y-2.5 items-center gap-2 text-[13.5px] font-bold text-[#7FCBFF] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100"
                   >
                     {card.linkLabel} <span aria-hidden>&rarr;</span>
-                  </Link>
+                  </LocaleLink>
                 ) : (
                   <a
                     href={card.href}

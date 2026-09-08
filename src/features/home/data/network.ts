@@ -62,3 +62,22 @@ export const networkNodes: NetworkNode[] = [
     href: "/services/telemedicine",
   },
 ];
+
+/** `#network`'s own copy, stranded in `NetworkSection.tsx` until now. */
+export const sectionEyebrow = "11 / Network";
+export const heading = { line1: "One group,", line2: "two countries" };
+export const body =
+  "Our Negombo hospital shares clinical governance with the largest pediatric group in Los Angeles.";
+export const cta = "The full network";
+
+/**
+ * The two screen-reader strings `NetworkAccordion.tsx` builds by
+ * interpolating a node's name into an English sentence. `{name}` is a token,
+ * not a split: Sinhala and Tamil word order does not put the name in the same
+ * place English does, so the component replaces the token rather than
+ * concatenating around it.
+ */
+export const accordionAria = {
+  show: "Show {name}",
+  open: "{name}, open",
+};

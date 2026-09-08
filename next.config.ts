@@ -8,6 +8,17 @@ const nextConfig: NextConfig = {
       // body carries the other nine fields on top of it.
       bodySizeLimit: "6mb",
     },
+    // The root layout lives at `src/app/[locale]/layout.tsx`, a top level
+    // dynamic segment with no `src/app/layout.tsx` above it. The Next docs
+    // name this exact case (alongside multiple root layouts) as the one
+    // `not-found.js` cannot cover: a segment-level `not-found.tsx` only
+    // catches `notFound()` thrown from within an already-matched, already
+    // valid route tree, so a locale segment that fails `hasLocale` before
+    // any layout below it renders (e.g. `/xx/contact-us`) has no boundary to
+    // land in and falls through to Next's bare, unbranded, unstyled built-in
+    // 404. `globalNotFound` (app/global-not-found.tsx) is the framework's own
+    // fix for that: it is handled at the routing level, before any layout.
+    globalNotFound: true,
   },
   watchOptions: {
     pollIntervalMs: 500,

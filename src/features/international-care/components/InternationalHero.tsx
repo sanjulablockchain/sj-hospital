@@ -4,7 +4,10 @@ import { ThemedHeader } from "@/components/layout/ThemedHeader";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { Ticker } from "@/components/ui/Ticker";
 import { internationalNavigation } from "@/config/internationalNavigation";
-import { heroFacts, tickerItems } from "../data/content";
+import { translateNavItems } from "@/config/navigationLabels";
+import { localeHref } from "@/lib/i18n/paths";
+import type { Locale } from "@/lib/i18n/locales";
+import type { InternationalCareContent } from "../data/getContent";
 
 /**
  * `#top`: the arrival photograph behind the themed header and the page's only
@@ -25,7 +28,8 @@ import { heroFacts, tickerItems } from "../data/content";
  * Copy animates with `animate-sj-up` rather than `Reveal`, since it is already
  * in the first viewport and should not wait on an intersection observer.
  */
-export function InternationalHero() {
+export function InternationalHero({ content, locale }: { content: InternationalCareContent; locale: Locale }) {
+  const { hero, heroFacts, tickerItems, whatsappHref } = content;
   return (
     <section
       id="top"
@@ -72,7 +76,7 @@ export function InternationalHero() {
         }}
       />
 
-      <ThemedHeader navItems={internationalNavigation} homeHref="/" bookHref="/e-channeling" />
+      <ThemedHeader navItems={translateNavItems(internationalNavigation, locale)} homeHref="/" bookHref="/e-channeling" />
 
       <div className="relative z-10 mx-auto mt-auto flex w-full max-w-[1440px] gap-10 px-5 sm:px-8 lg:px-11">
         {/* Decorative vertical strapline, dropped below 900px where there is no
@@ -85,25 +89,35 @@ export function InternationalHero() {
             className="text-[11px] tracking-[0.3em] text-white/50 uppercase"
             style={{ writingMode: "vertical-rl" }}
           >
-            Ten minutes from the airport
+            {hero.strapline}
           </span>
           <span className="w-px flex-1 bg-gradient-to-b from-white/40 to-transparent" />
         </div>
 
-        <div className="flex-1 pb-11">
+        {/* min-w-0: a flex item's automatic min-width is its content's
+            min-content size, not zero, so without this the column (and the
+            hero row it sits in) refused to shrink below its widest
+            untranslated-English-sized content once the Tamil and Sinhala
+            copy grew past it, pushing the row past a 360px viewport. */}
+        <div className="min-w-0 flex-1 pb-11">
           <div className="animate-sj-up inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
             <span aria-hidden className="h-px w-11 bg-[#2CA6F0]" />
-            <Link href="/" className="text-[#7FCBFF] hover:text-white">
-              Home
+            <Link href={localeHref("/", locale)} className="text-[#7FCBFF] hover:text-white">
+              {hero.breadcrumbHome}
             </Link>
             <span aria-hidden className="opacity-50">
               /
             </span>
-            International Patient Care
+            {hero.breadcrumbCurrent}
           </div>
 
-          <h1 className="font-display animate-sj-up mt-4.5 text-[clamp(42px,7vw,116px)] leading-[0.86] font-extrabold tracking-[-0.045em] text-white uppercase">
-            You land at
+          {/* `wrap-break-word`: Sinhala and Tamil can put a single unbreakable
+              token on one of these lines, with nothing beside it for the
+              browser to reflow around, so the word itself needs to be able to
+              wrap: the same fix `network`'s and `home-care`'s own hero
+              headings needed. */}
+          <h1 className="font-display animate-sj-up wrap-break-word mt-4.5 text-[clamp(42px,7vw,116px)] leading-[0.86] font-extrabold tracking-[-0.045em] text-white uppercase">
+            {hero.headingLead}
             <br />
             {/* Outlined rather than filled, so the three lines read as one
                 phrase stepping from solid to hollow to accent. */}
@@ -111,10 +125,10 @@ export function InternationalHero() {
               className="text-transparent"
               style={{ WebkitTextStroke: "1.4px rgba(242,246,255,0.75)" }}
             >
-              Katunayake.
+              {hero.headingPlace}
             </span>
             <br />
-            <span className="text-[#2CA6F0]">We take it from there.</span>
+            <span className="text-[#2CA6F0]">{hero.headingTail}</span>
           </h1>
 
           <div className="animate-sj-up mt-8 flex flex-col items-start gap-5.5">
@@ -122,23 +136,25 @@ export function InternationalHero() {
               className="max-w-[54ch] text-[18px] leading-[1.6] text-white/82"
               style={{ textWrap: "pretty" }}
             >
-              We are ten minutes from Bandaranaike International Airport, on St. Joseph Street in
-              central Negombo. The international desk arranges the transfer, the estimate, the
-              interpreter and the records you take home, from the first email to the flight back.
+              {hero.standfirst}
             </p>
             <div className="flex flex-wrap gap-3">
               <a
                 href="#enquiry"
                 className="sj-invert inline-flex items-center gap-2.5 bg-[#2CA6F0] px-6 py-4 text-[15px] font-bold text-[#04122B]"
               >
-                Get a written estimate <span aria-hidden>&rarr;</span>
+                {hero.estimateCta} <span aria-hidden>&rarr;</span>
               </a>
+              {/* No `whitespace-nowrap`: the English CTA fits on one line,
+                  but "Desk க்கு WhatsApp செய்யுங்கள்" does not at 360px, and
+                  nowrap text does not shrink, so it pushed the whole hero row
+                  past the viewport instead of wrapping. */}
               <a
-                href="https://wa.me/94742223334"
-                className="inline-flex items-center gap-3 border border-white/30 px-6 py-4 text-[15px] font-bold whitespace-nowrap text-white transition-colors hover:bg-white hover:text-[#060B1F]"
+                href={whatsappHref}
+                className="inline-flex items-center gap-3 border border-white/30 px-6 py-4 text-[15px] font-bold text-white transition-colors hover:bg-white hover:text-[#060B1F]"
               >
                 <span aria-hidden className="animate-sj-pulse h-2 w-2 rounded-full bg-[#2CA6F0]" />
-                WhatsApp the desk
+                {hero.whatsappCta}
               </a>
             </div>
           </div>

@@ -1,6 +1,6 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHead } from "./SectionHead";
-import { jumpCards, mission, missionIntro, vision } from "../data/content";
+import type { AboutContent } from "../data/getContent";
 
 /**
  * `#mission`: the mission and vision ported verbatim from the deleted
@@ -9,13 +9,14 @@ import { jumpCards, mission, missionIntro, vision } from "../data/content";
  * `intro` is `missionIntro`, a clause lifted from `mission.body`, not the
  * jump card's `note` restated.
  */
-export function MissionSection() {
+export function MissionSection({ content }: { content: AboutContent }) {
+  const { jumpCards, mission, missionIntro, sectionEyebrows, vision } = content;
   return (
     <section
       id="mission"
       className="mx-auto max-w-[1440px] px-5 pt-26 sm:px-8 lg:px-11 max-[640px]:pt-18"
     >
-      <SectionHead eyebrow="03 / What we aim at" heading={jumpCards[2].label} intro={missionIntro} />
+      <SectionHead eyebrow={sectionEyebrows.mission} heading={jumpCards[2].label} intro={missionIntro} />
 
       <div className="mt-10.5 grid gap-px bg-[var(--home-hairline)] min-[900px]:grid-cols-2">
         <Reveal>

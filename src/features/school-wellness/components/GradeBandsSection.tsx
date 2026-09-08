@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
-import { gradeBands } from "../data/content";
+import type { SchoolWellnessContent } from "../data/getContent";
 
 /**
  * `#grades`: the five age bands, against the dusk exterior washed back to 24%
@@ -18,8 +18,14 @@ import { gradeBands } from "../data/content";
  *
  * The heading column is `position: sticky` above 900px and static below, per
  * the reference's `[data-r="sticky"]` rule.
+ *
+ * The `0.85fr / 1.15fr` split uses `minmax(0, ...)` on both tracks: a bare
+ * `fr` track cannot shrink below its content's intrinsic width, and
+ * Sinhala/Tamil form long unbreakable tokens where English would have a
+ * space, so without this the grid (and the page) overflows a 360px viewport.
  */
-export function GradeBandsSection() {
+export function GradeBandsSection({ content }: { content: SchoolWellnessContent }) {
+  const { gradeBands, gradeBandsHeading, gradeBandsIntro, sectionEyebrows } = content;
   return (
     <section id="grades" className="relative mt-26 overflow-hidden bg-[#08123A] max-[640px]:mt-18">
       <ParallaxLayer
@@ -45,21 +51,20 @@ export function GradeBandsSection() {
       />
 
       <div className="relative z-10 mx-auto max-w-[1440px] px-5 py-23 sm:px-8 lg:px-11">
-        <Reveal className="grid grid-cols-[0.85fr_1.15fr] items-start gap-14.5 max-[899px]:grid-cols-1 max-[899px]:gap-10">
-          <div className="sticky top-10 max-[899px]:static">
+        <Reveal className="grid grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] items-start gap-14.5 max-[899px]:grid-cols-1 max-[899px]:gap-10">
+          <div className="min-w-0 sticky top-10 max-[899px]:static">
             <div className="text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
-              03 / By age group
+              {sectionEyebrows.grades}
             </div>
-            <h2 className="font-display mt-4.5 text-[clamp(36px,4.6vw,66px)] leading-[0.9] font-extrabold tracking-[-0.04em] text-white uppercase">
-              Different
+            <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(36px,4.6vw,66px)] leading-[0.9] font-extrabold tracking-[-0.04em] text-white uppercase">
+              {gradeBandsHeading.line1}
               <br />
-              ages, different
+              {gradeBandsHeading.line2}
               <br />
-              worries
+              {gradeBandsHeading.line3}
             </h2>
             <p className="mt-5.5 max-w-[40ch] text-[17px] leading-[1.65] text-white/78">
-              The national school health programme concentrates on Grades 1, 4, 7 and 10. We follow
-              that rhythm and add what the school asks for.
+              {gradeBandsIntro}
             </p>
           </div>
 

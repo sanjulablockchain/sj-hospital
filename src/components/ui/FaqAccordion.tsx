@@ -35,7 +35,7 @@ export function FaqAccordion({ faq, heading, eyebrow }: FaqAccordionProps) {
             {eyebrow}
           </div>
         ) : null}
-        <h2 className="font-display text-[clamp(34px,3.8vw,54px)] leading-[1.02] font-extrabold tracking-[-0.03em] text-[var(--home-heading)] uppercase">
+        <h2 className="font-display wrap-break-word text-[clamp(34px,3.8vw,54px)] leading-[1.02] font-extrabold tracking-[-0.03em] text-[var(--home-heading)] uppercase">
           {heading}
         </h2>
       </Reveal>

@@ -265,10 +265,95 @@ export const faq = [
  * The published hospital contacts, matching components/layout/ThemedFooter.
  * There is no home-visit line: content.test.ts fails on an invented mailbox or
  * phone number, and config/contactEmails.ts allows two addresses site wide.
+ *
+ * The phone row carries a `label` action phrase plus the number itself in
+ * `value`, the same split `contact`'s and `accommodation`'s own contact rows
+ * already use: previously `label` held the bare digits, which left this row
+ * with no action phrase in any language (English included) while its three
+ * siblings all had one. The number itself still has exactly one home, here.
  */
 export const contactRows: ContactRow[] = [
-  { label: "0117 84 84 84", href: "tel:+94117848484", glyph: "phone" },
+  { label: "Call us", value: "0117 84 84 84", href: "tel:+94117848484", glyph: "phone" },
   { label: "WhatsApp us", href: "https://wa.me/94742223334", glyph: "arrow" },
   { label: "Email the hospital", href: "mailto:info@sjhospital.lk", glyph: "arrow" },
-  { label: "Book a doctor online", href: "/e-channeling", glyph: "arrow" },
+  { label: "Book a doctor online", href: "/e-channeling", glyph: "arrow", internal: true },
 ];
+
+/**
+ * The hero's own copy, moved here out of HomeCareHero so it can be translated.
+ * The heading is split in three because the middle third is drawn outlined
+ * rather than filled and the last third is painted in the accent colour, the
+ * same three-way split about's and RoomsHero's own `hero` use: `headingLead`
+ * is solid white, `headingOutline` is the hollow "comes", `headingAccent` is
+ * blue.
+ *
+ * `visitsCta` sits in a `whitespace-nowrap` pill at 360px (see HomeCareHero),
+ * the trap that cost e-channeling's `helpRail.heading` a rewrite: keep any
+ * translation of this one short enough to fit a single line in that pill, a
+ * punchy phrase rather than the full sentence.
+ */
+export const hero = {
+  strapline: "We come to you",
+  breadcrumbHome: "Home",
+  breadcrumbCurrent: "Care at Home",
+  headingLead: "The hospital",
+  headingOutline: "comes",
+  headingAccent: "to you.",
+  bookCta: "Request a visit",
+  visitsCta: "Who visits, and what they do",
+};
+
+export const heroStandfirst =
+  "For an elder, an infant, or someone recovering from an operation, the journey in is often harder than the appointment itself. So we make the journey instead.";
+
+/**
+ * `#who`'s SectionHead. `heading` is two fields rather than one string because
+ * WhoSection hard-breaks it across two lines, the same reason `SectionHead`'s
+ * own `heading` prop takes a node rather than a string elsewhere on this page.
+ */
+export const whoHeading = { line1: "When getting there", line2: "is the hard part" };
+export const whoIntro =
+  "A visit is not a lesser version of coming in. It is the same team, for the patients whose obstacle was never the appointment.";
+
+/** `#sampling`'s SectionHead, and the two panel labels inside it. */
+export const samplingHeading = { line1: "The sample", line2: "travels, not", line3: "the patient" };
+export const samplingIntro =
+  "Where the only reason to come in was to give a sample, a laboratory technician comes instead.";
+export const samplingLabels = { howItWorks: "How it works", whatIsSettled: "What is settled" };
+
+/** `#how`'s own heading (not the SectionHead component; see HowSection), and the label over `prepPoints`. */
+export const howHeading = { line1: "Call, then", line2: "open the door" };
+export const readyLabel = "Have this ready";
+
+/** The heading FaqAccordion hard-breaks across two lines for this page. */
+export const faqHeading = { line1: "Before you", line2: "call us" };
+
+/**
+ * `#book`'s own heading and copy. `emergencyNote` is a separate sentence from
+ * `faq`'s own emergency answer, not a second copy of it: the two were already
+ * distinct English sentences before either was moved here, and each keeps its
+ * one home.
+ */
+export const bookHeading = { line1: "Tell us who", line2: "needs to be", line3: "seen." };
+export const bookIntro =
+  "Call the hospital, say who the visit is for and why, and have the hospital file number to hand if there is one. Mention it if a sample is likely to be needed, so the right person is on the vehicle.";
+export const emergencyNote =
+  "Home visits are arranged by appointment and are not an emergency service. In an emergency, call the hospital or come straight to accident and emergency, which is open at every hour.";
+
+/**
+ * The six numbered eyebrows, moved here out of VisitsSection, WhoSection,
+ * SamplingSection, HowSection, HomeCarePage's FaqAccordion call and
+ * BookSection so they can be translated with the rest of the page's copy.
+ * `05` and `06` belong to `handoffs[0].eyebrow` and `handoffs[1].eyebrow`
+ * instead, which already carry their own English and have their own home.
+ * The leading number is structural and stays the same in every language;
+ * only the words after it change.
+ */
+export const sectionEyebrows = {
+  visits: "01 / Home visit services",
+  who: "02 / Who it suits",
+  sampling: "03 / Sampling",
+  how: "04 / Arranging a visit",
+  faq: "07 / Fair questions",
+  book: "08 / Request a visit",
+};

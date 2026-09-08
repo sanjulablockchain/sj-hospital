@@ -1,6 +1,6 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
-import { kit, MEDIA_EMAIL } from "../data/content";
+import type { MediaContent } from "../data/getContent";
 
 /**
  * `#kit`: what the press kit contains, and how to ask for it.
@@ -18,25 +18,24 @@ import { kit, MEDIA_EMAIL } from "../data/content";
  * then a single stacked column below 900px, per the reference's own
  * `[data-r="kitrow"]` and `[data-r="kitnote"]` rules.
  */
-export function PressKitSection() {
+export function PressKitSection({ content }: { content: MediaContent }) {
+  const { kit, MEDIA_EMAIL, kitHeading, kitIntro, kitRequestCta, kitRequestSubject, kitRulesCta, sectionEyebrows } =
+    content;
   return (
     <section id="kit" className="mx-auto max-w-[1440px] px-5 pt-26 sm:px-8 lg:px-11 max-[640px]:pt-18.5">
       <Reveal>
         <div className="flex flex-wrap items-end justify-between gap-10">
-          <div>
+          <div className="min-w-0">
             <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
-              03 / Press kit
+              {sectionEyebrows.kit}
             </div>
-            <h2 className="font-display mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
-              Take what
+            <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
+              {kitHeading.line1}
               <br />
-              you need
+              {kitHeading.line2}
             </h2>
           </div>
-          <p className="max-w-[38ch] text-[16.5px] leading-[1.6] text-[var(--home-muted)]">
-            Free to use in editorial coverage, unmodified, with credit to St. Joseph Hospital,
-            Negombo. Ask us before using anything in advertising or on merchandise.
-          </p>
+          <p className="max-w-[38ch] text-[16.5px] leading-[1.6] text-[var(--home-muted)]">{kitIntro}</p>
         </div>
       </Reveal>
 
@@ -64,16 +63,16 @@ export function PressKitSection() {
 
       <Reveal className="mt-7 flex flex-wrap gap-3">
         <a
-          href={`mailto:${MEDIA_EMAIL}?subject=${encodeURIComponent("Press kit request")}`}
+          href={`mailto:${MEDIA_EMAIL}?subject=${encodeURIComponent(kitRequestSubject)}`}
           className="sj-invert inline-flex items-center gap-2.5 bg-[var(--home-accent)] px-6 py-4 text-[15px] font-bold text-[var(--home-on-accent)]"
         >
-          Request the full kit <span aria-hidden>&rarr;</span>
+          {kitRequestCta} <span aria-hidden>&rarr;</span>
         </a>
         <a
           href="#usage"
           className="sj-invert inline-flex items-center gap-2.5 border border-[var(--home-hairline-strong)] px-6 py-4 text-[15px] font-bold text-[var(--home-heading)]"
         >
-          Read the usage rules
+          {kitRulesCta}
         </a>
       </Reveal>
     </section>

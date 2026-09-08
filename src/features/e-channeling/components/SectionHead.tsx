@@ -27,11 +27,15 @@ export function SectionHead({
 }) {
   return (
     <Reveal className="flex flex-wrap items-end justify-between gap-10">
-      <div>
+      {/* min-w-0: without it a flex item never shrinks below its content
+          width, and a long unbreakable Sinhala or Tamil heading token pushes
+          straight out of a narrow viewport. English never overflows here, so
+          nothing warns you without this. */}
+      <div className="min-w-0">
         <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
           {eyebrow}
         </div>
-        <h2 className="font-display mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
+        <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(36px,4.4vw,64px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
           {heading}
         </h2>
       </div>

@@ -24,5 +24,20 @@ export type GradeBand = { band: string; title: string; body: string };
 /** One row of the `#referral` follow-up timeline. */
 export type FollowUpStep = { when: string; what: string };
 
-/** One of the four rows in the `#book` contact rail. */
-export type ContactRow = { label: string; href: string; glyph: "phone" | "arrow" };
+/**
+ * One of the four rows in the `#book` contact rail. `value` is optional: only
+ * the phone row carries a fact distinct from its own action phrase (the
+ * hospital's own number), the same role `contact`'s, `network`'s,
+ * `accommodation`'s, `home-care`'s and `pharmacy`'s own `value` fields play.
+ * `internal` marks the one row that is a route on this site rather than a
+ * phone number, a mailbox or an external site, so BookSection can send it
+ * through `LocaleLink` and keep a reader in the language they are already
+ * reading.
+ */
+export type ContactRow = {
+  label: string;
+  value?: string;
+  href: string;
+  glyph: "phone" | "arrow";
+  internal?: boolean;
+};

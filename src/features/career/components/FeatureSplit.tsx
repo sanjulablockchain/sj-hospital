@@ -38,13 +38,13 @@ export function FeatureSplit({
   return (
     <section id={id} className="mx-auto max-w-[1440px] px-5 pt-26 sm:px-8 lg:px-11 max-[640px]:pt-18">
       <Reveal>
-        <div className="grid grid-cols-[1.3fr_0.7fr] gap-px bg-[var(--home-hairline)] max-[899px]:grid-cols-1">
-          <div className="bg-[var(--home-accent)] px-10.5 py-11.5 text-[var(--home-on-accent)] max-[640px]:px-6 max-[640px]:py-8">
+        <div className="grid grid-cols-[minmax(0,1.3fr)_minmax(0,0.7fr)] gap-px bg-[var(--home-hairline)] max-[899px]:grid-cols-1">
+          <div className="min-w-0 bg-[var(--home-accent)] px-10.5 py-11.5 text-[var(--home-on-accent)] max-[640px]:px-6 max-[640px]:py-8">
             <span className="text-[11.5px] font-bold tracking-[0.2em] uppercase opacity-68">
               {eyebrow}
             </span>
             <h2
-              className="font-display mt-4 text-[clamp(30px,3.8vw,54px)] leading-[0.94] font-extrabold tracking-[-0.035em] uppercase"
+              className="font-display wrap-break-word mt-4 text-[clamp(30px,3.8vw,54px)] leading-[0.94] font-extrabold tracking-[-0.035em] uppercase"
               style={{ maxWidth: `${headingMaxCh}ch` }}
             >
               {heading}

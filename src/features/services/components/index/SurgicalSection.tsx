@@ -1,6 +1,6 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
-import { surgicalRows } from "@/features/services/data/indexContent";
+import type { ServicesContent } from "@/features/services/data/getContent";
 
 /**
  * `#surgical`: a `--home-surface-2` band, the same charcoal plate the home
@@ -8,46 +8,50 @@ import { surgicalRows } from "@/features/services/data/indexContent";
  * light mode. No fixed-dark literal here; only the fixed-dark hero is exempt
  * from the token rule.
  */
-export function SurgicalSection() {
+export function SurgicalSection({ content }: { content: ServicesContent }) {
+  const { surgicalRows, surgicalSection } = content.indexContent;
+
   return (
     // mt-30 matches the home page's banded sections, so the tinted band does
     // not start flush against the preceding section's last row.
     <section id="surgical" className="mt-30 bg-[var(--home-surface-2)]">
       <div className="mx-auto max-w-[1440px] px-5 py-26 sm:px-8 lg:px-11">
         <div className="grid gap-15 min-[900px]:grid-cols-2 min-[900px]:items-center">
-          <Reveal>
+          <Reveal className="min-w-0">
             <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
-              03 / Department of surgery
+              {surgicalSection.eyebrow}
             </div>
-            <h2 className="font-display mt-4.5 text-[clamp(38px,4.4vw,66px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
-              Seven specialties,
+            <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(38px,4.4vw,66px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
+              {surgicalSection.heading.line1}
               <br />
-              one surgical standard
+              {surgicalSection.heading.line2}
             </h2>
             <p
               className="mt-5.5 max-w-[46ch] text-[16.5px] leading-[1.65] text-[var(--home-muted)]"
               style={{ textWrap: "pretty" }}
             >
-              Consultant-led lists across general, orthopaedic, ENT, urological, ophthalmic, neuro- and
-              gastrointestinal surgery, each paired with its own anaesthesia service and a recovery nurse
-              assigned from theatre to discharge.
+              {surgicalSection.body}
             </p>
             <a
               href="#book"
               className="sj-invert mt-7 inline-flex items-center gap-2.5 bg-[var(--home-accent)] px-6 py-4 text-[15px] font-bold text-[var(--home-on-accent)]"
             >
-              Request a surgical consult <span aria-hidden>&rarr;</span>
+              {surgicalSection.cta} <span aria-hidden>&rarr;</span>
             </a>
           </Reveal>
 
-          <RevealStagger className="flex flex-col gap-px bg-[var(--home-hairline)]">
+          <RevealStagger className="min-w-0 flex flex-col gap-px bg-[var(--home-hairline)]">
             {surgicalRows.map((row) => (
               <div
                 key={row.name}
                 className="flex items-baseline justify-between gap-5 bg-[var(--home-surface-2)] px-7 py-5.5"
               >
-                <span className="text-[17px] font-bold text-[var(--home-heading)]">{row.name}</span>
-                <span className="text-right text-[14px] text-[var(--home-muted)]">{row.note}</span>
+                <span className="wrap-break-word min-w-0 text-[17px] font-bold text-[var(--home-heading)]">
+                  {row.name}
+                </span>
+                <span className="wrap-break-word min-w-0 text-right text-[14px] text-[var(--home-muted)]">
+                  {row.note}
+                </span>
               </div>
             ))}
           </RevealStagger>

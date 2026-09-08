@@ -71,21 +71,32 @@ function collectStrings(value: unknown, seen: Set<object> = new Set()): string[]
 
 const allCopy: string[] = Object.values(content).flatMap((value) => collectStrings(value));
 
-// FIX 1: src/app/accommodation/page.tsx's <meta name="description"> lives
-// outside this module entirely, so no reflection over content.ts's own
-// exports can ever see it, and it is exactly what a search engine or a social
-// unfurl publishes. A fabricated "starting from 10,000 LKR" there once
-// attributed the Standard-only price to all four room categories; read the
-// route file's source directly so a price introduced there fails this suite
-// too.
-const pageSource = readFileSync(
-  fileURLToPath(new URL("../../../app/accommodation/page.tsx", import.meta.url)),
+// FIX 1: the accommodation route's <meta name="description"> lives outside
+// this module entirely, so no reflection over content.ts's own exports can
+// ever see it, and it is exactly what a search engine or a social unfurl
+// publishes. A fabricated "starting from 10,000 LKR" there once attributed
+// the Standard-only price to all four room categories; read the description's
+// actual source directly so a price introduced there fails this suite too.
+//
+// The description used to live inline in accommodation/page.tsx's own
+// `export const metadata`. It now lives in src/config/pageMetadata.ts (one
+// entry per route, English base for all three locales; see that file's
+// header comment for why page metadata is cross-cutting rather than
+// per-feature), read by page.tsx via `getPageMetadataEntry`. This test reads
+// pageMetadata.ts's own source for the same reason it used to read
+// page.tsx's: to catch a fabricated figure at its source, not by trusting
+// the getter to have passed it through unchanged.
+const pageMetadataSource = readFileSync(
+  fileURLToPath(new URL("../../../config/pageMetadata.ts", import.meta.url)),
   "utf8"
 );
-const metadataDescriptionMatch = pageSource.match(/description:\s*\n?\s*"((?:[^"\\]|\\.)*)"/);
+const accommodationEntryMatch = pageMetadataSource.match(/accommodation:\s*\{([^}]*)\}/);
+const metadataDescriptionMatch = accommodationEntryMatch?.[1].match(
+  /description:\s*\n?\s*"((?:[^"\\]|\\.)*)"/
+);
 if (!metadataDescriptionMatch) {
   throw new Error(
-    "could not find accommodation/page.tsx's metadata description; update this test's regex"
+    "could not find pageMetadata.ts's accommodation description; update this test's regex"
   );
 }
 const routeMetadataDescription = metadataDescriptionMatch[1];

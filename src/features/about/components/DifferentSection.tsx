@@ -1,6 +1,6 @@
 import { RevealStagger } from "@/components/ui/RevealStagger";
 import { SectionHead } from "./SectionHead";
-import { differentIntro, jumpCards, reasons } from "../data/content";
+import type { AboutContent } from "../data/getContent";
 
 /**
  * `#different`: the six differentiators ported verbatim from the deleted
@@ -15,13 +15,14 @@ import { differentIntro, jumpCards, reasons } from "../data/content";
  * or of the jump card's `note`. `content.test.ts:123` asserts `differentIntro`
  * is a literal substring of `storyParagraphs[1]`.
  */
-export function DifferentSection() {
+export function DifferentSection({ content }: { content: AboutContent }) {
+  const { differentIntro, jumpCards, reasons, sectionEyebrows } = content;
   return (
     <section
       id="different"
       className="mx-auto max-w-[1440px] px-5 pt-26 sm:px-8 lg:px-11 max-[640px]:pt-18"
     >
-      <SectionHead eyebrow="02 / Why here" heading={jumpCards[1].label} intro={differentIntro} />
+      <SectionHead eyebrow={sectionEyebrows.different} heading={jumpCards[1].label} intro={differentIntro} />
 
       <RevealStagger
         stepMs={80}

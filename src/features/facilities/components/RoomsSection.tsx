@@ -1,6 +1,6 @@
-import Link from "next/link";
+import { LocaleLink } from "@/components/i18n/LocaleLink";
 import { Reveal } from "@/components/ui/Reveal";
-import { roomExtras, roomRows, roomStandard } from "@/features/facilities/data/content";
+import type { FacilitiesContent } from "../data/getContent";
 
 /**
  * `#rooms`: the four room categories as a table, then what every category
@@ -14,22 +14,33 @@ import { roomExtras, roomRows, roomStandard } from "@/features/facilities/data/c
  * /accommodation owns booking and the photographs; this table exists to answer
  * "what are my options" in one screen, then hands over.
  */
-export function RoomsSection() {
+export function RoomsSection({ content }: { content: FacilitiesContent }) {
+  const {
+    roomExtras,
+    roomRows,
+    roomStandard,
+    roomsHeading,
+    roomsIntro,
+    roomsStandardHeading,
+    roomsExtrasHeading,
+    roomsCta,
+    roomsNote,
+    sectionEyebrows,
+  } = content;
   return (
     <section id="rooms" className="mx-auto max-w-[1440px] px-5 pt-30 sm:px-8 lg:px-11">
       <Reveal>
         <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
-          04 / Rooms &amp; wards
+          {sectionEyebrows.rooms}
         </div>
-        <div className="mt-4.5 grid gap-6 min-[900px]:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] min-[900px]:items-end min-[900px]:gap-14">
-          <h2 className="font-display text-[clamp(38px,4.4vw,66px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
-            Four ways to
+        <div className="mt-4.5 grid min-w-0 gap-6 min-[900px]:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] min-[900px]:items-end min-[900px]:gap-14">
+          <h2 className="font-display wrap-break-word min-w-0 text-[clamp(38px,4.4vw,66px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
+            {roomsHeading.line1}
             <br />
-            spend the night
+            {roomsHeading.line2}
           </h2>
           <p className="text-[16px] leading-[1.6] text-[var(--home-muted)]" style={{ textWrap: "pretty" }}>
-            Every category is cleaned on the same two hour cycle. What changes is space, privacy and how
-            much room your family gets.
+            {roomsIntro}
           </p>
         </div>
       </Reveal>
@@ -63,7 +74,7 @@ export function RoomsSection() {
       <div className="mt-11.5 grid grid-cols-1 gap-px bg-[var(--home-hairline)] min-[900px]:grid-cols-2">
         <Reveal className="bg-[var(--home-surface-2)] p-7.5">
           <h3 className="text-[11.5px] font-bold tracking-[0.2em] text-[var(--home-accent)] uppercase">
-            In every category
+            {roomsStandardHeading}
           </h3>
           <ul className="mt-5 flex flex-wrap gap-2.5">
             {roomStandard.map((item) => (
@@ -79,7 +90,7 @@ export function RoomsSection() {
 
         <Reveal className="bg-[var(--home-surface-2)] p-7.5">
           <h3 className="text-[11.5px] font-bold tracking-[0.2em] text-[var(--home-accent)] uppercase">
-            Small things that help
+            {roomsExtrasHeading}
           </h3>
           <ul className="mt-5 flex flex-col gap-3">
             {roomExtras.map((extra) => (
@@ -95,16 +106,13 @@ export function RoomsSection() {
       </div>
 
       <Reveal className="mt-9 flex flex-wrap items-center gap-x-9 gap-y-4">
-        <Link
+        <LocaleLink
           href="/accommodation"
           className="sj-invert inline-flex w-fit items-center gap-2.5 bg-[var(--home-accent)] px-5.5 py-3.5 text-[14px] font-bold text-[var(--home-on-accent)]"
         >
-          See the rooms <span aria-hidden>&rarr;</span>
-        </Link>
-        <p className="max-w-[62ch] text-[14px] leading-[1.6] text-[var(--home-muted)]">
-          Room rates cover accommodation and nursing care. Doctor visits, medicine, tests and procedures
-          are billed separately and appear on your interim bill.
-        </p>
+          {roomsCta} <span aria-hidden>&rarr;</span>
+        </LocaleLink>
+        <p className="max-w-[62ch] text-[14px] leading-[1.6] text-[var(--home-muted)]">{roomsNote}</p>
       </Reveal>
     </section>
   );

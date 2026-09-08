@@ -62,6 +62,51 @@ export const MEDIA_EMAIL = "info@sjhospital.lk";
 export const SWITCHBOARD = "0117 84 84 84";
 export const SWITCHBOARD_TEL = "+94117848484";
 
+/**
+ * `#top`: the breadcrumb, the vertical strapline, the headline and the
+ * standfirst below it, and the hero's own two calls to action. "Media" in
+ * `breadcrumbCurrent` is reused verbatim from `navigationLabels.si.ts` and
+ * `.ta.ts`, where it is kept in `KEEPS_ENGLISH` because that is how a Sri
+ * Lankan reader actually sees the word: this page's own header nav prints
+ * the same untranslated "Media", so the breadcrumb has to agree with it.
+ */
+export const hero = {
+  breadcrumbHome: "Home",
+  breadcrumbCurrent: "Media",
+  strapline: "Press desk answers same day",
+  headingLine1: "On the",
+  headingOutline: "record.",
+  headingAccent: "Always.",
+  standfirst:
+    "Hospital news, clinical milestones, community programmes and everything a journalist needs to file accurately: named spokespeople, approved logos, high resolution photographs and a desk that replies the same working day.",
+  ctaPrimary: "Read the newsroom",
+  ctaSecondary: "See the press kit",
+};
+
+/**
+ * The "NN / Section name" eyebrow above each section's own heading. Reused
+ * verbatim where `navigationLabels.si.ts` / `.ta.ts` already translate the
+ * same word for this page's own header and footer links: "Newsroom",
+ * "Press desk" and "Image library" all have a site-wide translation there,
+ * so these three reuse it rather than inventing a second one. "Press kit"
+ * (this page's own eyebrow and its own `jumpCards[2].label`) is its own
+ * translation, distinct from the nav dictionary's longer "Press kit and
+ * logos" footer link label: different English strings for different
+ * places, not the same fact restated, so they are not forced to share one
+ * translation, though the overlays reuse the same root word for "kit".
+ * "Ground rules", "Who speaks" and "On deadline" have no nav dictionary
+ * entry and are translated fresh.
+ */
+export const sectionEyebrows = {
+  newsroom: "01 / Newsroom",
+  press: "02 / Press desk",
+  kit: "03 / Press kit",
+  gallery: "04 / Image library",
+  spokespeople: "05 / Who speaks",
+  usage: "06 / Ground rules",
+  enquiry: "07 / On deadline",
+};
+
 export const tickerItems: readonly string[] = [
   "Press releases",
   "Consultant interviews",
@@ -78,6 +123,17 @@ export const heroFacts: FactRow[] = [
   { k: "Assets", v: "Print resolution, free" },
 ];
 
+/**
+ * The category identity every `NewsItem.tag` and the filter chips' own React
+ * state carry. Kept as bare English strings on purpose: `NewsroomSection`
+ * compares against these to decide which items are `shown` and which chip is
+ * `isActive`, so translating this array would silently break every filter
+ * the moment a Sinhala or Tamil reader clicked a chip, the same trap that
+ * blanked four icons on `contact`'s own page when `ICONS[row.label]` keyed
+ * off translated text. `categoryLabels` right below carries the words a
+ * reader actually sees for these same six categories; `content.i18n.test.ts`
+ * excludes this array from parity for exactly this reason.
+ */
 export const newsCategories: readonly NewsCategory[] = [
   "Press releases",
   "Clinical",
@@ -87,8 +143,46 @@ export const newsCategories: readonly NewsCategory[] = [
   "In the news",
 ];
 
+/** The translatable label shown for each structural category above. */
+export const categoryLabels: Record<NewsCategory, string> = {
+  "Press releases": "Press releases",
+  Clinical: "Clinical",
+  Community: "Community",
+  Awards: "Awards",
+  Events: "Events",
+  "In the news": "In the news",
+};
+
+/**
+ * Copy `NewsroomSection` needs besides the data arrays: the heading shown
+ * when no filter is active, the "All" chip's own label, the "N of M items"
+ * live region (a `{shown}` / `{total}` token pair rather than a fixed split,
+ * since word order around a count moves between languages), and the
+ * "For journalists" kicker beside the featured release.
+ */
+export const newsroomCopy = {
+  headingAll: "Latest from the hospital",
+  allLabel: "All",
+  itemsCountTemplate: "{shown} of {total} items",
+  forJournalists: "For journalists",
+};
+
+/**
+ * The rule for translating "Consultant" (and its plural) anywhere in this
+ * feature's overlays, `points[1]` below included: as a title sitting
+ * directly in front of a role ("Consultant gastroenterologist", "Consultant
+ * physician"), it stays English, because that is how it reads on a
+ * nameplate. As an ordinary noun ("Named consultants" in `heroFacts[1].v`,
+ * "Consultant interviews" in `tickerItems[1]`, "cardiology consultants" in
+ * `news[10].lede`, "the consultant" in `desk[3].body`, "a consultant" in
+ * `rules[3].q`, "Consultant portraits" in `kit[6].name`, "Consultants" in
+ * `gallery[1].title`), it is just the word for a specialist doctor and
+ * translates like any other noun. `topics[*].v`, the ten job titles, get
+ * the same distinction applied per entry; see the comment above that array
+ * in content.si.ts / content.ta.ts.
+ */
 export const featured: FeaturedRelease = {
-  kicker: "August 2026 · Press release",
+  kickerDate: "August 2026",
   title: "New endoscopy suite opens on the second floor",
   lede: "Two dedicated procedure rooms and a separate recovery bay bring diagnostic gastroscopy and colonoscopy waiting times under a week. The suite runs six days, with sedation managed by the anaesthetic team and same day reporting for biopsies taken during the procedure.",
   date: "14 August 2026",
@@ -206,6 +300,17 @@ export const news: NewsItem[] = [
   },
 ];
 
+export const pressHeading = { line1: "One number,", line2: "one inbox,", line3: "no runaround" };
+export const pressIntro =
+  "Corporate Communications is staffed on weekdays from 8am to 5pm, with a duty phone for breaking stories outside those hours. We will tell you when we cannot comment, and why, rather than going quiet.";
+/**
+ * A `{phone}` token rather than a fixed split: the switchboard number is a
+ * fact with exactly one home (`SWITCHBOARD` above), and "ask for
+ * Communications" is the only translatable part of what used to be one
+ * hardcoded string in `PressDeskSection.tsx` itself.
+ */
+export const pressPhoneTemplate = "{phone}, ask for Communications";
+
 export const desk: DeskCard[] = [
   {
     kind: "First contact",
@@ -248,6 +353,19 @@ export const desk: DeskCard[] = [
     body: "Advertising, sponsorship and supplier proposals go to marketing. Sending them here slows down journalists working to a deadline.",
   },
 ];
+
+export const kitHeading = { line1: "Take what", line2: "you need" };
+export const kitIntro =
+  "Free to use in editorial coverage, unmodified, with credit to St. Joseph Hospital, Negombo. Ask us before using anything in advertising or on merchandise.";
+export const kitRequestCta = "Request the full kit";
+/**
+ * The mailto's own `?subject=` parameter, not copy a reader sees on the
+ * page: it sets what shows up in the visitor's own mail client once they
+ * open it. `content.i18n.test.ts` excludes it the same way it excludes
+ * every `.href`, since it is part of a link's machinery rather than prose.
+ */
+export const kitRequestSubject = "Press kit request";
+export const kitRulesCta = "Read the usage rules";
 
 export const kit: KitAsset[] = [
   {
@@ -297,6 +415,10 @@ export const kit: KitAsset[] = [
   },
 ];
 
+export const galleryHeading = { line1: "Approved for", line2: "publication" };
+export const galleryIntro =
+  "Every photograph here is cleared for editorial use. Nothing showing an identifiable patient is released, at any resolution, without written consent on file.";
+
 // The only content on this page that is genuinely the hospital's own: all three
 // files already ship in `public/images` and carry other pages on the site.
 export const gallery: GalleryShot[] = [
@@ -329,6 +451,12 @@ export const gallery: GalleryShot[] = [
   },
 ];
 
+export const spokespeopleHeading = { line1: "Ask for the", line2: "right person" };
+export const spokespeopleIntro1 =
+  "Requests go through Communications, who will put you with the clinician who actually does the work rather than a general spokesperson reading a statement.";
+export const spokespeopleIntro2 =
+  "Give us the topic and your deadline in the first email. Both change who we can offer and how fast.";
+
 export const topics: FactRow[] = [
   { k: "Hospital strategy and investment", v: "Chief Executive Officer, through Communications" },
   { k: "Clinical standards and accreditation", v: "Medical Director" },
@@ -341,6 +469,8 @@ export const topics: FactRow[] = [
   { k: "Medicines, shortages, prescribing", v: "Chief Pharmacist" },
   { k: "Community and school programmes", v: "Community Health Coordinator" },
 ];
+
+export const rulesHeading = { line1: "Filming, names", line2: "and patient", line3: "privacy" };
 
 export const rules: GroundRule[] = [
   {
@@ -376,6 +506,16 @@ export const rules: GroundRule[] = [
     a: "Commercial approaches, advertising sales and sponsorship proposals should go to the marketing team rather than the press desk, and the media address is not the right route. It slows down journalists who are on deadline. Anything commercial sent to the press inbox will simply be forwarded on.",
   },
 ];
+
+export const enquiryHeading = { line1: "Filing today?", line2: "Say so in", line3: "the subject." };
+export const enquiryIntro =
+  "Put your outlet, the topic and your deadline in the first line and we will come back within the working day. Overnight and weekend stories reach the duty phone through the main hospital number.";
+// Reused verbatim from navigationLabels.si.ts's / .ta.ts's "Press kit and
+// logos" -> this page's own footer link under `mediaFooterColumns` already
+// prints that exact translation for this same href (`#kit`), so this closing
+// row has to agree with it rather than inventing a second one.
+export const enquiryKitCta = "Press kit and logos";
+export const enquiryInterviewCta = "Request an interview";
 
 // Declared last because three of the four counts are derived from the lists
 // above, and a `const` read before its initialiser runs would hit the temporal

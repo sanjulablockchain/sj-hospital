@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
-import { homeCareCards } from "../data/homeCare";
+import { localeHref } from "@/lib/i18n/paths";
+import type { Locale } from "@/lib/i18n/locales";
+import type { HomeCareCard } from "../data/homeCare";
 
 /**
  * `#home-care`: the teaser for /home-care, sitting directly under the pharmacy
@@ -19,27 +21,39 @@ import { homeCareCards } from "../data/homeCare";
  * Every link leaves for a page, which `teaserLinks.test.ts` pins along with the
  * three card destinations.
  */
-export function HomeCareSection() {
+export function HomeCareSection({
+  items,
+  eyebrow,
+  heading,
+  body,
+  cta,
+  locale,
+}: {
+  items: readonly HomeCareCard[];
+  eyebrow: string;
+  heading: { line1: string; line2: string };
+  body: string;
+  cta: string;
+  locale: Locale;
+}) {
   return (
     <section id="home-care" className="mx-auto max-w-[1440px] px-5 pt-30 sm:px-8 lg:px-11">
       <Reveal className="flex flex-wrap items-end justify-between gap-10">
-        <div>
+        <div className="min-w-0">
           <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
-            06 / Care at home
+            {eyebrow}
           </div>
-          <h2 className="font-display mt-4.5 text-[clamp(38px,4.6vw,70px)] leading-[0.9] font-extrabold tracking-[-0.04em] text-[var(--home-heading)] uppercase">
-            Some patients
+          <h2 className="font-display mt-4.5 wrap-break-word text-[clamp(38px,4.6vw,70px)] leading-[0.9] font-extrabold tracking-[-0.04em] text-[var(--home-heading)] uppercase">
+            {heading.line1}
             <br />
-            cannot come in
+            {heading.line2}
           </h2>
         </div>
         <p
           className="max-w-[42ch] text-[17.5px] leading-[1.65] text-[var(--home-muted)]"
           style={{ textWrap: "pretty" }}
         >
-          Our doctors, nurses and laboratory technicians visit your home instead, for elders,
-          infants and recovery after an operation. Notes from the visit go straight onto your
-          hospital file.
+          {body}
         </p>
       </Reveal>
 
@@ -47,10 +61,10 @@ export function HomeCareSection() {
         stepMs={90}
         className="mt-11 grid grid-cols-3 gap-px bg-[var(--home-hairline)] max-[899px]:grid-cols-1"
       >
-        {homeCareCards.map((card) => (
+        {items.map((card) => (
           <Link
             key={card.href}
-            href={card.href}
+            href={localeHref(card.href, locale)}
             className="sj-fill flex flex-col gap-3 bg-[var(--home-bg)] px-7 py-8"
           >
             <span
@@ -60,7 +74,7 @@ export function HomeCareSection() {
             >
               {card.index}
             </span>
-            <span className="font-display text-[27px] leading-[1.04] font-semibold tracking-[-0.03em] text-[var(--home-heading)]">
+            <span className="font-display wrap-break-word text-[27px] leading-[1.04] font-semibold tracking-[-0.03em] text-[var(--home-heading)]">
               {card.title}
             </span>
             <span className="text-[15px] leading-[1.55] text-[var(--home-muted)]">{card.body}</span>
@@ -73,10 +87,10 @@ export function HomeCareSection() {
 
       <Reveal>
         <Link
-          href="/home-care"
+          href={localeHref("/home-care", locale)}
           className="sj-invert mt-8 inline-flex items-center gap-2.5 bg-[var(--home-accent)] px-6 py-4 text-[15px] font-bold text-[var(--home-on-accent)]"
         >
-          How a home visit works <span aria-hidden>&rarr;</span>
+          {cta} <span aria-hidden>&rarr;</span>
         </Link>
       </Reveal>
     </section>

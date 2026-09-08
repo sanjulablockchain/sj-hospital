@@ -1,6 +1,6 @@
 import { RevealStagger } from "@/components/ui/RevealStagger";
 import { SectionHeading } from "./SectionHeading";
-import { benefits } from "../data/content";
+import type { CareerContent } from "../data/getContent";
 
 /**
  * `#benefits`: four tiles, one per kind of benefit, each listing what is
@@ -10,22 +10,23 @@ import { benefits } from "../data/content";
  * is the shared `sj-tint` utility, which tokenises the wash so the light theme
  * uses its own deeper accent rather than the dark theme's.
  */
-export function BenefitsSection() {
+export function BenefitsSection({ content }: { content: CareerContent }) {
+  const { benefits, benefitsHeading, benefitsAside, sectionEyebrows } = content;
   return (
     <section
       id="benefits"
       className="mx-auto max-w-[1440px] px-5 pt-26 sm:px-8 lg:px-11 max-[640px]:pt-18"
     >
       <SectionHeading
-        eyebrow="02 / What you get"
+        eyebrow={sectionEyebrows.benefits}
         heading={
           <>
-            Benefits, stated
+            {benefitsHeading.line1}
             <br />
-            plainly
+            {benefitsHeading.line2}
           </>
         }
-        aside="No vague talk of a rewarding environment. These are the specific things in the letter of appointment."
+        aside={benefitsAside}
       />
 
       <RevealStagger
