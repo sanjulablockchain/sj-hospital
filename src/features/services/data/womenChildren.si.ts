@@ -65,10 +65,10 @@ export const __review = { status: "draft", reviewer: null, date: null } as const
 
 export const womenChildrenServices = [
   {
-    title: "ප්‍රසූතිය සහ මාතෘත්වය",
-    directoryTitle: "ප්‍රසූතිය සහ මාතෘත්වය",
+
+
     hours: "පැය 24ම On-call",
-    cta: "මාතෘ අංශයට කතා කරන්න",
+
     desc: "ගැබ්ගැනීමේ සත්කාරය විශේෂඥ වෛද්‍යවරයෙක් වටා හැදිලා තියෙන්නේ, ප්‍රසූතිය දක්වාම ඔබව බලාගන්නවා, Scans Clinic එකේදීම කරනවා, සාමාන්‍ය ශල්‍යකර්මයෙන් වෙන් වූ Obstetric Theatre එකකුත් සමඟ. අවශ්‍ය නම් ප්‍රසූතියේදී Neonatal සහාය ළඟින්ම ඉන්නවා, Private Rooms ලබාගත හැක.",
     tags: ["විශේෂඥ වෛද්‍යවරයෙක් මෙහෙයවන ගැබ්ගැනීමේ සත්කාරය", "Clinic එකේදීම Scans", "වෙන් වූ Obstetric Theatre එකක්", "ප්‍රසූතියේදී Neonatal සහාය"],
     facts: [
@@ -78,7 +78,7 @@ export const womenChildrenServices = [
       { k: "On Call එක", v: "පැය 24ම" },
     ],
     lede: "ගැබ්ගැනීම සහ ප්‍රසූතිය සත්කාරය විශේෂඥ වෛද්‍යවරයෙක් ඔබව අවසානය දක්වාම බලාගෙන, Scans Clinic එකේදීම කර, පාර පැත්තකින්ම වෙන් වූ Obstetric Theatre එකකුත් සමඟ.",
-    aboutHead: "එක් විශේෂඥ වෛද්‍යවරයෙක්, Booking සිට ප්‍රසූතිය දක්වා",
+
     body1: "Antenatal සත්කාරය හැදිලා තියෙන්නේ, මාරුවෙන් මාරුවට එන කණ්ඩායමක් නෙවෙයි, ඔබේ ගැබ්ගැනීම ප්‍රසූතිය දක්වාම බලාගන්නා එක් විශේෂඥ වෛද්‍යවරයෙක් වටාමයි, එහෙනම් හැම Visit එකකදීම ඔබව පරීක්ෂා කරන කෙනාට ඔබේ History ම කලින්ම දැනගෙන තියෙනවා. සාමාන්‍ය Scans කරන්නේ එකම Clinic එකේදීමයි, පුළුවන් හැම විටකම Antenatal පරීක්ෂණ එක් Visit එකකට සීමා කරගෙන.",
     body2: "ප්‍රසූතිය සිදු වෙන්නේ සාමාන්‍ය ශල්‍ය List වලින් වෙන් කර තියෙන Obstetric Theatre එකකදී, බබාගේ තත්ත්වය ඉල්ලුවොත් ප්‍රසූතියේදීම Neonatal සහායත් ළඟින්ම ඉන්නවා. ඇතුළත් වීම සඳහා Private Rooms ලබාගත හැක, උපදෙස් සඳහා හෝ දරු ප්‍රසූතිය පටන් ගත්තොත් මාතෘ Desk එකට ඕන වෙලාවක ලගාවෙන්නත් පුළුවන්.",
     strip: [
@@ -103,10 +103,10 @@ export const womenChildrenServices = [
     ],
     location: "දෙවන මහල, මාතෘ ඒකකය",
     steps: [
-      { title: "Book කිරීම", desc: "ඔබේ ගැබ්ගැනීම විශේෂඥ වෛද්‍යවරයා සමඟ Register කරන්න, එතුමා ප්‍රසූතිය දක්වාම ඔබේ සත්කාරය බලාගන්නවා." },
-      { title: "සහභාගී වීම", desc: "Antenatal Visits සියල්ලේදීම Consultation එකයි Clinic එකේදීම Scanning එකයි ගැබ්ගැනීමේ හැම අදියරකදීම එකට එකතු වෙනවා." },
-      { title: "ප්‍රසූතිය", desc: "දරු වෙදනාවයි ප්‍රසූතියයි වෙන් වූ Obstetric Theatre එකේදී සිදු වෙනවා, අවශ්‍ය නම් Neonatal සහායත් ළඟින්ම ඉන්නවා." },
-      { title: "සුවවීම", desc: "ඔබ සුවවෙන්නේ Private Room එකක, මාතෘ Desk එකට ඕන වෙලාවක ලගාවෙන්නත් පුළුවන්." },
+      { desc: "ඔබේ ගැබ්ගැනීම විශේෂඥ වෛද්‍යවරයා සමඟ Register කරන්න, එතුමා ප්‍රසූතිය දක්වාම ඔබේ සත්කාරය බලාගන්නවා." },
+      { desc: "Antenatal Visits සියල්ලේදීම Consultation එකයි Clinic එකේදීම Scanning එකයි ගැබ්ගැනීමේ හැම අදියරකදීම එකට එකතු වෙනවා." },
+      { desc: "දරු වෙදනාවයි ප්‍රසූතියයි වෙන් වූ Obstetric Theatre එකේදී සිදු වෙනවා, අවශ්‍ය නම් Neonatal සහායත් ළඟින්ම ඉන්නවා." },
+      { desc: "ඔබ සුවවෙන්නේ Private Room එකක, මාතෘ Desk එකට ඕන වෙලාවක ලගාවෙන්නත් පුළුවන්." },
     ],
     prep: [
       "හැම Visit එකකදීම ඔබේ Antenatal වාර්තා පොත අරගෙන එන්න",
@@ -128,10 +128,10 @@ export const womenChildrenServices = [
     ],
   },
   {
-    title: "Gynaecology",
-    directoryTitle: "Gynaecology",
+
+
     hours: "සතිපතා Clinics",
-    cta: "Gynaecology Book කරන්න",
+
     desc: "ඔසප් වීම, දරුවන් ලැබීමේ සහ Menopause ගැටලු සඳහා සතිපතා Clinics, පලමු Visit එකේදීම Ultrasound ලබාගත හැක, අවශ්‍ය නම් Day-case ක්‍රියාපටිපාටි, ඉල්ලීම මත කාන්තා Staff ලාද ලබාගත හැක.",
     tags: ["ඔසප් සෞඛ්‍යය", "Menopause සත්කාරය", "Clinic එකේදීම Ultrasound", "Day-case ක්‍රියාපටිපාටි"],
     facts: [
@@ -141,7 +141,7 @@ export const womenChildrenServices = [
       { k: "Staff සැපයුම", v: "ඉල්ලීම මත කාන්තා Staff ලා" },
     ],
     lede: "ඔසප් වීම, දරුවන් ලැබීමේ සහ Menopause ගැටලු සඳහා සතිපතා Gynaecology Clinics, ඔබේ පලමු Visit එකේදීම Ultrasound ලබාගත හැක.",
-    aboutHead: "සතිපතා Clinic එකකදී Gynaecology සත්කාරය",
+
     body1: "Gynaecology Clinic එක සතිපතා පවත්වන අතර ඔසප් ගැටලු, දරුවන් ලැබීමේ ගැටලු සහ Menopause කළමනාකරණය ආවරණය කරනවා. තක්සේරුවට උපකාරී වෙයි නම්, පලමු Visit එකේදීම Ultrasound ලබාගත හැක, එහෙනම් වෙනම Scan Appointment එකකට පස්සේ නෙවෙයි එදිනම සොයාගැනීම් ඔබ සමඟ සාකච්ඡා කරගත හැක.",
     body2: "ක්‍රියාපටිපාටියක් අවශ්‍ය නම්, බොහෝමයක් Day Cases විදිහට කරනවා, එහෙනම් රැදී නොසිට එදිනම ගෙදර යන්න පුළුවන්. කාන්තා Staff ලා විසින් බැලීමට සහ පරීක්ෂා කිරීමට කැමති නම්, Book කරන විට Clinic එකට කියන්න, පුළුවන් හැම විටකම එය සලසාගනී.",
     strip: [
@@ -166,10 +166,10 @@ export const womenChildrenServices = [
     ],
     location: "දෙවන මහල, Gynaecology Clinic",
     steps: [
-      { title: "Book කිරීම", desc: "Gynaecology Book කරලා, කාන්තා Staff ලා කැමති නම් සඳහන් කරන්න." },
-      { title: "තක්සේරු කිරීම", desc: "Gynaecologist කෙනෙක් ඔබේ History ගෙන ඔබව පරීක්ෂා කරනවා, එකම Visit එකේදීම Ultrasound ලබාගත හැක." },
-      { title: "සැලසුම් කිරීම", desc: "සොයාගැනීම් සාකච්ඡා කර, කළමනාකරණ හෝ ක්‍රියාපටිපාටි සැලැස්මක් ඔබ සමඟ එකඟ වෙනවා." },
-      { title: "ප්‍රතිකාර කිරීම", desc: "අවශ්‍ය නම්, Day-case ක්‍රියාපටිපාටියක් Book කරලා, එදිනම ගෙදර යනවා." },
+      { desc: "Gynaecology Book කරලා, කාන්තා Staff ලා කැමති නම් සඳහන් කරන්න." },
+      { desc: "Gynaecologist කෙනෙක් ඔබේ History ගෙන ඔබව පරීක්ෂා කරනවා, එකම Visit එකේදීම Ultrasound ලබාගත හැක." },
+      { desc: "සොයාගැනීම් සාකච්ඡා කර, කළමනාකරණ හෝ ක්‍රියාපටිපාටි සැලැස්මක් ඔබ සමඟ එකඟ වෙනවා." },
+      { desc: "අවශ්‍ය නම්, Day-case ක්‍රියාපටිපාටියක් Book කරලා, එදිනම ගෙදර යනවා." },
     ],
     prep: [
       "Visit එකට කලින් ඔබේ අවසාන ඔසප් දිනය සටහන් කරගන්න",
@@ -191,10 +191,10 @@ export const womenChildrenServices = [
     ],
   },
   {
-    title: "ළමා රෝග සහ Neonatal සත්කාරය",
-    directoryTitle: "ළමා රෝග සහ Neonatal සත්කාරය",
+
+
     hours: "පැය 24ම",
-    cta: "ළමා රෝග විශේෂඥ Book කරන්න",
+
     desc: "අලුත උපන් Review එකක්, වර්ධන Tracking එකක් සහ සම්පූර්ණ එන්නත් Schedule එකක්, Kids & Teens Medical Group Protocol එකට අනුව ධාවනය කරන, ඕන වෙලාවක තියුණු ළමා අසනීප බැලීම සහ අලුත උපන් දරුවන් සඳහා Home Visit ක්‍රමයක්ද සමඟ.",
     tags: ["Kids & Teens Medical Group Protocol එක", "අලුත උපන් Review එක", "වර්ධන Tracking එක", "පැය 24ම තියුණු සත්කාරය"],
     facts: [
@@ -204,7 +204,7 @@ export const womenChildrenServices = [
       { k: "එන්නත්කරණය", v: "සම්පූර්ණ ළමා Schedule" },
     ],
     lede: "අලුත උපන් Review එකක්, වර්ධන Tracking එකක් සහ ළමා එන්නත්කරණය Kids & Teens Medical Group Protocol එකට අනුව ධාවනය කරන, ඕන වෙලාවක තියුණු සත්කාරයක් සමඟ.",
-    aboutHead: "Structured Protocol එකක් මත හැදුනු ළමා සෞඛ්‍ය සත්කාරය",
+
     body1: "ළමා රෝග සත්කාරය Kids & Teens Medical Group Protocol එකට අනුව ධාවනය වන අතර, ප්‍රසූතියෙන් පසු අලුත උපන් Review එකක්, අඛණ්ඩ වර්ධන සහ සංවර්ධන Tracking එකක් සහ සම්පූර්ණ ළමා එන්නත් Schedule එකක් ආවරණය කරනවා. දිවි ආරම්භයේ පලමු මිනිත්තු තුළ අලුත උපන් බබාට වැඩිපුර අවධානයක් ඕන වුනොත් ප්‍රසූතියේදීම Neonatal සහාය ලබාගත හැක.",
     body2: "තියුණු ළමා අසනීප (උණ, හුස්ම ගැනීමේ අපහසුතාවය, Dehydration එකයි වගේ ගැටලු) නියමිත Clinic එකක් වෙනුවෙන් රැදී නොසිට ඕන වෙලාවක බලනවා. අලුත උපන් දරුවන් සඳහා, රෝහලට එන එක ලේසිම පියවර නොවෙයි නම්, Home Visit ක්‍රමයක්ද ලබාගත හැක.",
     strip: [
@@ -230,10 +230,10 @@ export const womenChildrenServices = [
     ],
     location: "දෙවන මහල, ළමා ඒකකය",
     steps: [
-      { title: "Book කිරීම", desc: "නියමිත Review එකක් සඳහා ළමා රෝග විශේෂඥ Book කරන්න, නැත්නම් තියුණු අසනීපයක් සඳහා ඕන වෙලාවක කෙලින්ම එන්න." },
-      { title: "තක්සේරු කිරීම", desc: "ළමා රෝග විශේෂඥයෙක් Kids & Teens Medical Group Protocol එකට අනුව Structured Review එකක් සඳහා දරුවා පරීක්ෂා කරනවා." },
-      { title: "Track කිරීම", desc: "වර්ධනය, සංවර්ධනය සහ එන්නත් තත්ත්වය කාලයාන්තරයේදී වාර්තා කර Track කරනවා." },
-      { title: "Follow up කිරීම", desc: "දරුවාගේ අවශ්‍යතාවයට අනුව Follow-up Review එකක් හෝ Home Visit එකක් සලසනවා." },
+      { desc: "නියමිත Review එකක් සඳහා ළමා රෝග විශේෂඥ Book කරන්න, නැත්නම් තියුණු අසනීපයක් සඳහා ඕන වෙලාවක කෙලින්ම එන්න." },
+      { desc: "ළමා රෝග විශේෂඥයෙක් Kids & Teens Medical Group Protocol එකට අනුව Structured Review එකක් සඳහා දරුවා පරීක්ෂා කරනවා." },
+      { desc: "වර්ධනය, සංවර්ධනය සහ එන්නත් තත්ත්වය කාලයාන්තරයේදී වාර්තා කර Track කරනවා." },
+      { desc: "දරුවාගේ අවශ්‍යතාවයට අනුව Follow-up Review එකක් හෝ Home Visit එකක් සලසනවා." },
     ],
     prep: [
       "ඔබේ දරුවාගේ සෞඛ්‍ය සහ එන්නත් වාර්තාව අරගෙන එන්න",
@@ -255,10 +255,10 @@ export const womenChildrenServices = [
     ],
   },
   {
-    title: "Fertility සහ Embryology",
-    directoryTitle: "Fertility සහ Embryology",
+
+
     hours: "Appointment එකකින්",
-    cta: "Consultation එකක් Book කරන්න",
+
     desc: "දරුවන් ලැබීමට අපහසුතාවයක් තියෙන ඕන කෙනෙකුට තක්සේරුවක් සහ උපදේශනයක්, දිගටම ගන්නා සත්කාරයේ කොටසක් විදිහට Cycle Monitoring එකක් සහ Embryology සහායක් සමඟ.",
     tags: ["Fertility තක්සේරුව", "Fertility උපදේශනය", "Cycle Monitoring එක", "Embryology සහාය"],
     facts: [
@@ -268,7 +268,7 @@ export const womenChildrenServices = [
       { k: "සහාය", v: "Embryology සහාය" },
     ],
     lede: "දරුවන් ලැබීමට අපහසුතාවයක් තියෙන ඕන කෙනෙකුට තක්සේරුවක් සහ උපදේශනයක්, ඔබේ සත්කාරය සමඟින්ම Cycle Monitoring එකක් සහ Embryology සහායක්.",
-    aboutHead: "දරුවන් ලැබීමට උත්සාහ කරන ඕන කෙනෙකුට සහාය",
+
     body1: "පලමු Consultation එකේදී ඔබේ History එක සහ Conception එකට බලපාන Factors තක්සේරු කරනවා, සොයාගැනීම් වල තේරුම සහ සුදුසු විය හැකි Options ගැන කතා කරන උපදේශනයකුත් සමඟ. Partners දෙදෙනෙක් සිටින නම්, තක්සේරුව දෙදෙනාවම ආවරණය කරනවා, හැම සැලැස්මක්ම ඊළඟ පියවරකට එකඟ වෙන්න කලින් ඔබ සමඟ කෙලින්ම සාකච්ඡා කරනවා.",
     body2: "අඛණ්ඩ ප්‍රතිකාරයක් සුදුසු නම්, Cycle Monitoring එකෙන් ඔබේ Cycle එක කාලයාන්තරයේදී Track කරනවා, ඒ සත්කාරයේ කොටසක් විදිහට Embryology සහායද ලබාගත හැක. ඔබේ විශේෂඥ වෛද්‍යවරයා ඉදිරියට යන්න කලින් ඔබේ තත්ත්වයට අදාළව හැම අදියරකදීම ඕන දේ පැහැදිලි කරයි.",
     strip: [
@@ -291,10 +291,10 @@ export const womenChildrenServices = [
     ],
     location: "දෙවන මහල, Fertility Clinic",
     steps: [
-      { title: "Book කිරීම", desc: "ආරම්භක Fertility තක්සේරුවක් සඳහා Consultation එකක් Book කරන්න." },
-      { title: "තක්සේරු කිරීම", desc: "History එකක් සහ තක්සේරුවක් සිදු කර, සොයාගැනීම් සාකච්ඡා කරන උපදේශනයකුත් සමඟ; Partners දෙදෙනෙක් සිටින නම්, තක්සේරුව දෙදෙනාවම ආවරණය කරනවා." },
-      { title: "Monitor කිරීම", desc: "සුදුසු නම්, Cycle Monitoring එක ආරම්භ වී, ඒ සමඟින්ම Embryology සහායද ලබාගත හැක." },
-      { title: "Review කිරීම", desc: "ඔබේ විශේෂඥ වෛද්‍යවරයා හැම අදියරකදීම ඔබ සමඟ ප්‍රගතිය Review කර ඊළඟ පියවර සාකච්ඡා කරනවා." },
+      { desc: "ආරම්භක Fertility තක්සේරුවක් සඳහා Consultation එකක් Book කරන්න." },
+      { desc: "History එකක් සහ තක්සේරුවක් සිදු කර, සොයාගැනීම් සාකච්ඡා කරන උපදේශනයකුත් සමඟ; Partners දෙදෙනෙක් සිටින නම්, තක්සේරුව දෙදෙනාවම ආවරණය කරනවා." },
+      { desc: "සුදුසු නම්, Cycle Monitoring එක ආරම්භ වී, ඒ සමඟින්ම Embryology සහායද ලබාගත හැක." },
+      { desc: "ඔබේ විශේෂඥ වෛද්‍යවරයා හැම අදියරකදීම ඔබ සමඟ ප්‍රගතිය Review කර ඊළඟ පියවර සාකච්ඡා කරනවා." },
     ],
     prep: [
       "Partner කෙනෙක් සිටින නම්, පලමු Consultation එකට එකට එන එක සම්පූර්ණ පින්තූරයක් ගොඩනගාගන්න උදව් වෙනවා",
@@ -316,10 +316,10 @@ export const womenChildrenServices = [
     ],
   },
   {
-    title: "එන්නත් Clinic එක",
-    directoryTitle: "එන්නත් Clinic එක",
+
+
     hours: "දිනපතා",
-    cta: "එන්නතක් Book කරන්න",
+
     desc: "සම්පූර්ණ ළමා Schedule එකට අමතරව වැඩිහිටි සහ Travel එන්නත්කරණය, Cold Chain Monitoring එකක් සමඟ දිනපතා ධාවනය කරන, හැම Visit එකකදීම මුද්‍රිත වාර්තා Card එකකුත්, ඔබේ ඊළඟ Dose එක සඳහා SMS මතක් කිරීමකුත් සමඟ.",
     tags: ["ළමා Schedule එක", "වැඩිහිටි සහ Travel එන්නත්කරණය", "Cold Chain Monitoring එක", "SMS මතක් කිරීම්"],
     facts: [
@@ -329,7 +329,7 @@ export const womenChildrenServices = [
       { k: "මතක් කිරීම්", v: "SMS මගින්" },
     ],
     lede: "ළමා, වැඩිහිටි සහ Travel එන්නත්කරණය දිනපතා ධාවනය කරන, හැම Visit එකකදීම මුද්‍රිත වාර්තා Card එකකුත්, ඔබේ ඊළඟ Dose එකට කලින් SMS මතක් කිරීමකුත් සමඟ.",
-    aboutHead: "හැම වයසකටම එන්නත්කරණය, වාර්තා කරලා මතක් කරලා",
+
     body1: "Clinic එක සම්පූර්ණ ළමා Immunisation Schedule එකට අමතරව වැඩිහිටි සහ Travel එන්නත්කරණයද ධාවනය කරන නිසා, පවුල් වලට හැම Dose එකක්ම එකම තැනක තියාගන්න පුළුවන්, Providers අතර මාරු වෙනවා වෙනුවට. එන්නත් ලැබෙන විට සිට Administration දක්වාම Monitor කරන Cold Chain තත්ත්වයන් යටතේ තියාගන්නවා, එහෙන් හැම Dose එකකම ක්‍රියාකාරීත්වය ආරක්ෂා වෙනවා.",
     body2: "හැම Visit එකක්ම අවසන් වෙන්නේ මොනවද, කවදාද ලබාදුන්නාද කියලා පෙන්වන මුද්‍රිත වාර්තා Card එකකින්, ඔබේ ඊළඟ නියමිත Dose එකට කලින් SMS මතක් කිරීමක්ද එවනවා, එහෙනම් සම්පූර්ණ ළමා Schedule එකක් පුරාවටත් Appointments Track කරගන්න ලේසි වෙනවා.",
     strip: [
@@ -353,10 +353,10 @@ export const womenChildrenServices = [
     ],
     location: "බිම් මහල, එන්නත් Clinic එක",
     steps: [
-      { title: "Book කිරීම", desc: "දරුවෙකුට, වැඩිහිටියෙකුට හෝ එන Travel අවශ්‍යතාවයකට එන්නතක් Book කරන්න." },
-      { title: "Review කිරීම", desc: "කාර්ය මණ්ඩලය නියමිත Schedule එක බලා Visit එකට සුදුසු එන්නත් තහවුරු කරනවා." },
-      { title: "එන්නත් කිරීම", desc: "Dose ලබාදෙන්නේ Cold-Chain-Monitor කරන තොගයෙන්, එතැනම වාර්තා කරලා." },
-      { title: "වාර්තා කර මතක් කිරීම", desc: "මුද්‍රිත වාර්තා Card එකක් සමඟ යනවා, ඊළඟ නියමිත Dose එකට SMS මතක් කිරීමකුත් සලසනවා." },
+      { desc: "දරුවෙකුට, වැඩිහිටියෙකුට හෝ එන Travel අවශ්‍යතාවයකට එන්නතක් Book කරන්න." },
+      { desc: "කාර්ය මණ්ඩලය නියමිත Schedule එක බලා Visit එකට සුදුසු එන්නත් තහවුරු කරනවා." },
+      { desc: "Dose ලබාදෙන්නේ Cold-Chain-Monitor කරන තොගයෙන්, එතැනම වාර්තා කරලා." },
+      { desc: "මුද්‍රිත වාර්තා Card එකක් සමඟ යනවා, ඊළඟ නියමිත Dose එකට SMS මතක් කිරීමකුත් සලසනවා." },
     ],
     prep: [
       "දැනට තියෙන එන්නත් වාර්තා Card එකක් තියෙනවා නම් අරගෙන එන්න",
