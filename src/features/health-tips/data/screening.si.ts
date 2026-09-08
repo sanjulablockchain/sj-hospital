@@ -7,12 +7,15 @@
 // decade, not a rounded or converted value), 30, 35, 25, 65, 40, "2 to 3",
 // "3 to 5" and "1 to 2" years all carry the same digits English does.
 //
-// "Health check packages" and "Screening by age" reuse
-// navigationLabels.si.ts's own established strings verbatim rather than
-// coining a second Sinhala form for either. "HbA1c", "ECG" and "Mammogram"
-// (test-name abbreviations/terms) stay bare English, the same never-
-// translate class as "OPD"/"ICU"; ordinary clinical prose around them
-// translates in full.
+// "HbA1c", "ECG" and "Mammogram" (test-name abbreviations/terms) stay bare
+// English, the same never-translate class as "OPD"/"ICU"; ordinary clinical
+// prose around them translates in full.
+//
+// The register sweep (2026-09-09) deleted `screeningSection.eyebrow`,
+// `.heading` and `.cta` (the section's own eyebrow, heading and CTA, which
+// used to reuse navigationLabels.si.ts's "Health check packages" and
+// "Screening by age" verbatim); `screening[*]` itself is clinical content
+// and is untouched below.
 
 export const __review = { status: "draft", reviewer: null, date: null } as const;
 
@@ -75,11 +78,9 @@ export const screening = [
 ];
 
 export const screeningSection = {
-  eyebrow: "03 / වයස අනුව පරීක්ෂණ",
-  heading: { line1: "කරන්න වටින", line2: "පරීක්ෂණ" },
+  heading: {},
   body1:
     "වැඩිම ප්‍රයෝජනවත් Screening ලාභයි, උද්යෝගිමත් නෑ. රෝග ලක්ෂණ නැති, පවුල් History එකක් නැති කෙනෙක්ට අපේ වෛද්‍යවරු ඇත්තටම Order කරන්නේ මේවා, සහ ආසන්න වශයෙන් කොපමණ නිතරද කියලා.",
   body2:
     "දියවැඩියාව, හෘද රෝග හෝ පිළිකා පවුල් History එකක් තියෙනවා නම් හැම දෙයක්ම ඉස්සරහට යනවා. අනුමාන කරනවා වෙනුවට අපෙන් අහන්න.",
-  cta: "සෞඛ්‍ය පරීක්ෂණ පැකේජ",
 };

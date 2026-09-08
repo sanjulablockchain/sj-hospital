@@ -109,6 +109,20 @@ export function sweepScope(relativePath: string): string {
  * intro/stat-caption prose and the testimonials were left translated
  * throughout.
  *
+ * `health-tips` was swept on 2026-09-09, needing no code change: every band's
+ * getter already reads its overlay through `localize`. 78 Sinhala and 78
+ * Tamil strings were deleted across its 14 overlays (`dengue`, `firstAid`,
+ * `library`, `myths`, `pageContent`, `screening`, `warnings`, each
+ * `.si.ts` / `.ta.ts`): every section eyebrow, section/tile heading, CTA and
+ * link label, the hero (entirely, in `pageContent`), `library.si/ta.ts`'s
+ * `categoryLabels` filter-chip dictionary (now `{}`) and every
+ * `articles[*].title` / `featured.title`. The clinical content this scope
+ * exists to protect (`warnings[*]`, `firstAidSteps[*]`, `screening[*]`,
+ * `myths[*]`, `denguePoints`, `homeKit`, `emergencyNumbers`, every article's
+ * own `lede`/`by`, and every FAQ) is untouched and stays translated: the
+ * policy's `CLINICAL_ROOTS` guard already keeps those paths out of reach, so
+ * the audit never listed them. No overlay file was deleted.
+ *
  * A future scope may need a similar check before it is swept: read the
  * feature's own getter (`getContent.ts` or equivalent) for whether it reads
  * an overlay directly or through `localize` before deleting from it.
@@ -120,7 +134,6 @@ export const PENDING_REGISTER_SWEEP: ReadonlySet<string> = new Set([
   "contact",
   "e-channeling",
   "facilities",
-  "health-tips",
   "home-care",
   "international-care",
   "media",

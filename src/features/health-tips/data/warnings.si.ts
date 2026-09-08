@@ -87,8 +87,7 @@ export const warnings = [
 ];
 
 export const warningSection = {
-  eyebrow: "02 / පැමිණිය යුතු වේලාව",
-  heading: { line1: "බලා ඉන්නද", line2: "අද රෑම එන්නද" },
+  heading: {},
   intro:
     "අවංක පිළිතුර සඳහා රෝග ලක්ෂණයක් Open කරන්න. සැක සහිතව ඉන්නවා නම්, එන්න. ඔබව බලලා ගෙදර යවනවා අපිට වඩා හොඳයි.",
 };

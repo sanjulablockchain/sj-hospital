@@ -51,6 +51,5 @@ export const myths = [
 ];
 
 export const mythsSection = {
-  eyebrow: "05 / අවංක පිළිතුරු",
-  heading: { line1: "අපිට අහන", line2: "ප්‍රශ්න, සහ", line3: "අවංක පිළිතුර" },
+  heading: {},
 };

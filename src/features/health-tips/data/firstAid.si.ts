@@ -80,9 +80,6 @@ export const emergencyNumbers = [
 ];
 
 export const firstAidSection = {
-  eyebrow: "04 / නිවසේ ප්‍රථමාධාර",
-  heading: { line1: "විනාඩි හතර", line2: "ඔබ අප ළඟට එනකන්" },
+  heading: {},
   neverLabel: "කිසිදා එපා:",
-  homeKitHeading: "ගෙදර තියාගන්න",
-  numbersHeading: "මේ දුරකථන අංක තියාගන්න",
 };
