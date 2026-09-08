@@ -25,6 +25,5 @@ export const testimonials = [
   },
 ];
 
-export const sectionEyebrow = "14 / நோயாளர் குரல்கள்";
 export const ariaPrev = "முந்தைய Testimonial";
 export const ariaNext = "அடுத்த Testimonial";

@@ -1,28 +1,11 @@
 // Sinhala for the home page's `#career` band.
 //
-// Four of the five `jobOpenings[*].title` values are the exact same open
-// positions as four of `career`'s own six `jobs[*].title` values (see the
-// header comment in content.ts), so they are read from `career`'s own
-// `sharedJobTitlesSi`, exported through its `index.ts`, rather than a second
-// copy of its already-reviewed Sinhala typed out again here. That file's own
-// header explains the per-title split between the occupational noun that
-// stays English and the ordinary word that translates:
-//
-// - "Medical Officer, Emergency": translates "Medical", keeps "Officer" and
-//   "Emergency" (a register word) English.
-// - "Theatre Nurse": translates "Theatre" to "ශල්‍යාගාර" (reusing
-//   navigationLabels.si.ts's own "Operating theatres" root), keeps "Nurse"
-//   English.
-// - "Medical Laboratory Technologist": translates "Medical Laboratory" to
-//   "වෛද්‍ය විද්‍යාගාර", keeps "Technologist" English.
-// - "Radiographer, Digital X-ray": KEEPS_ENGLISH in full, the same
-//   register-word class as "Digital X-ray" itself.
-//
-// "Pharmacist (night shift)" is this page's own row, not one of career's six:
-// "Pharmacist" keeps career's own KEEPS_ENGLISH precedent (a bare
-// occupational noun with no ordinary word riding along), and "night shift"
-// translates, keeping "Shift" English the same way career's own `jobs[*].line`
-// keeps "Shift Roster" English throughout.
+// `jobOpenings[*].title` used to be read from `career`'s own
+// `sharedJobTitlesSi` (four of the five) or typed out here (the fifth,
+// "Pharmacist (night shift)"). The register sweep (2026-09-09) deleted every
+// `title` on this page: a job opening's title is a card title, so it now
+// renders in English from the base module regardless of locale, and this
+// overlay no longer needs the shared-title import.
 //
 // `department` values reuse the site's own vocabulary: "Emergency", "Pharmacy"
 // and "Imaging" are KEEPS_ENGLISH (see content.i18n.test.ts). Of the three,
@@ -35,29 +18,19 @@
 // navigationLabels.si.ts), not on any match in that map.
 // "Surgical" and "Laboratory" translate. "Laboratory" here uses "විද්‍යාගාර"
 // rather than facilities'/home-care's "රසායනාගාරය", to match the word this
-// same row's own job title already uses for "Medical Laboratory
+// same row's own job title already used for "Medical Laboratory
 // Technologist" rather than saying the same thing two ways on one row.
-
-// See the header comment in careers.ts for why this is a relative import to
-// career's own overlay file rather than through its `index.ts`.
-import { sharedJobTitles as sharedJobTitlesSi } from "../../career/data/content.si.ts";
 
 export const __review = { status: "draft", reviewer: null, date: null } as const;
 
 export const jobOpenings = [
-  { title: sharedJobTitlesSi.medicalOfficerEmergency, department: "Emergency", type: "Full time" },
-  { title: sharedJobTitlesSi.theatreNurse, department: "ශල්‍ය", type: "Full time" },
-  { title: "Pharmacist (රාත්‍රී Shift)", department: "Pharmacy", type: "Shift" },
-  { title: sharedJobTitlesSi.medicalLaboratoryTechnologist, department: "විද්‍යාගාර", type: "Full time" },
-  { title: sharedJobTitlesSi.radiographerDigitalXray, department: "Imaging", type: "Full time" },
+  { department: "Emergency", type: "Full time" },
+  { department: "ශල්‍ය", type: "Full time" },
+  { department: "Pharmacy", type: "Shift" },
+  { department: "විද්‍යාගාර", type: "Full time" },
+  { department: "Imaging", type: "Full time" },
 ];
 
-// Reused verbatim from navigationLabels.si.ts's "Careers" -> "රැකියා".
-export const sectionEyebrow = "13 / රැකියා";
-export const heading = { line1: "ප්‍රමිතිය", line2: "තියෙන තැන", line3: "වැඩ කරන්න" };
+export const heading = {};
 export const body =
   "ඇමෙරිකානු Protocol එකට පුහුණු වූ Clinicians සහ Staff, ඔවුන් වෙනුවෙන් Invest කරන සමූහයක සහයෙන්.";
-// Reused from navigationLabels.si.ts's "Submit your CV" -> "ඔබේ CV එවන්න":
-// same fact (send us your CV), so this teaser's own CTA reuses it rather
-// than coining a second translation of the same action.
-export const cta = "ඔබේ CV එවන්න";

@@ -92,6 +92,23 @@ export function sweepScope(relativePath: string): string {
  * `localize` treats identically to a missing key. FAQ questions and answers,
  * body paragraphs and descriptions were left translated throughout.
  *
+ * `home` was swept on 2026-09-09, needing no code change: every home band's
+ * getter already reads its overlay through `localize`. 137 Sinhala and 137
+ * Tamil strings were deleted across its 18 overlays (`careers`, `content`,
+ * `facilities`, `healthTips`, `homeCare`, `internationalCare`, `media`,
+ * `network`, `testimonials`, each `.si.ts` / `.ta.ts`): every hero field,
+ * section eyebrow, section/tile heading, card/article title, CTA and link
+ * label, and the two `mediaItems[].tag` display chips. Two now-unused
+ * cross-feature imports (`content.si.ts`/`.ta.ts` importing `home-care`'s and
+ * `pharmacy`'s own hero strings for headings that no longer exist) were
+ * removed along with the fields that used them; `careers.si.ts`/`.ta.ts`
+ * similarly dropped its now-unused import of career's `sharedJobTitles`,
+ * since `jobOpenings[].title` (the only field that read it) is deleted too.
+ * `career`'s own `sharedJobTitles` dictionary is swept separately as part of
+ * `career`'s own scope. No overlay file was deleted; body paragraphs,
+ * intro/stat-caption prose and the testimonials were left translated
+ * throughout.
+ *
  * A future scope may need a similar check before it is swept: read the
  * feature's own getter (`getContent.ts` or equivalent) for whether it reads
  * an overlay directly or through `localize` before deleting from it.
@@ -104,7 +121,6 @@ export const PENDING_REGISTER_SWEEP: ReadonlySet<string> = new Set([
   "e-channeling",
   "facilities",
   "health-tips",
-  "home",
   "home-care",
   "international-care",
   "media",
