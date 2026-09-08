@@ -14,13 +14,15 @@
 // "Protocol"/"Anaesthesia" paragraph below, which now covers those two
 // labels as well.
 //
-// "The building", "Operating theatres", "Critical care", "Rooms & wards",
-// "Diagnostics" and "Ambulance & transfers" already have a site-wide
-// translation in navigationLabels.ta.ts for this exact page's own header and
-// footer links, so `sectionEyebrows`, `buildingHeading`, `jumpCards[*].label`
-// and `buildingZones[2].name` reuse those exact strings rather than inventing
-// a second translation of the same English phrase: this page's own facility
-// found six of its own already there.
+// "Diagnostics" already has a site-wide translation in navigationLabels.ta.ts,
+// so `buildingZones[2].name` reuses that exact string rather than inventing a
+// second translation of the same English phrase. The register sweep
+// (2026-09-09) deleted `sectionEyebrows` entirely, `buildingHeading` and
+// every `jumpCards[*].label`, which used to reuse the same nav dictionary
+// for "The building", "Operating theatres", "Critical care", "Rooms & wards"
+// and "Ambulance & transfers": a section eyebrow, a section heading and a
+// link label all go English by the rule table, so none of those strings is
+// an overlay decision any more.
 //
 // "Standard", "Deluxe" and "Super Deluxe" are the hospital's own room class
 // names, and `roomRows[0].name`, `roomRows[1].name` and `roomRows[2].name`
@@ -64,44 +66,15 @@
  */
 export const __review = { status: "draft", reviewer: null, date: null } as const;
 
-export const hero = {
-  breadcrumbHome: "முகப்பு",
-  // Reused verbatim from navigationLabels.ta.ts's "Facilities" ->
-  // "வசதிகள்": this page's own header and footer already print that
-  // translation, so the breadcrumb has to agree with it.
-  breadcrumbCurrent: "வசதிகள்",
-  headingLead: "கட்டப்பட்டது",
-  // Restated rather than omitted: KEEPS_ENGLISH in content.i18n.test.ts
-  // covers this path (see the file header), but the parity test still
-  // requires every path to be explicitly filled, the same way
-  // `school-wellness`'s own `training[1].title` restates "Basic Life
-  // Support" verbatim.
-  headingAccent: "US",
-  headingTail: "வசதி போல.",
-  walkCta: "கட்டிடத்தைப் பார்க்க",
-};
+export const hero = {};
 
-export const heroStandfirst =
-  "நீர்கொழும்பில் சிறப்பாகக் கட்டப்பட்ட 6 மாடிகள்: அறுவை சிகிச்சை அரங்குகளுக்கு அருகிலேயே Recovery Bay, அதற்கு அருகில் Monitor செய்யப்படும் தீவிர சிகிச்சை, எப்போதும் மூடாத ஆய்வுகூடம், மற்றும் உங்கள் குடும்பம் உண்மையிலேயே இரவைத் தங்கியிருக்கக்கூடிய அறைகள்.";
-
-export const sectionEyebrows = {
-  building: "01 / கட்டிடம்",
-  theatres: "02 / அறுவை சிகிச்சை அரங்குகள்",
-  critical: "03 / தீவிர சிகிச்சை",
-  rooms: "04 / அறைகள் மற்றும் வார்டுகள்",
-  diagnostic: "05 / நோய் கண்டறிதல்",
-  ambulance: "06 / Ambulance மற்றும் மாற்றங்கள்",
-  support: "07 / 24 மணி நேரமும்",
-  hygiene: "08 / சுத்தம் மற்றும் பாதுகாப்பு",
-  visiting: "09 / வருகை தருவோருக்கு",
-  book: "10 / வாருங்கள், பாருங்கள்",
-};
+export const sectionEyebrows = {};
 
 export const heroFacts = [
-  { k: "மாடிகள்", v: "ஆறு, சிறப்பாக கட்டப்பட்டவை" },
-  { k: "சுத்தம் செய்யும் Cycle", v: "ஒவ்வொரு 2 மணி நேரத்திற்கும்" },
-  { k: "ஆய்வுகூடம்", v: "24 மணி நேரமும் திறந்திருக்கும்" },
-  { k: "அறைகள் ஆரம்பம்" },
+  {},
+  {},
+  {},
+  {},
 ];
 
 export const tickerItems: readonly string[] = [
@@ -116,32 +89,23 @@ export const tickerItems: readonly string[] = [
 export const jumpCards = [
   {
     count: "6 மாடிகள்",
-    label: "கட்டிடம்",
     note: "எந்த துறைகள் ஒன்றாக இருக்கின்றன, ஏன்.",
   },
   {
     count: "Monitor செய்யப்படும் படுக்கைகள்",
-    label: "தீவிர சிகிச்சை",
     note: "அறுவை சிகிச்சை அரங்குகளுக்கு அருகில் தீவிர சிகிச்சை.",
   },
   {
     count: "4 வகைகள்",
-    label: "அறைகள் மற்றும் வார்டுகள்",
     note: "பகிரப்பட்ட வார்டு முதல் Super Deluxe அறை வரை.",
   },
   {
     count: "24 மணி நேரமும்",
-    // Kept as a code-mixed pair rather than the bare English word alone: the
-    // other three jump card labels each translate in full, so "Ambulance"
-    // by itself would be the sibling-test miss the recipe warns about.
-    // "Ambulance" itself still stays English, matching `network`'s,
-    // `international-care`'s and `school-wellness`'s own content.ta.ts.
-    label: "Ambulance சேவை",
     note: "எங்கள் சொந்த Fleet, எங்கள் சொந்த Bay இலிருந்தே Dispatch செய்யப்படும்.",
   },
 ];
 
-export const buildingHeading = { line1: "ஆறு மாடிகள்,", line2: "ஒரு கட்டிடம்" };
+export const buildingHeading = {};
 export const buildingIntro =
   "ஒன்றாக வேலை செய்யும் துறைகள் ஒன்றாகவே இருக்கும், அதனால் Clinic இல் Order செய்யப்படும் Scan ஒன்று நகரம் முழுவதும் ஒரு பயணமாக மாறாது.";
 
@@ -184,36 +148,20 @@ export const buildingZones = [
 
 export const showcaseCards = [
   {
-    title: "Ambulance வருகைப் பகுதி",
     body: "நேரடியாகப் பின்னால் Resuscitation Bay உடன் கூரையுள்ள நுழைவு, நாளின் ஒவ்வொரு நேரத்திலும் Staff உடன்.",
-    linkLabel: "விபத்து மற்றும் அவசர சிகிச்சை",
   },
   {
-    title: "வரவேற்பு மற்றும் அனுமதிகள்",
     body: "Registration மற்றும் Admission க்கு ஒரு Desk, Corridor ஐ விட காத்திருப்பு இடம் போன்ற இருக்கைகளுடன்.",
-    linkLabel: "அனுமதி பெறும் முறை",
   },
   {
-    title: "நோய் கண்டறிதல் பாதை",
     body: "ஆய்வுகூடம், Digital X-ray மற்றும் Ultrasound, Consulting Suites மற்றும் அவசரத் துறை Bay இலிருந்து சில மீட்டர்களில் அமைந்துள்ளன.",
-    // Reused verbatim from navigationLabels.ta.ts's "Diagnostics &
-    // radiology" -> "நோய் கண்டறிதல் மற்றும் கதிரியக்கவியல்".
-    linkLabel: "நோய் கண்டறிதல் மற்றும் கதிரியக்கவியல்",
   },
   {
-    // Reuses `buildingZones[3].name`, the same reuse content.ts's own
-    // `title: buildingZones[3].name` makes: a string used twice has one home.
-    title: "அறுவை சிகிச்சை அரங்குகள் மற்றும் குணமாதல்",
     body: "ஒரு நோயாளர் அறுவை சிகிச்சை அரங்கிலிருந்து வெளியேறும் ஒவ்வொரு முறையும் ஒரு Nurse Assign செய்யப்படும் Recovery Bay உடன் Operating Suites.",
-    linkLabel: "அறுவை சிகிச்சை அரங்குகளுக்கு உள்ளே",
   },
 ];
 
-export const theatresHeading = {
-  line1: "Track செய்யப்படும் Steel,",
-  line2: "ஒரே முறை Use செய்யப்படும்,",
-  line3: "ஒவ்வொருவருக்கும் ஒரு Nurse",
-};
+export const theatresHeading = {};
 export const theatresIntro1 =
   "எங்கள் அறுவை சிகிச்சை அரங்குகள் US Surgical நெறிமுறைப்படி இயங்குகின்றன, ஒவ்வொரு Instrument Set உம் Track செய்யப்படும். Instruments மற்றும் Consumables ஒவ்வொரு நோயாளருக்கும் ஒரே முறை Use செய்யப்படும், விதிவிலக்கு இல்லாமல்.";
 export const theatresIntro2 =
@@ -250,7 +198,7 @@ export const theatreSpecs = [
   { k: "அவசர ஆதரவு", v: "Call இல், 24 மணி நேரமும்" },
 ];
 
-export const criticalHeading = { line1: "இரவு முழுவதும்", line2: "உங்களைக் கவனிக்கும் படுக்கைகள்" };
+export const criticalHeading = {};
 export const criticalIntro =
   "Ventilation அல்லது நெருக்கமான கண்காணிப்பு தேவைப்படும் நோயாளர்களுக்கு, அறுவை சிகிச்சைக்குப் பிறகு, அல்லது வேறு எதுவும் நடப்பதற்கு முன் Stabilise செய்யப்பட Monitor செய்யப்படும் படுக்கைகள்.";
 
@@ -286,23 +234,17 @@ export const careUnits = [
 
 export const careNotes = [
   {
-    title: "வெளியே மாற்றம் இல்லை",
     body: "Unit அறுவை சிகிச்சை அரங்குகள் மற்றும் அவசரத் துறைக்கு அருகில் இருப்பதால், வார்டில் அல்லது அறுவை சிகிச்சைக்குப் பிறகு நிலைமை மோசமாகும் நோயாளர் மற்றொரு மருத்துவமனைக்கு மாற்றப்படுவதற்குப் பதிலாக நேரடியாக இங்கு கொண்டு வரப்படுவார்.",
   },
   {
-    // Same translated word as `visitingCardHeading`, which describes the
-    // same concept in the visitors section further down the page: a string
-    // used twice has one home.
-    title: "வருகை",
     body: "நோயாளர்கள் ஓய்வெடுக்கவும் குழு தடையின்றி வேலை செய்யவும் Unit க்கு வருகை நிலையான நேரங்களுக்கு மட்டுப்படுத்தப்பட்டுள்ளது. தற்போதைய நேரங்களை ICU Desk உங்களுக்குச் சொல்லும்.",
   },
   {
-    title: "குடும்பத்திற்கு புதுப்பிப்புகள்",
     body: "ஒரு நாளுக்கு ஒரு முறை குடும்ப உறுப்பினர் ஒருவருக்கு Call வரும், மற்றும் Unit Coordinator வருகை ஏற்பாடுகளையும் வார்டு படுக்கைக்குத் திரும்பும் நடவடிக்கையையும் கையாள்வார்.",
   },
 ];
 
-export const roomsHeading = { line1: "இரவைக் கழிக்க", line2: "நான்கு வழிகள்" };
+export const roomsHeading = {};
 export const roomsIntro =
   "ஒவ்வொரு வகையும் அதே 2 மணி நேர Cycle இல் சுத்தம் செய்யப்படும். மாறுவது இடம், தனியுரிமை மற்றும் உங்கள் குடும்பத்திற்குக் கிடைக்கும் இட அளவு.";
 
@@ -335,9 +277,6 @@ export const roomRows = [
   },
 ];
 
-export const roomsStandardHeading = "ஒவ்வொரு வகையிலும்";
-export const roomsExtrasHeading = "உதவும் சிறிய விஷயங்கள்";
-export const roomsCta = "அறைகளைப் பார்க்க";
 export const roomsNote =
   "அறை கட்டணம் தங்குமிடம் மற்றும் Nursing சிகிச்சையை உள்ளடக்கியது. Doctor வருகைகள், மருந்து, பரிசோதனைகள் மற்றும் நடைமுறைகள் தனியாக Bill செய்யப்பட்டு உங்கள் Interim Bill இல் தோன்றும்.";
 
@@ -359,10 +298,9 @@ export const roomExtras: readonly string[] = [
   "வார்டுகளிலிருந்து Discharge ஆகும்போது இலவச பழம் அல்லது Chocolate கூடை",
 ];
 
-export const diagnosticHeading = { line1: "இயந்திரங்கள், மற்றும்", line2: "அவற்றை", line3: "படிப்பவர் யார்" };
+export const diagnosticHeading = {};
 export const diagnosticIntro =
   "Equipment இன் மதிப்பு அதைச் சுற்றியுள்ள Discipline இல்லாமல் ஒன்றுமில்லை. ஒவ்வொரு ஆய்வுகூட Report உம் வெளியிடப்படுவதற்கு முன் இரு மருத்துவர்களால் Check செய்யப்படும், X-rays ஒரு மணி நேரத்திற்குள் ஒரு Radiologist ஆல் படிக்கப்பட்டு Report செய்யப்படும்.";
-export const diagnosticCta = "நோய் கண்டறிதல் சேவைகள்";
 
 export const equipment = [
   { name: "Digital X-ray", note: "Radiologist ஒருவரால் படிக்கப்பட்டு Report செய்யப்படும்", avail: "ஒரு மணி நேரத்திற்குள்" },
@@ -387,19 +325,13 @@ export const equipment = [
   },
 ];
 
-export const ambulanceHeading = {
-  line1: "சிகிச்சை",
-  line2: "வாகனத்திலேயே",
-  line3: "தொடங்குகிறது",
-};
+export const ambulanceHeading = {};
 export const ambulanceIntro1 =
   "எங்கள் சொந்த Ambulances Call இல் 24 மணி நேரமும் இருந்து, நோயாளர்கள் வரும் அதே கூரையுள்ள Bay இலிருந்தே Dispatch செய்யப்படும், அதனால் சிகிச்சை நீங்கள் வாசலை அடைவதற்கு முன்பே தொடங்கும்.";
 export const ambulanceIntro2 =
   "ஆய்வுகூடம் மற்றும் Digital X-ray அந்த Bay இலிருந்து சில மீட்டர்களில் அமைந்துள்ளன, அதனால் நீங்கள் இன்னும் Assess செய்யப்படும்போதே Bloods மற்றும் Films திரும்பி வரும். நாங்கள் Bandaranaike International இலிருந்து பத்து நிமிடங்கள், Transfer க்காக எங்கள் சொந்த Ambulance கிடைக்கும்.";
 
-export const ambulanceCall = {
-  label: "Ambulance ஒன்றை Call செய்யுங்கள்",
-};
+export const ambulanceCall = {};
 
 export const ambulanceSpecs = [
   { k: "கிடைக்கும் தன்மை", v: "24 மணி நேரமும்" },
@@ -410,7 +342,7 @@ export const ambulanceSpecs = [
   { k: "விமான நிலையம்", v: "பத்து நிமிடங்கள்" },
 ];
 
-export const supportHeading = { line1: "உங்களுக்குத்", line2: "தேவைப்படும்போது திறந்திருக்கும்" };
+export const supportHeading = {};
 export const supportIntro =
   "ஒரு மருத்துவமனை நள்ளிரவு மூன்று மணிக்கு மதிப்பிடப்படுகிறது. இந்த எட்டும் நீங்கள் வரும் எந்த நேரமும் Staff செய்யப்பட்டு அல்லது Call இல் இருக்கும்.";
 
@@ -449,7 +381,7 @@ export const support = [
   },
 ];
 
-export const hygieneHeading = { line1: "ஒவ்வொரு 2 மணி", line2: "நேரமும் சுத்தம்,", line3: "Clock படி" };
+export const hygieneHeading = {};
 export const hygieneIntro =
   "தொற்று கட்டுப்பாடு ஒரு கால அட்டவணை, Slogan அல்ல. கட்டிடத்தில் உள்ள ஒவ்வொரு மேற்பரப்பும் US Specification படி 2 மணி நேர Cycle இல் சுத்தம் செய்யப்படும்.";
 export const hygieneCaption = "Consumables ஒரே முறை Use செய்யப்படும், மீண்டும் ஒருபோதும் இல்லை";
@@ -466,11 +398,10 @@ export const hygieneRows = [
   { k: "ஆய்வுகூட Reports", v: "இரு மருத்துவர்களால் Check செய்யப்படும்" },
 ];
 
-export const visitorsHeading = { line1: "வரும் வழி,", line2: "மற்றும் நன்றாகக் காத்திருத்தல்" };
+export const visitorsHeading = {};
 export const visitorsIntro =
   "Bandaranaike International Airport இலிருந்து பத்து நிமிடங்கள், மத்திய நீர்கொழும்பில் St. Joseph Street இல்.";
 
-export const visitingCardHeading = "வருகை";
 export const visitingRows = [
   { k: "சாதாரண வார்டுகள்", v: "பகல் நேர வருகை" },
   { k: "தீவிர சிகிச்சை", v: "நிலையான நேரங்கள்" },
@@ -479,7 +410,6 @@ export const visitingRows = [
 ];
 export const visitingNote = "வார்டு அல்லது Unit Desk நீங்கள் பயணிக்கும் முன் தற்போதைய நேரங்களை உறுதிசெய்யும்.";
 
-export const gettingHereHeading = "வரும் வழி";
 export const gettingHere: readonly string[] = [
   "229/10 St. Joseph Street, நீர்கொழும்பு",
   "Bandaranaike International Airport இலிருந்து பத்து நிமிடங்கள்",
@@ -487,7 +417,6 @@ export const gettingHere: readonly string[] = [
   "Transfer க்காக எங்கள் சொந்த Ambulance கிடைக்கும்",
 ];
 
-export const whileYouWaitHeading = "நீங்கள் காத்திருக்கும்போது";
 export const comforts: readonly string[] = [
   "இலவச Parking",
   "இலவச Wifi",
@@ -499,12 +428,12 @@ export const comforts: readonly string[] = [
   "அமைதியான வருகை நேரங்கள்",
 ];
 
-export const bookHeading = { line1: "அறைகளைப் பார்க்க", line2: "தேவைப்படும் முன்பே", line3: "வாருங்கள்." };
+export const bookHeading = {};
 export const bookIntro =
   "Reception இல் கேளுங்கள், நாங்கள் உங்களுக்கு ஒரு அறையையும் வார்டையும் காண்பிப்போம். Appointment இல்லை, Sales பேச்சும் இல்லை.";
 
 export const contactRows = [
-  { label: "ஒரு அறையை முன்பதிவு செய்யுங்கள்" },
-  { label: "WhatsApp இல் Message அனுப்புங்கள்" },
-  { label: "மருத்துவமனையை Call செய்யுங்கள்" },
+  {},
+  {},
+  {},
 ];
