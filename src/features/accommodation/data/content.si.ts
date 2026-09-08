@@ -119,71 +119,29 @@ export const tickerItems = [
   "පුද්ගලික සහ බෙදාගත් විකල්ප",
 ];
 
-export const heroFacts = [
-  { k: "කාමර වර්ග", v: "හතරක්" },
-  // `v` omitted on purpose: "10,000 LKR" is a price fact, excluded from this
-  // overlay by its own exact path in content.i18n.test.ts, not translated.
-  { k: "Standard සිට" },
-  { k: "ආහාර", v: "දිනකට තුනක්" },
-  { k: "හෙදකාර සේවා", v: "පැය 24 පුරාම" },
-];
+export const heroFacts = [{}, {}, {}, {}];
 
 export const jumpCards = [
   {
-    // Kept identical to English: see KEEPS_ENGLISH in content.i18n.test.ts.
-    label: "Standard",
     note: "වෛද්‍ය සහායක් සමඟ, අත්‍යවශ්‍ය සුවපහසුව.",
   },
   {
-    label: "Deluxe",
     note: "වඩාත් සුවපහසුවක් සහිත වැඩි ඉඩක්.",
   },
   {
-    label: "Super Deluxe",
     note: "Steward සේවාවක් සමඟ, අපගේ වඩාත්ම Premium කාමර.",
   },
   {
-    label: "වාට්ටු",
     note: "පුද්ගලිකත්ව බාධකවලින් වෙන් කළ බෙදාගත් වාට්ටු.",
   },
 ];
 
-export const heroStandfirst =
-  "අපගේ රෝගී කාමරවල ඇමරිකානු ප්‍රමිතියේ සුවපහසුව සහ පහසුකම් අත්විඳින්න.";
-
-export const roomsHeading = "සරල සිට Premium දක්වා විහිදෙන කාමර";
 export const roomsIntro = mealsNote;
 
-export const specialtiesHeading = "අපගේ රෝගී කාමරවල විශේෂතා";
-
-export const bookHeading = "රෝගී කාමරයක් Book කරන්න";
 export const bookIntro = "අපට Message එකක් එවන්න, අපගේ කණ්ඩායම ඔබට ගැලපෙන කාමරය සොයාගැනීමට උදව් කරයි.";
 
-export const bookRail = [
-  { label: "අපට call කරන්න" },
-  // Kept identical to English: a product name in every script, the same as
-  // contact's `contactRows[2].label`. See KEEPS_ENGLISH.
-  { label: "WhatsApp" },
-  // Kept identical to English, the same as contact's `contactRows[3].label`.
-  { label: "Email" },
-  { label: "ඒ වෙනුවට වෛද්‍යවරයෙක් Book කරන්න" },
-];
+export const bookRail = [{}, {}, {}, {}];
 
-export const hero = {
-  strapline: "ඔබ නවාතැන් ගන්නා තැන",
-  breadcrumbHome: "මුල් පිටුව",
-  // "Accommodation" is an ordinary noun, not this feature's own brand name
-  // (unlike e-channeling's "E-Channeling"), so it translates: the same word
-  // navigationLabels.si.ts already uses for this page's own nav link.
-  breadcrumbCurrent: "නවාතැන් පහසුකම්",
-  headingLead: "ඇමරිකානු ප්‍රමිතියේ සුවපහසුව,",
-  headingAccent: "එක් රැයකට.",
-  bookCta: "වෛද්‍යවරයෙක් Book කරන්න",
-  seeRoomsCta: "කාමර බලන්න",
-};
+export const hero = {};
 
-export const sectionEyebrows = {
-  rooms: "01 / අපගේ කාමර",
-  specialties: "02 / සෑම කාමරයකම ඇති දේ",
-  book: "03 / කාමරයක් Book කරන්න",
-};
+export const sectionEyebrows = {};

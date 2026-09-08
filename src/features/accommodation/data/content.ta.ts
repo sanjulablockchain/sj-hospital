@@ -119,72 +119,30 @@ export const tickerItems = [
   "தனியார் மற்றும் பகிரப்பட்ட விருப்பங்கள்",
 ];
 
-export const heroFacts = [
-  { k: "அறை வகைகள்", v: "நான்கு" },
-  // `v` omitted on purpose: "10,000 LKR" is a price fact, excluded from this
-  // overlay by its own exact path in content.i18n.test.ts, not translated.
-  { k: "Standard முதல்" },
-  { k: "உணவு", v: "ஒரு நாளுக்கு மூன்று" },
-  { k: "செவிலியர் சேவை", v: "24 மணி நேரமும்" },
-];
+export const heroFacts = [{}, {}, {}, {}];
 
 export const jumpCards = [
   {
-    // Kept identical to English: see KEEPS_ENGLISH in content.i18n.test.ts.
-    label: "Standard",
     note: "மருத்துவ ஆதரவுடன் கூடிய அத்தியாவசிய வசதி.",
   },
   {
-    label: "Deluxe",
     note: "மேலும் வசதியுடன் கூடிய பெரிய இடம்.",
   },
   {
-    label: "Super Deluxe",
     note: "Steward சேவையுடன், எங்கள் மிகச் சிறந்த Premium அறைகள்.",
   },
   {
-    label: "வார்டுகள்",
     note: "தனியுரிமை பிரிப்பான்களுடன் பகிரப்பட்ட வார்டுகள்.",
   },
 ];
 
-export const heroStandfirst =
-  "எங்கள் நோயாளர் அறைகளில் அமெரிக்க தர வசதி மற்றும் வசதிகளை அனுபவியுங்கள்.";
-
-export const roomsHeading = "எளிமையானது முதல் Premium வரை பரவியுள்ள அறைகள்";
 export const roomsIntro = mealsNote;
 
-export const specialtiesHeading = "எங்கள் நோயாளர் அறைகளின் சிறப்பம்சங்கள்";
-
-export const bookHeading = "நோயாளர் அறை ஒன்றை Book செய்யுங்கள்";
 export const bookIntro =
   "எங்களுக்கு Message அனுப்புங்கள், எங்கள் குழு உங்களுக்குப் பொருந்தும் அறையைக் கண்டறிய உதவும்.";
 
-export const bookRail = [
-  { label: "எங்களை call செய்யுங்கள்" },
-  // Kept identical to English: a product name in every script, the same as
-  // contact's `contactRows[2].label`. See KEEPS_ENGLISH.
-  { label: "WhatsApp" },
-  // Kept identical to English, the same as contact's `contactRows[3].label`.
-  { label: "Email" },
-  { label: "அதற்குப் பதிலாக Doctor ஐ Book செய்யுங்கள்" },
-];
+export const bookRail = [{}, {}, {}, {}];
 
-export const hero = {
-  strapline: "நீங்கள் தங்கும் இடம்",
-  breadcrumbHome: "முகப்பு",
-  // "Accommodation" is an ordinary noun, not this feature's own brand name
-  // (unlike e-channeling's "E-Channeling"), so it translates: the same word
-  // navigationLabels.ta.ts already uses for this page's own nav link.
-  breadcrumbCurrent: "தங்குமிட வசதிகள்",
-  headingLead: "அமெரிக்க தர வசதி,",
-  headingAccent: "ஒரு இரவுக்கு.",
-  bookCta: "Doctor ஐ Book செய்யுங்கள்",
-  seeRoomsCta: "அறைகளைப் பார்க்கவும்",
-};
+export const hero = {};
 
-export const sectionEyebrows = {
-  rooms: "01 / எங்கள் அறைகள்",
-  specialties: "02 / ஒவ்வொரு அறையிலும் உள்ளவை",
-  book: "03 / Room ஐ Book செய்யுங்கள்",
-};
+export const sectionEyebrows = {};

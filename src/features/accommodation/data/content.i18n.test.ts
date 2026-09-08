@@ -71,11 +71,6 @@ const KEEPS_ENGLISH = new Set([
   "roomTypes[2].amenities[1]", // TV
   "roomTypes[2].amenities[2]", // Wi-Fi
   "roomTypes[3].amenities[3]", // TV (Wards has no Wi-Fi row to begin with)
-  "jumpCards[0].label", // "Standard"
-  "jumpCards[1].label", // "Deluxe"
-  "jumpCards[2].label", // "Super Deluxe"
-  "bookRail[1].label", // WhatsApp, a product name in every script
-  "bookRail[2].label", // Email
 ]);
 
 test("every translatable string in accommodation has Sinhala", () => {
