@@ -9,19 +9,28 @@ does so. This document is what that reviewer needs.
 ## What to do first
 
 ```bash
-npm run i18n:status                        # lists all 82 overlays and their state
+npm run i18n:status                        # lists all 84 overlays and their state
 npm run i18n:status -- --require-reviewed  # the gate: exits 1 while any is a draft
 ```
 
-Today the gate exits 1, and that is correct: **82 overlays, 41 Sinhala and 41
+Today the gate exits 1, and that is correct: **84 overlays, 42 Sinhala and 42
 Tamil, 0 reviewed.** Nothing ships until that changes.
 
-Four of those 82 are new to the list rather than new copy: the contact and
+Six of those 84 want your attention specially. Four are new to the list rather than new copy: the contact and
 careers form validation messages (`schemas.si.ts` / `schemas.ta.ts` in each
 feature). They were drafted alongside everything else but were sitting inline in
 a file the gate could not see, so no earlier version of this document told you
 they existed. They are the words a patient or an applicant reads when a form
 rejects what they typed, and they need your read like any other page copy.
+
+The other two are genuinely new copy, added last: `pageMetadata.si.ts` /
+`pageMetadata.ta.ts`, the `<title>` and search-result description for all 17
+routes. Until these landed, every Sinhala browser tab, Google result and shared
+link preview was in English, which rather undercut the point. Two titles stay
+English on purpose and are the ones to sanity-check: the home page, whose title
+is the motto set as a brand mark, and `/pharmacy`, because the nav dictionary
+already decided "Pharmacy" stays English and a title should not disagree with
+the menu.
 
 Read the pages, not the files. Start the site and click through:
 
@@ -140,6 +149,29 @@ One further note in the same vein: a fix round rendered "five back blows" as
 Tamil `அறைகள்`, which is the word this very site uses 38 times for **rooms**.
 Corrected to `அடிகள்`.
 
+## Decision needed: alt text is English in all three languages
+
+**64 image descriptions stay English on the Sinhala and Tamil pages.** They are
+excused from translation by a rule matching the `.alt` / `.heroAlt` / `.photoAlt`
+path suffixes, written when the branch began and never revisited.
+
+Alt text is what a screen reader speaks aloud. So today a blind Sinhala visitor
+hears the page in Sinhala and then, at each image, an English sentence. That is
+the group least able to work around it.
+
+The argument for leaving it: nobody sees alt text unless they need it, and 60 of
+the 64 are full sentences of three words or more, so translating them adds 120
+strings to the queue you are already reading.
+
+The argument for translating it: it is the one place where leaving English is not
+a stylistic choice but an accessibility gap, and this is a hospital.
+
+**I have not changed it either way, because it is your call.** Note one thing
+found while measuring: the rule is already applied inconsistently. The home
+hero's own `photoAlt` **is** translated in both locales, and the suffix rule was
+silently excusing it from the check. So the site does not currently do either
+thing consistently, and whichever you choose will be a change.
+
 ## Open decision that is yours, not a defect
 
 The pharmacy hero headline appears in two places: the band on the home page and
@@ -163,7 +195,7 @@ So you can spend your attention on meaning rather than on mechanics:
   line previously said the opposite, and said so correctly at the time: nothing
   enforced it, and changing the ambulance number in the Sinhala heart-attack
   instruction from `0117 84 84 84` to `0117 84 84 48` passed the whole suite.
-  That is now a test failure, on every one of the 82 overlays. So is a dropped
+  That is now a test failure, on every one of the 84 overlays. So is a dropped
   digit (`160/100` to `160/10`), an altered range (`25-65` to `52-56`), a
   changed magnitude in a mixed sentence (`USD 1 million` to `මිලියන 10`), and a
   Sinhala or Tamil numeral written where the English has an ASCII one (`40` to
