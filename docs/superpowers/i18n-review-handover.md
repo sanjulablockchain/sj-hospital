@@ -55,52 +55,56 @@ and only the reviewer's**. No agent has flipped a single one, deliberately: the
 whole gate exists to make sign-off a human decision. Sign off per file, as you
 finish reading that file's pages, rather than in one sweep at the end.
 
-## The register: the decision to confirm first
+## The register: settled, and much narrower than the first draft
 
-This is the one judgement that shapes every page, so confirm it before reading
-for detail. The site is **deliberately code-mixed**: everyday English nouns stay
-in English inside Sinhala and Tamil sentences. So this is correct, not a defect:
+**`docs/superpowers/i18n-register-rule.md` is the authority.** Read it before
+this document's detail; everything below assumes it.
+
+The first draft translated nearly everything, and reading it the owner called
+that wrong: "only nessassary part shold be traslated." So the site now keeps its
+**structure** English and translates the **explanation**. A reader scans and
+navigates in English, then reads in their own language.
+
+English in every language: the nav bar, the footer, the Book CTA and every other
+CTA and link label, each hero in full including its fact strip, section eyebrows,
+section headings, card and article titles, the filter chips and the filter row,
+and each page's `<title>`.
+
+Translated: body paragraphs and descriptions, page meta descriptions, the
+health-tips clinical content, the contact and career form labels and error
+messages, and the FAQ questions and answers.
+
+**That change removed 1,271 strings per language**, so what you are reading is
+**4,010 Sinhala and 4,010 Tamil strings**, not the 5,281 the earlier draft had.
+A consequence worth expecting rather than discovering: **an article has an
+English title and a Sinhala body**, and so does every card on the site.
+
+Inside translated copy the register is **code-mixed**, unchanged: everyday
+English nouns stay English, because that is how people speak in Negombo. So this
+is correct, not a defect:
 
 > රෝගී **Records** එක **Update** කරන්න
 
-The alternative was full translation into formal literary Sinhala and Tamil,
-which was rejected: it reads as officialese, and Colombo patients say "Records",
-"Channel", "Ambulance" and "Scan" in English in ordinary speech.
+Formal literary Sinhala and Tamil was considered and rejected: it reads as
+officialese, and patients say "Records", "Channel", "Ambulance" and "Scan" in
+English in ordinary speech.
 
-**251 individual strings are recorded as deliberately English**, each in its
-feature's `KEEPS_ENGLISH` set with a written reason, and each enforced by a test
-that fails if a string leaves the set without being translated:
-
-| feature | deliberate English strings | | feature | deliberate English strings |
-|---|---|---|---|---|
-| pharmacy | 47 | | facilities | 17 |
-| network | 38 | | contact | 6 |
-| career | 33 | | about | 3 |
-| media | 29 | | health-tips | 3 |
-| accommodation | 27 | | international-care | 3 |
-| services | 26 | | e-channeling | 1 |
-| home | 17 | | school-wellness | 1 |
-
-Further categories stay English by design, beyond those 251:
+Further categories stay English by design, beyond the rule's table:
 
 - **The hospital's own name and brand strings**, in every language.
 - **URL slugs.** `/si/contact-us`, not a transliterated path.
 - **The privacy policy's legal text.**
-- **The motto, where it is set as a brand mark.** The rule the site follows is
-  that "To live is a privilege" is translated where it appears as a *sentence*
-  (the home hero, which composes its own phrase across three segments in each
-  locale) and stays English where it is set as a *mark*: the footer's logo
-  lockup and the footer's bottom bar, both uppercase and letterspaced, plus the
-  page `<title>` and the email signature. **This one is worth your explicit
-  yes or no**, because it is a judgement about your brand rather than about
-  language: an independent reader of the site flagged the bottom-bar instance as
-  an untranslated string. It was kept English and the reasoning written at the
-  site. Say the word and it becomes translated copy.
+- **The motto, everywhere.** "To live is a privilege" is now English in all
+  three languages, in every position: the footer's logo lockup, the footer's
+  bottom bar, the page `<title>`, the email signature, and the home hero. The
+  hero used to compose its own Sinhala and Tamil phrase across three segments;
+  the register change made heroes English, so that translation is gone and the
+  question of whether the motto should be translated has answered itself.
 - **The footer copyright line**, being the registered name and a year.
 
-If you disagree with the register itself, say so before reading further: it
-would change every one of the 74 feature overlay files, and it is much cheaper
-to change now than after sign-off.
+The register itself is settled, so it is no longer a question put to you. If
+reading the pages changes your mind about it, say so early: it moves thousands
+of strings and is far cheaper to revisit before sign-off than after.
 
 ## Read these strings first: known-uncertain wording
 
