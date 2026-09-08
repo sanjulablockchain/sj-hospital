@@ -37,10 +37,7 @@ export const __review = { status: "draft", reviewer: null, date: null } as const
 
 export const diagnosticServices = [
   {
-    title: "රසායනාගාර සේවා",
-    directoryTitle: "රසායනාගාර සේවා",
     hours: "පැය 24",
-    cta: "පරීක්ෂණයක් Book කරන්න",
     desc: "Haematology, Biochemistry, Microbiology සහ Histopathology පරීක්ෂණ, පැය 24ම විවෘතයි. නිකුත් කිරීමට කලින් හැම Report එකක්ම වෛද්‍යවරු දෙදෙනෙක් Check කරනවා, බොහෝ ප්‍රතිඵල එදිනම ලැබෙනවා, OPD රෝගීන්ට රසායනාගාර ගාස්තුවලින් 10% වට්ටමක් ලැබෙනවා.",
     tags: ["Haematology සේවාව", "Biochemistry සේවාව", "Microbiology සේවාව", "එදිනම Reports"],
     facts: [
@@ -50,7 +47,6 @@ export const diagnosticServices = [
       { k: "OPD වට්ටම", v: "රසායනාගාර ගාස්තුවලින් 10%" },
     ],
     lede: "රුධිර, මූත්‍ර සහ පටක පරීක්ෂණ හැම වේලාවකම විවෘතයි, ඔබ වෙතට එන්න කලින් හැම ප්‍රතිඵලයක්ම දෙපාරක් Check කරනවා.",
-    aboutHead: "දිවා රෑ දෙකේම ධාවනය වන පරීක්ෂණ",
     body1: "රසායනාගාරය Haematology, Biochemistry, Microbiology සහ Histopathology ආවරණය කරන අතර පැය 24ම විවෘතව තියෙන නිසා ඕන වේලාවක ගත් Sample එකක් ඊළඟ Shift එකට රැඳී නොසිට Process කරනවා. බොහෝ ප්‍රතිඵල එදිනම ලැබෙනවා, Ward සහ Emergency Department වලින් එන හදිසි Requests ප්‍රමුඛතාවය ලබාදෙනවා.",
     body2: "නිකුත් කිරීමට කලින් හැම Report එකක්ම වෛද්‍යවරු දෙදෙනෙක් Verify කරනවා, Technologist කෙනාගේ වැඩට උඩින් දෙවෙනි Check එකක් එකතු කරලා. OPD හරහා Book කරන Outpatients ලාට රසායනාගාර ගාස්තුවලින් 10% වට්ටමක් ලැබෙනවා, ප්‍රතිඵල මුහුණින්ම ලබාගන්නත් නැත්නම් ඔබව Refer කරපු වෛද්‍යවරයාට යවන්නත් පුළුවන්.",
     strip: [
@@ -76,10 +72,10 @@ export const diagnosticServices = [
     ],
     location: "බිම් මහල, රසායනාගාර Reception",
     steps: [
-      { title: "Book කිරීම", desc: "OPD හරහා පරීක්ෂණයක් ඉල්ලන්න, නැත්නම් ඔබේ වෛද්‍යවරයාගෙන් Referral Form එකක් අරගෙන එන්න." },
-      { title: "Sample ලබාගැනීම", desc: "Phlebotomist කෙනෙක් ඔබේ Sample එක ලබාගන්නවා, අවශ්‍ය නම් කලින්ම Fasting උපදෙස් දෙනවා." },
-      { title: "Process කිරීම", desc: "ඔබේ Sample එක පරීක්ෂා කරලා, නිකුත් කිරීමට කලින් Report එක වෛද්‍යවරු දෙදෙනෙක් Check කරනවා." },
-      { title: "ලබාගැනීම", desc: "බොහෝ Reports එදිනම ලැබෙනවා, මුහුණින්ම ලබාගන්නත් නැත්නම් ඔබේ වෛද්‍යවරයාට යවන්නත් පුළුවන්." },
+      { desc: "OPD හරහා පරීක්ෂණයක් ඉල්ලන්න, නැත්නම් ඔබේ වෛද්‍යවරයාගෙන් Referral Form එකක් අරගෙන එන්න." },
+      { desc: "Phlebotomist කෙනෙක් ඔබේ Sample එක ලබාගන්නවා, අවශ්‍ය නම් කලින්ම Fasting උපදෙස් දෙනවා." },
+      { desc: "ඔබේ Sample එක පරීක්ෂා කරලා, නිකුත් කිරීමට කලින් Report එක වෛද්‍යවරු දෙදෙනෙක් Check කරනවා." },
+      { desc: "බොහෝ Reports එදිනම ලැබෙනවා, මුහුණින්ම ලබාගන්නත් නැත්නම් ඔබේ වෛද්‍යවරයාට යවන්නත් පුළුවන්." },
     ],
     prep: [
       "ඔබේ පරීක්ෂණයට කලින් Fasting අවශ්‍යද කියලා අහන්න",
@@ -101,10 +97,7 @@ export const diagnosticServices = [
     ],
   },
   {
-    title: "විකිරණවේදය සහ Digital X-ray",
-    directoryTitle: "විකිරණවේදය සහ Digital X-ray",
     hours: "පැය 24",
-    cta: "Imaging Book කරන්න",
     desc: "Digital X-ray සහ Ultrasound පැය 24ම ලබාගත හැක, Films පැයක් ඇතුළත කියවනවා, රෝගියෙක්ට Travel කරන්න බැරි උනොත් Portable Imaging වාට්ටුවටම ගෙනෙනවා. CT සහ MRI මෙතන සිදු කරන්නේ නෑ: Scan එකක් අවශ්‍ය උනොත්, Partner Imaging Centre එකකට Referral සංවිධානය කරනවා.",
     tags: ["Digital X-ray සේවාව", "Ultrasound සේවාව", "Portable Imaging සේවාව", "CT/MRI සඳහා Referral"],
     facts: [
@@ -114,7 +107,6 @@ export const diagnosticServices = [
       { k: "CT සහ MRI", v: "Partner Centre එකකට Referral එකකින්" },
     ],
     lede: "Digital X-ray සහ Ultrasound හැම වේලාවකම, Films පැයක් ඇතුළත කියවනවා, Scan එකකට CT හෝ MRI ඕන උනොත් පැහැදිලි Referral මාර්ගයකුත් සමඟ.",
-    aboutHead: "Digital Imaging මෙතනම, තව දුරට යනවනම් Referral",
     body1: "Digital Radiography සහ Ultrasound පැය 24ම ධාවනය වෙනවා, හැම X-ray එකක්ම වෙනම Film Handling අවශ්‍ය නැතුව කෙලින්ම ඔබේ File එකට එනවා. රෝගියෙක්ව Move කරන්න බැරි උනොත් Radiographer කෙනෙක්ට Portable Machine එකක් වාට්ටුවටම ගෙනෙන්නත් පුළුවන්. X-ray Films පැයක් ඇතුළත කියවලා Report කරනවා, එහෙනම් සාමාන්‍යයෙන් එකම Visit එකේදීම සැලැස්මක් එකඟ වෙන්න පුළුවන්.",
     body2: "මෙම රෝහලේ CT හෝ MRI Scanning මෙතන නෑ. එකක් අවශ්‍ය Case එකක් ආවොත්, අපේ කණ්ඩායම Partner Imaging Centre එකකට Referral සංවිධානය කරලා, ඔබේ දැනට තියෙන Films සහ Clinical Notes Referral එකත් සමඟම යවනවා, එහෙනම් ලබාගන්න Centre එකට හිස් අතින් පටන් ගන්න වෙන්නේ නෑ.",
     strip: [
@@ -140,10 +132,10 @@ export const diagnosticServices = [
     ],
     location: "බිම් මහල, විකිරණවේද අංශය",
     steps: [
-      { title: "ඉල්ලීම", desc: "ඔබේ වෛද්‍යවරයා අවශ්‍ය Imaging Order කරනවා, නැත්නම් සරළ X-ray එකක් සඳහා ඔබටම කෙලින්ම Book කරන්න පුළුවන්." },
-      { title: "Scan කිරීම", desc: "Digital X-ray හෝ Ultrasound මෙතනදීම කරනවා, නැත්නම් Portable Machine එකක් ඔබේ ඇඳටම ගෙනෙනවා." },
-      { title: "Report කිරීම", desc: "X-ray Films පැයක් ඇතුළත කියවනවා; Ultrasound සොයාගැනීම් Scan කරන වේලාවේදීම කතා කරනවා." },
-      { title: "අවශ්‍ය නම් Refer කිරීම", desc: "CT හෝ MRI අවශ්‍ය නම්, Partner Centre එකකට Referral සංවිධානය කරලා, ඔබේ Films සහ Notes කලින්ම යවනවා." },
+      { desc: "ඔබේ වෛද්‍යවරයා අවශ්‍ය Imaging Order කරනවා, නැත්නම් සරළ X-ray එකක් සඳහා ඔබටම කෙලින්ම Book කරන්න පුළුවන්." },
+      { desc: "Digital X-ray හෝ Ultrasound මෙතනදීම කරනවා, නැත්නම් Portable Machine එකක් ඔබේ ඇඳටම ගෙනෙනවා." },
+      { desc: "X-ray Films පැයක් ඇතුළත කියවනවා; Ultrasound සොයාගැනීම් Scan කරන වේලාවේදීම කතා කරනවා." },
+      { desc: "CT හෝ MRI අවශ්‍ය නම්, Partner Centre එකකට Referral සංවිධානය කරලා, ඔබේ Films සහ Notes කලින්ම යවනවා." },
     ],
     prep: [
       "Scan කරන ප්‍රදේශයට ළඟින් තියෙන Jewellery හෝ Metal අයින් කරන්න",
@@ -165,10 +157,7 @@ export const diagnosticServices = [
     ],
   },
   {
-    title: "හෘද Screening සහ ECG",
-    directoryTitle: "හෘද Screening සහ ECG",
     hours: "දිනපතා",
-    cta: "Screening එකක් Book කරන්න",
     desc: "Resting ECG, Echocardiography සහ හෘද අවදානම් තක්සේරුව, ඔබේ Visit එකේදීම කරලා වෛද්‍යවරයෙක් විසින් Review කරනවා, ප්‍රතිඵලය ඉල්ලනවනම් Cardiology එකට Referral එකකුත් සමඟ.",
     tags: ["Resting ECG සේවාව", "Echocardiography සේවාව", "හෘද අවදානම් තක්සේරුව", "වෛද්‍ය Review"],
     facts: [
@@ -178,7 +167,6 @@ export const diagnosticServices = [
       { k: "Referral එක", v: "අවශ්‍ය නම් Cardiology එකට" },
     ],
     lede: "ECG, Echocardiography සහ හෘද අවදානම් තක්සේරුවක් දිනපතා ධාවනය වෙනවා, ඔබේ Visit එකේදීම කරලා වෛද්‍යවරයෙක් විසින් Review කරනවා.",
-    aboutHead: "වෛද්‍යවරයෙක් Review කරන හෘද Screening",
     body1: "Resting ECG එකක් හදවතේ විදුලි රිද්මය Record කරනවා, Echocardiography එකෙන් හදවත Pump වෙන විදිහත් Valves වැඩ කරන විදිහත් පින්තූරයක් එකතු වෙනවා. දෙකම ඔබේ History, රුධිර පීඩනය සහ අනිත් Factors පරීක්ෂණ ප්‍රතිඵල සමඟ බලන හෘද අවදානම් තක්සේරුවක් සමඟ එකතු කරනවා.",
     body2: "පරීක්ෂණය ඔබේ Visit එකේදීම කරලා වෛද්‍යවරයෙක් විසින් Review කරනවා, එහෙනම් ඔබේ සත්කාරය වෙනම Report එකක් හඹාගෙන ඉන්න වෙන්නේ නෑ. සොයාගැනීම් තව සමීපව බැලිය යුතු දෙයක් පෙන්නුවොත්, තව තක්සේරුවක් සහ කළමනාකරණයක් සඳහා ඔබව Cardiology එකට Refer කරනවා.",
     strip: [
@@ -204,10 +192,10 @@ export const diagnosticServices = [
     ],
     location: "පළමු මහල, හෘද රෝග විනිශ්චය",
     steps: [
-      { title: "Book කිරීම", desc: "Screening එකක් කෙලින්ම Book කරන්න, නැත්නම් ඔබේ වෛද්‍යවරයාගෙන් Referral එකක් සමඟ එන්න." },
-      { title: "පරීක්ෂණය", desc: "Resting ECG එකක් සහ, සුදුසු නම්, Echocardiogram එකක් Record කරනවා." },
-      { title: "අර්ථ දැක්වීම", desc: "වෛද්‍යවරයෙක් ඔබේ ප්‍රතිඵල Review කරලා අවදානම් තක්සේරුව ඔබ සමඟ කතා කරනවා." },
-      { title: "අවශ්‍ය නම් Refer කිරීම", desc: "සොයාගැනීම් ඉල්ලනවනම්, තව කළමනාකරණයක් සඳහා ඔබව Cardiology එකට Refer කරනවා." },
+      { desc: "Screening එකක් කෙලින්ම Book කරන්න, නැත්නම් ඔබේ වෛද්‍යවරයාගෙන් Referral එකක් සමඟ එන්න." },
+      { desc: "Resting ECG එකක් සහ, සුදුසු නම්, Echocardiogram එකක් Record කරනවා." },
+      { desc: "වෛද්‍යවරයෙක් ඔබේ ප්‍රතිඵල Review කරලා අවදානම් තක්සේරුව ඔබ සමඟ කතා කරනවා." },
+      { desc: "සොයාගැනීම් ඉල්ලනවනම්, තව කළමනාකරණයක් සඳහා ඔබව Cardiology එකට Refer කරනවා." },
     ],
     prep: [
       "ඔබේ පපුවට ලේසියෙන් ලගාවෙන්න පුළුවන් Top එකක් අඳින්න",
@@ -229,10 +217,7 @@ export const diagnosticServices = [
     ],
   },
   {
-    title: "CTG සහ දරුවාගේ Monitoring",
-    directoryTitle: "CTG සහ දරුවාගේ Monitoring",
     hours: "Appointment එකකින්",
-    cta: "Monitoring Book කරන්න",
     desc: "දරුවාගේ හෘද ස්පන්දනය සහ සංකෝචන Monitor කරන්න Cardiotocography (CTG), Antenatal Clinic එකට සමගාමීව ධාවනය කරලා Obstetric කණ්ඩායම විසින් Review කරනවා.",
     tags: ["Cardiotocography සේවාව", "දරුවාගේ හෘද ස්පන්දනය", "සංකෝචන Monitoring", "Antenatal Clinic එක"],
     facts: [
@@ -242,7 +227,6 @@ export const diagnosticServices = [
       { k: "Review කරන්නේ", v: "Obstetric කණ්ඩායම" },
     ],
     lede: "දරුවාගේ හෘද ස්පන්දනය සහ සංකෝචන Track කරන්න Cardiotocography, ඔබේ Antenatal Visits සමඟ Book කරලා Obstetric කණ්ඩායම විසින් Review කරනවා.",
-    aboutHead: "ඔබේ දරුවාගේ හෘද ස්පන්දනයයි ඔබේ සංකෝචනයයි Monitor කිරීම",
     body1: "CTG Trace එකක් ඔබේ දරුවාගේ හෘද ස්පන්දනයයි ඕන Uterine සංකෝචනයන්ම Monitoring කාල පරිච්ඡේදයකට Record කරනවා, සාමාන්‍යයෙන් ඔබ සුවපහසුව වාඩිවෙලා හෝ හාන්සි වෙලා ඉන්නකොට ඔබේ බඩේ Soft Sensors දෙකක් තියලා. මේක Antenatal Clinic එකට සමගාමීව ලබාදෙනවා, එහෙනම් පුළුවන් තැන ඔබේ Regular ගැබ්ගිනි පරීක්ෂණ වගේම එකම Visit එකට Fit වෙනවා.",
     body2: "හැම Trace එකක්ම Obstetric කණ්ඩායම විසින් Review කරනවා, ඔවුන් Record කරගත් ඕන සංකෝචනයකට එරෙහිව හෘද ස්පන්දන රටාවත් ඔබේ සමස්ත Antenatal තත්ත්වයටත් එරෙහිව බලනවා. Trace එකෙන් ප්‍රශ්නයක් ආවොත්, ඒක කෙලින්ම ඔබ සමඟ කතා කරලා ඔබේ අඛණ්ඩ Antenatal සත්කාරයේ කොටසක් විදිහට Follow-up කරනවා.",
     strip: [
@@ -266,10 +250,10 @@ export const diagnosticServices = [
     ],
     location: "පළමු මහල, Antenatal Clinic",
     steps: [
-      { title: "Book කිරීම", desc: "ඔබේ Antenatal Appointment එකට සමගාමීව, නැත්නම් ඔබේ Obstetric කණ්ඩායම කියන විදිහට Monitoring Book කරන්න." },
-      { title: "සම්බන්ධ කිරීම", desc: "හෘද ස්පන්දනයයි ඕන සංකෝචනයන්ම අල්ලගන්න Soft Sensors දෙකක් ඔබේ බඩේ තියනවා." },
-      { title: "Monitor කිරීම", desc: "ඔබේ Obstetric කණ්ඩායම ඉල්ලපු කාල පරිච්ඡේදයට Trace එක ධාවනය වෙනවා, ඔබ සුවපහසුව Rest ගන්නකොට." },
-      { title: "Review කිරීම", desc: "ඔබ යනකොට Obstetric කණ්ඩායම Trace එක Review කරලා සොයාගැනීම් ඔබ සමඟ කතා කරනවා." },
+      { desc: "ඔබේ Antenatal Appointment එකට සමගාමීව, නැත්නම් ඔබේ Obstetric කණ්ඩායම කියන විදිහට Monitoring Book කරන්න." },
+      { desc: "හෘද ස්පන්දනයයි ඕන සංකෝචනයන්ම අල්ලගන්න Soft Sensors දෙකක් ඔබේ බඩේ තියනවා." },
+      { desc: "ඔබේ Obstetric කණ්ඩායම ඉල්ලපු කාල පරිච්ඡේදයට Trace එක ධාවනය වෙනවා, ඔබ සුවපහසුව Rest ගන්නකොට." },
+      { desc: "ඔබ යනකොට Obstetric කණ්ඩායම Trace එක Review කරලා සොයාගැනීම් ඔබ සමඟ කතා කරනවා." },
     ],
     prep: [
       "Trace එකේදී දරුවාගේ ක්‍රියාකාරීත්වයට උදව් වෙයි නම් කලින්ම කන්න",

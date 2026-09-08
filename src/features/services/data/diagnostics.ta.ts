@@ -23,10 +23,7 @@ export const __review = { status: "draft", reviewer: null, date: null } as const
 
 export const diagnosticServices = [
   {
-    title: "ஆய்வுகூட சேவைகள்",
-    directoryTitle: "ஆய்வுகூட சேவைகள்",
     hours: "24 மணி நேரம்",
-    cta: "ஒரு பரிசோதனையை Book செய்யுங்கள்",
     desc: "Haematology, Biochemistry, Microbiology மற்றும் Histopathology பரிசோதனைகள், 24 மணி நேரமும் திறந்திருக்கும். வெளியிடுவதற்கு முன் ஒவ்வொரு Report ஐயும் இரண்டு மருத்துவர்கள் Check செய்வர், பெரும்பாலான முடிவுகள் அன்றே கிடைக்கும், OPD நோயாளர்களுக்கு ஆய்வுகூட கட்டணங்களில் 10% தள்ளுபடி கிடைக்கும்.",
     tags: ["Haematology சேவை", "Biochemistry சேவை", "Microbiology சேவை", "அன்றே Reports"],
     facts: [
@@ -36,7 +33,6 @@ export const diagnosticServices = [
       { k: "OPD தள்ளுபடி", v: "ஆய்வுகூட கட்டணங்களில் 10%" },
     ],
     lede: "இரத்தம், சிறுநீர் மற்றும் திசு பரிசோதனைகள் ஒவ்வொரு நேரமும் திறந்திருக்கும், உங்களை அடைவதற்கு முன் ஒவ்வொரு முடிவும் இரண்டு முறை Check செய்யப்படும்.",
-    aboutHead: "பகலும் இரவும் இயங்கும் பரிசோதனைகள்",
     body1: "ஆய்வுகூடம் Haematology, Biochemistry, Microbiology மற்றும் Histopathology ஐ உள்ளடக்கியது, 24 மணி நேரமும் திறந்திருப்பதால் எந்த நேரத்திலும் எடுக்கப்படும் Sample அடுத்த Shift க்காக காத்திருக்காமல் Process செய்யப்படும். பெரும்பாலான முடிவுகள் அன்றே கிடைக்கும், Ward மற்றும் Emergency Department இலிருந்து வரும் அவசர Requests முன்னுரிமை பெறும்.",
     body2: "வெளியிடுவதற்கு முன் ஒவ்வொரு Report ஐயும் இரண்டு மருத்துவர்கள் Verify செய்வர், Technologist இன் வேலைக்கு மேல் இரண்டாவது Check ஒன்றை சேர்த்து. OPD மூலம் Book செய்யும் Outpatients க்கு ஆய்வுகூட கட்டணங்களில் 10% தள்ளுபடி கிடைக்கும், முடிவுகளை நேரடியாகப் பெறலாம் அல்லது உங்களை Refer செய்த மருத்துவருக்கு அனுப்பலாம்.",
     strip: [
@@ -62,10 +58,10 @@ export const diagnosticServices = [
     ],
     location: "தரைத் தளம், ஆய்வுகூட Reception",
     steps: [
-      { title: "Book செய்தல்", desc: "OPD மூலம் ஒரு பரிசோதனையை கோருங்கள், அல்லது உங்கள் மருத்துவரிடமிருந்து ஒரு Referral Form கொண்டு வாருங்கள்." },
-      { title: "Sample எடுத்தல்", desc: "ஒரு Phlebotomist உங்கள் Sample ஐ எடுப்பார், தேவைப்பட்டால் முன்கூட்டியே Fasting வழிமுறைகள் தரப்படும்." },
-      { title: "Process செய்தல்", desc: "உங்கள் Sample பரிசோதிக்கப்பட்டு, வெளியிடுவதற்கு முன் Report ஐ இரண்டு மருத்துவர்கள் Check செய்வர்." },
-      { title: "பெறுதல்", desc: "பெரும்பாலான Reports அன்றே தயாராகும், நேரடியாக பெறலாம் அல்லது உங்கள் மருத்துவருக்கு அனுப்பலாம்." },
+      { desc: "OPD மூலம் ஒரு பரிசோதனையை கோருங்கள், அல்லது உங்கள் மருத்துவரிடமிருந்து ஒரு Referral Form கொண்டு வாருங்கள்." },
+      { desc: "ஒரு Phlebotomist உங்கள் Sample ஐ எடுப்பார், தேவைப்பட்டால் முன்கூட்டியே Fasting வழிமுறைகள் தரப்படும்." },
+      { desc: "உங்கள் Sample பரிசோதிக்கப்பட்டு, வெளியிடுவதற்கு முன் Report ஐ இரண்டு மருத்துவர்கள் Check செய்வர்." },
+      { desc: "பெரும்பாலான Reports அன்றே தயாராகும், நேரடியாக பெறலாம் அல்லது உங்கள் மருத்துவருக்கு அனுப்பலாம்." },
     ],
     prep: [
       "உங்கள் பரிசோதனைக்கு முன் Fasting தேவையா என்று கேளுங்கள்",
@@ -87,10 +83,7 @@ export const diagnosticServices = [
     ],
   },
   {
-    title: "கதிரியக்கவியல் மற்றும் Digital X-ray",
-    directoryTitle: "கதிரியக்கவியல் மற்றும் Digital X-ray",
     hours: "24 மணி நேரம்",
-    cta: "Imaging ஐ Book செய்யுங்கள்",
     desc: "Digital X-ray மற்றும் Ultrasound 24 மணி நேரமும் கிடைக்கும், Films ஒரு மணி நேரத்தில் படிக்கப்படும், நோயாளி பயணிக்க முடியாதபோது Portable Imaging வார்டுக்கே கொண்டு வரப்படும். CT மற்றும் MRI இங்கு செய்யப்படாது: ஒரு Scan தேவைப்பட்டால், ஒரு Partner Imaging Centre க்கு Referral ஏற்பாடு செய்யப்படும்.",
     tags: ["Digital X-ray சேவை", "Ultrasound சேவை", "Portable Imaging சேவை", "CT/MRI க்கான Referral"],
     facts: [
@@ -100,7 +93,6 @@ export const diagnosticServices = [
       { k: "CT மற்றும் MRI", v: "Partner Centre க்கு Referral மூலம்" },
     ],
     lede: "Digital X-ray மற்றும் Ultrasound ஒவ்வொரு நேரமும், Films ஒரு மணி நேரத்தில் படிக்கப்படும், ஒரு Scan க்கு CT அல்லது MRI தேவைப்பட்டால் தெளிவான Referral வழியுடன்.",
-    aboutHead: "Digital Imaging இங்கேயே, மேலும் செல்ல வேண்டுமெனில் Referral",
     body1: "Digital Radiography மற்றும் Ultrasound 24 மணி நேரமும் இயங்கும், ஒவ்வொரு X-ray உம் தனி Film Handling தேவையின்றி நேரடியாக உங்கள் File இல் வரும். நோயாளியை Move செய்யக் கூடாதபோது ஒரு Radiographer ஒரு Portable Machine ஐ வார்டுக்கே கொண்டு வரலாம். X-ray Films ஒரு மணி நேரத்தில் படிக்கப்பட்டு Report செய்யப்படும், அதனால் பொதுவாக அதே Visit இல் ஒரு திட்டம் ஒப்புக்கொள்ளப்படும்.",
     body2: "இந்த மருத்துவமனையில் CT அல்லது MRI Scanning இங்கு இல்லை. இரண்டில் ஒன்று தேவைப்படும் Case வந்தால், எங்கள் குழு ஒரு Partner Imaging Centre க்கு Referral ஏற்பாடு செய்து, உங்கள் தற்போதைய Films மற்றும் Clinical Notes ஐ Referral உடன் அனுப்பும், அதனால் பெறும் Centre வெறுங்கையுடன் தொடங்க வேண்டியதில்லை.",
     strip: [
@@ -126,10 +118,10 @@ export const diagnosticServices = [
     ],
     location: "தரைத் தளம், கதிரியக்கவியல் பிரிவு",
     steps: [
-      { title: "கோரிக்கை", desc: "உங்கள் மருத்துவர் தேவையான Imaging ஐ Order செய்வார், அல்லது ஒரு எளிய X-ray க்கு நீங்களே நேரடியாக Book செய்யலாம்." },
-      { title: "Scan செய்தல்", desc: "Digital X-ray அல்லது Ultrasound இங்கேயே செய்யப்படும், அல்லது ஒரு Portable Machine உங்கள் படுக்கைக்கே கொண்டு வரப்படும்." },
-      { title: "Report செய்தல்", desc: "X-ray Films ஒரு மணி நேரத்தில் படிக்கப்படும்; Ultrasound கண்டுபிடிப்புகள் Scan செய்யும் நேரத்திலேயே விவாதிக்கப்படும்." },
-      { title: "தேவைப்பட்டால் Refer செய்தல்", desc: "CT அல்லது MRI தேவைப்பட்டால், ஒரு Partner Centre க்கு Referral ஏற்பாடு செய்து, உங்கள் Films மற்றும் Notes ஐ முன்கூட்டியே அனுப்புவோம்." },
+      { desc: "உங்கள் மருத்துவர் தேவையான Imaging ஐ Order செய்வார், அல்லது ஒரு எளிய X-ray க்கு நீங்களே நேரடியாக Book செய்யலாம்." },
+      { desc: "Digital X-ray அல்லது Ultrasound இங்கேயே செய்யப்படும், அல்லது ஒரு Portable Machine உங்கள் படுக்கைக்கே கொண்டு வரப்படும்." },
+      { desc: "X-ray Films ஒரு மணி நேரத்தில் படிக்கப்படும்; Ultrasound கண்டுபிடிப்புகள் Scan செய்யும் நேரத்திலேயே விவாதிக்கப்படும்." },
+      { desc: "CT அல்லது MRI தேவைப்பட்டால், ஒரு Partner Centre க்கு Referral ஏற்பாடு செய்து, உங்கள் Films மற்றும் Notes ஐ முன்கூட்டியே அனுப்புவோம்." },
     ],
     prep: [
       "Scan செய்யப்படும் பகுதிக்கு அருகில் உள்ள Jewellery அல்லது Metal ஐ அகற்றுங்கள்",
@@ -151,10 +143,7 @@ export const diagnosticServices = [
     ],
   },
   {
-    title: "இதய Screening மற்றும் ECG",
-    directoryTitle: "இதய Screening மற்றும் ECG",
     hours: "தினமும்",
-    cta: "ஒரு Screening ஐ Book செய்யுங்கள்",
     desc: "Resting ECG, Echocardiography மற்றும் இதய ஆபத்து மதிப்பீடு, உங்கள் Visit இலேயே செய்யப்பட்டு ஒரு மருத்துவரால் Review செய்யப்படும், முடிவு தேவைப்பட்டால் Cardiology க்கு Referral உடன்.",
     tags: ["Resting ECG சேவை", "Echocardiography சேவை", "இதய ஆபத்து மதிப்பீடு", "மருத்துவர் Review"],
     facts: [
@@ -164,7 +153,6 @@ export const diagnosticServices = [
       { k: "ஒரு Referral", v: "தேவைப்பட்டால் Cardiology க்கு" },
     ],
     lede: "ECG, Echocardiography மற்றும் ஒரு இதய ஆபத்து மதிப்பீடு தினமும் இயங்கும், உங்கள் Visit இலேயே செய்யப்பட்டு ஒரு மருத்துவரால் Review செய்யப்படும்.",
-    aboutHead: "மருத்துவரால் Review செய்யப்படும் இதய Screening",
     body1: "ஒரு Resting ECG இதயத்தின் மின் தாளத்தை Record செய்யும், Echocardiography இதயம் எப்படி Pump செய்கிறது, அதன் Valves எப்படி வேலை செய்கிறது என்பதற்கு ஒரு படத்தை சேர்க்கும். இரண்டும் உங்கள் History, இரத்த அழுத்தம் மற்றும் மற்ற Factors ஐ பரிசோதனை முடிவுகளுடன் பார்க்கும் இதய ஆபத்து மதிப்பீடு உடன் இணைக்கப்படும்.",
     body2: "பரிசோதனை உங்கள் Visit இலேயே செய்யப்பட்டு ஒரு மருத்துவரால் Review செய்யப்படும், அதனால் உங்கள் சிகிச்சை தனி Report ஒன்றை பின்தொடர காத்திருக்க வேண்டியதில்லை. கண்டுபிடிப்புகள் மேலும் நெருக்கமான கவனம் தேவை என்று காட்டினால், மேலும் மதிப்பீடு மற்றும் மேலாண்மைக்காக நீங்கள் Cardiology க்கு Refer செய்யப்படுவீர்கள்.",
     strip: [
@@ -190,10 +178,10 @@ export const diagnosticServices = [
     ],
     location: "முதல் தளம், இதய நோய் கண்டறிதல்",
     steps: [
-      { title: "Book செய்தல்", desc: "ஒரு Screening ஐ நேரடியாக Book செய்யுங்கள், அல்லது உங்கள் மருத்துவரிடமிருந்து ஒரு Referral உடன் வாருங்கள்." },
-      { title: "பரிசோதனை", desc: "ஒரு Resting ECG மற்றும், பொருந்தும்போது, ஒரு Echocardiogram Record செய்யப்படும்." },
-      { title: "விளக்குதல்", desc: "ஒரு மருத்துவர் உங்கள் முடிவுகளை Review செய்து ஆபத்து மதிப்பீட்டை உங்களுடன் விவாதிப்பார்." },
-      { title: "தேவைப்பட்டால் Refer செய்தல்", desc: "கண்டுபிடிப்புகள் தேவைப்பட்டால், மேலும் மேலாண்மைக்காக நீங்கள் Cardiology க்கு Refer செய்யப்படுவீர்கள்." },
+      { desc: "ஒரு Screening ஐ நேரடியாக Book செய்யுங்கள், அல்லது உங்கள் மருத்துவரிடமிருந்து ஒரு Referral உடன் வாருங்கள்." },
+      { desc: "ஒரு Resting ECG மற்றும், பொருந்தும்போது, ஒரு Echocardiogram Record செய்யப்படும்." },
+      { desc: "ஒரு மருத்துவர் உங்கள் முடிவுகளை Review செய்து ஆபத்து மதிப்பீட்டை உங்களுடன் விவாதிப்பார்." },
+      { desc: "கண்டுபிடிப்புகள் தேவைப்பட்டால், மேலும் மேலாண்மைக்காக நீங்கள் Cardiology க்கு Refer செய்யப்படுவீர்கள்." },
     ],
     prep: [
       "உங்கள் மார்பை எளிதாக அணுகக்கூடிய Top ஐ அணியுங்கள்",
@@ -215,10 +203,7 @@ export const diagnosticServices = [
     ],
   },
   {
-    title: "CTG மற்றும் குழந்தையின் Monitoring",
-    directoryTitle: "CTG மற்றும் குழந்தையின் Monitoring",
     hours: "Appointment மூலம்",
-    cta: "Monitoring ஐ Book செய்யுங்கள்",
     desc: "குழந்தையின் இதயத் துடிப்பு மற்றும் சுருக்கங்களை Monitor செய்ய Cardiotocography (CTG), Antenatal Clinic உடன் இணைந்து இயங்கி Obstetric குழுவால் Review செய்யப்படும்.",
     tags: ["Cardiotocography சேவை", "குழந்தையின் இதயத் துடிப்பு", "சுருக்க Monitoring", "ஒரு Antenatal Clinic"],
     facts: [
@@ -228,7 +213,6 @@ export const diagnosticServices = [
       { k: "Review செய்வது", v: "Obstetric குழு" },
     ],
     lede: "குழந்தையின் இதயத் துடிப்பு மற்றும் சுருக்கங்களை Track செய்ய Cardiotocography, உங்கள் Antenatal Visits உடன் Book செய்யப்பட்டு Obstetric குழுவால் Review செய்யப்படும்.",
-    aboutHead: "உங்கள் குழந்தையின் இதயத் துடிப்பு மற்றும் உங்கள் சுருக்கங்களை Monitor செய்தல்",
     body1: "ஒரு CTG Trace உங்கள் குழந்தையின் இதயத் துடிப்பையும் ஏதேனும் Uterine சுருக்கங்களையும் ஒரு Monitoring காலப்பகுதிக்கு Record செய்யும், பொதுவாக நீங்கள் வசதியாக அமர்ந்திருக்கும் அல்லது சாய்ந்திருக்கும்போது உங்கள் வயிற்றில் இரண்டு Soft Sensors வைக்கப்பட்டு. இது Antenatal Clinic உடன் இணைந்து வழங்கப்படுகிறது, அதனால் முடிந்தவரை உங்கள் வழக்கமான கர்ப்ப பரிசோதனைகள் போலவே அதே Visit இல் பொருந்தும்.",
     body2: "ஒவ்வொரு Trace ஐயும் Obstetric குழு Review செய்யும், அவர்கள் Record செய்யப்பட்ட ஏதேனும் சுருக்கங்களுக்கு எதிராக இதயத் துடிப்பு முறையையும், உங்கள் ஒட்டுமொத்த Antenatal நிலைக்கு எதிராகவும் பார்ப்பர். Trace ஒரு கேள்வியை எழுப்பினால், அது நேரடியாக உங்களுடன் விவாதிக்கப்பட்டு உங்கள் தொடர்ச்சியான Antenatal சிகிச்சையின் ஒரு பகுதியாக Follow-up செய்யப்படும்.",
     strip: [
@@ -252,10 +236,10 @@ export const diagnosticServices = [
     ],
     location: "முதல் தளம், Antenatal Clinic",
     steps: [
-      { title: "Book செய்தல்", desc: "உங்கள் Antenatal Appointment உடன் இணைந்து, அல்லது உங்கள் Obstetric குழு பரிந்துரைத்தபடி Monitoring ஐ Book செய்யுங்கள்." },
-      { title: "இணைத்தல்", desc: "இதயத் துடிப்பு மற்றும் ஏதேனும் சுருக்கங்களை பிடிக்க இரண்டு Soft Sensors உங்கள் வயிற்றில் வைக்கப்படும்." },
-      { title: "Monitor செய்தல்", desc: "உங்கள் Obstetric குழு கேட்ட காலப்பகுதிக்கு Trace இயங்கும், நீங்கள் வசதியாக Rest எடுக்கும்போது." },
-      { title: "Review செய்தல்", desc: "நீங்கள் செல்வதற்கு முன் Obstetric குழு Trace ஐ Review செய்து கண்டுபிடிப்புகளை உங்களுடன் விவாதிப்பார்." },
+      { desc: "உங்கள் Antenatal Appointment உடன் இணைந்து, அல்லது உங்கள் Obstetric குழு பரிந்துரைத்தபடி Monitoring ஐ Book செய்யுங்கள்." },
+      { desc: "இதயத் துடிப்பு மற்றும் ஏதேனும் சுருக்கங்களை பிடிக்க இரண்டு Soft Sensors உங்கள் வயிற்றில் வைக்கப்படும்." },
+      { desc: "உங்கள் Obstetric குழு கேட்ட காலப்பகுதிக்கு Trace இயங்கும், நீங்கள் வசதியாக Rest எடுக்கும்போது." },
+      { desc: "நீங்கள் செல்வதற்கு முன் Obstetric குழு Trace ஐ Review செய்து கண்டுபிடிப்புகளை உங்களுடன் விவாதிப்பார்." },
     ],
     prep: [
       "Trace இன் போது குழந்தையின் செயல்பாட்டுக்கு உதவும் என்பதால் முன்பே சாப்பிடுங்கள்",
