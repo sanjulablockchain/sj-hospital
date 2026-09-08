@@ -33,10 +33,10 @@ function englishStrings(field: "label" | "heading"): string[] {
  * string for any label neither dictionary carries.
  *
  * This is a local, readable echo of the same guarantee
- * `overlayRegister.test.ts`'s filesystem walker enforces sitewide once
- * `config` leaves `PENDING_REGISTER_SWEEP`: it fails right here, against the
- * actual `*Navigation.ts` route files, rather than only in a walker a reader
- * of this file might never open.
+ * `overlayRegister.test.ts`'s filesystem walker enforces sitewide
+ * unconditionally: it fails right here, against the actual `*Navigation.ts`
+ * route files, rather than only in a walker a reader of this file might
+ * never open.
  */
 test("no nav label in any config has a Sinhala or Tamil dictionary entry", () => {
   const labels = englishStrings("label");

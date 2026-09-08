@@ -30,11 +30,11 @@
 
 import {
   overlayFiles,
+  overlayScope,
   toImportUrl,
 } from "../src/lib/i18n/overlayFiles.ts";
 import { stringPaths } from "../src/lib/i18n/stringPaths.ts";
 import { REGISTER_REASONS, registerReason } from "../src/lib/i18n/registerPolicy.ts";
-import { sweepScope, PENDING_REGISTER_SWEEP } from "../src/lib/i18n/pendingRegisterSweep.ts";
 
 const args = process.argv.slice(2);
 const summaryOnly = args.includes("--summary");
@@ -46,7 +46,7 @@ const scopeFilter = args
 /** Every overlay, grouped by the English module it translates. */
 const byBase = new Map();
 for (const overlay of overlayFiles()) {
-  const scope = sweepScope(overlay.relative);
+  const scope = overlayScope(overlay.relative);
   if (scopeFilter.length > 0 && !scopeFilter.includes(scope)) continue;
   const group = byBase.get(overlay.baseRelative) ?? { scope, overlays: [] };
   group.overlays.push(overlay);
@@ -92,13 +92,12 @@ console.log("");
 const pad = Math.max(...Object.keys(REGISTER_REASONS).map((reason) => reason.length));
 
 for (const row of rows) {
-  const pending = PENDING_REGISTER_SWEEP.has(row.scope) ? "pending sweep" : "ENFORCED";
   if (row.toDelete.length === 0) {
-    console.log(`${row.overlay.relative}  [${row.scope}, ${pending}]  clean`);
+    console.log(`${row.overlay.relative}  [${row.scope}]  clean`);
     continue;
   }
   console.log(
-    `${row.overlay.relative}  [${row.scope}, ${pending}]  ${row.toDelete.length} to delete`
+    `${row.overlay.relative}  [${row.scope}]  ${row.toDelete.length} to delete`
   );
   if (!summaryOnly) {
     for (const entry of row.toDelete) {
@@ -152,9 +151,8 @@ for (const [reason, counts] of [...byReason.entries()].sort((a, b) => total(b[1]
 console.log("");
 console.log("Paths to delete, by feature:");
 for (const [scope, counts] of [...byScope.entries()].sort((a, b) => total(b[1]) - total(a[1]))) {
-  const pending = PENDING_REGISTER_SWEEP.has(scope) ? "pending sweep" : "enforced";
   console.log(
-    `  ${scope.padEnd(20)}  si ${String(counts.si).padStart(4)}  ta ${String(counts.ta).padStart(4)}  (${counts.files} overlays, ${pending})`
+    `  ${scope.padEnd(20)}  si ${String(counts.si).padStart(4)}  ta ${String(counts.ta).padStart(4)}  (${counts.files} overlays)`
   );
 }
 
@@ -162,6 +160,6 @@ const si = [...byScope.values()].reduce((sum, counts) => sum + counts.si, 0);
 const ta = [...byScope.values()].reduce((sum, counts) => sum + counts.ta, 0);
 console.log("");
 console.log(`Total to delete: ${si} Sinhala, ${ta} Tamil, ${si + ta} overall.`);
-console.log(`Overlays audited: ${rows.length}. Still pending sweep: ${PENDING_REGISTER_SWEEP.size} scope(s).`);
+console.log(`Overlays audited: ${rows.length}.`);
 
 if (requireClean && si + ta > 0) process.exit(1);

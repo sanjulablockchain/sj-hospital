@@ -71,9 +71,9 @@ test("the chrome overlays contain only keys the English module has", () => {
 
 // The other direction: a key the register policy calls English must be
 // ABSENT from the overlay, not merely unused. `overlayRegister.test.ts`
-// enforces this walker-wide for every overlay once a scope leaves
-// `PENDING_REGISTER_SWEEP`; this is the same check, scoped to the chrome, so
-// a regression here is caught by this file too.
+// enforces this walker-wide for every overlay unconditionally; this is the
+// same check, scoped to the chrome, so a regression here is caught by this
+// file too.
 test("no chrome overlay key is one the register policy calls English", () => {
   for (const [name, overlay] of [
     ["si", si],

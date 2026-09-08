@@ -17,10 +17,10 @@ import { assertTranslationParity, stringPaths } from "../../../lib/i18n/stringPa
  * `glyph` is a structural name the component switches on to pick an icon, not
  * copy: keying JSX off translatable text is what blanked four icons on
  * `contact`'s own page the moment its labels were translated.
- * `contactRows[].value` is the fact a row carries alongside its own
- * translatable `label` (only the phone row has one: the hospital's own
- * number), the same role `contact`'s, `network`'s, `accommodation`'s,
- * `home-care`'s and `pharmacy`'s own `value` fields play.
+ * `contactRows[].value` is the fact a row carries alongside its own link
+ * label, now English like every CTA (only the phone row has one: the
+ * hospital's own number), the same role `contact`'s, `network`'s,
+ * `accommodation`'s, `home-care`'s and `pharmacy`'s own `value` fields play.
  *
  * `stations[*].kicker` is "01" through "09", the oversized numeral each
  * screening station renders instead of a label (`numeral: true` on
@@ -60,15 +60,12 @@ function isUntranslatable(path: string): boolean {
  * sentence around them does; that is a translation, not an exception, so
  * nothing from `gradeBands[].band` is listed below.
  *
- * `training[1].title` ("Basic Life Support") is a genuine exception: it is an
- * internationally standardised course name, the way "CT" and "MRI" stay
- * English throughout this site rather than being coined into a local
- * equivalent nobody trains under. Its three siblings in the same array all
- * translate their own titles in full ("First aid for teachers", "The child
- * who is unwell", "Sick room audit"), so this is a documented exception, not
- * a miss the sibling test would otherwise catch.
+ * `training[*].title` (all four, including `training[1]`'s "Basic Life
+ * Support") no longer needs an entry here: the register sweep moved every
+ * card title to English regardless of register, so there is no longer a
+ * code-mixing decision left to record for it.
  */
-const KEEPS_ENGLISH = new Set<string>(["training[1].title"]);
+const KEEPS_ENGLISH = new Set<string>([]);
 
 test("every translatable string in school-wellness has Sinhala", () => {
   const missing = assertTranslationParity(base, si, isUntranslatable);

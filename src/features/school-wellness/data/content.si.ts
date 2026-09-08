@@ -16,15 +16,12 @@
 // "Clinic එකක් නොව පාසලක් ඇයි" for this exact page's own header and footer
 // links, so "School" translates to "පාසල" here too, the same way "Negombo"
 // translates to "මීගමුව" elsewhere: keeping it English would leave one page
-// disagreeing with its own navigation. `hero.breadcrumbCurrent` and
-// `sectionEyebrows.why` reuse those exact strings rather than inventing a
-// second translation of the same English phrase.
+// disagreeing with its own navigation.
 //
 // "Screening" likewise already has a site-wide translation in
 // navigationLabels.si.ts ("The screening" -> "පරීක්ෂණය", "Screening by age"
 // -> "වයස අනුව පරීක්ෂණ"), so it is "පරීක්ෂණය"/"පරීක්ෂණ" here rather than an
-// English loanword. "By age group" and "Bring us in" are reused verbatim from
-// the same file for the same reason.
+// English loanword.
 //
 // "Dengue" transliterates to "ඩෙංගු", the same spelling
 // navigationLabels.si.ts already uses in "නිවසේ ඩෙංගු සත්කාර". "Grade"
@@ -32,12 +29,6 @@
 // written: "1 ශ්‍රේණිය", never rounded or reworded) and "Katana" and
 // "Kochchikade", the two smaller education divisions named alongside
 // Negombo, translate to "කටාන" and "කොච්චිකඩේ".
-//
-// `training[1].title` ("Basic Life Support") is the one whole field kept in
-// English: it is an internationally standardised course name, the same way
-// "CT" and "MRI" stay English throughout this site rather than being coined
-// into a Sinhala equivalent nobody trains under. See KEEPS_ENGLISH in
-// content.i18n.test.ts.
 //
 // Sentence forms use the polite plural ("කරන්න"), which is how a hospital
 // addresses a parent it has not met.
@@ -53,10 +44,10 @@
 export const __review = { status: "draft", reviewer: null, date: null } as const;
 
 export const heroFacts = [
-  { k: "සිදුවෙන්නේ කොහෙද", v: "ඔබේ පාසලේම, අපේ නෙවෙයි" },
-  { k: "පරීක්ෂණ දිනයක", v: "ශිෂ්‍යයන් 300ක් දක්වා" },
-  { k: "සෑම දරුවෙක්ම යන්නේ", v: "මුද්‍රා තැබූ Report එකක් ගෙදරට රැගෙන" },
-  { k: "ගැලපෙන්නේ", v: "ජාතික පාසල් සෞඛ්‍ය වැඩසටහනට" },
+  {},
+  {},
+  {},
+  {},
 ];
 
 export const tickerItems: readonly string[] = [
@@ -70,21 +61,18 @@ export const tickerItems: readonly string[] = [
 ];
 
 export const jumpCards = [
-  { count: "ඇයි පාසල", label: "Clinic එක නෙවෙයි", note: "ඕන කරන දරුවෝ කවදාවත් එන්නේ නෑ." },
-  { count: "මධ්‍යස්ථාන 9ක්", label: "පරීක්ෂණය", note: "උදෑසනක්, ශිෂ්‍යයන් 300ක් දක්වා." },
+  { count: "ඇයි පාසල", note: "ඕන කරන දරුවෝ කවදාවත් එන්නේ නෑ." },
+  { count: "මධ්‍යස්ථාන 9ක්", note: "උදෑසනක්, ශිෂ්‍යයන් 300ක් දක්වා." },
   {
     count: "කාණ්ඩ 5ක්",
-    label: "වයස් කාණ්ඩය අනුව",
     note: "1 ශ්‍රේණියේ සිට ජ්‍යෙෂ්ඨ ශ්‍රේණි දක්වා.",
   },
   {
     count: "පිළිතුරු 9ක්",
-    label: "සාධාරණ ප්‍රශ්න",
     note: "Consent එක, වියදම, පෞද්ගලිකත්වය, දෙමව්පියන්ට ලැබෙන දේ.",
   },
 ];
 
-export const whyHeading = "වඩාත්ම අවශ්‍ය දරුවෝ කවදාවත් රෝහලට එන්නේ නෑ";
 export const whyBody =
   "යමක් පැහැදිලිවම වැරදුනාම තමයි පවුලක් දරුවෙක්ව රෝහලට ගේන්නේ. කණ්ණාඩි ඕන වෙයි කියලා, නැත්නම් Haemoglobin එක අඩුයි කියලා කිසිම කෙනෙක් දරුවෙක්ව ගේන්නේ නෑ. ඒ තත්ත්ව නිහඬයි, ඒවා සුලභයි, ඒවා නිශ්ශබ්දවම දරුවෙකුගෙන් පාසල් අවුරුදු ගාණක් උදුරාගන්නවා. ඒවා සොයාගන්න තියෙන එකම විදිහ දරුවෝ දැනටමත් ඉන්න තැනටම යන එකයි.";
 
@@ -98,125 +86,104 @@ export const findings: readonly string[] = [
   "සුව නොකළ කන් ආසාදන නිසා ශ්‍රවණ හානි, අවධානය නැති කමක් කියලා වැරදියට තේරුම් ගන්නවා",
 ];
 
-export const screeningHeading = { line1: "මධ්‍යස්ථාන නවයයි,", line2: "උදෑසනක්" };
+export const screeningHeading = {};
 export const screeningIntro =
   "Hall එකක හෝ Classrooms දෙකක Set up කරනවා. දරුවෝ Class Groups වශයෙන් ගමන් කරනවා, එහෙනම් කිසිම පාඩමකට විනාඩි තිහකට වඩා අහිමි වෙන්නේ නෑ.";
 
 export const stations = [
   {
-    title: "දෘෂ්ටිය",
     body: "මීටර් හයක Snellen Chart එකකින් ඇස් දෙකෙන්ම Distance Acuity එක, Near Vision එක, Squint එක සහ වර්ණ දෘෂ්ටිය. Threshold එකට අඩු දරුවෙක් නම් නිසි Refraction එකකට Refer කරනවා.",
     more: "අල්ලා ගන්නේ: පස්සේ පේළියේ ප්‍රශ්නය",
   },
   {
-    title: "ශ්‍රවණය",
     body: "Whisper සහ Tuning Fork Screening, Wax, Perforation සහ Glue Ear බලන්න Otoscopy සමඟ. Pass නොවන දරුවෝ Audiometry සඳහා යවනවා.",
     more: "අල්ලා ගන්නේ: වැරදියට තේරුම් ගත් අවධානම් නැති කම",
   },
   {
-    title: "වර්ධනය",
     body: "උස, බර සහ Body Mass Index එක දරුවාගේම Centile Chart එකේ Plot කරනවා, එක් අංකයකට එරෙහිව විනිශ්චය කරන්නේ නෑ. ජ්‍යෙෂ්ඨ ශ්‍රේණි වල ඉණ මනිනවා.",
     more: "අල්ලා ගන්නේ: Stunting එකයි තරබාරුකමයි",
   },
   {
-    title: "දන්ත",
     body: "Caries, Gum Disease, Fluorosis සහ Malocclusion සඳහා බැලීමක්, Fluoride උපදෙස් සහ Brushing Technique එතනදීම පෙන්නනවා.",
     more: "අල්ලා ගන්නේ: වඩාත්ම සුලභ සොයාගැනීම",
   },
   {
-    title: "රක්තහීනතාව",
     body: "පාසල ඉල්ලුවොත් Finger Prick එකකින් Haemoglobin, දෙමව්පියන්ගේ Consent එකත් සමඟ. නව යොවුන් වියේ දැරියෝ ප්‍රමුඛතා කාණ්ඩයයි.",
     more: "අල්ලා ගන්නේ: මහන්සි ශිෂ්‍යයා",
   },
   {
-    title: "කොඳු ඇට පෙළ සහ ඉරියව්ව",
     body: "Scoliosis සඳහා Forward Bend Test එකක්, ඊට අමතරව ඉරියව්ව, ඇවිදින විදිහ සහ පැතලි පාද. වර්ධන Spurt අවුරුදු වලදී අල්ලාගත්තොත්, බොහෝ විට හදාගන්න පුළුවන්.",
     more: "අල්ලා ගන්නේ: Scoliosis, කලින්",
   },
   {
-    title: "සාමාන්‍ය පරීක්ෂණය",
     body: "හෘද ශබ්ද, පපුව, Thyroid, Lymph Nodes, සම සහ බඩ බැලීමක්, එකම Gender එකේ Staff කෙනෙක් ඉන්න Screen එකක් පිටුපස.",
     more: "අල්ලා ගන්නේ: අනපේක්ෂිත Murmur එක",
   },
   {
-    title: "එන්නත් වාර්තාව",
     body: "Immunisation Card එක ජාතික Schedule එකට එරෙහිව Check කරලා, නැති කොටස් දෙමව්පියන්ට List කරනවා, ළඟින්ම Catch Up කරගන්නේ කොහෙන්ද කියලත් සමඟ.",
     more: "අල්ලා ගන්නේ: මග හැරුණු Dose එක",
   },
   {
-    title: "සුවතා සංවාදය",
     body: "ජ්‍යෙෂ්ඨ ශ්‍රේණි වල නින්ද, Screens, මනෝභාවය, Bullying සහ විභාග පීඩනය ගැන කෙටි පෞද්ගලික සංවාදයක්. කැමැත්තෙන් විතරයි, ගුරුවරුන්ට කවදාවත් Report කරන්නේ නෑ.",
     more: "අල්ලා ගන්නේ: කිසිවෙක් නොඅහන දේ",
   },
 ];
 
-export const gradeBandsHeading = { line1: "විවිධ", line2: "වයස්, විවිධ", line3: "කරදර" };
+export const gradeBandsHeading = {};
 export const gradeBandsIntro =
   "ජාතික පාසල් සෞඛ්‍ය වැඩසටහන අවධානය යොමු කරන්නේ 1, 4, 7 සහ 10 ශ්‍රේණි වලටයි. අපි ඒ රිද්මයම අනුගමනය කරලා, පාසල ඉල්ලන දේත් එකතු කරනවා.";
 
 export const gradeBands = [
   {
     band: "1 ශ්‍රේණිය",
-    title: "පළමු නිසි බැල්ම",
     body: "බොහෝ දරුවන්ට බාල්‍ය කාලයෙන් පසු පළමු සෞඛ්‍ය පරීක්ෂණය මෙයයි. දෘෂ්ටියයි ශ්‍රවණයයි මෙතන වඩාත්ම වැදගත්, මොකද පළමු අවුරුද්දේදී ගුරුවරයා පේන්නේ නැති, ඇහෙන්නේ නැති දරුවෙක් පස්සේ අල්ලගන්නේ කලාතුරකිනුයි. වර්ධනය, දත් සහ එන්නත් Card එක Check කරනවා, බාල්‍ය කාලයේදී මග ඇරුණු Congenital ප්‍රශ්නයක් නම් මේ Station එකේදී බොහෝ විට මතු වෙනවා.",
   },
   {
     band: "4 ශ්‍රේණිය",
-    title: "පුරුදු තහවුරු වෙන කාලය",
     body: "දන්ත Caries සහ බර තමයි මේ වයසේදී කතාව. දැන් හදාගන්නා ආහාර සහ ක්‍රියාකාරකම් රටාවන් වැඩිපුරම දිගටම පවතිනවා, දෙමව්පියෙක් සමඟ පෝෂණය ගැන කතාවක් තාමත් යමක් වෙනස් කරන අවස්ථාවත් මෙයයි. හත සහ දහය අතර දුර දෘෂ්ටි දෝෂය සාමාන්‍යයෙන් මතුවෙන නිසා දෘෂ්ටිය නැවත Check කරනවා.",
   },
   {
     band: "7 ශ්‍රේණිය",
-    title: "වර්ධන Spurt එක",
     body: "Scoliosis පරීක්ෂණය මේ කාණ්ඩයේදී වඩාත්ම වැදගත්, මොකද වර්ධන Spurt කාලයේදී හමුවෙන Curve එකක් බොහෝ විට සැත්කමකින් තොරව Bracing එකකින්ම හසුරුවගන්න පුළුවන්. රක්තහීනතා පරීක්ෂණය තදින්ම පටන් ගන්නවා, ඔසප් සෞඛ්‍යය ගැනත් දැරියන් සමඟ ඔවුන්ටම වෙන් වූ Session එකකදී කතා කරනවා.",
   },
   {
     band: "10 ශ්‍රේණිය",
-    title: "විභාග අවුරුද්දේ පීඩනය",
     body: "ශාරීරිකව මේ කාණ්ඩය සරළයි. සරළ නැත්තේ නින්ද, Stress එක, මේසයක දිගු වේලා ඉඳීමෙන් එන ඉරියව්ව, ඇස් වෙහෙස, සහ සමහර ශිෂ්‍යයන්ට Tobacco හෝ Alcohol පළමු වතාවට පාවිච්චි කිරීමයි. සුවතා සංවාදයට මෙතන ඕනෑම මිනුමකට වඩා බර තියෙනවා.",
   },
   {
     band: "ක්‍රීඩා කණ්ඩායම්",
-    title: "Season එක පටන් ගන්න කලින්",
     body: "පාසලේ කණ්ඩායමක ඕනෑම ශිෂ්‍යයෙකුට Pre Participation Check එකක්: හෘද ශබ්ද සහ රිද්මය, රුධිර පීඩනය, වෙහෙසෙන විට Fainting හෝ පපුවේ වේදනා History එකක්, කලින් තුවාල සහ Joint Stability. තරුණ ක්‍රීඩකයන්ට හදිසි හෘද සිදුවීම් දුර්ලභයි, දුර්ලභ Case එක සොයාගන්නේ මෙහෙමයි.",
   },
 ];
 
-export const teacherHeading = { line1: "පළමුවෙන්ම එහෙ", line2: "ඉන්න අයට", line3: "පුහුණුව දෙන්න" };
+export const teacherHeading = {};
 export const teacherIntro =
   "අඟහරුවාදා දහවල දරුවෙක් වැටුනොත්, ලඟින්ම දණහිස Bend කරන කෙනා ගුරුවරයෙක්. මේ Sessions වැඩසටහනේ පාසල් වලට නොමිලේ පවත්වනවා.";
 
 export const training = [
   {
     kicker: "අඩක් දවසක්",
-    title: "ගුරුවරුන්ට ප්‍රථමාධාර",
     body: "ලේ ගැලීම, පිළිස්සීම්, අස්ථි බිඳීම්, හුස්ම හිරවීම, Seizures සහ Fainting, කථා කරනවා වෙනුවට ප්‍රායෝගිකව පුහුණු කරනවා. සෑම Participant කෙනෙක්ම Scenario එක තමන්ම හසුරුවනවා.",
     more: "සියලුම ගුරු Staff",
   },
   {
-    // Kept in English: an internationally standardised course name, the same
-    // way CT and MRI stay English throughout this site. See the file header
-    // and KEEPS_ENGLISH in content.i18n.test.ts.
     kicker: "පැය දෙකක්",
-    title: "Basic Life Support",
     body: "Manikin එකක Chest Compressions සහ Rescue Breathing, ඊට අමතරව Ambulance එක Gate එකට එනකන් Emergency එකක් හසුරුවන විදිහ.",
     more: "Sports සහ Science Staff",
   },
   {
     kicker: "පැය දෙකක්",
-    title: "අසනීප දරුවා",
     body: "Sick Room එකේ වැතිරෙනවා වෙනුවට අද රෝහලකට ඕන දරුවා හඳුනාගැනීම. Asthma Attacks, Dehydration, High Fever, Allergic Reactions.",
     more: "Class ගුරුවරු, Matrons",
   },
   {
     kicker: "පැයක්",
-    title: "අසනීප කාමරයේ Review එකක්",
     body: "ඔබේ Sick Room Stock එක, Expiry Dates සහ වාර්තා අපි Review කරලා, නැති දේ මොනවද, ළඟින්ම ගන්නේ කොහෙන්ද කියලා ලියපු List එකක් තියලා යනවා.",
     more: "එය හසුරුවන ඕනෑම කෙනෙක්",
   },
 ];
 
-export const dengueHeading = { line1: "ඩෙංගු කියන්නේ", line2: "පාසල් ප්‍රශ්නයක්" };
+export const dengueHeading = {};
 export const dengueIntro =
   "මදුරුවා දෂ්ට කරන්නේ දහවල් වෙලාවේ, ඒ කියන්නේ දරුවෝ දෂ්ට වෙන්නේ පාසලේදී, ඇඳේ නිවසේ නෙවෙයි. Corridor එකක Pot එකක් යටින් තියෙන Tray එකක් හෝ අවහිර වූ එක් Gutter එකකින් Class එකක් පුරාම ප්‍රමාණවත්.";
 export const dengueNote =
@@ -235,15 +202,9 @@ export const breedingSites: readonly string[] = [
   "දමා තිබෙන ඉදිකිරීම් Debris සහ Cement මිශ්‍ර කරන Trays",
 ];
 
-export const followUpHeading = {
-  line1: "Report එකකින්",
-  line2: "ඉවර වෙන",
-  line3: "පරීක්ෂණයක්",
-  line4: "අඩක් විතරයි",
-};
+export const followUpHeading = {};
 export const followUpIntro =
   "වැදගත් වෙන්නේ Data එක නෙවෙයි. වැදගත් වෙන්නේ අඩු Haemoglobin තියෙන දරුවා ඇත්තටම Treatment ලබන එකයි. Flag කරපු හැම දරුවෙක්වම යමක් වෙනතුරු Track කරනවා.";
-export const followUpCta = "Coordinator සමඟ කතා කරන්න";
 
 export const followUp = [
   {
@@ -272,7 +233,7 @@ export const followUp = [
   },
 ];
 
-export const faqHeading = { line1: "අපිගෙන් අහන්න", line2: "සාධාරණ ප්‍රශ්න" };
+export const faqHeading = {};
 
 export const faq = [
   {
@@ -314,10 +275,10 @@ export const faq = [
 ];
 
 export const contactRows = [
-  { label: "රෝහලට Call කරන්න" },
-  { label: "රෝහලට Email කරන්න" },
-  { label: "අපට WhatsApp කරන්න" },
-  { label: "දෙමව්පියන්ට Health Tips" },
+  {},
+  {},
+  {},
+  {},
 ];
 
 export const bookingChecklist: readonly string[] = [
@@ -330,44 +291,10 @@ export const bookingChecklist: readonly string[] = [
 export const disclaimer =
   "පාසල් පරීක්ෂණය Ministry of Health පාසල් වෛද්‍ය පරීක්ෂණයයි ඔබේ Division එකේ Public Health Midwife සහ Medical Officer of Health සේවා ත් Complement කරනවා මිසක් ආදේශ කරන්නේ නෑ. සොයාගැනීම් පාසලයි දෙමව්පියායි එක්කම Share කරනවා; ඉදිරි දැනුම්දීම යන්නේ පාසලේම ප්‍රදේශයේ MOH එක සමඟ තියෙන එකඟතා අනුවයි.";
 
-export const hero = {
-  strapline: "අපි පාසලට එනවා",
-  breadcrumbHome: "මුල් පිටුව",
-  // Reused verbatim from navigationLabels.si.ts's "School Wellness" ->
-  // "පාසල් සුවතාව": this page's own header and footer already print that
-  // translation, so the breadcrumb has to agree with it.
-  breadcrumbCurrent: "පාසල් සුවතාව",
-  headingLead: "ප්‍රශ්නය",
-  headingOutline: "කවුරුවත්",
-  headingAccent: "දැක්කේ නෑ.",
-  bookCta: "අපිව ඔබේ පාසලට කැඳවන්න",
-  // Short deliberately: this sits inside a whitespace-nowrap pill at 360px
-  // (see WellnessHero.tsx), the same trap that cost e-channeling's
-  // helpRail.heading a rewrite. A one-line punchy phrase, not the full
-  // English sentence.
-  exploreCta: "පරීක්ෂණයේ දේ",
-};
+export const hero = {};
 
-export const heroStandfirst =
-  "Board එක කියවන්න බැරි දරුවා මන්දගාමී කෙනෙක් නෙවෙයි. Class එකේදී නින්ද යන දරුවා රක්තහීන කෙනෙක් වෙන්න පුළුවන්. අපේ කණ්ඩායම ඔබේ පාසලට ඇවිත්, සෑම ශිෂ්‍යයෙක්වම පරීක්ෂා කරලා, කවුද වෛද්‍යවරයෙක් ඕන කියලා ඔබට කියනවා.";
-
-export const bookHeading = { line1: "උදෑසනක්.", line2: "සෑම දරුවෙක්ම", line3: "පරීක්ෂා කරනවා." };
+export const bookHeading = {};
 export const bookIntro =
   "ඔබේ ශිෂ්‍ය සංඛ්‍යාව සහ ගැලපෙන Term දින අපිට කියන්න. අපි මුලින්ම ඇවිත් Hall එක බලනවා, ඊට පස්සේ දිනයක් තහවුරු කරනවා. මීගමුව, කටාන සහ කොච්චිකඩේ කලාප වල පාසල් අපේ ප්‍රමුඛතාවයි.";
 
-// Every value below is reused verbatim from navigationLabels.si.ts where that
-// file already translates the same English phrase for this page's own header
-// and footer links ("Why school, not clinic", "The screening", "By age
-// group", "Bring us in"): see the file header. `faq`'s own "Principal" stays
-// an English loanword throughout its body copy, so the eyebrow matches rather
-// than switching to the formal "විදුහල්පති" only here.
-export const sectionEyebrows = {
-  why: "01 / Clinic එකක් නොව පාසලක් ඇයි",
-  programme: "02 / පරීක්ෂණය",
-  grades: "03 / වයස් කාණ්ඩය අනුව",
-  teachers: "04 / ගුරු කාමරය සඳහා",
-  dengue: "05 / පාසල් බිම",
-  referral: "06 / පරීක්ෂණයෙන් පසු",
-  faq: "07 / Principal ලාට සහ දෙමව්පියන්ට",
-  book: "08 / අපව ආරාධනා කරන්න",
-};
+export const sectionEyebrows = {};

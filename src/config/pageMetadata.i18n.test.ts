@@ -51,8 +51,8 @@ test("the overlays contain only keys the English module has", () => {
 
 // The other direction: a `title` is register-policy English and must be
 // ABSENT from the overlay, not merely unused. `overlayRegister.test.ts`
-// enforces this walker-wide for every overlay once `config` leaves
-// `PENDING_REGISTER_SWEEP`; this is the same check, scoped to page metadata.
+// enforces this walker-wide for every overlay unconditionally; this is the
+// same check, scoped to page metadata.
 test("no overlay carries a title, which the register policy calls English", () => {
   for (const [name, overlay] of [
     ["si", si],

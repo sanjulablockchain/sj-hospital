@@ -119,3 +119,27 @@ export async function readReviewMarker(
 export function isSignedOff(marker: { status: string; reviewer: string | null }): boolean {
   return marker.status === "reviewed" && (marker.reviewer ?? "").trim() !== "";
 }
+
+/**
+ * The feature an overlay belongs to, derived from where it lives on disk.
+ *
+ * A feature is its directory name. The two overlays outside `src/features`
+ * get their own scopes: `config` for `src/config/pageMetadata.si/ta.ts`,
+ * `chrome` for the layout overlays under `src/components/`.
+ *
+ * Originally written for `pendingRegisterSweep.ts`, which used it to group
+ * overlays while the register-policy content sweep was in progress feature
+ * by feature. That module is gone now that the sweep is finished (every
+ * overlay obeys `registerPolicy.ts` unconditionally), but grouping an
+ * overlay by the feature that owns it is still useful on its own: the
+ * register audit script reports totals per feature, and
+ * `overlayRegister.test.ts` uses it to confirm every overlay on disk is
+ * covered by a recognised scope.
+ */
+export function overlayScope(relativePath: string): string {
+  const feature = /^src\/features\/([^/]+)\//.exec(relativePath);
+  if (feature) return feature[1];
+  if (relativePath.startsWith("src/config/")) return "config";
+  if (relativePath.startsWith("src/components/")) return "chrome";
+  return "other";
+}
