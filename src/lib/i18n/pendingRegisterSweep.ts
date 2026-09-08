@@ -243,12 +243,27 @@ export function sweepScope(relativePath: string): string {
  * translated. `KEEPS_ENGLISH`'s three `roomTiles[*].name` entries were
  * unaffected (that array is untouched) and needed no change.
  *
+ * `network` was swept on 2026-09-09, needing no code change: its getter
+ * already reads its overlay through `localize`. 53 Sinhala and 53 Tamil
+ * strings were deleted from its single content overlay (`content.si/ta.ts`):
+ * the hero (entirely, now `{}`), `jumpCards[*].label`,
+ * `contactRows[*].label` (now `{}`, `{}`), every `orgGroups[*].orgs[*].cta`
+ * (all nine), the bare `mattersHeading`/`practiceHeading`/`referralCta` and
+ * `contactEyebrow`/`familyEyebrow`/`mattersEyebrow`/`reachEyebrow`/
+ * `referralEyebrow` exports, and every split `*Heading.line*` object
+ * (`contactHeading`, `familyHeading`, `reachHeading`, `referralHeading`,
+ * each now `{}`). Fixed ten now-stale `KEEPS_ENGLISH` entries
+ * (`heroFacts[0].v` and the nine `orgGroups[*].orgs[*].cta` entries, one per
+ * organisation) and the two comments explaining why the Sri Lanka group's
+ * own `cta`s were the translated exception; `wordmark`/`name` and the
+ * chip-level exceptions are unaffected. `note`, `body`, `tagline`, every
+ * FAQ (`referrals`) and `disclaimer` are untouched and stay translated.
+ *
  * A future scope may need a similar check before it is swept: read the
  * feature's own getter (`getContent.ts` or equivalent) for whether it reads
  * an overlay directly or through `localize` before deleting from it.
  */
 export const PENDING_REGISTER_SWEEP: ReadonlySet<string> = new Set([
-  "network",
   "pharmacy",
   "school-wellness",
 ]);

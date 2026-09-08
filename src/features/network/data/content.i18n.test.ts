@@ -13,10 +13,11 @@ import { assertTranslationParity, stringPaths } from "../../../lib/i18n/stringPa
  * `#reach` row ("9", "25+", "2010"), a fact rather than prose. `glyph` is
  * which character a `#contact` row shows, a name the code switches on rather
  * than copy. `internal` is a boolean, not copy. `value` is the fact a
- * contact row carries alongside its own translatable `label` (only the
- * phone row has one: the hospital's own number), the same role `contact`'s,
- * `accommodation`'s, `home-care`'s and `pharmacy`'s own `value` fields play,
- * so it stays untranslated the same way `href` does. `PLACEHOLDER_NOTICE` is
+ * contact row carries alongside its own link label, now English like every
+ * CTA (only the phone row has one: the hospital's own number), the same
+ * role `contact`'s, `accommodation`'s, `home-care`'s and `pharmacy`'s own
+ * `value` fields play, so it stays untranslated the same way `href` does.
+ * `PLACEHOLDER_NOTICE` is
  * excluded entirely: it is internal review documentation asserted verbatim
  * by content.test.ts, and no component on this page ever renders it to a
  * reader.
@@ -55,14 +56,13 @@ function isUntranslatable(path: string): boolean {
  * and domains: proper nouns that never change script, the same way the
  * hospital's own name never does. `tickerItems` is the marquee of the other
  * eight companies in the group, so all eight are company names outright.
- * `heroFacts[0].v` is the parent company's own name. Each org's `wordmark`
- * and `name` is that company's own name, exactly as `ktdoctor.com/network`
- * prints it; recasting "Kids & Teens Medical Group" into Sinhala or Tamil
- * letters would not be a translation, it would be a different name. Each
- * org's `cta` is either "This hospital" (translated below, since it is a
- * statement rather than a name) or the literal domain the card links to
- * ("acig.lk", "ktdoctor.com", and so on), which content.test.ts pins against
- * the href on the same row and so can never be recast either.
+ * Each org's `wordmark` and `name` is that company's own name, exactly as
+ * `ktdoctor.com/network` prints it; recasting "Kids & Teens Medical Group"
+ * into Sinhala or Tamil letters would not be a translation, it would be a
+ * different name. `heroFacts[0].v` (the parent company's own name) and every
+ * org's `cta` no longer need an entry here: the register sweep moved the
+ * whole hero and every CTA/link label to English regardless of register, so
+ * there is no longer a code-mixing decision left to record for either.
  *
  * The last group of entries is a handful of individual chips. "Telemedicine",
  * "Telehealth" (x3) and "Speech therapy" were excused here too until a
@@ -97,41 +97,30 @@ const KEEPS_ENGLISH = new Set<string>([
   "tickerItems[6]",
   "tickerItems[7]",
 
-  // The parent company's own name.
-  "heroFacts[0].v",
-
   // Sri Lanka group: St. Joseph Hospital (this site) and ACIG.
   "orgGroups[0].orgs[0].wordmark",
   "orgGroups[0].orgs[0].name",
   "orgGroups[0].orgs[1].wordmark",
   "orgGroups[0].orgs[1].name",
-  "orgGroups[0].orgs[1].cta",
 
   // California group: Kids & Teens, St. Gianna, LAIPT, Serendib Healthways,
   // After-Hours Pediatric Urgent Care.
   "orgGroups[1].orgs[0].wordmark",
   "orgGroups[1].orgs[0].name",
-  "orgGroups[1].orgs[0].cta",
   "orgGroups[1].orgs[1].wordmark",
   "orgGroups[1].orgs[1].name",
-  "orgGroups[1].orgs[1].cta",
   "orgGroups[1].orgs[2].wordmark",
   "orgGroups[1].orgs[2].name",
-  "orgGroups[1].orgs[2].cta",
   "orgGroups[1].orgs[3].wordmark",
   "orgGroups[1].orgs[3].name",
-  "orgGroups[1].orgs[3].cta",
   "orgGroups[1].orgs[4].wordmark",
   "orgGroups[1].orgs[4].name",
-  "orgGroups[1].orgs[4].cta",
 
   // Business and support group: Human Compass MSO, Blockchain BPO.
   "orgGroups[2].orgs[0].wordmark",
   "orgGroups[2].orgs[0].name",
-  "orgGroups[2].orgs[0].cta",
   "orgGroups[2].orgs[1].wordmark",
   "orgGroups[2].orgs[1].name",
-  "orgGroups[2].orgs[1].cta",
 
   // A handful of individual chips: clinical therapy-service names and a US
   // insurance-scheme acronym with nothing to translate. See the comment

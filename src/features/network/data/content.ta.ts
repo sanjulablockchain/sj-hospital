@@ -38,19 +38,7 @@
  */
 export const __review = { status: "draft", reviewer: null, date: null } as const;
 
-export const hero = {
-  strapline: "நீர்கொழும்பிலிருந்து Los Angeles வரை",
-  breadcrumbHome: "முகப்பு",
-  breadcrumbCurrent: "எங்கள் Network",
-  headingLead: "ஒரு மருத்துவமனை",
-  headingOutline: "நீர்கொழும்பில்,",
-  headingAccent: "LA இலிருந்து ஆதரவு.",
-  familyCta: "Network ஐ அறிந்துகொள்ளுங்கள்",
-  mattersCta: "இது உங்களுக்கு எதைக் குறிக்கிறது",
-};
-
-export const heroStandfirst =
-  "St. Joseph Hospital ஐ இயக்குவது கலிபோர்னியாவின் மிகப்பெரிய குழந்தை மருத்துவ Group ஆன Kids & Teens Medical Group ஆகும். Clinical Protocols, Training மற்றும் Second Opinions வருவது அங்கிருந்துதான்.";
+export const hero = {};
 
 // The other eight companies in the group, exactly as ktdoctor.com/network
 // names them. See KEEPS_ENGLISH in content.i18n.test.ts.
@@ -67,25 +55,21 @@ export const tickerItems: readonly string[] = [
 
 export const heroFacts = [
   // `v` is the parent company's own name: see KEEPS_ENGLISH.
-  { k: "தாய் நிறுவனக் குழு", v: "Kids & Teens Medical Group" },
-  { k: "Group இன் Clinics", v: "Greater LA முழுவதும் 25" },
-  { k: "குடும்பத்தில் நிறுவனங்கள்", v: "ஒன்பது, இரு கண்டங்களில்" },
-  { k: "இலங்கைப் பிரிவு", v: "இந்த மருத்துவமனை, மற்றும் ACIG" },
+  {},
+  {},
+  {},
+  {},
 ];
 
 export const jumpCards = [
-  { count: "ஏன் முக்கியம்", label: "படுக்கை அருகில்", note: "இந்த தொடர்பு உங்கள் சிகிச்சையில் மாற்றும் விஷயம்." },
-  { count: "9 நிறுவனங்கள்", label: "குடும்பம்", note: "கலிபோர்னியா, இலங்கை, மற்றும் ஆதரவுப் பிரிவுகள்." },
-  { count: "எண்கள்", label: "Group அளவு", note: "Clinics, மருத்துவர்கள், இடங்கள், வெளியிடப்பட்டவை." },
-  { count: "7 பதில்கள்", label: "எங்களுக்கு இடையே பயணம்", note: "Referrals, Second Opinions, காப்பீடு, வேலைகள்." },
+  { count: "ஏன் முக்கியம்", note: "இந்த தொடர்பு உங்கள் சிகிச்சையில் மாற்றும் விஷயம்." },
+  { count: "9 நிறுவனங்கள்", note: "கலிபோர்னியா, இலங்கை, மற்றும் ஆதரவுப் பிரிவுகள்." },
+  { count: "எண்கள்", note: "Clinics, மருத்துவர்கள், இடங்கள், வெளியிடப்பட்டவை." },
+  { count: "7 பதில்கள்", note: "Referrals, Second Opinions, காப்பீடு, வேலைகள்." },
 ];
 
-export const mattersEyebrow = "01 / படுக்கை அருகில் ஏன் முக்கியம்";
-export const mattersHeading = "ஒரு Network நோயாளிக்கு பயன்படும்போது மட்டுமே மதிப்புடையது";
 export const mattersBody =
   "பெரும்பாலான மருத்துவமனை Group பக்கங்கள் corporate சுவர்ப்பேப்பர் மட்டுமே. இது இருப்பதற்குக் காரணம், இந்த தொடர்பு உங்கள் சிகிச்சையில் மாற்றும் குறிப்பிட்ட விஷயங்கள்: மருத்துவர்கள் பின்பற்றும் Protocols என்ன, கடினமான Case ஐ யார் மறுஆய்வு செய்கிறார்கள், Los Angeles இல் சிகிச்சை பெற்ற குழந்தை File ஐ மீண்டும் தொடங்காமல் நீர்கொழும்பில் Follow-up செய்யப்படும் விதம்.";
-
-export const practiceHeading = "நடைமுறையில்";
 
 export const practice = [
   "Group இலிருந்து பெறப்பட்ட Paediatric மற்றும் Emergency Protocols, இலங்கை Guidelines க்கு ஏற்ப மாற்றப்பட்டவை",
@@ -95,8 +79,7 @@ export const practice = [
   "Nursing மற்றும் Technician Training Programmes Group தரநிலைகளுக்கு இணங்க நடத்தப்படுகின்றன",
 ];
 
-export const familyEyebrow = "02 / குடும்பம்";
-export const familyHeading = { line1: "ஒன்பது நிறுவனங்கள்,", line2: "இரு கண்டங்கள்" };
+export const familyHeading = {};
 export const familyIntro =
   "கலிபோர்னியாவில் Paediatric மற்றும் Family Care, இலங்கையில் மருத்துவமனை சிகிச்சை மற்றும் காப்பீடு, மற்றும் இரண்டையும் இயங்க வைக்கும் நிர்வாக நிறுவனங்கள்.";
 
@@ -114,10 +97,6 @@ export const orgGroups = [
         tagline: "நீர்கொழும்பில் US தரத்திலான சிகிச்சை.",
         body: "Kids & Teens Medical Group, USA ஆல் இயக்கப்படும், சர்வதேச Airport இலிருந்து பத்து நிமிடத் தொலைவில், அமெரிக்க சுகாதார Standards ஐ, ஏற்புடைய, அணுகக்கூடிய சிகிச்சைக்குக் கொண்டு வருகிறது.",
         chips: ["Emergency மற்றும் OPD", "Inpatient சிகிச்சை", "Telemedicine சிகிச்சை", "Pharmacy மற்றும் Diagnostics"],
-        // A statement of fact rather than a company's own domain, so it is
-        // translated: see KEEPS_ENGLISH for why the other eight `cta`s are
-        // not.
-        cta: "இந்த மருத்துவமனை",
       },
       {
         wordmark: "Asiacorp Insurance",
@@ -126,9 +105,6 @@ export const orgGroups = [
         tagline: "இலங்கை முழுவதும் காப்பீட்டு தீர்வுகள்.",
         body: "தனிநபர்கள் மற்றும் Businesses க்காக ஏற்ப செய்யப்பட்ட Motor, Health, Life மற்றும் Corporate Cover வழங்கும் காப்பீட்டு Brokerage, மற்றும் எங்கள் நோயாளிகள் அதிகம் கேட்கும் Group நிறுவனம்.",
         chips: ["Health காப்பீடு", "Life காப்பீடு", "Motor காப்பீடு", "Corporate காப்பீடு"],
-        // This company's own domain, pinned against `href` by
-        // content.test.ts: see KEEPS_ENGLISH.
-        cta: "acig.lk",
       },
     ],
   },
@@ -143,7 +119,6 @@ export const orgGroups = [
         tagline: "முதன்மை Paediatric Network.",
         body: "Greater LA இல் 25 Clinics முழுவதும், வயது 0 முதல் 21 வரை குழந்தைகளுக்கு Board Certified Paediatric சிகிச்சை, மற்றும் இந்த மருத்துவமனையை இயக்கும் Group.",
         chips: ["முதன்மை சிகிச்சை", "அவசர சிகிச்சை", "Telehealth சிகிச்சை", "பிறந்த குழந்தை சிகிச்சை"],
-        cta: "ktdoctor.com",
       },
       {
         wordmark: "St. Gianna Medical",
@@ -152,7 +127,6 @@ export const orgGroups = [
         tagline: "அனைத்து வயதினருக்கும் குடும்ப மருத்துவம்.",
         body: "அன்றே Appointments மற்றும் 24 மணி நேர Booking உடன் பெரியவர்கள் மற்றும் குழந்தைகளுக்கான முழுமையான சிகிச்சை, Group ஐ Paediatrics ஐ தாண்டி விரிவாக்குகிறது.",
         chips: ["அன்றே Appointments", "24 மணி நேர Booking", "Telehealth சிகிச்சை", "மேம்பட்ட காயச் சிகிச்சை"],
-        cta: "sgmdoctor.com",
       },
       {
         wordmark: "LA Intensive Pediatric Therapy",
@@ -166,7 +140,6 @@ export const orgGroups = [
         // names: see KEEPS_ENGLISH. `chips[0]` translates "Speech" the same
         // way `reachRows` does further down this file.
         chips: ["பேச்சு Therapy", "Occupational therapy", "Sensory integration"],
-        cta: "laipt.org",
       },
       {
         wordmark: "Serendib Healthways",
@@ -177,7 +150,6 @@ export const orgGroups = [
         // `chips[0]` is a US insurance-scheme acronym with no Tamil
         // equivalent: see KEEPS_ENGLISH.
         chips: ["Paediatric HMO/IPA", "அன்றே Appointments", "Telehealth சிகிச்சை", "நேரத்திற்குப் பின் அவசர சிகிச்சை"],
-        cta: "serendibhealthways.com",
       },
       {
         wordmark: "After-Hours Pediatric Urgent Care",
@@ -186,7 +158,6 @@ export const orgGroups = [
         tagline: "நேரம் கடந்ததா? உங்கள் குழந்தைகளுக்காக நாங்கள் இருக்கிறோம்.",
         body: "20க்கும் மேற்பட்ட California Clinics இல் வயது 0 முதல் 21 வரை குழந்தைகளுக்கு, எந்த நேரத்திலும் Paediatric Urgent Care, முக்கிய காப்பீட்டு Plans அனைத்தும் ஏற்கப்படும்.",
         chips: ["24 மணி நேர அவசர சிகிச்சை", "அன்றே Appointments", "வயது 0 முதல் 21", "அனைத்து காப்பீடும் ஏற்கப்படும்"],
-        cta: "pediatricafterhour.com",
       },
     ],
   },
@@ -201,7 +172,6 @@ export const orgGroups = [
         tagline: "சிகிச்சையை வழிநடத்துதல், மனித தீர்வுகளை வழங்குதல்.",
         body: "25 ஆண்டுகளுக்கும் மேலாக நோயாளிகளை Primary, Specialty மற்றும் Urgent Care Providers உடன் இணைக்கும் தென் கலிபோர்னியாவின் Management Services நிறுவனம்.",
         chips: ["முதன்மை சிகிச்சை Network", "Specialty சிகிச்சை", "அவசர சிகிச்சை", "Provider மேலாண்மை"],
-        cta: "humancompassmso.com",
       },
       {
         wordmark: "Blockchain BPO",
@@ -210,14 +180,12 @@ export const orgGroups = [
         tagline: "US Businesses க்கான Offshore குழுக்கள்.",
         body: "Customer Care, Claims Processing மற்றும் Billing Support க்காக இலங்கை மற்றும் Mexico இல் அர்ப்பணிப்புள்ள Offshore குழுக்கள், மற்றும் Group இன் மிகப்பெரிய இலங்கை Employer களில் ஒன்று.",
         chips: ["வாடிக்கையாளர் சேவை", "Claims செயலாக்கம்", "Billing ஆதரவு", "தரவு உள்ளீடு"],
-        cta: "myblockchainbpo.com",
       },
     ],
   },
 ];
 
-export const reachEyebrow = "03 / எண்கள்";
-export const reachHeading = { line1: "Network இன்", line2: "கூட்டுத்தொகை", line3: "இதுதான்." };
+export const reachHeading = {};
 export const reachIntro =
   "Group நிறுவனங்கள் வெளியிட்ட Figures. கவர்ச்சியான தெளிவற்ற எண்ணை விட, சிறிய, நேர்மையான எண்ணைக் காட்டுவதையே நாங்கள் விரும்புகிறோம்.";
 
@@ -233,13 +201,10 @@ export const reachRows = [
   { k: "இலங்கையில் மருத்துவமனை", who: "இதுதான், நீர்கொழும்பில்" },
 ];
 
-export const referralEyebrow = "04 / எங்களுக்கு இடையே பயணம்";
-export const referralHeading = { line1: "ஒரே File,", line2: "நீங்கள்", line3: "எங்கிருந்தாலும்" };
+export const referralHeading = {};
 
 export const referralIntro =
   "Group இல் உள்ள குடும்பங்கள் நீங்கள் நினைப்பதை விட அடிக்கடி Los Angeles மற்றும் இலங்கைக்கு இடையில் நகர்கின்றன. தாத்தா பாட்டியுடன் Summer, ஒரு Semester சொந்த ஊரில், வெளிநாடு சென்ற பெற்றோர். Referral Desk இருப்பதன் காரணம் யாரும் வெற்றுப் பக்கத்திலிருந்து தொடங்க வேண்டியதில்லை.";
-
-export const referralCta = "Referral Desk இடம் கேளுங்கள்";
 
 export const referrals = [
   {
@@ -272,8 +237,7 @@ export const referrals = [
   },
 ];
 
-export const contactEyebrow = "05 / எங்களைத் தொடர்பு கொள்ளுங்கள்";
-export const contactHeading = { line1: "Network இல்", line2: "எங்கிருந்து தொடங்கினாலும்", line3: "பரவாயில்லை." };
+export const contactHeading = {};
 export const contactIntro =
   "நோயாளிகள், Partner Hospitals, Insurers மற்றும் Group உடன் இணைந்து பணியாற்ற விரும்பும் நிறுவனங்கள்: மருத்துவமனையை நேரடியாகத் தொடர்பு கொள்ளுங்கள், நாங்கள் உங்களைச் சரியான நிறுவனத்திற்கு Route செய்வோம்.";
 
@@ -281,10 +245,10 @@ export const contactIntro =
 // purpose: see the file header and `isUntranslatable` in
 // content.i18n.test.ts.
 export const contactRows = [
-  { label: "மருத்துவமனையை Call செய்யுங்கள்" },
-  { label: "மருத்துவமனைக்கு Email அனுப்புங்கள்" },
-  { label: "Group இன் Network பக்கம்" },
-  { label: "Treatment க்காக Travel செய்தல்" },
+  {},
+  {},
+  {},
+  {},
 ];
 
 export const disclaimer =
