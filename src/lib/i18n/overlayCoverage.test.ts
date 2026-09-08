@@ -38,6 +38,7 @@ import {
 const WALKERS = new Set([
   "src/lib/i18n/overlayCoverage.test.ts",
   "src/lib/i18n/overlayNumerals.test.ts",
+  "src/lib/i18n/overlayRegister.test.ts",
 ]);
 
 const OVERLAY_NAME = /\.(si|ta)\.tsx?$/;
