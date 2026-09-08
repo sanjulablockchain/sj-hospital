@@ -1,8 +1,8 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { splitLocale } from "@/lib/i18n/paths";
-import type { Locale } from "@/lib/i18n/locales";
+import { splitLocale } from "./paths.ts";
+import type { Locale } from "./locales.ts";
 
 /**
  * The locale of the page currently on screen, read from the address bar.

@@ -14,7 +14,8 @@ import { resolveLocaleRoute } from "@/lib/i18n/resolveLocaleRoute";
 export function proxy(request: NextRequest) {
   const action = resolveLocaleRoute(
     request.nextUrl.pathname,
-    request.cookies.get(LOCALE_COOKIE)?.value
+    request.cookies.get(LOCALE_COOKIE)?.value,
+    request.method
   );
 
   if (action.kind === "pass") return NextResponse.next();
@@ -23,13 +24,20 @@ export function proxy(request: NextRequest) {
   url.pathname = action.pathname;
 
   // The app runs `output: "standalone"` behind a Docker stack, where a shared
-  // cache (CDN, reverse proxy) is the expected deployment. Both branches below
-  // choose their response by reading the sj-locale cookie, so a cache keyed on
-  // the URL alone would serve one visitor's redirect or rewrite to every later
-  // visitor with a different cookie, bare URL and all: a shared cache could
-  // trap crawlers, and everyone else, in one reader's chosen locale. `Vary:
-  // Cookie` tells any such cache the response depends on the cookie, not just
-  // the URL.
+  // cache (CDN, reverse proxy) is the expected deployment. For a given URL,
+  // which action.kind this ends up as (and, on a redirect, where it points)
+  // can depend on the sj-locale cookie: `/contact-us` rewrites to English for
+  // no cookie or an English one, but redirects to `/si/contact-us` for a
+  // Sinhala one. A cache keyed on the URL alone would serve one visitor's
+  // response, redirect or rewrite, to every later visitor regardless of
+  // their own cookie, so `Vary: Cookie` marks both below as cookie-dependent.
+  //
+  // One redirect sub-case is the exception in isolation: the `/en/...`
+  // collapse (see resolveLocaleRoute) redirects to the bare canonical path
+  // without ever consulting the cookie, so THAT response alone never varies
+  // by it. It shares this branch with the remembered-locale redirect, which
+  // does, so the header stays on both rather than trying to split a single
+  // `action.kind === "redirect"` into the two cases that produced it.
   if (action.kind === "redirect") {
     // A redirect additionally must never be cached at all: caching a 307 to
     // /si/... under the bare URL is exactly the "one Sinhala reader bounces

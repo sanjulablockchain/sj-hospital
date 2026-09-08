@@ -107,3 +107,46 @@ test("an explicit /en with a Sinhala cookie lands on Sinhala in two hops", () =>
     pathname: "/si/contact-us",
   });
 });
+
+// A 307 preserves the method and body, and the career form attaches a CV up
+// to 6 MB. A POST must never be redirected, or it silently resubmits the
+// whole request (CV included) to a second URL.
+test("a POST is never redirected, even where a GET on the same URL would be", () => {
+  // The /en/... collapse: a GET redirects, but /en/contact-us already
+  // resolves on its own ([locale] binds to the literal "en"), so a POST just
+  // passes through unchanged.
+  assert.deepEqual(resolveLocaleRoute("/en/contact-us", undefined, "POST"), { kind: "pass" });
+
+  // The remembered-locale case: a GET redirects cross-locale, but that would
+  // resubmit the POST to a different URL, so it rewrites to English in place
+  // instead, the same target a request with no cookie at all would get.
+  assert.deepEqual(resolveLocaleRoute("/contact-us", "si", "POST"), {
+    kind: "rewrite",
+    pathname: "/en/contact-us",
+  });
+
+  // HEAD is safe (it carries no body) and keeps redirecting, same as GET.
+  assert.deepEqual(resolveLocaleRoute("/contact-us", "si", "HEAD"), {
+    kind: "redirect",
+    pathname: "/si/contact-us",
+  });
+
+  // A method left unspecified defaults to GET, so every pre-existing
+  // two-argument call above keeps its original behaviour.
+  assert.deepEqual(resolveLocaleRoute("/contact-us", "si"), {
+    kind: "redirect",
+    pathname: "/si/contact-us",
+  });
+});
+
+test("a POST never loops even where a GET on the same URL would redirect", () => {
+  for (const path of ["/", "/contact-us", "/en", "/en/services"]) {
+    for (const cookie of [undefined, "si", "ta"] as const) {
+      assert.notEqual(
+        resolveLocaleRoute(path, cookie, "POST").kind,
+        "redirect",
+        `${path} with cookie ${cookie} redirected a POST`
+      );
+    }
+  }
+});
