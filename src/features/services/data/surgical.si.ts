@@ -88,10 +88,10 @@ export const __review = { status: "draft", reviewer: null, date: null } as const
 
 export const surgicalServices = [
   {
-    title: "සාමාන්‍ය ශල්‍යකර්මය",
-    directoryTitle: "සාමාන්‍ය ශල්‍යකර්මය",
+
+
     hours: "නියමිත Lists",
-    cta: "Consult එකක් ඉල්ලන්න",
+
     desc: "Hernia, Gallbladder සහ Appendix ශල්‍යකර්ම සඳහා Elective Operating Lists, පුළුවන් හැම විටකම Laparoscopically කරන, එහෙන් සුවවීම කෙටි වෙනවා. විශේෂඥ වෛද්‍යවරයෙක් මෙහෙයවන නිර්වින්දනය සහ රෝගියෙකුට එක් Recovery Nurse කෙනෙක් Anaesthetic Room සිට Discharge දක්වා සත්කාරය රැගෙන යනවා.",
     tags: ["Laparoscopic ශල්‍යකර්මය", "Hernia අලුත්වැඩියාව", "Gallbladder ඉවත් කිරීම", "Appendix ශල්‍යකර්මය"],
     facts: [
@@ -101,7 +101,7 @@ export const surgicalServices = [
       { k: "සුවවීම", v: "රෝගියෙකුට Nurse කෙනෙක් Assign කරලා" },
     ],
     lede: "Hernia, Gallbladder සහ Appendix ගැටලු සඳහා Elective ශල්‍යකර්මය, ඔබව කලින් ගෙදර යවන Laparoscopic ප්‍රවේශය පුළුවන් හැම විටකම යොදාගෙන.",
-    aboutHead: "සුවවීම වටා හැදුනු Elective Lists",
+
     body1: "Hernia Repairs, Gallbladder ඉවත් කිරීම සහ Appendix ශල්‍යකර්මය නියමිත Operating Lists වලට Book කරනවා, Open ශල්‍යකර්මයකට සාපේක්ෂව සුවවීම කෙටි කර ලකුණු අඩු කරන Laparoscopic ප්‍රවේශය පුළුවන් හැම විටකම යොදාගෙන. විශේෂඥ Anaesthetist කෙනෙක් ශල්‍යකර්මයට කලින් හැම රෝගියෙක්ම Review කර, පුරාවටම නිර්වින්දනය සඳහා වගකිව යුතුව ඉන්නවා.",
     body2: "Instruments සහ Consumables හැම රෝගියෙකුටම Single-use, ඔබ Theatre එකෙන් පිටවෙන මොහොතේ සිට ගෙදර යන්න හෝ Ward Bed එකකට සූදානම් වෙනකම් ඔබව බලාගන්න Recovery Nurse කෙනෙක් Assign කරලා ඉන්නවා. Discharge එකට කලින් Wound-care උපදෙස් සහ Follow-up දිනයක් සමඟ යනවා.",
     strip: [
@@ -126,10 +126,10 @@ export const surgicalServices = [
     ],
     location: "තුන්වන මහල, සාමාන්‍ය ශල්‍ය ඒකකය",
     steps: [
-      { title: "Consult කිරීම", desc: "Surgeon කෙනෙක් ඔබව පරීක්ෂා කර, ඕන Scans Review කර, ඔබේ තත්ත්වයට Laparoscopic හෝ Open ප්‍රවේශය සුදුසුද කියලා පැහැදිලි කරනවා." },
-      { title: "Book කිරීම", desc: "ඔබේ ශල්‍යකර්මය List එකකට Schedule කරලා, ඉස්සරහ දින කීපයකදී Pre-operative පරීක්ෂණ සලසනවා." },
-      { title: "ශල්‍යකර්මය", desc: "විශේෂඥ නිර්වින්දනයයි කැපවුනු Theatre කණ්ඩායමයි ක්‍රියාපටිපාටිය පුරාවටම ඔබව රැගෙන යනවා." },
-      { title: "සුවවීම", desc: "Assign කරපු Recovery Nurse කෙනෙක් ඉන් පස්සේ ඔබව Monitor කරනවා, ලිඛිත Wound-care සහ Follow-up උපදෙස් සමඟ යනවා." },
+      { desc: "Surgeon කෙනෙක් ඔබව පරීක්ෂා කර, ඕන Scans Review කර, ඔබේ තත්ත්වයට Laparoscopic හෝ Open ප්‍රවේශය සුදුසුද කියලා පැහැදිලි කරනවා." },
+      { desc: "ඔබේ ශල්‍යකර්මය List එකකට Schedule කරලා, ඉස්සරහ දින කීපයකදී Pre-operative පරීක්ෂණ සලසනවා." },
+      { desc: "විශේෂඥ නිර්වින්දනයයි කැපවුනු Theatre කණ්ඩායමයි ක්‍රියාපටිපාටිය පුරාවටම ඔබව රැගෙන යනවා." },
+      { desc: "Assign කරපු Recovery Nurse කෙනෙක් ඉන් පස්සේ ඔබව Monitor කරනවා, ලිඛිත Wound-care සහ Follow-up උපදෙස් සමඟ යනවා." },
     ],
     prep: [
       "ඇතුළත් වන වේලාවට කලින් උපදෙස් අනුව උපවාසය කරන්න",
@@ -151,10 +151,10 @@ export const surgicalServices = [
     ],
   },
   {
-    title: "අස්ථි ශල්‍යකර්මය",
-    directoryTitle: "අස්ථි ශල්‍යකර්මය",
+
+
     hours: "Day Case සහ Inpatient",
-    cta: "Consult එකක් ඉල්ලන්න",
+
     desc: "ඇටකැඩීම්, ක්‍රීඩා තුවාල සහ Joint ගැටලු සඳහා Day Case සහ Inpatient ශල්‍යකර්මය, ඒම Corridor එකේම Imaging ලබාගත හැක, ඔබ යන්න කලින්ම Physiotherapy සැලැස්මකුත් එකඟ වෙනවා.",
     tags: ["ඇටකැඩීම් ශල්‍යකර්මය", "Arthroscopy සැත්කම", "ක්‍රීඩා තුවාල", "Physiotherapy සැලසුම් කිරීම"],
     facts: [
@@ -164,7 +164,7 @@ export const surgicalServices = [
       { k: "පසු විපරම", v: "Discharge එකේදී Schedule කරයි" },
     ],
     lede: "ඇටකැඩීම්, ක්‍රීඩා තුවාල සහ Joint ගැටලු සඳහා ශල්‍යකර්මය, පියවර ගාණකින් Imaging සහ ගෙදර යන්න කලින්ම එකඟ වෙන Physiotherapy සැලැස්මක් සමඟ.",
-    aboutHead: "තුවාලයේ සිට Rehabilitation දක්වා එක තැනකින්",
+
     body1: "ඇටකැඩීම්, Ligament තුවාල සහ Joint ගැටලු Clinic එකේ ම Corridor එකේදීම Imaging අරගෙන තක්සේරු කරනවා, එහෙනම් වෙනම තැනකින් ප්‍රතිඵල ලැබෙනකම් රැදී නොසිට පලමු Visit එකේදීම සැලැස්මක් එකඟ වෙන්න පුළුවන්. ශල්‍යකර්මය Day-case Arthroscopy සිට Inpatient ඇටකැඩුම් Fixation දක්වා විහිදෙනවා.",
     body2: "රෝහලෙන් යන්න කලින්, Physiotherapist කෙනෙක් ඔබ සමඟ Rehabilitation සැලැස්මකට එකඟ වෙනවා, ගමන් කිරීම, බර දැරීම සහ ගෙදර පටන් ගන්න Exercises ආවරණය කරමින්. ඔබේ Surgeon ට සුවවීම සහ ඒ සැලැස්මට එරෙහිව ප්‍රගතිය පරීක්ෂා කරගන්න Follow-up Appointment එකකුත් සලසනවා.",
     strip: [
@@ -189,10 +189,10 @@ export const surgicalServices = [
     ],
     location: "පලමු මහල, අස්ථි ඒකකය",
     steps: [
-      { title: "තක්සේරු කිරීම", desc: "අස්ථි Surgeon කෙනෙක් තුවාලය පරීක්ෂා කර ඒම Corridor එකේම Imaging සලසනවා." },
-      { title: "සැලසුම් කිරීම", desc: "ඇටකැඩීම හෝ තුවාලයට ඕන දේට අනුව ශල්‍යකර්මය Day Case හෝ Inpatient විදිහට Book කරනවා." },
-      { title: "ශල්‍යකර්මය", desc: "Fixation, Arthroscopy හෝ Repair අස්ථි Theatre කණ්ඩායම විසින් සිදු කරනවා." },
-      { title: "Rehabilitate කිරීම", desc: "ඔබ යන්න කලින් Physiotherapist කෙනෙක් ඔබ සමඟ ගමන් සහ Exercise සැලැස්මකට එකඟ වෙනවා." },
+      { desc: "අස්ථි Surgeon කෙනෙක් තුවාලය පරීක්ෂා කර ඒම Corridor එකේම Imaging සලසනවා." },
+      { desc: "ඇටකැඩීම හෝ තුවාලයට ඕන දේට අනුව ශල්‍යකර්මය Day Case හෝ Inpatient විදිහට Book කරනවා." },
+      { desc: "Fixation, Arthroscopy හෝ Repair අස්ථි Theatre කණ්ඩායම විසින් සිදු කරනවා." },
+      { desc: "ඔබ යන්න කලින් Physiotherapist කෙනෙක් ඔබ සමඟ ගමන් සහ Exercise සැලැස්මකට එකඟ වෙනවා." },
     ],
     prep: [
       "කලින් තිබූ Scans හෝ X-rays ඔබ සමඟ අරගෙන එන්න",
@@ -214,10 +214,10 @@ export const surgicalServices = [
     ],
   },
   {
-    title: "ENT ශල්‍යකර්මය සහ ශ්‍රවණවේදය",
-    directoryTitle: "ENT ශල්‍යකර්මය සහ ශ්‍රවණවේදය",
+
+
     hours: "සතිපතා Lists",
-    cta: "ENT Consult එකක් Book කරන්න",
+
     desc: "Tonsils, Sinuses සහ ශ්‍රවණ ගැටලු සඳහා ශල්‍යකර්මය, සතිපතා වැඩිහිටි සහ ළමා Lists මත ධාවනය කරන, ශ්‍රවණයට බලපාන ඕන ක්‍රියාපටිපාටියකට කලින් සහ පස්සේ ශ්‍රවණවේද තක්සේරුවකුත් සමඟ.",
     tags: ["Tonsil ශල්‍යකර්මය", "Sinus ශල්‍යකර්මය", "Grommets තැබීම", "ශ්‍රවණවේද තක්සේරුව"],
     facts: [
@@ -227,7 +227,7 @@ export const surgicalServices = [
       { k: "විමසීම", v: "කලින්ම Book කරයි" },
     ],
     lede: "Tonsils, Sinuses සහ Grommets සඳහා ශල්‍යකර්මය, ශ්‍රවණයට අදාළ ඕන ක්‍රියාපටිපාටියකට කලින් සහ පස්සේ ශ්‍රවණවේද පරීක්ෂාවකුත් සමඟ.",
-    aboutHead: "හැම වයසකටම කන, නාසය සහ උගුරේ ශල්‍යකර්මය",
+
     body1: "සතිපතා Operating Lists Tonsillectomy, Sinus ශල්‍යකර්මය සහ Grommet Insertion ළමයින්ට සහ වැඩිහිටියන්ට දෙදෙනාටම ආවරණය කරනවා. ක්‍රියාපටිපාටියක් ශ්‍රවණයට බලපානවා විය හැකි නම්, කලින්ම Baseline එකක් තියාගන්න ශ්‍රවණවේද තක්සේරුවක් කර, ප්‍රතිඵලය තහවුරු කරන්න පස්සේත් ආයෙත් කරනවා.",
     body2: "ළමා Lists වැඩිහිටි Lists වලින් වෙනම ධාවනය කරන්නේ, ළමයින්ට සහ ඔවුන්ගේ දෙමව්පියන්ට ගැළපෙන කාර්ය මණ්ඩලය සහ වේලාවන් සමඟ. ශල්‍යකර්මයට කලින්ම Consultation එකකින් බලාපොරොත්තු විය යුතු දේ, සුවවීමට කී කාලයක් යනවද, Follow-up එක කොහොමද වේවිද කියලා ආවරණය කරනවා.",
     strip: [
@@ -252,10 +252,10 @@ export const surgicalServices = [
     ],
     location: "දෙවන මහල, ENT ඒකකය",
     steps: [
-      { title: "Consult කිරීම", desc: "ENT Surgeon කෙනෙක් ඔබව පරීක්ෂා කර, ශ්‍රවණය සම්බන්ධ නම් ශ්‍රවණවේද තක්සේරුවක් සලසනවා." },
-      { title: "තක්සේරු කිරීම", desc: "ඔබේ ක්‍රියාපටිපාටිය Book කරන්න කලින් Baseline ශ්‍රවණ පරීක්ෂණ වාර්තා කරනවා." },
-      { title: "ශල්‍යකර්මය", desc: "ශල්‍යකර්මය සුදුසු ලෙස සතිපතා වැඩිහිටි හෝ ළමා List එකක් මත සිදු කරනවා." },
-      { title: "Review කිරීම", desc: "Follow-up ශ්‍රවණවේද පරීක්ෂාවක් සහ Consultation එකක් සුවවීම සහ ශ්‍රවණ ප්‍රතිඵලය තහවුරු කරයි." },
+      { desc: "ENT Surgeon කෙනෙක් ඔබව පරීක්ෂා කර, ශ්‍රවණය සම්බන්ධ නම් ශ්‍රවණවේද තක්සේරුවක් සලසනවා." },
+      { desc: "ඔබේ ක්‍රියාපටිපාටිය Book කරන්න කලින් Baseline ශ්‍රවණ පරීක්ෂණ වාර්තා කරනවා." },
+      { desc: "ශල්‍යකර්මය සුදුසු ලෙස සතිපතා වැඩිහිටි හෝ ළමා List එකක් මත සිදු කරනවා." },
+      { desc: "Follow-up ශ්‍රවණවේද පරීක්ෂාවක් සහ Consultation එකක් සුවවීම සහ ශ්‍රවණ ප්‍රතිඵලය තහවුරු කරයි." },
     ],
     prep: [
       "කලින් තිබූ ශ්‍රවණ පරීක්ෂණ ප්‍රතිඵල අරගෙන එන්න",
@@ -277,10 +277,10 @@ export const surgicalServices = [
     ],
   },
   {
-    title: "මුත්‍රා පද්ධති ශල්‍යකර්මය",
-    directoryTitle: "මුත්‍රා පද්ධති ශල්‍යකර්මය",
+
+
     hours: "සතිපතා Lists",
-    cta: "Urology Consult එකක් Book කරන්න",
+
     desc: "වකුගඩු ගල්, Prostate ගැටලු සහ මුත්‍රා පද්ධති තත්ත්ව සඳහා තක්සේරුව සහ ශල්‍යකර්මය, ඔබේ පලමු Visit එකේදීම Ultrasound සහ Flow Studies සිදු කරන.",
     tags: ["වකුගඩු ගල්", "Prostate ශල්‍යකර්මය", "මුත්‍රා පද්ධතිය", "Flow පරීක්ෂණ"],
     facts: [
@@ -290,7 +290,7 @@ export const surgicalServices = [
       { k: "වෙන් කිරීම", v: "Consultation එකකින්" },
     ],
     lede: "වකුගඩු ගල්, Prostate ගැටලු සහ මුත්‍රා පද්ධති තත්ත්ව සඳහා තක්සේරුව සහ ශල්‍යකර්මය, ඔබේ පලමු Visit එකේදීම කරන Ultrasound සහ Flow Studies සමඟ.",
-    aboutHead: "මුත්‍රා ගැටලු සඳහා එකම Visit එකේදීම තක්සේරුව",
+
     body1: "වකුගඩු සහ මුත්‍රාශයේ ගල්, Prostate විශාල වීම සහ නැවත නැවත එන මුත්‍රා පද්ධති ගැටලු පලමු Consultation එකේදීම Ultrasound සහ මුත්‍රා Flow Studies සමඟ තක්සේරු කරනවා, එහෙනම් ප්‍රතිඵල සඳහා වෙනම Visit එකක් නැතුවම ප්‍රතිකාර සැලැස්මක් සාකච්ඡා කරගත හැක.",
     body2: "ශල්‍යකර්මයක් අවශ්‍ය නම්, ක්‍රියාපටිපාටි සතිපතා Operating Lists වලට Book කරනවා. ඔබේ Surgeon ගල් ඉවත් කිරීමේ සිට Prostate ශල්‍යකර්මය දක්වා ඔබේ තත්ත්වයට සුදුසු ප්‍රවේශය, බලාපොරොත්තු විය යුතු සුවවීම සහ Follow-up එකත් සමඟ පැහැදිලි කරයි.",
     strip: [
@@ -315,10 +315,10 @@ export const surgicalServices = [
     ],
     location: "පලමු මහල, Urology Clinic",
     steps: [
-      { title: "Consult කිරීම", desc: "Urologist කෙනෙක් පලමු Visit එකේදීම ඔබේ History ගෙන ඔබව පරීක්ෂා කරනවා." },
-      { title: "විමර්ශනය කිරීම", desc: "Ultrasound සහ මුත්‍රා Flow Studies එදිනම සිදු කරනවා." },
-      { title: "සැලසුම් කිරීම", desc: "ඔබේ Surgeon සොයාගැනීම් සාකච්ඡා කර ප්‍රතිකාර හෝ ශල්‍ය සැලැස්මකට ඔබ සමඟ එකඟ වෙනවා." },
-      { title: "ප්‍රතිකාර කිරීම", desc: "අවශ්‍ය නම් ශල්‍යකර්මය සතිපතා List එකකට Book කරලා, පස්සේ Follow-up එකකුත් සලසනවා." },
+      { desc: "Urologist කෙනෙක් පලමු Visit එකේදීම ඔබේ History ගෙන ඔබව පරීක්ෂා කරනවා." },
+      { desc: "Ultrasound සහ මුත්‍රා Flow Studies එදිනම සිදු කරනවා." },
+      { desc: "ඔබේ Surgeon සොයාගැනීම් සාකච්ඡා කර ප්‍රතිකාර හෝ ශල්‍ය සැලැස්මකට ඔබ සමඟ එකඟ වෙනවා." },
+      { desc: "අවශ්‍ය නම් ශල්‍යකර්මය සතිපතා List එකකට Book කරලා, පස්සේ Follow-up එකකුත් සලසනවා." },
     ],
     prep: [
       "Flow Study එකක් සැලසුම් කරලා තියෙනවනම් සුවපහසුව පිරුණු මුත්‍රාශයක් සමඟ එන්න",
@@ -340,10 +340,10 @@ export const surgicalServices = [
     ],
   },
   {
-    title: "අක්ෂි වෛද්‍ය විද්‍යාව සහ Cataract ශල්‍යකර්මය",
-    directoryTitle: "අක්ෂි වෛද්‍ය විද්‍යාව සහ Cataract ශල්‍යකර්මය",
+
+
     hours: "සතිපතා Lists",
-    cta: "අක්ෂි Consult එකක් Book කරන්න",
+
     desc: "අක්ෂි තක්සේරුව සහ Day-case Cataract ශල්‍යකර්මය, ඔබේ පලමු Visit එකේදීම Refraction, Pressure පරීක්ෂණ සහ Retinal තක්සේරුවකුත් සමඟ, ශල්‍යකර්මයෙන් පසුදින Review එකකුත් සමඟ.",
     tags: ["Cataract ශල්‍යකර්මය", "Refraction පරීක්ෂාව", "Pressure පරීක්ෂණ", "Retinal තක්සේරුව"],
     facts: [
@@ -353,7 +353,7 @@ export const surgicalServices = [
       { k: "පලමු Visit එක", v: "Refraction, Pressure සහ Retinal පරීක්ෂාව" },
     ],
     lede: "අක්ෂි තක්සේරුව සහ Day-case Cataract ශල්‍යකර්මය, ඔබේ පලමු Visit එකේදීම සම්පූර්ණ පරීක්ෂාවකුත් හරියටම පසුදින Review එකකුත් සමඟ.",
-    aboutHead: "තක්සේරුවේ සිට Review දක්වා Cataract සත්කාරය",
+
     body1: "පලමු Visit එකේදී Refraction, අක්ෂි Pressure පරීක්ෂණ සහ Retinal තක්සේරුවක් සිදු කරනවා, Cataract ශල්‍යකර්මය ඔබට හරියටම සුදුසුද කියලා තීරණය කරන්න කලින් ඔබේ Ophthalmologist ට සම්පූර්ණ පින්තූරයක් දෙනවා. Lens Options මේ අවස්ථාවේදීම ශල්‍ය සැලැස්මේ කොටසක් විදිහට සාකච්ඡා කරගත හැක.",
     body2: "Cataract ශල්‍යකර්මය Day Case එකක් විදිහට කරනවා, Drops සහ ලිඛිත උපදෙස් සමඟ එදිනම ගෙදර යනවා. පසුදින Review එකකින් සුවවීම සහ දෘෂ්ටිය පරීක්ෂා කර, අවශ්‍ය නම් තව Follow-up එකක් සලසනවා.",
     strip: [
@@ -378,10 +378,10 @@ export const surgicalServices = [
     ],
     location: "බිම් මහල, Ophthalmology Clinic",
     steps: [
-      { title: "තක්සේරු කිරීම", desc: "Ophthalmologist කෙනෙක් ඔබේ පලමු Visit එකේදීම Refraction, අක්ෂි Pressure සහ Retina පරීක්ෂා කරනවා." },
-      { title: "සාකච්ඡා කිරීම", desc: "සොයාගැනීම් සහ Lens Options සාකච්ඡා කර, සුදුසු නම් ශල්‍යකර්මය Book කරනවා." },
-      { title: "ශල්‍යකර්මය", desc: "Cataract ශල්‍යකර්මය සතිපතා List එකක Day Case එකක් විදිහට සිදු කරනවා." },
-      { title: "Review කිරීම", desc: "දෘෂ්ටිය සහ සුවවීම පරීක්ෂා කරගන්න ඔබ පසුදින ආපහු එනවා." },
+      { desc: "Ophthalmologist කෙනෙක් ඔබේ පලමු Visit එකේදීම Refraction, අක්ෂි Pressure සහ Retina පරීක්ෂා කරනවා." },
+      { desc: "සොයාගැනීම් සහ Lens Options සාකච්ඡා කර, සුදුසු නම් ශල්‍යකර්මය Book කරනවා." },
+      { desc: "Cataract ශල්‍යකර්මය සතිපතා List එකක Day Case එකක් විදිහට සිදු කරනවා." },
+      { desc: "දෘෂ්ටිය සහ සුවවීම පරීක්ෂා කරගන්න ඔබ පසුදින ආපහු එනවා." },
     ],
     prep: [
       "ශල්‍යකර්මයෙන් පස්සේ ගෙදර ගෙනියන්න කෙනෙකුට Drive කරන්න සලසාගන්න",
@@ -403,10 +403,10 @@ export const surgicalServices = [
     ],
   },
   {
-    title: "ස්නායු ශල්‍යකර්මය",
-    directoryTitle: "ස්නායු ශල්‍යකර්මය",
+
+
     hours: "Referral එකකින්",
-    cta: "Consult එකක් ඉල්ලන්න",
+
     desc: "මොළයේ සහ කොඳු ඇට පෙළේ ගැටලු Imaging මගින් මෙහෙයවන තක්සේරුවක්, ඊළඟ පියවර සාකච්ඡා කරන්න කලින්ම සැලැස්මකට එකඟ වී පස්සේත් Structured සත්කාරයක් සමඟ. Referral එකකින් බලනවා, කිසිම Recommendation එකක් කරන්න කලින්ම Scans ස්නායු Surgeon කෙනෙක් සමඟ එකට Review කරනවා.",
     tags: ["මොළයේ තක්සේරුව", "කොඳු ඇට පෙළේ තක්සේරුව", "Imaging-Led සැලසුම්කරණය", "ශල්‍යකර්මයෙන් පසු සත්කාරය"],
     facts: [
@@ -416,7 +416,7 @@ export const surgicalServices = [
       { k: "සත්කාරය", v: "ශල්‍යකර්මයෙන් පසු Follow-up" },
     ],
     lede: "මොළයේ සහ කොඳු ඇට පෙළේ ගැටලු තක්සේරුව, Imaging සහ Referral මාර්ගයක් වටා හැදිලා තියෙන්නේ, සුදුසු ඊළඟ පියවර සත්කාරයට.",
-    aboutHead: "Imaging මගින් මෙහෙයවන තක්සේරුව සහ සැලසුම්කරණය",
+
     body1: "රෝගීන් Referral එකකින් බලනවා, ස්නායු Surgeon කෙනෙක් රෝගියා සමඟ එකට Imaging Review කර ඊළඟට මොකද කරන්න ඕනද, ඕනද කියලාවෙන් සාකච්ඡා කරනවා. සැලසුම්කරණය Fixed ක්‍රියාපටිපාටි ලැයිස්තුවකට වඩා Scans පෙන්වන දේ වටා හැදිලා තියෙන නිසා, හැම Case එකකම එහි ම සොයාගැනීම් මත සලකා බලනවා.",
     body2: "ශල්‍යකර්මයක් Recommend කරනවනම්, සුදුසු ශල්‍ය මාර්ගය හරහා සලසනවා, මේ සේවාව රෝගියා ලුහුබදින්නත් දිගටම කරගෙන යනවා: Imaging Review කරමින්, සුවවීම පරීක්ෂා කරමින් සහ තව සත්කාරයක් සඳහා සැලැස්ම තහවුරු කරමින්.",
     strip: [
@@ -440,10 +440,10 @@ export const surgicalServices = [
     ],
     location: "දෙවන මහල, ස්නායු Consultation Suite",
     steps: [
-      { title: "Refer කිරීම", desc: "ඔබේ Referral එකයි දැනට තියෙන ඕන Imaging එකයි ඔබේ Consultation එකට කලින් Review කරනවා." },
-      { title: "තක්සේරු කිරීම", desc: "ස්නායු Surgeon කෙනෙක් ඔබව පරීක්ෂා කර ඔබ සමඟ එකට Imaging Review කරනවා." },
-      { title: "සැලසුම් කිරීම", desc: "සොයාගැනීම් සාකච්ඡා කර, අවශ්‍ය නම් තව Imaging එකකුත් සමඟ සැලැස්මකට එකඟ වෙනවා." },
-      { title: "Follow up කිරීම", desc: "ඕන ශල්‍යකර්මයකින් පසු, Review Appointments සුවවීම Track කර ඊළඟ පියවර තහවුරු කරනවා." },
+      { desc: "ඔබේ Referral එකයි දැනට තියෙන ඕන Imaging එකයි ඔබේ Consultation එකට කලින් Review කරනවා." },
+      { desc: "ස්නායු Surgeon කෙනෙක් ඔබව පරීක්ෂා කර ඔබ සමඟ එකට Imaging Review කරනවා." },
+      { desc: "සොයාගැනීම් සාකච්ඡා කර, අවශ්‍ය නම් තව Imaging එකකුත් සමඟ සැලැස්මකට එකඟ වෙනවා." },
+      { desc: "ඕන ශල්‍යකර්මයකින් පසු, Review Appointments සුවවීම Track කර ඊළඟ පියවර තහවුරු කරනවා." },
     ],
     prep: [
       "ඔබේ වෛද්‍යවරයාගෙන් Referral Letter එකක් අරගෙන එන්න",
@@ -465,10 +465,10 @@ export const surgicalServices = [
     ],
   },
   {
-    title: "ආහාර ජීර්ණ පද්ධතිය සහ Endoscopy",
-    directoryTitle: "ආහාර ජීර්ණ පද්ධතිය සහ Endoscopy",
+
+
     hours: "නියමිත Lists",
-    cta: "Endoscopy Book කරන්න",
+
     desc: "නියමිත Gastroscopy සහ Colonoscopy Lists, අවශ්‍ය නම් එකම Sitting එකේදීම Biopsy සහ Polypectomy සිදු කරන, විශේෂඥ Anaesthetist කෙනෙක් දෙන Sedation එකකුත්, ඔබ යන්න කලින්ම එදින Reporting එකකුත් සමඟ.",
     tags: ["Gastroscopy පරීක්ෂණය", "Colonoscopy පරීක්ෂණය", "Biopsy සහ Polypectomy", "Sedation එකක්"],
     facts: [
@@ -478,7 +478,7 @@ export const surgicalServices = [
       { k: "ලැයිස්තු", v: "නියමිත" },
     ],
     lede: "නියමිත Lists මත Gastroscopy සහ Colonoscopy, එකම Sitting එකේදීම Biopsy හෝ Polypectomy සහ ඔබ ගෙදර යන්න කලින්ම එදින Reporting එකකුත් සමඟ.",
-    aboutHead: "Sedation එකයි එදින පිළිතුරුයි සමඟ Endoscopy",
+
     body1: "Gastroscopy සහ Colonoscopy නියමිත Lists මත සිදු කරනවා, සොයාගැනීම් ඉල්ලනවනම් එකම Sitting එකේදීම Biopsy හෝ Polypectomy සිදු කරනවා. Sedation දෙන්නේ විශේෂඥ Anaesthetist කෙනෙක්, එහෙනම් ක්‍රියාපටිපාටිය පුරාවටම Monitoring අඛණ්ඩව සිදු වෙනවා.",
     body2: "Recovery Bay එකක් Endoscopy Suite එකට යාබදව තියෙනවා, Sedation එක ක්ෂය වෙනකම් ඔබව එතන Observe කරනවා. Reporting එදිනම අවසන් කරනවා, එහෙනම් සොයාගැනුනු දේ සහ ඊළඟට මොකද වෙන්නේද කියලා පැහැදිලි පින්තූරයක් සමඟ ඔබ යනවා.",
     strip: [
@@ -503,10 +503,10 @@ export const surgicalServices = [
     ],
     location: "පලමු මහල, Endoscopy Suite",
     steps: [
-      { title: "Book කිරීම", desc: "ඔබේ ක්‍රියාපටිපාටිය Schedule කරලා, කලින්ම සූදානම් වීමේ උපදෙස් දෙනවා." },
-      { title: "සූදානම් වීම", desc: "ඇතුළත් වන්න කලින් උපවාස හෝ බඩවැල් සූදානම් කිරීමේ උපදෙස් අනුගමනය කරනවා." },
-      { title: "ක්‍රියාපටිපාටිය", desc: "Sedation එකක් යටතේ Gastroscopy හෝ Colonoscopy සිදු කරනවා, අවශ්‍ය නම් Biopsy හෝ Polypectomy එකකුත් සමඟ." },
-      { title: "සුවවී වාර්තා ලබාගැනීම", desc: "Suite එකට යාබද Bay එකේ සුවවී, Discharge එකට කලින් එදින Reporting එකක් ලබාගන්නවා." },
+      { desc: "ඔබේ ක්‍රියාපටිපාටිය Schedule කරලා, කලින්ම සූදානම් වීමේ උපදෙස් දෙනවා." },
+      { desc: "ඇතුළත් වන්න කලින් උපවාස හෝ බඩවැල් සූදානම් කිරීමේ උපදෙස් අනුගමනය කරනවා." },
+      { desc: "Sedation එකක් යටතේ Gastroscopy හෝ Colonoscopy සිදු කරනවා, අවශ්‍ය නම් Biopsy හෝ Polypectomy එකකුත් සමඟ." },
+      { desc: "Suite එකට යාබද Bay එකේ සුවවී, Discharge එකට කලින් එදින Reporting එකක් ලබාගන්නවා." },
     ],
     prep: [
       "දුන් උපවාස හෝ බඩවැල් සූදානම් කිරීමේ උපදෙස් හරියටම අනුගමනය කරන්න",
