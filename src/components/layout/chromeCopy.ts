@@ -1,10 +1,11 @@
 import type { Locale } from "@/lib/i18n/locales";
-// Explicit extensions on the two value imports: `chromeCopy.i18n.test.ts`
+// Explicit extensions on the three value imports: `chromeCopy.i18n.test.ts`
 // imports this module, and `npm test` runs the files through Node's own type
 // stripping, which resolves ESM specifiers literally and will not guess at
 // `.ts`. tsconfig has `allowImportingTsExtensions` and Turbopack resolves it
 // the same way, so the app build is unaffected. Same reason
 // `career/schemas.ts` imports `./data/content.ts` with its extension.
+import { localize } from "../../lib/i18n/localize.ts";
 import { chromeCopy as si } from "./chromeCopy.si.ts";
 import { chromeCopy as ta } from "./chromeCopy.ta.ts";
 
@@ -38,9 +39,18 @@ export const chromeCopy = {
 
 export type ChromeCopy = typeof chromeCopy;
 
-// chromeCopy above is already the English object, so the synchronous map
-// only needs the two overlays imported at the top of this file.
-const BY_LOCALE = { en: chromeCopy, si, ta };
+// Merged through `localize`, not read directly: some keys (the Book CTA, the
+// tagline, the two floating rail actions, the visible "Language" label) are
+// now deliberately ABSENT from the Sinhala and Tamil overlays, per the
+// register policy. `localize` iterates the English base and falls back to it
+// for any key the overlay omits, so a deleted key renders "Book now" rather
+// than an empty button. Reading `si` / `ta` directly, as this used to, would
+// render `undefined` for exactly those keys instead.
+const BY_LOCALE = {
+  en: chromeCopy,
+  si: localize(chromeCopy, si),
+  ta: localize(chromeCopy, ta),
+};
 
 /**
  * Synchronous because every caller is a client component. This is the one

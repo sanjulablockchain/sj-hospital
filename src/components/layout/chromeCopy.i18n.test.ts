@@ -4,6 +4,7 @@ import * as base from "./chromeCopy.ts";
 import * as si from "./chromeCopy.si.ts";
 import * as ta from "./chromeCopy.ta.ts";
 import { assertTranslationParity, stringPaths } from "../../lib/i18n/stringPaths.ts";
+import { staysEnglish } from "../../lib/i18n/registerPolicy.ts";
 
 /**
  * The chrome's own strings get the same gate every feature's copy gets.
@@ -24,10 +25,13 @@ import { assertTranslationParity, stringPaths } from "../../lib/i18n/stringPaths
  * phone number behind `callUs`, the WhatsApp link) live in `src/config`, not
  * here.
  *
- * Unlike a feature overlay, these are read synchronously by `chromeCopyFor`
- * rather than merged through `localize`, so a missing key would render as
- * `undefined` rather than falling back to English. Parity below is what stops
- * that, on both locales.
+ * `chromeCopyFor` now reads these THROUGH `localize`, the same as every
+ * feature overlay, rather than the object directly: `bookNow`, `tagline`,
+ * `callUs`, `whatsappUs` and the visible `language` label are register-policy
+ * English (`registerPolicy.ts`) and are therefore deliberately ABSENT from
+ * both overlays below, which is why the old "carries exactly the base's keys"
+ * assertion is gone. `localize` falls back to English for any key an overlay
+ * omits, so the five going missing renders readable English, not empty.
  */
 
 /**
@@ -50,23 +54,33 @@ test("every string in the chrome has Tamil", () => {
   assert.deepEqual(missing, [], `Tamil is missing: ${missing.join(", ")}`);
 });
 
-// `chromeCopyFor` returns the overlay object itself rather than merging it, so
-// an overlay with a key the base does not have is a key no component reads,
-// and an overlay missing one renders an empty label. Both directions matter
-// here in a way they do not for a `localize`-merged feature overlay.
-test("the chrome overlays carry exactly the base's keys", () => {
-  const expected = stringPaths(base).sort();
+// `localize` only ever replaces a base key, so an overlay key the base does
+// not have is a key `localize` drops silently: a typo'd key would translate
+// nothing and fail nothing without this.
+test("the chrome overlays contain only keys the English module has", () => {
+  const basePaths = new Set(stringPaths(base));
   for (const [name, overlay] of [
     ["si", si],
     ["ta", ta],
   ] as const) {
-    assert.deepEqual(
-      stringPaths(overlay).sort(),
-      expected,
-      `${name} chromeCopy does not have the same keys as the English. ` +
-        `chromeCopyFor reads it synchronously, so a missing key renders as an ` +
-        `empty label rather than falling back to English.`
-    );
+    for (const path of stringPaths(overlay)) {
+      assert.ok(basePaths.has(path), `${name} chromeCopy has an unknown key: ${path}`);
+    }
+  }
+});
+
+// The other direction: a key the register policy calls English must be
+// ABSENT from the overlay, not merely unused. `overlayRegister.test.ts`
+// enforces this walker-wide for every overlay once a scope leaves
+// `PENDING_REGISTER_SWEEP`; this is the same check, scoped to the chrome, so
+// a regression here is caught by this file too.
+test("no chrome overlay key is one the register policy calls English", () => {
+  for (const [name, overlay] of [
+    ["si", si],
+    ["ta", ta],
+  ] as const) {
+    const english = stringPaths(overlay).filter((path) => staysEnglish(`chromeCopy.${path}`));
+    assert.deepEqual(english, [], `${name} chromeCopy still carries English-only keys: ${english.join(", ")}`);
   }
 });
 

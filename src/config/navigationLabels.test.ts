@@ -23,65 +23,46 @@ function englishStrings(field: "label" | "heading"): string[] {
   return [...found].sort();
 }
 
-test("every nav label in every config has Sinhala and Tamil", () => {
-  const missingSi = englishStrings("label").filter((l) => !(l in si.NAV_LABELS));
-  const missingTa = englishStrings("label").filter((l) => !(l in ta.NAV_LABELS));
-  assert.deepEqual(missingSi, [], `Sinhala nav labels missing: ${missingSi.join(", ")}`);
-  assert.deepEqual(missingTa, [], `Tamil nav labels missing: ${missingTa.join(", ")}`);
+/**
+ * The register policy (`registerPolicy.ts`) says the whole nav bar and
+ * footer are English in every language, per `docs/superpowers/i18n-register-rule.md`.
+ * This inverts what this file asserted before the sweep: it used to fail when
+ * a label had no dictionary entry, now it fails when one does, because
+ * `NAV_LABELS` / `FOOTER_HEADINGS` are meant to end up empty and `navLabel` /
+ * `footerHeading` in `navigationLabels.ts` already fall back to the English
+ * string for any label neither dictionary carries.
+ *
+ * This is a local, readable echo of the same guarantee
+ * `overlayRegister.test.ts`'s filesystem walker enforces sitewide once
+ * `config` leaves `PENDING_REGISTER_SWEEP`: it fails right here, against the
+ * actual `*Navigation.ts` route files, rather than only in a walker a reader
+ * of this file might never open.
+ */
+test("no nav label in any config has a Sinhala or Tamil dictionary entry", () => {
+  const labels = englishStrings("label");
+  const stillSi = labels.filter((l) => l in si.NAV_LABELS);
+  const stillTa = labels.filter((l) => l in ta.NAV_LABELS);
+  assert.deepEqual(stillSi, [], `Sinhala NAV_LABELS still translates: ${stillSi.join(", ")}`);
+  assert.deepEqual(stillTa, [], `Tamil NAV_LABELS still translates: ${stillTa.join(", ")}`);
 });
 
-test("every footer heading in every config has Sinhala and Tamil", () => {
-  const missingSi = englishStrings("heading").filter((h) => !(h in si.FOOTER_HEADINGS));
-  const missingTa = englishStrings("heading").filter((h) => !(h in ta.FOOTER_HEADINGS));
-  assert.deepEqual(missingSi, [], `Sinhala footer headings missing: ${missingSi.join(", ")}`);
-  assert.deepEqual(missingTa, [], `Tamil footer headings missing: ${missingTa.join(", ")}`);
+test("no footer heading in any config has a Sinhala or Tamil dictionary entry", () => {
+  const headings = englishStrings("heading");
+  const stillSi = headings.filter((h) => h in si.FOOTER_HEADINGS);
+  const stillTa = headings.filter((h) => h in ta.FOOTER_HEADINGS);
+  assert.deepEqual(stillSi, [], `Sinhala FOOTER_HEADINGS still translates: ${stillSi.join(", ")}`);
+  assert.deepEqual(stillTa, [], `Tamil FOOTER_HEADINGS still translates: ${stillTa.join(", ")}`);
 });
 
-// Both dictionaries are keyed by the English string, so an entry whose value
-// is still the English string is either a real gap or a decision. Decisions go
-// in KEEPS_ENGLISH; gaps fail here.
-//
-// FOOTER_HEADINGS is checked alongside NAV_LABELS, and both comparisons are
-// normalised. Until this task neither was true, so this comment asserted a
-// rule its own test did not enforce: FOOTER_HEADINGS sat outside the loop, which
-// left all 17 footer column headings on every page in both languages exempt
-// from the only check that looks for an untranslated value (`Booking:
-// "Booking"` passed), and the comparison was exact rather than normalised, so
-// `"Privacy policy": "Privacy Policy"` passed as a translation. The
-// normalisation retrofit that reached all 15 feature tests in 4a739d1 never
-// reached this file.
-//
-// - Media, Pharmacy: everyday English nouns, read and written in English on an
-//   otherwise Sinhala or Tamil page, the same as Email or WhatsApp in the
-//   contact feature's overlays. Both are keys in NAV_LABELS and in
-//   FOOTER_HEADINGS, and one set covers both dictionaries because both are
-//   keyed by the same English strings.
-// - Standard, Deluxe, Super deluxe: accommodation room class names. Sri Lankan
-//   hospitals and hotels alike print these in English rather than coining a
-//   Sinhala or Tamil equivalent nobody actually says.
-// - WhatsApp: kept for parity with the chrome's own KEEPS_ENGLISH in
-//   chromeCopy.i18n.test.ts; it is not currently a nav label or a footer
-//   heading, but stays listed so one would not silently fail this test if it
-//   ever became one.
-const KEEPS_ENGLISH = new Set(["Media", "WhatsApp", "Pharmacy", "Standard", "Deluxe", "Super deluxe"]);
-
-const DICTIONARIES = [
-  ["si", "NAV_LABELS", si.NAV_LABELS],
-  ["si", "FOOTER_HEADINGS", si.FOOTER_HEADINGS],
-  ["ta", "NAV_LABELS", ta.NAV_LABELS],
-  ["ta", "FOOTER_HEADINGS", ta.FOOTER_HEADINGS],
-] as const;
-
-test("no dictionary entry is left as its English key, ignoring case and whitespace", () => {
-  const normalize = (value: string) => value.trim().toLowerCase();
-  for (const [locale, name, dictionary] of DICTIONARIES) {
-    for (const [english, translated] of Object.entries(dictionary)) {
-      if (KEEPS_ENGLISH.has(english)) continue;
-      assert.notEqual(
-        normalize(translated),
-        normalize(english),
-        `${locale} ${name} "${english}" is untranslated, or differs from the English only by case or whitespace, which is not a translation. If that is deliberate, add it to KEEPS_ENGLISH with a reason.`
-      );
-    }
-  }
+// The direct version of the same guarantee: both dictionaries are meant to be
+// empty now, not merely free of the labels currently in use in *Navigation.ts.
+// An empty object is also what lets `navigationLabels.si.ts` / `.ta.ts` keep
+// existing (rather than being deleted) while carrying nothing but the
+// `__review` marker's siblings: `navigationLabels.ts` still imports the two
+// named exports, so the module stays, with nothing in either dictionary.
+test("NAV_LABELS and FOOTER_HEADINGS are empty in both overlays", () => {
+  assert.deepEqual(Object.keys(si.NAV_LABELS), []);
+  assert.deepEqual(Object.keys(ta.NAV_LABELS), []);
+  assert.deepEqual(Object.keys(si.FOOTER_HEADINGS), []);
+  assert.deepEqual(Object.keys(ta.FOOTER_HEADINGS), []);
 });
