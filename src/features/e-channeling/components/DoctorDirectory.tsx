@@ -19,6 +19,8 @@ import { CALENDLY_BASE, type Doctor } from "../data/doctors";
 type DirectoryCopy = {
   introTemplate: string;
   searchPlaceholder: string;
+  searchAriaLabel: string;
+  clearSearchAriaLabel: string;
   allSpecialities: string;
   specialitiesLabel: string;
   clearFilters: string;
@@ -132,14 +134,14 @@ export function DoctorDirectory({ doctors, copy }: DoctorDirectoryProps) {
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder={copy.searchPlaceholder}
-            aria-label="Search doctors by name or speciality"
+            aria-label={copy.searchAriaLabel}
             className="h-12 flex-1 bg-transparent text-sm text-[var(--home-body)] outline-none placeholder:text-[var(--home-muted)] sm:h-13 sm:text-base"
           />
           {query && (
             <button
               type="button"
               onClick={() => setQuery("")}
-              aria-label="Clear search"
+              aria-label={copy.clearSearchAriaLabel}
               className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[var(--home-hairline)] text-[var(--home-muted)] transition hover:opacity-70"
             >
               &times;

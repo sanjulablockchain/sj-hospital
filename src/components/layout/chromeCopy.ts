@@ -13,7 +13,7 @@ import { chromeCopy as ta } from "./chromeCopy.ta.ts";
  * floating rail and both theme toggles. Everything else that varies by
  * locale in the chrome (nav labels, footer headings) comes from
  * `@/config/navigationLabels` instead, because those are keyed dictionaries
- * covering dozens of repeated strings rather than ten one-off ones.
+ * covering dozens of repeated strings rather than twelve one-off ones.
  */
 export const chromeCopy = {
   bookNow: "Book now",
@@ -26,6 +26,14 @@ export const chromeCopy = {
   tagline: "Compassionate, patient centered care, bringing American healthcare standards to Sri Lanka.",
   toLightMode: "Switch to light mode",
   toDarkMode: "Switch to dark mode",
+  // Shared by the mobile panel's section heading (LanguageMenuToggle) and the
+  // header switcher's dropdown aria-label (LanguageToggleButton): both are the
+  // same fact, the word naming the language picker, not two.
+  language: "Language",
+  // The header switcher button's aria-label. `{locale}` carries the current
+  // language's own name (from LOCALE_LABELS), interpolated with a token
+  // rather than a split because it sits mid sentence.
+  changeLanguage: "Language: {locale}. Change language",
 };
 
 export type ChromeCopy = typeof chromeCopy;
@@ -36,7 +44,7 @@ const BY_LOCALE = { en: chromeCopy, si, ta };
 
 /**
  * Synchronous because every caller is a client component. This is the one
- * place all three locales are allowed into the client bundle: ten short
+ * place all three locales are allowed into the client bundle: twelve short
  * strings, against the alternative of threading a prop through the header,
  * the mobile panel, the floating rail and both theme toggles.
  */

@@ -39,6 +39,8 @@ export function DirectorySection({
           copy={{
             introTemplate: directory.introTemplate,
             searchPlaceholder: directory.searchPlaceholder,
+            searchAriaLabel: directory.searchAriaLabel,
+            clearSearchAriaLabel: directory.clearSearchAriaLabel,
             allSpecialities: directory.allSpecialities,
             specialitiesLabel: directory.specialitiesLabel,
             clearFilters: directory.clearFilters,

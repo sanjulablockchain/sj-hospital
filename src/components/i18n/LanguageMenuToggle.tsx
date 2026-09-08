@@ -5,6 +5,7 @@ import { LOCALE_LABELS, LOCALES, type Locale } from "@/lib/i18n/locales";
 import { swapLocale } from "@/lib/i18n/paths";
 import { useLocale } from "@/lib/i18n/useLocale";
 import { rememberLocale } from "@/lib/i18n/rememberLocale";
+import { chromeCopyFor } from "@/components/layout/chromeCopy";
 
 type LanguageMenuToggleProps = {
   onChoose?: () => void;
@@ -19,6 +20,7 @@ export function LanguageMenuToggle({ onChoose }: LanguageMenuToggleProps) {
   const current = useLocale();
   const pathname = usePathname();
   const router = useRouter();
+  const copy = chromeCopyFor(current);
 
   function choose(locale: Locale) {
     rememberLocale(locale);
@@ -29,7 +31,7 @@ export function LanguageMenuToggle({ onChoose }: LanguageMenuToggleProps) {
   return (
     <div className="px-2 py-3">
       <p className="mb-2 text-[13px] font-semibold uppercase tracking-wide text-[var(--home-body)]">
-        Language
+        {copy.language}
       </p>
       <div className="flex flex-wrap gap-2">
         {LOCALES.map((locale) => (

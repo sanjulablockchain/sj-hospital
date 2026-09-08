@@ -9,7 +9,10 @@ import type { ContactContent } from "../data/getContent";
  * nothing theme-specific to do beyond the frame.
  *
  * `heading` reuses `jumpCards[2].label`. `intro` is `mapIntro`, distinct from
- * `jumpCards[2].note`.
+ * `jumpCards[2].note`. `mapIntro` is also passed to `LocationMap` as its
+ * `aria-label`, verbatim: content.ts already documents that as one fact, and
+ * this is where it is threaded through, since `LocationMap` is a Client
+ * Component and takes no content import of its own.
  */
 export function MapSection({ content }: { content: ContactContent }) {
   const { jumpCards, mapIntro, sectionEyebrows } = content;
@@ -18,7 +21,7 @@ export function MapSection({ content }: { content: ContactContent }) {
       <SectionHead eyebrow={sectionEyebrows.map} heading={jumpCards[2].label} intro={mapIntro} />
 
       <div className="mt-10.5 overflow-hidden border border-[var(--home-hairline)]">
-        <LocationMap />
+        <LocationMap ariaLabel={mapIntro} />
       </div>
     </section>
   );

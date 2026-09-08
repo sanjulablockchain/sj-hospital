@@ -8,15 +8,16 @@ import { assertTranslationParity, stringPaths } from "../../lib/i18n/stringPaths
 /**
  * The chrome's own strings get the same gate every feature's copy gets.
  *
- * These ten strings appear on every page in every locale: the header's Book
- * button, both mobile menu labels, back to top, the two floating rail
- * actions, both theme toggle labels and the site tagline. Until this file
+ * These twelve strings appear on every page in every locale: the header's
+ * Book button, both mobile menu labels, back to top, the two floating rail
+ * actions, both theme toggle labels, the site tagline and the language
+ * switcher's own label and change-language aria-label. Until this file
  * existed they were the only overlays no test imported, so leaving `callUs`
  * and the whole English tagline in `chromeCopy.si.ts` was green, and deleting
  * a key outright was caught by `next build` alone.
  *
- * `chromeCopy.ts` holds no facts and no structural keys: every one of its ten
- * values is copy a reader sees, so there is nothing for an `isUntranslatable`
+ * `chromeCopy.ts` holds no facts and no structural keys: every one of its
+ * twelve values is copy a reader sees, so there is nothing for an `isUntranslatable`
  * predicate to exclude and no path for an overlay to restate. That is why this
  * file passes `() => false` where the feature tests pass a predicate, and why
  * it carries no "overlay must not supply a fact" test. The chrome's facts (the

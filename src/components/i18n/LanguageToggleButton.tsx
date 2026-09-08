@@ -6,6 +6,7 @@ import { LOCALE_LABELS, LOCALES, type Locale } from "@/lib/i18n/locales";
 import { swapLocale } from "@/lib/i18n/paths";
 import { rememberLocale } from "@/lib/i18n/rememberLocale";
 import { useLocale } from "@/lib/i18n/useLocale";
+import { chromeCopyFor } from "@/components/layout/chromeCopy";
 
 /**
  * The header's language control, sized and bordered to match
@@ -18,6 +19,7 @@ export function LanguageToggleButton() {
   const current = useLocale();
   const pathname = usePathname();
   const router = useRouter();
+  const copy = chromeCopyFor(current);
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
@@ -57,7 +59,7 @@ export function LanguageToggleButton() {
         type="button"
         aria-expanded={isOpen}
         aria-haspopup="menu"
-        aria-label={`Language: ${LOCALE_LABELS[current]}. Change language`}
+        aria-label={copy.changeLanguage.replace("{locale}", LOCALE_LABELS[current])}
         onClick={() => setIsOpen((open) => !open)}
         className="inline-flex h-11 w-11 shrink-0 items-center justify-center border border-white/28 bg-transparent text-[16px] text-white"
       >
@@ -67,7 +69,7 @@ export function LanguageToggleButton() {
       {isOpen && (
         <div
           role="menu"
-          aria-label="Language"
+          aria-label={copy.language}
           className="absolute right-0 top-full z-40 mt-1 min-w-40 border border-[var(--home-hairline)] bg-[var(--home-bg)] py-1"
         >
           {LOCALES.map((locale) => (

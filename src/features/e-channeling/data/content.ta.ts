@@ -89,6 +89,8 @@ export const directory = {
   introTemplate:
     "சிறப்புத்துறைகள் {specialities} இல் நிபுணர் மருத்துவர்கள் {count} பேர் உள்ளனர். பெயர் அல்லது சிறப்புத்துறை மூலம் தேடுங்கள், அல்லது கீழே உள்ள பட்டியலைப் பார்க்கவும்.",
   searchPlaceholder: "ஒரு Doctor அல்லது சிறப்புத்துறையைத் தேடுங்கள்…",
+  searchAriaLabel: "பெயர் அல்லது சிறப்புத்துறை மூலம் மருத்துவர்களைத் தேடுங்கள்",
+  clearSearchAriaLabel: "தேடலை அகற்று",
   allSpecialities: "அனைத்து சிறப்புத்துறைகளும்",
   specialitiesLabel: "சிறப்புத்துறைகள்",
   clearFilters: "வடிகட்டிகளை அகற்று",

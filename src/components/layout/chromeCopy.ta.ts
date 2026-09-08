@@ -1,7 +1,8 @@
 // Tamil for the chrome's own hardcoded strings (header, mobile panel,
-// floating rail, both theme toggles). Written as a full object rather than a
-// partial: all ten strings are translated, and `chromeCopyFor` in
-// chromeCopy.ts reads this synchronously without merging through `localize`.
+// floating rail, both theme toggles, the language switcher). Written as a
+// full object rather than a partial: all twelve strings are translated, and
+// `chromeCopyFor` in chromeCopy.ts reads this synchronously without merging
+// through `localize`.
 //
 // "WhatsApp" is left in English deliberately: it is the product name, the
 // same decision as everywhere else in the chrome and in the contact feature.
@@ -25,4 +26,6 @@ export const chromeCopy = {
     "இரக்கமுள்ள, நோயாளர் மைய சிகிச்சை மூலம், அமெரிக்க சுகாதார தரநிலைகளை இலங்கைக்குக் கொண்டு வருகிறோம்.",
   toLightMode: "Light mode க்கு மாறுங்கள்",
   toDarkMode: "Dark mode க்கு மாறுங்கள்",
+  language: "மொழி",
+  changeLanguage: "மொழி: {locale}. மொழியை மாற்றுங்கள்",
 };

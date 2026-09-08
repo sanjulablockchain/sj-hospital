@@ -84,6 +84,8 @@ export const directory = {
   introTemplate:
     "විශේෂඥතා {specialities} ක් තුළ විශේෂඥ වෛද්‍යවරු {count} දෙනෙක් සිටිනවා. නම හෝ විශේෂඥතාව අනුව සොයන්න, නැත්නම් පහත ලැයිස්තුව බලන්න.",
   searchPlaceholder: "වෛද්‍යවරයෙක් හෝ විශේෂඥතාවක් සොයන්න…",
+  searchAriaLabel: "නම හෝ විශේෂඥතාව අනුව වෛද්‍යවරු සොයන්න",
+  clearSearchAriaLabel: "සෙවීම ඉවත් කරන්න",
   allSpecialities: "සියලුම විශේෂඥතා",
   specialitiesLabel: "විශේෂඥතා",
   clearFilters: "පෙරහන් ඉවත් කරන්න",

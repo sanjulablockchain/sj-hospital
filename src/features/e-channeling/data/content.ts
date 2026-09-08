@@ -94,6 +94,8 @@ export const directory = {
   introTemplate:
     "{count} consultants across {specialities} specialities. Search by name or speciality, or browse the list below.",
   searchPlaceholder: "Search a doctor or speciality…",
+  searchAriaLabel: "Search doctors by name or speciality",
+  clearSearchAriaLabel: "Clear search",
   allSpecialities: "All specialities",
   specialitiesLabel: "Specialities",
   clearFilters: "Clear filters",
