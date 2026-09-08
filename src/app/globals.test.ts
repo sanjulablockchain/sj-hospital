@@ -79,4 +79,30 @@ test("Sinhala and Tamil each rebind both shared font variables with their own fa
 
   assert.match(taBlock, /--sj-body:[^;]*--font-noto-tamil/, "ta does not rebind --sj-body with the Tamil face");
   assert.match(taBlock, /--sj-display:[^;]*--font-catamaran/, "ta does not rebind --sj-display with the Tamil display face");
+
+  // The Latin face must come FIRST in every locale stack. A browser picks a
+  // font per character and falls through only on a missing glyph, and all four
+  // script faces ship Latin glyphs of their own, so script-first made them
+  // paint the English text too: the English hero heading rendered in Gemunu
+  // Libre on /si and Catamaran on /ta, and English body copy in Noto Sans
+  // Sinhala rather than Manrope. The assertions above pass either way, which
+  // is exactly why that shipped, so these pin the order rather than the
+  // membership.
+  const order: Array<[string, string, string, string]> = [
+    ["si", siBlock, "--sj-body", "--font-manrope"],
+    ["si", siBlock, "--sj-display", "--font-bricolage"],
+    ["ta", taBlock, "--sj-body", "--font-manrope"],
+    ["ta", taBlock, "--sj-display", "--font-bricolage"],
+  ];
+  for (const [locale, block, property, latin] of order) {
+    const value = block.match(new RegExp(property + ":([^;]*)"))?.[1];
+    assert.ok(value, `${locale} has no ${property}`);
+    const families = value!.split(",").map((part) => part.trim());
+    assert.ok(
+      families[0]?.includes(latin),
+      `${locale} ${property} must list ${latin} first so English keeps its own` +
+        ` typeface; found "${families[0]}". A script face first repaints every` +
+        ` English word on the page, which is most of it.`
+    );
+  }
 });
