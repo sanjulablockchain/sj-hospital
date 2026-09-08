@@ -104,12 +104,10 @@ function isContentUntranslatable(path: string): boolean {
  * string keeps each one a decision somebody made, so a genuinely forgotten
  * translation still fails the suite.
  */
-const KEEPS_ENGLISH = new Set([
-  // The feature's own name, the way every other page's nav names it
-  // (channelingNavigation.ts). Treated like the hospital's own name: never
-  // transliterated.
-  "hero.breadcrumbCurrent",
-]);
+// The hero, entirely (including `hero.breadcrumbCurrent`, the feature's own
+// name), now renders in English from the base per the register sweep, so
+// there is no longer a code-mixing decision left to record here.
+const KEEPS_ENGLISH = new Set<string>([]);
 
 test("every translatable string in content has Sinhala", () => {
   const missing = assertTranslationParity(base, si, isContentUntranslatable);

@@ -56,54 +56,26 @@ export const tickerItems = [
 ];
 
 export const heroFacts = [
-  { k: "විශේෂඥ වෛද්‍යවරු" },
-  { k: "විශේෂඥතා" },
-  { k: "වෙන් කිරීම", v: "Online, පැය 24" },
-  { k: "Channelling කවුන්ටරය" },
+  {},
+  {},
+  {},
+  {},
 ];
 
-export const heroStandfirst =
-  "St. Joseph Hospital, මීගමුවේ අපගේ නිවාස වෛද්‍යවරුන් හමුවෙන්න. පැය 24 පුරාම ක්‍රියාත්මක වන Online e-channeling පද්ධතියක් හරහා වේලාවක් වෙන් කර ගැනීමට අප ඔබට උදව් කරනවා.";
-
-export const hero = {
-  strapline: "විශේෂඥ වෛද්‍යවරයෙක් Book කරන්න",
-  breadcrumbHome: "මුල් පිටුව",
-  // Kept identical to English on purpose: the feature's own name, the way
-  // every other page's nav names it. See KEEPS_ENGLISH in
-  // content.i18n.test.ts.
-  breadcrumbCurrent: "E-Channeling",
-  headingLead: "වේලාවක්",
-  headingAccent: "වෙන් කරන්න.",
-  findCta: "විශේෂඥ වෛද්‍යවරයෙක් සොයන්න",
-};
-
-export const directoryEyebrow = "01 / විශේෂඥ වෛද්‍යවරයෙක් සොයන්න";
-export const directoryHeading = "අපගේ විශේෂඥ වෛද්‍යවරුන් සොයන්න";
+export const hero = {};
 
 export const directory = {
   introTemplate:
     "විශේෂඥතා {specialities} ක් තුළ විශේෂඥ වෛද්‍යවරු {count} දෙනෙක් සිටිනවා. නම හෝ විශේෂඥතාව අනුව සොයන්න, නැත්නම් පහත ලැයිස්තුව බලන්න.",
-  searchPlaceholder: "වෛද්‍යවරයෙක් හෝ විශේෂඥතාවක් සොයන්න…",
   searchAriaLabel: "නම හෝ විශේෂඥතාව අනුව වෛද්‍යවරු සොයන්න",
   clearSearchAriaLabel: "සෙවීම ඉවත් කරන්න",
-  allSpecialities: "සියලුම විශේෂඥතා",
   specialitiesLabel: "විශේෂඥතා",
-  clearFilters: "පෙරහන් ඉවත් කරන්න",
   resultCountSingular: "විශේෂඥ වෛද්‍යවරයෙක්",
   resultCountPlural: "විශේෂඥ වෛද්‍යවරු",
-  noResultsHeading: "එම සෙවීමට ගැලපෙන විශේෂඥ වෛද්‍යවරයෙක් හමු නොවුණා",
   noResultsBodyTemplate:
     "වෙනත් නමක් හෝ විශේෂඥතාවක් උත්සාහ කරන්න, නැත්නම් අපගේ Channelling කවුන්ටරයට {phone} අමතන්න, අපි ඔබට ගැලපෙන වෛද්‍යවරයා සොයා දෙන්නම්.",
-  showAllDoctors: "සියලුම වෛද්‍යවරු පෙන්වන්න",
-  bookAppointment: "Appointment එකක් Book කරන්න",
 };
 
 export const helpRail = {
-  // Kept short on purpose: ChannelingHero reuses this exact string as a
-  // whitespace-nowrap pill-button label (see the hero's "Not sure who to
-  // see?" CTA), so a long formal question here overflowed a 360px viewport.
-  heading: "වෛද්‍යවරයා තෝරගන්න අමාරුද?",
   body: "අපගේ Channelling කවුන්ටරය ඔබට ගැලපෙන විශේෂඥ වෛද්‍යවරයා දවසේ ඕන වෙලාවක සොයා දෙනවා.",
-  callCtaTemplate: "{phone} අමතන්න",
-  emailCta: "Email කරන්න",
 };
