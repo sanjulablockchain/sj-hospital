@@ -41,10 +41,6 @@ function isUntranslatable(path: string): boolean {
  * translation still fails the suite.
  */
 const KEEPS_ENGLISH = new Set([
-  "heroFacts[0].k", // Reception
-  "heroFacts[2].v", // WhatsApp, a product name in every script
-  "contactRows[2].label", // WhatsApp / Mobile
-  "contactRows[3].label", // Email
   "form.emailLabel", // Email*, the word every Sri Lankan form already uses
   "form.emailPlaceholder", // an example address, not prose
 ]);

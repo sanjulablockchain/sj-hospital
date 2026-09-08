@@ -186,12 +186,24 @@ export function sweepScope(relativePath: string): string {
  * `roomTypes[*].description`, every amenity, `bookIntro` and every other
  * body/intro paragraph are untouched and stay translated.
  *
+ * `contact` was swept on 2026-09-09, needing no code change: its getter
+ * already reads its overlay through `localize`. 27 Sinhala and 27 Tamil
+ * strings were deleted from its single content overlay (`content.si/ta.ts`;
+ * `schemas.si/ta.ts` was already clean): the hero (entirely, now `{}`),
+ * `sectionEyebrows` (now `{}`), `jumpCards[*].label` and
+ * `contactRows[*].label`. Per the rule document, `contact`'s own filter-like
+ * row and jump cards go English while its form stays translated: `form`'s
+ * field labels, placeholders and error messages, `reachIntro`, `messageIntro`,
+ * `mapIntro` and every `contactRows[*].sub` are untouched. Fixed four
+ * now-stale `KEEPS_ENGLISH` entries (`heroFacts[0].k`, `heroFacts[2].v`,
+ * `contactRows[2].label`, `contactRows[3].label`); `form.emailLabel` and
+ * `form.emailPlaceholder` remain, since the form is unaffected.
+ *
  * A future scope may need a similar check before it is swept: read the
  * feature's own getter (`getContent.ts` or equivalent) for whether it reads
  * an overlay directly or through `localize` before deleting from it.
  */
 export const PENDING_REGISTER_SWEEP: ReadonlySet<string> = new Set([
-  "contact",
   "e-channeling",
   "home-care",
   "international-care",
