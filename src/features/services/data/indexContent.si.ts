@@ -3,26 +3,18 @@
 // and two small local arrays this task moved out of the section components
 // themselves; see the header comment above `hero` in indexContent.ts).
 //
-// Register matches the rest of the site. Several headings below reuse
-// src/config/navigationLabels.si.ts verbatim rather than coining a second
-// Sinhala phrase for the same nav concept: "Centres of excellence",
-// "Full directory", "Admissions", "Facilities", "Diagnostics & radiology"
-// and "Department of surgery" all have an exact entry there.
-// "Pharmacy" is KEEPS_ENGLISH there for the same reason it is here: that is
-// how a Sri Lankan reader actually sees the word. `.no`, `.href`, `.accent`,
-// `.index`, `.photo` and `.photoAlt` are omitted throughout, matching
+// Register matches the rest of the site. "Pharmacy" stays English (as it
+// does in `pharmacySection.body` and `pharmacyFacts` below) for the same
+// reason `pharmacy/data/content.si.ts` keeps it: that is how a Sri Lankan
+// reader actually sees the word. `.no`, `.href`, `.accent`, `.index`,
+// `.photo` and `.photoAlt` are omitted throughout, matching
 // content.i18n.test.ts's `isUntranslatable`.
 //
-// `internationalSteps[4].title` had fully translated "Records" -> "වාර්තා",
-// contradicting `pharmacySection.body`'s own bare "Digital Records" two
-// screens up in this same file, and `pharmacy/data/content.si.ts`'s
-// declared English-stays list for "Record"/"Records". Fixed to keep
-// "Records" bare English. `internationalSteps[5].title` was bare English
-// ("Online Follow Up", a reordered, recapitalised form of the base "Follow
-// up online") with no Sinhala at all, unlike every other sibling in this
-// six-entry array; fixed to "Online ලෙස Follow-up", keeping "Follow-up"
-// English the way `atHome.si.ts`'s telemedicine service already does
-// throughout, with a Sinhala connector so the title is not bare English.
+// The 2026-09-09 register sweep removed every section eyebrow, section
+// heading and `internationalSteps[].title` from this overlay (they render
+// in English on every page now), along with the heading-reuse notes and
+// the `internationalSteps[4]`/`[5]` translation fixes this header used to
+// document for them.
 
 export const __review = { status: "draft", reviewer: null, date: null } as const;
 
@@ -39,22 +31,18 @@ export const tickerItems: readonly string[] = [
 export const jumpCards = [
   {
     count: "ඒකක 9",
-    label: "විශිෂ්ඨතා මධ්‍යස්ථාන",
     note: "එක් ගැටලුවක් වටා සකසන ලද සත්කාරය, එක් පැමිණීමක් වටා නෙවෙයි.",
   },
   {
     count: "සේවා 36",
-    label: "සම්පූර්ණ නාමාවලිය",
     note: "වේලාවන්, විෂය පථය සහ එකින් එක පටන් ගන්නා ආකාරය.",
   },
   {
     count: "මට්ටම් 3",
-    label: "සෞඛ්‍ය පරීක්ෂණ",
     note: "එක උදෑසනකදී සංවිධානාත්මක පරීක්ෂණයක්.",
   },
   {
     count: "පියවර 4",
-    label: "ඇතුළත් කිරීම්",
     note: "රැගෙන එන දේ, Billing එකයි Insurance එකයි වැඩ කරන ආකාරය.",
   },
 ];
@@ -172,7 +160,6 @@ export const packages = [
       "පපුවේ X-ray",
       "වෛද්‍ය Consultation සහ Report Review",
     ],
-    ctaLabel: "Quote එකක් ඉල්ලන්න",
   },
   {
     tier: "වැඩිම තෝරන",
@@ -184,7 +171,6 @@ export const packages = [
       "බඩේ Ultrasound Scan එකක්",
       "Report Review සමඟ වෛද්‍ය Consultation",
     ],
-    ctaLabel: "Quote එකක් ඉල්ලන්න",
   },
   {
     tier: "Executive",
@@ -196,25 +182,20 @@ export const packages = [
       "වෛද්‍ය සහ හෘද රෝග Consultation",
       "Follow-up සැලසුම් සමඟ විස්තරාත්මක Report Review",
     ],
-    ctaLabel: "Quote එකක් ඉල්ලන්න",
   },
 ];
 
 export const admissionSteps = [
   {
-    title: "ගැටලුව අපිට කියන්න",
     desc: "0117 84 84 84 ට Call කරන්න හෝ OPD එකට ඇවිත් ඔබේ රෝග ලක්ෂණ විස්තර කරන්න; Coordinator කෙනෙක් ඔබට හරි විශේෂඥතාව හඳුනාගන්නවා.",
   },
   {
-    title: "වෛද්‍යවරයෙක් හමුවෙන්න",
     desc: "මොනවද වෙන්න ඕන කියලා Consultation එකෙන් තහවුරු කරනවා, ප්‍රයෝජනවත් නම් එදිනම පරීක්ෂණත් සකසනවා.",
   },
   {
-    title: "මුලින්ම වියදම් සැලැස්මක්",
     desc: "ප්‍රතිකාර පටන් ගන්න කලින් ලිඛිත සැලැස්මක් ලැබෙනවා, එහෙනම් කිසිම දෙයක් අන්ධකාරයේ එකඟ වෙන්නේ නෑ.",
   },
   {
-    title: "ප්‍රතිකාරයයි Follow Up එකයි",
     desc: "ඔබ රැඳී සිටින්නේ පැය කිහිපයක් හෝ දින කිහිපයක් වුනත්, Admission එකයි ප්‍රතිකාරයයි Follow-up දිනයක් සහිත Discharge සැලැස්මක්.",
   },
 ];
@@ -248,90 +229,53 @@ export const comforts = [
 ];
 
 export const hero = {
-  eyebrow: "වෛද්‍ය සේවා",
-  heading: { line1: "සේවා හැමවිටම,", accentPrefix: "එකම ", accent: "වහලක් යටතේ." },
-  body: "විශිෂ්ඨතා මධ්‍යස්ථාන නවයක සේවා {count}ක්: Emergency, ශල්‍ය, රෝග විනිශ්චය සහ පවුලේ සත්කාර, ඔබ ආ ගැටලුව වටා සකසන ලද, එය සුදුසුවෙන් ප්‍රතිකාර කරන අංශය වටා නෙවෙයි.",
-  cta: "නාමාවලිය විවෘත කරන්න",
+  heading: {},
 };
 
-export const jumpCardsCopy = { exploreLabel: "සොයන්න" };
+export const jumpCardsCopy = {};
 
-export const centresSection = {
-  eyebrow: "01 / විශිෂ්ඨතා මධ්‍යස්ථාන",
-  heading: "එක් ගැටලුවක් වටා තැනූ ඒකක නවයක්",
-};
+export const centresSection = {};
 
 export const directory = {
-  eyebrow: "02 / සම්පූර්ණ නාමාවලිය",
-  headingAll: "අප ප්‍රතිකාර කරන හැම දෙයක්ම",
-  headingFiltered: "{group} සේවා",
   countLine: "සේවා {total}න් {shown}ක්",
   filterAriaLabel: "මධ්‍යස්ථානය අනුව සේවා Filter කරන්න",
-  readMore: "{title} ගැන තව කියවන්න",
 };
 
 export const surgicalSection = {
-  eyebrow: "03 / ශල්‍ය අංශය",
-  heading: { line1: "විශේෂඥතා හතක්,", line2: "එකම ශල්‍ය ප්‍රමිතියක්" },
+  heading: {},
   body: "පොදු, අස්ථි, ENT, Urological, ඇස්, Neuro- සහ Gastrointestinal ශල්‍යකර්ම හරහා විශේෂඥ Lead කරන Lists, එකින් එකට Anaesthesia සේවාවක් සහ ශල්‍යාගාරයේ සිට Discharge දක්වා Assign කළ Recovery Nurse කෙනෙක් සමඟ.",
-  cta: "ශල්‍ය Consultation එකක් ඉල්ලන්න",
 };
 
-export const diagnosticsSection = {
-  eyebrow: "04 / රෝග විනිශ්චය සහ විකිරණවේදය",
-  heading: "රසායනාගාරය, Imaging සහ Endoscopy",
-  cta: "පරීක්ෂණයක් Book කරන්න",
-};
+export const diagnosticsSection = {};
 
-export const packagesSection = {
-  eyebrow: "05 / සෞඛ්‍ය පරීක්ෂණ",
-  heading: "එක උදෑසනකදී Screening",
-};
+export const packagesSection = {};
 
 export const admissionsSection = {
-  eyebrow: "06 / ඇතුළත් කිරීම්",
-  heading: "පියවර හතරක්, පුදුමයක් නෑ",
-  bringWithYouHeading: "රැගෙන එන්න",
-  paymentHeading: "ගෙවීම සහ Insurance",
-  roomsHeading: "කාමර",
   roomsBody: "Attendant ඉඩක් සහිත Private සහ Semi-Private කාමර, පැය දෙකකට වරක් Sanitise කරනවා.",
-  roomsCta: "කාමර බලන්න",
 };
 
 export const facilitiesSection = {
-  eyebrow: "07 / පහසුකම්",
-  heading: { line1: "සම්පූර්ණ රැඳී සිටීම සඳහා", line2: "තැනූ Campus එකක්" },
-  comfortsHeading: "එදිනෙදා පහසුකම්",
+  heading: {},
 };
 
 export const facilityCards = [
   {
-    title: "එක් Campus එකක්, මහල් හයක්",
     body: "මීගමුවේ විශේෂයෙන් තැනූ රෝහලක්, Ambulance Bay එකටයි OPD රෝගීන්ටයි වහලක් සහිත පිවිසුම් සමඟ.",
-    linkLabel: "අනතුරු සහ හදිසි ප්‍රතිකාර බලන්න",
   },
   {
-    title: "Reception සහ OPD",
     body: "පැය 24ම විවෘත OPD එකක්, ඔබ ඕනෑම වේලාවක ආවත් Emergency පිවිසුම ලඟින්ම සේවකයින් සිටිනවා.",
-    linkLabel: "ඇතුළත් කිරීම් බලන්න",
   },
   {
-    title: "වාට්ටු, කාමර සහ ICU",
     body: "රාත්‍රියකට LKR 10,000 සිට Private සහ Semi-Private කාමර, උසස් Dependency සත්කාරය සඳහා සම්පූර්ණ ICU එකක් සහිතව.",
-    linkLabel: "දැඩි සත්කාර බලන්න",
   },
   {
-    title: "Ambulance පිවිසුම",
     body: "අපගේම Ambulance රථ පිරිසක් සේවය කරන වහලක් සහිත පිවිසුමක්, Bandaranaike International සිට විනාඩි දහයයි.",
-    linkLabel: "විදේශීය සත්කාර බලන්න",
   },
 ];
 
 export const pharmacySection = {
-  eyebrow: "08 / Pharmacy",
-  heading: { line1: "විශ්වාස කළ හැකි බෙහෙත්,", line2: "දවල් වේවා රෑ වේවා" },
+  heading: {},
   body: "Counter එකේ තියෙන්නේ Authorized Stock විතරයි, එය භාරදෙන්න හෝ Delivery සඳහා යවන්න කලින් Pharmacist කෙනෙක් හැම Order එකක්ම ඔබේ File එකට එරෙහිව පරීක්ෂා කරනවා. Digital Records නිසා නැවත Order එකක් සරලයි, Delivery මීගමුව පුරාම නිවෙස්වලට ලඟාවෙනවා.",
-  cta: "Pharmacy එකට යන්න",
 };
 
 export const pharmacyFacts = [
@@ -342,59 +286,35 @@ export const pharmacyFacts = [
   { name: "නැවත Prescriptions", note: "Digital ලෙස File කරලා තියෙනවා" },
 ];
 
-export const internationalSection = {
-  eyebrow: "09 / විදේශීය රෝගීන්",
-  heading: "ගුවන් තොටුපළින් විනාඩි දහයයි",
-};
+export const internationalSection = {};
 
 export const bookSection = {
   // "වෙන් කිරීම" matches navigationLabels.si.ts's own FOOTER_HEADINGS
   // "Booking" entry exactly, rather than keeping "Book" English here.
-  eyebrow: "10 / වෙන් කිරීම",
-  heading: "ඔබට අවශ්‍ය දේ අපිට කියන්න",
   body: "පහත අංකයට Call කරන්න හෝ ඔබේ විස්තර එවන්න. Coordinator කෙනෙක් ඔබට හරි අංශය හඳුනාගෙන කිසිම දෙයක් පටන් ගන්න කලින් සැලැස්මක් තහවුරු කරයි.",
-  contactCta: "අප හා සම්බන්ධ වන්න",
-  browseServices: "සේවා පිරික්සන්න",
 };
 
-export const allServicesLabel = "සියලුම සේවා";
-
 export const detailChrome = {
-  aboutCoversHeading: "මෙයින් ආවරණය වන්නේ",
-  aboutConditionsHeading: "වැඩිපුරම හමුවෙන තත්ත්ව",
   addressLine: "229/10 St. Joseph Street, මීගමුව",
-  journeyHeading: "ඔබේ පැමිණීම, පියවරෙන් පියවර",
-  prepHeading: "සූදානම් වෙන ආකාරය",
-  teamHeading: "මෙම සේවාවේ කණ්ඩායම",
-  relatedHeading: "අදාළ සේවා",
-  faqHeading: "අහන්න කලින්ම අහපු ප්‍රශ්න",
-  bookHeading: "{cta} අදම.",
-  backToServices: "සියලුම සේවා වෙතට ආපහු",
 };
 
 export const internationalSteps = [
   {
-    title: "ගුවන් තොටුපළේ සිට ඇඳ දක්වා",
     desc: "Bandaranaike International සිට විනාඩි දහයයි, Transfer සඳහා අපගේම Ambulance එක ලබාගත හැක.",
   },
   {
-    title: "ලිඛිත Estimates",
     desc: "ප්‍රතිකාර ආරම්භයට කලින් ලිඛිත Estimate එකක් ලබාදෙනවා, ලැබෙන ප්‍රතිකාර ගමන ආවරණය කරමින්.",
   },
   {
-    title: "Insurance සහ Claims",
     desc: "අපගේ Desk එක විදේශීය Insurers සඳහා Documentation සකසා Claims සඳහා සහාය දෙනවා.",
   },
   {
-    title: "භාෂා සහාය",
     desc: "ඔබේ පැමිණීම පුරාම ඉල්ලුවහොත් භාෂා පරිවර්තකයින් ලබාගත හැක.",
   },
   {
-    title: "ගෙදර ගෙනියන්න Records",
     desc: "ඔබ සමඟ ගෙනියන්න ඔබේ Reports, Imaging Referrals සහ Discharge Summary එකේ පිටපත්.",
   },
   {
-    title: "Online ලෙස Follow-up",
     desc: "ඔබ ගෙදර ගිය පසුවත් Telemedicine Consultation එකක් ඔබේ සත්කාරය දිගටම කරගෙන යනවා.",
   },
 ];
