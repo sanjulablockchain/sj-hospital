@@ -12,6 +12,7 @@ import {
 import { notFound } from "next/navigation";
 import { LOCALES, hasLocale, type Locale } from "@/lib/i18n/locales";
 import { localeAlternates, SITE_URL } from "@/lib/i18n/alternates";
+import { getPageMetadataEntry } from "@/config/getPageMetadata";
 import "../globals.css";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -87,15 +88,20 @@ export async function generateMetadata({ params }: LayoutProps<'/[locale]'>): Pr
   // type checker what the guard already guarantees by the time a page renders.
   const typedLocale = locale as Locale;
 
+  // This is also the home page's own metadata: `src/app/[locale]/page.tsx`
+  // has no `export const metadata` / `generateMetadata` of its own, so Next
+  // merges these fields straight through. `home.title` stays English in
+  // every locale: it carries the motto ("To Live Is a Privilege") as a brand
+  // mark, and the site's rule (docs/superpowers/i18n-review-handover.md) is
+  // that the motto stays English wherever it is set as a mark rather than
+  // composed as a sentence. `home.description` is not a mark and is fully
+  // translated; see src/config/pageMetadata.ts.
+  const { title, description } = await getPageMetadataEntry(typedLocale, "home");
+
   return {
     metadataBase: new URL(SITE_URL),
-    title: "St. Joseph Hospital Negombo | To Live Is a Privilege",
-    description:
-      "US-standard healthcare in Negombo, Sri Lanka. 24/7 OPD, Emergency, Pharmacy, in-house doctors, and digital X-ray, with inpatient rooms from 10,000 LKR.",
-    // The title and description above stay English until the content plan
-    // translates them. The alternates are what matter now: they tell a search
-    // engine the three URLs are the same page in different languages rather
-    // than duplicate content.
+    title,
+    description,
     alternates: localeAlternates("/", typedLocale),
     openGraph: { locale: typedLocale },
   };

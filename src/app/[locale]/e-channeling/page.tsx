@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { EChannelingPage } from "@/features/e-channeling";
+import { getPageMetadataEntry } from "@/config/getPageMetadata";
 import type { Locale } from "@/lib/i18n/locales";
 
-export const metadata: Metadata = {
-  title: "Book an Appointment | St. Joseph Hospital Negombo",
-  description:
-    "Browse St. Joseph Hospital Negombo's doctors by specialization and book an appointment online via Calendly.",
-};
+export async function generateMetadata({ params }: PageProps<'/[locale]'>): Promise<Metadata> {
+  const { locale } = await params;
+  return getPageMetadataEntry(locale as Locale, "eChanneling");
+}
 
 export default async function Page({ params }: PageProps<'/[locale]'>) {
   const { locale } = await params;

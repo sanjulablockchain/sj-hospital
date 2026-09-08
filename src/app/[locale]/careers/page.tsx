@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { CareersPage } from "@/features/career";
+import { getPageMetadataEntry } from "@/config/getPageMetadata";
 import type { Locale } from "@/lib/i18n/locales";
 
-export const metadata: Metadata = {
-  title: "Careers | St. Joseph Hospital Negombo",
-  description:
-    "Open roles at St. Joseph Hospital Negombo: medical, nursing, allied health, pharmacy and administration. We never charge candidates a fee at any stage, and we reply to every application.",
-};
+export async function generateMetadata({ params }: PageProps<'/[locale]'>): Promise<Metadata> {
+  const { locale } = await params;
+  return getPageMetadataEntry(locale as Locale, "careers");
+}
 
 export default async function Page({ params }: PageProps<'/[locale]'>) {
   const { locale } = await params;
