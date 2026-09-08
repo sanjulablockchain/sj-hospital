@@ -11,9 +11,10 @@ import { assertTranslationParity, stringPaths } from "../../../lib/i18n/stringPa
  * `servicesEmail` and `whatsappHref` are the desk's own address and WhatsApp
  * link, each with exactly one home in `content.ts`. Every `href` is a URL, a
  * `tel:` or a `mailto:`. `enquiryContactRows[].value` is the fact a contact
- * row carries alongside its own translatable `label` (only the phone row has
- * one: the hospital's own number), the same role `contact`'s, `network`'s,
- * `accommodation`'s, `home-care`'s and `pharmacy`'s own `value` fields play.
+ * row carries alongside its own link label, now English like every CTA
+ * (only the phone row has one: the hospital's own number), the same role
+ * `contact`'s, `network`'s, `accommodation`'s, `home-care`'s and
+ * `pharmacy`'s own `value` fields play.
  * `glyph` is a structural name the component switches on to pick an icon, not
  * copy: keying JSX off translatable text is what blanked four icons on
  * `contact`'s own page the moment its labels were translated. `no` is the
