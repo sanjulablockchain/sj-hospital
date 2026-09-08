@@ -17,10 +17,7 @@ export const __review = { status: "draft", reviewer: null, date: null } as const
 
 export const emergencyServices = [
   {
-    title: "අනතුරු සහ හදිසි ප්‍රතිකාර",
-    directoryTitle: "අනතුරු සහ හදිසි ප්‍රතිකාර ඒකකය",
     hours: "පැය 24ම, කෙලින්ම එන්න",
-    cta: "කෙලින්ම එන්න",
     desc: "වහලක් සහිත Ambulance පිවිසුමක් පිටුපස පැය 24ම සේවකයින් සිටින Resuscitation Bay එකක්, papers වලට කලින් Triage පටන් ගන්නවා. On-call ශල්‍ය සහ Anaesthetic කණ්ඩායම් නිසා ශල්‍යාගාර ස්ථානයේම සූදානම්ව තියෙනවා.",
     tags: ["Resuscitation Bay එක", "තුවාල ප්‍රතිකාර", "Ambulance යැවීම", "On-call ශල්‍යාගාරය"],
     facts: [
@@ -30,7 +27,6 @@ export const emergencyServices = [
       { k: "රසායනාගාරයයි X-rayයි", v: "ඒම මහලේම" },
     ],
     lede: "වහලක් සහිත Ambulance පිවිසුමක් පිටුපස හැම වේලාවකම සේවකයින් සිටින Resuscitation Bay එකක්. Appointment එකක් නෑ, Queue එකක් නෑ, නිවසින් වෛද්‍යවරයෙක් කැඳවනකන් රැඳී සිටීමකුත් නෑ.",
-    aboutHead: "හැම දිනකම හැම වේලාවකම විවෘතයි",
     body1: "Papers ආරම්භ කරන්න කලින්ම දොරටුවේදීම වෛද්‍යවරයෙක් ඔබව බලනවා. On-call ශල්‍ය සහ Anaesthetic කණ්ඩායම් ශල්‍යාගාර ස්ථානයේම සූදානම්ව තියෙනවා, එහෙනම් හදිසි ශල්‍යකර්ම Transfer එකකින් පස්සේ නෙවෙයි මෙතනදීම සිදු වෙනවා.",
     body2: "අපගේම Ambulances එම Bay එකෙන්ම Dispatch කරනවා, රසායනාගාරයයි Digital X-rayයි මීටර ගණනකින්, එහෙනම් ඔබව තවම Assess කරන අතරේම Bloods සහ Films ආපහු එනවා.",
     strip: [
@@ -60,19 +56,15 @@ export const emergencyServices = [
     location: "බිම් මහල, Ambulance පිවිසුම",
     steps: [
       {
-        title: "පැමිණීම",
         desc: "කෙලින්ම එන්න, නැත්නම් Ambulance එකෙන් එන්න. Registration එක රැඳී සිටිය හැක; Assessment එක රැඳී සිටින්නේ නෑ.",
       },
       {
-        title: "Triage",
         desc: "පැමිණි විගසම Nurse කෙනෙක් සහ වෛද්‍යවරයෙක් තදබරකම Assess කරනවා, Registration එක අවසන් වෙනකලුත් ප්‍රතිකාර ආරම්භ වෙනවා.",
       },
       {
-        title: "පරීක්ෂණ",
         desc: "Bloods, ECG සහ Imaging ස්ථානයේදීම Order කරලා ඔබ තවම මෙතන ඉන්නකොටම Report කරනවා.",
       },
       {
-        title: "Admit කිරීම හෝ Discharge කිරීම",
         desc: "කාමරයක්, ශල්‍යාගාර වේලාවක් හෝ ලිඛිත උපදෙස් සහ Follow-up දිනයක් සහිත Discharge සැලැස්මක්.",
       },
     ],
@@ -108,10 +100,7 @@ export const emergencyServices = [
     ],
   },
   {
-    title: "දැඩි සත්කාර",
-    directoryTitle: "දැඩි සත්කාර ඒකකය",
     hours: "අඛණ්ඩව",
-    cta: "ICU Desk එකට කතා කරන්න",
     desc: "අඛණ්ඩ Observation, Ventilator සහාය හෝ ප්‍රධාන ශල්‍යකර්මයකින් හෝ දරුණු අසනීපයකින් පසු සමීප Nursing අවශ්‍ය රෝගීන් සඳහා Monitor කරන ඒකකයක්. Nurse කෙනෙක් බලන්නේ Beds කුඩා පිරිසක් විතරයි, විශේෂඥ වෛද්‍යවරයෙක් හැම දිනකම Rounds ඉස්සරහ ඉන්නවා.",
     tags: ["Ventilator සහාය", "අඛණ්ඩ Monitoring", "විශේෂඥ Rounds", "පවුලට Update"],
     facts: [
@@ -121,7 +110,6 @@ export const emergencyServices = [
       { k: "පවුලට Update", v: "දිනකට වරක් Phone එකෙන් හෝ මුහුණින්" },
     ],
     lede: "රෝහලේ වඩාත්ම අසනීප රෝගීන් සඳහා Monitor කරන ඒකකයක්, Nurse කෙනෙක් බලන්නේ Beds කුඩා පිරිසක් විතරයි, විශේෂඥ වෛද්‍යවරයෙක් හැම Case එකක්ම දිනපතා Review කරනවා.",
-    aboutHead: "අඛණ්ඩ Monitoring, ළඟින්ම",
     body1: "Heart Rhythm, Oxygen මට්ටම් සහ රුධිර පීඩනය අඛණ්ඩව Monitor කරන්න Beds Wire කරලා තියෙනවා, හුස්ම ගැනීමට හෝ බෙහෙත් සහාය අවශ්‍ය රෝගීන් සඳහා Ventilators සහ Infusion Pumps ළඟින්ම තියෙනවා. විශේෂඥ වෛද්‍යවරයෙක් දිනපතා Rounds ඉස්සරහ ඉන්නවා, රෝගියාගේ තත්ත්වය වෙනස් වන විදිහට සැලැස්ම වෙනස් කරනවා.",
     body2: "ඒකකය ශල්‍යාගාර සහ Emergency Department ළඟින්ම ඉන්න නිසා, Ward එකේ හෝ ශල්‍යකර්මයකින් පස්සේ තත්ත්වය Worse වෙන රෝගියෙක් වෙන රෝහලකට Transfer කරනවා වෙනුවට කෙලින්ම ඒකකයට ගෙනෙන්න පුළුවන්. පැමිණීම නියම වේලාවන්ට සීමා කරලා තියෙනවා රෝගීන්ට Rest ගන්න, Family Member කෙනෙකුට දිනකට වරක් Update Call එකක් එනවා.",
     strip: [
@@ -148,19 +136,15 @@ export const emergencyServices = [
     location: "දෙවන මහල, දැඩි සත්කාර ඒකකය",
     steps: [
       {
-        title: "ඇතුළත් කිරීම",
         desc: "Bed එකයි Monitor එකයි සූදානම් වුනාට පස්සේ රෝගියෙක් ශල්‍යාගාරයෙන්, Ward එකෙන් හෝ Emergency Department එකෙන් මෙතනට ගෙනෙනවා.",
       },
       {
-        title: "Stabilise කිරීම",
         desc: "Lines, Monitoring සහ, අවශ්‍යනම්, Ventilator එකක් Setup කරනවා, විශේෂඥ වෛද්‍යවරයා සමඟ මූලික සැලැස්මක් එකඟ වෙනවා.",
       },
       {
-        title: "දිනපතා Review",
         desc: "විශේෂඥ වෛද්‍යවරයා දිනපතා Rounds ඉස්සරහ ඉන්නවා, Nursing Observations Review අතරේම අඛණ්ඩව සටහන් කරනවා.",
       },
       {
-        title: "පහළට මාරු කිරීම",
         desc: "Stable වූ පසු, ලිඛිත Handover එකක් සමඟ රෝගියා ආපහු Ward Bed එකකට ගෙනියනවා.",
       },
     ],
