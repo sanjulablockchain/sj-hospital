@@ -123,6 +123,23 @@ export function sweepScope(relativePath: string): string {
  * policy's `CLINICAL_ROOTS` guard already keeps those paths out of reach, so
  * the audit never listed them. No overlay file was deleted.
  *
+ * `career` was swept on 2026-09-09, needing no code change: its getter
+ * already reads its overlay through `localize`. 87 Sinhala and 87 Tamil
+ * strings were deleted across its 2 content overlays (`schemas.si/ta.ts`,
+ * the Zod validation error strings, were already clean): the hero
+ * (entirely), every `sectionEyebrows` entry, every section/tile heading,
+ * every `jobs[*].title`/`benefits[*].title`/`process[*].title`/
+ * `students[*].title` (card titles), every `jumpCards[*].label`/
+ * `applyRows[*].label` (link labels), and `departmentLabels` (the openings
+ * filter's chip row, now `{}`). `sharedJobTitles`, career's own four
+ * shared job titles re-exported for `home`'s careers teaser, is swept the
+ * same way (its four properties are each `jobs[N].title` read back through
+ * a named export) and is now `{}`; `home`'s own `careers.si/ta.ts`, swept
+ * separately, no longer imports it, since the field that consumed it
+ * (`jobOpenings[*].title`) is deleted there too. `jobs[*].requirements`,
+ * `.detail`, `.line`, every FAQ, every benefit's `.items`, and every form
+ * label and error message are untouched and stay translated.
+ *
  * A future scope may need a similar check before it is swept: read the
  * feature's own getter (`getContent.ts` or equivalent) for whether it reads
  * an overlay directly or through `localize` before deleting from it.
@@ -130,7 +147,6 @@ export function sweepScope(relativePath: string): string {
 export const PENDING_REGISTER_SWEEP: ReadonlySet<string> = new Set([
   "about",
   "accommodation",
-  "career",
   "contact",
   "e-channeling",
   "facilities",

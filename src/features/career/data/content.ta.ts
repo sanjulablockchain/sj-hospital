@@ -6,57 +6,31 @@
 // nobody says out loud. Sentence forms use the polite plural
 // ("செய்யுங்கள்"), never the familiar imperative.
 //
-// "Careers" (hero.breadcrumbCurrent), "Home" (hero.breadcrumbHome), "Open
-// positions" (sectionEyebrows.openings, jumpCards[1].label), "How hiring
-// works" (sectionEyebrows.process, jumpCards[2].label), "Recruitment fraud"
-// (sectionEyebrows.fraud) and "Submit your CV" (sectionEyebrows.form) already
-// have a site-wide translation in navigationLabels.ta.ts for this exact
-// page's own header and footer links, so every one of those reuses that exact
-// string rather than inventing a second translation of the same English
-// phrase. "Why here" (sectionEyebrows.why, jumpCards[0].count) is reused the
-// same way.
-//
-// Job titles translate; professional qualifications do not (this feature's
-// own instruction). "MBBS", "SLMC", "BSc" and "Diploma" are registration and
-// degree names throughout `jobs[*].requirements` and stay English exactly as
-// written, the same class of word as any drug name or brand elsewhere on the
-// site. Two of the six `jobs[*].title` values are recorded in KEEPS_ENGLISH
-// in content.i18n.test.ts rather than translated, for the same reasons
-// content.si.ts's own file header gives:
-//
-// - "Pharmacist" (jobs[0].title): a bare occupational noun with a strong,
-//   already-audited site-wide precedent (facilities', media's and
-//   home-care's own overlays all keep "Nurse"/"Pharmacist" English inside a
-//   translated sentence), the same register class as "Doctor" and "OPD". It
-//   has no ordinary word riding along to translate, unlike its siblings
-//   below.
-// - "Radiographer, Digital X-ray" (jobs[5].title): "X-ray" is one of this
-//   site's own register words, "Digital" is the compound that always
-//   accompanies it, and "Radiographer" is the same occupational-noun class
-//   as "Pharmacist" above. Nothing in this title is ordinary prose.
-//
-// The other four titles are NOT nothing-but-nameplate, which is what the
-// sibling test is for: each carries an ordinary word that does translate.
-// "Business Development and Insurance Coordinator" keeps "Coordinator" and
-// "Insurance" English (both already established site-wide, "Insurance" from
-// navigationLabels.ta.ts's own "Insurance & billing") and translates
-// "Business Development". "Medical Officer, Emergency" keeps "Officer" and
-// "Emergency" (a register word) English and translates "Medical". "Theatre
-// Nurse" keeps "Nurse" English and translates "Theatre" to "அறுவை சிகிச்சை
-// அரங்கு", reusing navigationLabels.ta.ts's own "Operating theatres" root
-// rather than leaving it untranslated. "Medical Laboratory Technologist"
-// keeps "Technologist" English (same occupational-noun class) and translates
-// "Medical Laboratory".
+// "MBBS", "SLMC", "BSc" and "Diploma" are registration and degree names
+// throughout `jobs[*].requirements` and stay English exactly as written, the
+// same class of word as any drug name or brand elsewhere on the site.
 //
 // `jobs[0].detail[0]` quotes the exact word ("Pharmacist") a candidate is
 // asked to type into an email subject line. That quoted word is left as
 // written, the same treatment the recipe gives quoted material, while the
 // sentence around it translates in full.
 //
-// `applyRows[1]` used to carry the hospital's own number as its whole
-// `label`, with no separate action phrase (see the header note in
-// content.ts). `label` is now "Call us", reusing the recipe's own worked
-// example ("Call us" -> "எங்களை call செய்யுங்கள்") verbatim.
+// The register sweep (2026-09-09) deleted every `jobs[*].title` (a card
+// title, the policy's own naming for it), taking with it the file's former
+// discussion of which titles were bare occupational nouns (KEEPS_ENGLISH)
+// and which translated in part: none of the six is translated any more, so
+// every job title now renders in English from the base regardless of
+// locale. The same sweep deleted `sharedJobTitles`' four properties (each
+// one is `jobs[N].title` read back through a named export for
+// `home`'s own careers teaser, so the same classification applies), leaving
+// it `{}`; `departmentLabels` (the openings filter's chip row) also emptied
+// entirely, `hero` emptied entirely (the rule table's "Hero sections,
+// entirely" row), every `sectionEyebrows` entry, every `jumpCards[*].label`,
+// `applyRows[*].label`, and every section eyebrow/heading listed in the
+// array-length test below. `content.ts`'s own header note on why
+// `applyRows[1]` carries a separate `value` field (the switchboard number)
+// still applies: that fact has exactly one home regardless of what its
+// `label` renders as.
 //
 // Only translatable copy lives here. Every href, id, department key, count
 // derivation and structural field stays in content.ts and has exactly one
@@ -71,8 +45,6 @@ export const __review = { status: "draft", reviewer: null, date: null } as const
 
 export const jobs = [
   {
-    // "Pharmacist": KEEPS_ENGLISH, see the file header.
-    title: "Pharmacist",
     line: "Full Time · Shift Roster · நீர்கொழும்பு",
     body: "மருந்துகளை Dispense செய்தல், மருந்து பயன்பாடு பற்றி நோயாளர்களுக்கு ஆலோசனை வழங்குதல், Inventory ஐ Manage செய்தல், மற்றும் வார்டுகள் மற்றும் Counter முழுவதும் Prescribing பாதுகாப்பாக வைத்திருக்க Multidisciplinary குழுவுடன் இணைந்து பணியாற்றுதல்.",
     requirements: [
@@ -88,7 +60,6 @@ export const jobs = [
     ],
   },
   {
-    title: "வணிக மேம்பாடு மற்றும் Insurance Coordinator",
     line: "Full Time · Day Roster · நீர்கொழும்பு",
     body: "விற்பனை Strategies உருவாக்குதல், Insurance நிறுவனங்களுடன் Partnerships கட்டியெழுதல், சாத்தியமான Clients ஐ ஈர்த்தல், மற்றும் அதிக நோயாளர்கள் ஏற்கனவே Insured ஆக வருமாறு Cover ஐ Coordinate செய்தல்.",
     requirements: [
@@ -104,7 +75,6 @@ export const jobs = [
     ],
   },
   {
-    title: "மருத்துவ Officer, Emergency",
     line: "Full Time · Shift Roster · நீர்கொழும்பு",
     body: "Emergency சிகிச்சை Unit இல் Front Line Assessment மற்றும் Resuscitation, நீர்கொழும்பு நகரிலிருந்தும் விமான நிலைய சாலையிலிருந்தும் கதவு வழியாக வரும் அனைத்தையும் பார்த்தல்.",
     requirements: [
@@ -118,7 +88,6 @@ export const jobs = [
     ],
   },
   {
-    title: "அறுவை சிகிச்சை அரங்கு Nurse",
     line: "Full Time · Shift Roster · நீர்கொழும்பு",
     body: "அறுவை சிகிச்சை பட்டியல் முழுவதும் Scrub மற்றும் Circulating கடமைகள், Post Anaesthetic Recovery உடன் சேர்ந்து, இங்கு Operate செய்யும் Consultant Surgeons மற்றும் Anaesthetists உடன் இணைந்து பணியாற்றுதல்.",
     requirements: [
@@ -131,7 +100,6 @@ export const jobs = [
     ],
   },
   {
-    title: "மருத்துவ ஆய்வக Technologist",
     line: "Full Time · Shift Roster · நீர்கொழும்பு",
     body: "இருபத்து நான்கு மணி நேரமும் இயங்கும் ஆய்வகத்தில் Haematology, Biochemistry, Microbiology மற்றும் Serology, Emergency Unit எதிர்பார்க்கும் Urgent Panels உட்பட.",
     requirements: [
@@ -144,8 +112,6 @@ export const jobs = [
     ],
   },
   {
-    // "Radiographer, Digital X-ray": KEEPS_ENGLISH, see the file header.
-    title: "Radiographer, Digital X-ray",
     line: "Full Time · Shift Roster · நீர்கொழும்பு",
     body: "வார்டுகள், அறுவை சிகிச்சை அரங்கு மற்றும் Emergency Unit க்கான Digital Radiography மற்றும் Mobile Imaging, Radiologist Reporting மற்றும் Ultrasound Perform செய்கிறார்.",
     requirements: ["Radiography இல் Diploma அல்லது பட்டம்", "Radiation Safety பயிற்சி"],
@@ -156,25 +122,12 @@ export const jobs = [
   },
 ];
 
-// The same four titles as content.ts's own `sharedJobTitles`, derived from
-// `jobs` rather than a second literal, so `features/home/data/careers.ta.ts`
-// can import the already-reviewed Tamil instead of carrying its own copy.
-export const sharedJobTitles = {
-  medicalOfficerEmergency: jobs[2].title,
-  theatreNurse: jobs[3].title,
-  medicalLaboratoryTechnologist: jobs[4].title,
-  radiographerDigitalXray: jobs[5].title,
-};
+// Derived from `jobs[2..5].title` rather than a second literal, so a
+// translated title would have exactly one home; now empty, since a job
+// title is a card title and stays English (see the file header).
+export const sharedJobTitles = {};
 
-export const departmentLabels: Record<string, string> = {
-  All: "அனைத்தும்",
-  Medical: "மருத்துவம்",
-  Nursing: "Nursing",
-  "Allied health": "துணை சுகாதாரம்",
-  Pharmacy: "Pharmacy",
-  Administration: "நிர்வாகம்",
-  "Support services": "ஆதரவு சேவைகள்",
-};
+export const departmentLabels: Record<string, string> = {};
 
 export const generalApplicationLabel = "பொது விண்ணப்பம், குறிப்பிட்ட Role இல்லாமல்";
 
@@ -199,10 +152,10 @@ export const sourceOptions = [
 // vacancy or a hiring step is added or removed, these literals need updating
 // to match, the same staleness risk media's own jumpCards counts carry.
 export const heroFacts = [
-  { k: "இப்போது Open உள்ளவை", v: "பணியிடங்கள் 6" },
-  { k: "விண்ணப்பக் கட்டணம்", v: "எப்போதும் இல்லை" },
-  { k: "நாங்கள் Reply செய்கிறோம்", v: "ஒவ்வொரு விண்ணப்பத்திற்கும்" },
-  { k: "இதைச் சேர்ந்தது", v: "ஒன்பது நிறுவனக் குழு ஒன்று" },
+  {},
+  {},
+  {},
+  {},
 ];
 
 export const tickerItems = [
@@ -217,22 +170,18 @@ export const tickerItems = [
 export const jumpCards = [
   {
     count: "ஏன் இங்கே",
-    label: "நேர்மையான உண்மை",
     note: "நாங்கள் சரிசெய்யக்கூடியது, சரிசெய்ய முடியாதது.",
   },
   {
     count: "பணிகள் 6",
-    label: "வெற்றிடங்கள்",
     note: "மருத்துவம், துணை சுகாதாரம், Pharmacy, நிர்வாகம்.",
   },
   {
     count: "5 படிகள்",
-    label: "பணியமர்த்தல் நடைமுறை",
     note: "ஒவ்வொரு Stage இலும் உங்களுக்குப் பதில் வரும்.",
   },
   {
     count: "முக்கியம்",
-    label: "வேலைவாய்ப்பு மோசடி",
     note: "நாங்கள் ஒரு விண்ணப்பதாரரிடம் பணம் கேட்பதில்லை.",
   },
 ];
@@ -249,7 +198,6 @@ export const commitments = [
 export const benefits = [
   {
     kind: "பணம்",
-    title: "சம்பளம் மற்றும் Statutory",
     items: [
       "ஒப்பிடத்தக்க தனியார் மருத்துவமனைகளுக்கு எதிராக Benchmark செய்யப்பட்ட சம்பளம்",
       "EPF மற்றும் ETF பங்களிப்புகள் சரியாகவும் சரியான நேரத்திலும் செலுத்தப்படும்",
@@ -259,7 +207,6 @@ export const benefits = [
   },
   {
     kind: "சுகாதாரம்",
-    title: "உங்கள் குடும்பத்திற்கான Cover",
     items: [
       "உங்களுக்கும் உங்கள் நெருங்கிய குடும்பத்திற்கும் Medical Cover",
       "மருத்துவமனையில் ஊழியர்களுக்கு Outpatient Consultations",
@@ -269,7 +216,6 @@ export const benefits = [
   },
   {
     kind: "நேரம்",
-    title: "நீங்கள் எடுக்கக்கூடிய Leave",
     items: [
       "Annual, Casual மற்றும் Medical Leave Statutory உரிமைக்கு அல்லது அதற்கு மேலாக",
       "முழு Maternity Leave, ஏற்பாட்டின் மூலம் Phased Return உடன்",
@@ -279,7 +225,6 @@ export const benefits = [
   },
   {
     kind: "வளர்ச்சி",
-    title: "ஒன்றுக்கு Train ஆவது",
     items: [
       "மருத்துவ ஊழியர்களுக்கு Fund செய்யப்பட்ட Resuscitation மற்றும் Specialty Certification",
       "நீண்ட காலம் பணியாற்றும் ஊழியர்களுக்கு Sponsor செய்யப்பட்ட Diploma மற்றும் குறுகிய கால Course Study",
@@ -291,27 +236,22 @@ export const benefits = [
 
 export const process = [
   {
-    title: "நீங்கள் Apply செய்கிறீர்கள்",
     when: "முதல் நாள்",
     body: "இந்தப் பக்கத்தில் உள்ள Form ஐப் பயன்படுத்துங்கள், அல்லது பதவியை Subject Line இல் இட்டு உங்கள் CV ஐ Email செய்யுங்கள். உங்களுக்கு Automated Reply அல்ல, ஒருவரிடமிருந்தே Acknowledgement கிடைக்கும்.",
   },
   {
-    title: "தேர்வு செய்தல்",
     when: "இரண்டு வாரங்கள்",
     body: "விண்ணப்பங்களைப் படிப்பவர் துறையின் Head, Human Resources மட்டுமல்ல. நீங்கள் Shortlist செய்யப்படாவிட்டால், காத்திருக்க வைப்பதற்குப் பதிலாக Email மூலம் அது சொல்லப்படும்.",
   },
   {
-    title: "நேர்காணல்",
     when: "ஏற்பாட்டின் அடிப்படையில்",
     body: "துறை Head மற்றும் ஒரு மூத்த Clinician உடன் ஒரு Panel, உங்கள் தற்போதைய பதவியிலிருந்து Leave எடுக்கும்படி கட்டாயப்படுத்தாத நேரத்தில் நடத்தப்படும். சம்பளம் இந்த Stage இல் திறந்த முறையில் விவாதிக்கப்படும்.",
   },
   {
-    title: "நடைமுறை Assessment",
     when: "அதே வருகையில்",
     body: "மருத்துவ மற்றும் தொழில்நுட்ப பதவிகளுக்கு, உண்மையான வேலைக்குப் பொருந்தும் ஒரு சிறிய Practical அல்லது Scenario. நீங்கள் பணியாற்றும் Unit காட்டப்படும், அங்குள்ள Staff உடன் பேசலாம்.",
   },
   {
-    title: "Offer மற்றும் References",
     when: "ஒரு வாரம்",
     body: "சம்பளம், Allowances, Roster Pattern மற்றும் Probation Terms கூறும் எழுத்துப்பூர்வ Offer. References நீங்கள் Principle இல் ஏற்றுக்கொண்ட பிறகு மட்டுமே, நீங்கள் பரிந்துரைத்த Referees இடமிருந்து மட்டுமே எடுக்கப்படும்.",
   },
@@ -320,19 +260,16 @@ export const process = [
 export const students = [
   {
     kind: "உதவித்தொகை",
-    title: "மருத்துவ மாணவர்களுக்கு Support",
     body: "இக்குழு மருத்துவத் தொழிலைத் தேர்ந்த மாணவர்களை Support செய்கிறது. Applications மருத்துவமனையால் அல்ல, குழுவால் கையாளப்படுகின்றன, நீங்கள் எங்களுக்கு எழுதினால் சரியான Contact க்கு வழிகாட்டுவோம்.",
     who: "மருத்துவ மாணவர்கள்",
   },
   {
     kind: "மருத்துவ Placements",
-    title: "Nursing மற்றும் துணை சுகாதார பயிற்சி",
     body: "Nursing பள்ளிகள் மற்றும் துணை சுகாதார Programmes இலிருந்து மாணவர்களை Supervised மருத்துவ Placements க்காக எடுக்கிறோம், பெயரிடப்பட்ட Supervisor உடன், யார் Free ஆக இருக்கிறாரோ அவரை Shadow செய்ய விடுவதற்குப் பதிலாக.",
     who: "நிறுவனங்கள் மற்றும் மாணவர்கள்",
   },
   {
     kind: "ஆரம்ப நிலை",
-    title: "அனுபவம் இல்லாமல் தொடங்குங்கள்",
     body: "Front Office, Pharmacy Assistant மற்றும் Support Roles உண்மையிலேயே பள்ளி முடித்தவர்களுக்கும் Open, முழு Training உடன். இங்குள்ள பல Coordinators Front Desk இலிருந்தே தொடங்கினர்.",
     who: "பள்ளி முடித்தவர்கள்",
   },
@@ -397,102 +334,52 @@ export const applyChecklist = [
   "விரைவில் தொடங்கக்கூடிய தேதி",
 ];
 
-export const applyRows = [
-  { label: "உங்கள் CV ஐ Email செய்யுங்கள்" },
-  // Reused verbatim from the recipe's own worked example: "Call us" ->
-  // "எங்களை call செய்யுங்கள்". `value` (the number itself) is excluded from
-  // parity; see content.ts's header note on why it now has its own field.
-  { label: "எங்களை call செய்யுங்கள்" },
-  { label: "LinkedIn இல் எங்களை Follow செய்யுங்கள்" },
-  { label: "குழுவின் மற்ற இடங்களில் Roles" },
-];
+export const applyRows = [{}, {}, {}, {}];
 
 export const equalOpportunity =
   "St. Joseph Hospital ஒரு சம வாய்ப்பு வழங்குநர். நாங்கள் Merit அடிப்படையில் தேர்ந்தெடுக்கிறோம், இனம், மதம், பாலினம், திருமண நிலை, வயது அல்லது இயலாமை அடிப்படையில் பாகுபாடு காட்டுவதில்லை, மேலும் கோரிக்கையின் பேரில் ஆட்சேர்ப்பு செயல்முறையில் நியாயமான Adjustments செய்வோம். உங்கள் முதல் Application இல் உங்கள் NIC நகல், புகைப்படம் அல்லது சுகாதாரத் தகவலை Include செய்ய வேண்டாம்; அவை Offer Stage இல் மட்டுமே கேட்கப்படும்.";
 
-export const hero = {
-  // Reused verbatim from navigationLabels.ta.ts's "Home" -> "முகப்பு".
-  breadcrumbHome: "முகப்பு",
-  // Reused verbatim from navigationLabels.ta.ts's "Careers" -> "வேலைவாய்ப்புகள்".
-  breadcrumbCurrent: "வேலைவாய்ப்புகள்",
-  strapline: "நாங்கள் விண்ணப்பதாரர்களிடம் ஒருபோதும் பணம் கேட்பதில்லை",
-  headingLine1: "இலங்கையிலேயே",
-  headingOutline: "இருங்கள்.",
-  headingAccent: "சரியாக Practice செய்யுங்கள்.",
-  standfirst:
-    "உபகரணங்கள் பழையவை, Rosters கடினமானவை, யாரும் அவர்களில் Invest செய்யவில்லை என்பதால் நல்ல Clinicians பலர் வெளியேறுகிறார்கள். நீங்கள் தங்குவதற்கு ஒரு காரணத்தைத் தரும் மருத்துவமனையாக நாங்கள் இருக்க முயற்சிக்கிறோம்.",
-  ctaPrimary: "Open Roles ஐப் பார்க்கவும்",
-  ctaSecondary: "வேலைவாய்ப்பு மோசடிகள் குறித்து எச்சரிக்கையாக இருங்கள்",
-};
+export const hero = {};
 
-export const sectionEyebrows = {
-  // Reused verbatim from navigationLabels.ta.ts's "Why here" -> "ஏன் இங்கே".
-  why: "01 / ஏன் இங்கே",
-  benefits: "02 / நீங்கள் பெறுவது",
-  // Reused verbatim from navigationLabels.ta.ts's "Open positions".
-  openings: "03 / வெற்றிடங்கள்",
-  // Reused verbatim from navigationLabels.ta.ts's "How hiring works".
-  process: "04 / பணியமர்த்தல் நடைமுறை",
-  students: "05 / தொடங்குதல்",
-  // Reused verbatim from navigationLabels.ta.ts's "Recruitment fraud".
-  fraud: "06 / பணியமர்த்தல் மோசடி",
-  faq: "07 / விண்ணப்பதாரர் கேள்விகள்",
-  // Reused verbatim from navigationLabels.ta.ts's "Submit your CV".
-  form: "08 / உங்கள் CV ஐ சமர்ப்பியுங்கள்",
-  apply: "09 / விண்ணப்பியுங்கள்",
-};
+export const sectionEyebrows = {};
 
 export const whySection = {
-  heading: "வெளியேறுவதற்கு மக்கள் உண்மையில் சொல்லும் காரணங்கள்",
   body: "ஒரு Nurse அல்லது Technologist Gulf க்குச் செல்லும்போது, அது அரிதாகவே பணத்தைப் பற்றி மட்டும் இருக்கும். அது Relief இல்லாத 12 மணி நேர Shift, ஒரு வருடமாக Broken ஆக இருக்கும் உபகரணங்கள், யாரும் உங்களை சிறந்த ஒன்றாக Train செய்யப் போவதில்லை என்ற உணர்வு. தேசிய சம்பள Market ஐ நாங்கள் சரிசெய்ய முடியாது. அந்த மூன்று விஷயங்களை நாங்கள் சரிசெய்ய முடியும், மருத்துவமனையை அதற்கு முயற்சிக்க அமைத்துள்ளோம்.",
-  listHeading: "நாங்கள் Commit செய்வது",
 };
 
 export const fraudSection = {
-  heading: "இங்கு யாரும் உங்களிடம் ஒருபோதும் பணம் கேட்க மாட்டார்கள்",
   body: "இலங்கையில் போலி மருத்துவமனை மற்றும் வெளிநாட்டு Nursing வேலைகளின் ஒரு உண்மையான Trade உள்ளது, அது குறைவாக செலவிட முடிந்தவர்களையே இலக்காகக் கொண்டுள்ளது. நாங்கள் எந்த Stage இலும் Application Fees, Registration Fees, Training Deposits, Agent Commissions அல்லது Visa Processing பணம் வசூலிப்பதில்லை. இந்த மருத்துவமனையிலிருந்து என்று கூறி யாரேனும் உங்களிடம் ஒரு Payment கேட்டால், அது ஒரு Fraud. கீழே உள்ள எண்ணில் எங்களை Call செய்து சொல்லுங்கள்.",
-  listHeading: "ஒரு Posting எங்களுடையதா என்று Check செய்யும் விதம்",
 };
 
-export const benefitsHeading = { line1: "சலுகைகள்,", line2: "தெளிவாகச் சொல்லப்பட்டவை" };
+export const benefitsHeading = {};
 export const benefitsAside =
   "ஒரு Rewarding Environment பற்றிய தெளிவற்ற பேச்சு இல்லை. இவை உங்கள் Letter Of Appointment இல் உள்ள குறிப்பிட்ட விஷயங்கள்.";
 
 export const openings = {
-  headingAllRoles: "Open உள்ள ஒவ்வொரு Role உம்",
   positionsCountTemplate: "Positions {total} இல் {shown}",
   filterAriaLabel: "Department வாரியாக Positions ஐ Filter செய்யுங்கள்",
-  requirementsHeading: "உங்களுக்குத் தேவையானவை",
-  detailHeading: "விவரம்",
-  applyForRoleCta: "இந்த Role க்கு Apply செய்யுங்கள்",
   emptyNote:
     "இங்கு உங்களுக்குப் பொருந்தும் ஒன்று இல்லையா? எப்படியும் உங்கள் CV ஐ அனுப்புங்கள். நாங்கள் Applications ஐ File இல் வைத்திருக்கிறோம், ஒரு நல்ல Nursing Officer அல்லது Technologist ஒரு Vacancy க்காக அரிதாகவே நீண்ட நேரம் காத்திருப்பார்.",
 };
 
-export const processHeading = {
-  line1: "ஐந்து படிகள்,",
-  line2: "ஒவ்வொன்றிலும்",
-  line3: "உங்களுக்கு",
-  line4: "பதில் வரும்",
-};
+export const processHeading = {};
 export const processIntro =
   "ஒரு Interview க்குப் பிறகு அமைதியாக விடப்படுவது இந்த நாட்டில் மருத்துவமனை பணியமர்த்தல் பற்றிய பொதுவான Complaint. நாங்கள் எடுக்காதவர்கள் உட்பட அனைவருக்கும் பதிலளிக்கிறோம்.";
 
-export const studentsHeading = { line1: "மாணவர்கள் மற்றும்", line2: "புதிய பட்டதாரிகள்" };
+export const studentsHeading = {};
 export const studentsAside =
   "மருத்துவத் துறையில் நுழையும் மாணவர்களுக்கு குழு Support செய்கிறது, மருத்துவமனையிலேயே நாங்கள் Trainees ஐ எடுக்கிறோம்.";
 
-export const faqHeading = { line1: "விண்ணப்பிக்கும்", line2: "முன்" };
+export const faqHeading = {};
 
-export const applicationHeading = { line1: "இதை ஒரு முறை", line2: "நிரப்புங்கள்" };
+export const applicationHeading = {};
 export const applicationAside =
   "ஒன்பது Fields, ஒன்றும் அலங்காரமானது அல்ல. Registration Number ஐ நாங்கள் கேட்கிறோம், ஏனெனில் அது ஒரு Department Head முதலில் பார்க்கும் விஷயம்.";
-export const applicationSidebarHeading = "இதற்கு என்ன நடக்கும்";
 export const applicationEmailPrompt = "Email செய்வது சிறந்ததா?";
 export const applicationEmailNote =
   "பதவியை Subject Line இல் இடுங்கள். ஒரு Email இந்த Form ஐப் போலவே சம மதிப்புடையது.";
 
-export const applyHeading = { line1: "அதை அனுப்புங்கள்.", line2: "எங்களிடமிருந்து", line3: "பதில் வரும்." };
+export const applyHeading = {};
 export const applyBody =
   "மேலே உள்ள Form ஐப் பயன்படுத்துங்கள், அல்லது பதவியை Subject Line இல் இட்டு உங்கள் CV ஐ Email செய்யுங்கள். உங்கள் Registration Number மற்றும் கிடைக்கக்கூடிய தொடக்கத் தேதியை மேலே இடுங்கள்: இது Emails இன் ஒரு Round ஐச் சேமிக்கும்.";
 
