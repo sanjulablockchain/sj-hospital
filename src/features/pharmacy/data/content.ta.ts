@@ -17,10 +17,7 @@
 // which is how a Sri Lankan pharmacist writes and says them: see
 // `KEEPS_ENGLISH` in content.i18n.test.ts for the full list, with a reason.
 //
-// `hero.breadcrumbCurrent` ("Pharmacy") and `jumpCards[3].count` ("Digital")
-// are also in `KEEPS_ENGLISH`: "Pharmacy" is one of the everyday English
-// department nouns the site never recasts (the same way e-channeling's own
-// `hero.breadcrumbCurrent` stays "E-Channeling"), and "Digital" is the
+// `jumpCards[3].count` ("Digital") is also in `KEEPS_ENGLISH`: it is the
 // established loanword the about page already uses for a digital record,
 // with no natural Tamil word for a one-line stat badge.
 //
@@ -44,33 +41,9 @@
  */
 export const __review = { status: "draft", reviewer: null, date: null } as const;
 
-// Reused by `bookActions[0].label`, the same way `content.ts` reuses
-// `hero.sendCta` there: a string used twice has one home, even in translation.
-const sendCta = "Prescription ஐ Send செய்யுங்கள்";
+export const hero = {};
 
-export const hero = {
-  strapline: "Counter எப்போதும் மூடாது",
-  breadcrumbHome: "முகப்பு",
-  breadcrumbCurrent: "Pharmacy",
-  headingLead: "அங்கீகரிக்கப்பட்ட",
-  headingOutline: "மருந்து.",
-  headingAccent: "வேறு எதுவும் இல்லை.",
-  sendCta,
-};
-
-export const heroStandfirst =
-  "இரவு பகல் நேரம் இல்லாமல், உங்கள் Hospital file ஐ Read செய்யக்கூடிய Pharmacists மூலம், Verified Stock மட்டும்தான் தருகிறோம். உங்களிடம் கேட்காமல் எந்த Substitute உம் தரமாட்டோம், Grey market Supply எப்போதுமே இல்லை.";
-
-export const sectionEyebrows = {
-  counters: "01 / எங்களை கண்டுபிடிக்கும் விதம்",
-  standards: "02 / நாங்கள் Dispense செய்யும் விதம்",
-  stock: "03 / எங்களிடம் உள்ள Stock",
-  delivery: "04 / Delivery சேவை",
-  refills: "05 / மீண்டும் Prescriptions",
-  safety: "06 / Safety மற்றும் Records",
-  faq: "07 / கேள்விகள்",
-  book: "08 / இங்கே தொடங்குங்கள்",
-};
+export const sectionEyebrows = {};
 
 export const tickerItems: readonly string[] = [
   "Pharmacist ஒருவர் Counter இல், 24 மணி நேரமும்",
@@ -81,36 +54,32 @@ export const tickerItems: readonly string[] = [
 ];
 
 export const heroFacts = [
-  { k: "Counter நேரம்", v: "24 மணி நேரமும் Open" },
-  { k: "Stock நிலை", v: "Authorized மட்டும்" },
-  { k: "Prescription குறிப்புகள்", v: "File இல் உள்ளது" },
-  { k: "Delivery சேவை", v: "நீர்கொழும்பு முழுவதும்" },
+  {},
+  {},
+  {},
+  {},
 ];
 
 export const jumpCards = [
   {
     count: "ஒரு Counter",
-    label: "எங்களை கண்டுபிடிக்கும் விதம்",
     note: "Ground Floor இல், இரவு 24 மணி நேரமும் Open.",
   },
   {
     count: "10 வகைகள்",
-    label: "எங்களிடம் உள்ள Stock",
     note: "Prescription, Over the counter மருந்துகள் மற்றும் Supplies.",
   },
   {
     count: "4 படிகள்",
-    label: "Delivery சேவை",
     note: "உங்கள் Prescription ஐ Send செய்யுங்கள், நாங்கள் கொண்டு வருகிறோம்.",
   },
   {
     count: "Digital",
-    label: "மீண்டும் Prescriptions",
     note: "File இல் உள்ளது, காகிதம் இல்லாமலே மீண்டும் கேட்கலாம்.",
   },
 ];
 
-export const countersHeading = { line1: "ஒரு Counter,", line2: "ஒரே Record" };
+export const countersHeading = {};
 export const countersIntro =
   "உங்கள் Order எங்களுக்கு வரும் விதம் எதுவாக இருந்தாலும், Counter இல், Consultation ஒன்றின்போது, அல்லது Phone மூலம், Pharmacist பார்ப்பது ஒரே Prescription History தான், அதனால் எதுவும் இரண்டு முறை Dispense ஆகாது.";
 
@@ -135,16 +104,11 @@ export const counters = [
   },
 ];
 
-export const standardsHeading = {
-  line1: "ஒரு Pharmacist",
-  line2: "படிக்கிறார், அது",
-  line3: "ஒரு Shelf மட்டுமல்ல",
-};
+export const standardsHeading = {};
 export const standardsIntro =
   "எதையும் Pack செய்வதற்கு முன் ஒவ்வொரு Prescription உம் Pharmacist ஒருவரால் உங்கள் Hospital Record உடன் சரிபார்க்கப்படுகிறது. அவர்களால் உங்கள் File ஐ Read செய்ய முடிவதால், நீங்கள் எடுக்கும் மற்றொன்றுடன் Interaction இருந்தால் அதை Flag செய்யலாம், அல்லது உங்கள் Doctor எழுதிய Dose உடன் உறுதிப்படுத்தலாம்.";
 export const standardsNote =
   "நாங்கள் வைத்திருப்பது Authorized Stock மட்டும், Substitutes இல்லை, Grey market Supply இல்லை, அதனால் உங்கள் Consultant எழுதியதுதான் உங்களுக்கு தரப்படுகிறது.";
-export const standardsCta = "மீண்டும் Prescription ஒன்றை Set Up செய்யுங்கள்";
 
 export const standards = [
   { k: "Prescription சரிபார்ப்பு", v: "Pharmacist மூலம்" },
@@ -158,10 +122,9 @@ export const standards = [
   { k: "Delivery Orders க்காக", v: "அனுப்பும் முன் சரிபார்க்கப்படும்" },
 ];
 
-export const stockHeading = { line1: "இன்று இரவு", line2: "அலமாரிகள்", line3: "இல் உள்ளது" };
+export const stockHeading = {};
 export const stockIntro =
   "Prescription மருந்து, தினமும் பயன்படுத்தும் Over the counter Items, மற்றும் ஒரு Procedure க்குப் பிறகு நோயாளிகளுக்கு வீட்டில் தேவைப்படும் Dressings மற்றும் Supplies.";
-export const stockCta = "இருப்பு உள்ளதா என Check செய்யுங்கள்";
 
 export const stock = [
   {
@@ -216,25 +179,19 @@ export const stock = [
   },
 ];
 
-export const deliveryHeading = { line1: "Photo எடுங்கள்,", line2: "Send செய்யுங்கள், முடிந்தது" };
-export const sendingWellHeading = "Prescription ஐ நன்றாக Send செய்யும் விதம்";
-export const deliveryDetailHeading = "Delivery விவரம்";
+export const deliveryHeading = {};
 
 export const steps = [
   {
-    title: "Send செய்யுங்கள்",
     desc: "உங்கள் Prescription ஐ, அல்லது அதன் தெளிவான Photo ஒன்றை, Pharmacy Counter க்கு WhatsApp இல் Send செய்யுங்கள், அல்லது Call செய்து பேசுங்கள்.",
   },
   {
-    title: "Pharmacist பரிசோதனை",
     desc: "தயார் செய்வதற்கு முன் Pharmacist ஒருவர் Order ஐ உங்கள் Record உடன் Read செய்வார், Counter இல் உள்ள Order ஒன்றுக்கு கிடைக்கும் அதே Check.",
   },
   {
-    title: "தயார் செய்யப்படுகிறது",
     desc: "உங்கள் Order Counter இன் சொந்த Authorized Stock இலிருந்தே தயார் செய்யப்படும், வேண்டுமெனில் Over the counter Items அதே Order உடன் சேர்க்கலாம்.",
   },
   {
-    title: "Deliver செய்யப்படுகிறது",
     desc: "நீர்கொழும்பு முழுவதும் Delivery க்கு Dispatch செய்யப்படும், பிறகு ஏதேனும் கேள்வி இருந்தால் அது Counter க்கே செல்லும்.",
   },
 ];
@@ -255,17 +212,11 @@ export const deliveryFacts = [
   { k: "Order செய்யும் விதம்", v: "WhatsApp அல்லது Phone மூலம்" },
 ];
 
-export const refillsHeading = {
-  line1: "நீடித்த சிகிச்சை",
-  line2: "காகிதம்",
-  line3: "இல்லாமல்",
-};
+export const refillsHeading = {};
 export const refillsIntro =
   "நீங்கள் தினமும் Blood pressure, Diabetes, Thyroid, Asthma அல்லது இதய நோய்க்கு மருந்து எடுத்தால், உங்கள் Prescription Digital ஆக File இல் வைக்கப்படுகிறது, அதனால் ஒவ்வொரு முறையும் காகிதத்தை கொண்டு செல்ல வேண்டியதில்லை.";
 export const refillsNote =
   "Counter இல், Phone மூலம் அல்லது WhatsApp இல் மீண்டும் ஒன்றை கேளுங்கள். தயார் செய்வதற்கு முன் Pharmacist ஒருவர் அதை உங்கள் Record உடன் சரிபார்ப்பார், அது ஒரு Delivery உடனும் அனுப்பப்படலாம்.";
-export const refillsCta = "மீண்டும் ஒன்றை Request செய்யுங்கள்";
-export const refillsPhoneCta = "Pharmacist இடம் கேளுங்கள்";
 
 export const refills = [
   { name: "Blood pressure", note: "தினசரி பராமரிப்பு மருந்து" },
@@ -277,7 +228,7 @@ export const refills = [
   { name: "Discharge medicine", note: "Admission ஒன்றுக்குப் பிறகான குறுகிய Course" },
 ];
 
-export const safetyHeading = { line1: "உங்களை சென்றடையும்", line2: "முன் சரிபார்க்கப்படுகிறது" };
+export const safetyHeading = {};
 export const safetyIntro =
   "காகிதத்தின் பலத்தை மட்டும் வைத்து எதுவும் தரப்படாது. ஒவ்வொரு Order உம் முதலில் உங்கள் Record உடன் Read செய்யப்படுகிறது, Shelf இல் உள்ள அனைத்தும் Authorized Stock.";
 
@@ -355,15 +306,13 @@ export const faq = [
   },
 ];
 
-export const faqHeading = "Counter இல் கேட்கப்படும் கேள்விகள்";
-
-export const bookHeading = { line1: "இப்போதே", line2: "Open. ஆம்,", line3: "இப்போதே." };
+export const bookHeading = {};
 
 export const bookIntro =
   "229/10 St. Joseph Street, நீர்கொழும்பு. Ground Floor இல் உள்ள Counter க்கு வாருங்கள், Call செய்யுங்கள், அல்லது உங்கள் Prescription ஐ WhatsApp செய்யுங்கள்.";
 
 export const bookActions = [
-  { label: sendCta },
-  { label: "Counter க்கு Call செய்யுங்கள்" },
-  { label: "அனைத்து Services" },
+  {},
+  {},
+  {},
 ];

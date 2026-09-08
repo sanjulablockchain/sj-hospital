@@ -15,10 +15,11 @@ import { assertTranslationParity, stringPaths } from "../../../lib/i18n/stringPa
  * `contactRows.icon` and `accommodation`'s `bookRail.icon` already made, so
  * keying it off `label` cannot blank a glyph the way the pilot did).
  * `internal` is a boolean, not copy. `value` is the fact a row carries
- * alongside its own translatable `label` (only `hero.call` and
- * `bookActions[1]` have one: the pharmacy counter's own phone number), the
- * same role `contact`'s, `accommodation`'s and `home-care`'s own `value`
- * fields play, so it stays untranslated the same way `href` does.
+ * alongside its own link label, now English like every CTA (only
+ * `hero.call` and `bookActions[1]` have one: the pharmacy counter's own
+ * phone number), the same role `contact`'s, `accommodation`'s and
+ * `home-care`'s own `value` fields play, so it stays untranslated the same
+ * way `href` does.
  */
 function isUntranslatable(path: string): boolean {
   return (
@@ -52,11 +53,6 @@ function isUntranslatable(path: string): boolean {
  * leaving the whole string identical to its English source.
  */
 const KEEPS_ENGLISH = new Set<string>([
-  // "Pharmacy" is one of the everyday English department nouns the site
-  // never recasts (Reception, OPD, Emergency, X-ray). E-channeling's own
-  // `hero.breadcrumbCurrent` stays "E-Channeling" for the same reason.
-  "hero.breadcrumbCurrent",
-
   // "Digital" is the established loanword the about page already uses for a
   // digital record ("Digital X-ray", "Digital ලෙස file වලට පිවිසීම"). There
   // is no natural one-word Sinhala or Tamil equivalent for a stat badge this

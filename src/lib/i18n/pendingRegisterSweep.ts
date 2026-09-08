@@ -259,11 +259,30 @@ export function sweepScope(relativePath: string): string {
  * chip-level exceptions are unaffected. `note`, `body`, `tagline`, every
  * FAQ (`referrals`) and `disclaimer` are untouched and stay translated.
  *
+ * `pharmacy` was swept on 2026-09-09, needing no code change: its getter
+ * already reads its overlay through `localize`. 60 Sinhala and 60 Tamil
+ * strings were deleted from its single content overlay (`content.si/ta.ts`,
+ * the largest `KEEPS_ENGLISH` of any feature at 47 entries before this
+ * sweep): the hero (entirely, now `{}`), `sectionEyebrows` (now `{}`),
+ * `jumpCards[*].label`, `bookActions[*].label` (now `{}`, `{}`),
+ * `steps[*].title`, `refillsCta`, `refillsPhoneCta`, `standardsCta`,
+ * `stockCta`, and the bare `countersHeading`/`standardsHeading`/
+ * `stockHeading`/`deliveryHeading`/`sendingWellHeading`/
+ * `deliveryDetailHeading`/`refillsHeading`/`safetyHeading`/`faqHeading`/
+ * `bookHeading` exports (each now `{}`). The local `sendCta` constant (used
+ * twice: `hero.sendCta` and `bookActions[0].label`, both now deleted) was
+ * removed along with its explaining comment, since it is now unused; the
+ * file header's stale `hero.breadcrumbCurrent` paragraph was fixed too.
+ * Fixed the one now-stale `KEEPS_ENGLISH` entry, `hero.breadcrumbCurrent`;
+ * the other 46 (`jumpCards[3].count`, `standards[6].k`, every `stock[*]` and
+ * `refills[*].name`) are unaffected, since none of those fields were
+ * touched. `desc`, `intro`, `note` and every FAQ are untouched and stay
+ * translated.
+ *
  * A future scope may need a similar check before it is swept: read the
  * feature's own getter (`getContent.ts` or equivalent) for whether it reads
  * an overlay directly or through `localize` before deleting from it.
  */
 export const PENDING_REGISTER_SWEEP: ReadonlySet<string> = new Set([
-  "pharmacy",
   "school-wellness",
 ]);

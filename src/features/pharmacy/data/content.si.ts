@@ -17,10 +17,7 @@
 // which is how a Sri Lankan pharmacist writes and says them: see
 // `KEEPS_ENGLISH` in content.i18n.test.ts for the full list, with a reason.
 //
-// `hero.breadcrumbCurrent` ("Pharmacy") and `jumpCards[3].count` ("Digital")
-// are also in `KEEPS_ENGLISH`: "Pharmacy" is one of the everyday English
-// department nouns the site never recasts (the same way e-channeling's own
-// `hero.breadcrumbCurrent` stays "E-Channeling"), and "Digital" is the
+// `jumpCards[3].count` ("Digital") is also in `KEEPS_ENGLISH`: it is the
 // established loanword the about page already uses for a digital record,
 // with no natural Sinhala word for a one-line stat badge.
 //
@@ -44,33 +41,9 @@
  */
 export const __review = { status: "draft", reviewer: null, date: null } as const;
 
-// Reused by `bookActions[0].label`, the same way `content.ts` reuses
-// `hero.sendCta` there: a string used twice has one home, even in translation.
-const sendCta = "Prescription එක Send කරන්න";
+export const hero = {};
 
-export const hero = {
-  strapline: "Counter එක කවදාවත් වහන්නේ නෑ",
-  breadcrumbHome: "මුල් පිටුව",
-  breadcrumbCurrent: "Pharmacy",
-  headingLead: "අනුමත",
-  headingOutline: "බෙහෙත්.",
-  headingAccent: "වෙන කිසිවක් නෑ.",
-  sendCta,
-};
-
-export const heroStandfirst =
-  "රෑ දවල් වේලාවක් නැතුව, ඔබේ Hospital File එක Read කරන්න පුළුවන් Pharmacists ලවා, Verified Stock විතරයි දෙන්නේ. ඔබෙන් අහන්නේ නැතුව කිසිම Substitute එකක් දෙන්නේ නෑ, Grey Market Supply එකක් කවදාවත්ම නෑ.";
-
-export const sectionEyebrows = {
-  counters: "01 / අපිව හොයාගන්නා විදිහ",
-  standards: "02 / අපි Dispense කරන විදිහ",
-  stock: "03 / අප තියෙන Stock එක",
-  delivery: "04 / Delivery එක",
-  refills: "05 / නැවත Prescriptions",
-  safety: "06 / Safety සහ Records",
-  faq: "07 / ප්‍රශ්න",
-  book: "08 / මෙතනින් පටන් ගන්න",
-};
+export const sectionEyebrows = {};
 
 export const tickerItems: readonly string[] = [
   "Pharmacist කෙනෙක් Counter එකේ, පැය 24ම",
@@ -81,36 +54,32 @@ export const tickerItems: readonly string[] = [
 ];
 
 export const heroFacts = [
-  { k: "Counter වෙලාව", v: "පැය 24ම Open" },
-  { k: "Stock එක", v: "Authorized විතරයි" },
-  { k: "Prescription ටික", v: "File එකේ තියෙනවා" },
-  { k: "Delivery එක", v: "මීගමුව පුරාම" },
+  {},
+  {},
+  {},
+  {},
 ];
 
 export const jumpCards = [
   {
     count: "Counter එකක්",
-    label: "අපිව හොයාගන්නා විදිහ",
     note: "Ground Floor එකේ, රෑ පැය 24ම Open.",
   },
   {
     count: "වර්ග 10ක්",
-    label: "අප තියෙන Stock එක",
     note: "Prescription, Over The Counter බෙහෙත් සහ අනිත් Supplies.",
   },
   {
     count: "පියවර 4ක්",
-    label: "Delivery එක",
     note: "ඔබේ Prescription එක Send කරන්න, අපි ම ගෙනත් දෙනවා.",
   },
   {
     count: "Digital",
-    label: "නැවත Prescriptions",
     note: "File එකේ තියෙනවා, පත්‍රයක් නැතුවම නැවත ඉල්ලන්න පුළුවන්.",
   },
 ];
 
-export const countersHeading = { line1: "Counter එකක්,", line2: "එකම Record එකක්" };
+export const countersHeading = {};
 export const countersIntro =
   "ඔබේ Order එක අපිට එන විදිහ මොකක් වුනත්, Counter එකේදී, Consultation එකකදී, හෝ Phone එකෙන්, Pharmacist කවුරුත් බලන්නේ එකම Prescription History එකයි, ඒක නිසා කිසිම එකක් දෙපාරක් Dispense වෙන්නේ නෑ.";
 
@@ -135,12 +104,11 @@ export const counters = [
   },
 ];
 
-export const standardsHeading = { line1: "Pharmacist කෙනෙක්", line2: "බලනවා, එහෙම නෙවෙයි", line3: "Shelf එකක් විතරක්" };
+export const standardsHeading = {};
 export const standardsIntro =
   "හැම Prescription එකක්ම Pack කරන්න කලින් Pharmacist කෙනෙක් ඔබේ Hospital Record එකට එරෙහිව Check කරනවා. එයාලට ඔබේ File එක Read කරන්න පුළුවන් නිසා, ඔබ ගන්න අනිත් දේකින් Interaction එකක් තියෙනවනම් ඒක Flag කරන්න, නැත්නම් ඔබේ වෛද්‍යවරයා ලියපු Dose එකට එරෙහිව Confirm කරන්න පුළුවන්.";
 export const standardsNote =
   "අපි තියාගන්නේ Authorized Stock විතරයි, Substitutes නෑ, Grey Market Supply එකක් නෑ, ඒ නිසා ඔබේ Consultant ලියපු ම දෙයයි ඔබට දෙන්නේ.";
-export const standardsCta = "නැවත Prescription එකක් Set Up කරන්න";
 
 export const standards = [
   { k: "Prescription Review එක", v: "Pharmacist කෙනෙකු අතින්" },
@@ -154,10 +122,9 @@ export const standards = [
   { k: "Delivery Orders සඳහා", v: "Dispatch කරන්න කලින් Check කරනවා" },
 ];
 
-export const stockHeading = { line1: "අද රෑ", line2: "රාක්ක", line3: "වල තියෙන දේ" };
+export const stockHeading = {};
 export const stockIntro =
   "Prescription බෙහෙත්, හැම දාම ගන්න පුළුවන් Over The Counter Items, සහ Procedure එකකින් පස්සේ නිවසේදී රෝගීන්ට ඕන වෙන Dressings සහ Supplies.";
-export const stockCta = "තියෙනවද කියලා Check කරන්න";
 
 export const stock = [
   {
@@ -212,25 +179,19 @@ export const stock = [
   },
 ];
 
-export const deliveryHeading = { line1: "Photo ගන්න,", line2: "Send කරන්න, ඉවරයි" };
-export const sendingWellHeading = "Prescription එකක් හොඳට Send කරන විදිහ";
-export const deliveryDetailHeading = "Delivery ගැන විස්තර";
+export const deliveryHeading = {};
 
 export const steps = [
   {
-    title: "Send කරන්න",
     desc: "ඔබේ Prescription එක, නැත්නම් ඒකේ පැහැදිලි Photo එකක්, Pharmacy Counter එකට WhatsApp කරන්න, නැත්නම් Call කරලා කතා කරන්න.",
   },
   {
-    title: "Pharmacist Check එක",
     desc: "සකස් කරන්න කලින් Pharmacist කෙනෙක් Order එක ඔබේ Record එකට එරෙහිව Read කරනවා, Counter එකේ Order එකකට වගේම Check එකක්.",
   },
   {
-    title: "සකස් කරනවා",
     desc: "ඔබේ Order එක Counter එකේම Authorized Stock එකෙන් Fill කරනවා, ඕන නම් Over The Counter Items ම එකම Order එකට එකතු කරගන්න පුළුවන්.",
   },
   {
-    title: "Deliver කරනවා",
     desc: "මීගමුව පුරාම Delivery සඳහා Dispatch කරනවා, ඊට පස්සේ ප්‍රශ්නයක් තියෙනවනම් ඒක ම Counter එකටම යනවා.",
   },
 ];
@@ -251,17 +212,11 @@ export const deliveryFacts = [
   { k: "Order කරන විදිහ", v: "WhatsApp හෝ Phone එකෙන්" },
 ];
 
-export const refillsHeading = {
-  line1: "දිගටම ගන්න සත්කාර",
-  line2: "Paper එකක්",
-  line3: "නැතුවම",
-};
+export const refillsHeading = {};
 export const refillsIntro =
   "ඔබ දිනපතා Blood Pressure, Diabetes, Thyroid, Asthma හෝ හෘද රෝගයට බෙහෙත් ගන්නවනම්, ඔබේ Prescription එක Digital ලෙස File එකේ තියෙනවා, ඒ නිසා හැම වෙලාවෙම Paper එක අරගෙන යන්න ඕන නෑ.";
 export const refillsNote =
   "Counter එකේදී, Phone එකෙන් හෝ WhatsApp එකෙන් නැවත එකක් ඉල්ලන්න. සකස් කරන්න කලින් Pharmacist කෙනෙක් ඒක ඔබේ Record එකට එරෙහිව Check කරනවා, Delivery එකකත් එක්කම යවන්නත් පුළුවන්.";
-export const refillsCta = "නැවත එකක් Request කරන්න";
-export const refillsPhoneCta = "Pharmacist කෙනෙකුගෙන් අහන්න";
 
 export const refills = [
   { name: "Blood pressure", note: "දිනපතා ගන්න Maintenance බෙහෙත්" },
@@ -273,7 +228,7 @@ export const refills = [
   { name: "Discharge medicine", note: "Admission එකකින් පස්සේ ගන්න කෙටි Course එක" },
 ];
 
-export const safetyHeading = { line1: "ඔබට එන්න කලින්", line2: "Check කරනවා" };
+export const safetyHeading = {};
 export const safetyIntro =
   "Paper එකේ ශක්තිය විතරක් බලලා කිසිම දෙයක් දෙන්නේ නෑ. හැම Order එකක්ම මුලින්ම ඔබේ Record එකට එරෙහිව Read කරනවා, Shelf එකේ තියෙන හැම එකක්ම Authorized Stock.";
 
@@ -351,15 +306,13 @@ export const faq = [
   },
 ];
 
-export const faqHeading = "Counter එකේදී අහන දේවල්";
-
-export const bookHeading = { line1: "දැන්ම Open.", line2: "ඔව්,", line3: "දැන්ම." };
+export const bookHeading = {};
 
 export const bookIntro =
   "229/10 St. Joseph Street, මීගමුව. Ground Floor එකේ Counter එකට එන්න, Call කරන්න, හෝ ඔබේ Prescription එක WhatsApp කරන්න.";
 
 export const bookActions = [
-  { label: sendCta },
-  { label: "Counter එකට Call කරන්න" },
-  { label: "සියලුම Services" },
+  {},
+  {},
+  {},
 ];
