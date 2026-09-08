@@ -12,8 +12,7 @@
 //
 // "Negombo" translates to "මීගමුව" and "Colombo" translates to "කොළඹ", the
 // same Sinhala names contact's, pharmacy's and network's own content.si.ts
-// already use for the first of them. "Katunayake", the town the airport sits
-// in, translates the same way: "කටුනායක".
+// already use for the first of them.
 //
 // "10,000 LKR" keeps its currency code and figure exactly as content.ts
 // prints them: a currency code is not a word with a Sinhala equivalent, the
@@ -32,18 +31,7 @@
  */
 export const __review = { status: "draft", reviewer: null, date: null } as const;
 
-export const hero = {
-  strapline: "ගුවන් තොටුපළෙන් විනාඩි දහයයි",
-  breadcrumbHome: "මුල් පිටුව",
-  breadcrumbCurrent: "විදේශීය රෝගී සත්කාරය",
-  headingLead: "ඔබ බසින්නේ",
-  headingPlace: "කටුනායකට.",
-  headingTail: "ඉතුරු අපි බලාගන්නම්.",
-  standfirst:
-    "අපි Bandaranaike International Airport එකේ සිට විනාඩි දහයක් දුරින්, මධ්‍යම මීගමුවේ St. Joseph Street එකේ. විදේශීය රෝගී Desk එක Transfer එක, Estimate එක, Interpreter සහ ඔබ ගෙදර ගෙනියන Records, පළමු Email එකේ සිට ආපසු Flight එක දක්වා, සකසනවා.",
-  estimateCta: "ලිඛිත Estimate එකක් ගන්න",
-  whatsappCta: "Desk එකට WhatsApp කරන්න",
-};
+export const hero = {};
 
 /** Scrolling strip along the bottom of the hero. */
 export const tickerItems: readonly string[] = [
@@ -57,32 +45,23 @@ export const tickerItems: readonly string[] = [
 
 /** Fact strip along the bottom of the hero. */
 export const heroFacts = [
-  { k: "ගුවන් තොටුපළෙන්", v: "විනාඩි දහයයි" },
-  { k: "Estimate එක", v: "පළමුවෙන්ම, ලිඛිතව" },
-  { k: "භාෂාව", v: "ඉල්ලීම මත Interpreters" },
-  { k: "වාර්තා", v: "ඔබේ වෛද්‍යවරයාට යවනවා" },
+  {},
+  {},
+  {},
+  {},
 ];
 
 export const jumpCards = [
-  { count: "පියවර 6ක්", label: "ගමන", note: "පළමු Email එකේ සිට ආපසු Flight එක දක්වා." },
-  { count: "සේවා 10ක්", label: "Desk එක", note: "ප්‍රවාහනය, Interpreters ලා, Insurance, වාර්තා." },
-  { count: "ලිඛිතව", label: "Estimate එක", note: "මිනිසුන් මෙහි එන්නේ ඇයි, කොපමණ කාලයක්ද." },
-  { count: "පිළිතුරු 10ක්", label: "පියාසර කිරීමට කලින්", note: "පැමිණීම, Insurance, Records, ආපසු යාම." },
+  { count: "පියවර 6ක්", note: "පළමු Email එකේ සිට ආපසු Flight එක දක්වා." },
+  { count: "සේවා 10ක්", note: "ප්‍රවාහනය, Interpreters ලා, Insurance, වාර්තා." },
+  { count: "ලිඛිතව", note: "මිනිසුන් මෙහි එන්නේ ඇයි, කොපමණ කාලයක්ද." },
+  { count: "පිළිතුරු 10ක්", note: "පැමිණීම, Insurance, Records, ආපසු යාම." },
 ];
 
 /** The numbered eyebrow above every section heading. */
-export const sectionEyebrows = {
-  journey: "01 / ගමන",
-  services: "02 / Desk එක බලාගන්නා දේ",
-  estimates: "03 / මිනිසුන් එන්නේ ඇයි",
-  rooms: "04 / ඔබ නවතින්නේ කොහෙද",
-  insurance: "05 / ගෙවීම",
-  stay: "06 / මීගමුවේදී සුවවීම",
-  faq: "07 / පියාසර කිරීමට කලින්",
-  enquiry: "08 / මෙතනින් පටන් ගන්න",
-};
+export const sectionEyebrows = {};
 
-export const journeyHeading = { line1: "පියවර හයයි,", line2: "සම්බන්ධීකාරකයෙක්" };
+export const journeyHeading = {};
 export const journeyIntro =
   "කිසිම කෙනෙක් Department එකෙන් Department එකට යවන්නේ නෑ. ඔබේ පළමු Email එකට පිළිතුරු දෙන Desk එකම, ඔබේ Transfer එක සකසන, ඔබ ගෙදර ගෙනියන Pack එක අවසන් කරන එකත්.";
 
@@ -90,38 +69,32 @@ export const journeyIntro =
  *  in the order a travelling patient meets them. */
 export const journeySteps = [
   {
-    title: "මුලින්ම අප එක්ක කතා කරන්න",
     desc: "අපගේ වෛද්‍යවරයෙක් සමඟ Video එකෙන් හෝ Phone එකෙන්, දිනපතා වෙන් කරගත හැකි Consultation එකක්, ඔබ Ticket එකක් ගන්න කලින් Treatment එක ඔබත් සමඟ සාකච්ඡා කරන්න.",
     when: "පියාසර කිරීමට කලින්",
   },
   {
-    title: "ලිඛිත Estimate එකක්",
     desc: "Treatment එක ආරම්භ වීමට කලින් ලිඛිත Estimate එකක් ලැබෙනවා, ඇතිවිය හැකි සත්කාර ක්‍රියාවලිය ආවරණය කරමින්. ඔබේ Policy විස්තර එවන්න, Desk එක ඒ එක්කම Insurance ලේඛන සකසාවි.",
     when: "Admission එකට කලින්",
   },
   {
-    title: "ගුවන් තොටුපළේ සිට ඇඳ ලඟටම",
     desc: "Bandaranaike International Airport එකෙන් විනාඩි දහයයි, අපගේම Ambulance එක Transfer සඳහා ලබාගත හැක. ඔබේ Flight එක අපිට කියන්න, ඔබ බසින්න කලින්ම Transfer එකයි Admission එකයි සකසෙනවා.",
     when: "පැමිණෙන දිනය",
   },
   {
-    title: "Admission එක",
     desc: "Photo ID එකක්, වෛද්‍යවරයෙක් දුන්නා නම් Referral Letter එකක්, ඔබේ වර්තමාන බෙහෙත් සහ කලින් ගත් Imaging ඕනෑම දෙයක් ගෙනෙන්න. Consultation එකට සහ Consent කතාබහට ඉල්ලීම මත Interpreter කෙනෙක් සකසනවා.",
     when: "පැමිණෙන දිනය",
   },
   {
-    title: "Treatment එකයි පවුලයි",
     desc: "Attendant කෙනෙක් කාමරයේ රැඳී සිටිනවා, සෑම Category එකකම Bystander ඇඳක් සහ පුටුවක් සමඟ, ආහාර වේල Dietary Order එකට අනුවයි. Critical Care එකේ සිට, පවුලේ කෙනෙකුට දිනකට වරක් යාවත්කාලීන කිරීමක් Call කරනවා.",
     when: "ඔබ රැඳී සිටින කාලය තුළ",
   },
   {
-    title: "Discharge එකයි ගෙදර යාමයි",
     desc: "ඔබේ Reports, Imaging සහ Discharge Summary එකේ පිටපත් සමඟ ඔබ පිටව යනවා, Follow-up දිනයක් සහිත Discharge Plan එකක් සමඟින්. ඔබේ Consent එකෙන්, එම Pack එකම ගෙදර ඔබේ වෛද්‍යවරයාට යනවා.",
     when: "ගෙදර යාම",
   },
 ];
 
-export const servicesHeading = { line1: "Flight එක", line2: "හැරෙන්නට", line3: "සියල්ල" };
+export const servicesHeading = {};
 export const servicesIntro =
   "එක Desk එකක් Transfer එකයි, Estimate එකයි, Insurance ලේඛනයි, Interpreter එකයි, ඔබ රැගෙන යන Records ත් බලාගන්නවා. ප්‍රධාන පිවිසුමේදී විදේශීය Desk එක ගැන අහන්න, නැත්නම් කලින් ලියන්න, ඔබ බසින්න කලින්ම ඒක සකසෙනවා.";
 
@@ -129,52 +102,42 @@ export const servicesIntro =
 export const deskServices = [
   {
     kind: "පියාසර කිරීමට කලින්",
-    title: "Video එකෙන් හෝ Phone එකෙන් Consultation එකක්",
     desc: "Telemedicine එකෙන් අපගේ වෛද්‍යවරයෙක් සමඟ Video එකෙන් හෝ Phone එකෙන්, දිනපතා වෙන් කරගත හැකි Consultation එකක් ලැබෙනවා. සෘජුව පරීක්ෂණයක් අවශ්‍ය නොවන කතාබහකට ගැලපෙනවා, Flight එකට කලින් බහුතරයක්ම ඒ වගේ.",
   },
   {
     kind: "ප්‍රවාහනය",
-    title: "ගුවන් තොටුපළ Transfer එක",
     desc: "Bandaranaike International Airport එකෙන් විනාඩි දහයයි, මධ්‍යම මීගමුවේ St. Joseph Street එකේ. අපගේම Ambulance එක Transfer සඳහා ලබාගත හැක, රෝගීන් එන Covered Bay එකෙන්ම Dispatch කරනවා.",
   },
   {
     kind: "භාෂාව",
-    title: "ඉල්ලීම මත Interpreters ලා",
     desc: "අපගේ Clinicians ලා English භාෂාවෙන් Consult කරනවා, ඉල්ලීම මත Interpreters සකසනවා. පියාසර කිරීමට කලින් Desk එකට කියන්න, එවිට Consultation එකට, Consent කතාබහට සහ Discharge Briefing එකට කෙනෙක් ඉන්නවා.",
   },
   {
     kind: "මුදල්",
-    title: "Estimates සහ ගෙවීම",
     desc: "Treatment එක ආරම්භ වීමට කලින් ලිඛිත Estimate එකක්. Cash, Card සහ Bank Transfer සියල්ලම පිළිගැනේ, Outpatients ලාට Laboratory ගාස්තු වලින් 10%ක වට්ටමක්.",
   },
   {
     kind: "ඉන්ෂුවරන්ස්",
-    title: "Claims සහ ලේඛන",
     desc: "ජාත්‍යන්තර Insurers ලාට සහ Travel Policies සඳහා ලේඛන සකසනවා, Claim එක ඔබට හැරදාන්නේ නැතුව Desk එකම උදව් කරමින්. Corporate Insurance එක OPD එකේදී පිළිගැනේ.",
   },
   {
     kind: "පවුල",
-    title: "කාමරයේ Attendant කෙනෙක්",
     desc: "සෑම කාමර Category එකකම Bystander ඇඳක් සහ පුටුවක් තියෙනවා, Attendant කෙනෙකුට රාත්‍රියත් රැඳී සිටිය හැක. Admission එකේදී සටහන් කරගත් Dietary Order එකට ආහාර සකසනවා.",
   },
   {
     kind: "පරීක්ෂණ",
-    title: "ඉවසිල්ලෙන් ඉන්නේ නැතුව Tests",
     desc: "Laboratory Reports එදිනම ලැබෙනවා, වෛද්‍යවරු දෙදෙනෙක් Check කරනවා, X-ray පැයක් ඇතුලත කියවනවා, Ultrasound එක Visit එකේදීම. CT සහ MRI මෙතන කරන්නේ නෑ, Referral එකකින් සකසනවා.",
   },
   {
     kind: "ඔබ මෙහි සිටින විට",
-    title: "ගොඩනැගිල්ල ගැනම",
     desc: "ප්‍රධාන පිවිසුම ලඟ නොමිලේ Parking, නොමිලේ Wifi, Cafeteria එකක්, Patient Lounge එකක්, Prayer Room එකක්, Wheelchair Access සහ නිහඬ Visiting වේලාවන්. Ground Floor එකේ පැය 24ම විවෘත Pharmacy එකක්.",
   },
   {
     kind: "ඔබ පිටව යාමෙන් පසු",
-    title: "ගෙදර ගෙනියන Records",
     desc: "ඔබේ Reports, Imaging Referrals සහ Discharge Summary එකේ පිටපත් ඔබත් සමඟ ගෙනියන්න, ඔබේ Consent එකෙන් එම Pack එකම ඔබේ වෛද්‍යවරයාට ගෙදරටත් යවනවා.",
   },
   {
     kind: "Follow-up සත්කාර",
-    title: "ගෙදර ගිහින් Review එකක්",
     desc: "මෙහි බැලූ රෝගීන් ගෙදර ගිය පසු Follow-up සඳහා Telemedicine Use කරනවා, ඊළඟ පියවරේදීත් එකම වෛද්‍යවරයා සම්බන්ධව තියාගන්නවා.",
   },
 ];
@@ -184,7 +147,7 @@ export const deskServices = [
  * publishes appear, and `stay` uses the repo's own wording rather than a night
  * count the hospital has not committed to.
  */
-export const estimatesHeading = { line1: "ලිඛිත Estimates,", line2: "Book කරන්න කලින්" };
+export const estimatesHeading = {};
 export const estimatesIntro =
   "ඔබේ Reports එවන්න, Estimate එක ලිඛිතව ආපසු එනවා, ඇතිවිය හැකි සත්කාර ක්‍රියාවලිය ආවරණය කරමින්. එය Price List එකකට වඩා ඔබේ Scans අනුවයි, මොකද තීරණය කරන්නේ ඔබේ Scans නිසා.";
 
@@ -253,7 +216,7 @@ export const estimateNote =
 /** `#rooms`: the four categories the hospital actually offers, taken from
  *  `features/facilities/data/content`. Only the standard single carries a
  *  figure, because 10,000 LKR is the sole room price the repo publishes. */
-export const roomsHeading = { line1: "ඔබේ Attendant", line2: "ඔබ එක්කම ඉන්නවා" };
+export const roomsHeading = {};
 /** Sits under the shared amenity list in `#rooms`. */
 export const roomsNote = "සෑම Category එකකම, Wards වල සිටම, ඉහත ලැයිස්තුව සම්මතව තියෙනවා.";
 
@@ -302,7 +265,6 @@ export const roomStandard: readonly string[] = [
   "ඕනෑම වේලාවක වෛද්‍ය සහාය",
 ];
 
-export const billingHeading = "Estimate එක මුලින්ම එනවා";
 export const billingIntro =
   "Treatment එක ආරම්භ වීමට කලින් ලිඛිත Estimate එකක් ලැබෙනවා, ඇතිවිය හැකි සත්කාර ක්‍රියාවලිය ආවරණය කරමින්, ඒක ඔබ ඉදිරියේ තියෙන තෙක් කිසිවක් ආරම්භ වන්නේ නෑ. පියාසර කිරීමට කලින් ඔබේ Policy විස්තර Desk එකට එවන්න, ඒ එක්කම Insurance ලේඛන සකසෙනවා.";
 /** Eyebrow above `insuranceNotes` in the narrow list panel. */
@@ -327,7 +289,7 @@ export const insuranceNotes: readonly string[] = [
   "හදිසි අවස්ථාවක ඔබව මුලින්ම තක්සේරු කර ස්ථාවර කරනවා, Billing එක පස්සේ Settle කරනවා",
 ];
 
-export const stayHeading = { line1: "හොඳ ස්ථානයක්", line2: "සුවවීමට" };
+export const stayHeading = {};
 export const stayIntro =
   "මීගමුව නිහඬ, Walkable වෙරළබඩ නගරයක්, ගුවන් තොටුපළෙන් විනාඩි දහයයි, කොළඹින් පැයක් විතරයි. බොහෝ රෝගීන් ක්‍රියාපටිපාටියකින් පස්සේ සතියක් ගෙවන්නේ ගමන දිගටම කරගෙන යනවා වෙනුවට මෙතනයි.";
 export const stayNote =
@@ -346,8 +308,6 @@ export const practical = [
   { k: "Attendant කෙනා", v: "සෑම කාමර Category එකකම එක් අයෙකුට රාත්‍රිය රැඳී සිටිය හැක" },
   { k: "ඕනෑම වේලාවක", v: "0117 84 84 84 අමතන්න රෝහල ලැබෙනවා" },
 ];
-
-export const faqHeading = "අපිට හැමවෙලේම අහන ප්‍රශ්න";
 
 export const faq = [
   {
@@ -392,7 +352,7 @@ export const faq = [
   },
 ];
 
-export const enquiryHeading = { line1: "ඔබේ Reports", line2: "එවන්න. සැබෑ", line3: "පිළිතුරක් ගන්න." };
+export const enquiryHeading = {};
 export const enquiryIntro =
   "ඔබේ Scans, Reports, වර්තමාන බෙහෙත් සහ කෙටි ඉතිහාසයක් Email කරන්න හෝ WhatsApp කරන්න. නිවැරදි වෛද්‍යවරයා සමඟ Video එකෙන් හෝ Phone එකෙන් Consultation එකක් Desk එක සකසනවා, කිසිවක් Book කරන්න කලින් ලිඛිත Estimate එකත් එනවා.";
 
@@ -409,10 +369,10 @@ export const enquiryChips: readonly string[] = [
  *  no separate value: see the file header and `EnquiryContactRow` in
  *  `types.ts`. */
 export const enquiryContactRows = [
-  { label: "Desk එකට Email කරන්න" },
-  { label: "ඔබේ Reports WhatsApp කරන්න" },
-  { label: "Desk එකට Call කරන්න" },
+  {},
+  {},
+  {},
 ];
 
 /** The last row in `#enquiry`, a next/link to the services directory. */
-export const enquiryBrowseCta = "සියලුම Services බලන්න";
+

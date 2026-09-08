@@ -228,12 +228,26 @@ export function sweepScope(relativePath: string): string {
  * FAQ are untouched and stay translated. `KEEPS_ENGLISH` was already empty
  * and needed no change.
  *
+ * `international-care` was swept on 2026-09-09, needing no code change: its
+ * getter already reads its overlay through `localize`. 65 Sinhala and 65
+ * Tamil strings were deleted from its single content overlay
+ * (`content.si/ta.ts`): the hero (entirely, now `{}`), `sectionEyebrows`
+ * (now `{}`), `jumpCards[*].label`, `deskServices[*].title`,
+ * `journeySteps[*].title`, `enquiryContactRows[*].label` (now `{}` each),
+ * `enquiryBrowseCta`, and the bare `billingHeading`/`faqHeading` exports and
+ * every split `*Heading.line*` object (`enquiryHeading`, `estimatesHeading`,
+ * `journeyHeading`, `roomsHeading`, `servicesHeading`, `stayHeading`, each
+ * now `{}`). Fixed the file header's stale "Katunayake" translation example,
+ * a sentence about `hero.headingPlace` which is now deleted. `desc`, `body`,
+ * every intro/note paragraph and every FAQ are untouched and stay
+ * translated. `KEEPS_ENGLISH`'s three `roomTiles[*].name` entries were
+ * unaffected (that array is untouched) and needed no change.
+ *
  * A future scope may need a similar check before it is swept: read the
  * feature's own getter (`getContent.ts` or equivalent) for whether it reads
  * an overlay directly or through `localize` before deleting from it.
  */
 export const PENDING_REGISTER_SWEEP: ReadonlySet<string> = new Set([
-  "international-care",
   "network",
   "pharmacy",
   "school-wellness",
