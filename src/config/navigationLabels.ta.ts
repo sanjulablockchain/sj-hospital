@@ -1,135 +1,19 @@
-// Tamil for every nav label and footer heading used across the 17 route
-// configs in this directory. See navigationLabels.ts for how these are looked
-// up, and navigationLabels.test.ts for the parity gate that keeps this file
-// covering every string in src/config/*Navigation.ts.
+// Tamil for every nav label and footer heading used across the route
+// configs in this directory: deliberately empty. The register policy
+// (`docs/superpowers/i18n-register-rule.md`, `registerPolicy.ts`) says the
+// whole nav bar and footer are English in every language, per the owner's
+// ruling on 2026-09-09 ("nav bar and footer should be in english in every
+// language"). `navLabel` / `footerHeading` in `navigationLabels.ts` fall back
+// to the English string for any label neither dictionary carries, so an empty
+// dictionary here renders every nav label and footer heading in English.
 //
-// Same register as the contact feature: the sentence is Tamil, everyday
-// English nouns and product names stay in English, and "Book" is a verb
-// exactly like it is in content.ta.ts. "Media" and "Pharmacy" are recorded in
-// KEEPS_ENGLISH in navigationLabels.test.ts because that is how a Sri Lankan
-// reader actually sees those two words, in English, on an otherwise Tamil
-// page. "Standard", "Deluxe" and "Super deluxe" are recorded there too: they
-// are hotel-style room class names, and Sri Lankan hospitals and hotels alike
-// print them in English rather than coining a Tamil equivalent nobody uses.
+// This module stays, rather than being deleted, because `navigationLabels.ts`
+// still imports `NAV_LABELS` and `FOOTER_HEADINGS` by name from it; only their
+// contents are gone. See `navigationLabels.test.ts` for the gate that keeps
+// both empty.
 
 export const __review = { status: "draft", reviewer: null, date: null } as const;
 
-export const NAV_LABELS: Record<string, string> = {
-  "About us": "எங்களைப் பற்றி",
-  Accommodation: "தங்குமிட வசதிகள்",
-  Admissions: "அனுமதிகள்",
-  "All services": "அனைத்து சேவைகளும்",
-  "Ambulance & transfers": "Ambulance மற்றும் மாற்றங்கள்",
-  Benefits: "சலுகைகள்",
-  "Book a doctor": "Doctor ஐ Book செய்யுங்கள்",
-  "Book a room": "Room ஐ Book செய்யுங்கள்",
-  "Bring us in": "எங்களை அழையுங்கள்",
-  "By age group": "வயதுக் குழு வாரியாக",
-  "Care at Home": "வீட்டு சிகிச்சை",
-  "Care at home": "வீட்டு சிகிச்சை",
-  Careers: "வேலைவாய்ப்புகள்",
-  "Centres of excellence": "சிறப்பு மையங்கள்",
-  "Contact us": "எங்களைத் தொடர்பு கொள்ள",
-  "Critical care": "தீவிர சிகிச்சை",
-  Delivery: "விநியோகம்",
-  Deluxe: "Deluxe",
-  "Dengue at home": "வீட்டில் டெங்கு சிகிச்சை",
-  "Department of surgery": "அறுவை சிகிச்சைத் துறை",
-  "Diagnostics & radiology": "நோய் கண்டறிதல் மற்றும் கதிரியக்கவியல்",
-  Diagnostics: "நோய் கண்டறிதல்",
-  Facilities: "வசதிகள்",
-  "Filming and privacy": "படமாக்கல் மற்றும் தனியுரிமை",
-  "Find a consultant": "நிபுணர் மருத்துவரைக் கண்டறியுங்கள்",
-  "Find us": "எங்களைக் கண்டறியுங்கள்",
-  "First aid at home": "வீட்டில் முதலுதவி",
-  "Full directory": "முழு அடைவு",
-  "Get in touch": "தொடர்பு கொள்ள",
-  "Health Tips": "சுகாதார ஆலோசனைகள்",
-  "Health check packages": "சுகாதார பரிசோதனை பொதிகள்",
-  "Health tips": "சுகாதார ஆலோசனைகள்",
-  "Home visit services": "வீட்டு வருகை சேவைகள்",
-  Home: "முகப்பு",
-  "How hiring works": "பணியமர்த்தல் நடைமுறை",
-  "Image library": "பட நூலகம்",
-  "Insurance & billing": "Insurance மற்றும் பில்லிங்",
-  "International Patient Care": "வெளிநாட்டு நோயாளர் சிகிச்சை",
-  "International care": "வெளிநாட்டு சிகிச்சை",
-  "International patient care": "வெளிநாட்டு நோயாளர் சிகிச்சை",
-  Media: "Media",
-  "Medicine to your door": "உங்கள் வீட்டு வாசலுக்கு மருந்து",
-  "Mission and vision": "நோக்கமும் தொலைநோக்கும்",
-  "Moving between us": "எங்களுக்கு இடையே இடமாற்றம்",
-  Network: "வலையமைப்பு",
-  Newsroom: "செய்தி அறை",
-  "Open positions": "வெற்றிடங்கள்",
-  "Operating theatres": "அறுவை சிகிச்சை அரங்குகள்",
-  "Our network": "எங்கள் வலையமைப்பு",
-  "Our parent group": "எங்கள் தாய் நிறுவனக் குழு",
-  Pharmacy: "Pharmacy",
-  "Press desk": "பத்திரிகை மேசை",
-  "Press kit and logos": "பத்திரிகைக் கருவி மற்றும் Logo",
-  "Privacy policy": "தனியுரிமைக் கொள்கை",
-  "Reach us": "எங்களை அணுகுங்கள்",
-  "Recruitment fraud": "பணியமர்த்தல் மோசடி",
-  "Repeat prescriptions": "மீண்டும் மருந்து பரிந்துரைகள்",
-  "Request a visit": "வருகைக்கு கோரிக்கை",
-  "Rooms & attendants": "அறைகள் மற்றும் உதவியாளர்கள்",
-  "Rooms & wards": "அறைகள் மற்றும் வார்டுகள்",
-  "Safety & records": "பாதுகாப்பு மற்றும் பதிவுகள்",
-  "Sampling at home": "வீட்டில் மாதிரி சேகரிப்பு",
-  "School Wellness": "பள்ளி நல்வாழ்வு",
-  "School wellness": "பள்ளி நல்வாழ்வு",
-  "Screening by age": "வயது வாரியான பரிசோதனை",
-  "Send a message": "Message அனுப்புங்கள்",
-  Services: "சேவைகள்",
-  "Six floors, one building": "ஆறு மாடிகள், ஒரு கட்டிடம்",
-  Standard: "Standard",
-  "Submit your CV": "உங்கள் CV ஐ சமர்ப்பியுங்கள்",
-  "Super deluxe": "Super deluxe",
-  "Surgical care": "அறுவை சிகிச்சை பராமரிப்பு",
-  "Teacher training": "ஆசிரியர் பயிற்சி",
-  Telemedicine: "தொலை மருத்துவம்",
-  "The counter": "கவுன்டர்",
-  "The family of companies": "நிறுவனங்களின் குடும்பம்",
-  "The journey": "பயணம்",
-  "The library": "நூலகம்",
-  "The numbers": "எண்கள்",
-  "The screening": "பரிசோதனை",
-  "Visiting & getting here": "வருகை மற்றும் வழிகள்",
-  Wards: "வார்டுகள்",
-  "What makes us different": "நாங்கள் வேறுபடுவது எப்படி",
-  "What the desk handles": "கவுன்டர் கையாளும் விஷயங்கள்",
-  "What we stock": "நாங்கள் வைத்திருப்பவை",
-  "When to come in": "எப்போது வர வேண்டும்",
-  "Who a visit suits": "வருகை யாருக்குப் பொருந்தும்",
-  "Who we are": "நாங்கள் யார்",
-  "Why here": "ஏன் இங்கே",
-  "Why it matters": "இது ஏன் முக்கியம்",
-  "Why school, not clinic": "Clinic அல்ல, பள்ளி ஏன்",
-  "Written estimates": "எழுத்து மூல மதிப்பீடுகள்",
-};
+export const NAV_LABELS: Record<string, string> = {};
 
-export const FOOTER_HEADINGS: Record<string, string> = {
-  "About us": "எங்களைப் பற்றி",
-  Booking: "முன்பதிவு",
-  "Care at home": "வீட்டு சிகிச்சை",
-  // Same word as every compound "*care" label above (Care at home, Critical
-  // care, Surgical care, International care), matching Sinhala's single
-  // consistent "සත්කාර" for all of these. This heading groups exactly that
-  // set of links (see servicesNavigation.ts / homeNavigation.ts), so it is
-  // the same concept as the compounds, not a different one.
-  Care: "சிகிச்சை",
-  Careers: "வேலைவாய்ப்புகள்",
-  Contact: "தொடர்பு",
-  "Health tips": "சுகாதார ஆலோசனைகள்",
-  Hospital: "மருத்துவமனை",
-  International: "வெளிநாட்டு",
-  Legal: "சட்டம்",
-  Media: "Media",
-  Network: "வலையமைப்பு",
-  Patients: "நோயாளர்கள்",
-  Pharmacy: "Pharmacy",
-  Rooms: "அறைகள்",
-  "School wellness": "பள்ளி நல்வாழ்வு",
-  "The building": "கட்டிடம்",
-};
+export const FOOTER_HEADINGS: Record<string, string> = {};

@@ -62,27 +62,31 @@ export function sweepScope(relativePath: string): string {
  * Scopes whose content has not been swept yet. Remove a scope the moment its
  * audit comes back clean. When this is empty, delete this module.
  *
- * Two of these need work in `.ts` files before their overlays can lose keys,
- * and a sweep agent that does not know this will produce a page with blank
- * strings on it and a green-looking diff:
+ * `chrome` and `config` were swept and removed on 2026-09-09, each after a
+ * code change its overlays depended on:
  *
- * - `chrome`: `chromeCopyFor` in `src/components/layout/chromeCopy.ts` reads
- *   the overlay object DIRECTLY, without `localize`, because every caller is a
- *   client component. A missing key there renders empty, not English. Route it
- *   through `localize` (or spread it over the English object) first.
- * - `config`: `navigationLabels.test.ts` asserts that every nav label and
- *   footer heading in `src/config/*Navigation.ts` HAS a dictionary entry. The
- *   policy says the whole nav bar and footer are English, so that assertion
- *   has to be inverted when this scope is swept. `navLabel` and
- *   `footerHeading` already fall back to the English string, so the runtime is
- *   ready.
+ * - `chrome`: `chromeCopyFor` in `src/components/layout/chromeCopy.ts` used to
+ *   read the overlay object DIRECTLY, without `localize`, because every caller
+ *   is a client component; a missing key rendered empty, not English. It now
+ *   merges through `localize`, the same as every feature.
+ * - `config`: `navigationLabels.test.ts` used to assert that every nav label
+ *   and footer heading in `src/config/*Navigation.ts` HAS a dictionary entry.
+ *   The policy says the whole nav bar and footer are English, so that
+ *   assertion is now inverted (a label must NOT have one). `navLabel` and
+ *   `footerHeading` already fell back to the English string, so the runtime
+ *   needed no change. `config` also carries `pageMetadata.si.ts` / `.ta.ts`
+ *   (`src/config/pageMetadata.ts`), which already read through `localize` and
+ *   needed no code change; only the policy (ruling 3: a route's `<title>` is
+ *   English) and the overlay content moved.
+ *
+ * A future scope may need a similar check before it is swept: read the
+ * feature's own getter (`getContent.ts` or equivalent) for whether it reads
+ * an overlay directly or through `localize` before deleting from it.
  */
 export const PENDING_REGISTER_SWEEP: ReadonlySet<string> = new Set([
   "about",
   "accommodation",
   "career",
-  "chrome",
-  "config",
   "contact",
   "e-channeling",
   "facilities",

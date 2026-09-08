@@ -1,34 +1,33 @@
 // Sinhala for the chrome's own hardcoded strings (header, mobile panel,
-// floating rail, both theme toggles, the language switcher). Written as a
-// full object rather than a partial: all twelve keys are present, even
-// though one of the twelve values below is deliberately left identical to
-// its English source (see "WhatsApp" further down). `chromeCopyFor` in
-// chromeCopy.ts reads this synchronously without merging through
-// `localize`, so an object missing a key would render that string empty
-// rather than falling back to English.
+// floating rail, both theme toggles, the language switcher). `chromeCopyFor`
+// in chromeCopy.ts now merges this through `localize`, so a key absent here
+// falls back to the English string rather than rendering empty.
+//
+// Five keys are deliberately ABSENT, per the register policy
+// (`docs/superpowers/i18n-register-rule.md`, `registerPolicy.ts`) and the
+// owner's ruling on 2026-09-09 ("book now should be in english in every
+// language", "nav bar and footer should be in english in every language"):
+// `bookNow` (the Book CTA), `tagline` (the footer's own tagline), `callUs`
+// and `whatsappUs` (the floating rail's CTAs), and `language` (the visible
+// "Language" label in the mobile panel, which is chrome, not an aria-label).
+// Deleting the key is how "stays English" is expressed; translating it to
+// itself is rejected by the identity assertion in chromeCopy.i18n.test.ts.
 //
 // "WhatsApp" is left in English deliberately: it is the product name, the
 // same decision as everywhere else in the chrome and in the contact feature.
+// It is NOT one of the five above: `whatsapp` (the bare product name) is
+// still translated copy that happens to read identically in every language,
+// while `whatsappUs` (the sentence built around it) is now register-policy
+// English and is absent below.
 
 export const __review = { status: "draft", reviewer: null, date: null } as const;
 
 export const chromeCopy = {
-  // Shorter than a full "දැන්ම Book කරන්න" sentence deliberately: this is a
-  // button label, not a sentence, and the header never wraps the row onto a
-  // second line (see ThemedHeader.tsx). The fuller form overflowed the header
-  // on common phone widths once translated; English "Book now" is two words
-  // for the same reason.
-  bookNow: "දැන් Book",
   openMenu: "මෙනුව විවෘත කරන්න",
   closeMenu: "මෙනුව වසන්න",
   backToTop: "මුදුනට යන්න",
-  whatsappUs: "අප හට WhatsApp කරන්න",
   whatsapp: "WhatsApp",
-  callUs: "අපට call කරන්න",
-  tagline:
-    "අනුකම්පාශීලී, රෝගී කේන්ද්‍රීය සත්කාරයෙන්, ඇමරිකානු සෞඛ්‍ය සත්කාර ප්‍රමිතීන් ශ්‍රී ලංකාවට ගෙන එමින්.",
   toLightMode: "Light mode එකට මාරු වෙන්න",
   toDarkMode: "Dark mode එකට මාරු වෙන්න",
-  language: "භාෂාව",
   changeLanguage: "භාෂාව: {locale}. භාෂාව මාරු කරන්න",
 };

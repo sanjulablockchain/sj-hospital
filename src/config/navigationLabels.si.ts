@@ -1,130 +1,19 @@
-// Sinhala for every nav label and footer heading used across the 17 route
-// configs in this directory. See navigationLabels.ts for how these are looked
-// up, and navigationLabels.test.ts for the parity gate that keeps this file
-// covering every string in src/config/*Navigation.ts.
+// Sinhala for every nav label and footer heading used across the route
+// configs in this directory: deliberately empty. The register policy
+// (`docs/superpowers/i18n-register-rule.md`, `registerPolicy.ts`) says the
+// whole nav bar and footer are English in every language, per the owner's
+// ruling on 2026-09-09 ("nav bar and footer should be in english in every
+// language"). `navLabel` / `footerHeading` in `navigationLabels.ts` fall back
+// to the English string for any label neither dictionary carries, so an empty
+// dictionary here renders every nav label and footer heading in English.
 //
-// Same register as the contact feature: the sentence is Sinhala, everyday
-// English nouns and product names stay in English, and "Book" is a verb
-// exactly like it is in content.si.ts. "Media" and "Pharmacy" are recorded in
-// KEEPS_ENGLISH in navigationLabels.test.ts because that is how a Sri Lankan
-// reader actually sees those two words, in English, on an otherwise Sinhala
-// page. "Standard", "Deluxe" and "Super deluxe" are recorded there too: they
-// are hotel-style room class names, and Sri Lankan hospitals and hotels alike
-// print them in English rather than coining a Sinhala equivalent nobody uses.
+// This module stays, rather than being deleted, because `navigationLabels.ts`
+// still imports `NAV_LABELS` and `FOOTER_HEADINGS` by name from it; only their
+// contents are gone. See `navigationLabels.test.ts` for the gate that keeps
+// both empty.
 
 export const __review = { status: "draft", reviewer: null, date: null } as const;
 
-export const NAV_LABELS: Record<string, string> = {
-  "About us": "අප ගැන",
-  Accommodation: "නවාතැන් පහසුකම්",
-  Admissions: "ඇතුළත් කිරීම්",
-  "All services": "සියලුම සේවා",
-  "Ambulance & transfers": "Ambulance සහ මාරු කිරීම්",
-  Benefits: "වාසි",
-  "Book a doctor": "වෛද්‍යවරයෙක් Book කරන්න",
-  "Book a room": "කාමරයක් Book කරන්න",
-  "Bring us in": "අපව ආරාධනා කරන්න",
-  "By age group": "වයස් කාණ්ඩය අනුව",
-  "Care at Home": "නිවසේ සත්කාර",
-  "Care at home": "නිවසේ සත්කාර",
-  Careers: "රැකියා",
-  "Centres of excellence": "විශිෂ්ඨතා මධ්‍යස්ථාන",
-  "Contact us": "අප හා සම්බන්ධ වන්න",
-  "Critical care": "දැඩි සත්කාර",
-  Delivery: "ගෙන්වා දීම",
-  Deluxe: "Deluxe",
-  "Dengue at home": "නිවසේ ඩෙංගු සත්කාර",
-  "Department of surgery": "ශල්‍ය අංශය",
-  "Diagnostics & radiology": "රෝග විනිශ්චය සහ විකිරණවේදය",
-  Diagnostics: "රෝග විනිශ්චය",
-  Facilities: "පහසුකම්",
-  "Filming and privacy": "රූගත කිරීම සහ පුද්ගලිකත්වය",
-  "Find a consultant": "විශේෂඥ වෛද්‍යවරයෙක් සොයන්න",
-  "Find us": "අප සොයා ගන්න",
-  "First aid at home": "නිවසේ ප්‍රථමාධාර",
-  "Full directory": "සම්පූර්ණ නාමාවලිය",
-  "Get in touch": "සම්බන්ධ වන්න",
-  "Health Tips": "සෞඛ්‍ය උපදෙස්",
-  "Health check packages": "සෞඛ්‍ය පරීක්ෂණ පැකේජ",
-  "Health tips": "සෞඛ්‍ය උපදෙස්",
-  "Home visit services": "නිවසේ සේවා",
-  Home: "මුල් පිටුව",
-  "How hiring works": "බඳවා ගැනීම සිදුවන ආකාරය",
-  "Image library": "රූප එකතුව",
-  "Insurance & billing": "Insurance සහ බිල්පත් කිරීම",
-  "International Patient Care": "විදේශීය රෝගී සත්කාර",
-  "International care": "විදේශීය සත්කාර",
-  "International patient care": "විදේශීය රෝගී සත්කාර",
-  Media: "Media",
-  "Medicine to your door": "ඔබේ දොරටුවට බෙහෙත්",
-  "Mission and vision": "මෙහෙවර සහ දැක්ම",
-  "Moving between us": "අප අතර මාරු වීම",
-  Network: "ජාලය",
-  Newsroom: "පුවත් කාමරය",
-  "Open positions": "පුරප්පාඩු",
-  "Operating theatres": "ශල්‍යාගාර",
-  "Our network": "අපගේ ජාලය",
-  "Our parent group": "අපගේ මාතෘ සමූහය",
-  Pharmacy: "Pharmacy",
-  "Press desk": "මාධ්‍ය මේසය",
-  "Press kit and logos": "මාධ්‍ය කට්ටලය සහ Logo",
-  "Privacy policy": "පුද්ගලිකත්ව ප්‍රතිපත්තිය",
-  "Reach us": "අප අමතන්න",
-  "Recruitment fraud": "බඳවා ගැනීමේ වංචා",
-  "Repeat prescriptions": "නැවත බෙහෙත් වට්ටෝරු",
-  "Request a visit": "පැමිණීමක් ඉල්ලන්න",
-  "Rooms & attendants": "කාමර සහ ආධාරකයින්",
-  "Rooms & wards": "කාමර සහ වාට්ටු",
-  "Safety & records": "ආරක්ෂාව සහ වාර්තා",
-  "Sampling at home": "නිවසේ නියැදි ලබා ගැනීම",
-  "School Wellness": "පාසල් සුවතාව",
-  "School wellness": "පාසල් සුවතාව",
-  "Screening by age": "වයස අනුව පරීක්ෂණ",
-  "Send a message": "Message එකක් යවන්න",
-  Services: "සේවා",
-  "Six floors, one building": "තට්ටු හය, එක් ගොඩනැගිල්ලක්",
-  Standard: "Standard",
-  "Submit your CV": "ඔබේ CV එවන්න",
-  "Super deluxe": "Super deluxe",
-  "Surgical care": "ශල්‍ය සත්කාර",
-  "Teacher training": "ගුරු පුහුණුව",
-  Telemedicine: "දුරස්ථ වෛද්‍ය සේවා",
-  "The counter": "කවුන්ටරය",
-  "The family of companies": "සමාගම් පවුල",
-  "The journey": "ගමන් මග",
-  "The library": "පුස්තකාලය",
-  "The numbers": "ඉලක්කම්",
-  "The screening": "පරීක්ෂණය",
-  "Visiting & getting here": "පැමිණීම සහ එන ආකාරය",
-  Wards: "වාට්ටු",
-  "What makes us different": "අප වෙනස් වන්නේ ඇයි",
-  "What the desk handles": "කවුන්ටරයෙන් සිදු කරන කටයුතු",
-  "What we stock": "අප තබා ගන්නා දේ",
-  "When to come in": "පැමිණිය යුතු වේලාව",
-  "Who a visit suits": "පැමිණීම සුදුසු වන්නේ කාටද",
-  "Who we are": "අප කවුද",
-  "Why here": "මෙතැන ඇයි",
-  "Why it matters": "එය වැදගත් වන්නේ ඇයි",
-  "Why school, not clinic": "Clinic එකක් නොව පාසලක් ඇයි",
-  "Written estimates": "ලිඛිත ඇස්තමේන්තු",
-};
+export const NAV_LABELS: Record<string, string> = {};
 
-export const FOOTER_HEADINGS: Record<string, string> = {
-  "About us": "අප ගැන",
-  Booking: "වෙන් කිරීම",
-  "Care at home": "නිවසේ සත්කාර",
-  Care: "සත්කාර",
-  Careers: "රැකියා",
-  Contact: "සම්බන්ධ වන්න",
-  "Health tips": "සෞඛ්‍ය උපදෙස්",
-  Hospital: "රෝහල",
-  International: "විදේශීය",
-  Legal: "නීතිමය",
-  Media: "Media",
-  Network: "ජාලය",
-  Patients: "රෝගීන්",
-  Pharmacy: "Pharmacy",
-  Rooms: "කාමර",
-  "School wellness": "පාසල් සුවතාව",
-  "The building": "ගොඩනැගිල්ල",
-};
+export const FOOTER_HEADINGS: Record<string, string> = {};
