@@ -5,12 +5,6 @@ import type { Locale } from "@/lib/i18n/locales";
 import { ThemedShell } from "@/components/layout/ThemedShell";
 import { FloatingActions } from "@/components/layout/FloatingActions";
 
-// Same arrangement as the /about-us, /contact-us, /network, /international-care,
-// /pharmacy, /facilities and /accommodation layouts: the header lives inside
-// the hero and scrolls away with it rather than sticking, so flowHeader
-// cancels the sticky-header anchor offset for every in-page anchor on this
-// route.
-//
 // FloatingActions is a client leaf ('use client', its own scroll listener), so
 // this layout stays a Server Component and only renders it. It has to sit
 // inside ThemedShell: the --home-* tokens it reads are scoped to ThemedShell's
@@ -22,7 +16,7 @@ export async function generateMetadata({ params }: LayoutProps<'/[locale]'>): Pr
 
 export default function PrivacyPolicyLayout({ children }: { children: ReactNode }) {
   return (
-    <ThemedShell flowHeader>
+    <ThemedShell>
       {children}
       <FloatingActions />
     </ThemedShell>

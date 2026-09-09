@@ -1,10 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ThemedHeader } from "@/components/layout/ThemedHeader";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { Ticker } from "@/components/ui/Ticker";
-import { internationalNavigation } from "@/config/internationalNavigation";
-import { translateNavItems } from "@/config/navigationLabels";
 import { localeHref } from "@/lib/i18n/paths";
 import type { Locale } from "@/lib/i18n/locales";
 import type { InternationalCareContent } from "../data/getContent";
@@ -33,7 +30,7 @@ export function InternationalHero({ content, locale }: { content: InternationalC
   return (
     <section
       id="top"
-      className="relative flex min-h-[84vh] flex-col overflow-hidden bg-[#060B1F] max-[899px]:min-h-[76vh]"
+      className="relative flex pt-[var(--sj-header-h)] min-h-[84vh] flex-col overflow-hidden bg-[#060B1F] max-[899px]:min-h-[76vh]"
     >
       <ParallaxLayer
         factor={0.14}
@@ -75,8 +72,6 @@ export function InternationalHero({ content, locale }: { content: InternationalC
             "radial-gradient(64% 50% at 78% 28%, rgba(44,166,240,0.32) 0%, rgba(6,11,31,0) 66%)",
         }}
       />
-
-      <ThemedHeader navItems={translateNavItems(internationalNavigation, locale)} homeHref="/" bookHref="/e-channeling" />
 
       <div className="relative z-10 mx-auto mt-auto flex w-full max-w-[1440px] gap-10 px-5 sm:px-8 lg:px-11">
         {/* Decorative vertical strapline, dropped below 900px where there is no

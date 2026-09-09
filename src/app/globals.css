@@ -133,22 +133,29 @@ html::-webkit-scrollbar-thumb:hover {
   }
 }
 
-/* Offset anchor-scroll targets so content doesn't land behind the sticky header.
-   Scoped to the real anchor targets (section/footer) rather than any [id] so it
-   doesn't also match unrelated elements like #mobile-nav-panel. 140px accounts
-   for the header growing to ~135px at intermediate viewport widths where the
-   top contact bar wraps. */
-section[id],
-footer[id] {
-  scroll-margin-top: 140px;
+/* ---- Fixed header ----
+   ThemedHeader is `position: fixed` over every page. --sj-header-h is its
+   rendered height (20px padding above and below a 40px logo mark on phones, a
+   48px one from `sm`), read by the heroes (which pad their top by it so copy
+   never starts under the bar), by the anchor offset below, and by anything
+   else that has to sit under the bar, such as the accommodation page's sticky
+   room-type rail. Change the header's padding or logo size and change this. */
+:root {
+  --sj-header-h: 80px;
 }
 
-/* data-flow-header marks a page whose header is not sticky (it scrolls away
-   inside the hero, as on the home page), so the 140px offset above is wrong
-   for all of its in-page anchors: cancel it here. */
-[data-sj][data-flow-header] section[id],
-[data-sj][data-flow-header] footer[id] {
-  scroll-margin-top: 0;
+@media (min-width: 640px) {
+  :root {
+    --sj-header-h: 88px;
+  }
+}
+
+/* Offset anchor-scroll targets so content doesn't land behind the fixed header.
+   Scoped to the real anchor targets (section/footer) rather than any [id] so it
+   doesn't also match unrelated elements like the mobile drawer. */
+section[id],
+footer[id] {
+  scroll-margin-top: calc(var(--sj-header-h) + 24px);
 }
 
 @layer components {
@@ -466,6 +473,96 @@ footer[id] {
   --home-accent-tint-soft: rgba(11, 111, 192, 0.06);
   /* The dark theme's salmon would be unreadable on the light page background. */
   --home-danger: #b23a20;
+}
+
+/* ---- Header chrome ----
+   The header has two states. At the top of the page it is transparent over the
+   hero photograph, which is fixed-dark in both themes, so its text and controls
+   are white regardless of theme. Once the page scrolls (or a menu opens) the
+   bar gains the theme's own surface, and the same text and controls have to
+   follow the theme instead. The header, the language and theme toggles and the
+   hamburger all paint from these four tokens so the flip is one attribute
+   (`data-solid` on the header) rather than a class swap in five files. */
+[data-sj] {
+  --sj-chrome-fg: #ffffff;
+  --sj-chrome-fg-soft: rgba(255, 255, 255, 0.82);
+  --sj-chrome-accent: #7fcbff;
+  --sj-chrome-hairline: rgba(255, 255, 255, 0.28);
+  --sj-chrome-tint: rgba(255, 255, 255, 0.08);
+}
+
+/* The hairline under the solid bar is an inset shadow, not a border, so the
+   bar stays exactly --sj-header-h tall in both states. */
+[data-sj] .sj-header {
+  box-shadow: inset 0 -1px 0 transparent;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+[data-sj] .sj-header[data-solid] {
+  --sj-chrome-fg: var(--home-heading);
+  --sj-chrome-fg-soft: var(--home-body);
+  --sj-chrome-accent: var(--home-accent-soft);
+  --sj-chrome-hairline: var(--home-hairline-strong);
+  --sj-chrome-tint: var(--home-accent-tint);
+  background-color: color-mix(in srgb, var(--home-bg) 90%, transparent);
+  box-shadow: inset 0 -1px 0 var(--home-hairline);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* The panel drops in from the bar. The exit is not animated: a panel that is
+   closing because the pointer left it must be gone before the pointer reaches
+   whatever sat behind it. */
+@keyframes sj-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-sj-menu-in {
+  transform-origin: top center;
+  animation: sj-menu-in 0.22s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes sj-drawer-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+.animate-sj-drawer-in {
+  animation: sj-drawer-in 0.32s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes sj-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-sj-fade-in {
+  animation: sj-fade-in 0.25s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-sj-menu-in,
+  .animate-sj-drawer-in,
+  .animate-sj-fade-in {
+    animation: none;
+  }
 }
 
 [data-sj] .sj-invert,

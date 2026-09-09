@@ -15,7 +15,7 @@ export function ThemeToggleButton() {
       type="button"
       title={label}
       onClick={toggle}
-      className="inline-flex h-11 w-11 shrink-0 items-center justify-center border border-white/28 bg-transparent text-[16px] text-white"
+      className="inline-flex h-11 w-11 shrink-0 items-center justify-center border border-[var(--sj-chrome-hairline)] bg-transparent text-[16px] text-[var(--sj-chrome-fg)] transition-colors duration-300"
     >
       <span aria-hidden>{isDark ? "☀" : "☽"}</span>
       <span className="sr-only">{label}</span>

@@ -1,11 +1,7 @@
 import Image from "next/image";
 import { LocaleLink } from "@/components/i18n/LocaleLink";
-import { ThemedHeader } from "@/components/layout/ThemedHeader";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { Ticker } from "@/components/ui/Ticker";
-import { facilitiesNavigation } from "@/config/facilitiesNavigation";
-import { translateNavItems } from "@/config/navigationLabels";
-import type { Locale } from "@/lib/i18n/locales";
 import type { FacilitiesContent } from "../data/getContent";
 
 /**
@@ -20,7 +16,7 @@ import type { FacilitiesContent } from "../data/getContent";
  * `next/link`, the same fix every other feature's own hero needed, so a
  * translated reader is not dropped back into English.
  */
-export function FacilitiesHero({ content, locale }: { content: FacilitiesContent; locale: Locale }) {
+export function FacilitiesHero({ content }: { content: FacilitiesContent }) {
   const { hero, heroFacts, tickerItems } = content;
   return (
     <section id="top" className="relative flex flex-col overflow-hidden bg-[#060B1F]">
@@ -32,7 +28,7 @@ export function FacilitiesHero({ content, locale }: { content: FacilitiesContent
           the spill) and behind the fact strip. The strip is capped at
           max-w-[1440px], so on wider viewports the spill showed through the
           left and right gutters as two bright fragments. */}
-      <div className="relative flex min-h-[86vh] flex-col overflow-hidden max-[899px]:min-h-[76vh]">
+      <div className="relative flex pt-[var(--sj-header-h)] min-h-[86vh] flex-col overflow-hidden max-[899px]:min-h-[76vh]">
         <ParallaxLayer
           factor={0.14}
           maxOffsetPx={100}
@@ -67,8 +63,6 @@ export function FacilitiesHero({ content, locale }: { content: FacilitiesContent
               "linear-gradient(rgba(6,11,31,0.84) 0%, rgba(6,11,31,0.46) 40%, rgba(6,11,31,0.96) 100%)",
           }}
         />
-
-        <ThemedHeader navItems={translateNavItems(facilitiesNavigation, locale)} homeHref="/" bookHref="/e-channeling" />
 
         <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 flex-col justify-end gap-6 px-5 pb-14 sm:px-8 lg:px-11">
           <div className="animate-sj-up flex min-w-0 flex-wrap items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">

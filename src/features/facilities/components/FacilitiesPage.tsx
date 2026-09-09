@@ -33,7 +33,7 @@ export async function FacilitiesPage({ locale }: { locale: Locale }) {
   return (
     <>
       <main>
-        <FacilitiesHero content={content} locale={locale} />
+        <FacilitiesHero content={content} />
         <JumpCards content={content} />
         <BuildingSection content={content} />
         <ShowcaseSection content={content} />

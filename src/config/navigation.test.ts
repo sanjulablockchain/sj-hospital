@@ -2,47 +2,26 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { homeNavigation, homeFooterColumns } from "./homeNavigation.ts";
-import { healthTipsNavigation, healthTipsFooterColumns } from "./healthTipsNavigation.ts";
-import { servicesNavigation, servicesDetailNavigation, servicesFooterColumns } from "./servicesNavigation.ts";
-import { pharmacyNavigation, pharmacyFooterColumns } from "./pharmacyNavigation.ts";
-import { facilitiesNavigation, facilitiesFooterColumns } from "./facilitiesNavigation.ts";
-import { internationalNavigation, internationalFooterColumns } from "./internationalNavigation.ts";
-import { networkNavigation, networkFooterColumns } from "./networkNavigation.ts";
-import { mediaNavigation, mediaFooterColumns } from "./mediaNavigation.ts";
-import { wellnessNavigation, wellnessFooterColumns } from "./wellnessNavigation.ts";
-import { careerNavigation, careerFooterColumns } from "./careerNavigation.ts";
-import { aboutNavigation, aboutFooterColumns } from "./aboutNavigation.ts";
-import { contactNavigation, contactFooterColumns } from "./contactNavigation.ts";
-import { accommodationNavigation, accommodationFooterColumns } from "./accommodationNavigation.ts";
-import { channelingNavigation, channelingFooterColumns } from "./channelingNavigation.ts";
-import { privacyNavigation, privacyFooterColumns } from "./privacyNavigation.ts";
-import { homeCareNavigation, homeCareFooterColumns } from "./homeCareNavigation.ts";
+import { homeFooterColumns } from "./homeNavigation.ts";
+import { healthTipsFooterColumns } from "./healthTipsNavigation.ts";
+import { servicesFooterColumns } from "./servicesNavigation.ts";
+import { pharmacyFooterColumns } from "./pharmacyNavigation.ts";
+import { facilitiesFooterColumns } from "./facilitiesNavigation.ts";
+import { internationalFooterColumns } from "./internationalNavigation.ts";
+import { networkFooterColumns } from "./networkNavigation.ts";
+import { mediaFooterColumns } from "./mediaNavigation.ts";
+import { wellnessFooterColumns } from "./wellnessNavigation.ts";
+import { careerFooterColumns } from "./careerNavigation.ts";
+import { aboutFooterColumns } from "./aboutNavigation.ts";
+import { contactFooterColumns } from "./contactNavigation.ts";
+import { accommodationFooterColumns } from "./accommodationNavigation.ts";
+import { channelingFooterColumns } from "./channelingNavigation.ts";
+import { privacyFooterColumns } from "./privacyNavigation.ts";
+import { homeCareFooterColumns } from "./homeCareNavigation.ts";
 
-const labels = (items: { label: string }[]) => items.map((i) => i.label);
-
-// Every nav on the site. Add a page's nav here when you add the page: these
-// checks are what caught the health tips, pharmacy and facilities navs
-// drifting apart from each other when three branches landed in turn.
-const ALL_NAVS = [
-  homeNavigation,
-  healthTipsNavigation,
-  servicesNavigation,
-  servicesDetailNavigation,
-  pharmacyNavigation,
-  facilitiesNavigation,
-  internationalNavigation,
-  networkNavigation,
-  mediaNavigation,
-  wellnessNavigation,
-  careerNavigation,
-  aboutNavigation,
-  contactNavigation,
-  accommodationNavigation,
-  channelingNavigation,
-  privacyNavigation,
-  homeCareNavigation,
-];
+// The header's own tree (one for the whole site, src/config/megaNavigation.ts)
+// is checked in megaNavigation.test.ts. This file covers the per-page footers
+// and the chrome wiring around them.
 
 // Every footer on the site. About us, Contact us and Accommodation were each
 // unreachable before this change: no footer anywhere linked to them, so the
@@ -67,104 +46,6 @@ const ALL_FOOTERS = [
   homeFooterColumns,
 ];
 
-// The header must read identically on every page: only the targets differ.
-// This is the check that stops a new page's nav from quietly growing its own
-// items, which is exactly what the health tips reference design did.
-test("every page's nav carries the same labels in the same order", () => {
-  const expected = labels(homeNavigation);
-  for (const nav of ALL_NAVS) assert.deepEqual(labels(nav), expected);
-});
-
-// A page whose nav points at its own section uses a bare hash; every other
-// nav has to reach the page itself. Getting this wrong is invisible until
-// someone clicks, so it is asserted rather than reviewed.
-test("Health Tips points at the health tips page from every nav but its own", () => {
-  for (const nav of ALL_NAVS) {
-    if (nav === healthTipsNavigation) continue;
-    const item = nav.find((i) => i.label === "Health Tips");
-    assert.ok(item, "no Health Tips item");
-    assert.equal(item.href, "/health-tips");
-  }
-});
-
-test("Facilities, Pharmacy, International and Media reach their pages from every other nav", () => {
-  for (const nav of ALL_NAVS) {
-    for (const [label, href] of [
-      ["Facilities", "/facilities"],
-      ["Pharmacy", "/pharmacy"],
-      ["International Patient Care", "/international-care"],
-      ["School Wellness", "/school-wellness"],
-      ["Network", "/network"],
-      ["Media", "/media"],
-      ["Careers", "/careers"],
-      ["Care at Home", "/home-care"],
-    ]) {
-      const item = nav.find((i) => i.label === label);
-      assert.ok(item, `no ${label} item`);
-      // The page's own nav anchors into itself instead; anything else must be
-      // the page, never a superseded /services band.
-      if (item.href.startsWith("#")) continue;
-      assert.equal(item.href, href, `${label} points at ${item.href}`);
-    }
-  }
-});
-
-test("on the health tips page itself, Health Tips is an in-page anchor", () => {
-  const item = healthTipsNavigation.find((i) => i.label === "Health Tips");
-  assert.ok(item);
-  assert.equal(item.href, "#library");
-});
-
-test("on the international page itself, International Patient Care is an in-page anchor", () => {
-  const item = internationalNavigation.find((i) => i.label === "International Patient Care");
-  assert.ok(item);
-  assert.equal(item.href, "#journey");
-});
-
-test("on the network page itself, Network is an in-page anchor", () => {
-  const item = networkNavigation.find((i) => i.label === "Network");
-  assert.ok(item);
-  assert.equal(item.href, "#family");
-});
-
-test("on the school wellness page itself, School Wellness is an in-page anchor", () => {
-  const item = wellnessNavigation.find((i) => i.label === "School Wellness");
-  assert.ok(item);
-  assert.equal(item.href, "#programme");
-});
-
-test("on the careers page itself, Careers is an in-page anchor", () => {
-  const item = careerNavigation.find((i) => i.label === "Careers");
-  assert.ok(item);
-  assert.equal(item.href, "#openings");
-});
-
-test("on the media page itself, Media is an in-page anchor", () => {
-  const item = mediaNavigation.find((i) => i.label === "Media");
-  assert.ok(item);
-  assert.equal(item.href, "#newsroom");
-});
-
-test("on the home care page itself, Care at Home is an in-page anchor", () => {
-  const item = homeCareNavigation.find((i) => i.label === "Care at Home");
-  assert.ok(item);
-  assert.equal(item.href, "#visits");
-});
-
-// Care at Home is the tenth nav item, and the four bands it gathers all had a
-// home elsewhere first: home visits and telemedicine as service detail pages,
-// medicine delivery on /pharmacy too. So the label has to reach the new page
-// rather than deep linking into whichever of those came to mind, or the nav
-// would mean something different depending on the page you clicked it from.
-test("Care at Home reaches the home care page from every nav but its own", () => {
-  for (const nav of ALL_NAVS) {
-    if (nav === homeCareNavigation) continue;
-    const item = nav.find((i) => i.label === "Care at Home");
-    assert.ok(item, "no Care at Home item");
-    assert.equal(item.href, "/home-care");
-  }
-});
-
 // The bands on /home-care that only summarise a page which already owns the
 // detail. Both must stay outbound links: the point of keeping those two bands
 // thin is that the reader ends up on the page holding the real content, and a
@@ -175,58 +56,19 @@ test("the home care footer sends medicine and telemedicine to the pages that own
   assert.ok(hrefs.includes("/services/telemedicine"), "no telemedicine link");
 });
 
-test("no nav item still points at the superseded home network band", () => {
-  for (const nav of ALL_NAVS) {
-    const item = nav.find((i) => i.label === "Network");
-    assert.ok(item, "no Network item");
-    // Only the network page's own nav may anchor into itself with #family;
-    // every other nav must reach the page, or this could regress to #family
-    // without the test noticing.
-    const allowed = nav === networkNavigation ? ["#family", "/network"] : ["/network"];
-    assert.ok(allowed.includes(item.href), `Network points at ${item.href}`);
-  }
-});
-
-test("no nav item still points at a retired home or services band", () => {
-  for (const nav of ALL_NAVS) {
-    for (const item of nav) {
-      assert.ok(!/#tips$/.test(item.href), `${item.label} still points at ${item.href}`);
-      // International patient care has a page of its own now, so neither the
-      // home band nor the /services band is a valid target any more.
-      assert.ok(!/#international$/.test(item.href), `${item.label} still points at ${item.href}`);
-      // Media has a page of its own now, so the home page's #media teaser band
-      // is no longer a valid nav target either.
-      assert.ok(!/#media$/.test(item.href), `${item.label} still points at ${item.href}`);
-      // And the same for Network, whose #network band on the home page is now
-      // only a teaser.
-      assert.ok(!/#network$/.test(item.href), `${item.label} still points at ${item.href}`);
-      // School wellness has a page of its own now, so the home page's #wellness
-      // teaser band is no longer a valid nav target either.
-      assert.ok(!/#wellness$/.test(item.href), `${item.label} still points at ${item.href}`);
-      // And the same for Careers: the home page's #career band is now only a
-      // five-row teaser, and /careers carries the roles, the hiring process and
-      // the application form.
-      assert.ok(!/#career$/.test(item.href), `${item.label} still points at ${item.href}`);
-    }
-  }
-});
-
-// The retired-band check above covers nav items only. Footer columns were
-// checked for reachability and shape but never against the bands, so two links
-// in the home footer (Surgical care -> #surgical, Media -> #media) still
-// scrolled to a teaser while the pages they name sat a click further away.
+// Footer columns were checked for reachability and shape but never against the
+// home page's teaser bands, so two links in the home footer (Surgical care ->
+// #surgical, Media -> #media) still scrolled to a teaser while the pages they
+// name sat a click further away.
 //
 // The home footer is the one footer this rule can apply to wholesale. Every
 // other page owns sections worth linking to, which is why facilitiesFooter
 // legitimately carries #theatres and #rooms; but every band on the home page is
 // a teaser for a page somewhere else, so nothing there should hold a reader on
 // the home page. #top is the exception a back-to-top link needs.
-test("every home nav and footer link leaves the page, apart from back to top", () => {
-  const hrefs = [
-    ...homeNavigation.map((item) => item.href),
-    ...homeFooterColumns.flatMap((column) => column.links.map((link) => link.href)),
-  ];
-  assert.ok(hrefs.length > 10, `only found ${hrefs.length} home chrome links`);
+test("every home footer link leaves the page, apart from back to top", () => {
+  const hrefs = homeFooterColumns.flatMap((column) => column.links.map((link) => link.href));
+  assert.ok(hrefs.length > 10, `only found ${hrefs.length} home footer links`);
   for (const href of hrefs) {
     if (href === "#top") continue;
     assert.ok(!href.startsWith("#"), `the home chrome links ${href}, which scrolls in place`);
@@ -350,8 +192,20 @@ function stripCommentLines(src: string): string {
     .join("\n");
 }
 
-const RETIRED_COMPONENTS = ["SiteHeader", "SiteFooter", "PageBanner", "BackToTopButton", "MobileNav"];
-const RETIRED_IDENTIFIERS = ["primaryNavigation", "footerQuickLinks"];
+// MobileNavPanel and HomeHeader joined the list with the mega menu: the
+// hamburger now opens MobileNavDrawer, and the home page takes the header from
+// ThemedShell like every other page. translateNavItems went with the per-page
+// nav arrays it translated.
+const RETIRED_COMPONENTS = [
+  "SiteHeader",
+  "SiteFooter",
+  "PageBanner",
+  "BackToTopButton",
+  "MobileNav",
+  "MobileNavPanel",
+  "HomeHeader",
+];
+const RETIRED_IDENTIFIERS = ["primaryNavigation", "footerQuickLinks", "translateNavItems"];
 
 // The old chrome is gone. These files were the last thing rendering the
 // pre-redesign header, footer and page banner, and (marketing) was the only
@@ -365,13 +219,12 @@ const RETIRED_IDENTIFIERS = ["primaryNavigation", "footerQuickLinks"];
 // need no stripping; the identifier checks do, since a plain word like
 // "primaryNavigation" could otherwise appear inside a sentence.
 //
-// MobileNav shares this generic treatment with the other four rather than a
-// narrower path-only special case: MobileNavPanel (which stays) does not
+// MobileNav shares this generic treatment with the others rather than a
+// narrower path-only special case: MobileNavDrawer (which stays) does not
 // false-positive on either half. The path pattern requires the closing quote
-// immediately after the name, so "MobileNavPanel" never matches "MobileNav"
+// immediately after the name, so "MobileNavDrawer" never matches "MobileNav"
 // there; the JSX pattern's `\b` requires a word boundary, and there isn't one
-// between the "v" and the "P" in "<MobileNavPanel". Verified empirically, not
-// just by inspection: see the Round 2 section of the task report.
+// between the "v" and the "D" in "<MobileNavDrawer".
 test("the retired chrome is not referenced anywhere in src", () => {
   const files = findSourceFiles("src");
   for (const file of files) {
@@ -393,19 +246,6 @@ test("the retired chrome is not referenced anywhere in src", () => {
   }
 });
 
-test("navigation.ts still exports the NavItem type every nav depends on", () => {
-  const src = readFileSync("src/config/navigation.ts", "utf8");
-  assert.match(src, /export type NavItem/);
-  assert.ok(!src.includes("primaryNavigation"));
-});
-
-// The header's "Book now" button has to mean the same thing on every page. It
-// used to be a per-page anchor (#form, #book, #enquiry, #press, #contact), so
-// the same button scrolled somewhere different depending on where you clicked
-// it. ThemedHeader and MobileNavPanel are off limits for this fix (their
-// "#book" default stays untouched), so every hero is required to pass the
-// prop explicitly instead: a hero that forgets it would silently fall back to
-// the unfixed default, which is exactly the regression this guards against.
 // Every hero on the site closes with a marquee under the fact strip, and it is
 // the band that tells a reader at a glance what the page covers. /home-care
 // shipped without one and nothing failed, because the convention lived in
@@ -433,14 +273,43 @@ test("every page hero closes with a ticker", () => {
   }
 });
 
-test("every hero passes bookHref=\"/e-channeling\" to ThemedHeader", () => {
-  const heroes = findHeroFiles("src/features");
+// The header is fixed over the page and rendered once, by ThemedShell. A hero
+// that rendered its own copy would stack a second header under the first, and
+// a page whose shell forgot it would have no navigation at all. Both fail here.
+// The "Book now" target is no longer a per-hero prop for the same reason: the
+// one header owns it, so it means the same thing on every page by construction.
+test("ThemedShell renders the header and no hero does", () => {
+  const shell = readFileSync("src/components/layout/ThemedShell.tsx", "utf8");
+  assert.match(shell, /<ThemedHeader\b/, "ThemedShell does not render ThemedHeader");
+
+  for (const file of findSourceFiles("src")) {
+    if (file.endsWith("ThemedShell.tsx") || file.endsWith("navigation.test.ts")) continue;
+    const src = readFileSync(file, "utf8");
+    assert.ok(!/<ThemedHeader\b/.test(src), `${file} renders its own ThemedHeader`);
+  }
+});
+
+// Heroes used to hold the header in their flow, so the hero copy started 88px
+// down. With the header fixed, each hero pads by the header's height instead
+// so nothing moves and the first line of copy never slides under the bar.
+test("every hero pads for the fixed header", () => {
+  const heroes = [...findHeroFiles("src/features"), "src/app/[locale]/privacy-policy/_components/PolicyHero.tsx"];
   assert.ok(heroes.length >= 6, `only found ${heroes.length} heroes`);
   for (const file of heroes) {
     const src = readFileSync(file, "utf8");
-    if (!src.includes("<ThemedHeader")) continue;
-    const match = src.match(/bookHref=\{?"([^"]+)"\}?/);
-    assert.ok(match, `${file} renders ThemedHeader without an explicit bookHref`);
-    assert.equal(match[1], "/e-channeling", `${file} passes bookHref="${match[1]}"`);
+    assert.ok(src.includes("pt-[var(--sj-header-h)]"), `${file} does not pad for the header`);
   }
+});
+
+// Anchor scrolling has to clear the fixed bar on every page now, so the
+// per-layout flowHeader switch that used to cancel the offset is gone.
+test("no layout opts out of the sticky-header anchor offset", () => {
+  for (const file of findSourceFiles("src")) {
+    if (file.endsWith("navigation.test.ts")) continue;
+    const src = readFileSync(file, "utf8");
+    assert.ok(!/\bflowHeader\b/.test(src), `${file} still uses flowHeader`);
+  }
+  const css = readFileSync("src/app/globals.css", "utf8");
+  assert.ok(!css.includes("data-flow-header"), "globals.css still carries the data-flow-header rule");
+  assert.match(css, /scroll-margin-top:\s*calc\(var\(--sj-header-h\)/, "anchor offset is not derived from the header height");
 });

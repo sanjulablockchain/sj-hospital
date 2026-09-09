@@ -1,44 +1,4 @@
-import type { NavItem } from "@/config/navigation";
 import type { FooterColumn } from "@/components/layout/ThemedFooter";
-
-// Labels and order mirror homeNavigation exactly, so the header reads
-// identically on every page. Only the targets differ. Facilities, Pharmacy,
-// Health Tips, International Patient Care and Network are all pages of their
-// own now, superseding the summary bands still on this index, so they leave
-// /services entirely. The remaining three (School Wellness, Media, Careers)
-// have no home on the services pages, so they always point back at the
-// matching section on the home page.
-export const servicesNavigation: NavItem[] = [
-  { label: "Services", href: "#directory" },
-  { label: "Facilities", href: "/facilities" },
-  { label: "Pharmacy", href: "/pharmacy" },
-  { label: "Care at Home", href: "/home-care" },
-  { label: "Health Tips", href: "/health-tips" },
-  { label: "International Patient Care", href: "/international-care" },
-  { label: "School Wellness", href: "/school-wellness" },
-  { label: "Network", href: "/network" },
-  { label: "Media", href: "/media" },
-  { label: "Careers", href: "/careers" },
-];
-
-// Same labels and order as servicesNavigation, for the /services/[slug]
-// detail pages, which have none of the /services index sections on
-// themselves. Facilities, Pharmacy, Health Tips and International Patient Care
-// point at their own pages, the same targets servicesNavigation uses; and
-// Services points at the index page itself, since there's no equivalent
-// section on a detail page to jump to.
-export const servicesDetailNavigation: NavItem[] = [
-  { label: "Services", href: "/services" },
-  { label: "Facilities", href: "/facilities" },
-  { label: "Pharmacy", href: "/pharmacy" },
-  { label: "Care at Home", href: "/home-care" },
-  { label: "Health Tips", href: "/health-tips" },
-  { label: "International Patient Care", href: "/international-care" },
-  { label: "School Wellness", href: "/school-wellness" },
-  { label: "Network", href: "/network" },
-  { label: "Media", href: "/media" },
-  { label: "Careers", href: "/careers" },
-];
 
 // Absolute `/services#...` targets rather than bare hashes, so these same
 // columns work correctly from both page families: from a detail page

@@ -35,7 +35,7 @@ export async function MediaPage({ locale }: { locale: Locale }) {
   return (
     <>
       <main>
-        <MediaHero content={content} locale={locale} />
+        <MediaHero content={content} />
         <JumpCards content={content} />
         <NewsroomSection content={content} />
         <PressDeskSection content={content} />

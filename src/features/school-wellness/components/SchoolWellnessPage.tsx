@@ -39,7 +39,7 @@ export async function SchoolWellnessPage({ locale }: { locale: Locale }) {
   return (
     <>
       <main>
-        <WellnessHero content={content} locale={locale} />
+        <WellnessHero content={content} />
         <JumpCards content={content} />
         <WhySchoolSection content={content} />
         <ScreeningSection content={content} />

@@ -1,10 +1,6 @@
 import Image from "next/image";
-import { ThemedHeader } from "@/components/layout/ThemedHeader";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { Ticker } from "@/components/ui/Ticker";
-import { servicesNavigation } from "@/config/servicesNavigation";
-import { translateNavItems } from "@/config/navigationLabels";
-import type { Locale } from "@/lib/i18n/locales";
 import { groupCounts } from "@/features/services/data/services";
 import type { ServicesContent } from "@/features/services/data/getContent";
 
@@ -19,7 +15,7 @@ import type { ServicesContent } from "@/features/services/data/getContent";
  * English word order: word order moves between English, Sinhala and Tamil
  * (i18n recipe pattern 3).
  */
-export function ServicesHero({ content, locale }: { content: ServicesContent; locale: Locale }) {
+export function ServicesHero({ content }: { content: ServicesContent }) {
   const { hero, tickerItems } = content.indexContent;
   const totalServices = groupCounts().All;
   const body = hero.body.replace("{count}", String(totalServices));
@@ -27,7 +23,7 @@ export function ServicesHero({ content, locale }: { content: ServicesContent; lo
   return (
     <section
       id="top"
-      className="relative flex min-h-[86vh] flex-col overflow-hidden bg-[#060B1F] max-[899px]:min-h-[74vh]"
+      className="relative flex pt-[var(--sj-header-h)] min-h-[86vh] flex-col overflow-hidden bg-[#060B1F] max-[899px]:min-h-[74vh]"
     >
       <ParallaxLayer
         factor={0.14}
@@ -57,8 +53,6 @@ export function ServicesHero({ content, locale }: { content: ServicesContent; lo
             "linear-gradient(rgba(6,11,31,0.86) 0%, rgba(6,11,31,0.42) 42%, rgba(6,11,31,0.96) 100%)",
         }}
       />
-
-      <ThemedHeader navItems={translateNavItems(servicesNavigation, locale)} homeHref="/" bookHref="/e-channeling" />
 
       <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 flex-col justify-end gap-6 px-5 pb-12 sm:px-8 lg:px-11">
         <div className="animate-sj-up inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">

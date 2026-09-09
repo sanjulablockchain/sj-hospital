@@ -1,10 +1,6 @@
 import Image from "next/image";
 import { LocaleLink } from "@/components/i18n/LocaleLink";
-import { ThemedHeader } from "@/components/layout/ThemedHeader";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
-import { servicesDetailNavigation } from "@/config/servicesNavigation";
-import { translateNavItems } from "@/config/navigationLabels";
-import type { Locale } from "@/lib/i18n/locales";
 import type { Service } from "@/features/services/types";
 import type { ServicesContent } from "@/features/services/data/getContent";
 
@@ -22,21 +18,13 @@ import type { ServicesContent } from "@/features/services/data/getContent";
  * header comment), so the eyebrow shows `content.groups.groupLabels` for it
  * rather than the raw key.
  */
-export function ServiceHero({
-  service,
-  content,
-  locale,
-}: {
-  service: Service;
-  content: ServicesContent;
-  locale: Locale;
-}) {
+export function ServiceHero({ service, content }: { service: Service; content: ServicesContent }) {
   const groupLabel = content.groups.groupLabels[service.group] ?? service.group;
 
   return (
     <section
       id="top"
-      className="relative flex min-h-[72vh] flex-col overflow-hidden bg-[#060B1F]"
+      className="relative flex pt-[var(--sj-header-h)] min-h-[72vh] flex-col overflow-hidden bg-[#060B1F]"
     >
       <ParallaxLayer
         factor={0.14}
@@ -60,8 +48,6 @@ export function ServiceHero({
             "linear-gradient(rgba(6,11,31,0.86) 0%, rgba(6,11,31,0.42) 42%, rgba(6,11,31,0.96) 100%)",
         }}
       />
-
-      <ThemedHeader navItems={translateNavItems(servicesDetailNavigation, locale)} homeHref="/" bookHref="/e-channeling" />
 
       <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 flex-col justify-end gap-6 px-5 pb-14 sm:px-8 lg:px-11">
         <LocaleLink
