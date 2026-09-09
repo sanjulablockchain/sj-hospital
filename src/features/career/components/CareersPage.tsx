@@ -41,7 +41,7 @@ export async function CareersPage({ locale }: { locale: Locale }) {
   return (
     <>
       <main>
-        <CareersHero content={content} locale={locale} />
+        <CareersHero content={content} />
         <JumpCards content={content} />
 
         <FeatureSplit

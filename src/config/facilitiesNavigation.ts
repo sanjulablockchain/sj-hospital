@@ -1,24 +1,4 @@
-import type { NavItem } from "@/config/navigation";
 import type { FooterColumn } from "@/components/layout/ThemedFooter";
-
-// Same nine labels in the same order as homeNavigation and servicesNavigation,
-// so the header reads identically on every page; only the targets differ.
-// Facilities is the page we are already on, so it points at this page's own
-// building section. The other eight have no home here, so Services goes to the
-// services index, Pharmacy and International Patient Care to their own pages,
-// and the remaining four back to the matching section on the home page.
-export const facilitiesNavigation: NavItem[] = [
-  { label: "Services", href: "/services" },
-  { label: "Facilities", href: "#floors" },
-  { label: "Pharmacy", href: "/pharmacy" },
-  { label: "Care at Home", href: "/home-care" },
-  { label: "Health Tips", href: "/health-tips" },
-  { label: "International Patient Care", href: "/international-care" },
-  { label: "School Wellness", href: "/school-wellness" },
-  { label: "Network", href: "/network" },
-  { label: "Media", href: "/media" },
-  { label: "Careers", href: "/careers" },
-];
 
 // Bare hashes for this page's own sections, absolute paths for everything else.
 // ThemedFooter renders these as plain <a> tags rather than next/link, so the

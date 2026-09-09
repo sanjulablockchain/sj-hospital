@@ -27,7 +27,7 @@ export async function EChannelingPage({ locale }: { locale: Locale }) {
   return (
     <>
       <main>
-        <ChannelingHero content={content} locale={locale} />
+        <ChannelingHero content={content} />
         <DirectorySection content={content} doctors={doctors} />
         <HelpSection content={content} />
       </main>

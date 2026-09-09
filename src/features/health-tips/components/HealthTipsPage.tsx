@@ -32,7 +32,7 @@ export async function HealthTipsPage({ locale }: { locale: Locale }) {
   return (
     <>
       <main>
-        <TipsHero pageContent={pageContent} locale={locale} />
+        <TipsHero pageContent={pageContent} />
         <JumpCards jumpCards={pageContent.jumpCards} />
         <SeasonalSection dengue={dengue} />
         <LibrarySection

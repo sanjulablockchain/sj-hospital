@@ -1,11 +1,7 @@
 import Image from "next/image";
 import { LocaleLink } from "@/components/i18n/LocaleLink";
-import { ThemedHeader } from "@/components/layout/ThemedHeader";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { Ticker } from "@/components/ui/Ticker";
-import { homeCareNavigation } from "@/config/homeCareNavigation";
-import { translateNavItems } from "@/config/navigationLabels";
-import type { Locale } from "@/lib/i18n/locales";
 import type { HomeCareContent } from "../data/getContent";
 
 /**
@@ -28,12 +24,12 @@ import type { HomeCareContent } from "../data/getContent";
  * hero blocks: this sits on a photograph in both themes, and the light theme
  * swaps that token to a deep `#0B6FC0` that would sink into the image.
  */
-export function HomeCareHero({ content, locale }: { content: HomeCareContent; locale: Locale }) {
+export function HomeCareHero({ content }: { content: HomeCareContent }) {
   const { hero, heroFacts, heroStandfirst, tickerItems } = content;
   return (
     <section
       id="top"
-      className="relative flex min-h-[84vh] flex-col overflow-hidden bg-[#060B1F] max-[899px]:min-h-[76vh]"
+      className="relative flex pt-[var(--sj-header-h)] min-h-[84vh] flex-col overflow-hidden bg-[#060B1F] max-[899px]:min-h-[76vh]"
     >
       <ParallaxLayer
         factor={0.14}
@@ -63,8 +59,6 @@ export function HomeCareHero({ content, locale }: { content: HomeCareContent; lo
             "radial-gradient(64% 50% at 78% 24%, rgba(44,166,240,0.3) 0%, rgba(6,11,31,0) 66%)",
         }}
       />
-
-      <ThemedHeader navItems={translateNavItems(homeCareNavigation, locale)} homeHref="/" bookHref="/e-channeling" />
 
       <div className="relative z-10 mx-auto mt-auto flex w-full max-w-[1440px] gap-5.5 px-5 sm:px-8 lg:px-11">
         {/* Decorative vertical strapline, dropped below 900px where there is no

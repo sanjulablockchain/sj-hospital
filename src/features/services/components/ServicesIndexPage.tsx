@@ -39,7 +39,7 @@ export async function ServicesIndexPage({ locale }: { locale: Locale }) {
   return (
     <>
       <main>
-        <ServicesHero content={content} locale={locale} />
+        <ServicesHero content={content} />
         <JumpCards content={content} />
         <CentresSection content={content} />
         <ServiceDirectory services={content.services} counts={counts} groupLabels={content.groups.groupLabels} copy={content.indexContent.directory} />

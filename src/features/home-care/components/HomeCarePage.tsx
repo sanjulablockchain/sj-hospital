@@ -42,7 +42,7 @@ export async function HomeCarePage({ locale }: { locale: Locale }) {
   return (
     <>
       <main>
-        <HomeCareHero content={content} locale={locale} />
+        <HomeCareHero content={content} />
         <JumpCards content={content} />
         <VisitsSection content={content} />
         <WhoSection content={content} />

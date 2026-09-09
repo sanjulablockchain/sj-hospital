@@ -24,7 +24,7 @@ export async function ContactPage({ locale }: { locale: Locale }) {
   return (
     <>
       <main>
-        <ContactHero content={content} locale={locale} />
+        <ContactHero content={content} />
         <JumpCards content={content} locale={locale} />
         <ReachSection content={content} />
         <MessageSection content={content} />

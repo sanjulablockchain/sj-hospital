@@ -25,7 +25,7 @@ export async function AccommodationPage({ locale }: { locale: Locale }) {
   return (
     <>
       <main>
-        <RoomsHero content={content} locale={locale} />
+        <RoomsHero content={content} />
         <JumpCards content={content} />
         <RoomsSection content={content} />
         <SpecialtiesSection content={content} />

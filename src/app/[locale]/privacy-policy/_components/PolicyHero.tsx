@@ -1,7 +1,5 @@
 import Link from "next/link";
-import { ThemedHeader } from "@/components/layout/ThemedHeader";
-import { privacyNavigation } from "@/config/privacyNavigation";
-import { navLabel, translateNavItems } from "@/config/navigationLabels";
+import { navLabel } from "@/config/navigationLabels";
 import type { Locale } from "@/lib/i18n/locales";
 import { localePath } from "@/lib/i18n/paths";
 import { policyLastUpdated } from "./PolicyContent";
@@ -21,7 +19,7 @@ export function PolicyHero({ locale }: { locale: Locale }) {
   return (
     <section
       id="top"
-      className="relative flex min-h-[52vh] flex-col overflow-hidden bg-[#060B1F]"
+      className="relative flex pt-[var(--sj-header-h)] min-h-[52vh] flex-col overflow-hidden bg-[#060B1F]"
     >
       <div
         className="animate-sj-sheen absolute inset-0"
@@ -30,8 +28,6 @@ export function PolicyHero({ locale }: { locale: Locale }) {
             "radial-gradient(64% 50% at 80% 26%, rgba(44,166,240,0.3) 0%, rgba(6,11,31,0) 66%)",
         }}
       />
-
-      <ThemedHeader navItems={translateNavItems(privacyNavigation, locale)} homeHref="/" bookHref="/e-channeling" />
 
       <div className="relative z-10 mx-auto mt-auto flex w-full max-w-[1440px] px-5 pb-11 sm:px-8 lg:px-11">
         <div className="flex-1">

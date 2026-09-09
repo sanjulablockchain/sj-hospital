@@ -1,10 +1,6 @@
 import Image from "next/image";
-import { ThemedHeader } from "@/components/layout/ThemedHeader";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { LocaleLink } from "@/components/i18n/LocaleLink";
-import { healthTipsNavigation } from "@/config/healthTipsNavigation";
-import { translateNavItems } from "@/config/navigationLabels";
-import type { Locale } from "@/lib/i18n/locales";
 import type { HealthTipsContent } from "../data/getContent";
 import { TipsTicker } from "./TipsTicker";
 
@@ -28,19 +24,13 @@ import { TipsTicker } from "./TipsTicker";
  * they are already reading, matching `contact`'s, `career`'s and
  * `e-channeling`'s own hero breadcrumbs.
  */
-export function TipsHero({
-  pageContent,
-  locale,
-}: {
-  pageContent: HealthTipsContent["pageContent"];
-  locale: Locale;
-}) {
+export function TipsHero({ pageContent }: { pageContent: HealthTipsContent["pageContent"] }) {
   const { hero, factStrip, tickerLines } = pageContent;
 
   return (
     <section
       id="top"
-      className="relative flex min-h-[82vh] flex-col overflow-hidden bg-[#060B1F] max-[899px]:min-h-[76vh]"
+      className="relative flex pt-[var(--sj-header-h)] min-h-[82vh] flex-col overflow-hidden bg-[#060B1F] max-[899px]:min-h-[76vh]"
     >
       <ParallaxLayer
         factor={0.14}
@@ -63,8 +53,6 @@ export function TipsHero({
             "linear-gradient(rgba(6,11,31,0.86) 0%, rgba(6,11,31,0.42) 42%, rgba(6,11,31,0.96) 100%)",
         }}
       />
-
-      <ThemedHeader navItems={translateNavItems(healthTipsNavigation, locale)} homeHref="/" bookHref="/e-channeling" />
 
       <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 gap-11 px-5 sm:px-8 lg:px-11">
         {/* Vertical rail: decoration plus a standing label, hidden below 900px

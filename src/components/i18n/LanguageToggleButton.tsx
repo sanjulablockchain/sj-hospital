@@ -61,7 +61,7 @@ export function LanguageToggleButton() {
         aria-haspopup="menu"
         aria-label={copy.changeLanguage.replace("{locale}", LOCALE_LABELS[current])}
         onClick={() => setIsOpen((open) => !open)}
-        className="inline-flex h-11 w-11 shrink-0 items-center justify-center border border-white/28 bg-transparent text-[16px] text-white"
+        className="inline-flex h-11 w-11 shrink-0 items-center justify-center border border-[var(--sj-chrome-hairline)] bg-transparent text-[16px] text-[var(--sj-chrome-fg)] transition-colors duration-300"
       >
         <span aria-hidden>&#127760;</span>
       </button>

@@ -28,7 +28,7 @@ export async function NetworkPage({ locale }: { locale: Locale }) {
   return (
     <>
       <main>
-        <NetworkHero content={content} locale={locale} />
+        <NetworkHero content={content} />
         <JumpCards content={content} />
         <MattersSection content={content} />
         <FamilySection content={content} />

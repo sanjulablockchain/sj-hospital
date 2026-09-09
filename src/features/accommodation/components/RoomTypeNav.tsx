@@ -5,12 +5,12 @@ import { useEffect, useState } from "react";
 type Room = { id: string; label: string };
 
 /**
- * The sticky room-type bar sits at `top-0`: `ThemedHeader` is `relative`
- * inside the hero (the layout's `flowHeader` prop), not sticky itself, so
- * there is no header height to offset this bar by, and none to add to the
- * `IntersectionObserver`'s `rootMargin` either. `RoomsSection.tsx`'s
- * `scroll-mt-[88px]` on each room wrapper is derived from this bar's own
- * rendered height; see the comment there for the arithmetic.
+ * The sticky room-type bar pins just under the site header: `ThemedHeader` is
+ * fixed over every page, `--sj-header-h` tall (globals.css), so this bar sits
+ * at `top-[var(--sj-header-h)]` and the `IntersectionObserver`'s `rootMargin`
+ * adds the same height. `RoomsSection.tsx`'s scroll margin on each room
+ * wrapper is this bar's own height plus the header's; see the comment there
+ * for the arithmetic.
  *
  * `rooms` arrives as a prop rather than an import: this is a client
  * component, so it never reads `data/content.ts` directly, and its parent
@@ -38,10 +38,12 @@ export function RoomTypeNav({ rooms }: { rooms: Room[] }) {
           .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
         if (topMostVisible) setActiveId(topMostVisible.target.id);
       },
-      // -64px is this bar's own rendered height (a 1px bottom border + `py-3`'s
-      // 24px + a chip's 36px, rounded up), so a section only counts as
-      // "reached" once it has scrolled clear of the bar sitting over it.
-      { rootMargin: "-64px 0px -55% 0px", threshold: 0 }
+      // 64px is this bar's own rendered height (a 1px bottom border + `py-3`'s
+      // 24px + a chip's 36px, rounded up) and 88px is the fixed site header
+      // above it (`--sj-header-h` at this width; rootMargin cannot read a CSS
+      // variable), so a section only counts as "reached" once it has scrolled
+      // clear of both.
+      { rootMargin: "-152px 0px -55% 0px", threshold: 0 }
     );
 
     sections.forEach((section) => observer.observe(section));
@@ -49,7 +51,7 @@ export function RoomTypeNav({ rooms }: { rooms: Room[] }) {
   }, [rooms]);
 
   return (
-    <div className="sticky top-0 z-30 border-b border-[var(--home-hairline)] bg-[var(--home-bg)]/95 backdrop-blur-md">
+    <div className="sticky top-[var(--sj-header-h)] z-30 border-b border-[var(--home-hairline)] bg-[var(--home-bg)]/95 backdrop-blur-md">
       <div className="themed-scrollbar mx-auto flex max-w-[1240px] gap-2 overflow-x-auto px-6 py-3">
         {rooms.map((room) => (
           <a

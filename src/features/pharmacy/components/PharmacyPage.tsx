@@ -31,7 +31,7 @@ export async function PharmacyPage({ locale }: { locale: Locale }) {
   return (
     <>
       <main>
-        <PharmacyHero content={content} locale={locale} />
+        <PharmacyHero content={content} />
         <JumpCards content={content} />
         <CountersSection content={content} />
         <StandardsSection content={content} />

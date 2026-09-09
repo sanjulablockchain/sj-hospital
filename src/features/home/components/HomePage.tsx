@@ -40,9 +40,9 @@ export async function HomePage({ locale }: { locale: Locale }) {
   const { content } = home;
 
   return (
-    <ThemedShell flowHeader>
+    <ThemedShell>
       <main>
-        <HeroSection hero={content.hero} tickerItems={content.statTickerItems} locale={locale} />
+        <HeroSection hero={content.hero} tickerItems={content.statTickerItems} />
         <WhoWeAreSection content={content.whoWeAre} locale={locale} />
         <ServicesBentoSection content={content.servicesBento} locale={locale} />
         <SurgicalSection content={content.surgical} locale={locale} />

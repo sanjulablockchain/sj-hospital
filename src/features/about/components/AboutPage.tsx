@@ -25,7 +25,7 @@ export async function AboutPage({ locale }: { locale: Locale }) {
   return (
     <>
       <main>
-        <AboutHero content={content} locale={locale} />
+        <AboutHero content={content} />
         <JumpCards content={content} />
         <StorySection content={content} />
         <DifferentSection content={content} />

@@ -37,7 +37,7 @@ export async function ServiceDetailPage({ slug, locale }: { slug: string; locale
   return (
     <>
       <main>
-        <ServiceHero service={service} content={content} locale={locale} />
+        <ServiceHero service={service} content={content} />
         <ServicePicker
           services={content.services}
           current={service.slug}
