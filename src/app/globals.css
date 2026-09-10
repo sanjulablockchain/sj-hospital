@@ -489,6 +489,28 @@ footer[id] {
   --sj-chrome-accent: #7fcbff;
   --sj-chrome-hairline: rgba(255, 255, 255, 0.28);
   --sj-chrome-tint: rgba(255, 255, 255, 0.08);
+  /* Solid-state header/mega-menu surface. Dark theme gets a diagonal gradient
+     instead of a flat fill, plus an accent-tinted divider and a faint tint for
+     alternating mega-menu columns; light theme (below) reproduces the previous
+     flat behaviour untouched. */
+  --sj-chrome-solid-bg: linear-gradient(
+    160deg,
+    rgba(18, 35, 89, 0.94) 0%,
+    rgba(10, 20, 54, 0.9) 60%,
+    rgba(6, 11, 31, 0.88) 100%
+  );
+  --sj-chrome-hairline-accent: rgba(127, 203, 255, 0.22);
+  --sj-chrome-panel-bg: linear-gradient(160deg, #0e1c4a 0%, #0a1436 100%);
+  --sj-chrome-panel-frame-bg: linear-gradient(160deg, #0a1436 0%, #060b1f 100%);
+  --sj-chrome-col-tint: rgba(127, 203, 255, 0.035);
+}
+
+[data-sj][data-theme="light"] {
+  --sj-chrome-solid-bg: color-mix(in srgb, var(--home-bg) 90%, transparent);
+  --sj-chrome-hairline-accent: var(--home-hairline);
+  --sj-chrome-panel-bg: var(--home-surface);
+  --sj-chrome-panel-frame-bg: var(--home-bg);
+  --sj-chrome-col-tint: transparent;
 }
 
 /* The hairline under the solid bar is an inset shadow, not a border, so the
@@ -506,10 +528,24 @@ footer[id] {
   --sj-chrome-accent: var(--home-accent-soft);
   --sj-chrome-hairline: var(--home-hairline-strong);
   --sj-chrome-tint: var(--home-accent-tint);
-  background-color: color-mix(in srgb, var(--home-bg) 90%, transparent);
-  box-shadow: inset 0 -1px 0 var(--home-hairline);
+  background: var(--sj-chrome-solid-bg);
+  box-shadow: inset 0 -1px 0 var(--sj-chrome-hairline-accent);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+}
+
+/* Mega-menu panel surfaces. Same gradient/flat split as the header above:
+   dark theme gets depth, light theme reproduces the previous flat colours. */
+[data-sj] .sj-mega-panel-frame {
+  background: var(--sj-chrome-panel-frame-bg);
+}
+
+[data-sj] .sj-mega-panel-surface {
+  background: var(--sj-chrome-panel-bg);
+}
+
+[data-sj] .sj-mega-panel-col:nth-child(odd) {
+  background: var(--sj-chrome-col-tint);
 }
 
 /* The panel drops in from the bar. The exit is not animated: a panel that is

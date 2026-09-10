@@ -35,16 +35,16 @@ export function MegaNavPanel({ menu, locale, labelledBy, onNavigate }: MegaNavPa
     >
       {/* Opaque, not translucent: the hero's fact strip sits right behind the
           footer row on every page and read through anything less. */}
-      <div className="border border-[var(--home-hairline)] bg-[var(--home-bg)] p-1.5 shadow-[0_36px_70px_-30px_rgba(0,0,0,0.7)]">
+      <div className="sj-mega-panel-frame border border-[var(--home-hairline)] p-1.5 shadow-[0_36px_70px_-30px_rgba(0,0,0,0.7)]">
         <div
-          className={`max-h-[calc(100vh-var(--sj-header-h)-96px)] overflow-y-auto themed-scrollbar border border-[var(--home-hairline)] bg-[var(--home-surface)] ${
+          className={`sj-mega-panel-surface max-h-[calc(100vh-var(--sj-header-h)-96px)] overflow-y-auto themed-scrollbar border border-[var(--home-hairline)] ${
             isTiles ? "grid grid-cols-3" : "grid grid-cols-6"
           }`}
         >
           {menu.columns.map((column, index) => (
             <div
               key={column.heading ?? index}
-              className={`${index > 0 ? "border-l border-[var(--home-hairline)]" : ""} ${
+              className={`sj-mega-panel-col ${index > 0 ? "border-l border-[var(--home-hairline)]" : ""} ${
                 isTiles ? "flex flex-col" : "px-5 py-5"
               }`}
             >
