@@ -214,7 +214,7 @@ export function DesktopNav({ sections, locale, onOpenChange }: DesktopNavProps) 
                   if (e.pointerType === "mouse") scheduleOpen(section.id);
                 }}
                 onClick={() => (openId === section.id ? close() : open(section.id))}
-                className={`group ${triggerClass} aria-expanded:border-[var(--sj-chrome-hairline)] aria-expanded:bg-[var(--sj-chrome-tint)] aria-expanded:text-[var(--sj-chrome-fg)]`}
+                className={`group ${triggerClass} aria-expanded:border-[var(--sj-chrome-accent)] aria-expanded:bg-[var(--sj-chrome-tint)] aria-expanded:text-[var(--sj-chrome-fg)]`}
               >
                 {section.label}
                 <svg
