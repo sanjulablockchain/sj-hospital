@@ -135,8 +135,6 @@ export function AnnouncementModal({
   const goPrev = () => setIndex((i) => (i - 1 + slides.length) % slides.length);
   const goNext = () => setIndex((i) => (i + 1) % slides.length);
 
-  const slide = slides[index];
-
   return (
     <Modal
       open={open}
@@ -178,53 +176,76 @@ export function AnnouncementModal({
             </button>
           </div>
 
-          {/* Keyed on the index so each slide fades in as it arrives. The
-              animation is a no-op under prefers-reduced-motion (globals.css). */}
-          <div
-            key={index}
-            className="animate-sj-fade-in grid min-[700px]:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]"
-          >
-            <div className="relative aspect-[16/10] min-[700px]:aspect-auto min-[700px]:min-h-[370px]">
-              <Image
-                src={slide.photo}
-                alt={slide.photoAlt}
-                fill
-                sizes="(min-width: 700px) 400px, 100vw"
-                className="object-cover"
-              />
-            </div>
+          {/* All three slides occupy ONE grid cell, stacked, with the
+              inactive two faded out rather than unmounted.
 
-            <div className="flex flex-col justify-center px-5 py-7 sm:px-8 sm:py-9">
-              <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
-                {slide.eyebrow}
-              </div>
-              <h3 className="font-display mt-3.5 wrap-break-word text-[clamp(28px,4.2vw,42px)] leading-[0.95] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
-                {slide.heading.line1}
-                <br />
-                {slide.heading.line2}
-              </h3>
-              <p
-                className="mt-4.5 max-w-[44ch] text-[15.5px] leading-[1.6] text-[var(--home-body)]"
-                style={{ textWrap: "pretty" }}
+              This is what keeps the panel still. Sized to its content, it
+              was as tall as whichever slide was showing, and the bodies wrap
+              to different line counts (measured: 505px, 498px, 498px on
+              desktop, and 774 / 749 / 690 on a phone). Because the dialog is
+              centred, every change moved its top and bottom edges, so the
+              whole pop-up jumped as it rotated. Stacked, the cell is as tall
+              as the TALLEST slide and never changes, which also holds for
+              Sinhala and Tamil, where the bodies are longer and differ by
+              more. A min-height would have had to be re-guessed per
+              language; this cannot drift.
+
+              The two hidden slides are `inert`, so they are out of the tab
+              order and off the accessibility tree: without it a keyboard
+              reader would tab into CTAs nobody can see. */}
+          <div className="grid">
+            {slides.map((item, i) => (
+              <div
+                key={item.eyebrow}
+                aria-hidden={i !== index}
+                inert={i !== index}
+                className={`col-start-1 row-start-1 grid transition-opacity duration-300 motion-reduce:transition-none min-[700px]:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] ${
+                  i === index ? "opacity-100" : "pointer-events-none opacity-0"
+                }`}
               >
-                {slide.body}
-              </p>
-              <div className="mt-6.5 flex flex-wrap gap-2.5">
-                <SlideCta
-                  href={slide.hrefPrimary}
-                  label={slide.ctaPrimary}
-                  locale={locale}
-                  onNavigate={close}
-                  primary
-                />
-                <SlideCta
-                  href={slide.hrefSecondary}
-                  label={slide.ctaSecondary}
-                  locale={locale}
-                  onNavigate={close}
-                />
+                <div className="relative aspect-[16/10] min-[700px]:aspect-auto min-[700px]:min-h-[370px]">
+                  <Image
+                    src={item.photo}
+                    alt={item.photoAlt}
+                    fill
+                    sizes="(min-width: 700px) 400px, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+
+                <div className="flex flex-col justify-center px-5 py-7 sm:px-8 sm:py-9">
+                  <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
+                    {item.eyebrow}
+                  </div>
+                  <h3 className="font-display mt-3.5 wrap-break-word text-[clamp(28px,4.2vw,42px)] leading-[0.95] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
+                    {item.heading.line1}
+                    <br />
+                    {item.heading.line2}
+                  </h3>
+                  <p
+                    className="mt-4.5 max-w-[44ch] text-[15.5px] leading-[1.6] text-[var(--home-body)]"
+                    style={{ textWrap: "pretty" }}
+                  >
+                    {item.body}
+                  </p>
+                  <div className="mt-6.5 flex flex-wrap gap-2.5">
+                    <SlideCta
+                      href={item.hrefPrimary}
+                      label={item.ctaPrimary}
+                      locale={locale}
+                      onNavigate={close}
+                      primary
+                    />
+                    <SlideCta
+                      href={item.hrefSecondary}
+                      label={item.ctaSecondary}
+                      locale={locale}
+                      onNavigate={close}
+                    />
+                  </div>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
 
           <div className="flex items-center gap-3 border-t border-[var(--home-hairline)] px-5 py-3 sm:px-7">
