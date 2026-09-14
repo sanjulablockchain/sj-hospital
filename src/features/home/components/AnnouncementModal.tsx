@@ -158,7 +158,7 @@ export function AnnouncementModal({
               button scrolled out of reach and the reader had to scroll back up
               to dismiss the pop-up. The footer below is sticky for the same
               reason, so the arrows and the dots stay put too. */}
-          <div className="sticky top-0 z-10 flex items-center gap-3 border-b border-[var(--home-hairline)] bg-[var(--home-bg)] px-5 py-3.5 sm:px-7">
+          <div className="sticky top-0 z-10 flex items-center gap-3 border-b border-[var(--home-hairline)] bg-[var(--home-bg)] px-5 py-2 sm:px-7 sm:py-3.5">
             <Image
               src={LOGO_MARK.src}
               alt=""
@@ -176,7 +176,10 @@ export function AnnouncementModal({
               type="button"
               onClick={close}
               aria-label={ariaClose}
-              className="sj-invert flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center text-[var(--home-muted)] hover:text-[var(--home-heading)]"
+              // 44px on a phone, the usual minimum for something you hit with
+              // a thumb, and back to 36 from `sm` where it is a mouse target.
+              // The icon inside stays the same size either way.
+              className="sj-invert flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center text-[var(--home-muted)] hover:text-[var(--home-heading)] sm:h-9 sm:w-9"
             >
               <CloseIcon className="h-5 w-5" />
             </button>
@@ -217,7 +220,25 @@ export function AnnouncementModal({
                   i === index ? "opacity-100" : "pointer-events-none opacity-0"
                 }`}
               >
-                <div className="relative aspect-[16/10] min-w-0 min-[700px]:aspect-auto min-[700px]:min-h-[370px]">
+                {/* On a phone the band is sized against the VIEWPORT, not the
+                    panel width. At 16:10 of a full-width panel the photograph
+                    was about 230px on a 390px phone, roughly 40% of the card,
+                    and it pushed the CTAs off the bottom of a short screen.
+                    `clamp(120px, 20vh, 180px)` keeps it a banner on every
+                    phone and shrinks it first on the short ones, which are
+                    exactly the screens that were scrolling. From 700px up the
+                    height goes back to being driven by the copy beside it.
+
+                    On a phone SHORTER than 700px (a 360x640 Android, an
+                    iPhone SE) the band goes entirely. Even at its 120px floor
+                    it was the difference between the card fitting and the
+                    card scrolling, and on the screen with the least room the
+                    copy and the two CTAs are worth more than the photograph.
+                    The query is width AND height: a phone held sideways is
+                    under 700px tall too, but it is over 700px wide, so it
+                    takes the two-column layout where removing the image would
+                    leave an empty column. */}
+                <div className="relative h-[clamp(120px,20vh,180px)] min-w-0 [@media(max-width:699px)_and_(max-height:700px)]:hidden min-[700px]:h-auto min-[700px]:min-h-[370px]">
                   <Image
                     src={item.photo}
                     alt={item.photoAlt}
@@ -227,22 +248,26 @@ export function AnnouncementModal({
                   />
                 </div>
 
-                <div className="flex min-w-0 flex-col justify-center px-5 py-7 sm:px-8 sm:py-9">
-                  <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
+                <div className="flex min-w-0 flex-col justify-center px-5 py-6 sm:px-8 sm:py-9">
+                  <div className="text-[11px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase sm:text-[11.5px]">
                     {item.eyebrow}
                   </div>
-                  <h3 className="font-display mt-3.5 wrap-break-word text-[clamp(28px,4.2vw,42px)] leading-[0.95] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">
+                  <h3 className="font-display mt-3 wrap-break-word text-[clamp(25px,4.2vw,42px)] leading-[0.95] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase sm:mt-3.5">
                     {item.heading.line1}
                     <br />
                     {item.heading.line2}
                   </h3>
                   <p
-                    className="mt-4.5 max-w-[44ch] text-[15.5px] leading-[1.6] text-[var(--home-body)]"
+                    className="mt-3.5 max-w-[44ch] text-[14.5px] leading-[1.55] text-[var(--home-body)] sm:mt-4.5 sm:text-[15.5px] sm:leading-[1.6]"
                     style={{ textWrap: "pretty" }}
                   >
                     {item.body}
                   </p>
-                  <div className="mt-6.5 flex flex-wrap gap-2.5">
+                  {/* A grid on phones, so both buttons are one full-width
+                      column and read as a pair: `flex-wrap` gave them their
+                      own content widths, which stacked ragged. From 700px up
+                      they sit inline at their natural widths again. */}
+                  <div className="mt-5 grid gap-2.5 sm:mt-6.5 min-[700px]:flex min-[700px]:flex-wrap">
                     <SlideCta
                       href={item.hrefPrimary}
                       label={item.ctaPrimary}
@@ -262,7 +287,13 @@ export function AnnouncementModal({
             ))}
           </div>
 
-          <div className="sticky bottom-0 z-10 flex items-center gap-3 border-t border-[var(--home-hairline)] bg-[var(--home-bg)] px-5 py-3 sm:px-7">
+          <div className="sticky bottom-0 z-10 flex items-center gap-3 border-t border-[var(--home-hairline)] bg-[var(--home-bg)] px-5 py-2 sm:px-7 sm:py-3">
+            {/* The dot is 8px of paint inside a 44px button. A dot you can see
+                and a dot you can hit are different sizes, and shipping the
+                8px one as the whole target made five of the controls in this
+                footer unhittable with a thumb. The taller buttons are paid
+                for by the reduced footer padding beside them, so the card is
+                no taller than it was. */}
             <div className="flex gap-2">
               {slides.map((item, i) => (
                 <button
@@ -271,12 +302,16 @@ export function AnnouncementModal({
                   onClick={() => setIndex(i)}
                   aria-label={`${ariaSlide} ${i + 1}`}
                   aria-current={i === index ? "true" : undefined}
-                  className={`h-2 cursor-pointer rounded-full transition-all duration-300 ${
-                    i === index
-                      ? "w-7 bg-[var(--home-accent)]"
-                      : "w-2 bg-[var(--home-hairline-strong)]"
-                  }`}
-                />
+                  className="flex h-11 cursor-pointer items-center sm:h-9"
+                >
+                  <span
+                    className={`block h-2 rounded-full transition-all duration-300 ${
+                      i === index
+                        ? "w-7 bg-[var(--home-accent)]"
+                        : "w-2 bg-[var(--home-hairline-strong)]"
+                    }`}
+                  />
+                </button>
               ))}
             </div>
 
@@ -290,7 +325,7 @@ export function AnnouncementModal({
                 onClick={goPrev}
                 aria-label={ariaPrev}
                 disabled={slides.length < 2}
-                className="sj-invert flex h-9 w-9 cursor-pointer items-center justify-center border border-[var(--home-hairline-strong)] text-[15px] text-[var(--home-heading)] disabled:opacity-40"
+                className="sj-invert flex h-11 w-11 cursor-pointer items-center justify-center border border-[var(--home-hairline-strong)] text-[15px] text-[var(--home-heading)] disabled:opacity-40 sm:h-9 sm:w-9"
               >
                 <span aria-hidden>&larr;</span>
               </button>
@@ -299,7 +334,7 @@ export function AnnouncementModal({
                 onClick={goNext}
                 aria-label={ariaNext}
                 disabled={slides.length < 2}
-                className="sj-invert flex h-9 w-9 cursor-pointer items-center justify-center border border-[var(--home-hairline-strong)] text-[15px] text-[var(--home-heading)] disabled:opacity-40"
+                className="sj-invert flex h-11 w-11 cursor-pointer items-center justify-center border border-[var(--home-hairline-strong)] text-[15px] text-[var(--home-heading)] disabled:opacity-40 sm:h-9 sm:w-9"
               >
                 <span aria-hidden>&rarr;</span>
               </button>
@@ -333,8 +368,8 @@ function SlideCta({
   primary?: boolean;
 }) {
   const className = primary
-    ? "sj-invert inline-flex items-center gap-2 bg-[var(--home-accent)] px-5 py-3.5 text-[14px] font-bold text-[var(--home-on-accent)]"
-    : "sj-invert inline-flex items-center gap-2 border border-[var(--home-hairline-strong)] px-5 py-3.5 text-[14px] font-bold text-[var(--home-heading)]";
+    ? "sj-invert inline-flex items-center justify-center gap-2 bg-[var(--home-accent)] px-5 py-3.5 text-[14px] font-bold text-[var(--home-on-accent)]"
+    : "sj-invert inline-flex items-center justify-center gap-2 border border-[var(--home-hairline-strong)] px-5 py-3.5 text-[14px] font-bold text-[var(--home-heading)]";
 
   // `tel:` and the WhatsApp link leave the site (or leave the browser), so
   // they are plain anchors: routing them through `<Link>` would prefetch a
