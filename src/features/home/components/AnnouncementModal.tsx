@@ -52,9 +52,9 @@ function rememberSeen(): void {
 }
 
 /**
- * The announcement pop-up over the home page: three slides that rotate, on
- * the hospital's in-house medicine delivery, the free OPD offer, and how to
- * reach us or channel a doctor.
+ * The announcement pop-up over the home page: five slides that rotate, on
+ * the hospital's in-house medicine delivery, the free OPD offer, home visits,
+ * inpatient rooms, and how to reach us or channel a doctor.
  *
  * A `'use client'` leaf, mounted by the Server Component `HomePage`, which
  * passes it copy already localized. It never imports a data file itself, so
@@ -143,7 +143,7 @@ export function AnnouncementModal({
       size="panel"
       surface="themed"
     >
-      {/* Mounted but empty until it opens, so the three slide photographs are
+      {/* Mounted but empty until it opens, so the five slide photographs are
           not fetched on a page load where the reader has already dismissed
           the pop-up, or in the two seconds before it appears. */}
       {open && (
@@ -152,7 +152,13 @@ export function AnnouncementModal({
           onMouseLeave={() => setHovered(false)}
           onKeyDown={() => setKeyboardEngaged(true)}
         >
-          <div className="flex items-center gap-3 border-b border-[var(--home-hairline)] px-5 py-3.5 sm:px-7">
+          {/* Sticky, because on a short phone the panel is capped at the
+              viewport and the content scrolls inside it: measured at 360x640,
+              the copy is taller than the 616px panel. Left static, the close
+              button scrolled out of reach and the reader had to scroll back up
+              to dismiss the pop-up. The footer below is sticky for the same
+              reason, so the arrows and the dots stay put too. */}
+          <div className="sticky top-0 z-10 flex items-center gap-3 border-b border-[var(--home-hairline)] bg-[var(--home-bg)] px-5 py-3.5 sm:px-7">
             <Image
               src={LOGO_MARK.src}
               alt=""
@@ -176,8 +182,8 @@ export function AnnouncementModal({
             </button>
           </div>
 
-          {/* All three slides occupy ONE grid cell, stacked, with the
-              inactive two faded out rather than unmounted.
+          {/* All five slides occupy ONE grid cell, stacked, with the four
+              inactive ones faded out rather than unmounted.
 
               This is what keeps the panel still. Sized to its content, it
               was as tall as whichever slide was showing, and the bodies wrap
@@ -190,20 +196,28 @@ export function AnnouncementModal({
               more. A min-height would have had to be re-guessed per
               language; this cannot drift.
 
-              The two hidden slides are `inert`, so they are out of the tab
+              The four hidden slides are `inert`, so they are out of the tab
               order and off the accessibility tree: without it a keyboard
               reader would tab into CTAs nobody can see. */}
-          <div className="grid">
+          {/* `grid-cols-1`, not a bare `grid`. A bare grid has one implicit
+              column sized to `auto`, which grows to the widest child's
+              max-content: the body paragraph's `max-w-[44ch]` is about 431px,
+              so on a 390px phone the stack was 431px wide inside a 378px
+              panel and the copy was clipped by the dialog's `overflow-hidden`,
+              silently. Tailwind's `grid-cols-1` is `minmax(0,1fr)`, which
+              cannot be pushed past the container. `min-w-0` on each slide and
+              each of its two columns is the same guard one level down. */}
+          <div className="grid grid-cols-1">
             {slides.map((item, i) => (
               <div
                 key={item.eyebrow}
                 aria-hidden={i !== index}
                 inert={i !== index}
-                className={`col-start-1 row-start-1 grid transition-opacity duration-300 motion-reduce:transition-none min-[700px]:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] ${
+                className={`col-start-1 row-start-1 grid min-w-0 transition-opacity duration-300 motion-reduce:transition-none min-[700px]:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] ${
                   i === index ? "opacity-100" : "pointer-events-none opacity-0"
                 }`}
               >
-                <div className="relative aspect-[16/10] min-[700px]:aspect-auto min-[700px]:min-h-[370px]">
+                <div className="relative aspect-[16/10] min-w-0 min-[700px]:aspect-auto min-[700px]:min-h-[370px]">
                   <Image
                     src={item.photo}
                     alt={item.photoAlt}
@@ -213,7 +227,7 @@ export function AnnouncementModal({
                   />
                 </div>
 
-                <div className="flex flex-col justify-center px-5 py-7 sm:px-8 sm:py-9">
+                <div className="flex min-w-0 flex-col justify-center px-5 py-7 sm:px-8 sm:py-9">
                   <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
                     {item.eyebrow}
                   </div>
@@ -248,7 +262,7 @@ export function AnnouncementModal({
             ))}
           </div>
 
-          <div className="flex items-center gap-3 border-t border-[var(--home-hairline)] px-5 py-3 sm:px-7">
+          <div className="sticky bottom-0 z-10 flex items-center gap-3 border-t border-[var(--home-hairline)] bg-[var(--home-bg)] px-5 py-3 sm:px-7">
             <div className="flex gap-2">
               {slides.map((item, i) => (
                 <button

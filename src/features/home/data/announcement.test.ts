@@ -24,14 +24,14 @@ const allCopy = [
   ]),
 ].join("\n");
 
-test("the pop-up carries exactly the three slides the brief asked for", () => {
-  assert.equal(slides.length, 3);
+test("the pop-up carries exactly the five slides the brief asked for", () => {
+  assert.equal(slides.length, 5);
 });
 
 test("the slides number themselves in an unbroken run", () => {
   assert.deepEqual(
     slides.map((s) => s.eyebrow.split(" / ")[0]),
-    ["01", "02", "03"],
+    ["01", "02", "03", "04", "05"],
   );
 });
 
@@ -104,6 +104,29 @@ test("the free OPD slide states the offer without inventing a limit on it", () =
       [opd.heading.line1, opd.heading.line2, opd.body].join("\n"),
     ),
     "an unpublished limit on the free OPD offer",
+  );
+});
+
+/**
+ * The room rate has exactly one home, the `CountUp` in `RoomsSection.tsx`.
+ * Quoting it here too would be the same fact in two files with nothing to
+ * keep them together, so the rooms slide sends the reader to /accommodation
+ * for the rate instead of restating it.
+ */
+test("no slide quotes a room rate", () => {
+  assert.ok(!/\b\d{1,3},\d{3}\b|\bLKR\b|\bRs\.?\b/i.test(allCopy), "a price restated in the pop-up");
+});
+
+/**
+ * The rooms slide's pitch is that our rooms are good, not that anyone else's
+ * are dirty. An unnamed competitor is still a competitor, and a hospital
+ * running down other hospitals' wards on its own front page is a claim it
+ * cannot support and would not want quoted back at it.
+ */
+test("no slide disparages other hospitals", () => {
+  assert.ok(
+    !/dirty|filthy|worn.?out|fed up|other hospitals|elsewhere in|unlike/i.test(allCopy),
+    "a swipe at other hospitals",
   );
 });
 

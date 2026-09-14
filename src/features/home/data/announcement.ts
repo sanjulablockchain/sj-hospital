@@ -1,12 +1,13 @@
 /**
  * Copy for the announcement pop-up that opens over the home page.
  *
- * Three slides, rotating: the in-house medicine delivery service, the free
- * OPD offer, and how to reach the hospital or channel a doctor. They live
- * here rather than in `content.ts` because the pop-up is not one of the home
- * page's bands: it is chrome over the page, mounted once and dismissed, and
- * giving it its own module keeps `content.ts` about what the page renders
- * inline.
+ * Five slides, rotating: the in-house medicine delivery service, the free OPD
+ * offer, home visits, inpatient rooms, and how to reach the hospital or
+ * channel a doctor. Contact sits last on purpose, as the closer after the
+ * four things worth coming in for. They live here rather than in
+ * `content.ts` because the pop-up is not one of the home page's bands: it is
+ * chrome over the page, mounted once and dismissed, and giving it its own
+ * module keeps `content.ts` about what the page renders inline.
  *
  * `photo`, `photoAlt`, `hrefPrimary` and `hrefSecondary` are facts, not copy,
  * and have exactly one home here (see content.i18n.test.ts's
@@ -52,14 +53,10 @@ export const ariaSlide = "Announcement";
  * The three slides, in the order they rotate.
  *
  * Each `eyebrow` leads with its own ordinal, the same "01 / Reach us" shape
- * `contact`'s section eyebrows use. The word after the numeral is a register
- * noun in all three: "Pharmacy" has direct precedent as an eyebrow kept in
- * English on this very page (`content.pharmacy.eyebrow`), "OPD" is on the
- * register rule's keep-English list, and "Contact" is nav vocabulary, which
- * the owner's 2026-09-09 ruling keeps English in every language. All three
- * being English together is what makes this a rule rather than a miss: the
- * sibling test in the i18n recipe looks for the odd one out, and there is
- * none.
+ * `contact`'s section eyebrows use. Every eyebrow is English under the
+ * register policy, so none of them appears in the overlays at all, and the
+ * sibling test in the i18n recipe (which looks for the one entry left in
+ * English beside translated neighbours) has no odd one out to find.
  */
 export const slides = [
   {
@@ -85,7 +82,42 @@ export const slides = [
     photoAlt: "The hospital entrance lit at night, seen from the street.",
   },
   {
-    eyebrow: "03 / Contact",
+    eyebrow: "03 / Home visits",
+    heading: { line1: "Cannot come in?", line2: "We come to you" },
+    body: "Doctors, nurses and laboratory technicians at your door, on six dedicated vehicles. For elders, for infants, and for anyone recovering where they are most comfortable.",
+    ctaPrimary: "See home visits",
+    hrefPrimary: "/home-care#visits",
+    ctaSecondary: "Arrange a visit",
+    hrefSecondary: "tel:+94117848484",
+    photo: "/images/services/heroes/home-visits.jpg",
+    photoAlt: "A nurse attending to a patient at home.",
+  },
+  {
+    /**
+     * The brief for this slide was "fed up of dirty and worn-out inpatient
+     * rooms", which is a claim about other hospitals' wards rather than about
+     * ours. It is not made here: an unnamed competitor is still a competitor,
+     * the hospital cannot support it, and announcement.test.ts fails if that
+     * framing comes back. The contrast is carried by describing our own rooms
+     * concretely instead, which is the part a reader can check.
+     *
+     * The rate is deliberately absent. It has one home, the `CountUp` in
+     * `RoomsSection.tsx`, and a second copy here could drift from it with
+     * nothing to notice; the CTA sends the reader to /accommodation, where
+     * the rate actually lives.
+     */
+    eyebrow: "04 / Rooms",
+    heading: { line1: "Recover in", line2: "US comfort" },
+    body: "Private and semi private rooms, sanitised on a two hour cycle, with attendant space for your family and meals prepared to dietary orders. Held to the standards of our Los Angeles parent group.",
+    ctaPrimary: "See the rooms",
+    hrefPrimary: "/accommodation",
+    ctaSecondary: "Reserve a room",
+    hrefSecondary: "/accommodation#book",
+    photo: "/images/rooms/super-deluxe-1.jpg",
+    photoAlt: "A private inpatient room with an attendant sofa and window.",
+  },
+  {
+    eyebrow: "05 / Contact",
     heading: { line1: "Talk to us,", line2: "or book online" },
     body: "Reception answers around the clock, every day of the year. Channel a doctor online, message us on WhatsApp, or call and we will find you the next open slot.",
     ctaPrimary: "Book a doctor",
