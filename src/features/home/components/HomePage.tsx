@@ -19,21 +19,27 @@ import { CareersSection } from "./CareersSection";
 import { TestimonialsSection } from "./TestimonialsSection";
 import { ContactCtaSection } from "./ContactCtaSection";
 import { HomeFooter } from "./HomeFooter";
+import { AnnouncementModal } from "./AnnouncementModal";
 
 /**
  * The home page, the most visited on the site and the most plumbing of any
- * feature: eight pre-existing per-teaser data files plus `content.ts` (added
- * by this task, see its own header comment), fetched ONCE here via the
- * single `getHomeContent` getter rather than once per section.
+ * feature: eight pre-existing per-teaser data files, plus `content.ts` for
+ * the bands with no data file of their own and `announcement.ts` for the
+ * pop-up over the page (see each one's own header comment), fetched ONCE
+ * here via the single `getHomeContent` getter rather than once per section.
  *
  * Every section below takes its own slice of the already localized result as
  * a prop, never by importing a data file itself: that is what makes the page
  * translatable, and it is what keeps translation data out of the client
- * bundle for the eight sections that are Client Components
+ * bundle for the nine sections that are Client Components
  * (`HeroParallaxBackground` inside `HeroSection`, `SurgicalSection`,
  * `PharmacySection`, `RoomsSection`, `SchoolWellnessSection`,
- * `NetworkAccordion` inside `NetworkSection`, `TestimonialsSection`, and
- * `CountUp` wherever it is used).
+ * `NetworkAccordion` inside `NetworkSection`, `TestimonialsSection`,
+ * `AnnouncementModal`, and `CountUp` wherever it is used).
+ *
+ * `AnnouncementModal` sits last, outside `<main>` beside `FloatingActions`,
+ * for the same reason that one does: it is chrome over the page rather than
+ * a band of it.
  */
 export async function HomePage({ locale }: { locale: Locale }) {
   const home = await getHomeContent(locale);
@@ -113,6 +119,7 @@ export async function HomePage({ locale }: { locale: Locale }) {
       </main>
       <HomeFooter locale={locale} />
       <FloatingActions />
+      <AnnouncementModal content={home.announcement} locale={locale} />
     </ThemedShell>
   );
 }
