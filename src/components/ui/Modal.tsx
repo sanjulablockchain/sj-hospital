@@ -3,15 +3,72 @@
 import { useEffect, useRef } from "react";
 import { ArrowLeftIcon, CloseIcon } from "@/components/ui/Icons";
 
+/**
+ * The two shapes a modal takes, each carrying its own geometry because they
+ * differ on phones as well as on desktop.
+ *
+ * `form` is the original: full screen on a phone, a 32rem column from `lg`.
+ * A stack of labelled fields wants the whole screen on a small device, and
+ * filling it means there is no wasted space to explain.
+ *
+ * `panel` is wide enough to seat a photograph beside its copy, and it is
+ * sized to its content at EVERY width rather than only from `lg`. Full screen
+ * is wrong for it: the announcement pop-up is four short elements, and
+ * stretching them down a phone leaves a dead half-screen under the controls.
+ *
+ * `dialog` is the panel itself, `scroll` the container inside it that holds
+ * the overflow.
+ */
+const SIZES = {
+  form: {
+    dialog:
+      "h-full max-h-none w-full rounded-none border-0 lg:h-fit lg:w-[calc(100%-2rem)] lg:max-w-lg lg:rounded-[22px] lg:border",
+    scroll: "h-full lg:h-auto lg:max-h-[85vh]",
+  },
+  panel: {
+    dialog:
+      "h-fit max-h-[calc(100dvh-1.5rem)] w-[calc(100%-1.5rem)] rounded-[18px] border lg:max-h-[90vh] lg:w-[calc(100%-2rem)] lg:max-w-[880px] lg:rounded-[22px]",
+    scroll: "max-h-[calc(100dvh-1.5rem)] lg:max-h-[90vh]",
+  },
+} as const;
+
+/**
+ * `card` is the white sheet a form sits on, unaffected by the site's theme
+ * toggle on purpose: a form is a document.
+ *
+ * `themed` follows the `--home-*` tokens, so the modal is dark on the dark
+ * theme and light on the light one. Anything that reads as part of the page
+ * rather than as a dialog over it wants this one.
+ */
+const SURFACES = {
+  card: "bg-white border-ink/10",
+  themed: "bg-[var(--home-bg)] border-[var(--home-hairline)]",
+} as const;
+
 type ModalProps = {
   open: boolean;
   onClose: () => void;
+  /**
+   * Renders the built-in header: a centred title with a back arrow on
+   * phones and a close button from `lg`. Omit it to supply your own chrome
+   * as part of `children`, which is what a modal with a footer wants.
+   */
   title?: string;
   labelledBy?: string;
+  size?: keyof typeof SIZES;
+  surface?: keyof typeof SURFACES;
   children: React.ReactNode;
 };
 
-export function Modal({ open, onClose, title, labelledBy, children }: ModalProps) {
+export function Modal({
+  open,
+  onClose,
+  title,
+  labelledBy,
+  size = "form",
+  surface = "card",
+  children,
+}: ModalProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
@@ -31,16 +88,16 @@ export function Modal({ open, onClose, title, labelledBy, children }: ModalProps
         <div
           aria-hidden="true"
           onClick={onClose}
-          className="fixed inset-0 z-60 hidden bg-ink/60 backdrop-blur-sm lg:block"
+          className="fixed inset-0 z-60 bg-ink/60 backdrop-blur-sm"
         />
       )}
       <dialog
         ref={dialogRef}
         aria-labelledby={labelledBy}
         onClose={onClose}
-        className="fixed inset-0 z-70 h-full w-full max-w-none max-h-none overflow-hidden rounded-none border-0 bg-white p-0 shadow-none lg:m-auto lg:h-fit lg:w-[calc(100%-2rem)] lg:max-w-lg lg:rounded-[22px] lg:border lg:border-ink/10 lg:shadow-[0_40px_80px_-30px_rgba(20,10,50,0.45)]"
+        className={`fixed inset-0 z-70 m-auto max-w-none overflow-hidden p-0 shadow-none lg:shadow-[0_40px_80px_-30px_rgba(20,10,50,0.45)] ${SIZES[size].dialog} ${SURFACES[surface]}`}
       >
-        <div className="themed-scrollbar h-full overflow-y-auto lg:h-auto lg:max-h-[85vh]">
+        <div className={`themed-scrollbar overflow-y-auto ${SIZES[size].scroll}`}>
           {title && (
             <div className="sticky top-0 z-10 flex items-center gap-2 border-b border-ink/10 bg-white/90 px-7 py-3 backdrop-blur-md lg:static lg:items-start lg:gap-4 lg:border-0 lg:bg-transparent lg:px-8 lg:pt-8 lg:pb-0 lg:backdrop-blur-none">
               <button

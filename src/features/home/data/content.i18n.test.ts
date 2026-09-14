@@ -3,6 +3,9 @@ import assert from "node:assert/strict";
 import * as content from "./content.ts";
 import * as contentSi from "./content.si.ts";
 import * as contentTa from "./content.ta.ts";
+import * as announcement from "./announcement.ts";
+import * as announcementSi from "./announcement.si.ts";
+import * as announcementTa from "./announcement.ta.ts";
 import * as careers from "./careers.ts";
 import * as careersSi from "./careers.si.ts";
 import * as careersTa from "./careers.ta.ts";
@@ -30,14 +33,15 @@ import * as testimonialsTa from "./testimonials.ta.ts";
 import { assertTranslationParity, stringPaths } from "../../../lib/i18n/stringPaths.ts";
 
 /**
- * The nine data files this feature is built from: eight per-teaser files
- * that predate this task, plus `content.ts`, added by this task for the
- * bands with no data file of their own (see its own header comment). Every
- * module gets the same parity, array-length and "not still English" gates,
- * scoped by `moduleName` below.
+ * The ten data files this feature is built from: eight per-teaser files,
+ * plus `content.ts` for the bands with no data file of their own, plus
+ * `announcement.ts` for the pop-up that opens over the page (see each one's
+ * own header comment). Every module gets the same parity, array-length and
+ * "not still English" gates, scoped by `moduleName` below.
  */
 const MODULES = [
   { name: "content", base: content, si: contentSi, ta: contentTa },
+  { name: "announcement", base: announcement, si: announcementSi, ta: announcementTa },
   { name: "careers", base: careers, si: careersSi, ta: careersTa },
   { name: "facilities", base: facilities, si: facilitiesSi, ta: facilitiesTa },
   { name: "healthTips", base: healthTips, si: healthTipsSi, ta: healthTipsTa },
@@ -49,7 +53,7 @@ const MODULES = [
 ] as const;
 
 /**
- * Facts, not copy, shared across every one of the nine data files:
+ * Facts, not copy, shared across every one of the ten data files:
  *
  * - `.index` is the ordinal numeral each teaser card counts itself with
  *   ("01".."06"), the same class of literal `process[*].n` is in career.
@@ -76,6 +80,11 @@ const MODULES = [
 function isUntranslatable(moduleName: string, path: string): boolean {
   if (path.endsWith(".index")) return true;
   if (path.endsWith(".href")) return true;
+  // `announcement`'s slides each carry two destinations rather than one, so
+  // they are named `hrefPrimary` / `hrefSecondary` and the bare `.href`
+  // suffix above does not reach them. They are routes and `tel:` / `https:`
+  // actions, the same class of fact as every other href on the page.
+  if (path.endsWith(".hrefPrimary") || path.endsWith(".hrefSecondary")) return true;
   if (path.endsWith(".photo")) return true;
   if (path.endsWith(".photoAlt") && !(moduleName === "content" && path === "hero.photoAlt")) return true;
   if (path.endsWith(".date")) return true;
