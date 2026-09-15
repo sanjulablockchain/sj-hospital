@@ -96,7 +96,7 @@ export const whoWeAre = {
  * copy) rather than splitting the sentence around the number.
  */
 export const servicesBento = {
-  eyebrow: "02 / What we do",
+  eyebrow: "03 / What we do",
   heading: { line1: "Eight ways we", line2: "look after you" },
   tilesNote: "Every tile opens a service",
   tiles: [
@@ -158,12 +158,44 @@ export const servicesBento = {
 };
 
 /**
+ * `#free-opd`'s own copy: the band announcing that an OPD consultation costs
+ * nothing, which is the biggest claim the hospital makes and had, until this
+ * band, no home on the front page at all. It lived only in the announcement
+ * pop-up, which is dismissible chrome, and on the OPD service page itself.
+ *
+ * It carries NO figures, deliberately. The 24 hours, the same-day slots and
+ * the 10% laboratory discount all have one home, the `outpatient-department`
+ * entry in `services/data/clinics.ts`, and a second copy here could drift
+ * from it with nothing to notice; `bands.test.ts` fails if a number appears.
+ * The CTA sends the reader to that page, where the detail actually lives.
+ *
+ * `hrefPrimary` is a route and `hrefSecondary` a `tel:` action, both facts
+ * rather than copy, so neither appears in the overlays.
+ */
+export const freeOpd = {
+  eyebrow: "02 / Free OPD",
+  heading: { line1: "Seeing a doctor", line2: "costs you nothing" },
+  body: "A first for Sri Lanka: consultations at our outpatient department are free, so nobody has to weigh up whether a fever, a lump or a week of pain is worth the money. Walk in and see a doctor.",
+  points: [
+    "Free consultation, every hour we are open",
+    "General complaints and specialist referral alike",
+    "Your diagnosis explained before you leave",
+  ],
+  ctaPrimary: "See the OPD",
+  hrefPrimary: "/services/outpatient-department",
+  ctaSecondary: "Call the hospital",
+  hrefSecondary: "tel:+94117848484",
+  photo: "/images/services/heroes/outpatient-department.jpg",
+  photoAlt: "A doctor and patient reviewing medical notes together at a consultation desk.",
+};
+
+/**
  * `#surgical`'s own copy, moved here out of `SurgicalSection.tsx`, a
  * `'use client'` leaf (it runs a parallax effect) that must take this as a
  * prop rather than import it.
  */
 export const surgical = {
-  eyebrow: "03 / Surgical care",
+  eyebrow: "04 / Surgical care",
   heading: { line1: "Theatres run", line2: "to protocol,", line3: "not to habit" },
   body: "Elective and emergency surgery with consultant anaesthesia, single use consumables, sterile tracking on every instrument set and a nurse assigned to your recovery from theatre to discharge.",
   ctaPrimary: "Request a surgical consult",
@@ -184,7 +216,7 @@ export const surgical = {
  * stay in this file only.
  */
 export const pharmacy = {
-  eyebrow: "05 / Pharmacy",
+  eyebrow: "06 / Pharmacy",
   // `pharmacy`'s own hero heading (`hero.headingLead` / `.headingOutline` /
   // `.headingAccent`), read back through its `index.ts` rather than typed
   // here a second time: same fact, exactly one home.
@@ -210,7 +242,7 @@ export const pharmacy = {
  * price `CountUp` animates to is a fact and stays in this file only.
  */
 export const rooms = {
-  eyebrow: "07 / Stay with us",
+  eyebrow: "08 / Stay with us",
   heading: { line1: "A room that", line2: "feels like", line3: "recovery" },
   body: "Quiet, private and sanitised on a two hour cycle, with nursing that knows your name and a doctor on the floor at all times.",
   cta: "Reserve a room",
@@ -228,7 +260,7 @@ export const rooms = {
  * `'use client'` leaf that must take this as a prop rather than import it.
  */
 export const schoolWellness = {
-  eyebrow: "10 / School wellness",
+  eyebrow: "11 / School wellness",
   heading: { line1: "We come to", line2: "the classroom" },
   body: "A pediatric led programme for Negombo schools: annual screening, vision and hearing checks, growth tracking, vaccination drives and teacher first aid training, run by the same doctors who see your children in clinic.",
   rows: [
@@ -250,7 +282,7 @@ export const schoolWellness = {
  * treatment `hero` above gives the identical chip.
  */
 export const contactCta = {
-  eyebrow: "15 / Come see us",
+  eyebrow: "16 / Come see us",
   heading: { line1: "Open right", line2: "now. Yes,", line3: "right now." },
   body: "229/10 St. Joseph Street, Negombo. Walk in, call us, or send a message on WhatsApp.",
   ctaSurgical: "Surgical care",
