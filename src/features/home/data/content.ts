@@ -185,8 +185,19 @@ export const freeOpd = {
   hrefPrimary: "/services/outpatient-department",
   ctaSecondary: "Call the hospital",
   hrefSecondary: "tel:+94117848484",
-  photo: "/images/services/heroes/outpatient-department.jpg",
-  photoAlt: "A doctor and patient reviewing medical notes together at a consultation desk.",
+  /**
+   * The hospital's own reception, from the live site's media library
+   * (`2025/09/IMG_1865-n.jpg`, 5712x4284, downscaled to 1800px), rather than
+   * the stock consultation this band first used. It shows the actual counter
+   * a reader will walk up to, the hospital's own branding and its doctor
+   * schedule board, which is a better argument for "walk in and see a doctor"
+   * than two anonymous hands over a clipboard. See the hospital-photo-source
+   * note: `DSC_*` and `IMG_*` filenames in that library are the real
+   * photoshoot, descriptive slugs are stock.
+   */
+  photo: "/images/home/free-opd-reception.jpg",
+  photoAlt:
+    "The St. Joseph Hospital reception counter, with a member of staff greeting visitors beneath the doctor schedule board.",
 };
 
 /**
