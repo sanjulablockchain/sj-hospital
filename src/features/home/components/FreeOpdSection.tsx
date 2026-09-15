@@ -53,7 +53,13 @@ export function FreeOpdSection({
             alt={photoAlt}
             fill
             sizes="(min-width: 900px) 45vw, 100vw"
-            className="object-cover"
+            // The photograph is portrait and the band crops it two different
+            // ways. Beside the copy it is near-square, and centring lands on
+            // the embroidered name and the stethoscope. On a phone it is a
+            // wide strip, and centring a portrait frame there lands on the
+            // folded arms instead: anchoring to the top brings the scrubs and
+            // the hospital's name back into the strip.
+            className="object-cover object-top min-[900px]:object-center"
           />
         </div>
 

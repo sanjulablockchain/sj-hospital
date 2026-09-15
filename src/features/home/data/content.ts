@@ -186,18 +186,29 @@ export const freeOpd = {
   ctaSecondary: "Call the hospital",
   hrefSecondary: "tel:+94117848484",
   /**
-   * The hospital's own reception, from the live site's media library
-   * (`2025/09/IMG_1865-n.jpg`, 5712x4284, downscaled to 1800px), rather than
-   * the stock consultation this band first used. It shows the actual counter
-   * a reader will walk up to, the hospital's own branding and its doctor
-   * schedule board, which is a better argument for "walk in and see a doctor"
-   * than two anonymous hands over a clipboard. See the hospital-photo-source
-   * note: `DSC_*` and `IMG_*` filenames in that library are the real
-   * photoshoot, descriptive slugs are stock.
+   * One of the hospital's own doctors, from the live site's media library
+   * (`2025/09/DSC_8082-scaled.jpg`, 1703x2560, downscaled to 1400px wide), in
+   * SJ-branded scrubs with a stethoscope. The heading is "seeing a doctor
+   * costs you nothing", and this is one of ours.
+   *
+   * Portrait, which suits both crops this band uses: near-square beside the
+   * copy from 900px up, and a wide strip on a phone. Either way the centre of
+   * the frame is the embroidered "ST. JOSEPH HOSPITAL" and the stethoscope,
+   * so the branding survives the crop.
+   *
+   * The two images this band went through first are worth recording, because
+   * the same trap is there for the next person. It opened on
+   * `/images/services/heroes/outpatient-department.jpg`, which is stock: two
+   * anonymous hands over a clipboard, from the same Western shoot the
+   * hospital's own media library also carries. It then used the real
+   * reception photograph (`2025/09/IMG_1865-n.jpg`), which is a good frame
+   * but argues "walk up to a desk" rather than "see a doctor". Per the
+   * hospital-photo-source note, `DSC_*` and `IMG_*` filenames in that library
+   * are the real photoshoot and descriptive slugs are stock.
    */
-  photo: "/images/home/free-opd-reception.jpg",
+  photo: "/images/home/free-opd-doctor.jpg",
   photoAlt:
-    "The St. Joseph Hospital reception counter, with a member of staff greeting visitors beneath the doctor schedule board.",
+    "A St. Joseph Hospital doctor with a stethoscope, in scrubs embroidered with the hospital's name.",
 };
 
 /**
