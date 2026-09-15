@@ -57,5 +57,5 @@ export const facilities: FacilityCard[] = [
 ];
 
 /** `#facilities`'s own copy, stranded in `FacilitiesSection.tsx` until now. */
-export const sectionEyebrow = "04 / Facilities";
+export const sectionEyebrow = "05 / Facilities";
 export const heading = { line1: "Built like a", line2: "US facility" };

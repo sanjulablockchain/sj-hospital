@@ -28,6 +28,6 @@ export const healthTips: HealthTip[] = [
 ];
 
 /** `#tips`'s own copy, stranded in `HealthTipsSection.tsx` until now. */
-export const sectionEyebrow = "09 / Health tips";
+export const sectionEyebrow = "10 / Health tips";
 export const heading = { line1: "Small habits,", line2: "written by", line3: "our doctors" };
 export const cta = "All health tips";

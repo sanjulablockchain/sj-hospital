@@ -84,6 +84,20 @@ export const servicesBento = {
   footer: {},
 };
 
+// `02 / Free OPD`. The eyebrow, both heading lines and both CTA labels are
+// English in every language under the register policy, so they are absent
+// here rather than restated; what is left is the paragraph and the three
+// points, which is what a Tamil reader actually reads.
+export const freeOpd = {
+  heading: {},
+  body: "இலங்கையில் இதுவே முதல் முறை: எங்கள் வெளிநோயாளர் பிரிவில் Consultations இலவசம். ஒரு காய்ச்சலுக்கோ, கட்டிக்கோ, ஒரு வார வலிக்கோ பணம் செலவழிப்பது தகுமா என்று யாரும் யோசிக்க வேண்டியதில்லை. நேரடியாக வந்து ஒரு மருத்துவரைப் பாருங்கள்.",
+  points: [
+    "நாங்கள் திறந்திருக்கும் ஒவ்வொரு மணி நேரமும் இலவச Consultation",
+    "பொதுவான பிரச்சினைகளுக்கும் நிபுணர் Referral க்கும் ஒரேபோல",
+    "நீங்கள் புறப்படுவதற்கு முன் உங்கள் நோய் கண்டறிதல் விளக்கப்படும்",
+  ],
+};
+
 export const surgical = {
   heading: {},
   body: "Elective மற்றும் Emergency Surgery, Consultant Anaesthesia, Single Use Consumables, ஒவ்வொரு Instrument Set க்கும் Sterile Tracking, மற்றும் அறுவை சிகிச்சை அரங்கிலிருந்து Discharge வரை உங்கள் Recovery க்கு நியமிக்கப்பட்ட Nurse.",

@@ -74,8 +74,12 @@ export const slides = [
     eyebrow: "02 / OPD",
     heading: { line1: "Free OPD", line2: "healthcare" },
     body: "A first for Sri Lanka. An OPD consultation at St. Joseph Hospital costs you nothing, so seeing a doctor is never a question of what you can afford.",
-    ctaPrimary: "See our services",
-    hrefPrimary: "/services",
+    // The OPD's own page, not the services directory. This slide pointed at
+    // `/services` only because no OPD page had been found; there is one, and
+    // sending a reader who just read "free OPD" to a list of twenty-odd
+    // services made them hunt for the thing they had come for.
+    ctaPrimary: "See the OPD",
+    hrefPrimary: "/services/outpatient-department",
     ctaSecondary: "Call the hospital",
     hrefSecondary: "tel:+94117848484",
     photo: "/images/home/hero-night-facade.jpg",

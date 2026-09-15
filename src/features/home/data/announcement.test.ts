@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { slides, title, ariaPrev, ariaNext, ariaClose, ariaSlide } from "./announcement.ts";
+import { services } from "../../services/data/services.ts";
 
 /** Repo root, four levels up from src/features/home/data. */
 const ROOT = fileURLToPath(new URL("../../../../", import.meta.url));
@@ -128,6 +129,51 @@ test("no slide disparages other hospitals", () => {
     !/dirty|filthy|worn.?out|fed up|other hospitals|elsewhere in|unlike/i.test(allCopy),
     "a swipe at other hospitals",
   );
+});
+
+/**
+ * The OPD slide and the OPD service page are one promise in two places, and
+ * the two tests below are what stop them drifting apart.
+ *
+ * The slide used to point at `/services`, the whole directory, because no OPD
+ * page had been found. There is one, `/services/outpatient-department`, so the
+ * slide links straight to it. A slug typo or a later rename would 404 with
+ * nothing on screen to say so, which is what the first test catches.
+ */
+const OPD_SLUG = "outpatient-department";
+
+test("the OPD slide links to a service page that actually exists", () => {
+  const opd = slides[1];
+  assert.equal(opd.hrefPrimary, `/services/${OPD_SLUG}`);
+  assert.ok(
+    services.some((service) => service.slug === OPD_SLUG),
+    `no service in the catalog has the slug ${OPD_SLUG}`,
+  );
+});
+
+/**
+ * The pop-up tells the reader an OPD consultation costs nothing. Following its
+ * CTA must not land them on a page that says nothing about it, so the service
+ * page has to carry the same fact, and has to be equally clear about what is
+ * NOT free: the hospital charges for tests, and separately advertises a 10%
+ * laboratory discount that would read as a contradiction otherwise.
+ */
+test("the OPD service page confirms the free consultation, and says what is still charged", () => {
+  const opd = services.find((service) => service.slug === OPD_SLUG);
+  assert.ok(opd, `no ${OPD_SLUG} service`);
+
+  const freeFact = opd.facts.find((fact) => /free/i.test(fact.v));
+  assert.ok(freeFact, "no fact row states the consultation is free");
+  assert.match(freeFact.k, /consultation/i);
+
+  assert.ok(
+    opd.faq.some((entry) => /free/i.test(entry.q)),
+    "no FAQ entry answers whether the consultation is really free",
+  );
+
+  const prose = [opd.desc, opd.lede, opd.body1, opd.body2].join("\n");
+  assert.match(prose, /free/i, "the page body never mentions the free consultation");
+  assert.match(prose, /charged|charge/i, "the page never says what is still charged");
 });
 
 test("the hospital's name is never re-scripted in the pop-up title", () => {

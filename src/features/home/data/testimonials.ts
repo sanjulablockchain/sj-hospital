@@ -31,6 +31,6 @@ export const testimonials: Testimonial[] = [
  * quote and the role do. See the commit message for how the quotes were
  * translated: as quoted speech, not paraphrase.
  */
-export const sectionEyebrow = "14 / Patient voices";
+export const sectionEyebrow = "15 / Patient voices";
 export const ariaPrev = "Previous testimonial";
 export const ariaNext = "Next testimonial";

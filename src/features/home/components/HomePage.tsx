@@ -4,6 +4,7 @@ import type { Locale } from "@/lib/i18n/locales";
 import { getHomeContent } from "../data/getContent";
 import { HeroSection } from "./HeroSection";
 import { WhoWeAreSection } from "./WhoWeAreSection";
+import { FreeOpdSection } from "./FreeOpdSection";
 import { ServicesBentoSection } from "./ServicesBentoSection";
 import { SurgicalSection } from "./SurgicalSection";
 import { FacilitiesSection } from "./FacilitiesSection";
@@ -50,6 +51,7 @@ export async function HomePage({ locale }: { locale: Locale }) {
       <main>
         <HeroSection hero={content.hero} tickerItems={content.statTickerItems} />
         <WhoWeAreSection content={content.whoWeAre} locale={locale} />
+        <FreeOpdSection content={content.freeOpd} locale={locale} />
         <ServicesBentoSection content={content.servicesBento} locale={locale} />
         <SurgicalSection content={content.surgical} locale={locale} />
         <FacilitiesSection
