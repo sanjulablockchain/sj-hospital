@@ -270,6 +270,15 @@ function isUntranslatable(moduleName: string, path: string): boolean {
  *   `strip[3].v`, the bare number alone): the first DOES translate the
  *   words around the number, which is the sibling-test evidence that the
  *   second is a genuine exception, not a miss.
+ * - `clinics:[0].facts[0].k` and `clinics:[0].strip[0].k` ("Consultation",
+ *   the label on the outpatient department's free-consultation stat): this
+ *   file keeps "Consultation" in English everywhere it appears as a noun
+ *   ("සාමාන්‍ය Consultation", "පොது Consultation", "Consultation එකක් Book
+ *   කරන්න"), which is the sibling-test evidence: not one occurrence in
+ *   clinics.si.ts or clinics.ta.ts translates it. The VALUE beside each of
+ *   these keys does translate ("නොමිලේ" / "இலவசம்"), which is the same
+ *   key-English/value-translated split `emergency:[0].facts[0].k` and
+ *   `atHome:[2].facts[3].k` already use.
  */
 const KEEPS_ENGLISH = new Set<string>([
   "groups:groupLabels.Clinics",
@@ -298,6 +307,8 @@ const KEEPS_ENGLISH = new Set<string>([
   "womenChildren:[2].strip[1].v",
   "womenChildren:[4].strip[3].v",
   "clinics:[0].strip[3].v",
+  "clinics:[0].facts[0].k",
+  "clinics:[0].strip[0].k",
 ]);
 
 for (const { name, base, si, ta } of MODULES) {

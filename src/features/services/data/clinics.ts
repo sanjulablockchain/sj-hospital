@@ -11,21 +11,27 @@ export const clinicServices: Service[] = [
     hours: "24 hours",
     cta: "Book a consultation",
     desc: "General and specialist consultations under one roof, with in-house doctors covering everyday complaints as well as referral to the right specialist clinic. Only the tests your case needs are ordered, your diagnosis is explained before you leave, and follow-up is booked at the same desk.",
-    tags: ["General consultation", "Specialist referral", "Same-day slots", "10% lab discount"],
+    tags: ["Free consultation", "General consultation", "Specialist referral", "Same-day slots", "10% lab discount"],
     facts: [
+      { k: "Consultation", v: "Free" },
       { k: "Hours", v: "24 hours" },
       { k: "Booking", v: "Same-day slots available" },
       { k: "Diagnosis", v: "Explained before you leave" },
       { k: "Lab discount", v: "10% for OPD patients" },
     ],
-    lede: "General and specialist consultations in one department, with same-day slots and a diagnosis explained before you leave.",
+    lede: "Free general and specialist consultations in one department, with same-day slots and a diagnosis explained before you leave.",
     aboutHead: "One department, every consultation",
     body1: "The outpatient department is open around the clock and covers everyday complaints as well as booked specialist clinics, with in-house doctors deciding what your case actually needs rather than working through a fixed list of tests. Same-day slots are kept open for problems that cannot wait for next week.",
-    body2: "Before you leave, your doctor explains what was found and what it means, and the same desk books your follow-up so you are not sent elsewhere to arrange it. OPD patients also receive a 10% discount on laboratory charges when tests are ordered as part of the visit.",
+    body2: "The consultation itself is free, a first for Sri Lanka, so seeing a doctor is never a question of what you can afford. Tests, medicines and procedures are charged as usual, and OPD patients receive a 10% discount on laboratory charges when tests are ordered as part of the visit. Before you leave, your doctor explains what was found and what it means, and the same desk books your follow-up so you are not sent elsewhere to arrange it.",
+    // Exactly four: this is the hero stats row and the page's layout assumes
+    // it (catalog.test.ts pins the count). The free consultation displaces
+    // "Diagnosis / Explained at the visit", which is the softest of the four
+    // and survives in `facts`, `body2` and `covers`; the other three are
+    // concrete and one of them is money.
     strip: [
+      { k: "Consultation", v: "Free" },
       { k: "Hours", v: "24 hours" },
       { k: "Slots", v: "Same-day available" },
-      { k: "Diagnosis", v: "Explained at the visit" },
       { k: "Lab discount", v: "10%" },
     ],
     covers: [
@@ -62,6 +68,7 @@ export const clinicServices: Service[] = [
       { role: "OPD reception", note: "Handles registration, discounts and follow-up booking." },
     ],
     faq: [
+      { q: "Is the consultation really free?", a: "Yes. Seeing an OPD doctor costs you nothing, at any hour. Tests, medicines and procedures are charged as usual, and laboratory charges ordered during the visit carry a 10% discount." },
       { q: "Do I need an appointment?", a: "No. You can walk in at any hour, though booking a consultation in advance can shorten your wait." },
       { q: "Will I be sent for tests I don't need?", a: "No. Your doctor orders only the tests your case calls for, and will explain why each one is being requested." },
       { q: "Do I get a discount on lab tests here?", a: "Yes. OPD patients receive a 10% discount on laboratory charges ordered as part of the visit." },
