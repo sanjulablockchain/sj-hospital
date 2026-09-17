@@ -186,29 +186,38 @@ export const freeOpd = {
   ctaSecondary: "Call the hospital",
   hrefSecondary: "tel:+94117848484",
   /**
-   * One of the hospital's own doctors, from the live site's media library
-   * (`2025/09/DSC_8082-scaled.jpg`, 1703x2560, downscaled to 1400px wide), in
-   * SJ-branded scrubs with a stethoscope. The heading is "seeing a doctor
-   * costs you nothing", and this is one of ours.
+   * One of the hospital's own doctors, looking back at the reader: the SJ
+   * consultant in the white coat, cut out of the five-clinician team frame
+   * (`2025/08/DSC_6347.jpg`, 7290x4322) at 1660,120 1700x1950 and downscaled
+   * to 1400px wide. The heading is "seeing a doctor costs you nothing", and
+   * this is the doctor it means.
    *
    * Portrait, which suits both crops this band uses: near-square beside the
-   * copy from 900px up, and a wide strip on a phone. Either way the centre of
-   * the frame is the embroidered "ST. JOSEPH HOSPITAL" and the stethoscope,
-   * so the branding survives the crop.
+   * copy from 900px up, and a wide strip on a phone. The frame is cut with
+   * both in mind: the square crop keeps roughly 90px of headroom above him,
+   * and the strip, anchored to the top, lands on his face and the
+   * stethoscope. The right edge stops short of 3400px in the original, where
+   * the next clinician's shoulder starts.
    *
-   * The two images this band went through first are worth recording, because
-   * the same trap is there for the next person. It opened on
+   * The three images this band went through first are worth recording,
+   * because the same traps are there for the next person. It opened on
    * `/images/services/heroes/outpatient-department.jpg`, which is stock: two
    * anonymous hands over a clipboard, from the same Western shoot the
    * hospital's own media library also carries. It then used the real
    * reception photograph (`2025/09/IMG_1865-n.jpg`), which is a good frame
-   * but argues "walk up to a desk" rather than "see a doctor". Per the
-   * hospital-photo-source note, `DSC_*` and `IMG_*` filenames in that library
-   * are the real photoshoot and descriptive slugs are stock.
+   * but argues "walk up to a desk" rather than "see a doctor". It then used
+   * `2025/09/DSC_8082-scaled.jpg`, a real SJ doctor in branded scrubs, but
+   * that frame is a close detail starting below the chin: beside a heading
+   * about seeing a doctor it reads as a headless torso, and a face was the
+   * whole point. Per the hospital-photo-source note, `DSC_*` and `IMG_*`
+   * filenames in that library are the real photoshoot and descriptive slugs
+   * are stock, and DSC_6347 is the only real frame the hospital has of a
+   * doctor's face. `/careers` crops the same original, as the full
+   * five-person lineup.
    */
   photo: "/images/home/free-opd-doctor.jpg",
   photoAlt:
-    "A St. Joseph Hospital doctor with a stethoscope, in scrubs embroidered with the hospital's name.",
+    "A St. Joseph Hospital doctor in a branded white coat, arms folded, a stethoscope around his neck.",
 };
 
 /**
