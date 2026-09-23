@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { Reveal } from "@/components/ui/Reveal";
+import { RevealStagger } from "@/components/ui/RevealStagger";
 import { LOGO_MARK } from "@/config/brand";
 import type { Locale } from "@/lib/i18n/locales";
 import { localeHref } from "@/lib/i18n/paths";
@@ -27,21 +29,23 @@ export function ContactCtaSection({
       <Container>
         <Reveal className="grid [grid-template-columns:repeat(auto-fit,minmax(min(100%,480px),1fr))]">
           <div className="relative flex min-h-[400px] flex-col justify-center gap-5 overflow-hidden bg-[var(--home-brand)] p-8 text-white sm:px-12 sm:py-14">
-            <Image
-              src={LOGO_MARK.src}
-              alt=""
-              aria-hidden
-              width={LOGO_MARK.width}
-              height={LOGO_MARK.height}
-              className="pointer-events-none absolute -top-8 -right-15 h-[120%] w-auto opacity-[0.12]"
-            />
+            <ParallaxLayer factor={-0.08} maxOffsetPx={40} className="pointer-events-none absolute -top-8 -right-15 h-[120%]">
+              <Image
+                src={LOGO_MARK.src}
+                alt=""
+                aria-hidden
+                width={LOGO_MARK.width}
+                height={LOGO_MARK.height}
+                className="h-full w-auto opacity-[0.12]"
+              />
+            </ParallaxLayer>
             <span className="relative text-[12px] font-extrabold tracking-[0.2em] text-[#CFE9F8] uppercase">{content.eyebrow}</span>
             <h2 className="font-display relative m-0 text-[clamp(42px,5vw,72px)] leading-[0.92] font-extrabold tracking-[-0.04em] uppercase">
               {content.heading}
             </h2>
             <p className="relative m-0 max-w-[420px] text-[16.5px] leading-[1.6] text-[#EDEAF8]">{content.body}</p>
           </div>
-          <div className="flex flex-col border border-[var(--home-hairline)] min-[960px]:border-l-0">
+          <RevealStagger stepMs={80} className="flex flex-col border border-[var(--home-hairline)] min-[960px]:border-l-0">
             {content.contactRows.map((row) => {
               const icon = (
                 <span className="text-[var(--home-brand-text)]">
@@ -58,7 +62,7 @@ export function ContactCtaSection({
                 </a>
               );
             })}
-          </div>
+          </RevealStagger>
         </Reveal>
       </Container>
     </section>

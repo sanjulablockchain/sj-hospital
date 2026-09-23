@@ -2,6 +2,7 @@ import { RevealStagger } from "@/components/ui/RevealStagger";
 import { Reveal } from "@/components/ui/Reveal";
 import type { HomeContent } from "../data/getContent";
 import type { StatTone } from "../types";
+import { CountUp } from "./CountUp";
 import { HomeIcon } from "./HomeIcon";
 import { Container, Eyebrow, displayHeading } from "./primitives";
 
@@ -20,8 +21,9 @@ const TONE: Record<StatTone, { bg: string; fg: string }> = {
 
 /**
  * `#about`: the two-column intro over a lavender gradient, then six stat cards
- * (1 / 2 / 3 columns at 720 and 1180px). The services figure is filled from
- * the live count rather than typed into the data.
+ * (1 / 2 / 3 columns at 720 and 1180px) whose figures count up as they scroll
+ * into view and lift on hover. The services figure is filled from the live
+ * count rather than typed into the data.
  */
 export function WhoWeAreSection({
   content,
@@ -60,7 +62,7 @@ export function WhoWeAreSection({
             return (
               <div
                 key={stat.label}
-                className="flex gap-5 rounded-[14px] bg-[var(--home-bg)] p-5.5 shadow-[0_1px_2px_rgba(26,21,64,0.06),0_12px_32px_-20px_rgba(26,21,64,0.25)]"
+                className="sj-card-lift flex gap-5 rounded-[14px] bg-[var(--home-bg)] p-5.5 shadow-[0_1px_2px_rgba(26,21,64,0.06),0_12px_32px_-20px_rgba(26,21,64,0.25)]"
               >
                 <span
                   className="flex h-[84px] w-[84px] shrink-0 items-center justify-center rounded-[14px]"
@@ -70,9 +72,10 @@ export function WhoWeAreSection({
                 </span>
                 <div className="flex min-w-0 flex-col gap-2">
                   <div className="flex flex-wrap items-center gap-2.5">
-                    <span className="font-display text-[38px] leading-none font-bold tracking-[-0.02em] text-[var(--home-accent-soft)] tabular-nums">
-                      {stat.value.replace("{count}", String(servicesCount))}
-                    </span>
+                    <CountUp
+                      display={stat.value.replace("{count}", String(servicesCount))}
+                      className="font-display text-[38px] leading-none font-bold tracking-[-0.02em] text-[var(--home-accent-soft)] tabular-nums"
+                    />
                     <span className="max-w-[140px] text-[15px] leading-[1.25] font-extrabold text-[var(--home-heading)]">
                       {stat.label}
                     </span>

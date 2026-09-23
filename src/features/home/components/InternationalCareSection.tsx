@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { Reveal } from "@/components/ui/Reveal";
 import type { Locale } from "@/lib/i18n/locales";
 import { localeHref } from "@/lib/i18n/paths";
@@ -63,32 +64,38 @@ export function InternationalCareSection({
           </div>
         </Reveal>
 
+        {/* Three depths: the accent disc drifts up, the photograph holds, the
+            badges drift down, so the composition parts slightly as you scroll. */}
         <div className="relative flex min-h-[420px] items-center justify-center sm:min-h-[560px]">
-          <div aria-hidden className="absolute aspect-square w-[min(92%,540px)] rounded-full bg-[var(--home-accent)] opacity-[0.22]" />
+          <ParallaxLayer factor={-0.05} maxOffsetPx={28} className="absolute flex h-full w-full items-center justify-center">
+            <div aria-hidden className="aspect-square w-[min(92%,540px)] rounded-full bg-[var(--home-accent)] opacity-[0.22]" />
+          </ParallaxLayer>
           <div className="relative aspect-square w-[min(82%,480px)] overflow-hidden rounded-full border-[10px] border-white shadow-[0_30px_60px_-30px_rgba(26,21,64,0.45)]">
             <Image src={content.photo} alt={content.photoAlt} fill sizes="(min-width: 1024px) 40vw, 90vw" className="object-cover" />
           </div>
-          <div
-            aria-hidden
-            className={`${badge} top-[12%] left-[4%] h-[92px] w-[92px] bg-[var(--home-brand)] text-white shadow-[0_16px_30px_-14px_rgba(69,51,143,0.7)]`}
-          >
-            <HomeIcon name="plane" size={40} stroke={1.5} />
-          </div>
-          <div aria-hidden className={`${badge} top-[22%] right-[4%] h-[76px] w-[76px] bg-[var(--home-bg)] text-[var(--home-accent-soft)]`}>
-            <HomeIcon name="globe" size={34} stroke={1.5} />
-          </div>
-          <div className="absolute bottom-[10%] left-[10%] flex items-center gap-3 rounded-[12px] bg-[var(--home-bg)] px-4.5 py-3.5 shadow-[0_16px_30px_-14px_rgba(26,21,64,0.4)]">
-            <span className="text-[var(--home-brand-text)]">
-              <HomeIcon name="shield" size={28} stroke={1.7} />
-            </span>
-            <span className="flex flex-col">
-              <span className="text-[14.5px] font-extrabold text-[var(--home-heading)]">{content.badge.title}</span>
-              <span className="text-[12.5px] text-[var(--home-muted-2)]">{content.badge.note}</span>
-            </span>
-          </div>
-          <div aria-hidden className={`${badge} right-[8%] bottom-[16%] h-16 w-16 bg-[var(--home-accent)] text-[var(--home-on-accent)]`}>
-            <HomeIcon name="steth" size={28} stroke={1.6} />
-          </div>
+          <ParallaxLayer factor={0.06} maxOffsetPx={34} className="pointer-events-none absolute inset-0">
+            <div
+              aria-hidden
+              className={`${badge} top-[12%] left-[4%] h-[92px] w-[92px] bg-[var(--home-brand)] text-white shadow-[0_16px_30px_-14px_rgba(69,51,143,0.7)]`}
+            >
+              <HomeIcon name="plane" size={40} stroke={1.5} />
+            </div>
+            <div aria-hidden className={`${badge} top-[22%] right-[4%] h-[76px] w-[76px] bg-[var(--home-bg)] text-[var(--home-accent-soft)]`}>
+              <HomeIcon name="globe" size={34} stroke={1.5} />
+            </div>
+            <div className="absolute bottom-[10%] left-[10%] flex items-center gap-3 rounded-[12px] bg-[var(--home-bg)] px-4.5 py-3.5 shadow-[0_16px_30px_-14px_rgba(26,21,64,0.4)]">
+              <span className="text-[var(--home-brand-text)]">
+                <HomeIcon name="shield" size={28} stroke={1.7} />
+              </span>
+              <span className="flex flex-col">
+                <span className="text-[14.5px] font-extrabold text-[var(--home-heading)]">{content.badge.title}</span>
+                <span className="text-[12.5px] text-[var(--home-muted-2)]">{content.badge.note}</span>
+              </span>
+            </div>
+            <div aria-hidden className={`${badge} right-[8%] bottom-[16%] h-16 w-16 bg-[var(--home-accent)] text-[var(--home-on-accent)]`}>
+              <HomeIcon name="steth" size={28} stroke={1.6} />
+            </div>
+          </ParallaxLayer>
         </div>
       </Container>
     </section>

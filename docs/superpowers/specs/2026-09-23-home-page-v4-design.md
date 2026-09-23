@@ -234,8 +234,9 @@ Ticker items unchanged.
 
 ### Who we are (`content.whoWeAre`, reshaped)
 
-- eyebrow "Who we are"; heading "A US hospital in a Sri Lankan neighbourhood"
-  (one string; the component lets it wrap).
+- eyebrow "Who we are"; heading "A USA hospital in a Sri Lankan neighbourhood"
+  (one string; the component lets it wrap; "USA" rather than the reference's
+  "US" at the owner's request, 2026-09-23).
 - intro: the existing sentence. body: "Consumables are never reused. Every
   surface is cleaned on a two hour cycle. Every report is read by two doctors
   before it reaches you."
@@ -450,6 +451,31 @@ reference's JavaScript breakpoints become CSS:
   rail hides under 900px.
 
 ## Motion and hover
+
+Added at the owner's request after the first review (2026-09-23), beyond the
+reference's own motion:
+
+- **Counters.** The six "who we are" figures and the pharmacy fact values
+  count up from zero the first time they scroll into view (`CountUp`, over
+  the shared `AnimatedCounter`); their dressing ("/7", "h", "%", " / 7") stays
+  fixed. Values without digits render as text.
+- **Card lift.** Every card-shaped element (stat cards, mosaic tiles and the
+  switchboard row, care tiles, standards items, FAQ rows, news strips, job
+  rows) lifts 6px on a soft shadow on hover (`.sj-card-lift`); photographs
+  inside a hovered tile or the newsroom story ease up 4% (`.sj-card-zoom`).
+  Pharmacy fact rows wash with the accent tint.
+- **Parallax.** Beyond the hero: the mosaic team photograph, the free OPD
+  portrait and the reception photograph drift inside clipped boxes; the
+  pharmacy and contact leaf watermarks and the motto plaque drift against
+  the scroll; the international composition parts in three depths (disc up,
+  photograph still, badges down). All through the shared `ParallaxLayer` or
+  `useScrollParallax`, disabled under reduced motion.
+- **Staggered reveals** on the mosaic tiles, pharmacy rows, standards items,
+  FAQ rows, job rows and contact rows in addition to the grids that had them.
+- **Specialties card height.** All six tabs' photographs and text are
+  rendered stacked in one grid cell, only the active one visible, so the
+  card keeps the tallest tab's height and nothing below it moves when the
+  tab changes.
 
 Existing keyframes and utilities are reused: `sj-up` (hero copy), `sj-tick`,
 `sj-pulse` (dots), `sj-burns`, `sj-sheen`, `sj-scan`, `Reveal` and

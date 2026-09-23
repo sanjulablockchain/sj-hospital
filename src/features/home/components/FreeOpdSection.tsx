@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { Reveal } from "@/components/ui/Reveal";
 import type { Locale } from "@/lib/i18n/locales";
 import { localeHref } from "@/lib/i18n/paths";
@@ -23,14 +24,17 @@ export function FreeOpdSection({
     <section id="free-opd" className="py-20 sm:py-27.5">
       <Container>
         <Reveal className="grid overflow-hidden rounded-[18px] bg-[var(--home-sky-bg)] [grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr))]">
-          <div className="relative min-h-[320px] sm:min-h-[480px]">
-            <Image
-              src={content.photo}
-              alt={content.photoAlt}
-              fill
-              sizes="(min-width: 900px) 50vw, 100vw"
-              className="object-cover object-[50%_15%]"
-            />
+          <div className="relative min-h-[320px] overflow-hidden sm:min-h-[480px]">
+            {/* Taller than its box so the scroll drift never shows an edge. */}
+            <ParallaxLayer factor={0.07} maxOffsetPx={36} className="absolute inset-x-0 -inset-y-[8%]">
+              <Image
+                src={content.photo}
+                alt={content.photoAlt}
+                fill
+                sizes="(min-width: 900px) 50vw, 100vw"
+                className="object-cover object-[50%_15%]"
+              />
+            </ParallaxLayer>
           </div>
           <div className="flex flex-col justify-center gap-5 p-7 sm:p-15">
             <span className="self-start rounded-full bg-[var(--home-brand)] px-3 py-[7px] text-[12px] font-extrabold tracking-[0.16em] text-white uppercase">

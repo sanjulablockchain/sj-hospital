@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
+import { RevealStagger } from "@/components/ui/RevealStagger";
 import type { Locale } from "@/lib/i18n/locales";
 import { localeHref } from "@/lib/i18n/paths";
 import type { HomeContent } from "../data/getContent";
@@ -8,9 +9,10 @@ import { Container, ArrowRight } from "./primitives";
 
 /**
  * `#media`: the newsroom card (fixed ink, the radiology photograph under the
- * top story, three more stories in a strip, a brand footer link) beside the
- * careers card (lavender, five job rows). The first media item is the top
- * story; the rest fill the strip.
+ * top story easing in on hover, three more stories in a strip that lift, a
+ * brand footer link) beside the careers card (lavender, five job rows that
+ * lift and reveal in turn). The first media item is the top story; the rest
+ * fill the strip.
  */
 export function MediaCareersSection({
   media,
@@ -28,8 +30,14 @@ export function MediaCareersSection({
     <section id="media" className="pb-20 sm:pb-27.5">
       <Container className="grid gap-5 [grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr))]">
         <Reveal className="flex flex-col overflow-hidden rounded-[16px] bg-[#1A1540] text-white">
-          <Link href={story} className="relative block min-h-[300px] flex-1 text-white hover:text-white">
-            <Image src={media.photo} alt={media.photoAlt} fill sizes="(min-width: 1100px) 50vw, 100vw" className="object-cover" />
+          <Link href={story} className="group relative block min-h-[300px] flex-1 overflow-hidden text-white hover:text-white">
+            <Image
+              src={media.photo}
+              alt={media.photoAlt}
+              fill
+              sizes="(min-width: 1100px) 50vw, 100vw"
+              className="sj-card-zoom object-cover"
+            />
             <div
               aria-hidden
               className="absolute inset-0"
@@ -53,12 +61,12 @@ export function MediaCareersSection({
               </span>
             </div>
           </Link>
-          <div className="grid gap-px border-t border-white/12 bg-white/12 [grid-template-columns:repeat(auto-fit,minmax(170px,1fr))]">
+          <RevealStagger className="grid gap-px border-t border-white/12 bg-white/12 [grid-template-columns:repeat(auto-fit,minmax(170px,1fr))]">
             {rest.map((item) => (
               <Link
                 key={item.title}
                 href={story}
-                className="flex flex-col gap-2 bg-[#1A1540] px-6 py-5.5 text-white transition-colors hover:bg-[var(--home-deep)] hover:text-white"
+                className="sj-card-lift relative flex flex-col gap-2 bg-[#1A1540] px-6 py-5.5 text-white hover:z-10 hover:bg-[var(--home-deep)] hover:text-white"
               >
                 <span className="text-[11px] font-extrabold tracking-[0.12em] text-[var(--home-accent)] uppercase">
                   {item.tag} &middot; {item.date}
@@ -66,7 +74,7 @@ export function MediaCareersSection({
                 <span className="text-[15px] leading-[1.35] font-extrabold">{item.title}</span>
               </Link>
             ))}
-          </div>
+          </RevealStagger>
           <Link
             href={localeHref(media.href, locale)}
             className="flex items-center justify-between gap-3 bg-[var(--home-brand)] px-6 py-4.5 text-[14.5px] font-extrabold text-white transition-colors hover:bg-[var(--home-brand-hover)] hover:text-white"
@@ -88,26 +96,25 @@ export function MediaCareersSection({
               {careers.cta} <ArrowRight />
             </Link>
           </div>
-          <ul className="m-0 flex list-none flex-col gap-2 p-0">
+          <RevealStagger stepMs={60} className="flex flex-col gap-2">
             {careers.jobOpenings.map((job) => (
-              <li key={job.title}>
-                <Link
-                  href={localeHref(careers.openingsHref, locale)}
-                  className="flex items-center justify-between gap-3 rounded-[10px] border border-[var(--home-hairline)] bg-[var(--home-bg)] px-4.5 py-[15px] text-[var(--home-heading)] transition-colors hover:border-[var(--home-brand)] hover:text-[var(--home-heading)]"
-                >
-                  <span className="flex flex-col gap-0.5">
-                    <span className="text-[15.5px] font-extrabold">{job.title}</span>
-                    <span className="text-[13px] text-[var(--home-muted-2)]">
-                      {job.department} &middot; {job.type}
-                    </span>
+              <Link
+                key={job.title}
+                href={localeHref(careers.openingsHref, locale)}
+                className="sj-card-lift flex items-center justify-between gap-3 rounded-[10px] border border-[var(--home-hairline)] bg-[var(--home-bg)] px-4.5 py-[15px] text-[var(--home-heading)] hover:border-[var(--home-brand)] hover:text-[var(--home-heading)]"
+              >
+                <span className="flex flex-col gap-0.5">
+                  <span className="text-[15.5px] font-extrabold">{job.title}</span>
+                  <span className="text-[13px] text-[var(--home-muted-2)]">
+                    {job.department} &middot; {job.type}
                   </span>
-                  <span aria-hidden className="font-extrabold text-[var(--home-brand-text)]">
-                    &rarr;
-                  </span>
-                </Link>
-              </li>
+                </span>
+                <span aria-hidden className="font-extrabold text-[var(--home-brand-text)]">
+                  &rarr;
+                </span>
+              </Link>
             ))}
-          </ul>
+          </RevealStagger>
         </Reveal>
       </Container>
     </section>

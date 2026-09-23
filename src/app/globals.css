@@ -998,3 +998,51 @@ footer[id] {
 [data-sj][data-theme="dark"] .leaflet-tile-pane {
   filter: invert(1) hue-rotate(180deg) brightness(0.95) contrast(0.9);
 }
+
+/* ---- Card hover (home page v4) ----
+   One lift for every card-shaped element on the home page: the stat cards,
+   the mosaic tiles, the care tiles, the standards items, the news strips, the
+   job rows. Lifts 6px on a soft shadow; `.sj-card-zoom` inside a lifted card
+   (or any `group`) eases its photograph up 4%. Both stand still under
+   prefers-reduced-motion.
+
+   Declared AFTER the staggered-reveal rules above on purpose: most lifted
+   cards are direct children of a RevealStagger, whose `[data-stagger-armed] >
+   *` rule also sets `transition` at the same specificity, and the later rule
+   is the one that wins. Placed earlier, the lift ran on the reveal's slower
+   0.72s ease-out instead of its own curve. */
+[data-sj] .sj-card-lift {
+  transition:
+    transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.45s ease,
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease;
+}
+
+[data-sj] .sj-card-zoom {
+  transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@media (hover: hover) {
+  [data-sj] .sj-card-lift:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 26px 48px -26px rgba(26, 21, 64, 0.45);
+  }
+
+  [data-sj] .sj-card-lift:hover .sj-card-zoom,
+  [data-sj] .group:hover .sj-card-zoom {
+    transform: scale(1.04);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-sj] .sj-card-lift:hover {
+    transform: none;
+  }
+
+  [data-sj] .sj-card-lift:hover .sj-card-zoom,
+  [data-sj] .group:hover .sj-card-zoom {
+    transform: none;
+  }
+}

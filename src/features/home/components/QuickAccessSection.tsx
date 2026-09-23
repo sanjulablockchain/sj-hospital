@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
+import { RevealStagger } from "@/components/ui/RevealStagger";
 import type { Locale } from "@/lib/i18n/locales";
 import { localeHref } from "@/lib/i18n/paths";
 import type { HomeContent } from "../data/getContent";
@@ -8,11 +10,12 @@ import { Container, pillButton, ArrowRight } from "./primitives";
 
 /**
  * `#book`: the mosaic under the hero. Top row: the channelling card over the
- * team photograph (a fade from the page surface so the copy stays legible in
- * both themes) beside the emergency column (the switchboard row over a brand
- * card and the emergency photograph). Bottom row: laboratory photo, the
- * accent "Facilities and services" card, the building, the brand "Our
- * location" card. Grids are the reference's: `auto-fit` above, 1 / 2 / 4
+ * team photograph (drifting on scroll under a fade from the page surface so
+ * the copy stays legible in both themes) beside the emergency column (the
+ * switchboard row over a brand card and the emergency photograph). Bottom
+ * row: laboratory photo, the accent "Facilities and services" card, the
+ * building, the brand "Our location" card. Every tile lifts on hover and the
+ * photographs ease in. Grids are the reference's: `auto-fit` above, 1 / 2 / 4
  * columns below at 600 and 1100px.
  */
 export function QuickAccessSection({
@@ -25,20 +28,23 @@ export function QuickAccessSection({
   locale: Locale;
 }) {
   const { channel, emergencyCall, emergency, facilities, location } = content;
-  const cardText = "flex flex-col justify-center gap-2.5 p-7.5 transition-colors";
+  const cardText = "sj-card-lift relative flex flex-col justify-center gap-2.5 p-7.5 hover:z-10";
+  const photoTile = "group relative overflow-hidden";
 
   return (
     <section id="book" className="pt-16 sm:pt-22">
       <Container className="flex flex-col">
         <div className="grid [grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr))]">
-          <div className="relative flex min-h-[420px] items-center overflow-hidden bg-[var(--home-surface)]">
-            <Image
-              src={channel.photo}
-              alt={channel.photoAlt}
-              fill
-              sizes="(min-width: 1100px) 50vw, 100vw"
-              className="object-cover object-[75%_30%]"
-            />
+          <div className="group relative flex min-h-[420px] items-center overflow-hidden bg-[var(--home-surface)]">
+            <ParallaxLayer factor={0.06} maxOffsetPx={30} className="absolute inset-x-0 -inset-y-[8%]">
+              <Image
+                src={channel.photo}
+                alt={channel.photoAlt}
+                fill
+                sizes="(min-width: 1100px) 50vw, 100vw"
+                className="sj-card-zoom object-cover object-[75%_30%]"
+              />
+            </ParallaxLayer>
             <div
               aria-hidden
               className="absolute inset-0"
@@ -63,7 +69,7 @@ export function QuickAccessSection({
           <div className="flex flex-col">
             <a
               href={emergencyCall.href}
-              className="flex min-h-[150px] items-center gap-5.5 px-6 py-7.5 text-[var(--home-heading)] sm:px-9"
+              className="sj-card-lift flex min-h-[150px] items-center gap-5.5 px-6 py-7.5 text-[var(--home-heading)] hover:bg-[var(--home-surface)] sm:px-9"
             >
               <span className="flex h-[72px] w-[72px] shrink-0 items-center justify-center rounded-full border-2 border-[var(--home-heading)]">
                 <HomeIcon name="phone" size={32} stroke={1.7} />
@@ -77,7 +83,7 @@ export function QuickAccessSection({
                 </span>
               </span>
             </a>
-            <div className="grid min-h-[270px] flex-1 grid-cols-1 min-[480px]:grid-cols-2">
+            <RevealStagger className="grid min-h-[270px] flex-1 grid-cols-1 min-[480px]:grid-cols-2">
               <Link
                 href={localeHref(emergency.href, locale)}
                 className={`${cardText} bg-[var(--home-brand)] text-white hover:bg-[var(--home-brand-hover)] hover:text-white`}
@@ -87,16 +93,28 @@ export function QuickAccessSection({
                 <span className="text-[14px] leading-[1.55] text-white/88">{emergency.body}</span>
                 <span className="mt-1.5 text-[14px] font-bold italic">{emergency.cta}</span>
               </Link>
-              <div className="relative min-h-[220px]">
-                <Image src={emergency.photo} alt={emergency.photoAlt} fill sizes="(min-width: 1100px) 25vw, 50vw" className="object-cover" />
+              <div className={`${photoTile} min-h-[220px]`}>
+                <Image
+                  src={emergency.photo}
+                  alt={emergency.photoAlt}
+                  fill
+                  sizes="(min-width: 1100px) 25vw, 50vw"
+                  className="sj-card-zoom object-cover"
+                />
               </div>
-            </div>
+            </RevealStagger>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 min-[600px]:grid-cols-2 min-[1100px]:grid-cols-4">
-          <div className="relative h-[260px]">
-            <Image src={facilities.photo} alt={facilities.photoAlt} fill sizes="(min-width: 1100px) 25vw, 50vw" className="object-cover" />
+        <RevealStagger className="grid grid-cols-1 min-[600px]:grid-cols-2 min-[1100px]:grid-cols-4">
+          <div className={`${photoTile} h-[260px]`}>
+            <Image
+              src={facilities.photo}
+              alt={facilities.photoAlt}
+              fill
+              sizes="(min-width: 1100px) 25vw, 50vw"
+              className="sj-card-zoom object-cover"
+            />
           </div>
           <Link
             href={localeHref(facilities.href, locale)}
@@ -107,8 +125,14 @@ export function QuickAccessSection({
             <span className="text-[14px] leading-[1.55]">{facilities.bodyTemplate.replace("{count}", String(servicesCount))}</span>
             <span className="mt-1.5 text-[14px] font-bold italic">{facilities.cta}</span>
           </Link>
-          <div className="relative h-[260px]">
-            <Image src={location.photo} alt={location.photoAlt} fill sizes="(min-width: 1100px) 25vw, 50vw" className="object-cover" />
+          <div className={`${photoTile} h-[260px]`}>
+            <Image
+              src={location.photo}
+              alt={location.photoAlt}
+              fill
+              sizes="(min-width: 1100px) 25vw, 50vw"
+              className="sj-card-zoom object-cover"
+            />
           </div>
           <a
             href={location.href}
@@ -121,7 +145,7 @@ export function QuickAccessSection({
             <span className="text-[14px] leading-[1.55] text-white/88">{location.body}</span>
             <span className="mt-1.5 text-[14px] font-bold italic">{location.cta}</span>
           </a>
-        </div>
+        </RevealStagger>
       </Container>
     </section>
   );

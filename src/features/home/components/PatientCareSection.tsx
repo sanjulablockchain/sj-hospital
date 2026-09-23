@@ -47,7 +47,7 @@ export function PatientCareSection({
             <Link
               key={tile.href}
               href={localeHref(tile.href, locale)}
-              className="flex aspect-[1/0.92] flex-col items-center justify-center gap-3.5 bg-[var(--home-brand)] p-4.5 text-center text-white transition-colors hover:bg-[var(--home-accent)] hover:text-[var(--home-on-accent)]"
+              className="sj-card-lift relative flex aspect-[1/0.92] flex-col items-center justify-center gap-3.5 bg-[var(--home-brand)] p-4.5 text-center text-white hover:z-10 hover:bg-[var(--home-accent)] hover:text-[var(--home-on-accent)]"
             >
               {/* The header's icon vocabulary is wider than the home page's;
                   a key without path data renders no icon rather than throwing.
