@@ -30,6 +30,15 @@ const SIZES = {
       "h-fit max-h-[calc(100dvh-1.5rem)] w-[calc(100%-1.5rem)] rounded-[18px] border lg:max-h-[90vh] lg:w-[calc(100%-2rem)] lg:max-w-[880px] lg:rounded-[22px]",
     scroll: "max-h-[calc(100dvh-1.5rem)] lg:max-h-[90vh]",
   },
+  /**
+   * `sheet` is `panel` at two thirds the width: a compact set of choices (the
+   * booking sheet's three cards) rather than a photograph beside its copy.
+   */
+  sheet: {
+    dialog:
+      "h-fit max-h-[calc(100dvh-1.5rem)] w-[calc(100%-1.5rem)] rounded-[18px] border lg:max-h-[90vh] lg:w-[calc(100%-2rem)] lg:max-w-[680px] lg:rounded-[22px]",
+    scroll: "max-h-[calc(100dvh-1.5rem)] lg:max-h-[90vh]",
+  },
 } as const;
 
 /**

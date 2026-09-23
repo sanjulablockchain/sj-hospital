@@ -30,4 +30,12 @@ export const chromeCopy = {
   toLightMode: "Light mode එකට මාරු වෙන්න",
   toDarkMode: "Dark mode එකට මාරු වෙන්න",
   changeLanguage: "භාෂාව: {locale}. භාෂාව මාරු කරන්න",
+  // The booking sheet's prose. Its heading, eyebrow, kickers, card titles
+  // and "Not now" are register-policy English and absent here.
+  bookSubtitle: "OPD එකේ එදිනම Slots, සහ පැය 24ම Online Booking.",
+  bookOnlineDesc: "Consultant කෙනෙක් සහ වෙලාවක් තෝරන්න; Channelling Desk එක ඒක Confirm කරනවා.",
+  bookMessageDesc: "ඔබේ නම සහ ඔබට ඕන Clinic එක එවන්න.",
+  bookCallDesc: "Switchboard එක හැම පැයකම උත්තර දෙනවා.",
+  bookFooter: "OPD Consultation නොමිලේ. OPD එකේ Corporate Insurance භාර ගන්නවා.",
+  closeBooking: "Booking විකල්ප වසන්න",
 };

@@ -413,6 +413,15 @@ export function registerReason(path: string): RegisterReason | null {
     if (leaf === "language") return "nav";
     if (leaf === "tagline") return "footer";
     if (leaf === "bookNow" || leaf === "callUs" || leaf === "whatsappUs") return "cta";
+    // The booking sheet behind Book now: its heading, eyebrow, the kicker over
+    // each card, the card titles and the dismiss button are scaffolding of the
+    // same kind as the button that opens it; its subtitle, descriptions and
+    // footer line are prose and fall through to translated.
+    if (leaf === "bookTitle") return "heading";
+    if (leaf === "bookEyebrow") return "eyebrow";
+    if (leaf === "bookOnlineKicker" || leaf === "bookMessageKicker" || leaf === "bookCallKicker") return "chip";
+    if (leaf === "bookOnlineTitle" || leaf === "bookMessageTitle") return "title";
+    if (leaf === "notNow") return "cta";
     return null;
   }
 

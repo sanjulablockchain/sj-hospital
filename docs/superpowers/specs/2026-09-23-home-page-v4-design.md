@@ -551,5 +551,15 @@ header, the carousel, the accordion, the FAQ and every link's destination.
    2026-09-23); the reference inverted it to white.
 10. A partner logo marquee sits between the network accordion and the FAQ
     (owner's request, 2026-09-23): the nine group companies from the network
-    page's own data, desaturated until hovered, pausing under the pointer,
-    each opening the network page's family section. Not in the reference.
+    page's own data on white tiles (the logos were drawn for a white ground
+    and vanished desaturated on the dark surface), part-desaturated until
+    hovered, pausing under the pointer, each opening the network page's
+    family section. Not in the reference.
+11. The header's Book now opens a booking sheet (owner's request,
+    2026-09-23) rather than leaving for the channelling page directly: three
+    cards (book online, WhatsApp, call) over a free OPD and corporate
+    insurance footer line and a "Not now" button. The button stays a real
+    link to `/e-channeling` for JavaScript-off readers, and the sheet's first
+    card is that page. Site-wide, since the header is. Copy lives in
+    `chromeCopy` with Sinhala and Tamil drafts for the prose; the heading,
+    eyebrow, kickers, card titles and dismiss label are register English.

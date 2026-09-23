@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { ThemeToggleButton } from "@/components/theme/ThemeToggleButton";
 import { LanguageToggleButton } from "@/components/i18n/LanguageToggleButton";
+import { BookingModal } from "@/components/layout/BookingModal";
 import { DesktopNav } from "@/components/layout/mega-nav/DesktopNav";
 import { MobileNavDrawer } from "@/components/layout/mega-nav/MobileNavDrawer";
 import { LOGO_LOCKUP_BRAND, LOGO_MARK } from "@/config/brand";
@@ -58,6 +59,7 @@ export function ThemedHeader({ sections, variant = "fixed" }: ThemedHeaderProps)
   const copy = chromeCopyFor(locale);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [bookingOpen, setBookingOpen] = useState(false);
 
   useEffect(() => {
     function onScroll() {
@@ -128,8 +130,17 @@ export function ThemedHeader({ sections, variant = "fixed" }: ThemedHeaderProps)
             <ThemeToggleButton />
           </div>
 
+          {/* A real link to the channelling page, so it goes somewhere with
+              JavaScript off; with it on, the click opens the booking sheet
+              instead, whose first card is that same page. */}
           <a
             href={localeHref(BOOK_HREF, locale)}
+            aria-haspopup="dialog"
+            aria-expanded={bookingOpen}
+            onClick={(event) => {
+              event.preventDefault();
+              setBookingOpen(true);
+            }}
             className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap bg-[var(--home-cta-bg)] px-2 py-2.5 text-[12.5px] font-bold text-[var(--home-cta-fg)] transition-colors hover:bg-[var(--home-cta-hover)] sm:gap-2.5 sm:px-5 sm:py-3.5 sm:text-[13.5px]"
           >
             {copy.bookNow}{" "}
@@ -143,6 +154,7 @@ export function ThemedHeader({ sections, variant = "fixed" }: ThemedHeaderProps)
           </div>
         </div>
       </div>
+      <BookingModal open={bookingOpen} onClose={() => setBookingOpen(false)} />
     </header>
   );
 }

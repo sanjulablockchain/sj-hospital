@@ -35,6 +35,29 @@ export const chromeCopy = {
   // language's own name (from LOCALE_LABELS), interpolated with a token
   // rather than a split because it sits mid sentence.
   changeLanguage: "Language: {locale}. Change language",
+
+  // The booking sheet that opens from the header's Book now. Its heading,
+  // eyebrow, kickers, card titles and the dismiss button are register-policy
+  // English (`registerPolicy.ts`, chromeCopy branch); the subtitle, the three
+  // descriptions and the footer line are prose and translate. Every claim in
+  // them has its home elsewhere: same-day slots and the free consultation in
+  // `services/data/clinics.ts` (the OPD), online 24/7 in e-channeling's own
+  // hero facts, corporate insurance at the OPD in `about/data/content.ts`.
+  // The phone and WhatsApp numbers are facts rendered by the component.
+  bookTitle: "Book an appointment",
+  bookSubtitle: "Same-day slots at the OPD, and online booking around the clock.",
+  bookEyebrow: "You can be seen today",
+  bookOnlineKicker: "Under a minute",
+  bookOnlineTitle: "Book online",
+  bookOnlineDesc: "Pick a consultant and a time; the channelling desk confirms it.",
+  bookMessageKicker: "WhatsApp",
+  bookMessageTitle: "Message us",
+  bookMessageDesc: "Send your name and the clinic you need.",
+  bookCallKicker: "Call",
+  bookCallDesc: "The switchboard answers at every hour.",
+  bookFooter: "Free OPD consultation. Corporate insurance accepted at the OPD.",
+  notNow: "Not now",
+  closeBooking: "Close booking options",
 };
 
 export type ChromeCopy = typeof chromeCopy;
