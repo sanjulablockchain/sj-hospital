@@ -1,42 +1,48 @@
 import type { FooterColumn } from "@/components/layout/ThemedFooter";
 
-// Moved here from HomeFooter.tsx so every footer's data lives in src/config,
-// where navigation.test.ts can reach it. The Accommodation link now points at
-// /accommodation rather than the home page's own #rooms band: that band is a
-// four-card teaser, and the full page is the real destination, matching how
-// Facilities, Pharmacy, Health Tips, Network and Careers were each repointed
-// when their own pages landed.
-//
-// Surgical care and Media were the last two holding out, scrolling to a home
-// band while the pages they name sat one click further away. Every link here
-// now leaves the page, and teaserLinks.test.ts asserts it: unlike the other
-// footers, this one has no page sections of its own worth linking, because
-// every band on the home page is a teaser for somewhere else.
+/**
+ * The home footer's three columns, as the v4 reference lays them out:
+ * Services, Patient care, About. Every link leaves the page
+ * (teaserLinks.test.ts, navigation.test.ts); the home page has no section of
+ * its own worth linking, because every band on it is a teaser for a page
+ * somewhere else.
+ */
 export const homeFooterColumns: FooterColumn[] = [
   {
-    heading: "Care",
+    heading: "Services",
     links: [
-      { label: "Services", href: "/services" },
+      { label: "Accident and emergency", href: "/services/accident-emergency" },
+      { label: "Outpatient department", href: "/services/outpatient-department" },
       { label: "Surgical care", href: "/services/general-surgery" },
-      { label: "Pharmacy", href: "/pharmacy" },
-      { label: "Accommodation", href: "/accommodation" },
-      { label: "Care at home", href: "/home-care" },
-      { label: "Book a doctor", href: "/e-channeling" },
+      { label: "Laboratory", href: "/services/laboratory" },
+      { label: "Radiology", href: "/services/radiology" },
+      { label: "See all services", href: "/services" },
     ],
   },
   {
-    heading: "Hospital",
+    heading: "Patient care",
+    links: [
+      { label: "Facilities", href: "/facilities" },
+      { label: "Pharmacy", href: "/pharmacy" },
+      { label: "Care at home", href: "/home-care" },
+      { label: "International patients", href: "/international-care" },
+      { label: "School wellness", href: "/school-wellness" },
+      { label: "Accommodation", href: "/accommodation" },
+    ],
+  },
+  {
+    heading: "About",
     links: [
       { label: "About us", href: "/about-us" },
-      { label: "Facilities", href: "/facilities" },
-      { label: "International patient care", href: "/international-care" },
-      { label: "Health tips", href: "/health-tips" },
-      { label: "School wellness", href: "/school-wellness" },
       { label: "Network", href: "/network" },
       { label: "Media", href: "/media" },
       { label: "Careers", href: "/careers" },
-      { label: "Contact us", href: "/contact-us" },
+      { label: "Health tips", href: "/health-tips" },
       { label: "Privacy policy", href: "/privacy-policy" },
+      // Not in the reference's column, but every footer on the site must reach
+      // the contact page (navigation.test.ts), and "Reach us" beside it holds
+      // the numbers rather than the link.
+      { label: "Contact us", href: "/contact-us" },
     ],
   },
 ];

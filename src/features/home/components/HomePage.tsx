@@ -5,6 +5,19 @@ import { services } from "@/features/services";
 import { getHomeContent } from "../data/getContent";
 import { HeroSection } from "./HeroSection";
 import { QuickAccessSection } from "./QuickAccessSection";
+import { WhoWeAreSection } from "./WhoWeAreSection";
+import { FreeOpdSection } from "./FreeOpdSection";
+import { SpecialtiesSection } from "./SpecialtiesSection";
+import { PatientCareSection } from "./PatientCareSection";
+import { PharmacySection } from "./PharmacySection";
+import { StandardsSection } from "./StandardsSection";
+import { TestimonialsSection } from "./TestimonialsSection";
+import { InternationalCareSection } from "./InternationalCareSection";
+import { NetworkSection } from "./NetworkSection";
+import { FaqSection } from "./FaqSection";
+import { MediaCareersSection } from "./MediaCareersSection";
+import { ContactCtaSection } from "./ContactCtaSection";
+import { HomeFooter } from "./HomeFooter";
 import { AnnouncementModal } from "./AnnouncementModal";
 
 /**
@@ -29,7 +42,29 @@ export async function HomePage({ locale }: { locale: Locale }) {
       <main>
         <HeroSection hero={content.hero} tickerItems={content.statTickerItems} />
         <QuickAccessSection content={content.quickAccess} servicesCount={services.length} locale={locale} />
+        <WhoWeAreSection content={content.whoWeAre} servicesCount={services.length} />
+        <FreeOpdSection content={content.freeOpd} locale={locale} />
+        <SpecialtiesSection content={content.specialties} servicesCount={services.length} locale={locale} />
+        <PatientCareSection content={content.patientCare} locale={locale} />
+        <PharmacySection content={content.pharmacy} locale={locale} />
+        <StandardsSection content={content.standards} />
+        <TestimonialsSection
+          items={home.testimonials.testimonials}
+          heading={home.testimonials.heading}
+          body={home.testimonials.body}
+          ariaShow={home.testimonials.ariaShow}
+          ariaPrev={home.testimonials.ariaPrev}
+          ariaNext={home.testimonials.ariaNext}
+          photo={home.testimonials.photo}
+          photoAlt={home.testimonials.photoAlt}
+        />
+        <InternationalCareSection content={home.internationalCare} locale={locale} />
+        <NetworkSection content={home.network} locale={locale} />
+        <FaqSection content={home.faq} locale={locale} />
+        <MediaCareersSection media={home.media} careers={home.careers} locale={locale} />
+        <ContactCtaSection content={content.contactCta} locale={locale} />
       </main>
+      <HomeFooter locale={locale} />
       <FloatingActions />
       <AnnouncementModal content={home.announcement} locale={locale} />
     </ThemedShell>
