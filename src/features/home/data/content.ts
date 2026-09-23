@@ -113,7 +113,7 @@ export const quickAccess = {
  */
 export const whoWeAre = {
   eyebrow: "Who we are",
-  heading: "A US hospital in a Sri Lankan neighbourhood",
+  heading: "A USA hospital in a Sri Lankan neighbourhood",
   intro:
     "Managed and operated by the Kids & Teens Pediatric Medical Group of Los Angeles: the standards, protocols and clinical discipline of American care, priced for families in Negombo.",
   body: "Consumables are never reused. Every surface is cleaned on a two hour cycle. Every report is read by two doctors before it reaches you.",
