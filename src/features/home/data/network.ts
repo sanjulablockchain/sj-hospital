@@ -72,6 +72,15 @@ export const cta = "The full network";
 export const href = "/network";
 
 /**
+ * The logo marquee under the accordion: the nine group companies' logos,
+ * read from `network`'s own `orgGroups` so the family has one home. The
+ * eyebrow and link label are English by the register rule.
+ */
+export const familyEyebrow = "The St. Joseph family";
+export const familyCta = "Meet the family";
+export const familyHref = "/network#family";
+
+/**
  * The two screen-reader strings `NetworkAccordion.tsx` builds by
  * interpolating a node's name into an English sentence. `{name}` is a token,
  * not a split: Sinhala and Tamil word order does not put the name in the same
