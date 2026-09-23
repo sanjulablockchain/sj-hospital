@@ -14,10 +14,11 @@ function fillName(template: string, name: string): string {
 }
 
 /**
- * Horizontal accordion across the network nodes: the open panel widens to show
- * its photograph and description, the rest collapse to a spine carrying just
- * the location. Below 640px it lays out vertically, where a horizontal
- * accordion has no room to work.
+ * Horizontal accordion across the network nodes, in the v4 reference's dress:
+ * rounded cards with a 12px gap, the open panel widening to show its
+ * photograph and description under a bottom-up ink gradient, the rest
+ * collapsed to a 90px spine (64px tall, stacked vertically, under 760px)
+ * carrying just the index and location.
  *
  * Every panel's text stays in the DOM in both states, so the collapse is purely
  * visual and assistive tech always has the full content.
@@ -72,7 +73,7 @@ export function NetworkAccordion({
   };
 
   return (
-    <ul className="flex h-[610px] flex-col gap-px bg-[var(--home-hairline)] min-[640px]:h-[540px] min-[640px]:flex-row">
+    <ul className="m-0 flex h-[760px] list-none flex-col gap-3 p-0 min-[760px]:h-[540px] min-[760px]:flex-row">
       {nodes.map((node, index) => {
         const isActive = index === activeIndex;
         const contentId = `${baseId}-network-${index}`;
@@ -80,29 +81,20 @@ export function NetworkAccordion({
         return (
           <li
             key={node.index}
-            // Collapsed panels hold a fixed spine width (height on mobile) and
-            // the open one takes whatever is left, which reads far better than
-            // splitting the row proportionally.
-            style={{
-              flexGrow: isActive ? 1 : 0,
-              flexBasis: isActive ? "0%" : "5.5rem",
-            }}
-            className="relative overflow-hidden bg-[#08123A] transition-[flex-basis,flex-grow] duration-[620ms] ease-[cubic-bezier(0.22,0.68,0.24,1)] motion-reduce:transition-none"
+            // Collapsed panels hold a fixed spine (64px tall stacked, 90px wide
+            // in a row) and the open one takes whatever is left.
+            className={`relative min-h-0 min-w-0 overflow-hidden rounded-[22px] bg-[#1A1540] shadow-[0_24px_48px_-30px_rgba(26,21,64,0.55)] transition-[flex-basis,flex-grow] duration-[600ms] ease-[cubic-bezier(0.2,0.8,0.2,1)] motion-reduce:transition-none ${
+              isActive ? "grow basis-0" : "grow-0 basis-16 min-[760px]:basis-[90px]"
+            }`}
           >
-            <Image
-              src={node.photo}
-              alt=""
-              fill
-              sizes="(min-width: 640px) 75vw, 100vw"
-              className={`object-cover transition-[opacity,transform] duration-[900ms] ease-out motion-reduce:transition-none ${
-                isActive ? "scale-100 opacity-60" : "scale-[1.08] opacity-25"
-              }`}
-            />
+            <Image src={node.photo} alt="" fill sizes="(min-width: 760px) 75vw, 100vw" className="object-cover" />
             <div
-              className="absolute inset-0"
+              aria-hidden
+              className="absolute inset-0 transition-[background] duration-[400ms] motion-reduce:transition-none"
               style={{
-                background:
-                  "linear-gradient(rgba(6,11,31,0.24) 18%, rgba(6,11,31,0.62) 58%, rgba(6,11,31,0.95) 100%)",
+                background: isActive
+                  ? "linear-gradient(rgba(26,21,64,0) 35%, rgba(26,21,64,0.9) 100%)"
+                  : "rgba(35,26,92,0.72)",
               }}
             />
 
@@ -117,19 +109,18 @@ export function NetworkAccordion({
               onMouseEnter={() => setActiveIndex(index)}
               onFocus={() => setActiveIndex(index)}
               onKeyDown={(event) => handleKeyDown(event, index)}
-              className="absolute inset-0 z-10 flex items-center px-6 text-left focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-[var(--home-accent)] min-[640px]:justify-center min-[640px]:px-0"
+              className="absolute inset-0 z-10 flex items-center justify-center text-left focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-[var(--home-accent)] min-[760px]:items-end min-[760px]:pb-6"
             >
               <span className="sr-only">
                 {isActive ? fillName(aria.open, node.name) : fillName(aria.show, node.name)}
               </span>
               <span
                 aria-hidden
-                className={`text-[12px] font-bold tracking-[0.2em] whitespace-nowrap text-white/80 uppercase transition-opacity duration-[380ms] motion-reduce:transition-none min-[640px]:rotate-180 min-[640px]:[writing-mode:vertical-rl] ${
+                className={`text-[12px] font-extrabold tracking-[0.2em] whitespace-nowrap text-white uppercase transition-opacity duration-[380ms] motion-reduce:transition-none min-[760px]:rotate-180 min-[760px]:[writing-mode:vertical-rl] ${
                   isActive ? "opacity-0" : "opacity-100 delay-[180ms]"
                 }`}
               >
-                <span className="text-[var(--home-accent)]">{node.index}</span>
-                &nbsp;&nbsp;{node.location}
+                {node.index} / {node.location}
               </span>
             </button>
 
@@ -138,19 +129,17 @@ export function NetworkAccordion({
                 so the link's own stretched hit area covers the whole panel. */}
             <div
               id={contentId}
-              className={`pointer-events-none absolute inset-0 flex flex-col justify-end p-6 transition-[opacity,transform] duration-[520ms] ease-out motion-reduce:transition-none min-[640px]:p-7.5 ${
-                isActive
-                  ? "z-20 translate-y-0 opacity-100 delay-[140ms]"
-                  : "translate-y-3 opacity-0 min-[640px]:opacity-0"
+              className={`pointer-events-none absolute inset-x-0 bottom-0 flex flex-col gap-2.5 border-b-[3px] border-[var(--home-accent)] p-6 text-white sm:p-8 ${
+                isActive ? "animate-sj-fade-slow z-20 opacity-100 [animation-delay:200ms]" : "opacity-0"
               }`}
             >
-              <span className="text-[12px] font-bold tracking-[0.2em] text-[#7FCBFF] uppercase">
-                {node.index} &nbsp;/&nbsp; {node.location}
+              <span className="text-[12px] font-extrabold tracking-[0.2em] text-[#9FD6F5] uppercase">
+                {node.index} / {node.location}
               </span>
-              <h3 className="font-display mt-3 wrap-break-word text-[clamp(24px,2.6vw,38px)] leading-[1.04] font-semibold tracking-[-0.03em] text-white">
+              <h3 className="font-display m-0 wrap-break-word text-[clamp(26px,2.6vw,38px)] leading-[1.04] font-extrabold tracking-[-0.02em] text-white">
                 {node.name}
               </h3>
-              <p className="mt-3 max-w-[42ch] text-[14.5px] leading-[1.55] text-white/78">{node.body}</p>
+              <p className="m-0 max-w-[440px] text-[15px] leading-[1.55] text-white/88">{node.body}</p>
               {/* Rendered for every panel, open or not, so all four
                   destinations are in the served HTML rather than appearing
                   only once a panel has been opened. A closed panel's link
@@ -159,7 +148,7 @@ export function NetworkAccordion({
               <Link
                 href={localeHref(node.href, locale)}
                 tabIndex={isActive ? undefined : -1}
-                className={`mt-4.5 inline-flex w-fit items-center gap-2 border-b border-[#7FCBFF]/40 pb-0.5 text-[14px] font-bold text-[#7FCBFF] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--home-accent)] ${
+                className={`inline-flex w-fit items-center gap-2 text-[14px] font-extrabold text-[#9FD6F5] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--home-accent)] ${
                   isActive ? "pointer-events-auto" : ""
                 }`}
               >
@@ -170,13 +159,6 @@ export function NetworkAccordion({
                 <span className="absolute inset-0" />
               </Link>
             </div>
-
-            <div
-              aria-hidden
-              className={`absolute z-30 bg-[var(--home-accent)] transition-transform duration-[520ms] ease-out motion-reduce:transition-none max-[639px]:inset-y-0 max-[639px]:left-0 max-[639px]:w-[3px] max-[639px]:origin-top min-[640px]:inset-x-0 min-[640px]:bottom-0 min-[640px]:h-[3px] min-[640px]:origin-left ${
-                isActive ? "scale-100" : "max-[639px]:scale-y-0 min-[640px]:scale-x-0"
-              }`}
-            />
           </li>
         );
       })}
