@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { overlayFiles, overlayScope, toImportUrl } from "./overlayFiles.ts";
 import { stringPaths } from "./stringPaths.ts";
-import { REGISTER_REASONS, registerReason } from "./registerPolicy.ts";
+import { REGISTER_REASONS, registerReason, type RegisterReason } from "./registerPolicy.ts";
 
 /**
  * The direction nothing enforced before: a path the register policy says
@@ -31,7 +31,7 @@ import { REGISTER_REASONS, registerReason } from "./registerPolicy.ts";
 type Audited = {
   relative: string;
   scope: string;
-  violations: { path: string; reason: string }[];
+  violations: { path: string; reason: RegisterReason }[];
 };
 
 const audited: Audited[] = [];
@@ -39,7 +39,7 @@ for (const overlay of overlayFiles()) {
   const loaded = await import(toImportUrl(overlay.path));
   const violations = stringPaths(loaded)
     .map((path) => ({ path, reason: registerReason(path) }))
-    .filter((entry): entry is { path: string; reason: string } => entry.reason !== null);
+    .filter((entry): entry is { path: string; reason: RegisterReason } => entry.reason !== null);
   audited.push({ relative: overlay.relative, scope: overlayScope(overlay.relative), violations });
 }
 

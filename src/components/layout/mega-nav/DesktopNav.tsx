@@ -23,8 +23,10 @@ type DesktopNavProps = {
 const OPEN_DELAY_MS = 90;
 const CLOSE_DELAY_MS = 180;
 
+// `sj-nav-trigger` is a hook for globals.css: under the brand palette the
+// triggers take the reference's weight and lavender hover wash.
 const triggerClass =
-  "inline-flex h-10 items-center gap-1.5 border border-transparent px-3.5 text-[13.5px] font-semibold whitespace-nowrap text-[var(--sj-chrome-fg-soft)] transition-colors duration-200 hover:text-[var(--sj-chrome-fg)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--sj-chrome-accent)]";
+  "sj-nav-trigger inline-flex h-10 items-center gap-1.5 border border-transparent px-3.5 text-[13.5px] font-semibold whitespace-nowrap text-[var(--sj-chrome-fg-soft)] transition-colors duration-200 hover:text-[var(--sj-chrome-fg)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--sj-chrome-accent)]";
 
 /**
  * The `lg:` navigation: three menu triggers and a plain link, with the open
