@@ -1,125 +1,35 @@
 import { ThemedShell } from "@/components/layout/ThemedShell";
 import { FloatingActions } from "@/components/layout/FloatingActions";
 import type { Locale } from "@/lib/i18n/locales";
+import { services } from "@/features/services";
 import { getHomeContent } from "../data/getContent";
 import { HeroSection } from "./HeroSection";
-import { WhoWeAreSection } from "./WhoWeAreSection";
-import { FreeOpdSection } from "./FreeOpdSection";
-import { ServicesBentoSection } from "./ServicesBentoSection";
-import { SurgicalSection } from "./SurgicalSection";
-import { FacilitiesSection } from "./FacilitiesSection";
-import { PharmacySection } from "./PharmacySection";
-import { HomeCareSection } from "./HomeCareSection";
-import { RoomsSection } from "./RoomsSection";
-import { InternationalCareSection } from "./InternationalCareSection";
-import { HealthTipsSection } from "./HealthTipsSection";
-import { SchoolWellnessSection } from "./SchoolWellnessSection";
-import { NetworkSection } from "./NetworkSection";
-import { MediaSection } from "./MediaSection";
-import { CareersSection } from "./CareersSection";
-import { TestimonialsSection } from "./TestimonialsSection";
-import { ContactCtaSection } from "./ContactCtaSection";
-import { HomeFooter } from "./HomeFooter";
+import { QuickAccessSection } from "./QuickAccessSection";
 import { AnnouncementModal } from "./AnnouncementModal";
 
 /**
- * The home page, the most visited on the site and the most plumbing of any
- * feature: eight pre-existing per-teaser data files, plus `content.ts` for
- * the bands with no data file of their own and `announcement.ts` for the
- * pop-up over the page (see each one's own header comment), fetched ONCE
- * here via the single `getHomeContent` getter rather than once per section.
+ * The home page, rebuilt to the v4 reference
+ * (docs/superpowers/specs/2026-09-23-home-page-v4-design.md): the brand
+ * palette, the solid header with the utility bar above it, and the bands in
+ * the reference's order. All copy is fetched ONCE here through
+ * `getHomeContent` and handed down as props, so the Client Component leaves
+ * (the slideshow, the specialties carousel, the reviews carousel, the network
+ * accordion, the FAQ list and the announcement pop-up) never import a data
+ * file and no translation reaches the client bundle.
  *
- * Every section below takes its own slice of the already localized result as
- * a prop, never by importing a data file itself: that is what makes the page
- * translatable, and it is what keeps translation data out of the client
- * bundle for the nine sections that are Client Components
- * (`HeroParallaxBackground` inside `HeroSection`, `SurgicalSection`,
- * `PharmacySection`, `RoomsSection`, `SchoolWellnessSection`,
- * `NetworkAccordion` inside `NetworkSection`, `TestimonialsSection`,
- * `AnnouncementModal`, and `CountUp` wherever it is used).
- *
- * `AnnouncementModal` sits last, outside `<main>` beside `FloatingActions`,
- * for the same reason that one does: it is chrome over the page rather than
- * a band of it.
+ * `AnnouncementModal` sits last, outside `<main>` beside `FloatingActions`:
+ * it is chrome over the page rather than a band of it.
  */
 export async function HomePage({ locale }: { locale: Locale }) {
   const home = await getHomeContent(locale);
   const { content } = home;
 
   return (
-    <ThemedShell>
+    <ThemedShell palette="brand" header="solid" utilityBar>
       <main>
         <HeroSection hero={content.hero} tickerItems={content.statTickerItems} />
-        <WhoWeAreSection content={content.whoWeAre} locale={locale} />
-        <FreeOpdSection content={content.freeOpd} locale={locale} />
-        <ServicesBentoSection content={content.servicesBento} locale={locale} />
-        <SurgicalSection content={content.surgical} locale={locale} />
-        <FacilitiesSection
-          items={home.facilities.facilities}
-          eyebrow={home.facilities.sectionEyebrow}
-          heading={home.facilities.heading}
-          locale={locale}
-        />
-        <PharmacySection content={content.pharmacy} locale={locale} />
-        <HomeCareSection
-          items={home.homeCare.homeCareCards}
-          eyebrow={home.homeCare.sectionEyebrow}
-          heading={home.homeCare.heading}
-          body={home.homeCare.body}
-          cta={home.homeCare.cta}
-          locale={locale}
-        />
-        <RoomsSection content={content.rooms} locale={locale} />
-        <InternationalCareSection
-          items={home.internationalCare.internationalCareItems}
-          eyebrow={home.internationalCare.sectionEyebrow}
-          heading={home.internationalCare.heading}
-          body={home.internationalCare.body}
-          ctaPrimary={home.internationalCare.ctaPrimary}
-          ctaSecondary={home.internationalCare.ctaSecondary}
-          locale={locale}
-        />
-        <HealthTipsSection
-          items={home.healthTips.healthTips}
-          eyebrow={home.healthTips.sectionEyebrow}
-          heading={home.healthTips.heading}
-          cta={home.healthTips.cta}
-          locale={locale}
-        />
-        <SchoolWellnessSection content={content.schoolWellness} locale={locale} />
-        <NetworkSection
-          nodes={home.network.networkNodes}
-          eyebrow={home.network.sectionEyebrow}
-          heading={home.network.heading}
-          body={home.network.body}
-          cta={home.network.cta}
-          accordionAria={home.network.accordionAria}
-          locale={locale}
-        />
-        <MediaSection
-          items={home.media.mediaItems}
-          eyebrow={home.media.sectionEyebrow}
-          heading={home.media.heading}
-          cta={home.media.cta}
-          locale={locale}
-        />
-        <CareersSection
-          jobs={home.careers.jobOpenings}
-          eyebrow={home.careers.sectionEyebrow}
-          heading={home.careers.heading}
-          body={home.careers.body}
-          cta={home.careers.cta}
-          locale={locale}
-        />
-        <TestimonialsSection
-          items={home.testimonials.testimonials}
-          eyebrow={home.testimonials.sectionEyebrow}
-          ariaPrev={home.testimonials.ariaPrev}
-          ariaNext={home.testimonials.ariaNext}
-        />
-        <ContactCtaSection content={content.contactCta} locale={locale} />
+        <QuickAccessSection content={content.quickAccess} servicesCount={services.length} locale={locale} />
       </main>
-      <HomeFooter locale={locale} />
       <FloatingActions />
       <AnnouncementModal content={home.announcement} locale={locale} />
     </ThemedShell>
