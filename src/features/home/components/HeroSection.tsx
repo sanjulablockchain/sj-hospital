@@ -1,7 +1,17 @@
 import { HeroParallaxBackground } from "./HeroParallaxBackground";
-import { StatTicker } from "./StatTicker";
+import { Ticker } from "@/components/ui/Ticker";
 import type { HomeContent } from "../data/getContent";
 
+/**
+ * The hero: three exterior photographs crossfading under a fixed-dark
+ * gradient, the sheen and scan-line effects, the motto and the switchboard
+ * chip, with the stat ticker along its foot. Fixed-dark in both themes, as in
+ * the reference, because the photographs are.
+ *
+ * The header is in normal flow above this band (ThemedShell `header="solid"`),
+ * so unlike every other hero on the site this one pads by nothing and fills
+ * the rest of the first viewport: 100vh less the utility bar and the header.
+ */
 export function HeroSection({
   hero,
   tickerItems,
@@ -10,34 +20,34 @@ export function HeroSection({
   tickerItems: readonly string[];
 }) {
   return (
-    <section id="top" className="relative flex pt-[var(--sj-header-h)] min-h-screen flex-col overflow-hidden bg-[#060B1F]">
+    <section id="top" className="relative flex min-h-[calc(100vh-120px)] flex-col overflow-hidden bg-[#0B0826]">
       <HeroParallaxBackground photoAlt={hero.photoAlt} />
       <div
-        className="absolute inset-0"
+        className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "linear-gradient(rgba(6,11,31,0.84) 0%, rgba(6,11,31,0.4) 40%, rgba(6,11,31,0.95) 100%)",
+            "linear-gradient(rgba(12,8,38,0.84) 0%, rgba(12,8,38,0.4) 40%, rgba(12,8,38,0.95) 100%)",
         }}
       />
       <div
-        className="animate-sj-sheen absolute inset-0"
+        className="animate-sj-sheen pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(70% 55% at 78% 26%, rgba(44,166,240,0.34) 0%, rgba(6,11,31,0) 66%)",
+            "radial-gradient(70% 55% at 78% 26%, rgba(82,181,232,0.34) 0%, rgba(12,8,38,0) 66%)",
         }}
       />
       <div
         className="animate-sj-scan pointer-events-none absolute inset-x-0 top-0 h-[14%]"
         style={{
           background:
-            "linear-gradient(rgba(127,203,255,0) 0%, rgba(127,203,255,0.16) 60%, rgba(127,203,255,0) 100%)",
+            "linear-gradient(rgba(159,214,245,0) 0%, rgba(159,214,245,0.16) 60%, rgba(159,214,245,0) 100%)",
         }}
       />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 gap-10 px-5 pb-13 sm:px-8 lg:px-11">
+      <div className="relative z-[2] mx-auto flex w-full max-w-[1440px] flex-1 gap-10 px-5 pt-10 pb-10 sm:px-8 sm:pt-15 sm:pb-13 lg:px-11">
         <div className="hidden min-w-0 flex-col items-center gap-4.5 pb-2.5 min-[900px]:flex" style={{ flex: "0 0 44px" }}>
           <span
-            className="text-[11px] tracking-[0.3em] text-white/50 uppercase"
+            className="text-[11px] tracking-[0.3em] text-white/55 uppercase"
             style={{ writingMode: "vertical-rl" }}
           >
             {hero.locationLabel}
@@ -45,12 +55,12 @@ export function HeroSection({
           <span className="w-px flex-1 bg-gradient-to-b from-white/40 to-transparent" />
         </div>
 
-        <div className="flex min-w-0 flex-1 flex-col justify-end pb-13">
-          <div className="animate-sj-up mb-0 inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
-            <span className="h-px w-11 shrink-0 bg-[var(--home-accent)]" />
+        <div className="flex min-w-0 flex-1 flex-col justify-end pb-6 sm:pb-13">
+          <div className="animate-sj-up inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#9FD6F5] uppercase">
+            <span aria-hidden className="h-px w-11 shrink-0 bg-[var(--home-accent)]" />
             <span className="wrap-break-word">{hero.managedBy}</span>
           </div>
-          <h1 className="font-display animate-sj-up mt-5 wrap-break-word text-[clamp(52px,9vw,152px)] leading-[0.86] font-extrabold tracking-[-0.045em] text-white uppercase">
+          <h1 className="font-display animate-sj-up mt-5 wrap-break-word text-[clamp(52px,9vw,152px)] leading-[0.86] font-extrabold tracking-[-0.045em] text-white uppercase [animation-delay:120ms]">
             {hero.headingLine1}
             <br />
             <span style={{ color: "transparent", WebkitTextStroke: "1.4px rgba(242,246,255,0.75)" }}>
@@ -58,22 +68,22 @@ export function HeroSection({
             </span>{" "}
             <span className="text-[var(--home-accent)]">{hero.headingAccent}</span>
           </h1>
-          <div className="animate-sj-up mt-10 flex flex-col items-start gap-6.5">
-            <p className="max-w-[46ch] text-[18px] leading-[1.6] text-white/82" style={{ textWrap: "pretty" }}>
+          <div className="animate-sj-up mt-10 flex flex-col items-start gap-6.5 [animation-delay:240ms]">
+            <p className="max-w-[46ch] text-[18px] leading-[1.6] text-white/84" style={{ textWrap: "pretty" }}>
               {hero.body}
             </p>
             <a
               href="tel:+94117848484"
-              className="inline-flex items-center gap-3 border border-white/30 px-6 py-4 text-[15px] font-bold whitespace-nowrap text-white tabular-nums"
+              className="inline-flex items-center gap-3 border border-white/30 px-6 py-4 text-[15px] font-bold whitespace-nowrap text-white tabular-nums transition-colors hover:bg-white/8 hover:text-white"
             >
-              <span className="animate-sj-pulse h-2 w-2 rounded-full bg-[var(--home-accent)]" />
+              <span aria-hidden className="animate-sj-pulse h-2 w-2 rounded-full bg-[var(--home-accent)]" />
               0117 84 84 84
             </a>
           </div>
         </div>
       </div>
 
-      <StatTicker items={tickerItems} />
+      <Ticker items={tickerItems} />
     </section>
   );
 }

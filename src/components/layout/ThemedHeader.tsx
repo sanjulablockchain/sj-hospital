@@ -89,7 +89,7 @@ export function ThemedHeader({ sections, variant = "fixed" }: ThemedHeaderProps)
               height={LOGO_LOCKUP_BRAND.height}
               data-logo
               className="-mx-2 block h-12 w-auto sm:-mx-3.5 sm:h-16"
-              priority
+              preload
             />
           ) : (
             <>
@@ -99,7 +99,7 @@ export function ThemedHeader({ sections, variant = "fixed" }: ThemedHeaderProps)
                 width={LOGO_MARK.width}
                 height={LOGO_MARK.height}
                 className="block h-10 w-auto sm:h-12"
-                priority
+                preload
               />
               <span className="block leading-[1.05]">
                 <span className="font-display block text-[15px] font-extrabold tracking-[-0.02em] text-[var(--sj-chrome-fg)] transition-colors duration-300 sm:text-[16.5px]">

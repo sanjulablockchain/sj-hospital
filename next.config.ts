@@ -23,6 +23,17 @@ const nextConfig: NextConfig = {
   watchOptions: {
     pollIntervalMs: 500,
   },
+  // The project root for Turbopack. Next infers it from the nearest lockfile
+  // and, when this checkout is a git worktree under the main checkout's
+  // `.claude/worktrees/`, that inference lands on the PARENT repository: it
+  // then compiles the worktree as a subfolder of a different checkout, skips
+  // the dot-directory when watching for changes, and serves stale modules.
+  // Pinning the root to this file's own directory keeps each checkout
+  // self-contained (see the "Root directory" section of the bundled
+  // turbopack.md guide).
+  turbopack: {
+    root: import.meta.dirname,
+  },
   async redirects() {
     return [
       // The careers page moved from the singular /career, which the old
