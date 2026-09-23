@@ -25,5 +25,7 @@ export const testimonials = [
   },
 ];
 
-export const ariaPrev = "කලින් Testimonial එක";
-export const ariaNext = "ඊළඟ Testimonial එක";
+export const body = "මෙතන ප්‍රතිකාර ලබපු, සැත්කම් කරගත්තු සහ බලාගත්තු රෝගීන්ගේම ඇත්ත වචන.";
+export const ariaShow = "Review {n} පෙන්වන්න";
+export const ariaPrev = "කලින් Review එක";
+export const ariaNext = "ඊළඟ Review එක";

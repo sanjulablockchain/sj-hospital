@@ -28,6 +28,6 @@ export const internationalCareItems = [
   },
 ];
 
-export const heading = {};
 export const body =
-  "நீர்கொழும்பு சர்வதேச Airport இலிருந்து பத்து நிமிட தொலைவில் அமைந்துள்ளது. Visitors, Expatriates மற்றும் Medical Travelers ஐ வருகையிலிருந்து வீட்டு Follow-up வரை நாங்கள் கவனித்துக்கொள்கிறோம்.";
+  "நீங்கள் Katunayake இல் Land ஆகிறீர்கள். மீதியை நாங்கள் பார்த்துக்கொள்கிறோம். Transfer, Estimate, Interpreter மற்றும் நீங்கள் வீட்டுக்கு எடுத்துச் செல்லும் Records ஐ ஒரே Desk ஏற்பாடு செய்யும்.";
+export const badge = { note: "எதுவும் தொடங்குவதற்கு முன்" };

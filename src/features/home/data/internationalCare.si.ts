@@ -28,6 +28,6 @@ export const internationalCareItems = [
   },
 ];
 
-export const heading = {};
 export const body =
-  "මීගමුව ජාත්‍යන්තර Airport එකෙන් විනාඩි දහයක් දුරින්. Visitors ලා, Expatriates ලා සහ Medical Travelers ලා පැමිණීමේ ඉඳන් ගෙදර Follow-up එක දක්වා අපි බලාගන්නවා.";
+  "ඔබ Katunayake එකට Land වෙනවා. ඉතුරු ටික අපි බලාගන්නවා. Transfer එක, Estimate එක, Interpreter කෙනා සහ ඔබ ගෙදර ගෙනියන Records එක Desk එකක් සකසනවා.";
+export const badge = { note: "මොකක් හරි පටන් ගන්න කලින්" };

@@ -1,28 +1,7 @@
-// Tamil for the home page bands that have no dedicated data file: hero,
-// "who we are", the services bento, surgical, pharmacy, rooms, school
-// wellness, the stat ticker and the closing "come see us" band.
-//
-// Same code-mixed register as the rest of this feature: the sentence is
-// Tamil, everyday English nouns and this site's own register words
-// ("Emergency", "OPD", "Digital X-ray", "Pharmacy", "Los Angeles", "Nurse")
-// stay in English, the same precedent `career`'s, `facilities`'s, `network`'s
-// and `pharmacy`'s own content.ta.ts already establish. Sentence forms use
-// the polite plural ("செய்யுங்கள்"), never the familiar imperative.
-//
-// "St. Joseph Street" keeps the hospital's own address in English, the same
-// rule `contact`'s own content.ts states (see content.ts's header note on
-// `contactCta`).
-//
-// The register sweep (2026-09-09) deleted every hero field, section eyebrow,
-// section/tile heading and CTA/link label from this file: the policy
-// (`docs/superpowers/i18n-register-rule.md`) renders all of those in
-// English on every page. That also emptied `servicesBento.tiles[6].heading`
-// and `pharmacy.heading`, which used to import `home-care`'s and
-// `pharmacy`'s own hero strings rather than typing them a second time
-// (`homeCareHeroTa.strapline`, `pharmacyHeroTa.headingLead` /
-// `.headingAccent`); both imports are gone from this file along with the
-// fields that used them. What remains below is intro/body/stat-caption
-// prose, which stays translated.
+// Tamil for the home page bands that have no dedicated data file; see
+// content.si.ts for what is and is not here. Same code-mixed register as the
+// rest of this feature: everyday English nouns and this site's own register
+// words stay in English inside a Tamil sentence, Western numerals throughout.
 
 export const __review = { status: "draft", reviewer: null, date: null } as const;
 
@@ -38,59 +17,37 @@ export const statTickerItems = [
   "அறைகள் 10,000 LKR முதல்",
 ];
 
+export const quickAccess = {
+  channel: {
+    body: "ஒரு Consultant ஐயும் நேரத்தையும் Online இல் தேர்ந்தெடுங்கள், அல்லது எங்கள் இலவச OPD க்கு நேரடியாக வாருங்கள்.",
+  },
+  emergency: {
+    body: "எந்த நேரத்திலும் நேரடியாக வாருங்கள். Ambulance Bay மற்றும் Critical Care 24 மணி நேரமும் திறந்திருக்கும்.",
+  },
+  facilities: {
+    bodyTemplate: "{count} சேவைகள் ஒரே கூரையின் கீழ், US Protocol இன் படி.",
+  },
+  location: {
+    body: "229/10 St. Joseph Street, நீர்கொழும்பு. Airport இலிருந்து பத்து நிமிடங்கள்.",
+  },
+};
+
 export const whoWeAre = {
-  heading: {},
   intro:
-    "St. Joseph Hospital ஐ நிர்வகித்து Operate செய்வது Los Angeles இன் Kids & Teens Pediatric Medical Group ஆகும்: அமெரிக்க சிகிச்சையின் Standards, Protocols மற்றும் Clinical Discipline, நீர்கொழும்பு குடும்பங்களுக்கு ஏற்புடைய விலையில்.",
-  body: "Consumables ஒருபோதும் மீண்டும் பயன்படுத்தப்படுவதில்லை. கழிவுகள் சர்வதேச Protocol இன் படி Manage செய்யப்படும். ஒவ்வொரு மேற்பரப்பும் இரு மணி நேரத்திற்கு ஒருமுறை Clean செய்யப்படும். எங்கள் House Doctors உங்களுக்கு உண்மையில் தேவையான Tests ஐ மட்டுமே Order செய்வார்கள், ஒவ்வொரு Report உம் அது உங்களை அடைவதற்கு முன் அவர்களில் இருவரால் படிக்கப்படும்.",
+    "Los Angeles இன் Kids & Teens Pediatric Medical Group ஆல் நிர்வகிக்கப்பட்டு Operate செய்யப்படுகிறது: அமெரிக்க சிகிச்சையின் Standards, Protocols மற்றும் Clinical Discipline, நீர்கொழும்பு குடும்பங்களுக்கு ஏற்புடைய விலையில்.",
+  body: "Consumables ஒருபோதும் மீண்டும் பயன்படுத்தப்படுவதில்லை. ஒவ்வொரு மேற்பரப்பும் இரு மணி நேரத்திற்கு ஒருமுறை Clean செய்யப்படும். ஒவ்வொரு Report உம் உங்களை அடைவதற்கு முன் இரு மருத்துவர்களால் படிக்கப்படும்.",
   stats: [
-    { caption: "ஒரு நாளுக்கு மணி நேரம், ஒவ்வொரு சேவையும் திறந்திருக்கும்" },
-    { caption: "Cleaning Cycle, US Specification இன் படி" },
-    { caption: "உங்களுக்குத் தேவையில்லாத Tests Order செய்வது" },
+    { label: "Emergency மற்றும் OPD", desc: "ஒவ்வொரு சேவையும், ஒவ்வொரு மணி நேரமும், ஆண்டின் ஒவ்வொரு நாளும் திறந்திருக்கும்." },
+    { label: "சேவைகள்", desc: "Emergency சிகிச்சையிலிருந்து Fertility வரை, ஒரே கூரையின் கீழ்." },
+    { label: "மாடி மருத்துவமனை", desc: "நீர்கொழும்பில் இதற்காகவே கட்டப்பட்டது, Ambulance Bay மற்றும் மூடிய வருகைப் பகுதியுடன்." },
+    { label: "Cleaning சுழற்சி", desc: "ஒவ்வொரு மேற்பரப்பும், US Specification இன் படி Clean செய்யப்படும்." },
+    { label: "Home Visit வாகனங்கள்", desc: "மருத்துவர்கள், Nurses மற்றும் Lab Technicians உங்கள் வாசலுக்கு." },
+    { label: "Airport இலிருந்து நிமிடங்கள்", desc: "Bandaranaike International இலிருந்து எங்கள் வாசல் வரை." },
   ],
 };
 
-export const servicesBento = {
-  heading: {},
-  tilesNote: "ஒவ்வொரு Tile உம் ஒரு சேவையைத் திறக்கும்",
-  tiles: [
-    {
-      openNow: "இப்போது திறந்துள்ளது",
-      heading: {},
-      body: "Emergency சிகிச்சை, Outpatient Consultations, ஆய்வகம் மற்றும் Digital X-ray, ஆண்டின் ஒவ்வொரு நாளும் 24 மணி நேரமும் Live.",
-    },
-    {
-      body: "Elective மற்றும் Emergency Surgery, Sterile Instrument Tracking மற்றும் நியமிக்கப்பட்ட Recovery Nurse உடன்.",
-    },
-    {
-      body: "LKR, ஓர் இரவுக்கு. Private மற்றும் Semi Private, இரு மணி நேரத்திற்கு ஒருமுறை Sanitise செய்யப்படும், உங்கள் பெயரை அறிந்த Nursing.",
-    },
-    {
-      body: "Verified மருந்து மட்டும். Substitutes இல்லை.",
-    },
-    {
-      body: "ஒரு மணி நேரத்திற்குள் படிக்கப்படும், வாரமல்ல.",
-    },
-    {
-      note: "OPD நோயாளர்களுக்கு 10% தள்ளுபடி",
-    },
-    {
-      body: "மருத்துவர்கள், Nurses மற்றும் Lab Technicians உங்கள் வாசலுக்கு.",
-    },
-    {
-      body: "நீர்கொழும்பு முழுவதும், எங்கள் சொந்த Counter இலிருந்து.",
-    },
-  ],
-  footer: {},
-};
-
-// `02 / Free OPD`. The eyebrow, both heading lines and both CTA labels are
-// English in every language under the register policy, so they are absent
-// here rather than restated; what is left is the paragraph and the three
-// points, which is what a Tamil reader actually reads.
 export const freeOpd = {
-  heading: {},
-  body: "இலங்கையில் இதுவே முதல் முறை: எங்கள் வெளிநோயாளர் பிரிவில் Consultations இலவசம். ஒரு காய்ச்சலுக்கோ, கட்டிக்கோ, ஒரு வார வலிக்கோ பணம் செலவழிப்பது தகுமா என்று யாரும் யோசிக்க வேண்டியதில்லை. நேரடியாக வந்து ஒரு மருத்துவரைப் பாருங்கள்.",
+  body: "எங்கள் வெளிநோயாளர் பிரிவில் Consultations இலவசம், அதனால் ஒரு காய்ச்சலுக்கோ, கட்டிக்கோ, ஒரு வார வலிக்கோ பணம் செலவழிப்பது தகுமா என்று யாரும் யோசிக்க வேண்டியதில்லை. நேரடியாக வந்து ஒரு மருத்துவரைப் பாருங்கள்.",
   points: [
     "நாங்கள் திறந்திருக்கும் ஒவ்வொரு மணி நேரமும் இலவச Consultation",
     "பொதுவான பிரச்சினைகளுக்கும் நிபுணர் Referral க்கும் ஒரேபோல",
@@ -98,20 +55,50 @@ export const freeOpd = {
   ],
 };
 
-export const surgical = {
-  heading: {},
-  body: "Elective மற்றும் Emergency Surgery, Consultant Anaesthesia, Single Use Consumables, ஒவ்வொரு Instrument Set க்கும் Sterile Tracking, மற்றும் அறுவை சிகிச்சை அரங்கிலிருந்து Discharge வரை உங்கள் Recovery க்கு நியமிக்கப்பட்ட Nurse.",
-  procedures: [
-    { name: "பொது அறுவை சிகிச்சை", note: "Elective மற்றும் Emergency" },
-    { name: "Obstetric அறுவை சிகிச்சை அரங்கு", note: "Consultant தலைமையிலான" },
-    { name: "Orthopaedic நடைமுறைகள்", note: "Day Case மற்றும் Inpatient" },
-    { name: "Endoscopy பிரிவு", note: "அதே நாள் Report" },
-    { name: "அறுவை சிகிச்சைக்குப் பிந்தைய பராமரிப்பு", note: "நியமிக்கப்பட்ட Recovery Nurse" },
+export const specialties = {
+  body: "நேரடியாக வரும் Consultation இலிருந்து Surgery, Diagnostics மற்றும் வீட்டில் பராமரிப்பு வரை, ஒவ்வொரு சேவையும் ஒரே அமெரிக்க Protocol இன் படி நடக்கிறது.",
+  countTemplate: "{total} இல் {n}",
+  ariaPrev: "முந்தைய சிறப்புப் பிரிவு",
+  ariaNext: "அடுத்த சிறப்புப் பிரிவு",
+  // Each tab's `links` are service titles and routes, all English or facts, so
+  // the entries are empty placeholders: the parity test still checks the
+  // array lengths match the English (the same shape media.ta.ts uses).
+  tabs: [
+    {
+      desc: "24 மணி நேரமும் Accident மற்றும் Emergency சிகிச்சை, Intensive மற்றும் Critical Care அங்கேயே. ஆண்டின் ஒவ்வொரு நாளும் எந்த நேரத்திலும் நேரடியாக வாருங்கள், அல்லது Call செய்யுங்கள், நாங்கள் உங்களிடம் வருகிறோம்.",
+      links: [{}, {}, {}],
+    },
+    {
+      desc: "Consultant Anaesthesia, Single Use Consumables, ஒவ்வொரு Instrument Set க்கும் Sterile Tracking மற்றும் உங்கள் Recovery க்கு நியமிக்கப்பட்ட Nurse உடன், Consultant தலைமையிலான அறுவை சிகிச்சை அரங்குகள்.",
+      links: [{}, {}, {}, {}, {}, {}, {}],
+    },
+    {
+      desc: "24 மணி நேர ஆய்வகம் மற்றும் Digital X-ray, ஒவ்வொரு Report உம் இரு மருத்துவர்களால் படிக்கப்பட்டு அதே நாளில் திருப்பித் தரப்படும். OPD நோயாளர்கள் Laboratory Tests இல் 10% சேமிக்கிறார்கள்.",
+      links: [{}, {}, {}, {}],
+    },
+    {
+      desc: "இலவச வெளிநோயாளர் பிரிவுக்கு அருகிலேயே நிபுணர் Clinics, அதனால் ஒரு Referral என்பது ஊர் முழுவதும் பயணம் அல்ல, Corridor இல் சில அடிகள் மட்டுமே.",
+      links: [{}, {}, {}, {}, {}, {}, {}, {}],
+    },
+    {
+      desc: "Maternity, Gynaecology மற்றும் Paediatric சிகிச்சை, எங்கள் Los Angeles குழு தன் சொந்த நோயாளர்களுக்குப் பயன்படுத்தும் அதே Kids and Teens Protocol இன் தலைமையில்.",
+      links: [{}, {}, {}, {}, {}],
+    },
+    {
+      desc: "ஒருபோதும் மூடாத Pharmacy, நீர்கொழும்பு முழுவதும் மருந்து விநியோகம், ஆறு வாகனங்களில் Home Visits மற்றும் தீவின் எந்த இடத்திலிருந்தும் Telemedicine.",
+      links: [{}, {}, {}, {}],
+    },
   ],
 };
 
+export const patientCare = {
+  body1:
+    "St. Joseph Hospital நீர்கொழும்பில் இதற்காகவே கட்டப்பட்ட ஆறு மாடி மருத்துவமனை, ஒரு அமெரிக்க Pediatric குழுவின் Protocols இன் படி இயங்குகிறது.",
+  body2:
+    "பராமரிப்பு வார்டில் நின்றுவிடுவதில்லை. எங்கள் Pharmacy ஒருபோதும் மூடாது, எங்கள் மருத்துவர்கள் வீடுகளுக்கும் பள்ளிகளுக்கும் செல்கிறார்கள், பயணம் செய்யும் நோயாளர்கள் Airport இலிருந்தே கவனிக்கப்படுகிறார்கள்.",
+};
+
 export const pharmacy = {
-  heading: {},
   body: "எங்கள் House Pharmacy இல் இருப்பது Verified, Authorized Stock மட்டும், உங்கள் File ஐ படிக்கக்கூடிய Pharmacists இரவின் எந்த நேரத்திலும் Dispense செய்வார்கள்.",
   stats: [
     { label: "Counter நேரங்கள்" },
@@ -121,33 +108,17 @@ export const pharmacy = {
   ],
 };
 
-export const rooms = {
-  heading: {},
-  body: "அமைதியான, Private, இரு மணி நேரத்திற்கு ஒருமுறை Sanitise செய்யப்படும், உங்கள் பெயரை அறிந்த Nursing மற்றும் எப்போதும் மாடியில் இருக்கும் மருத்துவர் உடன்.",
-  fromLabel: "அறைகள் தொடக்கம்",
-  priceCaption: "LKR, ஓர் இரவுக்கு, Nursing பராமரிப்புடன் அனைத்தும் உட்பட",
-  perks: [
-    "Private மற்றும் Semi Private Options",
-    "குடும்பத்திற்கு Attendant Space",
-    "உணவு Dietary Orders படி தயார் செய்யப்படும்",
+export const standards = {
+  sub: "Medical Quality சிகிச்சை, அமெரிக்க Protocol இன் படி",
+  items: [
+    { desc: "Consumables ஒருபோதும் மீண்டும் பயன்படுத்தப்படுவதில்லை, கழிவுகள் சர்வதேச Protocol இன் படி Manage செய்யப்படும்." },
+    { desc: "ஒவ்வொரு மேற்பரப்பும் இரு மணி நேரத்திற்கு ஒருமுறை, US Specification இன் படி Clean செய்யப்படும்." },
+    { desc: "ஒவ்வொரு முடிவும் உங்களை அடைவதற்கு முன் இரு மருத்துவர்களால் படிக்கப்படும், அதே நாளில்." },
   ],
-};
-
-export const schoolWellness = {
-  heading: {},
-  body: "நீர்கொழும்பு பள்ளிகளுக்கான Pediatric தலைமையிலான திட்டம்: வருடாந்திர Screening, பார்வை மற்றும் செவிப்புலன் பரிசோதனைகள், வளர்ச்சி Tracking, தடுப்பூசி பயணங்கள் மற்றும் Teacher First Aid பயிற்சி, உங்கள் குழந்தைகளை Clinic இல் பார்க்கும் அதே மருத்துவர்களால் நடத்தப்படுகிறது.",
-  rows: [
-    { note: "பள்ளியிலேயே, தர வாரியாக" },
-    { note: "பெற்றோருக்கு Referral அறிக்கை" },
-    { note: "அரை நாள், Certified" },
-  ],
-  // "Kids & Teens Pediatric Protocol": this specific programme's own named
-  // protocol, the same class of proper noun as "Kids & Teens Medical Group"
-  // itself, which stays English throughout this feature. KEEPS_ENGLISH.
-  photoCaption: "Kids & Teens Pediatric Protocol",
 };
 
 export const contactCta = {
-  heading: {},
   body: "229/10 St. Joseph Street, நீர்கொழும்பு. நேரடியாக வாருங்கள், எங்களை Call செய்யுங்கள், அல்லது WhatsApp இல் Message அனுப்புங்கள்.",
+  // Link labels, routes and icon keys: English or facts, placeholders only.
+  contactRows: [{}, {}, {}, {}],
 };

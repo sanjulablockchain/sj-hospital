@@ -1,6 +1,7 @@
-// Sinhala for the home page bands that have no dedicated data file: hero,
-// "who we are", the services bento, surgical, pharmacy, rooms, school
-// wellness, the stat ticker and the closing "come see us" band.
+// Sinhala for the home page bands that have no dedicated data file: the hero,
+// the quick access mosaic, "who we are", the free OPD band, the specialties
+// carousel, the patient care band, the pharmacy band, the standards band and
+// the closing "come see us" band.
 //
 // Same code-mixed register as the rest of this feature: the sentence is
 // Sinhala, everyday English nouns and this site's own register words
@@ -10,18 +11,12 @@
 // the polite plural ("කරන්න"), never the familiar imperative.
 //
 // "St. Joseph Street" keeps the hospital's own address in English, the same
-// rule `contact`'s own content.ts states (see content.ts's header note on
-// `contactCta`).
+// rule `contact`'s own content.ts states.
 //
-// The register sweep (2026-09-09) deleted every hero field, section eyebrow,
-// section/tile heading and CTA/link label from this file: the policy
-// (`docs/superpowers/i18n-register-rule.md`) renders all of those in
-// English on every page. That also emptied `servicesBento.tiles[6].heading`
-// and `pharmacy.heading.line1`, which used to import `home-care`'s and
-// `pharmacy`'s own hero strings rather than typing them a second time
-// (`homeCareHeroSi.strapline`, `pharmacyHeroSi.headingLead`); both imports
-// are gone from this file along with the fields that used them. What
-// remains below is intro/body/stat-caption prose, which stays translated.
+// Per the register rule (docs/superpowers/i18n-register-rule.md) every hero
+// field, eyebrow, heading, card title, chip and CTA is ABSENT from this file
+// and renders in English; what remains is prose, stat captions and assistive
+// text.
 
 export const __review = { status: "draft", reviewer: null, date: null } as const;
 
@@ -37,59 +32,37 @@ export const statTickerItems = [
   "කාමර 10,000 LKR සිට",
 ];
 
+export const quickAccess = {
+  channel: {
+    body: "Consultant කෙනෙක් සහ වෙලාවක් Online තෝරන්න, නැත්නම් අපේ නොමිලේ OPD එකට කෙලින්ම එන්න.",
+  },
+  emergency: {
+    body: "ඕනෑම වෙලාවක කෙලින්ම එන්න. Ambulance Bay සහ Critical Care පැය 24ම විවෘත.",
+  },
+  facilities: {
+    bodyTemplate: "{count} සේවාවන් එක වහලක් යට, US Protocol එකට.",
+  },
+  location: {
+    body: "229/10 St. Joseph Street, මීගමුව. Airport එකෙන් විනාඩි දහයක්.",
+  },
+};
+
 export const whoWeAre = {
-  heading: {},
   intro:
-    "St. Joseph Hospital මෙහෙයවනු සහ Operate කරනු ලබන්නේ Los Angeles හි Kids & Teens Pediatric Medical Group විසිනුයි: ඇමෙරිකානු සත්කාරයේ Standards, Protocols සහ Clinical Discipline, මීගමුවේ පවුල් සඳහා දැරිය හැකි මිලකට.",
-  body: "Consumables කවදාවත් නැවත පාවිච්චි කරන්නේ නෑ. කසළ ජාත්‍යන්තර Protocol එකට Manage කරනවා. හැම මතුපිටක්ම පැය දෙකකට සැරයක් Clean කරනවා. අපේ House Doctors ඔබට ඇත්තටම ඕන Tests විතරක් Order කරනවා, සහ හැම Report එකක්ම ඔබ ලඟට එන්න කලින් ඒගොල්ලන් දෙන්නෙක් කියවනවා.",
+    "Los Angeles හි Kids & Teens Pediatric Medical Group විසින් මෙහෙයවනු සහ Operate කරනු ලබන: ඇමෙරිකානු සත්කාරයේ Standards, Protocols සහ Clinical Discipline, මීගමුවේ පවුල් සඳහා දැරිය හැකි මිලකට.",
+  body: "Consumables කවදාවත් නැවත පාවිච්චි කරන්නේ නෑ. හැම මතුපිටක්ම පැය දෙකකට සැරයක් Clean කරනවා. හැම Report එකක්ම ඔබ ලඟට එන්න කලින් වෛද්‍යවරු දෙන්නෙක් කියවනවා.",
   stats: [
-    { caption: "දිනකට පැය, හැම සේවාවක්ම විවෘත" },
-    { caption: "Cleaning Cycle එක, US Specification එකට" },
-    { caption: "ඔබට ඕන නැති Tests Order කරන එක" },
+    { label: "Emergency සහ OPD", desc: "හැම සේවාවක්ම, හැම පැයකම, අවුරුද්දේ හැම දිනකම විවෘත." },
+    { label: "සේවාවන්", desc: "Emergency සත්කාරයේ ඉඳන් Fertility දක්වා, එක වහලක් යට." },
+    { label: "මහල් රෝහල", desc: "මීගමුවේ මේ සඳහාම ඉදිකළ, Ambulance Bay සහ වැසුණු පිවිසුමක් සමඟ." },
+    { label: "Cleaning Cycle එක", desc: "හැම මතුපිටක්ම, US Specification එකට Clean කරනවා." },
+    { label: "Home Visit වාහන", desc: "වෛද්‍යවරු, Nurses සහ Lab Technicians ඔබේ දොරටුවට." },
+    { label: "Airport එකෙන් විනාඩි", desc: "Bandaranaike International එකෙන් අපේ දොරටුව දක්වා." },
   ],
 };
 
-export const servicesBento = {
-  heading: {},
-  tilesNote: "හැම Tile එකක්ම සේවාවක් විවෘත කරනවා",
-  tiles: [
-    {
-      openNow: "දැන් විවෘතයි",
-      heading: {},
-      body: "Emergency සත්කාරය, Outpatient Consultations, රසායනාගාරය සහ Digital X-ray, අවුරුද්දේ හැම දිනකම පැය 24ම Live.",
-    },
-    {
-      body: "Elective සහ Emergency Surgery, Sterile Instrument Tracking සහ පවරන ලද Recovery Nurse කෙනෙක් සමඟ.",
-    },
-    {
-      body: "LKR, එක රාත්‍රියකට. Private සහ Semi Private, පැය දෙකට සැරයක් Sanitise කරනවා, ඔබේ නම දන්නා Nursing.",
-    },
-    {
-      body: "Verified බෙහෙත් විතරයි. Substitutes නෑ.",
-    },
-    {
-      body: "පැයක් ඇතුලත කියවනවා, සතියක් නෙවෙයි.",
-    },
-    {
-      note: "OPD රෝගීන්ට 10% වට්ටමක්",
-    },
-    {
-      body: "වෛද්‍යවරු, Nurses සහ Lab Technicians ඔබේ දොරටුවට.",
-    },
-    {
-      body: "මීගමුව පුරාම, අපේම Counter එකෙන්.",
-    },
-  ],
-  footer: {},
-};
-
-// `02 / Free OPD`. The eyebrow, both heading lines and both CTA labels are
-// English in every language under the register policy, so they are absent
-// here rather than restated; what is left is the paragraph and the three
-// points, which is what a Sinhala reader actually reads.
 export const freeOpd = {
-  heading: {},
-  body: "ශ්‍රී ලංකාවේ පළමු වතාවට: අපේ බාහිර රෝගී අංශයේ Consultations නොමිලේ. උණක්, ගෙඩියක් හෝ සතියක වේදනාවක් සඳහා මුදල් වියදම් කරන්න වටිනවද කියලා කාටවත් කල්පනා කරන්න වෙන්නේ නෑ. කෙලින්ම ඇවිත් වෛද්‍යවරයෙක් හමුවෙන්න.",
+  body: "අපේ බාහිර රෝගී අංශයේ Consultations නොමිලේ, ඒ නිසා උණක්, ගෙඩියක් හෝ සතියක වේදනාවක් සඳහා මුදල් වියදම් කරන්න වටිනවද කියලා කාටවත් කල්පනා කරන්න වෙන්නේ නෑ. කෙලින්ම ඇවිත් වෛද්‍යවරයෙක් හමුවෙන්න.",
   points: [
     "අපි විවෘත හැම පැයකම නොමිලේ Consultation",
     "සාමාන්‍ය පැමිණිලිවලට වගේම විශේෂඥ Referral එකටත්",
@@ -97,20 +70,50 @@ export const freeOpd = {
   ],
 };
 
-export const surgical = {
-  heading: {},
-  body: "Elective සහ Emergency Surgery, Consultant Anaesthesia, Single Use Consumables, හැම Instrument Set එකකම Sterile Tracking, සහ ශල්‍යාගාරයේ ඉඳන් Discharge වෙනකන් ඔබේ Recovery සඳහා පවරන ලද Nurse කෙනෙක්.",
-  procedures: [
-    { name: "සාමාන්‍ය Surgery", note: "Elective සහ Emergency" },
-    { name: "Obstetric ශල්‍යාගාරය", note: "Consultant මෙහෙයවන" },
-    { name: "Orthopaedic ක්‍රියාමාර්ග", note: "Day Case සහ Inpatient" },
-    { name: "Endoscopy අංශය", note: "එදිනම Report කිරීම" },
-    { name: "සැත්කමෙන් පස්සේ සත්කාරය", note: "පවරන ලද Recovery Nurse" },
+export const specialties = {
+  body: "කෙලින්ම එන Consultation එකේ ඉඳන් Surgery, Diagnostics සහ ගෙදරදී සත්කාරය දක්වා, හැම සේවාවක්ම දුවන්නේ එකම ඇමෙරිකානු Protocol එකටයි.",
+  countTemplate: "{total}න් {n}",
+  ariaPrev: "කලින් විශේෂඥ අංශය",
+  ariaNext: "ඊළඟ විශේෂඥ අංශය",
+  // Each tab's `links` are service titles and routes, all English or facts, so
+  // the entries are empty placeholders: the parity test still checks the
+  // array lengths match the English (the same shape media.si.ts uses).
+  tabs: [
+    {
+      desc: "පැය 24ම Accident සහ Emergency සත්කාරය, Intensive සහ Critical Care එතැනම. අවුරුද්දේ හැම දිනකම ඕනෑම වෙලාවක කෙලින්ම එන්න, නැත්නම් Call කරන්න, අපි ඔබ ලඟට එනවා.",
+      links: [{}, {}, {}],
+    },
+    {
+      desc: "Consultant Anaesthesia, Single Use Consumables, හැම Instrument Set එකකම Sterile Tracking සහ ඔබේ Recovery සඳහා පවරන ලද Nurse කෙනෙක් සමඟ Consultant මෙහෙයවන ශල්‍යාගාර.",
+      links: [{}, {}, {}, {}, {}, {}, {}],
+    },
+    {
+      desc: "පැය 24 රසායනාගාරයක් සහ Digital X-ray, හැම Report එකක්ම වෛද්‍යවරු දෙන්නෙක් කියවලා එදිනම ලබා දෙනවා. OPD රෝගීන්ට Laboratory Tests සඳහා 10% ඉතිරියක්.",
+      links: [{}, {}, {}, {}],
+    },
+    {
+      desc: "නොමිලේ බාහිර රෝගී අංශයක් ලඟින්ම විශේෂඥ Clinics, ඒ නිසා Referral එකක් කියන්නේ නගරය හරහා ගමනක් නෙවෙයි, Corridor එකේ ටිකක් ඇවිදින එකයි.",
+      links: [{}, {}, {}, {}, {}, {}, {}, {}],
+    },
+    {
+      desc: "Maternity, Gynaecology සහ Paediatric සත්කාරය, අපේ Los Angeles සමූහය තමන්ගේම රෝගීන්ට පාවිච්චි කරන ම Kids and Teens Protocol එකෙන් මෙහෙයවනවා.",
+      links: [{}, {}, {}, {}, {}],
+    },
+    {
+      desc: "කවදාවත් වහන්නේ නැති Pharmacy එකක්, මීගමුව පුරාම බෙහෙත් ගෙන්වා දීම, වාහන හයක් මත Home Visits සහ දිවයිනේ ඕනෑම තැනකින් Telemedicine.",
+      links: [{}, {}, {}, {}],
+    },
   ],
 };
 
+export const patientCare = {
+  body1:
+    "St. Joseph Hospital කියන්නේ මීගමුවේ මේ සඳහාම ඉදිකළ මහල් හයක රෝහලක්, ඇමෙරිකානු Pediatric සමූහයක Protocols වලට දුවන.",
+  body2:
+    "සත්කාරය වාට්ටුවෙන් නවතින්නේ නෑ. අපේ Pharmacy එක කවදාවත් වහන්නේ නෑ, අපේ වෛද්‍යවරු ගෙවල් සහ පාසල් වලට යනවා, සහ ගමන් කරන රෝගීන් Airport එකෙන් පටන් බලාගන්නවා.",
+};
+
 export const pharmacy = {
-  heading: {},
   body: "අපේ House Pharmacy එකේ තියෙන්නේ Verified, Authorized Stock විතරයි, ඔබේ File එක කියවන්න පුළුවන් Pharmacists ලා විසින් රාත්‍රියේ ඕන වෙලාවක Dispense කරනවා.",
   stats: [
     { label: "Counter වෙලාවන්" },
@@ -120,33 +123,17 @@ export const pharmacy = {
   ],
 };
 
-export const rooms = {
-  heading: {},
-  body: "නිස්කලංක, Private, පැය දෙකට සැරයක් Sanitise කරන, ඔබේ නම දන්නා Nursing එකක් සහ හැම වෙලාවකම මාලයේ ඉන්නා වෛද්‍යවරයෙක් සමඟ.",
-  fromLabel: "කාමර ආරම්භය",
-  priceCaption: "LKR, එක රාත්‍රියකට, Nursing සත්කාරයත් සමඟ සියල්ලම ඇතුළුව",
-  perks: [
-    "Private සහ Semi Private Options",
-    "පවුලේ අයට Attendant Space",
-    "ආහාර සකසන්නේ Dietary Orders වලට අනුවයි",
+export const standards = {
+  sub: "Medical Quality සත්කාරය, ඇමෙරිකානු Protocol එකට",
+  items: [
+    { desc: "Consumables කවදාවත් නැවත පාවිච්චි කරන්නේ නෑ, කසළ ජාත්‍යන්තර Protocol එකට Manage කරනවා." },
+    { desc: "හැම මතුපිටක්ම පැය දෙකකට සැරයක්, US Specification එකට Clean කරනවා." },
+    { desc: "හැම ප්‍රතිඵලයක්ම ඔබ ලඟට එන්න කලින් වෛද්‍යවරු දෙන්නෙක් කියවනවා, එදිනම." },
   ],
-};
-
-export const schoolWellness = {
-  heading: {},
-  body: "මීගමුව පාසල් සඳහා Pediatric මෙහෙයවන වැඩසටහනක්: වාර්ෂික Screening, දෘෂ්ටි සහ ශ්‍රවණ පරීක්ෂණ, වර්ධන Tracking, එන්නත්කරණ වැඩසටහන් සහ Teacher First Aid පුහුණුව, ඔබේ දරුවන්ව Clinic එකේ බලන ම වෛද්‍යවරුන් විසින්ම මෙහෙයවනවා.",
-  rows: [
-    { note: "පාසලේදීම, ශ්‍රේණිය අනුව" },
-    { note: "දෙමව්පියන්ට Referral වාර්තාවක්" },
-    { note: "අඩ දවසක්, Certified" },
-  ],
-  // "Kids & Teens Pediatric Protocol": this specific programme's own named
-  // protocol, the same class of proper noun as "Kids & Teens Medical Group"
-  // itself, which stays English throughout this feature. KEEPS_ENGLISH.
-  photoCaption: "Kids & Teens Pediatric Protocol",
 };
 
 export const contactCta = {
-  heading: {},
   body: "229/10 St. Joseph Street, මීගමුව. ඇවිත් එන්න, අපිට Call කරන්න, නැත්නම් WhatsApp එකෙන් Message එකක් යවන්න.",
+  // Link labels, routes and icon keys: English or facts, placeholders only.
+  contactRows: [{}, {}, {}, {}],
 };

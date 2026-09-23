@@ -9,15 +9,9 @@ import * as announcementTa from "./announcement.ta.ts";
 import * as careers from "./careers.ts";
 import * as careersSi from "./careers.si.ts";
 import * as careersTa from "./careers.ta.ts";
-import * as facilities from "./facilities.ts";
-import * as facilitiesSi from "./facilities.si.ts";
-import * as facilitiesTa from "./facilities.ta.ts";
-import * as healthTips from "./healthTips.ts";
-import * as healthTipsSi from "./healthTips.si.ts";
-import * as healthTipsTa from "./healthTips.ta.ts";
-import * as homeCare from "./homeCare.ts";
-import * as homeCareSi from "./homeCare.si.ts";
-import * as homeCareTa from "./homeCare.ta.ts";
+import * as faq from "./faq.ts";
+import * as faqSi from "./faq.si.ts";
+import * as faqTa from "./faq.ta.ts";
 import * as internationalCare from "./internationalCare.ts";
 import * as internationalCareSi from "./internationalCare.si.ts";
 import * as internationalCareTa from "./internationalCare.ta.ts";
@@ -33,8 +27,8 @@ import * as testimonialsTa from "./testimonials.ta.ts";
 import { assertTranslationParity, stringPaths } from "../../../lib/i18n/stringPaths.ts";
 
 /**
- * The ten data files this feature is built from: eight per-teaser files,
- * plus `content.ts` for the bands with no data file of their own, plus
+ * The eight data files this feature is built from: six per-band files, plus
+ * `content.ts` for the bands with no data file of their own, plus
  * `announcement.ts` for the pop-up that opens over the page (see each one's
  * own header comment). Every module gets the same parity, array-length and
  * "not still English" gates, scoped by `moduleName` below.
@@ -43,9 +37,7 @@ const MODULES = [
   { name: "content", base: content, si: contentSi, ta: contentTa },
   { name: "announcement", base: announcement, si: announcementSi, ta: announcementTa },
   { name: "careers", base: careers, si: careersSi, ta: careersTa },
-  { name: "facilities", base: facilities, si: facilitiesSi, ta: facilitiesTa },
-  { name: "healthTips", base: healthTips, si: healthTipsSi, ta: healthTipsTa },
-  { name: "homeCare", base: homeCare, si: homeCareSi, ta: homeCareTa },
+  { name: "faq", base: faq, si: faqSi, ta: faqTa },
   { name: "internationalCare", base: internationalCare, si: internationalCareSi, ta: internationalCareTa },
   { name: "media", base: media, si: mediaSi, ta: mediaTa },
   { name: "network", base: network, si: networkSi, ta: networkTa },
@@ -79,19 +71,26 @@ const MODULES = [
  */
 function isUntranslatable(moduleName: string, path: string): boolean {
   if (path.endsWith(".index")) return true;
-  if (path.endsWith(".href")) return true;
-  // `announcement`'s slides each carry two destinations rather than one, so
-  // they are named `hrefPrimary` / `hrefSecondary` and the bare `.href`
-  // suffix above does not reach them. They are routes and `tel:` / `https:`
-  // actions, the same class of fact as every other href on the page.
-  if (path.endsWith(".hrefPrimary") || path.endsWith(".hrefSecondary")) return true;
+  // A route, a `tel:` or a `https:` action, wherever it sits: nested
+  // (`quickAccess.channel.href`), a top-level export of a per-band file
+  // (`media.href`, `media.storyHref`, `careers.openingsHref`), or one of the
+  // paired destinations `announcement`'s slides and the free OPD and pharmacy
+  // bands carry (`hrefPrimary` / `hrefSecondary`).
+  if (/(^|\.)href$/.test(path) || /Href$/.test(path)) return true;
+  if (/(^|\.)href(Primary|Secondary)$/.test(path)) return true;
   if (path.endsWith(".photo")) return true;
+  // `photo` is also a top-level export of testimonials.ts, internationalCare.ts
+  // and media.ts (the band's photograph), and `photoAlt` its description.
+  if (path === "photo" || path === "photoAlt") return true;
   if (path.endsWith(".photoAlt") && !(moduleName === "content" && path === "hero.photoAlt")) return true;
   if (path.endsWith(".date")) return true;
+  // Structural keys the components switch on: an icon name, a colour tone, a
+  // service group, and the specialties photograph path.
+  if (path.endsWith(".icon") || path.endsWith(".tone") || path.endsWith(".group") || path.endsWith(".image")) return true;
   if (/^testimonials\[\d+\]\.name$/.test(path)) return true;
   if (moduleName === "content") {
-    if (/^whoWeAre\.stats\[\d+\]\.(value|suffix)$/.test(path)) return true;
-    if (/^pharmacy\.stats\[\d+\]\.(value|suffix)$/.test(path)) return true;
+    if (/^whoWeAre\.stats\[\d+\]\.value$/.test(path)) return true;
+    if (/^pharmacy\.stats\[\d+\]\.value$/.test(path)) return true;
   }
   return false;
 }
@@ -101,29 +100,6 @@ function isUntranslatable(moduleName: string, path: string): boolean {
  * `"<module>:<path>"` so two modules can each have their own path without
  * colliding.
  *
- * - `content:servicesBento.tiles[3].badge` ("/04 Pharmacy") and
- *   `content:servicesBento.tiles[4].badge` ("/05 Digital X-ray"): "Pharmacy"
- *   and "Digital X-ray" are this site's own register words, the same class
- *   as "OPD" and "Emergency", and a bare numeral badge has no other word to
- *   translate.
- * - `content:pharmacy.eyebrow` and `media:sectionEyebrow` ("05 / Pharmacy",
- *   "12 / Media"): "Pharmacy" and "Media" are KEEPS_ENGLISH in
- *   navigationLabels.si.ts / .ta.ts for this exact word, and this eyebrow is
- *   that same word.
- * - `content:servicesBento.tiles[3].heading` ("Authorized stock, 24/7") is
- *   NOT in this set: "Authorized" here is part of the fixed compound
- *   "Authorized Stock", the same noun phrase `pharmacy`'s own standalone
- *   feature keeps English throughout its ticker, fact rows and safety cards
- *   ("Authorized Stock විතරයි", "Authorized Stock மட்டும்"). That is
- *   different from `pharmacy.heading.line1` below, where "Authorized" stands
- *   alone as one full segment of a three-segment heading whose other two
- *   segments both translate: pharmacy's own hero heading has the identical
- *   shape and translates that segment (see `content.si.ts` / `content.ta.ts`
- *   for the reused string), so home's copy of the same heading shape must
- *   too, and is translated rather than excepted here.
- * - `content:schoolWellness.photoCaption` ("Kids & Teens Pediatric
- *   Protocol"): this programme's own named protocol, the same proper-noun
- *   class as "Kids & Teens Medical Group" itself.
  * - `careers:jobOpenings[4].title` ("Radiographer, Digital X-ray"), and the
  *   `.department` / `.type` entries below: `.title` is now imported from
  *   `career`'s own `sharedJobTitlesSi` / `sharedJobTitlesTa` (see
@@ -146,11 +122,6 @@ function isUntranslatable(moduleName: string, path: string): boolean {
  *   own name and its home city, both English throughout this feature.
  */
 const KEEPS_ENGLISH = new Set<string>([
-  "content:servicesBento.tiles[3].badge",
-  "content:servicesBento.tiles[4].badge",
-  "content:pharmacy.eyebrow",
-  "content:schoolWellness.photoCaption",
-  "media:sectionEyebrow",
   "careers:jobOpenings[0].department",
   "careers:jobOpenings[0].type",
   "careers:jobOpenings[1].type",

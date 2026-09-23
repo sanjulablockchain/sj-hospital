@@ -30,7 +30,3 @@ export const jobOpenings = [
   { department: "විද්‍යාගාර", type: "Full time" },
   { department: "Imaging", type: "Full time" },
 ];
-
-export const heading = {};
-export const body =
-  "ඇමෙරිකානු Protocol එකට පුහුණු වූ Clinicians සහ Staff, ඔවුන් වෙනුවෙන් Invest කරන සමූහයක සහයෙන්.";

@@ -2,9 +2,12 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { facilities } from "./data/facilities.ts";
-import { networkNodes } from "./data/network.ts";
-import { homeCareCards } from "./data/homeCare.ts";
+import { quickAccess, specialties, pharmacy, contactCta, patientCare } from "./data/content.ts";
+import * as faq from "./data/faq.ts";
+import * as media from "./data/media.ts";
+import * as careers from "./data/careers.ts";
+import * as internationalCare from "./data/internationalCare.ts";
+import { networkNodes, href as networkHref } from "./data/network.ts";
 
 // Walks src/features/home for every .ts/.tsx file. Hand-written for the same
 // reason navigation.test.ts writes its own walker: @types/node@20 (pinned in
@@ -56,15 +59,15 @@ const HOME_FILES = findSourceFiles("src/features/home").filter(
   (file) => !file.endsWith("teaserLinks.test.ts")
 );
 
-// Every home band that is now only a teaser for a page of its own. Clicking a
-// teaser has to leave the home page, which is the whole point of a teaser; a
-// bare hash just scrolls the reader further down the page they are already on
-// and the destination page never gets visited.
+// Every home band is a teaser for a page of its own. Clicking a teaser has to
+// leave the home page, which is the whole point of a teaser; a bare hash just
+// scrolls the reader further down the page they are already on and the
+// destination page never gets visited.
 //
 // This is the same failure navigation.test.ts already guards for the header
 // and footer ("no nav item still points at a retired home or services band").
-// The teaser cards were missed by that check because they are not nav items,
-// so thirteen of them still scrolled in place.
+// The v4 reference arrived with `href="#"` on every link, so the list now
+// covers its bands too.
 const RETIRED_BANDS = new Map([
   ["#facilities", "/facilities"],
   ["#rooms", "/accommodation"],
@@ -80,10 +83,13 @@ const RETIRED_BANDS = new Map([
   ["#book", "/e-channeling"],
   ["#standards", "/about-us"],
   ["#voices", "/about-us"],
-  // The care-at-home band is a teaser from the day it lands, so it never gets
-  // the chance to become a section someone links to in place. Listed here with
-  // the rest so it cannot acquire one later.
   ["#home-care", "/home-care"],
+  ["#free-opd", "/services/outpatient-department"],
+  ["#care", "/facilities"],
+  ["#about", "/about-us"],
+  ["#faq", "/contact-us"],
+  ["#contact", "/contact-us"],
+  ["#", "a real page"],
 ]);
 
 test("no home teaser links to a band that now has a page of its own", () => {
@@ -113,57 +119,50 @@ test("every literal home href is a route, a call, an email or an external site",
   }
 });
 
-// The four facilities cards are rendered from data, so their hrefs never
-// appear as literals in the JSX above. Each one has a section of its own on
-// /facilities except the rooms card, which belongs to /accommodation.
-test("every facilities teaser card reaches a page, not a home anchor", () => {
-  assert.equal(facilities.length, 4);
-  for (const card of facilities) {
-    assert.ok(card.href.startsWith("/"), `${card.title} links ${card.href}`);
-    assert.ok(card.linkLabel.trim().length > 0, `${card.title} has no link label`);
+// The data-driven destinations never appear as literals in the JSX above, so
+// each is asserted here: a route on this site, a call, an email or an external
+// site, and never the home page itself.
+const OUTBOUND = /^(\/[a-z0-9-]+(\/[a-z0-9-]+)*(#[a-z0-9-]+)?|tel:\+94\d+|mailto:[^\s]+|https:\/\/[^\s]+)$/;
+
+test("every destination in the home data leaves the page", () => {
+  const hrefs = [
+    quickAccess.channel.href,
+    quickAccess.emergencyCall.href,
+    quickAccess.emergency.href,
+    quickAccess.facilities.href,
+    quickAccess.location.href,
+    specialties.findDoctor.href,
+    specialties.exploreMore.href,
+    specialties.viewAll.href,
+    ...specialties.tabs.flatMap((t) => t.links.map((l) => l.href)),
+    patientCare.href,
+    pharmacy.hrefPrimary,
+    pharmacy.hrefSecondary,
+    ...contactCta.contactRows.map((r) => r.href),
+    faq.seeAll.href,
+    media.href,
+    media.storyHref,
+    careers.href,
+    careers.openingsHref,
+    internationalCare.hrefPrimary,
+    internationalCare.hrefSecondary,
+    networkHref,
+    ...networkNodes.map((node) => node.href),
+  ];
+  assert.ok(hrefs.length > 40, `only ${hrefs.length} data destinations found`);
+  for (const href of hrefs) {
+    assert.match(href, OUTBOUND, `${href} does not leave the page`);
   }
 });
 
-// Deep links, not just the page root: a reader who clicks "Reports read twice"
-// on the imaging card should land on the diagnostics section, not at the top of
-// a long facilities page with the relevant part somewhere below the fold.
-test("the facilities teasers deep link to the section each one describes", () => {
-  const byTitle = new Map(facilities.map((card) => [card.title, card.href]));
-  assert.equal(byTitle.get("Six floor hospital"), "/facilities#ambulance");
-  assert.equal(byTitle.get("Outpatient wing"), "/facilities#floors");
-  assert.equal(byTitle.get("Imaging, lab & theatres"), "/facilities#diagnostic");
-  assert.equal(byTitle.get("Inpatient rooms"), "/accommodation#rooms");
-});
-
-// The network accordion is the other data driven teaser band. Its panels used
-// to be buttons and nothing else, so an open panel described a place the
-// reader then had no way to reach.
+// The network accordion's panels used to be buttons and nothing else, so an
+// open panel described a place the reader then had no way to reach.
 test("every network teaser panel reaches a page, not a home anchor", () => {
   assert.equal(networkNodes.length, 4);
   for (const node of networkNodes) {
     assert.ok(node.href.startsWith("/"), `${node.name} links ${node.href}`);
     assert.ok(node.linkLabel.trim().length > 0, `${node.name} has no link label`);
   }
-});
-
-// The care-at-home band is the third data driven teaser. Its three cards are
-// the three strands /home-care gathers, and each deep links into the band that
-// covers that strand rather than dropping the reader at the top of the page.
-test("every care at home teaser card reaches a page, not a home anchor", () => {
-  assert.equal(homeCareCards.length, 3);
-  for (const card of homeCareCards) {
-    assert.ok(card.href.startsWith("/"), `${card.title} links ${card.href}`);
-    assert.ok(card.linkLabel.trim().length > 0, `${card.title} has no link label`);
-  }
-});
-
-test("the care at home teasers deep link to the section each one describes", () => {
-  const byTitle = new Map(homeCareCards.map((card) => [card.title, card.href]));
-  assert.equal(byTitle.get("Home visits"), "/home-care#visits");
-  assert.equal(byTitle.get("Sampling at home"), "/home-care#sampling");
-  // Telemedicine is summarised on /home-care but owned by the service page, so
-  // this card skips the summary and goes where the detail actually is.
-  assert.equal(byTitle.get("Telemedicine"), "/services/telemedicine");
 });
 
 test("the network teasers each point at the page that covers that node", () => {

@@ -11,5 +11,3 @@
 export const __review = { status: "draft", reviewer: null, date: null } as const;
 
 export const mediaItems = [{}, {}, {}, {}];
-
-export const heading = {};
