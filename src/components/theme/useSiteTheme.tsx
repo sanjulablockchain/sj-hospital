@@ -17,11 +17,13 @@ const STORAGE_KEY = "sj-home-theme";
 
 function getSnapshot(): Theme {
   const attr = document.getElementById("sj-root")?.getAttribute("data-theme");
-  return attr === "light" ? "light" : "dark";
+  return attr === "dark" ? "dark" : "light";
 }
 
+// Light is the default theme: what the server renders and what ThemeScript
+// applies when nothing is saved. Kept in step with ThemedShell's data-theme.
 function getServerSnapshot(): Theme {
-  return "dark";
+  return "light";
 }
 
 function subscribe(onStoreChange: () => void) {

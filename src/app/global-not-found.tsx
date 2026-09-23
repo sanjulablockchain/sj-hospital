@@ -57,7 +57,7 @@ export default function GlobalNotFound() {
       <body className="min-h-full">
         <div
           data-sj
-          data-theme="dark"
+          data-theme="light"
           className="flex min-h-screen flex-col items-center justify-center gap-8 bg-[var(--home-bg)] px-6 py-24 text-center text-[var(--home-body)]"
         >
           <div className="inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent-soft)] uppercase">

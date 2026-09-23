@@ -42,7 +42,7 @@ export function ThemedShell({
     <div
       id="sj-root"
       data-sj
-      data-theme="dark"
+      data-theme="light"
       data-palette={palette}
       suppressHydrationWarning
       className={
