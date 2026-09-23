@@ -1,33 +1,30 @@
 /**
- * Copy for the home page bands that have no topical match among this
- * feature's eight pre-existing per-teaser data files (`careers.ts`,
- * `facilities.ts`, `healthTips.ts`, `homeCare.ts`, `internationalCare.ts`,
- * `media.ts`, `network.ts`, `testimonials.ts`): the hero, "who we are", the
- * services bento, the surgical band, the pharmacy stat band, the rooms band,
- * the school wellness band, the stat ticker and the closing "come see us"
- * band. None of these had a typed array before this task; their copy was
- * hardcoded directly in JSX and, for four of them, inside a `'use client'`
- * component.
+ * Copy for the home page bands that have no data file of their own: the hero
+ * and its ticker, the quick access mosaic, "who we are" and its stat cards, the
+ * free OPD band, the specialties carousel, the patient care tiles, the
+ * pharmacy band, the standards band and the closing "come see us" band. The
+ * reviews, international care, network, FAQ, media and careers bands read
+ * their own files beside this one, and `getContent.ts` fetches all of them
+ * once per request.
  *
- * This file, and its `content.si.ts` / `content.ta.ts` overlays, are not
- * named in this task's brief, which lists only the eight files above. They
- * are added because the brief separately requires `SurgicalSection.tsx`,
- * `PharmacySection.tsx`, `RoomsSection.tsx`, `SchoolWellnessSection.tsx` and
- * `HeroParallaxBackground.tsx` to take their copy as a prop rather than an
- * import, which is only possible once that copy has a home to be threaded
- * from. Flagged in the task report rather than left unexplained.
+ * Layout and copy follow the v4 reference
+ * (docs/superpowers/specs/2026-09-23-home-page-v4-reference.html). Facts
+ * (phone numbers, prices, counts, routes, image paths, icon and tone keys)
+ * live here and nowhere else; `content.si.ts` / `content.ta.ts` may only
+ * replace prose. Where the reference and the repo disagreed on a fact or a
+ * house spelling, the repo won: "X-ray", "in-house", and "Ambulance" is not a
+ * service, so its chip goes to the facilities page's ambulance section.
  */
 
 // Relative imports straight to each feature's own data file, not its
 // `index.ts`: `index.ts` also re-exports that feature's Page component from
 // a `.tsx` file, and `node --test` (which loads this file directly, through
-// content.i18n.test.ts's import graph) has no JSX transform, only
-// TypeScript type-stripping. This file still needs to load under plain
-// node, so it reaches past each barrel to the same file its `index.ts`
-// re-exports `homeCareHero` / `pharmacyHero` from, rather than duplicating
-// either fact a second time.
-import { hero as homeCareHero } from "../../home-care/data/content.ts";
+// bands.test.ts and content.i18n.test.ts) has no JSX transform, only
+// TypeScript type-stripping.
 import { hero as pharmacyHero } from "../../pharmacy/data/content.ts";
+import { DIRECTIONS_URL } from "../../contact/data/content.ts";
+import type { ServiceGroup } from "../../services/types.ts";
+import type { HomeIconKey, StatTone } from "../types.ts";
 
 /**
  * Not yet read by a Sinhala or Tamil speaker. `npm run i18n:status` lists
@@ -36,20 +33,13 @@ import { hero as pharmacyHero } from "../../pharmacy/data/content.ts";
 export const __review = { status: "draft", reviewer: null, date: null } as const;
 
 /**
- * The hero's own copy, moved here out of `HeroSection.tsx`.
- *
  * `headingLine1` / `headingOutline` / `headingAccent` are three independent
- * segments of one visual heading, not a literal split of the English
- * sentence around the letter "a": `HeroSection.tsx` renders the outlined
- * segment with a special stroke-only text style, the same three-part
- * heading shape `career`'s and `network`'s own hero headings already use.
- * Each locale composes its own coherent phrase across the three segments
- * rather than preserving "a" specifically; see content.si.ts / content.ta.ts
- * for how each language fills the outlined segment with a real word.
+ * segments of one visual heading: `HeroSection.tsx` renders the outlined
+ * segment with a stroke-only text style. Each locale composes its own phrase
+ * across the three segments rather than preserving "a" specifically.
  *
- * The phone number rendered beside the standfirst is a structural fact
- * (`tel:+94117848484`), not copy, the same as the identical chip in
- * `contactCta` below: there is no separate label to translate.
+ * The phone number beside the standfirst is a structural fact
+ * (`tel:+94117848484`), not copy: there is no separate label to translate.
  */
 export const hero = {
   locationLabel: "Negombo, Sri Lanka",
@@ -61,7 +51,7 @@ export const hero = {
   photoAlt: "St. Joseph Hospital building at dusk",
 };
 
-/** The five-item ticker under the hero, moved here out of `StatTicker.tsx`. */
+/** The five-item ticker under the hero. The room price is the fact `facilities/data/content.ts` owns. */
 export const statTickerItems = [
   "Emergency open 24/7",
   "Surgical theatres to US protocol",
@@ -71,111 +61,123 @@ export const statTickerItems = [
 ];
 
 /**
- * `#standards`'s own copy, moved here out of `WhoWeAreSection.tsx`.
- * `stats[*].count` / `.suffix` / `.value` are the numeric facts `CountUp`
- * renders and stay in this file only, absent from both overlays.
+ * `#book`: the mosaic under the hero. `cta` leaves are link labels (English by
+ * the register rule); `bodyTemplate` carries a `{count}` the component fills
+ * with `services.length`. "Get directions" opens the same Google Maps route
+ * the contact page's map offers, imported rather than typed twice.
  */
-export const whoWeAre = {
-  eyebrow: "01 / Who we are",
-  heading: { line1: "A US hospital", line2: "in a Sri Lankan", line3: "neighbourhood" },
-  intro:
-    "St. Joseph Hospital is managed and operated by the Kids & Teens Pediatric Medical Group of Los Angeles: the standards, protocols and clinical discipline of American care, priced for families in Negombo.",
-  body: "Consumables are never reused. Waste is managed to international protocol. Every surface is cleaned on a two hour cycle. Our in-house doctors order only the tests you genuinely need, and every report is read by two of them before it reaches you.",
-  cta: "More about us",
-  stats: [
-    { count: 24, caption: "Hours a day, every service open" },
-    { count: 2, suffix: "h", caption: "Cleaning cycle, US specification" },
-    { value: "0", caption: "Tests ordered that you don't need" },
-  ],
-};
-
-/**
- * `#services`'s own copy, moved here out of `ServicesBentoSection.tsx`.
- * `viewAllTemplate` carries a `{count}` token: `ServicesBentoSection.tsx`
- * substitutes the services feature's own `services.length` (a fact, not
- * copy) rather than splitting the sentence around the number.
- */
-export const servicesBento = {
-  eyebrow: "03 / What we do",
-  heading: { line1: "Eight ways we", line2: "look after you" },
-  tilesNote: "Every tile opens a service",
-  tiles: [
-    {
-      badge: "/01 Emergency & OPD",
-      openNow: "Open now",
-      heading: { line1: "Walk in at", line2: "any hour" },
-      body: "Emergency care, outpatient consultations, laboratory and digital X-ray, live around the clock every day of the year.",
-    },
-    {
-      badge: "/02 Surgical care",
-      heading: "Theatres, consultant led",
-      body: "Elective and emergency surgery with sterile instrument tracking and an assigned recovery nurse.",
-      linkLabel: "Surgical services",
-    },
-    {
-      badge: "/03 Rooms",
-      body: "LKR a night. Private and semi private, sanitised every two hours, nursing that knows your name.",
-    },
-    {
-      badge: "/04 Pharmacy",
-      heading: "Authorized stock, 24/7",
-      body: "Verified medicine only. No substitutes.",
-    },
-    {
-      badge: "/05 Digital X-ray",
-      heading: "Lower dose, sharper plates",
-      body: "Read within the hour, not the week.",
-    },
-    {
-      badge: "/06 Laboratory",
-      heading: "Two doctors read every report",
-      note: "10% off for OPD patients",
-    },
-    {
-      badge: "/07 Home visits",
-      // `home-care`'s own hero tagline (`hero.strapline`), read back through
-      // its `index.ts` rather than typed here a second time: same fact,
-      // exactly one home.
-      heading: homeCareHero.strapline,
-      body: "Doctors, nurses and lab technicians at your door.",
-    },
-    {
-      badge: "/08 Delivery",
-      heading: "Medicine to your door",
-      body: "Across Negombo, from our own counter.",
-    },
-    // `as const`: each tile has a genuinely different shape (tile 0's
-    // `heading` is a two-line object, every other tile's is a plain string),
-    // and this keeps `tiles[N]` a fixed, per-position type instead of a union
-    // of all eight, which is what ServicesBentoSection.tsx's direct indexing
-    // needs.
-  ] as const,
-  footer: {
-    label: "Full service directory",
-    heading: "Every service, in one place",
-    viewAllTemplate: "View all {count} services",
+export const quickAccess = {
+  channel: {
+    heading: "Channel a doctor",
+    body: "Pick a consultant and a time online, or walk in to our free OPD.",
+    cta: "Make an appointment",
+    href: "/e-channeling",
+    photo: "/images/career-staff.jpg",
+    photoAlt: "St. Joseph Hospital doctors and nurses",
+  },
+  emergencyCall: {
+    heading: "24 hour emergency assistance. Call us on",
+    href: "tel:+94117848484",
+  },
+  emergency: {
+    title: "Emergency assistance",
+    body: "Walk in at any hour. Ambulance bay and critical care open 24/7.",
+    cta: "Read more",
+    href: "/services/accident-emergency",
+    photo: "/images/services/heroes/accident-emergency.jpg",
+    photoAlt: "The St. Joseph Hospital emergency team",
+  },
+  facilities: {
+    title: "Facilities and services",
+    bodyTemplate: "{count} services under one roof, run to US protocol.",
+    cta: "Read more",
+    href: "/services",
+    photo: "/images/services/heroes/laboratory.jpg",
+    photoAlt: "The St. Joseph Hospital laboratory",
+  },
+  location: {
+    title: "Our location",
+    body: "229/10 St. Joseph Street, Negombo. Ten minutes from the airport.",
+    cta: "Get directions",
+    href: DIRECTIONS_URL,
+    photo: "/images/hero-exterior.png",
+    photoAlt: "The St. Joseph Hospital building",
   },
 };
 
 /**
- * `#free-opd`'s own copy: the band announcing that an OPD consultation costs
- * nothing, which is the biggest claim the hospital makes and had, until this
- * band, no home on the front page at all. It lived only in the announcement
- * pop-up, which is dismissible chrome, and on the OPD service page itself.
+ * `#about`. `stats[*].value` is a fact (`{count}` is filled with
+ * `services.length`); `icon` and `tone` are structural keys. `label` and
+ * `desc` are the stat's caption and translate, the same split the old
+ * `caption` had.
+ */
+export const whoWeAre = {
+  eyebrow: "Who we are",
+  heading: "A US hospital in a Sri Lankan neighbourhood",
+  intro:
+    "Managed and operated by the Kids & Teens Pediatric Medical Group of Los Angeles: the standards, protocols and clinical discipline of American care, priced for families in Negombo.",
+  body: "Consumables are never reused. Every surface is cleaned on a two hour cycle. Every report is read by two doctors before it reaches you.",
+  stats: [
+    {
+      icon: "clock",
+      value: "24/7",
+      label: "Emergency and OPD",
+      desc: "Every service open, every hour, every day of the year.",
+      tone: "red",
+    },
+    {
+      icon: "grid",
+      value: "{count}",
+      label: "Services",
+      desc: "From emergency care to fertility, under one roof.",
+      tone: "brand",
+    },
+    {
+      icon: "building",
+      value: "6",
+      label: "Floor hospital",
+      desc: "Purpose built in Negombo, with ambulance bay and covered arrival.",
+      tone: "sky",
+    },
+    {
+      icon: "spark",
+      value: "2h",
+      label: "Cleaning cycle",
+      desc: "Every surface, cleaned to US specification.",
+      tone: "green",
+    },
+    {
+      icon: "ambulance",
+      value: "6",
+      label: "Home visit vehicles",
+      desc: "Doctors, nurses and lab technicians at your door.",
+      tone: "orange",
+    },
+    {
+      icon: "plane",
+      value: "10",
+      label: "Minutes from the airport",
+      desc: "Bandaranaike International to our door.",
+      tone: "brand",
+    },
+  ] satisfies { icon: HomeIconKey; value: string; label: string; desc: string; tone: StatTone }[],
+};
+
+/**
+ * `#free-opd`: the band announcing that an OPD consultation costs nothing.
+ * `eyebrow` is the "A first for Sri Lanka" pill. It carries NO figures,
+ * deliberately: the 24 hours, the same-day slots and the 10% laboratory
+ * discount all have one home, the `outpatient-department` entry in
+ * `services/data/clinics.ts`; `bands.test.ts` fails if a number appears.
  *
- * It carries NO figures, deliberately. The 24 hours, the same-day slots and
- * the 10% laboratory discount all have one home, the `outpatient-department`
- * entry in `services/data/clinics.ts`, and a second copy here could drift
- * from it with nothing to notice; `bands.test.ts` fails if a number appears.
- * The CTA sends the reader to that page, where the detail actually lives.
- *
- * `hrefPrimary` is a route and `hrefSecondary` a `tel:` action, both facts
- * rather than copy, so neither appears in the overlays.
+ * The photograph is one of the hospital's own doctors, cut from the
+ * five-clinician team frame (`2025/08/DSC_6347.jpg`); see the git history of
+ * this file for the three frames it replaced and why.
  */
 export const freeOpd = {
-  eyebrow: "02 / Free OPD",
-  heading: { line1: "Seeing a doctor", line2: "costs you nothing" },
-  body: "A first for Sri Lanka: consultations at our outpatient department are free, so nobody has to weigh up whether a fever, a lump or a week of pain is worth the money. Walk in and see a doctor.",
+  eyebrow: "A first for Sri Lanka",
+  heading: "Seeing a doctor costs you nothing",
+  body: "Consultations at our outpatient department are free, so nobody has to weigh up whether a fever, a lump or a week of pain is worth the money. Walk in and see a doctor.",
   points: [
     "Free consultation, every hour we are open",
     "General complaints and specialist referral alike",
@@ -185,72 +187,156 @@ export const freeOpd = {
   hrefPrimary: "/services/outpatient-department",
   ctaSecondary: "Call the hospital",
   hrefSecondary: "tel:+94117848484",
-  /**
-   * One of the hospital's own doctors, looking back at the reader: the SJ
-   * consultant in the white coat, cut out of the five-clinician team frame
-   * (`2025/08/DSC_6347.jpg`, 7290x4322) at 1660,120 1700x1950 and downscaled
-   * to 1400px wide. The heading is "seeing a doctor costs you nothing", and
-   * this is the doctor it means.
-   *
-   * Portrait, which suits both crops this band uses: near-square beside the
-   * copy from 900px up, and a wide strip on a phone. The frame is cut with
-   * both in mind: the square crop keeps roughly 90px of headroom above him,
-   * and the strip, anchored to the top, lands on his face and the
-   * stethoscope. The right edge stops short of 3400px in the original, where
-   * the next clinician's shoulder starts.
-   *
-   * The three images this band went through first are worth recording,
-   * because the same traps are there for the next person. It opened on
-   * `/images/services/heroes/outpatient-department.jpg`, which is stock: two
-   * anonymous hands over a clipboard, from the same Western shoot the
-   * hospital's own media library also carries. It then used the real
-   * reception photograph (`2025/09/IMG_1865-n.jpg`), which is a good frame
-   * but argues "walk up to a desk" rather than "see a doctor". It then used
-   * `2025/09/DSC_8082-scaled.jpg`, a real SJ doctor in branded scrubs, but
-   * that frame is a close detail starting below the chin: beside a heading
-   * about seeing a doctor it reads as a headless torso, and a face was the
-   * whole point. Per the hospital-photo-source note, `DSC_*` and `IMG_*`
-   * filenames in that library are the real photoshoot and descriptive slugs
-   * are stock, and DSC_6347 is the only real frame the hospital has of a
-   * doctor's face. `/careers` crops the same original, as the full
-   * five-person lineup.
-   */
   photo: "/images/home/free-opd-doctor.jpg",
   photoAlt:
     "A St. Joseph Hospital doctor in a branded white coat, arms folded, a stethoscope around his neck.",
 };
 
-/**
- * `#surgical`'s own copy, moved here out of `SurgicalSection.tsx`, a
- * `'use client'` leaf (it runs a parallax effect) that must take this as a
- * prop rather than import it.
- */
-export const surgical = {
-  eyebrow: "04 / Surgical care",
-  heading: { line1: "Theatres run", line2: "to protocol,", line3: "not to habit" },
-  body: "Elective and emergency surgery with consultant anaesthesia, single use consumables, sterile tracking on every instrument set and a nurse assigned to your recovery from theatre to discharge.",
-  ctaPrimary: "Request a surgical consult",
-  ctaSecondary: "Speak to the theatre desk",
-  procedures: [
-    { name: "General surgery", note: "Elective and emergency" },
-    { name: "Obstetric theatre", note: "Consultant led" },
-    { name: "Orthopaedic procedures", note: "Day case and inpatient" },
-    { name: "Endoscopy suite", note: "Same day reporting" },
-    { name: "Post-operative care", note: "Assigned recovery nurse" },
-  ],
+export type SpecialtyLink = { title: string; href: string };
+export type SpecialtyTab = {
+  /** Compared against `SERVICE_GROUPS`; the tabs run in that order. */
+  group: ServiceGroup;
+  label: string;
+  title: string;
+  desc: string;
+  image: string;
+  links: SpecialtyLink[];
 };
 
 /**
- * `#pharmacy`'s own copy, moved here out of `PharmacySection.tsx`, a
- * `'use client'` leaf that must take this as a prop rather than import it.
- * `stats[*].count` / `.suffix` / `.value` are facts `CountUp` renders and
- * stay in this file only.
+ * `#services`: six tabs, one per service group, each with a photograph, a
+ * paragraph and the group's top services as chips. Every `/services/<slug>`
+ * href names a real entry in `services/data/services.ts`
+ * (`specialties.test.ts`). Ambulance is not a service in the catalogue, so its
+ * chip goes to the facilities page's ambulance section. `headingTemplate` and
+ * `viewAll.ctaTemplate` take `{count}`; `countTemplate` takes `{n}` and
+ * `{total}`.
+ */
+export const specialties = {
+  eyebrow: "What we do",
+  headingTemplate: "{count} services, six ways we look after you",
+  body: "From a walk in consultation to surgery, diagnostics and care at home, every service runs to the same American protocol.",
+  topServicesHeading: "Top services",
+  findDoctor: { cta: "Find a doctor", href: "/e-channeling" },
+  exploreMore: { cta: "Explore more", href: "/services#directory" },
+  viewAll: { ctaTemplate: "View all {count} services", href: "/services" },
+  countTemplate: "{n} of {total}",
+  ariaPrev: "Previous specialty",
+  ariaNext: "Next specialty",
+  tabs: [
+    {
+      group: "Emergency",
+      label: "Emergency",
+      title: "Emergency and critical care",
+      desc: "Accident and emergency care around the clock, with intensive and critical care on site. Walk in at any hour, every day of the year, or call and we come to you.",
+      image: "/images/services/heroes/accident-emergency.jpg",
+      links: [
+        { title: "Accident and emergency", href: "/services/accident-emergency" },
+        { title: "Intensive and critical care", href: "/services/intensive-critical-care" },
+        { title: "Ambulance", href: "/facilities#ambulance" },
+      ],
+    },
+    {
+      group: "Surgical",
+      label: "Surgical",
+      title: "Surgical care",
+      desc: "Consultant led theatres with consultant anaesthesia, single use consumables, sterile tracking on every instrument set and a nurse assigned to your recovery.",
+      image: "/images/services/heroes/general-surgery.jpg",
+      links: [
+        { title: "General surgery", href: "/services/general-surgery" },
+        { title: "Orthopaedic surgery", href: "/services/orthopaedic-surgery" },
+        { title: "ENT surgery and audiology", href: "/services/ent-surgery" },
+        { title: "Urology", href: "/services/urology" },
+        { title: "Ophthalmology and cataract", href: "/services/ophthalmology" },
+        { title: "Neurosurgery", href: "/services/neurosurgery" },
+        { title: "Endoscopy", href: "/services/endoscopy" },
+      ],
+    },
+    {
+      group: "Diagnostics",
+      label: "Diagnostics",
+      title: "Laboratory and imaging",
+      desc: "A 24 hour laboratory and digital X-ray, with every report read by two doctors and returned the same day. OPD patients save 10% on laboratory tests.",
+      image: "/images/services/heroes/laboratory.jpg",
+      links: [
+        { title: "Laboratory services", href: "/services/laboratory" },
+        { title: "Radiology and digital X-ray", href: "/services/radiology" },
+        { title: "Cardiac screening and ECG", href: "/services/cardiac-screening" },
+        { title: "CTG and fetal monitoring", href: "/services/fetal-monitoring" },
+      ],
+    },
+    {
+      group: "Clinics",
+      label: "Clinics",
+      title: "Specialist clinics",
+      desc: "Specialist clinics beside a free outpatient department, so a referral is a walk down the corridor rather than a trip across town.",
+      image: "/images/services/heroes/cardiology.jpg",
+      links: [
+        { title: "Outpatient department", href: "/services/outpatient-department" },
+        { title: "Cardiology", href: "/services/cardiology" },
+        { title: "Dermatology", href: "/services/dermatology" },
+        { title: "Diabetes and endocrine care", href: "/services/diabetes-endocrinology" },
+        { title: "Neurology", href: "/services/neurology" },
+        { title: "Nephrology", href: "/services/nephrology" },
+        { title: "Physiotherapy", href: "/services/physiotherapy" },
+        { title: "Mental health", href: "/services/mental-health" },
+      ],
+    },
+    {
+      group: "Women & children",
+      label: "Women and children",
+      title: "Women and children",
+      desc: "Maternity, gynaecology and paediatric care, led by the same Kids and Teens protocol our Los Angeles group uses for its own patients.",
+      image: "/images/services/heroes/obstetrics-maternity.jpg",
+      links: [
+        { title: "Obstetrics and maternity", href: "/services/obstetrics-maternity" },
+        { title: "Gynaecology", href: "/services/gynaecology" },
+        { title: "Paediatrics and neonatal care", href: "/services/paediatrics" },
+        { title: "Fertility and embryology", href: "/services/fertility" },
+        { title: "Vaccination clinic", href: "/services/vaccination-clinic" },
+      ],
+    },
+    {
+      group: "At home",
+      label: "At home",
+      title: "Care at home",
+      desc: "A pharmacy that never closes, medicine delivered across Negombo, home visits on six dedicated vehicles and telemedicine from anywhere on the island.",
+      image: "/images/services/heroes/home-visits.jpg",
+      links: [
+        { title: "24 hour pharmacy", href: "/services/pharmacy" },
+        { title: "Medicine delivery", href: "/services/medicine-delivery" },
+        { title: "Home visits", href: "/services/home-visits" },
+        { title: "Telemedicine", href: "/services/telemedicine" },
+      ],
+    },
+  ] satisfies SpecialtyTab[],
+};
+
+/**
+ * `#care`. The six tiles themselves are the Patient Care menu of
+ * `src/config/megaNavigation.ts`, read through `patientCareTiles.ts`, so the
+ * labels and one-liners have one home; only the band's own copy lives here.
+ * "All patient care" has no index page of its own, so it opens the first
+ * tile's destination.
+ */
+export const patientCare = {
+  heading: "Committed to your better health",
+  body1:
+    "St. Joseph Hospital is a six floor, purpose built hospital in Negombo, run to the protocols of an American pediatric group.",
+  body2:
+    "Care does not stop at the ward. Our pharmacy never closes, our doctors visit homes and schools, and travelling patients are looked after from the airport onward.",
+  cta: "All patient care",
+  href: "/facilities",
+};
+
+/**
+ * `#pharmacy`. The heading is `pharmacy`'s own hero heading, read back
+ * through its data file rather than typed here a second time. `stats[*].value`
+ * is a fact and stays in this file only; `label` is the caption and
+ * translates. `tone` picks the value's colour.
  */
 export const pharmacy = {
-  eyebrow: "06 / Pharmacy",
-  // `pharmacy`'s own hero heading (`hero.headingLead` / `.headingOutline` /
-  // `.headingAccent`), read back through its `index.ts` rather than typed
-  // here a second time: same fact, exactly one home.
+  eyebrow: "24 hour pharmacy",
   heading: {
     line1: pharmacyHero.headingLead,
     line2: pharmacyHero.headingOutline,
@@ -258,64 +344,56 @@ export const pharmacy = {
   },
   body: "Our in-house pharmacy stocks only verified, authorized stock, dispensed by pharmacists who can read your file, at any hour of the night.",
   ctaPrimary: "Order a delivery",
+  hrefPrimary: "/pharmacy#delivery",
   ctaSecondary: "Ask a pharmacist",
+  hrefSecondary: "/pharmacy#contact",
   stats: [
-    { label: "Counter hours", count: 24, suffix: " / 7" },
-    { label: "Home delivery radius", value: "Negombo" },
-    { label: "Prescriptions on file", value: "Digital", accent: true },
-    { label: "OPD patient lab discount", count: 10, suffix: "%" },
-  ],
+    { icon: "clock", label: "Counter hours", value: "24 / 7", tone: "ink" },
+    { icon: "ambulance", label: "Home delivery radius", value: "Negombo", tone: "ink" },
+    { icon: "report", label: "Prescriptions on file", value: "Digital", tone: "sky" },
+    { icon: "flask", label: "OPD patient lab discount", value: "10%", tone: "brand" },
+  ] satisfies { icon: HomeIconKey; label: string; value: string; tone: "ink" | "sky" | "brand" }[],
+};
+
+/** `#standards`: the deep band and the motto plaque hanging off its foot. */
+export const standards = {
+  heading: "Built like a US facility",
+  sub: "Medical quality care, to American protocol",
+  items: [
+    {
+      icon: "drop",
+      title: "Single use consumables",
+      desc: "Consumables are never reused, and waste is managed to international protocol.",
+    },
+    {
+      icon: "shield",
+      title: "Infection control",
+      desc: "Every surface is cleaned on a two hour cycle, to US specification.",
+    },
+    {
+      icon: "report",
+      title: "Reports read twice",
+      desc: "Every result is read by two doctors before it reaches you, the same day.",
+    },
+  ] satisfies { icon: HomeIconKey; title: string; desc: string }[],
+  /** The motto set as a brand mark, English in every locale (see ThemedFooter's note). */
+  plaqueHeading: "To live is a privilege.",
 };
 
 /**
- * `#rooms`'s own copy, moved here out of `RoomsSection.tsx`, a `'use client'`
- * leaf that must take this as a prop rather than import it. The 10,000 LKR
- * price `CountUp` animates to is a fact and stays in this file only.
- */
-export const rooms = {
-  eyebrow: "08 / Stay with us",
-  heading: { line1: "A room that", line2: "feels like", line3: "recovery" },
-  body: "Quiet, private and sanitised on a two hour cycle, with nursing that knows your name and a doctor on the floor at all times.",
-  cta: "Reserve a room",
-  fromLabel: "Rooms from",
-  priceCaption: "LKR per night, all inclusive of nursing care",
-  perks: [
-    "Private and semi private options",
-    "Attendant space for family",
-    "Meals prepared to dietary orders",
-  ],
-};
-
-/**
- * `#wellness`'s own copy, moved here out of `SchoolWellnessSection.tsx`, a
- * `'use client'` leaf that must take this as a prop rather than import it.
- */
-export const schoolWellness = {
-  eyebrow: "11 / School wellness",
-  heading: { line1: "We come to", line2: "the classroom" },
-  body: "A pediatric led programme for Negombo schools: annual screening, vision and hearing checks, growth tracking, vaccination drives and teacher first aid training, run by the same doctors who see your children in clinic.",
-  rows: [
-    { title: "Annual health screening", note: "On campus, per grade" },
-    { title: "Vision, hearing & dental", note: "Referral report to parents" },
-    { title: "Teacher first aid training", note: "Half day, certified" },
-  ],
-  cta: "Bring it to our school",
-  photoAlt: "Pediatric doctor with a young patient",
-  photoCaption: "Kids & Teens pediatric protocol",
-};
-
-/**
- * `#book`'s own copy, moved here out of `ContactCtaSection.tsx`. "St. Joseph
- * Street" keeps the hospital's own street name in English, unchanged, the
- * same rule `contact`'s own content.ts states: it is the address a driver is
- * shown, and the building's own signage never changes script. The phone
- * number is a structural fact rendered without a separate label, the same
- * treatment `hero` above gives the identical chip.
+ * `#contact`: the closing band. "St. Joseph Street" keeps the hospital's own
+ * street name in English, unchanged, the same rule `contact`'s own content.ts
+ * states. `contactRows[*].label` are link labels (English); `href` and `icon`
+ * are facts.
  */
 export const contactCta = {
-  eyebrow: "16 / Come see us",
-  heading: { line1: "Open right", line2: "now. Yes,", line3: "right now." },
+  eyebrow: "Come see us",
+  heading: "Open right now. Yes, right now.",
   body: "229/10 St. Joseph Street, Negombo. Walk in, call us, or send a message on WhatsApp.",
-  ctaSurgical: "Surgical care",
-  ctaRooms: "Reserve a room",
+  contactRows: [
+    { label: "Surgical care", href: "/services/general-surgery", icon: "arrow" },
+    { label: "Reserve a room", href: "/accommodation", icon: "arrow" },
+    { label: "WhatsApp 074 222 333 4", href: "https://wa.me/94742223334", icon: "chat" },
+    { label: "0117 84 84 84", href: "tel:+94117848484", icon: "phone" },
+  ] satisfies { label: string; href: string; icon: HomeIconKey }[],
 };

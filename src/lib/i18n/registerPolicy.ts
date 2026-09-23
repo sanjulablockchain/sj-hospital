@@ -270,6 +270,9 @@ const LINK_LABEL_PARENTS = new Set([
   "ambulanceCall",
   // `servicesBento.footer.label`
   "footer",
+  // home `specialties.tabs[].label`: the six filter chips over the carousel,
+  // the same species as `groupLabels` in services.
+  "tabs",
 ]);
 
 /**
