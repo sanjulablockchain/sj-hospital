@@ -37,8 +37,8 @@ export const jobOpenings: JobOpening[] = [
 ];
 
 /** `#career`'s own copy, stranded in `CareersSection.tsx` until now. */
-export const sectionEyebrow = "14 / Careers";
-export const heading = { line1: "Work where", line2: "the standard", line3: "is the point" };
-export const body =
-  "Clinicians and staff trained to US protocol, supported by a group that invests in them.";
+export const sectionEyebrow = "Careers";
+export const heading = "Work where the standard is the point";
 export const cta = "Send your CV";
+export const href = "/careers#apply";
+export const openingsHref = "/careers#openings";

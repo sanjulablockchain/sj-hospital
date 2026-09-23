@@ -15,33 +15,38 @@ import { sectionEyebrow as careers } from "./careers.ts";
  */
 const NUMBERED = /^\d{2} \/ /;
 
-function stringsIn(module: object): string[] {
+/**
+ * Every string under a key that names an eyebrow (`eyebrow`,
+ * `sectionEyebrow`), found by walking the module. Only eyebrow keys, not every
+ * string: the pharmacy band's "24 / 7" counter-hours value matches the same
+ * pattern and is a fact, not a band number.
+ */
+function eyebrowsIn(module: object): string[] {
   const found: string[] = [];
-  const walk = (value: unknown) => {
+  const walk = (value: unknown, key: string) => {
     if (typeof value === "string") {
-      found.push(value);
+      if (/eyebrow$/i.test(key)) found.push(value);
       return;
     }
     if (Array.isArray(value)) {
-      value.forEach(walk);
+      value.forEach((item) => walk(item, key));
       return;
     }
     if (value !== null && typeof value === "object") {
-      for (const [key, inner] of Object.entries(value as Record<string, unknown>)) {
-        if (key.startsWith("__")) continue;
-        walk(inner);
+      for (const [innerKey, inner] of Object.entries(value as Record<string, unknown>)) {
+        if (innerKey.startsWith("__")) continue;
+        walk(inner, innerKey);
       }
     }
   };
-  walk(module);
+  walk(module, "");
   return found;
 }
 
 test("no home band eyebrow still carries a band number", () => {
-  const numbered = [...stringsIn(content), ...stringsIn(faq), internationalCare, network, media, careers].filter(
-    (s) => NUMBERED.test(s),
-  );
-  assert.deepEqual(numbered, []);
+  const eyebrows = [...eyebrowsIn(content), ...eyebrowsIn(faq), internationalCare, network, media, careers];
+  assert.ok(eyebrows.length >= 8, `only ${eyebrows.length} eyebrows found`);
+  assert.deepEqual(eyebrows.filter((s) => NUMBERED.test(s)), []);
 });
 
 test("the free OPD band announces the first for Sri Lanka and sends the reader to the OPD page", () => {

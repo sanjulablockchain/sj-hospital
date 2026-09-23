@@ -12,6 +12,11 @@ export const mediaItems: MediaItem[] = [
 ];
 
 /** `#media`'s own copy, stranded in `MediaSection.tsx` until now. */
-export const sectionEyebrow = "13 / Media";
-export const heading = { line1: "News, press", line2: "& gallery" };
-export const cta = "Media enquiries";
+export const sectionEyebrow = "Media · News, press and gallery";
+export const readMore = "Read the story";
+export const cta = "Media enquiries and full newsroom";
+export const href = "/media";
+/** Every teaser row opens the newsroom; the stories themselves live there. */
+export const storyHref = "/media#newsroom";
+export const photo = "/images/services/heroes/radiology.jpg";
+export const photoAlt = "Digital X-ray suite";

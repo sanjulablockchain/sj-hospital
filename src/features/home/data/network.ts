@@ -64,11 +64,12 @@ export const networkNodes: NetworkNode[] = [
 ];
 
 /** `#network`'s own copy, stranded in `NetworkSection.tsx` until now. */
-export const sectionEyebrow = "12 / Network";
+export const sectionEyebrow = "Network";
 export const heading = { line1: "One group,", line2: "two countries" };
 export const body =
   "Our Negombo hospital shares clinical governance with the largest pediatric group in Los Angeles.";
 export const cta = "The full network";
+export const href = "/network";
 
 /**
  * The two screen-reader strings `NetworkAccordion.tsx` builds by

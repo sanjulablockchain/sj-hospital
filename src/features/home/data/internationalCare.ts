@@ -38,9 +38,15 @@ export const internationalCareItems: InternationalCareItem[] = [
 ];
 
 /** `#international`'s own copy, stranded in `InternationalCareSection.tsx` until now. */
-export const sectionEyebrow = "09 / International patient care";
-export const heading = { line1: "Travelling", line2: "for care, or", line3: "just visiting" };
+export const sectionEyebrow = "Ten minutes from the airport";
+export const heading = "International patient care";
 export const body =
-  "Negombo sits ten minutes from the international airport. We look after visitors, expatriates and medical travellers from arrival to follow up at home.";
-export const ctaPrimary = "See international care";
-export const ctaSecondary = "Talk to the desk";
+  "You land at Katunayake. We take it from there. One desk arranges the transfer, the estimate, the interpreter and the records you take home.";
+export const ctaPrimary = "Read more";
+export const hrefPrimary = "/international-care";
+export const ctaSecondary = "WhatsApp the desk";
+export const hrefSecondary = "https://wa.me/94742223334";
+/** The floating card over the photograph. */
+export const badge = { title: "Estimate in writing", note: "Before anything begins" };
+export const photo = "/images/international/hero-arrival.jpg";
+export const photoAlt = "An international patient arriving at St. Joseph Hospital";

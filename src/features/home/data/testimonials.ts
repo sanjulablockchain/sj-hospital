@@ -31,6 +31,11 @@ export const testimonials: Testimonial[] = [
  * quote and the role do. See the commit message for how the quotes were
  * translated: as quoted speech, not paraphrase.
  */
-export const sectionEyebrow = "15 / Patient voices";
-export const ariaPrev = "Previous testimonial";
-export const ariaNext = "Next testimonial";
+export const heading = "Satisfied patient reviews";
+export const body = "Real words from patients who were treated, operated on and looked after here.";
+/** Screen-reader label on each dot; `{n}` is the 1-based index. */
+export const ariaShow = "Show review {n}";
+export const ariaPrev = "Previous review";
+export const ariaNext = "Next review";
+export const photo = "/images/welcome.jpg";
+export const photoAlt = "Patients at the St. Joseph Hospital reception";
