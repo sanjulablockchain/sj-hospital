@@ -17,7 +17,7 @@ export function CountUp({ display, className }: { display: string; className?: s
       target={split.value}
       prefix={split.prefix}
       suffix={split.suffix}
-      durationMs={1400}
+      durationMs={2800}
       className={className}
     />
   );
