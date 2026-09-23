@@ -67,14 +67,16 @@ function LogoTrack({
             href={href}
             tabIndex={hidden ? -1 : undefined}
             title={org.wordmark}
-            className="sj-card-lift group flex h-[96px] w-[176px] items-center justify-center rounded-[14px] border border-[var(--home-hairline)] bg-[var(--home-bg)] px-6"
+            // The tile is white on both themes: the logos were drawn for a white
+            // ground, and desaturated on the dark surface they disappeared.
+            className="sj-card-lift group flex h-[96px] w-[176px] items-center justify-center rounded-[14px] border border-[var(--home-hairline-strong)] bg-white px-6"
           >
             <Image
               src={org.logo}
               alt={hidden ? "" : org.wordmark}
               width={72}
               height={72}
-              className="h-[64px] w-[64px] object-contain opacity-75 grayscale transition-[filter,opacity,transform] duration-500 group-hover:scale-110 group-hover:opacity-100 group-hover:grayscale-0 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+              className="h-[64px] w-[64px] object-contain grayscale-[0.6] transition-[filter,transform] duration-500 group-hover:scale-110 group-hover:grayscale-0 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
             />
           </Link>
         </li>
