@@ -106,3 +106,64 @@ test("Sinhala and Tamil each rebind both shared font variables with their own fa
     );
   }
 });
+
+// The brand palette (home page v4) is a second set of values for the SAME
+// tokens the default palette defines, switched on by data-palette="brand".
+// The shared chrome (header, footer, toggles, floating rail) paints from those
+// tokens without knowing which palette it is under, so a token the default
+// block defines and the brand block forgets would silently fall through to
+// the navy value on a purple page.
+test("the brand palette defines every token the default palette defines, in both themes", () => {
+  const block = (selector: string) => {
+    const start = declarations.indexOf(selector + " {");
+    assert.ok(start !== -1, `missing block ${selector}`);
+    return declarations.slice(start, declarations.indexOf("}", start));
+  };
+  const tokensIn = (text: string) => [...text.matchAll(/(--home-[a-z0-9-]+):/g)].map((m) => m[1]);
+
+  // The default palette is declared across several [data-sj] blocks (the
+  // core tokens, then the hover tokens further down), so collect from all of
+  // them rather than the first match only.
+  const defaults = new Set<string>();
+  for (const match of declarations.matchAll(/\n\[data-sj\](?:\[data-theme="light"\])? \{([^}]*)\}/g)) {
+    for (const token of tokensIn(match[1])) defaults.add(token);
+  }
+  assert.ok(defaults.size >= 10, `only ${defaults.size} default tokens found`);
+
+  const light = new Set(tokensIn(block('[data-sj][data-palette="brand"]')));
+  const dark = new Set(tokensIn(block('[data-sj][data-palette="brand"][data-theme="dark"]')));
+
+  for (const token of defaults) {
+    assert.ok(light.has(token), `brand palette (light) is missing ${token}`);
+  }
+  // Fixed-value tokens are declared once, in the light block; the dark block
+  // must redefine every token whose value changes with the theme.
+  for (const token of [
+    "--home-bg",
+    "--home-surface",
+    "--home-surface-2",
+    "--home-heading",
+    "--home-body",
+    "--home-muted",
+    "--home-muted-2",
+    "--home-hairline",
+    "--home-hairline-strong",
+    "--home-brand-text",
+    "--home-accent-soft",
+    "--home-sky-bg",
+    "--home-sky-bg-2",
+    "--home-chip-on",
+    "--home-chip-on-fg",
+    "--home-fade-a",
+    "--home-fade-b",
+    "--home-fade-c",
+    "--home-dot",
+  ]) {
+    assert.ok(dark.has(token), `brand palette (dark) is missing ${token}`);
+  }
+  // The header's Book now paints from the CTA pair in every palette.
+  for (const token of ["--home-cta-bg", "--home-cta-fg", "--home-cta-hover"]) {
+    assert.ok(defaults.has(token), `default palette is missing ${token}`);
+    assert.ok(light.has(token), `brand palette is missing ${token}`);
+  }
+});

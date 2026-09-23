@@ -320,6 +320,12 @@ footer[id] {
   --home-accent: #2ca6f0;
   --home-accent-soft: #7fcbff;
   --home-on-accent: #04122b;
+  /* The header's Book now button. Defaults to the accent pair so every page
+     looks as it did; the brand palette further down repoints it at the logo
+     purple. */
+  --home-cta-bg: var(--home-accent);
+  --home-cta-fg: var(--home-on-accent);
+  --home-cta-hover: var(--home-accent-hover);
   font-family: var(--sj-body);
 }
 
@@ -473,6 +479,147 @@ footer[id] {
   --home-accent-tint-soft: rgba(11, 111, 192, 0.06);
   /* The dark theme's salmon would be unreadable on the light page background. */
   --home-danger: #b23a20;
+}
+
+/* ---- Brand palette (home page v4) ----
+   The logo's own purple and sky, light first, switched on by
+   data-palette="brand" on #sj-root (ThemedShell's `palette` prop). Every token
+   the default palette defines is redefined here so the shared chrome (header,
+   footer, toggles, floating rail) follows without knowing which palette it is
+   under; globals.test.ts fails if one is forgotten. Light values live in the
+   first block, dark in the second; data-theme is always set, so the right
+   block always wins. Values are the reference's
+   (docs/superpowers/specs/2026-09-23-home-page-v4-reference.html, its :root
+   and [data-theme="dark"]). */
+[data-sj][data-palette="brand"] {
+  --home-brand: #45338f;
+  --home-brand-hover: #362872;
+  --home-brand-text: #45338f;
+  --home-accent: #52b5e8;
+  --home-accent-hover: #3fa6dc;
+  --home-accent-soft: #1b7fc0;
+  --home-on-accent: #0f0b30;
+  --home-deep: #231a5c;
+  --home-ink: #1a1540;
+  --home-bg: #ffffff;
+  --home-surface: #f5f3fb;
+  --home-surface-2: #f0edfa;
+  --home-sky-bg: #eaf6fd;
+  --home-sky-bg-2: #dff1fc;
+  --home-heading: #1a1540;
+  --home-body: #2e2a55;
+  --home-muted: #4a4668;
+  --home-muted-2: #5a5775;
+  --home-hairline: rgba(26, 21, 64, 0.12);
+  --home-hairline-strong: rgba(26, 21, 64, 0.2);
+  --home-chip-on: #1a1540;
+  --home-chip-on-fg: #ffffff;
+  --home-fade-a: rgba(255, 255, 255, 0.97);
+  --home-fade-b: rgba(255, 255, 255, 0.88);
+  --home-fade-c: rgba(255, 255, 255, 0);
+  --home-dot: rgba(255, 255, 255, 0.95);
+  /* Outlined buttons fill with ink and go white on hover in both themes. */
+  --home-invert-bg: #1a1540;
+  --home-invert-fg: #ffffff;
+  --home-accent-tint: rgba(82, 181, 232, 0.1);
+  --home-accent-tint-soft: rgba(82, 181, 232, 0.06);
+  --home-danger: #b23a20;
+  --home-cta-bg: var(--home-brand);
+  --home-cta-fg: #ffffff;
+  --home-cta-hover: var(--home-brand-hover);
+  /* Header chrome: the reference's 97% white bar and flat panels. */
+  --sj-chrome-solid-bg: rgba(255, 255, 255, 0.97);
+  --sj-chrome-hairline-accent: var(--home-hairline);
+  --sj-chrome-panel-bg: #ffffff;
+  --sj-chrome-panel-frame-bg: #f5f3fb;
+  --sj-chrome-col-tint: transparent;
+  --sj-header-h: 84px;
+}
+
+[data-sj][data-palette="brand"][data-theme="dark"] {
+  --home-brand-text: #b3a6f5;
+  --home-accent-soft: #6cc4f0;
+  --home-bg: #110c30;
+  --home-surface: #1a1444;
+  --home-surface-2: #261e57;
+  --home-sky-bg: #0f1c3e;
+  --home-sky-bg-2: #13264d;
+  --home-heading: #f2f0fb;
+  --home-body: #d8d4ee;
+  --home-muted: #b9b4d6;
+  --home-muted-2: #a19cc2;
+  --home-hairline: rgba(255, 255, 255, 0.12);
+  --home-hairline-strong: rgba(255, 255, 255, 0.25);
+  --home-chip-on: #52b5e8;
+  --home-chip-on-fg: #0f0b30;
+  --home-fade-a: rgba(17, 12, 48, 0.97);
+  --home-fade-b: rgba(17, 12, 48, 0.86);
+  --home-fade-c: rgba(17, 12, 48, 0);
+  --home-dot: rgba(82, 181, 232, 0.18);
+  --home-danger: #ffb4a2;
+  --sj-chrome-solid-bg: rgba(17, 12, 48, 0.94);
+  --sj-chrome-panel-bg: #110c30;
+  --sj-chrome-panel-frame-bg: #1a1444;
+  color-scheme: dark;
+}
+
+/* The lockup is purple text on transparency; on the dark theme it becomes
+   white, exactly as the reference does it. */
+[data-sj][data-theme="dark"] img[data-logo] {
+  filter: brightness(0) invert(1);
+}
+
+/* The solid header variant (ThemedShell `header="solid"`): in normal flow and
+   sticky, always in its solid state. Nav triggers take the reference's 14px
+   bold and its lavender hover wash only under the brand palette, so the
+   transparent header on every other page is untouched. */
+[data-sj] .sj-header-solid {
+  position: sticky;
+  top: 0;
+}
+
+[data-sj][data-palette="brand"] .sj-nav-trigger {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+@media (hover: hover) {
+  [data-sj][data-palette="brand"] .sj-nav-trigger:hover {
+    background-color: var(--home-surface);
+    color: var(--home-brand-text);
+  }
+}
+
+/* Slower fade for content that swaps in place: the specialties photograph,
+   an FAQ answer, the open network panel. */
+.animate-sj-fade-slow {
+  animation: sj-fade-in 0.5s ease both;
+}
+
+/* The utility bar's emergency dot shrinks and dims rather than ringing, which
+   is what the reference's sjPulse does; the site's own sj-pulse is the ring on
+   the hero's phone chip and the floating call button. */
+@keyframes sj-pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(0.8);
+  }
+}
+
+.animate-sj-pulse-dot {
+  animation: sj-pulse-dot 1.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-sj-fade-slow,
+  .animate-sj-pulse-dot {
+    animation: none;
+  }
 }
 
 /* ---- Header chrome ----

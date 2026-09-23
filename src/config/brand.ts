@@ -13,3 +13,15 @@ export const LOGO_LOCKUP = {
   width: 1684,
   height: 360,
 } as const;
+
+/**
+ * The lockup recoloured to the brand palette: sky leaf, logo-purple serif
+ * wordmark and tagline, on transparency. Lifted from the v4 home reference
+ * bundle. Used by the solid header variant and the home footer; the dark
+ * theme inverts it to white through `img[data-logo]` in globals.css.
+ */
+export const LOGO_LOCKUP_BRAND = {
+  src: "/images/logo-lockup-brand.png",
+  width: 1248,
+  height: 386,
+} as const;
