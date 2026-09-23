@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useId, useState } from "react";
+import { useScrollParallax } from "@/hooks/useScrollParallax";
 import type { Locale } from "@/lib/i18n/locales";
 import { localeHref } from "@/lib/i18n/paths";
 import type { SpecialtyTab } from "../data/content";
@@ -48,6 +49,8 @@ export function SpecialtiesCarousel({
   const total = tabs.length;
   const step = (delta: number) => setIndex((i) => (i + delta + total) % total);
   const pad = (n: number) => String(n).padStart(2, "0");
+  // The photographs drift inside their clipped column as the card scrolls by.
+  const { ref: photoRef, offset: photoOffset } = useScrollParallax(0.08, 36);
 
   const arrow =
     "hidden h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[var(--home-brand)] text-white transition-colors hover:bg-[var(--home-brand-hover)] lg:flex";
@@ -87,10 +90,18 @@ export function SpecialtiesCarousel({
         </button>
 
         <div className="grid min-w-0 flex-1 gap-8 rounded-[18px] bg-[var(--home-bg)] p-4 shadow-[0_30px_60px_-40px_rgba(26,21,64,0.4)] sm:p-6 [grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))]">
-          <div className="relative grid min-h-[260px] min-w-0 overflow-hidden rounded-[12px] bg-[#DDE3EE] sm:min-h-[360px]">
+          <div ref={photoRef} className="group relative grid min-h-[260px] min-w-0 overflow-hidden rounded-[12px] bg-[#DDE3EE] sm:min-h-[360px]">
             {tabs.map((tab, i) => (
               <div key={tab.group} aria-hidden={i !== index} className={`${stacked} ${i === index ? shown : hidden}`}>
-                <Image src={tab.image} alt={tab.title} fill sizes="(min-width: 1024px) 45vw, 100vw" className="object-cover" />
+                <div style={{ transform: `translateY(${photoOffset}px)` }} className="absolute inset-x-0 -inset-y-[10%]">
+                  <Image
+                    src={tab.image}
+                    alt={tab.title}
+                    fill
+                    sizes="(min-width: 1024px) 45vw, 100vw"
+                    className="sj-card-zoom object-cover"
+                  />
+                </div>
               </div>
             ))}
           </div>

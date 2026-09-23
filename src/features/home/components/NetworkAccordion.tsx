@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useId, useRef, useState } from "react";
 import type { KeyboardEvent } from "react";
+import { useScrollParallax } from "@/hooks/useScrollParallax";
 import { localeHref } from "@/lib/i18n/paths";
 import type { Locale } from "@/lib/i18n/locales";
 import type { NetworkNode } from "../data/network";
@@ -43,6 +44,9 @@ export function NetworkAccordion({
   const [activeIndex, setActiveIndex] = useState(0);
   const buttonRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const baseId = useId();
+  // One scroll offset for all four photographs, so they drift together
+  // inside their rounded panels.
+  const { ref: photosRef, offset: photoOffset } = useScrollParallax(0.07, 40);
 
   const handleKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
     const lastIndex = nodes.length - 1;
@@ -73,6 +77,8 @@ export function NetworkAccordion({
   };
 
   return (
+    // The parallax hook types its ref for a div, so it sits on this wrapper.
+    <div ref={photosRef}>
     <ul className="m-0 flex h-[760px] list-none flex-col gap-3 p-0 min-[760px]:h-[540px] min-[760px]:flex-row">
       {nodes.map((node, index) => {
         const isActive = index === activeIndex;
@@ -87,7 +93,9 @@ export function NetworkAccordion({
               isActive ? "grow basis-0" : "grow-0 basis-16 min-[760px]:basis-[90px]"
             }`}
           >
-            <Image src={node.photo} alt="" fill sizes="(min-width: 760px) 75vw, 100vw" className="object-cover" />
+            <div style={{ transform: `translateY(${photoOffset}px)` }} className="absolute inset-x-0 -inset-y-[10%]">
+              <Image src={node.photo} alt="" fill sizes="(min-width: 760px) 75vw, 100vw" className="object-cover" />
+            </div>
             <div
               aria-hidden
               className="absolute inset-0 transition-[background] duration-[400ms] motion-reduce:transition-none"
@@ -166,5 +174,6 @@ export function NetworkAccordion({
         );
       })}
     </ul>
+    </div>
   );
 }

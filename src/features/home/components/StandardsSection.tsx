@@ -50,8 +50,10 @@ export function StandardsSection({ content }: { content: HomeContent["content"][
       </div>
       <Container className="relative z-[2] -mt-14 max-w-[1000px]">
         <ParallaxLayer factor={-0.06} maxOffsetPx={24}>
-          <div className="bg-[var(--home-accent)] px-6 py-8 text-center shadow-[0_24px_40px_-24px_rgba(26,21,64,0.5)]">
-            <span className="font-display text-[clamp(26px,3vw,38px)] font-bold tracking-[-0.01em] text-[#0F0B30] italic">
+          {/* Lifts like a card and brightens on hover; the motto slides a
+              touch to the right so the plaque reads as something you can hold. */}
+          <div className="sj-card-lift group bg-[var(--home-accent)] px-6 py-8 text-center hover:bg-[var(--home-accent-hover)] shadow-[0_24px_40px_-24px_rgba(26,21,64,0.5)]">
+            <span className="font-display inline-block text-[clamp(26px,3vw,38px)] font-bold tracking-[-0.01em] text-[#0F0B30] italic transition-transform duration-500 group-hover:translate-x-1.5 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0">
               {content.plaqueHeading}
             </span>
           </div>

@@ -14,6 +14,7 @@ import { StandardsSection } from "./StandardsSection";
 import { TestimonialsSection } from "./TestimonialsSection";
 import { InternationalCareSection } from "./InternationalCareSection";
 import { NetworkSection } from "./NetworkSection";
+import { PartnerLogosSection } from "./PartnerLogosSection";
 import { FaqSection } from "./FaqSection";
 import { MediaCareersSection } from "./MediaCareersSection";
 import { ContactCtaSection } from "./ContactCtaSection";
@@ -60,6 +61,7 @@ export async function HomePage({ locale }: { locale: Locale }) {
         />
         <InternationalCareSection content={home.internationalCare} locale={locale} />
         <NetworkSection content={home.network} locale={locale} />
+        <PartnerLogosSection content={home.network} locale={locale} />
         <FaqSection content={home.faq} locale={locale} />
         <MediaCareersSection media={home.media} careers={home.careers} locale={locale} />
         <ContactCtaSection content={content.contactCta} locale={locale} />

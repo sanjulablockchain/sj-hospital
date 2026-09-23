@@ -456,9 +456,14 @@ Added at the owner's request after the first review (2026-09-23), beyond the
 reference's own motion:
 
 - **Counters.** The six "who we are" figures and the pharmacy fact values
-  count up from zero the first time they scroll into view (`CountUp`, over
-  the shared `AnimatedCounter`); their dressing ("/7", "h", "%", " / 7") stays
-  fixed. Values without digits render as text.
+  count up from zero over 2.8 seconds the first time they scroll into view
+  (`CountUp`, over the shared `AnimatedCounter`); their dressing ("/7", "h",
+  "%", " / 7") stays fixed. Values without digits render as text.
+- **International band.** Five parallax depths (dot pattern, disc, photo,
+  badges at three rates); the photograph eases up when its ring is hovered,
+  each badge lifts and turns, and each list item highlights, slides right and
+  grows its dot under the pointer.
+- **Motto plaque** lifts, brightens and nudges its text on hover.
 - **Card lift.** Every card-shaped element (stat cards, mosaic tiles and the
   switchboard row, care tiles, standards items, FAQ rows, news strips, job
   rows) lifts 6px on a soft shadow on hover (`.sj-card-lift`); photographs
@@ -539,5 +544,12 @@ header, the carousel, the accordion, the FAQ and every link's destination.
    of the largest paediatric groups in California" (network page) is a
    pre-existing inconsistency and is left as it is on main. Flagged, not
    fixed here.
-8. The theme default is the site's (stored, then OS preference), not the
-   reference's light-unless-dark-was-chosen.
+8. Light is the default theme site-wide (owner's decision after the first
+   review, 2026-09-23): a saved choice wins, otherwise the page opens light.
+   The OS preference no longer picks the first theme.
+9. The lockup keeps its own colours on the dark theme (owner's decision,
+   2026-09-23); the reference inverted it to white.
+10. A partner logo marquee sits between the network accordion and the FAQ
+    (owner's request, 2026-09-23): the nine group companies from the network
+    page's own data, desaturated until hovered, pausing under the pointer,
+    each opening the network page's family section. Not in the reference.

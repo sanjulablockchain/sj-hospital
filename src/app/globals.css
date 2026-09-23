@@ -563,11 +563,9 @@ footer[id] {
   color-scheme: dark;
 }
 
-/* The lockup is purple text on transparency; on the dark theme it becomes
-   white, exactly as the reference does it. */
-[data-sj][data-theme="dark"] img[data-logo] {
-  filter: brightness(0) invert(1);
-}
+/* The lockup keeps its own colours on both themes (owner's decision,
+   2026-09-23; the reference inverted it to white on dark). `data-logo` stays
+   on the images as a hook, with no rule attached. */
 
 /* The solid header variant (ThemedShell `header="solid"`): in normal flow and
    sticky, always in its solid state. Nav triggers take the reference's 14px
@@ -1022,6 +1020,19 @@ footer[id] {
 
 [data-sj] .sj-card-zoom {
   transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* The partner logo marquee under the network band: the shared `sj-tick`
+   keyframe on a slower clock, held still while the pointer is over it so a
+   logo can be hovered and clicked. */
+[data-sj] .sj-marquee .animate-sj-tick {
+  animation-duration: 52s;
+}
+
+@media (hover: hover) {
+  [data-sj] .sj-marquee:hover .animate-sj-tick {
+    animation-play-state: paused;
+  }
 }
 
 @media (hover: hover) {

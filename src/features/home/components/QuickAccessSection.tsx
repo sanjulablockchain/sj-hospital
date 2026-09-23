@@ -36,7 +36,7 @@ export function QuickAccessSection({
       <Container className="flex flex-col">
         <div className="grid [grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr))]">
           <div className="group relative flex min-h-[420px] items-center overflow-hidden bg-[var(--home-surface)]">
-            <ParallaxLayer factor={0.06} maxOffsetPx={30} className="absolute inset-x-0 -inset-y-[8%]">
+            <ParallaxLayer factor={0.1} maxOffsetPx={44} className="absolute inset-x-0 -inset-y-[10%]">
               <Image
                 src={channel.photo}
                 alt={channel.photoAlt}
@@ -94,13 +94,15 @@ export function QuickAccessSection({
                 <span className="mt-1.5 text-[14px] font-bold italic">{emergency.cta}</span>
               </Link>
               <div className={`${photoTile} min-h-[220px]`}>
-                <Image
-                  src={emergency.photo}
-                  alt={emergency.photoAlt}
-                  fill
-                  sizes="(min-width: 1100px) 25vw, 50vw"
-                  className="sj-card-zoom object-cover"
-                />
+                <ParallaxLayer factor={0.08} maxOffsetPx={28} className="absolute inset-x-0 -inset-y-[10%]">
+                  <Image
+                    src={emergency.photo}
+                    alt={emergency.photoAlt}
+                    fill
+                    sizes="(min-width: 1100px) 25vw, 50vw"
+                    className="sj-card-zoom object-cover"
+                  />
+                </ParallaxLayer>
               </div>
             </RevealStagger>
           </div>
@@ -108,13 +110,15 @@ export function QuickAccessSection({
 
         <RevealStagger className="grid grid-cols-1 min-[600px]:grid-cols-2 min-[1100px]:grid-cols-4">
           <div className={`${photoTile} h-[260px]`}>
-            <Image
-              src={facilities.photo}
-              alt={facilities.photoAlt}
-              fill
-              sizes="(min-width: 1100px) 25vw, 50vw"
-              className="sj-card-zoom object-cover"
-            />
+            <ParallaxLayer factor={0.08} maxOffsetPx={28} className="absolute inset-x-0 -inset-y-[10%]">
+              <Image
+                src={facilities.photo}
+                alt={facilities.photoAlt}
+                fill
+                sizes="(min-width: 1100px) 25vw, 50vw"
+                className="sj-card-zoom object-cover"
+              />
+            </ParallaxLayer>
           </div>
           <Link
             href={localeHref(facilities.href, locale)}
@@ -126,13 +130,15 @@ export function QuickAccessSection({
             <span className="mt-1.5 text-[14px] font-bold italic">{facilities.cta}</span>
           </Link>
           <div className={`${photoTile} h-[260px]`}>
-            <Image
-              src={location.photo}
-              alt={location.photoAlt}
-              fill
-              sizes="(min-width: 1100px) 25vw, 50vw"
-              className="sj-card-zoom object-cover"
-            />
+            <ParallaxLayer factor={0.08} maxOffsetPx={28} className="absolute inset-x-0 -inset-y-[10%]">
+              <Image
+                src={location.photo}
+                alt={location.photoAlt}
+                fill
+                sizes="(min-width: 1100px) 25vw, 50vw"
+                className="sj-card-zoom object-cover"
+              />
+            </ParallaxLayer>
           </div>
           <a
             href={location.href}

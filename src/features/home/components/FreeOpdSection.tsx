@@ -26,7 +26,7 @@ export function FreeOpdSection({
         <Reveal className="grid overflow-hidden rounded-[18px] bg-[var(--home-sky-bg)] [grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr))]">
           <div className="relative min-h-[320px] overflow-hidden sm:min-h-[480px]">
             {/* Taller than its box so the scroll drift never shows an edge. */}
-            <ParallaxLayer factor={0.07} maxOffsetPx={36} className="absolute inset-x-0 -inset-y-[8%]">
+            <ParallaxLayer factor={0.11} maxOffsetPx={52} className="absolute inset-x-0 -inset-y-[12%]">
               <Image
                 src={content.photo}
                 alt={content.photoAlt}

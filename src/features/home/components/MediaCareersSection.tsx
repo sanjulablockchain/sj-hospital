@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
 import type { Locale } from "@/lib/i18n/locales";
@@ -31,13 +32,15 @@ export function MediaCareersSection({
       <Container className="grid gap-5 [grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr))]">
         <Reveal className="flex flex-col overflow-hidden rounded-[16px] bg-[#1A1540] text-white">
           <Link href={story} className="group relative block min-h-[300px] flex-1 overflow-hidden text-white hover:text-white">
-            <Image
-              src={media.photo}
-              alt={media.photoAlt}
-              fill
-              sizes="(min-width: 1100px) 50vw, 100vw"
-              className="sj-card-zoom object-cover"
-            />
+            <ParallaxLayer factor={0.09} maxOffsetPx={40} className="absolute inset-x-0 -inset-y-[10%]">
+              <Image
+                src={media.photo}
+                alt={media.photoAlt}
+                fill
+                sizes="(min-width: 1100px) 50vw, 100vw"
+                className="sj-card-zoom object-cover"
+              />
+            </ParallaxLayer>
             <div
               aria-hidden
               className="absolute inset-0"

@@ -44,7 +44,7 @@ export function TestimonialsSection({
   const [index, setIndex] = useState(Math.max(items.length - 1, 0));
   const step = (delta: number) => setIndex((i) => (i + delta + items.length) % items.length);
   // The reception photograph drifts against the scroll inside its clipped box.
-  const { ref: photoRef, offset: photoOffset } = useScrollParallax(0.07, 36);
+  const { ref: photoRef, offset: photoOffset } = useScrollParallax(0.11, 52);
 
   return (
     <section id="voices" className="pt-20 pb-20 sm:pb-27.5">
@@ -120,7 +120,7 @@ export function TestimonialsSection({
           </div>
         </div>
         <div className="relative h-[360px] overflow-hidden shadow-[0_30px_60px_-30px_rgba(26,21,64,0.45)] sm:h-[540px]">
-          <div ref={photoRef} style={{ transform: `translateY(${photoOffset}px)` }} className="absolute inset-x-0 -inset-y-[8%]">
+          <div ref={photoRef} style={{ transform: `translateY(${photoOffset}px)` }} className="absolute inset-x-0 -inset-y-[12%]">
             <Image src={photo} alt={photoAlt} fill sizes="(min-width: 960px) 50vw, 100vw" className="object-cover" />
           </div>
         </div>
