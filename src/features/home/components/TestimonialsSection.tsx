@@ -106,7 +106,10 @@ export function TestimonialsSection({
                 type="button"
                 aria-label={ariaNext}
                 onClick={() => step(1)}
-                className="flex h-12 w-12 items-center justify-center border-[1.5px] border-[var(--home-ink)] bg-[var(--home-ink)] text-white transition-colors hover:border-[var(--home-brand)] hover:bg-[var(--home-brand)]"
+                // The reference draws this box with the theme's ink border over a
+                // fixed #1A1540 fill, so on the dark theme the border stays light
+                // and the box is still visible against the lavender card.
+                className="flex h-12 w-12 items-center justify-center border-[1.5px] border-[var(--home-heading)] bg-[var(--home-ink)] text-white transition-colors hover:border-[var(--home-brand)] hover:bg-[var(--home-brand)]"
               >
                 <HomeIcon name="right" size={22} stroke={2} />
               </button>

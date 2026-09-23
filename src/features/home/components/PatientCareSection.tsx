@@ -5,7 +5,7 @@ import type { Locale } from "@/lib/i18n/locales";
 import { localeHref } from "@/lib/i18n/paths";
 import type { HomeContent } from "../data/getContent";
 import { patientCareTiles } from "../data/patientCareTiles";
-import type { HomeIconKey } from "../types";
+import { isHomeIconKey } from "../types";
 import { HomeIcon } from "./HomeIcon";
 import { Container, pillButton, ArrowRight } from "./primitives";
 
@@ -49,7 +49,10 @@ export function PatientCareSection({
               href={localeHref(tile.href, locale)}
               className="flex aspect-[1/0.92] flex-col items-center justify-center gap-3.5 bg-[var(--home-brand)] p-4.5 text-center text-white transition-colors hover:bg-[var(--home-accent)] hover:text-[var(--home-on-accent)]"
             >
-              <HomeIcon name={tile.icon as HomeIconKey} size={48} stroke={1.3} />
+              {/* The header's icon vocabulary is wider than the home page's;
+                  a key without path data renders no icon rather than throwing.
+                  patientCareTiles.test.ts pins that today's six all resolve. */}
+              {isHomeIconKey(tile.icon) ? <HomeIcon name={tile.icon} size={48} stroke={1.3} /> : null}
               <span className="text-[15.5px] font-extrabold">{tile.label}</span>
               <span className="max-w-[170px] text-[12.5px] leading-[1.4] opacity-85">{tile.description}</span>
             </Link>

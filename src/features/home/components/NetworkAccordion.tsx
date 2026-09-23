@@ -129,7 +129,10 @@ export function NetworkAccordion({
                 so the link's own stretched hit area covers the whole panel. */}
             <div
               id={contentId}
-              className={`pointer-events-none absolute inset-x-0 bottom-0 flex flex-col gap-2.5 border-b-[3px] border-[var(--home-accent)] p-6 text-white sm:p-8 ${
+              // Spans the whole panel (not just the caption at its foot) so the
+              // link's stretched hit area below covers the photograph too: the
+              // second tap, or a click anywhere on an open panel, follows it.
+              className={`pointer-events-none absolute inset-0 flex flex-col justify-end gap-2.5 border-b-[3px] border-[var(--home-accent)] p-6 text-white sm:p-8 ${
                 isActive ? "animate-sj-fade-slow z-20 opacity-100 [animation-delay:200ms]" : "opacity-0"
               }`}
             >
