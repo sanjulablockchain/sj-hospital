@@ -1035,6 +1035,72 @@ footer[id] {
   }
 }
 
+/* The marquee's logo tiles. The tile itself follows the theme (the owner
+   did not want a white tile on the dark page), but the logo artwork does
+   not: two of the nine (LAIPT, After-Hours) are full-colour badges with no
+   transparent detail to invert against, so a white-mark treatment collapsed
+   them into a plain white disc. Every logo instead sits on a small white
+   backing plate (`.sj-logo-mark`), which reads correctly regardless of a
+   given logo's own transparency and, on the light theme's already-white
+   tile, is invisible. Idle logos are part-desaturated; hover restores full
+   colour and lifts the plate a little. */
+[data-sj] .sj-logo-tile {
+  background: var(--home-bg);
+}
+
+[data-sj][data-theme="dark"] .sj-logo-tile {
+  background: var(--home-surface);
+}
+
+@media (hover: hover) {
+  [data-sj][data-theme="dark"] .sj-logo-tile:hover {
+    background: var(--home-surface-2);
+  }
+}
+
+[data-sj] .sj-logo-mark {
+  background: #ffffff;
+  transition:
+    box-shadow 0.5s ease,
+    transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+[data-sj][data-theme="dark"] .sj-logo-mark {
+  box-shadow: 0 6px 16px -8px rgba(6, 4, 20, 0.6);
+}
+
+[data-sj] .sj-logo-mark img {
+  filter: grayscale(0.55);
+  transition:
+    filter 0.5s ease,
+    transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@media (hover: hover) {
+  [data-sj] .sj-logo-tile:hover .sj-logo-mark {
+    transform: translateY(-3px);
+  }
+
+  [data-sj][data-theme="dark"] .sj-logo-tile:hover .sj-logo-mark {
+    box-shadow: 0 10px 22px -8px rgba(6, 4, 20, 0.7);
+  }
+
+  [data-sj] .sj-logo-tile:hover .sj-logo-mark img {
+    filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-sj] .sj-logo-mark,
+  [data-sj] .sj-logo-mark img {
+    transition: none;
+  }
+
+  [data-sj] .sj-logo-tile:hover .sj-logo-mark {
+    transform: none;
+  }
+}
+
 @media (hover: hover) {
   [data-sj] .sj-card-lift:hover {
     transform: translateY(-6px);

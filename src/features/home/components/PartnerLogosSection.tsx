@@ -67,17 +67,23 @@ function LogoTrack({
             href={href}
             tabIndex={hidden ? -1 : undefined}
             title={org.wordmark}
-            // The tile is white on both themes: the logos were drawn for a white
-            // ground, and desaturated on the dark surface they disappeared.
-            className="sj-card-lift group flex h-[96px] w-[176px] items-center justify-center rounded-[14px] border border-[var(--home-hairline-strong)] bg-white px-6"
+            // Tile and logo mark treatment live in globals.css: the tile
+            // follows the theme (`.sj-logo-tile`), and the logo itself sits
+            // on a small white plate (`.sj-logo-mark`) that reads correctly
+            // whichever tile it is on, since two of the nine logos are
+            // full-colour badges a white-mark invert would have collapsed
+            // into a blank disc.
+            className="sj-card-lift sj-logo-tile group flex h-[96px] w-[176px] items-center justify-center rounded-[14px] border border-[var(--home-hairline)] px-6"
           >
-            <Image
-              src={org.logo}
-              alt={hidden ? "" : org.wordmark}
-              width={72}
-              height={72}
-              className="h-[64px] w-[64px] object-contain grayscale-[0.6] transition-[filter,transform] duration-500 group-hover:scale-110 group-hover:grayscale-0 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
-            />
+            <span className="sj-logo-mark flex h-[72px] w-[72px] items-center justify-center rounded-[10px] p-2">
+              <Image
+                src={org.logo}
+                alt={hidden ? "" : org.wordmark}
+                width={64}
+                height={64}
+                className="h-full w-full object-contain"
+              />
+            </span>
           </Link>
         </li>
       ))}
