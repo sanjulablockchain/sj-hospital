@@ -53,21 +53,15 @@ export function InternationalCareSection({
             {content.heading}
           </h2>
           <p className="m-0 max-w-[560px] text-[16.5px] leading-[1.65] text-[var(--home-muted)]">{content.body}</p>
-          <RevealStagger stepMs={70} className="-mx-3 flex flex-col gap-1">
+          <RevealStagger stepMs={70} className="flex flex-col gap-4">
             {content.internationalCareItems.map((item) => (
-              <div
-                key={item.index}
-                className="group/item flex items-start gap-4 rounded-[12px] px-3 py-1.5 transition-[background-color,transform] duration-300 hover:translate-x-1.5 hover:bg-[var(--home-surface)] motion-reduce:transition-none motion-reduce:hover:translate-x-0"
-              >
+              <div key={item.index} className="flex items-start gap-4">
                 <span
                   aria-hidden
-                  className="mt-1 h-[18px] w-[18px] shrink-0 rounded-full bg-[var(--home-accent)] shadow-[0_0_0_5px_var(--home-sky-bg)] transition-[transform,box-shadow] duration-300 group-hover/item:scale-110 group-hover/item:shadow-[0_0_0_7px_var(--home-sky-bg-2)] motion-reduce:transition-none"
+                  className="mt-1 h-[18px] w-[18px] shrink-0 rounded-full bg-[var(--home-accent)] shadow-[0_0_0_5px_var(--home-sky-bg)]"
                 />
                 <p className="m-0 text-[15.5px] leading-[1.6] text-[var(--home-body)]">
-                  <strong className="font-extrabold text-[var(--home-heading)] transition-colors duration-300 group-hover/item:text-[var(--home-brand-text)]">
-                    {item.title}:
-                  </strong>{" "}
-                  {item.body}
+                  <strong className="font-extrabold text-[var(--home-heading)]">{item.title}:</strong> {item.body}
                 </p>
               </div>
             ))}
