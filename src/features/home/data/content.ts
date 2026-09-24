@@ -107,9 +107,15 @@ export const quickAccess = {
 
 /**
  * `#about`. `stats[*].value` is a fact (`{count}` is filled with
- * `services.length`); `icon` and `tone` are structural keys. `label` and
- * `desc` are the stat's caption and translate, the same split the old
+ * `services.length`); `icon`, `tone` and `href` are structural keys. `label`
+ * and `desc` are the stat's caption and translate, the same split the old
  * `caption` had.
+ *
+ * Each card's `href` is the page that backs its claim: emergency care,
+ * the services directory, the facilities page's own floors and hygiene
+ * sections, home care, and international care. The "Emergency and OPD"
+ * card names two services; it goes to accident and emergency, since the
+ * free OPD claim already has its own band and link two sections down.
  */
 export const whoWeAre = {
   eyebrow: "Who we are",
@@ -124,6 +130,7 @@ export const whoWeAre = {
       label: "Emergency and OPD",
       desc: "Every service open, every hour, every day of the year.",
       tone: "red",
+      href: "/services/accident-emergency",
     },
     {
       icon: "grid",
@@ -131,6 +138,7 @@ export const whoWeAre = {
       label: "Services",
       desc: "From emergency care to fertility, under one roof.",
       tone: "brand",
+      href: "/services",
     },
     {
       icon: "building",
@@ -138,6 +146,7 @@ export const whoWeAre = {
       label: "Floor hospital",
       desc: "Purpose built in Negombo, with ambulance bay and covered arrival.",
       tone: "sky",
+      href: "/facilities#floors",
     },
     {
       icon: "spark",
@@ -145,6 +154,7 @@ export const whoWeAre = {
       label: "Cleaning cycle",
       desc: "Every surface, cleaned to US specification.",
       tone: "green",
+      href: "/facilities#hygiene",
     },
     {
       icon: "ambulance",
@@ -152,6 +162,7 @@ export const whoWeAre = {
       label: "Home visit vehicles",
       desc: "Doctors, nurses and lab technicians at your door.",
       tone: "orange",
+      href: "/home-care#visits",
     },
     {
       icon: "plane",
@@ -159,8 +170,9 @@ export const whoWeAre = {
       label: "Minutes from the airport",
       desc: "Bandaranaike International to our door.",
       tone: "brand",
+      href: "/international-care",
     },
-  ] satisfies { icon: HomeIconKey; value: string; label: string; desc: string; tone: StatTone }[],
+  ] satisfies { icon: HomeIconKey; value: string; label: string; desc: string; tone: StatTone; href: string }[],
 };
 
 /**

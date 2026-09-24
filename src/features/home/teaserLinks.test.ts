@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { quickAccess, specialties, pharmacy, contactCta, patientCare } from "./data/content.ts";
+import { quickAccess, specialties, pharmacy, contactCta, patientCare, whoWeAre } from "./data/content.ts";
 import * as faq from "./data/faq.ts";
 import * as media from "./data/media.ts";
 import * as careers from "./data/careers.ts";
@@ -126,6 +126,7 @@ const OUTBOUND = /^(\/[a-z0-9-]+(\/[a-z0-9-]+)*(#[a-z0-9-]+)?|tel:\+94\d+|mailto
 
 test("every destination in the home data leaves the page", () => {
   const hrefs = [
+    ...whoWeAre.stats.map((s) => s.href),
     quickAccess.channel.href,
     quickAccess.emergencyCall.href,
     quickAccess.emergency.href,

@@ -43,7 +43,7 @@ export async function HomePage({ locale }: { locale: Locale }) {
       <main>
         <HeroSection hero={content.hero} tickerItems={content.statTickerItems} />
         <QuickAccessSection content={content.quickAccess} servicesCount={services.length} locale={locale} />
-        <WhoWeAreSection content={content.whoWeAre} servicesCount={services.length} />
+        <WhoWeAreSection content={content.whoWeAre} servicesCount={services.length} locale={locale} />
         <FreeOpdSection content={content.freeOpd} locale={locale} />
         <SpecialtiesSection content={content.specialties} servicesCount={services.length} locale={locale} />
         <PatientCareSection content={content.patientCare} locale={locale} />
