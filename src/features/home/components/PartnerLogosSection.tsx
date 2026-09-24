@@ -67,23 +67,17 @@ function LogoTrack({
             href={href}
             tabIndex={hidden ? -1 : undefined}
             title={org.wordmark}
-            // Tile and logo mark treatment live in globals.css: the tile
-            // follows the theme (`.sj-logo-tile`), and the logo itself sits
-            // on a small white plate (`.sj-logo-mark`) that reads correctly
-            // whichever tile it is on, since two of the nine logos are
-            // full-colour badges a white-mark invert would have collapsed
-            // into a blank disc.
+            // The tile follows the theme (`.sj-logo-tile`); the logo sits
+            // directly on it, no backing plate.
             className="sj-card-lift sj-logo-tile group flex h-[96px] w-[176px] items-center justify-center rounded-[14px] border border-[var(--home-hairline)] px-6"
           >
-            <span className="sj-logo-mark flex h-[72px] w-[72px] items-center justify-center rounded-[10px] p-2">
-              <Image
-                src={org.logo}
-                alt={hidden ? "" : org.wordmark}
-                width={64}
-                height={64}
-                className="h-full w-full object-contain"
-              />
-            </span>
+            <Image
+              src={org.logo}
+              alt={hidden ? "" : org.wordmark}
+              width={68}
+              height={68}
+              className="h-[68px] w-[68px] object-contain transition-transform duration-500 group-hover:scale-110 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+            />
           </Link>
         </li>
       ))}

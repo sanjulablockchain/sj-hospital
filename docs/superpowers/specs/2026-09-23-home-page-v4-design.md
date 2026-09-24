@@ -552,15 +552,15 @@ header, the carousel, the accordion, the FAQ and every link's destination.
 10. A partner logo marquee sits between the network accordion and the FAQ
     (owner's request, 2026-09-23): the nine group companies from the network
     page's own data, pausing under the pointer, each opening the network
-    page's family section. The tile follows the theme (the owner did not
-    want a white tile on dark: white on light, the theme's raised surface
-    on dark). Each logo sits on a small white backing plate rather than
-    being inverted to a white mark, since two of the nine (LAIPT,
-    After-Hours) are full-colour badges with no transparent detail to
-    invert against, which a white-mark treatment collapsed into a blank
-    disc; the plate reads correctly regardless. Logos are part-desaturated
-    until hovered, when they take full colour and lift. Not in the
-    reference.
+    page's family section. The tile follows the theme (white on light, the
+    theme's raised surface on dark); the owner rejected two earlier
+    treatments here in turn, a white-mark invert (collapsed the two
+    full-colour badge logos, LAIPT and After-Hours, into a blank disc) and
+    a white backing plate behind every logo (read as an unwanted white
+    background). Logos now sit directly on the tile with no backing shape
+    of any kind, each keeping its own artwork: the badge-style logos show
+    their own baked-in white circle, the wordmark logos their own colours.
+    Not in the reference.
 11. The header's Book now opens a booking sheet (owner's request,
     2026-09-23) rather than leaving for the channelling page directly: three
     cards (book online, WhatsApp, call) over a free OPD and corporate
