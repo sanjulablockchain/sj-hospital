@@ -55,7 +55,7 @@ export function BookSection({ content }: { content: SchoolWellnessContent }) {
           <p className="mt-5.5 max-w-[44ch] text-[17px] leading-[1.6] opacity-85">{bookIntro}</p>
           <ul className="mt-6.5 flex flex-wrap gap-2.5 text-[13.5px] font-bold">
             {bookingChecklist.map((item) => (
-              <li key={item} className="border border-[#04122B]/30 px-3.75 py-2.5">
+              <li key={item} className="border border-[var(--home-on-accent)]/30 px-3.75 py-2.5">
                 {item}
               </li>
             ))}

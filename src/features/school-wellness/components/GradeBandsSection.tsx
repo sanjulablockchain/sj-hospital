@@ -12,7 +12,7 @@ import type { SchoolWellnessContent } from "../data/getContent";
  * reuses it rather than adding a second copy.
  *
  * Fixed-dark in both themes, like the hero: the panel is a photograph with a
- * `#060B1F` scrim over it, so its foreground colours are literal and its rows
+ * `#1A1540` scrim over it, so its foreground colours are literal and its rows
  * sit on `--home-surface-2`'s dark value rather than the token, which the light
  * theme turns white.
  *
@@ -27,7 +27,7 @@ import type { SchoolWellnessContent } from "../data/getContent";
 export function GradeBandsSection({ content }: { content: SchoolWellnessContent }) {
   const { gradeBands, gradeBandsHeading, gradeBandsIntro, sectionEyebrows } = content;
   return (
-    <section id="grades" className="relative mt-26 overflow-hidden bg-[#08123A] max-[640px]:mt-18">
+    <section id="grades" className="relative mt-26 overflow-hidden bg-[#1A1540] max-[640px]:mt-18">
       <ParallaxLayer
         factor={0.12}
         maxOffsetPx={80}
@@ -46,14 +46,14 @@ export function GradeBandsSection({ content }: { content: SchoolWellnessContent 
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(90deg, #060B1F 4%, rgba(6,11,31,0.9) 55%, rgba(6,11,31,0.78) 100%)",
+            "linear-gradient(90deg, #1A1540 4%, rgba(26,21,64,0.9) 55%, rgba(26,21,64,0.78) 100%)",
         }}
       />
 
       <div className="relative z-10 mx-auto max-w-[1440px] px-5 py-23 sm:px-8 lg:px-11">
         <Reveal className="grid grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] items-start gap-14.5 max-[899px]:grid-cols-1 max-[899px]:gap-10">
           <div className="min-w-0 sticky top-10 max-[899px]:static">
-            <div className="text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
+            <div className="text-[11.5px] font-bold tracking-[0.24em] text-[#9FD6F5] uppercase">
               {sectionEyebrows.grades}
             </div>
             <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(36px,4.6vw,66px)] leading-[0.9] font-extrabold tracking-[-0.04em] text-white uppercase">
@@ -70,9 +70,9 @@ export function GradeBandsSection({ content }: { content: SchoolWellnessContent 
 
           <div className="flex flex-col gap-px bg-white/18">
             {gradeBands.map((band) => (
-              <div key={band.band} className="bg-[#08123A] px-7 py-6.5">
+              <div key={band.band} className="bg-[#1A1540] px-7 py-6.5">
                 <div className="flex flex-wrap items-baseline gap-4">
-                  <span className="bg-[#2CA6F0] px-2.75 py-1.5 text-[12px] font-bold tracking-[0.16em] whitespace-nowrap text-[#04122B] uppercase">
+                  <span className="bg-[var(--home-accent)] px-2.75 py-1.5 text-[12px] font-bold tracking-[0.16em] whitespace-nowrap text-[var(--home-on-accent)] uppercase">
                     {band.band}
                   </span>
                   <span className="font-display text-[23px] font-bold tracking-[-0.025em] text-white">
