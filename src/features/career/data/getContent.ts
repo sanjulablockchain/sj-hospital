@@ -31,6 +31,12 @@ const overlays = {
 export type CareerContent = typeof base;
 
 export async function getCareerContent(locale: Locale): Promise<CareerContent> {
-  if (locale === DEFAULT_LOCALE) return base;
+  // Spread, not the namespace itself: `import * as base` is a Module object,
+  // and CareersPage hands this whole result to two Client Components
+  // (ApplicationForm, OpeningsSection). React refuses to serialize a Module
+  // across that boundary ("Only plain objects can be passed to Client
+  // Components"). si/ta never hit this because `localize` already builds a
+  // plain object, which is what made the bug invisible on those locales.
+  if (locale === DEFAULT_LOCALE) return { ...base };
   return localize(base, await overlays[locale]());
 }
