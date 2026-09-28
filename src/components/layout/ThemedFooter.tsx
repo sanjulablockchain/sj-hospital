@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { FacebookIcon, InstagramIcon, LinkedInIcon, WhatsAppIcon } from "@/components/ui/BrandIcons";
-import { LOGO_MARK } from "@/config/brand";
+import { LOGO_LOCKUP_BRAND } from "@/config/brand";
 import { LocaleLink } from "@/components/i18n/LocaleLink";
 import { ChromeText } from "@/components/i18n/ChromeText";
 
@@ -50,23 +50,14 @@ export function ThemedFooter({ columns, reachUsLabel, id = "contact" }: ThemedFo
     <footer id={id} className="mx-auto max-w-[1440px] px-5 pb-10 pt-26 sm:px-8 lg:px-11">
       <div className="flex flex-wrap items-start justify-between gap-13">
         <div className="max-w-[34ch]">
-          <span className="flex items-center gap-3.5">
-            <Image
-              src={LOGO_MARK.src}
-              alt="St. Joseph Hospital"
-              width={LOGO_MARK.width}
-              height={LOGO_MARK.height}
-              className="block h-15 w-auto"
-            />
-            <span className="block leading-[1.1]">
-              <span className="font-display block text-[20px] font-extrabold tracking-[-0.02em] text-[var(--home-heading)]">
-                ST. JOSEPH HOSPITAL
-              </span>
-              <span className="mt-1 block text-[10.5px] tracking-[0.22em] text-[var(--home-accent-soft)]">
-                TO LIVE IS A PRIVILEGE
-              </span>
-            </span>
-          </span>
+          <Image
+            src={LOGO_LOCKUP_BRAND.src}
+            alt="St. Joseph Hospital"
+            width={LOGO_LOCKUP_BRAND.width}
+            height={LOGO_LOCKUP_BRAND.height}
+            data-logo
+            className="-mx-4 -mt-2 block h-16 w-auto self-start"
+          />
           <p className="mt-4.5 text-[15px] leading-[1.62] text-[var(--home-muted)]">
             <ChromeText id="tagline" />
           </p>
