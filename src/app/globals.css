@@ -98,6 +98,41 @@ body {
   cursor: pointer;
 }
 
+/* Crossfades every colour on the page when the theme toggles, rather than the
+   default: a `data-theme` flip changes a batch of CSS custom properties in a
+   single frame, and a custom property cannot be transitioned directly (short
+   of registering each one with @property, which is not worth the ~40-token
+   list here), so every background, border and icon under it would otherwise
+   snap.
+
+   `.sj-theme-transitioning` is applied to #sj-root only for the brief window
+   around a toggle (see useSiteTheme.tsx's `toggle`), not left on permanently.
+   A permanent rule here would sit outside any @layer, and Tailwind v4 puts
+   its own utility classes inside `@layer utilities`; unlayered author CSS
+   outranks every layer regardless of source order, so an always-on version of
+   this rule would beat the site's own hover-tuned utility classes at equal
+   specificity (the header's scroll-solidify fade, the FAQ toggle's "+", every
+   `.sj-invert` hover) and slow or speed them to this rule's duration instead
+   of the one each was tuned to. Scoping it to the toggle's own brief window
+   avoids that: normal hover timing is untouched the rest of the time. */
+/* Both the element carrying the class (#sj-root itself, which paints the
+   page's own background) and its descendants: the bare `*` combinator
+   reaches only descendants, and #sj-root's own background-color would
+   otherwise keep snapping while everything inside it crossfaded. */
+.sj-theme-transitioning,
+.sj-theme-transitioning * {
+  transition-property: background-color, color, border-color, fill, stroke;
+  transition-duration: 350ms;
+  transition-timing-function: ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sj-theme-transitioning,
+  .sj-theme-transitioning * {
+    transition: none;
+  }
+}
+
 /* One scrollbar colour for the whole site, defined on :root rather than beside
    the --home-* tokens on purpose. Those live on [data-sj], which is a div inside
    body, and the document scrollbar belongs to html: a custom property set on a

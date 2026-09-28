@@ -181,3 +181,27 @@ test("an enabled button gets a pointer cursor", () => {
     "no rule gives an enabled <button> under [data-sj] a pointer cursor"
   );
 });
+
+// Toggling the theme flips a batch of CSS custom properties, which cannot be
+// transitioned directly: the colour under every background, border and icon
+// on the page changes in a single frame. `.sj-theme-transitioning` is a class
+// applied to #sj-root for one moment around a toggle (see useSiteTheme.tsx),
+// so every descendant crossfades instead of snapping. It is deliberately its
+// own opt-in class rather than a permanent rule on every element: an
+// always-on rule would sit outside any @layer, so it would beat every
+// Tailwind utility class at equal specificity regardless of source order
+// (unlayered CSS outranks every layer), overriding the site's own hover-tuned
+// durations (the header's scroll fade, the FAQ toggle's "+", every sj-invert
+// hover) rather than only the moment a toggle fires.
+test("the theme toggle crossfades colours instead of snapping, without touching hover-tuned transitions", () => {
+  assert.match(
+    declarations,
+    /\.sj-theme-transitioning,\s*\.sj-theme-transitioning\s+\*\s*\{[^}]*transition-property:[^};]*background-color[^};]*color[^};]*border-color/,
+    "no .sj-theme-transitioning rule crossfades background, text and border colour on both the element and its descendants"
+  );
+  assert.match(
+    declarations,
+    /@media \(prefers-reduced-motion:\s*reduce\)\s*\{[^}]*\.sj-theme-transitioning[^}]*\}/,
+    "the theme crossfade is not disabled under prefers-reduced-motion: reduce"
+  );
+});
