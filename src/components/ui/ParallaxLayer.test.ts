@@ -47,7 +47,7 @@ test("every hero's min-height box clips the parallax layer that overflows it", (
     // Each opening tag's className, so a min-h box is checked against the
     // classes on that same element rather than anywhere in the file.
     const classNames = [...src.matchAll(/className="([^"]*)"/g)].map((m) => m[1]);
-    const boxes = classNames.filter((c) => /min-h-\[\d+(\.\d+)?vh\]/.test(c));
+    const boxes = classNames.filter((c) => /min-h-\[(\d+(\.\d+)?vh|calc\([^\]]*vh[^\]]*\))\]/.test(c));
     assert.ok(boxes.length > 0, `${file} mounts a ParallaxLayer with no min-height box`);
 
     for (const box of boxes) {

@@ -24,7 +24,7 @@ export function ServiceHero({ service, content }: { service: Service; content: S
   return (
     <section
       id="top"
-      className="relative flex pt-[var(--sj-header-h)] min-h-[72vh] flex-col overflow-hidden bg-[#0B0826]"
+      className="relative flex min-h-[calc(72vh-120px)] flex-col overflow-hidden bg-[#0B0826]"
     >
       <ParallaxLayer
         factor={0.14}

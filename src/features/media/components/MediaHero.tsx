@@ -36,7 +36,7 @@ export function MediaHero({ content }: { content: MediaContent }) {
   return (
     <section
       id="top"
-      className="relative flex pt-[var(--sj-header-h)] min-h-[80vh] flex-col overflow-hidden bg-[#0B0826] max-[899px]:min-h-[76vh]"
+      className="relative flex min-h-[calc(80vh-120px)] flex-col overflow-hidden bg-[#0B0826] max-[899px]:min-h-[calc(76vh-120px)]"
     >
       <ParallaxLayer
         factor={0.14}

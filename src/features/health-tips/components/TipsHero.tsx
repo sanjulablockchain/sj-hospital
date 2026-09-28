@@ -30,7 +30,7 @@ export function TipsHero({ pageContent }: { pageContent: HealthTipsContent["page
   return (
     <section
       id="top"
-      className="relative flex pt-[var(--sj-header-h)] min-h-[82vh] flex-col overflow-hidden bg-[#0B0826] max-[899px]:min-h-[76vh]"
+      className="relative flex min-h-[calc(82vh-120px)] flex-col overflow-hidden bg-[#0B0826] max-[899px]:min-h-[calc(76vh-120px)]"
     >
       <ParallaxLayer
         factor={0.14}

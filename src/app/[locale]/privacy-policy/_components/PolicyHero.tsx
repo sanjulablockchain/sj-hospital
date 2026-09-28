@@ -19,7 +19,7 @@ export function PolicyHero({ locale }: { locale: Locale }) {
   return (
     <section
       id="top"
-      className="relative flex pt-[var(--sj-header-h)] min-h-[52vh] flex-col overflow-hidden bg-[#0B0826]"
+      className="relative flex min-h-[calc(52vh-120px)] flex-col overflow-hidden bg-[#0B0826]"
     >
       <div
         className="animate-sj-sheen absolute inset-0"

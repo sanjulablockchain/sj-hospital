@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: LayoutProps<'/[locale]'>): Pr
 
 export default function ServicesLayout({ children }: { children: ReactNode }) {
   return (
-    <ThemedShell palette="brand">
+    <ThemedShell palette="brand" header="solid" utilityBar>
       {children}
       <FloatingActions />
     </ThemedShell>

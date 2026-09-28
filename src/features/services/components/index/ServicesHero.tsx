@@ -23,7 +23,7 @@ export function ServicesHero({ content }: { content: ServicesContent }) {
   return (
     <section
       id="top"
-      className="relative flex pt-[var(--sj-header-h)] min-h-[86vh] flex-col overflow-hidden bg-[#0B0826] max-[899px]:min-h-[74vh]"
+      className="relative flex min-h-[calc(86vh-120px)] flex-col overflow-hidden bg-[#0B0826] max-[899px]:min-h-[calc(74vh-120px)]"
     >
       <ParallaxLayer
         factor={0.14}

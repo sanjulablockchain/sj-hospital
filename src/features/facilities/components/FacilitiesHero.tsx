@@ -28,7 +28,7 @@ export function FacilitiesHero({ content }: { content: FacilitiesContent }) {
           the spill) and behind the fact strip. The strip is capped at
           max-w-[1440px], so on wider viewports the spill showed through the
           left and right gutters as two bright fragments. */}
-      <div className="relative flex pt-[var(--sj-header-h)] min-h-[86vh] flex-col overflow-hidden max-[899px]:min-h-[76vh]">
+      <div className="relative flex min-h-[calc(86vh-120px)] flex-col overflow-hidden max-[899px]:min-h-[calc(76vh-120px)]">
         <ParallaxLayer
           factor={0.14}
           maxOffsetPx={100}

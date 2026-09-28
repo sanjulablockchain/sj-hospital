@@ -289,15 +289,17 @@ test("ThemedShell renders the header and no hero does", () => {
   }
 });
 
-// Heroes used to hold the header in their flow, so the hero copy started 88px
-// down. With the header fixed, each hero pads by the header's height instead
-// so nothing moves and the first line of copy never slides under the bar.
-test("every hero pads for the fixed header", () => {
+// Every page now renders ThemedShell with header="solid" (the same sticky,
+// always-branded bar the home page introduced), so the header sits in normal
+// flow above every hero rather than floating fixed over it. A hero that still
+// padded for a fixed header would leave a second, redundant gap on top of the
+// space the sticky header now actually occupies.
+test("no hero pads for a fixed header", () => {
   const heroes = [...findHeroFiles("src/features"), "src/app/[locale]/privacy-policy/_components/PolicyHero.tsx"];
   assert.ok(heroes.length >= 6, `only found ${heroes.length} heroes`);
   for (const file of heroes) {
     const src = readFileSync(file, "utf8");
-    assert.ok(src.includes("pt-[var(--sj-header-h)]"), `${file} does not pad for the header`);
+    assert.ok(!src.includes("pt-[var(--sj-header-h)]"), `${file} still pads for a fixed header`);
   }
 });
 
