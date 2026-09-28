@@ -83,6 +83,21 @@ body {
   color: var(--color-ink);
 }
 
+/* A native <button> has no `cursor: pointer` by default, unlike an <a> with
+   an href: neither the browser's own stylesheet nor Tailwind's preflight
+   sets one, so every button-based control renders the plain arrow cursor on
+   hover, the same as static text. The v4 home page introduced many of these
+   (carousel arrows and tabs, the reviews and network navigation, the FAQ
+   toggles, the theme and language switches, the booking sheet, the mobile
+   drawer), all of them acting exactly like a link, so they get a link's
+   cursor. Scoped to [data-sj], which every page's ThemedShell renders inside,
+   so the fix reaches the whole site rather than only the v4 page; a disabled
+   button keeps the default cursor, matching the one browser affordance that
+   is actually useful here. */
+[data-sj] button:not(:disabled) {
+  cursor: pointer;
+}
+
 /* One scrollbar colour for the whole site, defined on :root rather than beside
    the --home-* tokens on purpose. Those live on [data-sj], which is a div inside
    body, and the document scrollbar belongs to html: a custom property set on a

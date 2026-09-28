@@ -167,3 +167,17 @@ test("the brand palette defines every token the default palette defines, in both
     assert.ok(light.has(token), `brand palette is missing ${token}`);
   }
 });
+
+// Neither the browser's own stylesheet nor Tailwind's preflight gives a
+// native <button> a pointer cursor (unlike an <a> with an href), so every
+// button-based control on the site rendered the plain arrow cursor on
+// hover: the v4 home page's carousel arrows among them. Scoped to
+// [data-sj], which every page's ThemedShell renders inside, so one rule
+// fixes it site-wide rather than only on the home page.
+test("an enabled button gets a pointer cursor", () => {
+  assert.match(
+    declarations,
+    /\[data-sj\]\s*button:not\(:disabled\)\s*\{[^}]*cursor:\s*pointer/,
+    "no rule gives an enabled <button> under [data-sj] a pointer cursor"
+  );
+});
