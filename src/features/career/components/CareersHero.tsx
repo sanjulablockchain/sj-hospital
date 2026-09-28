@@ -31,7 +31,7 @@ export function CareersHero({ content }: { content: CareerContent }) {
   return (
     <section
       id="top"
-      className="relative flex pt-[var(--sj-header-h)] min-h-[84vh] flex-col overflow-hidden bg-[#060B1F] max-[899px]:min-h-[76vh]"
+      className="relative flex pt-[var(--sj-header-h)] min-h-[84vh] flex-col overflow-hidden bg-[#0B0826] max-[899px]:min-h-[76vh]"
     >
       <ParallaxLayer
         factor={0.14}
@@ -57,14 +57,14 @@ export function CareersHero({ content }: { content: CareerContent }) {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(rgba(6,11,31,0.9) 0%, rgba(6,11,31,0.56) 42%, rgba(6,11,31,0.97) 100%)",
+            "linear-gradient(rgba(12,8,38,0.9) 0%, rgba(12,8,38,0.56) 42%, rgba(12,8,38,0.97) 100%)",
         }}
       />
       <div
         className="animate-sj-sheen absolute inset-0"
         style={{
           background:
-            "radial-gradient(64% 50% at 80% 26%, rgba(44,166,240,0.3) 0%, rgba(6,11,31,0) 66%)",
+            "radial-gradient(64% 50% at 80% 26%, rgba(82,181,232,0.3) 0%, rgba(12,8,38,0) 66%)",
         }}
       />
 
@@ -85,9 +85,9 @@ export function CareersHero({ content }: { content: CareerContent }) {
         </div>
 
         <div className="min-w-0 flex-1 pb-11">
-          <div className="animate-sj-up flex min-w-0 flex-wrap items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
-            <span aria-hidden className="h-px w-11 bg-[#2CA6F0]" />
-            <LocaleLink href="/" className="text-[#7FCBFF] hover:text-white">
+          <div className="animate-sj-up flex min-w-0 flex-wrap items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#9FD6F5] uppercase">
+            <span aria-hidden className="h-px w-11 bg-[var(--home-accent)]" />
+            <LocaleLink href="/" className="text-[#9FD6F5] hover:text-white">
               {hero.breadcrumbHome}
             </LocaleLink>
             <span aria-hidden className="opacity-50">
@@ -108,7 +108,7 @@ export function CareersHero({ content }: { content: CareerContent }) {
               {hero.headingOutline}
             </span>
             <br />
-            <span className="text-[#2CA6F0]">{hero.headingAccent}</span>
+            <span className="text-[var(--home-accent)]">{hero.headingAccent}</span>
           </h1>
 
           <div className="animate-sj-up mt-8 flex flex-col items-start gap-5.5">
@@ -121,7 +121,7 @@ export function CareersHero({ content }: { content: CareerContent }) {
             <div className="flex flex-wrap gap-3">
               <a
                 href="#openings"
-                className="sj-invert inline-flex items-center gap-2.5 bg-[#2CA6F0] px-6 py-4 text-[15px] font-bold text-[#04122B]"
+                className="sj-invert inline-flex items-center gap-2.5 bg-[var(--home-accent)] px-6 py-4 text-[15px] font-bold text-[var(--home-on-accent)]"
               >
                 {hero.ctaPrimary} <span aria-hidden>&rarr;</span>
               </a>
@@ -132,9 +132,9 @@ export function CareersHero({ content }: { content: CareerContent }) {
                   the viewport at 360px. */}
               <a
                 href="#fraud"
-                className="inline-flex items-center gap-3 border border-white/30 px-6 py-4 text-[15px] font-bold text-white transition-colors hover:bg-white hover:text-[#060B1F]"
+                className="inline-flex items-center gap-3 border border-white/30 px-6 py-4 text-[15px] font-bold text-white transition-colors hover:bg-white hover:text-[#0B0826]"
               >
-                <span aria-hidden className="animate-sj-pulse h-2 w-2 shrink-0 rounded-full bg-[#2CA6F0]" />
+                <span aria-hidden className="animate-sj-pulse h-2 w-2 shrink-0 rounded-full bg-[var(--home-accent)]" />
                 {hero.ctaSecondary}
               </a>
             </div>
@@ -142,7 +142,7 @@ export function CareersHero({ content }: { content: CareerContent }) {
         </div>
       </div>
 
-      <div className="relative z-10 mt-11 border-t border-white/14 bg-[#060B1F]/55">
+      <div className="relative z-10 mt-11 border-t border-white/14 bg-[#0B0826]/55">
         <dl className="mx-auto grid max-w-[1440px] grid-cols-4 px-5 sm:px-8 lg:px-11 max-[899px]:grid-cols-2 max-[640px]:grid-cols-1">
           {heroFacts.map((fact, index) => (
             <div
@@ -154,7 +154,7 @@ export function CareersHero({ content }: { content: CareerContent }) {
                 className={`font-display mt-1.5 text-[22px] font-bold tracking-[-0.02em] ${
                   // "None, ever" is the one the page most wants read, so it
                   // takes the accent, exactly as in the reference.
-                  index === 1 ? "text-[#2CA6F0]" : "text-white"
+                  index === 1 ? "text-[var(--home-accent)]" : "text-white"
                 }`}
               >
                 {fact.v}
