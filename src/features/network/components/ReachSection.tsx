@@ -24,7 +24,7 @@ import type { NetworkContent } from "../data/getContent";
 export function ReachSection({ content }: { content: NetworkContent }) {
   const { reachEyebrow, reachHeading, reachIntro, reachRows } = content;
   return (
-    <section id="reach" className="relative mt-26 overflow-hidden bg-[#08123A]">
+    <section id="reach" className="relative mt-26 overflow-hidden bg-[#1A1540]">
       <ParallaxLayer factor={0.12} maxOffsetPx={90} className="absolute inset-x-0 -top-[10%] h-[120%]">
         <Image
           src="/images/international/ward-round.jpg"
@@ -37,7 +37,7 @@ export function ReachSection({ content }: { content: NetworkContent }) {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(90deg, #060B1F 4%, rgba(6,11,31,0.9) 55%, rgba(6,11,31,0.76) 100%)",
+            "linear-gradient(90deg, #1A1540 4%, rgba(26,21,64,0.9) 55%, rgba(26,21,64,0.76) 100%)",
         }}
       />
 
@@ -48,7 +48,7 @@ export function ReachSection({ content }: { content: NetworkContent }) {
             this the grid (and the page) overflows a 360px viewport. */}
         <Reveal className="grid grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] items-start gap-14.5 max-[899px]:grid-cols-1 max-[899px]:gap-10">
           <div className="sticky top-10 min-w-0 max-[899px]:static">
-            <div className="text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
+            <div className="text-[11.5px] font-bold tracking-[0.24em] text-[#9FD6F5] uppercase">
               {reachEyebrow}
             </div>
             <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(36px,4.6vw,66px)] leading-[0.9] font-extrabold tracking-[-0.04em] text-white uppercase">
@@ -70,7 +70,7 @@ export function ReachSection({ content }: { content: NetworkContent }) {
                 className="grid grid-cols-[minmax(0,0.5fr)_minmax(0,1fr)_minmax(0,0.5fr)] items-baseline gap-5.5 border-b border-white/16 px-1 py-5 max-[1023px]:grid-cols-[minmax(0,1fr)_minmax(0,0.6fr)] max-[899px]:grid-cols-1 max-[899px]:gap-y-1.5"
               >
                 <dt className="wrap-break-word text-[16px] font-bold text-white">{row.k}</dt>
-                <dd className="font-display order-first text-[34px] leading-none font-extrabold tracking-[-0.04em] text-[#2CA6F0] tabular-nums">
+                <dd className="font-display order-first text-[34px] leading-none font-extrabold tracking-[-0.04em] text-[var(--home-accent)] tabular-nums">
                   {row.n}
                 </dd>
                 <dd className="wrap-break-word text-right text-[13.5px] leading-[1.5] text-white/60 max-[1023px]:hidden">
