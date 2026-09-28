@@ -25,7 +25,7 @@ export function RefillsSection({ content }: { content: PharmacyContent }) {
     sectionEyebrows,
   } = content;
   return (
-    <section id="refills" className="relative mt-26 overflow-hidden bg-[#08123A]">
+    <section id="refills" className="relative mt-26 overflow-hidden bg-[#1A1540]">
       <ParallaxLayer
         factor={0.1}
         maxOffsetPx={60}
@@ -43,7 +43,7 @@ export function RefillsSection({ content }: { content: PharmacyContent }) {
       <div className="relative mx-auto max-w-[1440px] px-5 py-23 sm:px-8 lg:px-11">
         <div className="grid grid-cols-2 items-center gap-14 max-[899px]:grid-cols-1 max-[899px]:gap-10">
           <Reveal className="min-w-0">
-            <div className="text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
+            <div className="text-[11.5px] font-bold tracking-[0.24em] text-[#9FD6F5] uppercase">
               {sectionEyebrows.refills}
             </div>
             <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(38px,5.2vw,74px)] leading-[0.9] font-extrabold tracking-[-0.04em] text-white uppercase">
@@ -80,7 +80,7 @@ export function RefillsSection({ content }: { content: PharmacyContent }) {
             {refills.map((refill) => (
               <div
                 key={refill.name}
-                className="flex items-baseline justify-between gap-5 bg-[#08123A] px-7 py-5"
+                className="flex items-baseline justify-between gap-5 bg-[#1A1540] px-7 py-5"
               >
                 <span className="text-[16px] font-bold text-white">{refill.name}</span>
                 <span className="text-right text-[13.5px] text-white/62">{refill.note}</span>

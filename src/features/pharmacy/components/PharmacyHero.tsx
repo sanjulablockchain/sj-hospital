@@ -23,7 +23,7 @@ export function PharmacyHero({ content }: { content: PharmacyContent }) {
   return (
     <section
       id="top"
-      className="relative flex pt-[var(--sj-header-h)] min-h-[84vh] flex-col overflow-hidden bg-[#060B1F] max-[899px]:min-h-[76vh]"
+      className="relative flex pt-[var(--sj-header-h)] min-h-[84vh] flex-col overflow-hidden bg-[#0B0826] max-[899px]:min-h-[76vh]"
     >
       <ParallaxLayer
         factor={0.14}
@@ -43,14 +43,14 @@ export function PharmacyHero({ content }: { content: PharmacyContent }) {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(rgba(6,11,31,0.9) 0%, rgba(6,11,31,0.5) 42%, rgba(6,11,31,0.96) 100%)",
+            "linear-gradient(rgba(12,8,38,0.9) 0%, rgba(12,8,38,0.5) 42%, rgba(12,8,38,0.96) 100%)",
         }}
       />
       <div
         className="animate-sj-sheen absolute inset-0"
         style={{
           background:
-            "radial-gradient(66% 52% at 78% 26%, rgba(44,166,240,0.32) 0%, rgba(6,11,31,0) 66%)",
+            "radial-gradient(66% 52% at 78% 26%, rgba(82,181,232,0.32) 0%, rgba(12,8,38,0) 66%)",
         }}
       />
 
@@ -71,9 +71,9 @@ export function PharmacyHero({ content }: { content: PharmacyContent }) {
         </div>
 
         <div className="min-w-0 flex-1 pb-11">
-          <div className="animate-sj-up inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
-            <span aria-hidden className="h-px w-11 bg-[#2CA6F0]" />
-            <LocaleLink href="/" className="text-[#7FCBFF] hover:text-white">
+          <div className="animate-sj-up inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#9FD6F5] uppercase">
+            <span aria-hidden className="h-px w-11 bg-[var(--home-accent)]" />
+            <LocaleLink href="/" className="text-[#9FD6F5] hover:text-white">
               {hero.breadcrumbHome}
             </LocaleLink>
             <span aria-hidden className="opacity-50">
@@ -98,7 +98,7 @@ export function PharmacyHero({ content }: { content: PharmacyContent }) {
               {hero.headingOutline}
             </span>
             <br />
-            <span className="text-[#2CA6F0]">{hero.headingAccent}</span>
+            <span className="text-[var(--home-accent)]">{hero.headingAccent}</span>
           </h1>
 
           <div className="animate-sj-up mt-8 flex flex-col items-start gap-5.5">
@@ -111,16 +111,16 @@ export function PharmacyHero({ content }: { content: PharmacyContent }) {
             <div className="flex flex-wrap gap-3">
               <a
                 href="https://wa.me/94742223334"
-                className="inline-flex items-center gap-2.75 bg-[#1FAF54] px-6 py-4 text-[15px] font-bold text-[#04220F] transition-colors hover:bg-white hover:text-[#060B1F]"
+                className="inline-flex items-center gap-2.75 bg-[#1FAF54] px-6 py-4 text-[15px] font-bold text-[#04220F] transition-colors hover:bg-white hover:text-[#0B0826]"
               >
                 <WhatsAppIcon />
                 {hero.sendCta}
               </a>
               <a
                 href="tel:+94742223334"
-                className="inline-flex items-center gap-3 border border-white/30 px-6 py-4 text-[15px] font-bold whitespace-nowrap text-white tabular-nums transition-colors hover:bg-white hover:text-[#060B1F]"
+                className="inline-flex items-center gap-3 border border-white/30 px-6 py-4 text-[15px] font-bold whitespace-nowrap text-white tabular-nums transition-colors hover:bg-white hover:text-[#0B0826]"
               >
-                <span aria-hidden className="animate-sj-pulse h-2 w-2 rounded-full bg-[#2CA6F0]" />
+                <span aria-hidden className="animate-sj-pulse h-2 w-2 rounded-full bg-[var(--home-accent)]" />
                 {hero.call.value}
               </a>
             </div>
@@ -128,7 +128,7 @@ export function PharmacyHero({ content }: { content: PharmacyContent }) {
         </div>
       </div>
 
-      <div className="relative z-10 mt-11 border-t border-white/14 bg-[#060B1F]/55">
+      <div className="relative z-10 mt-11 border-t border-white/14 bg-[#0B0826]/55">
         <dl className="mx-auto grid max-w-[1440px] grid-cols-4 px-5 sm:px-8 lg:px-11 max-[899px]:grid-cols-2 max-[640px]:grid-cols-1">
           {heroFacts.map((fact, index) => (
             <div
@@ -138,7 +138,7 @@ export function PharmacyHero({ content }: { content: PharmacyContent }) {
               <dt className="text-[11.5px] tracking-[0.16em] text-white/50 uppercase">{fact.k}</dt>
               <dd
                 className={`font-display mt-1.5 text-[22px] font-bold tracking-[-0.02em] ${
-                  index === 0 ? "text-[#2CA6F0]" : "text-white"
+                  index === 0 ? "text-[var(--home-accent)]" : "text-white"
                 }`}
               >
                 {fact.v}
