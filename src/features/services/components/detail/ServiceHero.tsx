@@ -24,7 +24,7 @@ export function ServiceHero({ service, content }: { service: Service; content: S
   return (
     <section
       id="top"
-      className="relative flex pt-[var(--sj-header-h)] min-h-[72vh] flex-col overflow-hidden bg-[#060B1F]"
+      className="relative flex pt-[var(--sj-header-h)] min-h-[72vh] flex-col overflow-hidden bg-[#0B0826]"
     >
       <ParallaxLayer
         factor={0.14}
@@ -45,7 +45,7 @@ export function ServiceHero({ service, content }: { service: Service; content: S
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(rgba(6,11,31,0.86) 0%, rgba(6,11,31,0.42) 42%, rgba(6,11,31,0.96) 100%)",
+            "linear-gradient(rgba(12,8,38,0.86) 0%, rgba(12,8,38,0.42) 42%, rgba(12,8,38,0.96) 100%)",
         }}
       />
 
@@ -57,7 +57,7 @@ export function ServiceHero({ service, content }: { service: Service; content: S
           <span aria-hidden>&larr;</span> {content.indexContent.allServicesLabel}
         </LocaleLink>
 
-        <div className="animate-sj-up inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
+        <div className="animate-sj-up inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#9FD6F5] uppercase">
           <span className="h-px w-11 bg-[var(--home-accent)]" />
           {groupLabel}
         </div>
