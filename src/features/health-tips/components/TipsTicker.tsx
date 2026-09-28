@@ -30,7 +30,7 @@ function TickerTrack({ lines, hidden }: { lines: readonly string[]; hidden?: boo
 
 export function TipsTicker({ tickerLines }: { tickerLines: readonly string[] }) {
   return (
-    <div className="relative z-[5] overflow-hidden border-y border-white/14 bg-[#060B1F]/50 py-3.25">
+    <div className="relative z-[5] overflow-hidden border-y border-white/14 bg-[#1A1540]/50 py-3.25">
       <div className="animate-sj-tick flex w-max">
         <TickerTrack lines={tickerLines} />
         <TickerTrack lines={tickerLines} hidden />

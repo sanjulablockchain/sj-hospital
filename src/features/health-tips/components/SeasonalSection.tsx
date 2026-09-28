@@ -21,7 +21,7 @@ export function SeasonalSection({ dengue }: { dengue: HealthTipsContent["dengue"
   const { denguePoints, seasonalSection } = dengue;
 
   return (
-    <section id="seasonal" className="relative mt-24 overflow-hidden bg-[#08123A]">
+    <section id="seasonal" className="relative mt-24 overflow-hidden bg-[#1A1540]">
       <Image
         src="/images/services/exterior-dusk-a.png"
         alt=""
@@ -34,7 +34,7 @@ export function SeasonalSection({ dengue }: { dengue: HealthTipsContent["dengue"
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(90deg, #060B1F 4%, rgba(6,11,31,0.9) 55%, rgba(6,11,31,0.78) 100%)",
+            "linear-gradient(90deg, #1A1540 4%, rgba(26,21,64,0.9) 55%, rgba(26,21,64,0.78) 100%)",
         }}
       />
 
@@ -63,13 +63,13 @@ export function SeasonalSection({ dengue }: { dengue: HealthTipsContent["dengue"
             <div className="mt-7 flex flex-wrap gap-3">
               <a
                 href="#warning"
-                className="inline-flex min-w-0 items-center gap-2.5 bg-[var(--home-accent)] px-6 py-4 text-[15px] font-bold wrap-break-word text-[var(--home-on-accent)] transition-colors hover:bg-white hover:text-[#060B1F]"
+                className="inline-flex min-w-0 items-center gap-2.5 bg-[var(--home-accent)] px-6 py-4 text-[15px] font-bold wrap-break-word text-[var(--home-on-accent)] transition-colors hover:bg-white hover:text-[#1A1540]"
               >
                 {seasonalSection.ctaWarning} <span aria-hidden>&rarr;</span>
               </a>
               <a
                 href="tel:+94117848484"
-                className="inline-flex min-w-0 items-center gap-2.5 border border-white/30 px-6 py-4 text-[15px] font-bold wrap-break-word text-white transition-colors hover:bg-white hover:text-[#060B1F]"
+                className="inline-flex min-w-0 items-center gap-2.5 border border-white/30 px-6 py-4 text-[15px] font-bold wrap-break-word text-white transition-colors hover:bg-white hover:text-[#1A1540]"
               >
                 {seasonalSection.ctaFever}
               </a>
@@ -81,7 +81,7 @@ export function SeasonalSection({ dengue }: { dengue: HealthTipsContent["dengue"
             className="flex flex-col gap-px bg-[rgba(242,246,255,0.18)]"
           >
             {denguePoints.map((point) => (
-              <div key={point} className="flex min-w-0 items-baseline gap-4 bg-[#08123A] px-6.5 py-4.75">
+              <div key={point} className="flex min-w-0 items-baseline gap-4 bg-[#1A1540] px-6.5 py-4.75">
                 <span className="shrink-0 text-[13px] text-[var(--home-accent)]" aria-hidden>
                   &#10022;
                 </span>

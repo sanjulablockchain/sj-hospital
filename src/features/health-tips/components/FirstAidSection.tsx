@@ -17,7 +17,7 @@ export function FirstAidSection({ firstAid }: { firstAid: HealthTipsContent["fir
   const { firstAidSteps, homeKit, emergencyNumbers, firstAidSection } = firstAid;
 
   return (
-    <section id="firstaid" className="relative mt-26 overflow-hidden bg-[#08123A]">
+    <section id="firstaid" className="relative mt-26 overflow-hidden bg-[#1A1540]">
       <Image
         src={LOGO_MARK.src}
         alt=""
@@ -44,7 +44,7 @@ export function FirstAidSection({ firstAid }: { firstAid: HealthTipsContent["fir
           className="mt-10.5 grid grid-cols-1 gap-px bg-[rgba(242,246,255,0.18)] min-[641px]:grid-cols-2 min-[900px]:grid-cols-4"
         >
           {firstAidSteps.map((step) => (
-            <article key={step.title} className="min-w-0 bg-[#08123A] px-6.5 pt-7.5 pb-8">
+            <article key={step.title} className="min-w-0 bg-[#1A1540] px-6.5 pt-7.5 pb-8">
               <p className="wrap-break-word text-[11.5px] font-bold tracking-[0.2em] text-[var(--home-accent-soft)] uppercase">
                 {step.kind}
               </p>
@@ -61,7 +61,7 @@ export function FirstAidSection({ firstAid }: { firstAid: HealthTipsContent["fir
 
         <Reveal className="mt-px">
           <div className="grid grid-cols-1 gap-px bg-[rgba(242,246,255,0.18)] min-[900px]:grid-cols-2">
-            <div className="min-w-0 bg-[#08123A] px-6.5 py-7">
+            <div className="min-w-0 bg-[#1A1540] px-6.5 py-7">
               <h3 className="wrap-break-word text-[12.5px] font-bold tracking-[0.2em] text-[var(--home-accent-soft)] uppercase">
                 {firstAidSection.homeKitHeading}
               </h3>
@@ -77,7 +77,7 @@ export function FirstAidSection({ firstAid }: { firstAid: HealthTipsContent["fir
               </ul>
             </div>
 
-            <div className="min-w-0 bg-[#08123A] px-6.5 py-7">
+            <div className="min-w-0 bg-[#1A1540] px-6.5 py-7">
               <h3 className="wrap-break-word text-[12.5px] font-bold tracking-[0.2em] text-[var(--home-accent-soft)] uppercase">
                 {firstAidSection.numbersHeading}
               </h3>

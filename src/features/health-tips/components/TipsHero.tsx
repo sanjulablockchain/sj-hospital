@@ -30,7 +30,7 @@ export function TipsHero({ pageContent }: { pageContent: HealthTipsContent["page
   return (
     <section
       id="top"
-      className="relative flex pt-[var(--sj-header-h)] min-h-[82vh] flex-col overflow-hidden bg-[#060B1F] max-[899px]:min-h-[76vh]"
+      className="relative flex pt-[var(--sj-header-h)] min-h-[82vh] flex-col overflow-hidden bg-[#0B0826] max-[899px]:min-h-[76vh]"
     >
       <ParallaxLayer
         factor={0.14}
@@ -50,7 +50,7 @@ export function TipsHero({ pageContent }: { pageContent: HealthTipsContent["page
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(rgba(6,11,31,0.86) 0%, rgba(6,11,31,0.42) 42%, rgba(6,11,31,0.96) 100%)",
+            "linear-gradient(rgba(12,8,38,0.86) 0%, rgba(12,8,38,0.42) 42%, rgba(12,8,38,0.96) 100%)",
         }}
       />
 
@@ -65,9 +65,9 @@ export function TipsHero({ pageContent }: { pageContent: HealthTipsContent["page
         </div>
 
         <div className="flex min-w-0 flex-1 flex-col justify-end pb-11">
-          <div className="animate-sj-up inline-flex min-w-0 items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
+          <div className="animate-sj-up inline-flex min-w-0 items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#9FD6F5] uppercase">
             <span className="h-px w-11 shrink-0 bg-[var(--home-accent)]" aria-hidden />
-            <LocaleLink href="/" className="wrap-break-word text-[#7FCBFF] hover:text-white">
+            <LocaleLink href="/" className="wrap-break-word text-[#9FD6F5] hover:text-white">
               {hero.breadcrumbHome}
             </LocaleLink>
             <span className="opacity-50" aria-hidden>
@@ -100,13 +100,13 @@ export function TipsHero({ pageContent }: { pageContent: HealthTipsContent["page
             <div className="flex flex-wrap gap-3">
               <a
                 href="#library"
-                className="inline-flex items-center gap-2.5 bg-[var(--home-accent)] px-6 py-4 text-[15px] font-bold text-[var(--home-on-accent)] transition-colors hover:bg-white hover:text-[#060B1F]"
+                className="inline-flex items-center gap-2.5 bg-[var(--home-accent)] px-6 py-4 text-[15px] font-bold text-[var(--home-on-accent)] transition-colors hover:bg-white hover:text-[#0B0826]"
               >
                 {hero.ctaLibrary} <span aria-hidden>&rarr;</span>
               </a>
               <a
                 href="#warning"
-                className="inline-flex min-w-0 items-center gap-3 border border-white/30 px-6 py-4 text-[15px] font-bold wrap-break-word text-white transition-colors hover:bg-white hover:text-[#060B1F]"
+                className="inline-flex min-w-0 items-center gap-3 border border-white/30 px-6 py-4 text-[15px] font-bold wrap-break-word text-white transition-colors hover:bg-white hover:text-[#0B0826]"
               >
                 <span
                   aria-hidden
@@ -119,7 +119,7 @@ export function TipsHero({ pageContent }: { pageContent: HealthTipsContent["page
         </div>
       </div>
 
-      <div className="relative z-[5] border-t border-white/14 bg-[#060B1F]/55">
+      <div className="relative z-[5] border-t border-white/14 bg-[#0B0826]/55">
         <dl className="mx-auto grid max-w-[1440px] grid-cols-1 px-5 sm:px-8 lg:px-11 min-[641px]:grid-cols-2 min-[900px]:grid-cols-4">
           {factStrip.map((tile) => (
             <div key={tile.label} className="min-w-0 py-5.5 pr-6 max-[640px]:py-4">
