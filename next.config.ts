@@ -23,6 +23,16 @@ const nextConfig: NextConfig = {
   watchOptions: {
     pollIntervalMs: 500,
   },
+  // `next dev`'s Turbopack image-optimizer route hangs indefinitely on this
+  // machine whenever a request negotiates a re-encoded format (the AVIF/WebP
+  // a real browser's Accept header asks for), for any width that needs
+  // resizing - confirmed with sharp itself working fine outside of Next, so
+  // the hang is in Next's dev route, not the encoder. `next build`/`next
+  // start` (production) are unaffected; this only turns optimization off in
+  // dev, where the browser then just requests the original file.
+  images: {
+    unoptimized: process.env.NODE_ENV !== "production",
+  },
   // The project root for Turbopack. Next infers it from the nearest lockfile
   // and, when this checkout is a git worktree under the main checkout's
   // `.claude/worktrees/`, that inference lands on the PARENT repository: it
