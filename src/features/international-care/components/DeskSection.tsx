@@ -22,7 +22,7 @@ import type { InternationalCareContent } from "../data/getContent";
 export function DeskSection({ content }: { content: InternationalCareContent }) {
   const { deskServices, sectionEyebrows, servicesEmail, servicesHeading, servicesIntro } = content;
   return (
-    <section id="services" className="relative mt-26 overflow-hidden bg-[#08123A]">
+    <section id="services" className="relative mt-26 overflow-hidden bg-[#1A1540]">
       <ParallaxLayer
         factor={0.12}
         maxOffsetPx={80}
@@ -41,14 +41,14 @@ export function DeskSection({ content }: { content: InternationalCareContent }) 
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(90deg, #060B1F 4%, rgba(6,11,31,0.9) 55%, rgba(6,11,31,0.76) 100%)",
+            "linear-gradient(90deg, #1A1540 4%, rgba(26,21,64,0.9) 55%, rgba(26,21,64,0.76) 100%)",
         }}
       />
 
       <div className="relative z-10 mx-auto max-w-[1440px] px-5 py-23 sm:px-8 lg:px-11">
         <div className="grid items-start gap-14.5 min-[900px]:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] max-[899px]:gap-10">
           <Reveal className="min-[900px]:sticky min-[900px]:top-10">
-            <div className="text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
+            <div className="text-[11.5px] font-bold tracking-[0.24em] text-[#9FD6F5] uppercase">
               {sectionEyebrows.services}
             </div>
             <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(36px,4.6vw,66px)] leading-[0.9] font-extrabold tracking-[-0.04em] text-white uppercase">
@@ -63,7 +63,7 @@ export function DeskSection({ content }: { content: InternationalCareContent }) 
             </p>
             <a
               href={`mailto:${servicesEmail}`}
-              className="sj-invert mt-6.5 inline-flex w-fit items-center gap-2.5 bg-[#2CA6F0] px-5.5 py-3.75 text-[14.5px] font-bold text-[#04122B]"
+              className="sj-invert mt-6.5 inline-flex w-fit items-center gap-2.5 bg-[var(--home-accent)] px-5.5 py-3.75 text-[14.5px] font-bold text-[var(--home-on-accent)]"
             >
               {servicesEmail}
             </a>
@@ -72,8 +72,8 @@ export function DeskSection({ content }: { content: InternationalCareContent }) 
           <div className="grid grid-cols-2 gap-px bg-white/18 max-[899px]:grid-cols-1">
             {deskServices.map((service) => (
               <Reveal key={service.title} className="h-full">
-                <div className="h-full bg-[#08123A] px-6 pt-6.5 pb-7">
-                  <div className="text-[11.5px] font-bold tracking-[0.2em] text-[#7FCBFF] uppercase">
+                <div className="h-full bg-[#1A1540] px-6 pt-6.5 pb-7">
+                  <div className="text-[11.5px] font-bold tracking-[0.2em] text-[#9FD6F5] uppercase">
                     {service.kind}
                   </div>
                   <h3 className="font-display mt-3 text-[22px] leading-[1.1] font-semibold tracking-[-0.025em] text-white">
