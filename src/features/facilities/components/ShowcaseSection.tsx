@@ -28,7 +28,7 @@ export function ShowcaseSection({ content }: { content: FacilitiesContent }) {
           return (
             <article
               key={card.no}
-              className="group relative flex min-h-[430px] items-end overflow-hidden bg-[#08123A]"
+              className="group relative flex min-h-[430px] items-end overflow-hidden bg-[#1A1540]"
             >
               <ParallaxLayer factor={0.05} maxOffsetPx={26} className="absolute inset-x-0 -top-[8%] h-[116%]">
                 <Image
@@ -41,11 +41,11 @@ export function ShowcaseSection({ content }: { content: FacilitiesContent }) {
               </ParallaxLayer>
               <div
                 className="absolute inset-0"
-                style={{ background: "linear-gradient(rgba(6,11,31,0.08) 30%, rgba(6,11,31,0.94) 100%)" }}
+                style={{ background: "linear-gradient(rgba(26,21,64,0.08) 30%, rgba(26,21,64,0.94) 100%)" }}
               />
               <div className="absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-[var(--home-accent)] transition-transform duration-[450ms] group-hover:scale-x-100" />
               <div className="relative p-7 transition-transform duration-500 group-hover:-translate-y-2">
-                <div className="text-[12px] font-bold tracking-[0.18em] text-[#7FCBFF] tabular-nums">
+                <div className="text-[12px] font-bold tracking-[0.18em] text-[#9FD6F5] tabular-nums">
                   {card.no}
                 </div>
                 {/* Two lines are reserved whether the title needs them or not.
@@ -60,14 +60,14 @@ export function ShowcaseSection({ content }: { content: FacilitiesContent }) {
                 {isInternal ? (
                   <LocaleLink
                     href={card.href}
-                    className="mt-3.5 inline-flex translate-y-2.5 items-center gap-2 text-[13.5px] font-bold text-[#7FCBFF] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100"
+                    className="mt-3.5 inline-flex translate-y-2.5 items-center gap-2 text-[13.5px] font-bold text-[#9FD6F5] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100"
                   >
                     {card.linkLabel} <span aria-hidden>&rarr;</span>
                   </LocaleLink>
                 ) : (
                   <a
                     href={card.href}
-                    className="mt-3.5 inline-flex translate-y-2.5 items-center gap-2 text-[13.5px] font-bold text-[#7FCBFF] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100"
+                    className="mt-3.5 inline-flex translate-y-2.5 items-center gap-2 text-[13.5px] font-bold text-[#9FD6F5] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100"
                   >
                     {card.linkLabel} <span aria-hidden>&rarr;</span>
                   </a>

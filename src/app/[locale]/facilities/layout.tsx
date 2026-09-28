@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: LayoutProps<'/[locale]'>): Pr
 
 export default function FacilitiesLayout({ children }: { children: ReactNode }) {
   return (
-    <ThemedShell>
+    <ThemedShell palette="brand">
       {children}
       <FloatingActions />
     </ThemedShell>

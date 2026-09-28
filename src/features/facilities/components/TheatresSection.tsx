@@ -16,7 +16,7 @@ export function TheatresSection({ content }: { content: FacilitiesContent }) {
   const { sectionEyebrows, theatresHeading, theatresIntro1, theatresIntro2, theatreFigures, theatreSpecs } =
     content;
   return (
-    <section id="theatres" className="relative mt-30 overflow-hidden bg-[#060B1F]">
+    <section id="theatres" className="relative mt-30 overflow-hidden bg-[#1A1540]">
       <ParallaxLayer factor={0.12} maxOffsetPx={80} className="absolute inset-x-0 -top-[12%] h-[124%]">
         <Image
           src="/images/facilities/operating-theatre.jpg"
@@ -31,14 +31,14 @@ export function TheatresSection({ content }: { content: FacilitiesContent }) {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(rgba(6,11,31,0.92) 0%, rgba(6,11,31,0.82) 50%, rgba(6,11,31,0.95) 100%)",
+            "linear-gradient(rgba(26,21,64,0.92) 0%, rgba(26,21,64,0.82) 50%, rgba(26,21,64,0.95) 100%)",
         }}
       />
 
       <div className="relative z-10 mx-auto max-w-[1440px] px-5 py-26 sm:px-8 lg:px-11">
         <div className="grid min-w-0 gap-10 min-[900px]:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] min-[900px]:gap-16">
           <Reveal className="min-w-0">
-            <div className="text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
+            <div className="text-[11.5px] font-bold tracking-[0.24em] text-[#9FD6F5] uppercase">
               {sectionEyebrows.theatres}
             </div>
             <h2 className="font-display wrap-break-word mt-4.5 text-[clamp(36px,4.2vw,62px)] leading-[0.94] font-extrabold tracking-[-0.035em] text-white uppercase">
@@ -53,7 +53,7 @@ export function TheatresSection({ content }: { content: FacilitiesContent }) {
 
             <dl className="mt-11 grid grid-cols-1 gap-px bg-white/14 min-[640px]:grid-cols-3">
               {theatreFigures.map((figure) => (
-                <div key={figure.label} className="bg-[#060B1F]/70 px-6 py-7">
+                <div key={figure.label} className="bg-[#1A1540]/70 px-6 py-7">
                   <dt className="sr-only">{figure.label}</dt>
                   <dd>
                     <AnimatedCounter

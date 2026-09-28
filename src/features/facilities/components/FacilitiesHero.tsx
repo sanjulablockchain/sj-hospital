@@ -19,7 +19,7 @@ import type { FacilitiesContent } from "../data/getContent";
 export function FacilitiesHero({ content }: { content: FacilitiesContent }) {
   const { hero, heroFacts, tickerItems } = content;
   return (
-    <section id="top" className="relative flex flex-col overflow-hidden bg-[#060B1F]">
+    <section id="top" className="relative flex flex-col overflow-hidden bg-[#0B0826]">
       {/* overflow-hidden is load bearing. The section below has its own, but
           the photo lives in here, and the fact strip and marquee are siblings
           *after* this div: without clipping, the parallax layer's -top-[14%]
@@ -60,12 +60,12 @@ export function FacilitiesHero({ content }: { content: FacilitiesContent }) {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(rgba(6,11,31,0.84) 0%, rgba(6,11,31,0.46) 40%, rgba(6,11,31,0.96) 100%)",
+              "linear-gradient(rgba(12,8,38,0.84) 0%, rgba(12,8,38,0.46) 40%, rgba(12,8,38,0.96) 100%)",
           }}
         />
 
         <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 flex-col justify-end gap-6 px-5 pb-14 sm:px-8 lg:px-11">
-          <div className="animate-sj-up flex min-w-0 flex-wrap items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#7FCBFF] uppercase">
+          <div className="animate-sj-up flex min-w-0 flex-wrap items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#9FD6F5] uppercase">
             <span className="h-px w-11 bg-[var(--home-accent)]" />
             <LocaleLink href="/" className="hover:text-white">
               {hero.breadcrumbHome}
@@ -108,8 +108,8 @@ export function FacilitiesHero({ content }: { content: FacilitiesContent }) {
       <div className="relative z-10 mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-11">
         <dl className="grid grid-cols-1 gap-px bg-white/14 min-[640px]:grid-cols-2 min-[900px]:grid-cols-4">
           {heroFacts.map((fact) => (
-            <div key={fact.k} className="bg-[#060B1F] px-6 py-6">
-              <dt className="text-[11.5px] font-bold tracking-[0.2em] text-[#7FCBFF] uppercase">{fact.k}</dt>
+            <div key={fact.k} className="bg-[#0B0826] px-6 py-6">
+              <dt className="text-[11.5px] font-bold tracking-[0.2em] text-[#9FD6F5] uppercase">{fact.k}</dt>
               <dd className="font-display mt-2.5 text-[19px] leading-[1.15] font-semibold tracking-[-0.02em] text-white">
                 {fact.v}
               </dd>

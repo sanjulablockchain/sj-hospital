@@ -46,7 +46,7 @@ export function HygieneSection({ content }: { content: FacilitiesContent }) {
         </Reveal>
 
         <Reveal>
-          <div className="relative aspect-[4/3] overflow-hidden bg-[#08123A]">
+          <div className="relative aspect-[4/3] overflow-hidden bg-[#1A1540]">
             <ParallaxLayer factor={0.08} maxOffsetPx={40} className="absolute inset-x-0 -top-[8%] h-[116%]">
               <Image
                 src="/images/facilities/sterile-instruments.jpg"
@@ -58,7 +58,7 @@ export function HygieneSection({ content }: { content: FacilitiesContent }) {
             </ParallaxLayer>
             <div
               className="absolute inset-0"
-              style={{ background: "linear-gradient(rgba(6,11,31,0.1) 40%, rgba(6,11,31,0.9) 100%)" }}
+              style={{ background: "linear-gradient(rgba(26,21,64,0.1) 40%, rgba(26,21,64,0.9) 100%)" }}
             />
             <p className="absolute inset-x-0 bottom-0 p-7 text-[15px] leading-[1.45] font-bold text-white">
               {hygieneCaption}
