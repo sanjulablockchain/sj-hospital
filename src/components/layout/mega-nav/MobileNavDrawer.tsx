@@ -117,7 +117,7 @@ export function MobileNavDrawer({ sections, locale, bookHref }: MobileNavDrawerP
             <div
               aria-hidden
               onClick={() => setIsOpen(false)}
-              className="animate-sj-fade-in absolute inset-0 bg-[#060b1f]/60 backdrop-blur-sm"
+              className="animate-sj-fade-in absolute inset-0 bg-[#1A1540]/60 backdrop-blur-sm"
             />
             <div
               ref={dialogRef}
