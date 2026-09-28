@@ -22,6 +22,6 @@ const overlays = {
 export type NetworkContent = typeof base;
 
 export async function getNetworkContent(locale: Locale): Promise<NetworkContent> {
-  if (locale === DEFAULT_LOCALE) return base;
+  if (locale === DEFAULT_LOCALE) return { ...base };
   return localize(base, await overlays[locale]());
 }

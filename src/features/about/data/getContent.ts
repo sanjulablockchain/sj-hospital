@@ -22,6 +22,6 @@ const overlays = {
 export type AboutContent = typeof base;
 
 export async function getAboutContent(locale: Locale): Promise<AboutContent> {
-  if (locale === DEFAULT_LOCALE) return base;
+  if (locale === DEFAULT_LOCALE) return { ...base };
   return localize(base, await overlays[locale]());
 }

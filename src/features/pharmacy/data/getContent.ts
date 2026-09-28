@@ -22,6 +22,6 @@ const overlays = {
 export type PharmacyContent = typeof base;
 
 export async function getPharmacyContent(locale: Locale): Promise<PharmacyContent> {
-  if (locale === DEFAULT_LOCALE) return base;
+  if (locale === DEFAULT_LOCALE) return { ...base };
   return localize(base, await overlays[locale]());
 }

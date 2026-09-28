@@ -25,6 +25,6 @@ const overlays = {
 export type MediaContent = typeof base;
 
 export async function getMediaContent(locale: Locale): Promise<MediaContent> {
-  if (locale === DEFAULT_LOCALE) return base;
+  if (locale === DEFAULT_LOCALE) return { ...base };
   return localize(base, await overlays[locale]());
 }

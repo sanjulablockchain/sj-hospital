@@ -29,7 +29,7 @@ const doctorsOverlays = {
 export type EChannelingContent = typeof base;
 
 export async function getEChannelingContent(locale: Locale): Promise<EChannelingContent> {
-  if (locale === DEFAULT_LOCALE) return base;
+  if (locale === DEFAULT_LOCALE) return { ...base };
   return localize(base, await contentOverlays[locale]());
 }
 

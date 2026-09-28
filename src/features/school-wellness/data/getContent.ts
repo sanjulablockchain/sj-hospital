@@ -22,6 +22,6 @@ const overlays = {
 export type SchoolWellnessContent = typeof base;
 
 export async function getSchoolWellnessContent(locale: Locale): Promise<SchoolWellnessContent> {
-  if (locale === DEFAULT_LOCALE) return base;
+  if (locale === DEFAULT_LOCALE) return { ...base };
   return localize(base, await overlays[locale]());
 }

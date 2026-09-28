@@ -22,6 +22,6 @@ const overlays = {
 export type InternationalCareContent = typeof base;
 
 export async function getInternationalCareContent(locale: Locale): Promise<InternationalCareContent> {
-  if (locale === DEFAULT_LOCALE) return base;
+  if (locale === DEFAULT_LOCALE) return { ...base };
   return localize(base, await overlays[locale]());
 }
