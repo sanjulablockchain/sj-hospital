@@ -47,7 +47,7 @@ export const hero = {
   headingLine1: "To live is",
   headingOutline: "a",
   headingAccent: "privilege.",
-  body: "American healthcare standards in Negombo: 24 hour emergency care, surgical theatres, in-house doctors, a modern laboratory, digital X-ray and a pharmacy that never closes.",
+  body: "American healthcare standards in Negombo: 24 hour emergency care, in-house doctors, a modern laboratory, digital X-ray, home drug delivery, home visits and a pharmacy that never closes.",
   photoAlt: "St. Joseph Hospital building at dusk",
 };
 
@@ -70,7 +70,7 @@ export const quickAccess = {
   channel: {
     heading: "Channel a doctor",
     body: "Pick a consultant and a time online, or walk in to our free OPD.",
-    cta: "Make an appointment",
+    cta: "Book a consultation",
     href: "/e-channeling",
     photo: "/images/career-staff.jpg",
     photoAlt: "St. Joseph Hospital doctors and nurses",

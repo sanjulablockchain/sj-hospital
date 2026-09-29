@@ -5,8 +5,9 @@ import { RevealStagger } from "@/components/ui/RevealStagger";
 import type { Locale } from "@/lib/i18n/locales";
 import { localeHref } from "@/lib/i18n/paths";
 import type { HomeContent } from "../data/getContent";
+import { ChannelBookCta } from "./ChannelBookCta";
 import { HomeIcon } from "./HomeIcon";
-import { Container, pillButton, ArrowRight } from "./primitives";
+import { Container, pillButton } from "./primitives";
 
 /**
  * `#book`: the mosaic under the hero. Top row: the channelling card over the
@@ -60,9 +61,12 @@ export function QuickAccessSection({
                 {channel.heading}
               </h2>
               <p className="m-0 text-[15px] leading-[1.55] text-[var(--home-muted)]">{channel.body}</p>
-              <Link href={localeHref(channel.href, locale)} className={`${pillButton("brand")} h-[50px] self-start px-6 text-[15px]`}>
-                {channel.cta} <ArrowRight />
-              </Link>
+              <ChannelBookCta
+                href={channel.href}
+                locale={locale}
+                cta={channel.cta}
+                className={`${pillButton("brand")} h-[50px] self-start px-6 text-[15px]`}
+              />
             </div>
           </div>
 

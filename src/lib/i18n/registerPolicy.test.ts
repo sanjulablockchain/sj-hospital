@@ -61,7 +61,7 @@ const ENGLISH: [string, string, string][] = [
   ["allServicesLabel", "cta", "All services"],
   ["detailChrome.backToServices", "cta", "Back to all services"],
   ["directory.bookAppointment", "cta", "Book appointment"],
-  ["chromeCopy.bookNow", "cta", "Book now"],
+  ["chromeCopy.bookNow", "cta", "Book a consultation"],
   ["chromeCopy.callUs", "cta", "Call us"],
 
   ["groupLabels.Surgical", "chip", "Surgical"],

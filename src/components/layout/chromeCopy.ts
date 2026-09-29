@@ -17,7 +17,7 @@ import { chromeCopy as ta } from "./chromeCopy.ta.ts";
  * covering dozens of repeated strings rather than twelve one-off ones.
  */
 export const chromeCopy = {
-  bookNow: "Book now",
+  bookNow: "Book a consultation",
   openMenu: "Open menu",
   closeMenu: "Close menu",
   backToTop: "Back to top",
