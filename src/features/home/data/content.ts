@@ -406,6 +406,6 @@ export const contactCta = {
     { label: "Surgical care", href: "/services/general-surgery", icon: "arrow" },
     { label: "Reserve a room", href: "/accommodation", icon: "arrow" },
     { label: "WhatsApp 074 222 333 4", href: "https://wa.me/94742223334", icon: "chat" },
-    { label: "0117 84 84 84", href: "tel:+94117848484", icon: "phone" },
+    { label: "0117 84 84 84 / 031", href: "tel:+94117848484", icon: "phone" },
   ] satisfies { label: string; href: string; icon: HomeIconKey }[],
 };

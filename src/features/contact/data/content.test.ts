@@ -18,7 +18,7 @@ test("the hospital's real contact details, unchanged", () => {
   const byLabel = new Map(contactRows.map((r) => [r.label, r]));
   assert.equal(byLabel.get("Location")?.value, "229/10 St. Joseph Street");
   assert.equal(byLabel.get("Location")?.sub, "Negombo, Sri Lanka");
-  assert.equal(byLabel.get("Call us")?.value, "0117 84 84 84");
+  assert.equal(byLabel.get("Call us")?.value, "0117 84 84 84 / 031");
   assert.equal(byLabel.get("Call us")?.href, "tel:+94117848484");
   assert.equal(byLabel.get("WhatsApp / Mobile")?.value, "074 222 333 4");
   assert.equal(byLabel.get("Email")?.value, "info@sjhospital.lk");

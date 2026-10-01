@@ -22,7 +22,7 @@ export function FaqSection({ content, locale }: { content: HomeContent["faq"]; l
             <span className="text-[14.5px] leading-[1.55] text-white/86">{content.still.body}</span>
             <div className="flex flex-wrap gap-2.5">
               <a href="tel:+94117848484" className={`${pillButton("surface")} h-[46px] gap-2 px-4.5 text-[14.5px] tabular-nums`}>
-                <HomeIcon name="phone" size={16} stroke={2} /> 0117 84 84 84
+                <HomeIcon name="phone" size={16} stroke={2} /> 0117 84 84 84 / 031
               </a>
               <a
                 href={`mailto:${GENERAL_EMAIL}`}

@@ -53,7 +53,7 @@ export function HomeFooter({ locale }: { locale: Locale }) {
             <span className="text-[12px] font-extrabold tracking-[0.16em] text-[var(--home-brand-text)] uppercase">{navLabel("Reach us", locale)}</span>
             <span className="text-[14px] leading-[1.5] text-[var(--home-heading)]">229/10 St. Joseph Street, Negombo</span>
             <a href="tel:+94117848484" className="text-[14px] font-extrabold text-[var(--home-heading)] tabular-nums hover:text-[var(--home-brand-text)]">
-              0117 84 84 84
+              0117 84 84 84 / 031
             </a>
             <a href="https://wa.me/94742223334" className="text-[14px] text-[var(--home-heading)] tabular-nums hover:text-[var(--home-brand-text)]">
               WhatsApp 074 222 333 4

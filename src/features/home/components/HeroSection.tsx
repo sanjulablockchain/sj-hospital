@@ -77,7 +77,7 @@ export function HeroSection({
               className="inline-flex items-center gap-3 border border-white/30 px-6 py-4 text-[15px] font-bold whitespace-nowrap text-white tabular-nums transition-colors hover:bg-white/8 hover:text-white"
             >
               <span aria-hidden className="animate-sj-pulse h-2 w-2 rounded-full bg-[var(--home-accent)]" />
-              0117 84 84 84
+              0117 84 84 84 / 031
             </a>
           </div>
         </div>

@@ -68,7 +68,7 @@ export const contactRows: {
   {
     icon: "phone",
     label: "Call us",
-    value: "0117 84 84 84",
+    value: "0117 84 84 84 / 031",
     sub: "Reception, 24 hours",
     href: "tel:+94117848484",
   },
