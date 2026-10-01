@@ -20,7 +20,7 @@ export function UtilityBar() {
             <span aria-hidden className="animate-sj-pulse-dot h-[7px] w-[7px] rounded-full bg-[#F04438]" />
             <span>Emergency 24/7</span>
             <a href="tel:+94117848484" className="font-extrabold text-white tabular-nums hover:text-white">
-              0117 84 84 84
+              0117 84 84 84 / 031
             </a>
           </span>
           <span className="text-white/75">229/10 St. Joseph Street, Negombo</span>

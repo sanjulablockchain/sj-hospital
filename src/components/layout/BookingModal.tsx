@@ -12,7 +12,7 @@ import { useLocale } from "@/lib/i18n/useLocale";
 const BOOK_HREF = "/e-channeling";
 const WHATSAPP_HREF = "https://wa.me/94742223334";
 const PHONE_HREF = "tel:+94117848484";
-const PHONE_DISPLAY = "0117 84 84 84";
+const PHONE_DISPLAY = "0117 84 84 84 / 031";
 const WHATSAPP_DISPLAY = "074 222 333 4";
 
 /**

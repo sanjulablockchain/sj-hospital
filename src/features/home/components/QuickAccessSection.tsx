@@ -83,7 +83,7 @@ export function QuickAccessSection({
                   {emergencyCall.heading}
                 </span>
                 <span className="font-display text-[28px] leading-[1.1] font-extrabold tracking-[-0.01em] text-[var(--home-accent-soft)] tabular-nums sm:text-[34px]">
-                  0117 84 84 84
+                  0117 84 84 84 / 031
                 </span>
               </span>
             </a>

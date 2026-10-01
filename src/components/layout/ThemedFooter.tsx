@@ -94,7 +94,7 @@ export function ThemedFooter({ columns, reachUsLabel, id = "contact" }: ThemedFo
           </span>
           <span className="text-[var(--home-body)] opacity-90">229/10 St. Joseph Street, Negombo</span>
           <a href="tel:+94117848484" className="sj-link text-[var(--home-body)] tabular-nums">
-            0117 84 84 84
+            0117 84 84 84 / 031
           </a>
           <a href="https://wa.me/94742223334" className="sj-link text-[var(--home-body)] tabular-nums">
             WhatsApp 074 222 333 4

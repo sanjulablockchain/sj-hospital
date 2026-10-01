@@ -132,7 +132,7 @@ export function ContactForm({ copy }: { copy: ContactContent["form"] }) {
       <p className="text-xs leading-relaxed text-[var(--home-muted)]">
         {beforePhone}
         <a href="tel:+94117848484" className="font-semibold text-[var(--home-accent)] hover:opacity-80">
-          0117 84 84 84
+          0117 84 84 84 / 031
         </a>
         {afterPhone}
       </p>
