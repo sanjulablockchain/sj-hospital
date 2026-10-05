@@ -223,8 +223,14 @@ export function DoctorDirectory({ doctors, copy }: DoctorDirectoryProps) {
             )}
           </div>
 
+          {/* `auto-rows-fr` makes every row as tall as the tallest card in
+              the grid, not just in its own row, so all cards share one size
+              and their Book links line up across the page. Kept to sm and
+              up: in the single mobile column nothing sits side by side, and
+              padding 88 cards to the tallest would only add scrolling.
+              groupSessions keeps that tallest card short. */}
           {filtered.length > 0 ? (
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 sm:auto-rows-fr sm:grid-cols-2 xl:grid-cols-3">
               {filtered.map((doctor) => {
                 const sessions = groupSessions(doctor.sessions);
                 return (
@@ -248,10 +254,15 @@ export function DoctorDirectory({ doctors, copy }: DoctorDirectoryProps) {
                   {(sessions.length > 0 || doctor.sessionNote) && (
                     <span className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-3 gap-y-1 text-[13px] leading-snug text-[var(--home-muted)]">
                       {sessions.map((group) => (
-                        <Fragment key={group.from}>
+                        <Fragment key={group.times.join("|")}>
                           <span className="font-semibold text-[var(--home-body)]">
-                            {copy.weekdays[group.from]}
-                            {group.to !== group.from && `–${copy.weekdays[group.to]}`}
+                            {group.days
+                              .map(({ from, to }) =>
+                                from === to
+                                  ? copy.weekdays[from]
+                                  : `${copy.weekdays[from]}–${copy.weekdays[to]}`
+                              )
+                              .join(", ")}
                           </span>
                           <span>{group.times.join(", ")}</span>
                         </Fragment>

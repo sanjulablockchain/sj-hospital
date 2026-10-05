@@ -1,31 +1,32 @@
 import { WEEKDAYS, type Doctor, type Weekday } from "./doctors.ts";
 
-export type SessionGroup = { from: Weekday; to: Weekday; times: readonly string[] };
+/** A run of consecutive days, `from` and `to` equal for a single day. */
+export type DayRun = { from: Weekday; to: Weekday };
+export type SessionGroup = { days: DayRun[]; times: readonly string[] };
 
 /**
- * A consultant's week as the card prints it: a run of consecutive days with
- * identical times becomes one line ("Mon–Fri  4.00 PM"), so a five-day
- * clinic does not take five lines. Days run Monday to Sunday and do not wrap,
- * so a Sunday session always stands on its own.
+ * A consultant's week as the card prints it: one line per distinct set of
+ * times, naming every day that has it, with consecutive days joined into a
+ * run ("Mon, Wed, Fri–Sat  4.00 PM"). Grouping by times rather than only by
+ * consecutive days keeps the longest week to a few lines, so the directory's
+ * cards can all share one height without most of them sitting half empty.
+ * Days run Monday to Sunday and do not wrap; lines are ordered by their
+ * first day.
  */
 export function groupSessions(sessions: Doctor["sessions"]): SessionGroup[] {
-  const groups: SessionGroup[] = [];
-  let previous: Weekday | null = null;
+  const groups = new Map<string, SessionGroup>();
 
-  for (const day of WEEKDAYS) {
+  WEEKDAYS.forEach((day, index) => {
     const times = sessions[day];
-    if (!times?.length) {
-      previous = null;
-      continue;
-    }
-    const last = groups[groups.length - 1];
-    if (previous && last && last.to === previous && last.times.join("|") === times.join("|")) {
-      last.to = day;
-    } else {
-      groups.push({ from: day, to: day, times });
-    }
-    previous = day;
-  }
+    if (!times?.length) return;
+    const key = times.join("|");
+    const group = groups.get(key) ?? { days: [], times };
+    groups.set(key, group);
 
-  return groups;
+    const last = group.days[group.days.length - 1];
+    if (last && WEEKDAYS.indexOf(last.to) === index - 1) last.to = day;
+    else group.days.push({ from: day, to: day });
+  });
+
+  return [...groups.values()];
 }
