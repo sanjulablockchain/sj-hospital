@@ -109,6 +109,21 @@ export const directory = {
     "Try a different name or speciality, or call our channelling desk on {phone} and we will find the right doctor for you.",
   showAllDoctors: "Show all doctors",
   bookAppointment: "Book appointment",
+  // The CTA on a card whose Calendly event has not been set up yet: the card
+  // dials the channelling desk instead of opening a booking page.
+  callToBook: "Call to book",
+  // Short day names for each card's weekly sessions, keyed like
+  // doctors.ts's WEEKDAYS. A run of days with the same times prints as one
+  // range ("Mon–Fri"), so these should read cleanly either side of a dash.
+  weekdays: {
+    mon: "Mon",
+    tue: "Tue",
+    wed: "Wed",
+    thu: "Thu",
+    fri: "Fri",
+    sat: "Sat",
+    sun: "Sun",
+  },
 };
 
 // Lifted verbatim from the gradient rail that used to sit at the bottom of

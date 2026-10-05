@@ -1,7 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { CALENDLY_BASE, type Doctor } from "../data/doctors";
+import { Fragment, useMemo, useState } from "react";
+import { CALENDLY_BASE, type Doctor, type Weekday } from "../data/doctors";
+import { groupSessions } from "../data/sessions";
 
 /**
  * The translatable copy this component needs, defined here rather than
@@ -14,7 +15,8 @@ import { CALENDLY_BASE, type Doctor } from "../data/doctors";
  * / `{phone}` tokens rather than a fixed split: word order moves between
  * languages. `phone` / `phoneHref` are the channelling desk's own number,
  * threaded through from `helpRail` so it has one home rather than a second
- * copy living here.
+ * copy living here. A card whose consultant has no Calendly slug yet dials
+ * that same number, labelled `callToBook`, instead of opening a booking page.
  */
 type DirectoryCopy = {
   introTemplate: string;
@@ -30,6 +32,8 @@ type DirectoryCopy = {
   noResultsBodyTemplate: string;
   showAllDoctors: string;
   bookAppointment: string;
+  callToBook: string;
+  weekdays: Record<Weekday, string>;
   phone: string;
   phoneHref: string;
 };
@@ -221,12 +225,18 @@ export function DoctorDirectory({ doctors, copy }: DoctorDirectoryProps) {
 
           {filtered.length > 0 ? (
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-              {filtered.map((doctor) => (
+              {filtered.map((doctor) => {
+                const sessions = groupSessions(doctor.sessions);
+                return (
                 <a
-                  key={doctor.name + doctor.calendlySlug}
-                  href={`${CALENDLY_BASE}${doctor.calendlySlug}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  key={doctor.name}
+                  {...(doctor.calendlySlug
+                    ? {
+                        href: `${CALENDLY_BASE}${doctor.calendlySlug}`,
+                        target: "_blank",
+                        rel: "noopener noreferrer",
+                      }
+                    : { href: copy.phoneHref })}
                   className="sj-fill group flex flex-col gap-3 rounded-2xl border border-[var(--home-hairline)] bg-[var(--home-bg)] p-5 transition hover:-translate-y-0.5 hover:shadow-lg"
                 >
                   <span className="text-[11px] font-bold uppercase tracking-wider text-[var(--home-accent-soft)]">
@@ -235,8 +245,22 @@ export function DoctorDirectory({ doctors, copy }: DoctorDirectoryProps) {
                   <span className="font-display text-lg font-bold text-[var(--home-heading)]">
                     {doctor.name}
                   </span>
-                  <span className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-[var(--home-accent)]">
-                    {copy.bookAppointment}
+                  {(sessions.length > 0 || doctor.sessionNote) && (
+                    <span className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-3 gap-y-1 text-[13px] leading-snug text-[var(--home-muted)]">
+                      {sessions.map((group) => (
+                        <Fragment key={group.from}>
+                          <span className="font-semibold text-[var(--home-body)]">
+                            {copy.weekdays[group.from]}
+                            {group.to !== group.from && `–${copy.weekdays[group.to]}`}
+                          </span>
+                          <span>{group.times.join(", ")}</span>
+                        </Fragment>
+                      ))}
+                      {doctor.sessionNote && <span className="col-span-2">{doctor.sessionNote}</span>}
+                    </span>
+                  )}
+                  <span className="mt-auto inline-flex items-center gap-2 pt-1 text-sm font-semibold text-[var(--home-accent)]">
+                    {doctor.calendlySlug ? copy.bookAppointment : copy.callToBook}
                     <svg
                       width="16"
                       height="16"
@@ -254,7 +278,8 @@ export function DoctorDirectory({ doctors, copy }: DoctorDirectoryProps) {
                     </svg>
                   </span>
                 </a>
-              ))}
+                );
+              })}
             </div>
           ) : (
             <div className="flex flex-col items-center gap-3 rounded-2xl border border-dashed border-[var(--home-hairline)] bg-[var(--home-bg)] px-6 py-16 text-center">
