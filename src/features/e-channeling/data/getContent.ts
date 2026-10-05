@@ -34,9 +34,10 @@ export async function getEChannelingContent(locale: Locale): Promise<EChanneling
 }
 
 /**
- * The 71 consultants with `specialization` localized and `name` /
- * `calendlySlug` untouched (doctors.ts explains why: `name` is a proper noun,
- * `calendlySlug` is a Calendly URL fragment). DoctorDirectory filters and
+ * The 88 consultants with `specialization` and `sessionNote` localized and
+ * `name` / `calendlySlug` / `sessions` untouched (doctors.ts explains why:
+ * `name` is a proper noun, `calendlySlug` is a Calendly URL fragment,
+ * `sessions` are times in numerals). DoctorDirectory filters and
  * searches against whichever locale's specializations this returns, so its
  * speciality rail and search box stay consistent within one language.
  */

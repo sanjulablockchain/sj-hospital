@@ -12,7 +12,7 @@
 // Sentence forms use the polite plural ("කරන්න"), which is how a hospital
 // addresses a patient it has not met.
 //
-// Only translatable copy lives here. `doctors.si.ts` carries the 71
+// Only translatable copy lives here. `doctors.si.ts` carries the 88
 // consultants' translated specialities; every href, phone number and email
 // address stays in content.ts and has exactly one home.
 
@@ -23,36 +23,41 @@
  */
 export const __review = { status: "draft", reviewer: null, date: null } as const;
 
-// Same 28 specialities as doctors.si.ts, in the base's count-sorted order.
+// Same 33 specialities as doctors.si.ts, in the base's count-sorted order.
 export const tickerItems = [
-  "ළමා රෝග විශේෂඥ",
-  "වෛද්‍ය විශේෂඥ",
   "ශල්‍ය වෛද්‍ය විශේෂඥ",
+  "ළමා රෝග විශේෂඥ",
   "ප්‍රසව හා නාරි රෝග විශේෂඥ",
   "හෘද රෝග විශේෂඥ",
+  "වෛද්‍ය විශේෂඥ",
+  "විකිරණවේද විශේෂඥ",
   "සම රෝග විශේෂඥ",
+  "අස්ථි ශල්‍ය වෛද්‍ය විශේෂඥ",
+  "වකුගඩු රෝග විශේෂඥ",
+  "පෝෂණ විශේෂඥ",
+  "සන්ධි රෝග විශේෂඥ",
+  "මුත්‍රා පද්ධති රෝග විශේෂඥ",
+  "ශ්‍රවණ පරීක්ෂණ විශේෂඥ",
   "ENT ශල්‍ය වෛද්‍ය විශේෂඥ",
   "ඇස් ශල්‍ය වෛද්‍ය විශේෂඥ",
-  "විකිරණවේද විශේෂඥ",
-  "සන්ධි රෝග විශේෂඥ",
-  "ශ්‍රවණ පරීක්ෂණ විශේෂඥ",
-  "ස්නායු රෝග විශේෂඥ",
-  "අස්ථි ශල්‍ය වෛද්‍ය විශේෂඥ",
-  "භෞත චිකිත්සක",
   "මනෝ රෝග විශේෂඥ",
+  "මනෝවිද්‍යාත්මක උපදේශනය",
   "පපුවේ රෝග විශේෂඥ",
   "වන්ධ්‍යත්ව උපදේශන විශේෂඥ",
   "උපදේශන මනෝවිද්‍යාඥ",
+  "EEG (මොළයේ විද්‍යුත් තරංග පරීක්ෂණය)",
   "අන්තර්ස්‍රාවී රෝග විශේෂඥ",
-  "ආමාශ ආන්ත්‍ර හා අක්මා රෝග විශේෂඥ",
   "රක්ත රෝග විශේෂඥ",
   "පටක රෝග විශේෂඥ",
-  "වකුගඩු රෝග විශේෂඥ",
+  "පෙනහළු ක්‍රියාකාරිත්ව පරීක්ෂණය",
+  "අධිකරණ වෛද්‍ය විශේෂඥ",
   "ස්නායු ශල්‍ය වෛද්‍ය විශේෂඥ",
-  "පෝෂණ විශේෂඥ",
-  "මනෝවිද්‍යාත්මක උපදේශනය",
+  "ස්නායු රෝග විශේෂඥ",
+  "පිළිකා ශල්‍ය වෛද්‍ය විශේෂඥ",
+  "පිළිකා රෝග විශේෂඥ",
+  "භෞත චිකිත්සක",
   "කථන චිකිත්සක",
-  "මුත්‍රා පද්ධති රෝග විශේෂඥ",
+  "ක්‍රීඩා හා ව්‍යායාම වෛද්‍ය විශේෂඥ",
 ];
 
 export const heroFacts = [
@@ -74,6 +79,15 @@ export const directory = {
   resultCountPlural: "විශේෂඥ වෛද්‍යවරු",
   noResultsBodyTemplate:
     "වෙනත් නමක් හෝ විශේෂඥතාවක් උත්සාහ කරන්න, නැත්නම් අපගේ Channelling කවුන්ටරයට {phone} අමතන්න, අපි ඔබට ගැලපෙන වෛද්‍යවරයා සොයා දෙන්නම්.",
+  weekdays: {
+    mon: "සඳු",
+    tue: "අඟ",
+    wed: "බදා",
+    thu: "බ්‍රහ",
+    fri: "සිකු",
+    sat: "සෙන",
+    sun: "ඉරි",
+  },
 };
 
 export const helpRail = {

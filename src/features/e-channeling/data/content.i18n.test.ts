@@ -15,12 +15,20 @@ import { assertTranslationParity, stringPaths } from "../../../lib/i18n/stringPa
  * changes script; several rows carry a title merged into the same string
  * ("Dr. ", "Prof. ", "Mrs. ", "Mr. ", "Ms. "), so the whole string is excluded
  * rather than inventing a split doctors.ts never had. `calendlySlug` and
- * `CALENDLY_BASE` are URL fragments. Excluding these by path keeps this file
- * short: it does not need to list all 71 names the way KEEPS_ENGLISH lists a
+ * `CALENDLY_BASE` are URL fragments. `WEEKDAYS` are structural keys, and
+ * every `.sessions.` path is a time written in numerals ("4.00 PM"), which
+ * renders as written in every locale. Excluding these by path keeps this file
+ * short: it does not need to list all 88 names the way KEEPS_ENGLISH lists a
  * handful of deliberate words elsewhere.
  */
 function isDoctorUntranslatable(path: string): boolean {
-  return path === "CALENDLY_BASE" || path.endsWith(".name") || path.endsWith(".calendlySlug");
+  return (
+    path === "CALENDLY_BASE" ||
+    path.startsWith("WEEKDAYS[") ||
+    path.endsWith(".name") ||
+    path.endsWith(".calendlySlug") ||
+    path.includes(".sessions.")
+  );
 }
 
 test("every translatable string in doctors has Sinhala", () => {
@@ -128,6 +136,25 @@ test("the content overlays keep the base's array lengths", () => {
   ] as const) {
     assert.equal(overlay.heroFacts.length, base.heroFacts.length, `${name} heroFacts`);
     assert.equal(overlay.tickerItems.length, base.tickerItems.length, `${name} tickerItems`);
+  }
+});
+
+// The base ticker is derived from doctors.ts and sorted by headcount, so a
+// roster change reorders it, while the overlay ticker is a typed list merged
+// by index. If the two disagree, the hero labels one speciality with
+// another's name. Each overlay entry must be the same locale's
+// doctors-overlay word for the speciality at that index.
+test("each translated ticker item names the same speciality as the base ticker", () => {
+  for (const [name, overlay, doctorsOverlay] of [
+    ["si", si, doctorsSi],
+    ["ta", ta, doctorsTa],
+  ] as const) {
+    const bySpeciality = new Map(
+      doctorsBase.doctors.map((d, i) => [d.specialization, doctorsOverlay.doctors[i].specialization])
+    );
+    base.tickerItems.forEach((speciality, i) => {
+      assert.equal(overlay.tickerItems[i], bySpeciality.get(speciality), `${name} tickerItems[${i}] (${speciality})`);
+    });
   }
 });
 

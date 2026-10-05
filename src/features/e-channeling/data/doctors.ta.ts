@@ -1,11 +1,12 @@
 // Tamil for the e-channeling consultant list.
 //
-// Only `specialization` is here. `name` is a proper noun, exactly like the
-// hospital's own name, and never changes script; content.i18n.test.ts
-// excludes it by path rather than listing all 71 names. `calendlySlug` is a
-// URL fragment and stays in doctors.ts too.
+// Only `specialization` is here, plus `sessionNote` on the two rows that have
+// one. `name` is a proper noun, exactly like the hospital's own name, and
+// never changes script; content.i18n.test.ts excludes it by path rather than
+// listing all 88 names. `calendlySlug` is a URL fragment and `sessions` holds
+// times in numerals, so both stay in doctors.ts too.
 //
-// The 28 specialities below use the same vocabulary as the hero's ticker
+// The 33 specialities below use the same vocabulary as the hero's ticker
 // (content.ta.ts's tickerItems) and, where one already exists, the same
 // wording as navigationLabels.ta.ts's "Find a consultant" so the site says a
 // speciality the same way everywhere it appears.
@@ -24,6 +25,9 @@ export const doctors = [
   { specialization: "மகப்பேறு மற்றும் மகளிர் நோய் நிபுணர்" },
   { specialization: "மகப்பேறு மற்றும் மகளிர் நோய் நிபுணர்" },
   { specialization: "மகப்பேறு மற்றும் மகளிர் நோய் நிபுணர்" },
+  { specialization: "மகப்பேறு மற்றும் மகளிர் நோய் நிபுணர்" },
+  { specialization: "மகப்பேறு மற்றும் மகளிர் நோய் நிபுணர்" },
+  { specialization: "குழந்தை மருத்துவ நிபுணர்" },
   { specialization: "குழந்தை மருத்துவ நிபுணர்" },
   { specialization: "குழந்தை மருத்துவ நிபுணர்" },
   { specialization: "குழந்தை மருத்துவ நிபுணர்" },
@@ -37,9 +41,11 @@ export const doctors = [
   { specialization: "பொது மருத்துவ நிபுணர்" },
   { specialization: "பொது மருத்துவ நிபுணர்" },
   { specialization: "பொது மருத்துவ நிபுணர்" },
-  { specialization: "பொது மருத்துவ நிபுணர்" },
-  { specialization: "பொது மருத்துவ நிபுணர்" },
+  { specialization: "விளையாட்டு மற்றும் உடற்பயிற்சி மருத்துவ நிபுணர்" },
   { specialization: "அறுவை சிகிச்சை நிபுணர்" },
+  { specialization: "அறுவை சிகிச்சை நிபுணர்" },
+  { specialization: "அறுவை சிகிச்சை நிபுணர்" },
+  { specialization: "அறுவை சிகிச்சை நிபுணர்", sessionNote: "மாதம் ஒருமுறை; தேதியை அறிய அழைக்கவும்" },
   { specialization: "அறுவை சிகிச்சை நிபுணர்" },
   { specialization: "அறுவை சிகிச்சை நிபுணர்" },
   { specialization: "அறுவை சிகிச்சை நிபுணர்" },
@@ -48,14 +54,16 @@ export const doctors = [
   { specialization: "அறுவை சிகிச்சை நிபுணர்" },
   { specialization: "எலும்பியல் அறுவை சிகிச்சை நிபுணர்" },
   { specialization: "எலும்பியல் அறுவை சிகிச்சை நிபுணர்" },
+  { specialization: "எலும்பியல் அறுவை சிகிச்சை நிபுணர்" },
+  { specialization: "எலும்பியல் அறுவை சிகிச்சை நிபுணர்" },
   { specialization: "மூட்டு நோய் நிபுணர்" },
   { specialization: "மூட்டு நோய் நிபுணர்" },
-  { specialization: "மூட்டு நோய் நிபுணர்" },
+  { specialization: "மூட்டு நோய் நிபுணர்", sessionNote: "மாதம் இருமுறை; தேதிகளை அறிய அழைக்கவும்" },
   { specialization: "இதய நோய் நிபுணர்" },
   { specialization: "இதய நோய் நிபுணர்" },
   { specialization: "இதய நோய் நிபுணர்" },
   { specialization: "இதய நோய் நிபுணர்" },
-  { specialization: "கண் அறுவை சிகிச்சை நிபுணர்" },
+  { specialization: "இதய நோய் நிபுணர்" },
   { specialization: "கண் அறுவை சிகிச்சை நிபுணர்" },
   { specialization: "கண் அறுவை சிகிச்சை நிபுணர்" },
   { specialization: "தோல் நோய் நிபுணர்" },
@@ -63,31 +71,41 @@ export const doctors = [
   { specialization: "தோல் நோய் நிபுணர்" },
   { specialization: "தோல் நோய் நிபுணர்" },
   { specialization: "நரம்பியல் நோய் நிபுணர்" },
-  { specialization: "நரம்பியல் நோய் நிபுணர்" },
+  { specialization: "சிறுநீரக நோய் நிபுணர்" },
+  { specialization: "சிறுநீரக நோய் நிபுணர்" },
   { specialization: "சிறுநீரக நோய் நிபுணர்" },
   { specialization: "மனநல மருத்துவ நிபுணர்" },
   { specialization: "மனநல மருத்துவ நிபுணர்" },
   { specialization: "ENT அறுவை சிகிச்சை நிபுணர்" },
   { specialization: "ENT அறுவை சிகிச்சை நிபுணர்" },
-  { specialization: "ENT அறுவை சிகிச்சை நிபுணர்" },
-  { specialization: "இரைப்பை குடல் மற்றும் கல்லீரல் நோய் நிபுணர்" },
   { specialization: "நாளமில்லச் சுரப்பி நோய் நிபுணர்" },
   { specialization: "மார்பு நோய் நிபுணர்" },
   { specialization: "மார்பு நோய் நிபுணர்" },
   { specialization: "நரம்பியல் அறுவை சிகிச்சை நிபுணர்" },
   { specialization: "இரத்த நோய் நிபுணர்" },
   { specialization: "சிறுநீரியல் நிபுணர்" },
+  { specialization: "சிறுநீரியல் நிபுணர்" },
+  { specialization: "சிறுநீரியல் நிபுணர்" },
+  { specialization: "புற்றுநோய் நிபுணர்" },
+  { specialization: "புற்றுநோய் அறுவை சிகிச்சை நிபுணர்" },
   { specialization: "திசு நோயியல் நிபுணர்" },
   { specialization: "கதிரியக்கவியல் நிபுணர்" },
   { specialization: "கதிரியக்கவியல் நிபுணர்" },
   { specialization: "கதிரியக்கவியல் நிபுணர்" },
+  { specialization: "கதிரியக்கவியல் நிபுணர்" },
+  { specialization: "கதிரியக்கவியல் நிபுணர்" },
+  { specialization: "சட்ட மருத்துவ நிபுணர்" },
   { specialization: "செவிவழி பரிசோதனை நிபுணர்" },
   { specialization: "செவிவழி பரிசோதனை நிபுணர்" },
+  { specialization: "EEG (மூளை மின் அலை பரிசோதனை)" },
+  { specialization: "நுரையீரல் செயல்பாட்டு பரிசோதனை" },
   { specialization: "கருவுறுதல் ஆலோசனை நிபுணர்" },
   { specialization: "பேச்சு சிகிச்சை நிபுணர்" },
   { specialization: "பிசியோதெரபி நிபுணர்" },
-  { specialization: "பிசியோதெரபி நிபுணர்" },
   { specialization: "ஊட்டச்சத்து நிபுணர்" },
+  { specialization: "ஊட்டச்சத்து நிபுணர்" },
+  { specialization: "ஊட்டச்சத்து நிபுணர்" },
+  { specialization: "உளவியல் ஆலோசனை" },
   { specialization: "உளவியல் ஆலோசனை" },
   { specialization: "ஆலோசனை உளவியல் நிபுணர்" },
 ];

@@ -50,6 +50,8 @@ export function DirectorySection({
             noResultsBodyTemplate: directory.noResultsBodyTemplate,
             showAllDoctors: directory.showAllDoctors,
             bookAppointment: directory.bookAppointment,
+            callToBook: directory.callToBook,
+            weekdays: directory.weekdays,
             phone: helpRail.phone,
             phoneHref: helpRail.phoneHref,
           }}
