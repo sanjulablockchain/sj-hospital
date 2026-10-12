@@ -393,7 +393,7 @@ export const facilityCards: FacilityCard[] = [
     body: "A purpose-built hospital in Negombo, with covered arrival for both the ambulance bay and outpatients.",
     linkLabel: "See Accident & Emergency",
     href: "/services/accident-emergency",
-    photo: "/images/hero-exterior.png",
+    photo: "/images/hero-exterior.jpg",
     photoAlt: "St. Joseph Hospital exterior",
   },
   {
@@ -420,7 +420,7 @@ export const facilityCards: FacilityCard[] = [
     body: "A covered entrance served by our own ambulance fleet, ten minutes from Bandaranaike International.",
     linkLabel: "See international care",
     href: "/international-care",
-    photo: "/images/services/exterior-dusk-b.png",
+    photo: "/images/services/exterior-dusk-b.jpg",
     photoAlt: "Hospital exterior and ambulance entrance",
   },
 ];

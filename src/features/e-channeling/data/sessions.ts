@@ -7,7 +7,7 @@ export type SessionGroup = { days: DayRun[]; times: readonly string[] };
 /**
  * A consultant's week as the card prints it: one line per distinct set of
  * times, naming every day that has it, with consecutive days joined into a
- * run ("Mon, Wed, Fri–Sat  4.00 PM"). Grouping by times rather than only by
+ * run ("Mon, Wed, Fri to Sat  4.00 PM"). Grouping by times rather than only by
  * consecutive days keeps the longest week to a few lines, so the directory's
  * cards can all share one height without most of them sitting half empty.
  * Days run Monday to Sunday and do not wrap; lines are ordered by their

@@ -52,6 +52,7 @@ export function DirectorySection({
             bookAppointment: directory.bookAppointment,
             callToBook: directory.callToBook,
             weekdays: directory.weekdays,
+            dayRangeTemplate: directory.dayRangeTemplate,
             phone: helpRail.phone,
             phoneHref: helpRail.phoneHref,
           }}

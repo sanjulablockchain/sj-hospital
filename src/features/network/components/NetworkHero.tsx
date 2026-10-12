@@ -29,7 +29,7 @@ export function NetworkHero({ content }: { content: NetworkContent }) {
         className="absolute inset-x-0 -top-[14%] h-[128%] overflow-hidden"
       >
         <Image
-          src="/images/network/exterior-dusk.png"
+          src="/images/network/exterior-dusk.jpg"
           alt="St. Joseph Hospital Negombo lit at dusk, with an ambulance at the covered entrance bay"
           fill
           priority

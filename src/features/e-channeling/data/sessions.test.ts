@@ -63,7 +63,7 @@ test("no card needs more than five session lines", () => {
 
 test("every session time is written the one way the site prints times", () => {
   const time = String.raw`(?:[1-9]|1[0-2])\.[0-5]\d (?:AM|PM)`;
-  const pattern = new RegExp(`^${time}(?: – ${time})?$`);
+  const pattern = new RegExp(`^${time}(?: to ${time})?$`);
   for (const d of doctors) {
     for (const times of Object.values(d.sessions)) {
       for (const t of times ?? []) assert.match(t, pattern, `${d.name}: ${t}`);

@@ -423,7 +423,7 @@ export const galleryIntro =
 // files already ship in `public/images` and carry other pages on the site.
 export const gallery: GalleryShot[] = [
   {
-    src: "/images/hero-exterior.png",
+    src: "/images/hero-exterior.jpg",
     tag: "Exterior",
     title: "Main building after dark",
     alt: "The St. Joseph Hospital Negombo building lit at dusk, with an ambulance at the covered bay",

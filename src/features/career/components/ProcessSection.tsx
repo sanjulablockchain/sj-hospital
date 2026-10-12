@@ -22,7 +22,7 @@ export function ProcessSection({ content }: { content: CareerContent }) {
     <section id="process" className="relative mt-26 overflow-hidden bg-[#1A1540] max-[640px]:mt-18">
       <ParallaxLayer factor={0.12} maxOffsetPx={80} className="absolute inset-x-0 -top-[10%] h-[120%]">
         <Image
-          src="/images/hero-exterior.png"
+          src="/images/hero-exterior.jpg"
           alt=""
           aria-hidden
           fill

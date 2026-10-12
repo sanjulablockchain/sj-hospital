@@ -2,7 +2,7 @@
 
 # SJ Hospital
 
-Hospital management web app. Next.js 16 App Router + React 19 + TypeScript (strict) + Tailwind CSS v4.
+Public website for St. Joseph Hospital, Negombo (sjhospital.lk), in English, Sinhala and Tamil. Next.js 16 App Router + React 19 + TypeScript (strict) + Tailwind CSS v4.
 
 > Next.js 16 differs from older versions in ways that matter (see "Next.js 16 gotchas" below). The bundled docs in `node_modules/next/dist/docs/` are the source of truth: read the relevant one before writing framework code. Do not code Next.js from memory.
 
@@ -13,6 +13,9 @@ npm run dev     # dev server → http://localhost:3000
 npm run build   # production build
 npm start       # serve the production build
 npm run lint    # ESLint (flat config: eslint.config.mjs)
+npm test        # node --test over src/**/*.test.ts
+npm run check   # check:dashes + check:images + check:audit (see Rules)
+npm run i18n:status   # translation overlays still awaiting a native speaker
 
 # Docker
 docker compose -f docker-compose.dev.yml up --build   # containerized dev server with hot reload → http://localhost:3000
@@ -38,29 +41,41 @@ Package manager: **npm** (`package-lock.json`). `npm test` runs `node --test` ov
 
 ```
 src/
-├── app/                     # Routing only: layouts, pages, route handlers
-│   ├── (marketing)/         # Public site, route group, own layout (no URL segment)
-│   ├── (dashboard)/         # Authenticated app, route group, own layout
-│   ├── api/                 # route.ts handlers (only when a real HTTP endpoint is needed)
-│   ├── layout.tsx           # Root layout
-│   ├── globals.css          # Tailwind entry + theme
-│   └── page.tsx
-├── features/<domain>/       # Self-contained domains: patients, appointments, doctors, billing, staff…
-│   ├── components/          # Feature-scoped UI
-│   ├── server/              # Data access / queries; start files with `import 'server-only'`
-│   ├── actions/             # Server Actions (`'use server'`)
-│   ├── hooks/               # Client hooks
-│   ├── schemas.ts           # Validation for this domain's inputs
+├── app/                          # Routing only
+│   ├── [locale]/                 # Every page, once per locale (en, si, ta); English keeps unprefixed URLs via proxy.ts
+│   │   ├── layout.tsx            # Root layout: fonts, ThemeScript, html lang
+│   │   ├── page.tsx              # Home
+│   │   ├── <page>/               # about-us, services, e-channeling, careers… (kebab-case, one per feature)
+│   │   │   ├── layout.tsx / page.tsx
+│   │   │   ├── [slug]/           # Detail pages where a feature has them (services)
+│   │   │   └── _components/      # Route-only UI that is never reused (privacy-policy)
+│   ├── global-not-found.tsx      # Branded 404 for URLs no locale matches
+│   ├── sitemap.ts
+│   ├── icon.png
+│   └── globals.css               # Tailwind entry, theme tokens, base layer, keyframes
+├── features/<domain>/            # One per page area: home, services, e-channeling, career, contact…
+│   ├── components/               # Feature-scoped UI
+│   ├── data/                     # Copy and content: content.ts (English) + content.si.ts / content.ta.ts overlays, getContent.ts
+│   ├── actions/                  # Server Actions ('use server'), for features with a form
+│   ├── lib/                      # Feature-only server helpers (e.g. the mailer for that form)
+│   ├── hooks/                    # Feature-only client hooks
+│   ├── schemas.ts                # zod schemas for this feature's inputs, with .si / .ta messages
 │   ├── types.ts
-│   └── index.ts             # Public surface: other features import from here, not internals
-├── components/ui/           # Shared design-system primitives (Button, Input, Dialog…)
-├── components/              # Shared cross-feature composite components
-├── lib/                     # Shared clients & helpers (db, auth, http, utils, env)
-├── hooks/                   # Shared client hooks
-├── config/                  # Constants, navigation, feature flags
-├── types/                   # Global shared types
-└── proxy.ts                 # Request proxy (was middleware), sits beside app/
+│   └── index.ts                  # Public surface: other code imports from here, not internals
+├── components/
+│   ├── ui/                       # Shared primitives: Modal, Reveal*, ParallaxLayer, Icons, AccordionList…
+│   ├── layout/                   # Site chrome: ThemedShell, ThemedHeader, mega-nav, ThemedFooter, BookingModal
+│   ├── theme/                    # ThemeScript, useSiteTheme, theme toggles
+│   └── i18n/                     # LocaleLink, language toggles, ChromeText
+├── lib/                          # Shared helpers: i18n/ (locales, routing, overlays), mailer.ts, email.ts
+├── hooks/                        # Shared client hooks (useScrollParallax, useMeasuredHeight)
+├── config/                       # Navigation per page, page metadata (+ .si / .ta), brand, contact emails
+└── proxy.ts                      # Locale routing only (was middleware), sits beside app/
+scripts/                          # Node checks and one-off tooling (check:*, i18n:*)
+docs/                             # Plans, specs and records (image credits, removed consultants)
 ```
+
+Translations: every user-facing string has its English home in a feature's `data/` (or `config/`, or `components/layout/chromeCopy.ts`) and a `.si.ts` / `.ta.ts` overlay beside it. Overlays carry a `__review` marker; `npm run i18n:status` lists any still awaiting a native speaker.
 
 Rules:
 - **Import via the `@/*` alias** (→ `src/*`). No `../../..` chains.
@@ -81,7 +96,7 @@ Rules:
 Every page and component must work on mobile, tablet and desktop. Build mobile first, then add wider overrides with `min-*` variants. Check at 375px, 768px and 1280px. No horizontal scroll at any width. Tap targets at least 44px. Reuse the breakpoints already in the codebase: `sm:` (640px), `min-[900px]:` / `max-[899px]:` and `lg:` (1024px). Only invent a new arbitrary threshold when a component genuinely needs one.
 
 ### No dash punctuation in visible text
-Never use em dashes, en dashes, or a hyphen as punctuation (" - ") in any copy, headings, labels, alt text, metadata, button text or translated strings (English, Sinhala and Tamil alike). Rewrite the sentence with a comma, colon, semicolon, parentheses, a full stop or "and" instead. Hyphens are fine in code, class names, URLs, filenames and compound words. The ban covers every encoding: the literal characters (U+2014, U+2013), the `&mdash;` / `&ndash;` entities, and the numeric forms `&#8212;` / `&#x2014;` / `&#8211;` / `&#x2013;`. When checking, grep for all of them; a search for the bare character alone misses entity-encoded ones. Also avoid them in commit messages and docs we write.
+Never use em dashes, en dashes, or a hyphen as punctuation (" - ") in any copy, headings, labels, alt text, metadata, button text or translated strings (English, Sinhala and Tamil alike). Rewrite the sentence with a comma, colon, semicolon, parentheses, a full stop or "and" instead. Hyphens are fine in code, class names, URLs, filenames and compound words. The ban covers every encoding: the literal characters (U+2014, U+2013), the `&mdash;` / `&ndash;` entities, and the numeric forms `&#8212;` / `&#x2014;` / `&#8211;` / `&#x2013;`. `npm run check:dashes` enforces this for every string and JSX text under `src` (comments and code are ignored). Outside `src`, grep for all the forms above; a search for the bare character alone misses entity-encoded ones. Also avoid them in commit messages and docs we write.
 
 ### Always follow the theme
 Colours come from the `--home-*` custom properties in `src/app/globals.css`, defined on `[data-sj]` (dark) and overridden under `[data-sj][data-theme="light"]`, with the brand palette layered on by `[data-sj][data-palette="brand"]`. In components, reach them through Tailwind arbitrary values (`bg-[var(--home-surface)]`, `text-[var(--home-heading)]`), never raw hex or `rgb()`. To tint a token, use `color-mix(in srgb, var(--home-accent) 40%, transparent)`. Need a new value? Add the token to every block it belongs in (dark, light and brand) in `globals.css` first, then use it. Text on accent fills uses `--home-on-accent`.
@@ -102,8 +117,9 @@ Every image must be light and load fast on slow networks:
 - Always set `sizes` for responsive images and `width` / `height` (or `fill` with a sized parent) so there is no layout shift.
 - Only the first visible (above the fold) image gets `preload` (Next 16 replaces `priority`); everything else lazy loads.
 - Use `placeholder="blur"` for large photos (a static import gives the blur data for free).
-- Before committing, resize to at most 2x the largest display size and compress. Photos as `.webp` or `.jpg`, graphics and logos as optimized `.svg` (or `.png` when only a raster master exists). Limits: raster 300 KB, SVG 50 KB. Some existing files in `public/images` exceed this; shrink them when you touch them and never add new ones that do.
+- Before committing, resize to at most 2x the largest display size and compress. Photos as `.webp` or `.jpg`, graphics and logos as optimized `.svg` (or `.png` when only a raster master exists). Limits: raster 300 KB, SVG 50 KB.
 - When replacing an image, give it a new filename so cached copies don't linger.
+- `npm run check:images` enforces the size limits, bans raw `<img>`, and rejects external image URLs.
 - Real hospital photography comes from the hospital's own media library, not stock.
 
 ### No external image links
@@ -118,10 +134,10 @@ Think about security in every change:
 - Forms: validate and sanitize on the server (Server Actions with the feature's zod schema), limit input length and upload size, add spam protection, and never trust client side validation alone. Escape user input before it goes into an email body.
 - External links use `target="_blank" rel="noopener noreferrer"`.
 - Treat any patient or health information (appointment details, symptoms, CVs, contact form messages) as sensitive: never log it, never put it in URLs or query strings.
-- Add dependencies only when needed, prefer well maintained packages, and keep `npm audit` clean.
+- Add dependencies only when needed, prefer well maintained packages, and keep `npm run check:audit` (production dependencies) clean.
 
 ### Commit everything
-Small, focused commits using Conventional Commits with the feature as scope where it fits (`feat(e-channeling):`, `fix:`, `chore:`, `style:`, `refactor:`, `docs:`, `test:`). Never leave work uncommitted at the end of a task; the working tree must be clean when done. Run `npm run lint`, `npm test` and `npm run build` before calling a feature finished.
+Small, focused commits using Conventional Commits with the feature as scope where it fits (`feat(e-channeling):`, `fix:`, `chore:`, `style:`, `refactor:`, `docs:`, `test:`). Never leave work uncommitted at the end of a task; the working tree must be clean when done. Run `npm run lint`, `npm test`, `npm run check` and `npm run build` before calling a feature finished.
 
 ### New feature means a new git worktree
 Never build features directly on `main`. Worktrees live under `.claude/worktrees/` (gitignored), one branch each named `worktree-<feature>`:

@@ -201,7 +201,7 @@ export const doctors: Doctor[] = [
 
   // Nutritionist
   { name: "Mrs. Fathima Nazriya", specialization: "Nutritionist", sessions: { mon: ["4.00 PM"], tue: ["4.00 PM"], wed: ["4.00 PM"], thu: ["4.00 PM"], fri: ["4.00 PM"] } },
-  { name: "H. D. Rasika Chandimala", specialization: "Nutritionist", sessions: { mon: ["9.00 AM – 5.00 PM"], tue: ["9.00 AM – 5.00 PM"], wed: ["9.00 AM – 5.00 PM"], thu: ["9.00 AM – 5.00 PM"], fri: ["9.00 AM – 5.00 PM"] } },
+  { name: "H. D. Rasika Chandimala", specialization: "Nutritionist", sessions: { mon: ["9.00 AM to 5.00 PM"], tue: ["9.00 AM to 5.00 PM"], wed: ["9.00 AM to 5.00 PM"], thu: ["9.00 AM to 5.00 PM"], fri: ["9.00 AM to 5.00 PM"] } },
   { name: "Mrs. Thiloka Sammani", specialization: "Nutritionist", calendlySlug: "physiotherapists-mrs-yamuna-perera-clone-clone", sessions: { mon: ["4.30 PM"], tue: ["4.30 PM"], wed: ["4.30 PM"], thu: ["4.30 PM"], fri: ["4.30 PM"], sat: ["3.30 PM"], sun: ["6.30 PM"] } },
 
   // Psychological Counselling
