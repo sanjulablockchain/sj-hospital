@@ -92,7 +92,7 @@ test("news titles are unique, since the grid keys on them", () => {
 // These three files ship in public/images and carry other pages on the site;
 // the reference's own fallbacks pointed at paths that do not exist here.
 test("every gallery image is a repo asset with alt text and a credit", () => {
-  const known = ["/images/hero-exterior.png", "/images/career-staff.jpg", "/images/logo-mark.png"];
+  const known = ["/images/hero-exterior.jpg", "/images/career-staff.jpg", "/images/logo-mark.png"];
   assert.deepEqual(
     gallery.map((shot) => shot.src),
     known,

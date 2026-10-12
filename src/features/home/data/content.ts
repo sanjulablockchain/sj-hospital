@@ -100,7 +100,7 @@ export const quickAccess = {
     body: "229/10 St. Joseph Street, Negombo. Ten minutes from the airport.",
     cta: "Get directions",
     href: DIRECTIONS_URL,
-    photo: "/images/hero-exterior.png",
+    photo: "/images/hero-exterior.jpg",
     photoAlt: "The St. Joseph Hospital building",
   },
 };

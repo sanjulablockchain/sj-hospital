@@ -23,7 +23,7 @@ export function SeasonalSection({ dengue }: { dengue: HealthTipsContent["dengue"
   return (
     <section id="seasonal" className="relative mt-24 overflow-hidden bg-[#1A1540]">
       <Image
-        src="/images/services/exterior-dusk-a.png"
+        src="/images/services/exterior-dusk-a.jpg"
         alt=""
         aria-hidden
         fill

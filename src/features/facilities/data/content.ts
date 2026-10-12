@@ -215,7 +215,7 @@ export const showcaseCards: ShowcaseCard[] = [
     body: "A covered entrance with the resuscitation bay directly behind it, staffed at every hour of the day.",
     linkLabel: "Accident & Emergency",
     href: "/services/accident-emergency",
-    photo: "/images/hero-exterior.png",
+    photo: "/images/hero-exterior.jpg",
     photoAlt: "St. Joseph Hospital exterior and ambulance entrance",
   },
   {

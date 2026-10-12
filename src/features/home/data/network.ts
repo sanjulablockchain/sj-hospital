@@ -24,7 +24,7 @@ export const networkNodes: NetworkNode[] = [
     location: "Negombo, LK",
     name: "St. Joseph Hospital",
     body: "Flagship hospital: emergency, OPD, surgery, inpatient, laboratory, imaging and pharmacy.",
-    photo: "/images/hero-exterior.png",
+    photo: "/images/hero-exterior.jpg",
     photoAlt: "St. Joseph Hospital in Negombo",
     linkLabel: "Tour the hospital",
     href: "/facilities",

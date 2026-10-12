@@ -26,7 +26,7 @@ export function PressDeskSection({ content }: { content: MediaContent }) {
         className="pointer-events-none absolute inset-x-0 -top-[10%] h-[120%]"
       >
         <Image
-          src="/images/hero-exterior.png"
+          src="/images/hero-exterior.jpg"
           alt=""
           aria-hidden
           fill

@@ -8,7 +8,7 @@ import type { SchoolWellnessContent } from "../data/getContent";
  * behind a left-to-right scrim.
  *
  * The photograph is the one the reference itself used here, which already
- * ships as `/images/network/exterior-dusk.png` for the network hero, so this
+ * ships as `/images/network/exterior-dusk.jpg` for the network hero, so this
  * reuses it rather than adding a second copy.
  *
  * Fixed-dark in both themes, like the hero: the panel is a photograph with a
@@ -34,7 +34,7 @@ export function GradeBandsSection({ content }: { content: SchoolWellnessContent 
         className="absolute inset-x-0 -top-[10%] h-[120%] opacity-24"
       >
         <Image
-          src="/images/network/exterior-dusk.png"
+          src="/images/network/exterior-dusk.jpg"
           alt=""
           aria-hidden
           fill
