@@ -9,7 +9,11 @@
     "lint": "eslint",
     "test": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test \"src/**/*.test.ts\"",
     "i18n:status": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/i18n-status.mjs",
-    "i18n:register-audit": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/i18n-register-audit.mjs"
+    "i18n:register-audit": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/i18n-register-audit.mjs",
+    "check:dashes": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/check-dashes.mjs",
+    "check:images": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/check-images.mjs",
+    "check:audit": "npm audit --omit=dev",
+    "check": "npm run check:dashes && npm run check:images && npm run check:audit"
   },
   "dependencies": {
     "leaflet": "^1.9.4",

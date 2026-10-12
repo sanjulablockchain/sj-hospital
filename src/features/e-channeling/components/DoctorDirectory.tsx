@@ -260,7 +260,9 @@ export function DoctorDirectory({ doctors, copy }: DoctorDirectoryProps) {
                               .map(({ from, to }) =>
                                 from === to
                                   ? copy.weekdays[from]
-                                  : `${copy.weekdays[from]}–${copy.weekdays[to]}`
+                                  : copy.dayRangeTemplate
+                                      .replace("{from}", copy.weekdays[from])
+                                      .replace("{to}", copy.weekdays[to])
                               )
                               .join(", ")}
                           </span>

@@ -88,6 +88,7 @@ export const directory = {
     sat: "සෙන",
     sun: "ඉරි",
   },
+  dayRangeTemplate: "{from} සිට {to} දක්වා",
 };
 
 export const helpRail = {

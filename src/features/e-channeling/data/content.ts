@@ -114,7 +114,7 @@ export const directory = {
   callToBook: "Call to book",
   // Short day names for each card's weekly sessions, keyed like
   // doctors.ts's WEEKDAYS. A run of days with the same times prints as one
-  // range ("Mon–Fri"), so these should read cleanly either side of a dash.
+  // range through dayRangeTemplate ("Mon to Fri").
   weekdays: {
     mon: "Mon",
     tue: "Tue",
@@ -124,6 +124,7 @@ export const directory = {
     sat: "Sat",
     sun: "Sun",
   },
+  dayRangeTemplate: "{from} to {to}",
 };
 
 // Lifted verbatim from the gradient rail that used to sit at the bottom of

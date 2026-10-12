@@ -26,7 +26,7 @@ export async function sendJobApplicationEmail(input: JobApplicationInput, cv: Cv
     from: SMTP_FROM,
     to: CAREER_TO_EMAILS.split(",").map((address) => address.trim()),
     replyTo: input.email,
-    subject: `Job application: ${input.roleTitle} - ${input.fullName}`,
+    subject: `Job application: ${input.roleTitle}, ${input.fullName}`,
     text: [
       ...applicationRows(input).map((row) => `${row.label}: ${row.value}`),
       "",
