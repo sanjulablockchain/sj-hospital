@@ -74,4 +74,72 @@ Rules:
 - Component files: `PascalCase.tsx`. Hooks: `useXxx.ts`. Route folders: `kebab-case`.
 - Validate every external input (forms, route params, API bodies) against a schema at the boundary before use.
 - Default every component to a Server Component; extract interactive pieces into small `'use client'` leaves.
-- Never use the em dash in UI copy or documentation, in any encoding: the literal character (U+2014), the `&mdash;` entity, or the numeric forms `&#8212;` / `&#x2014;`. Restructure the sentence, or use a comma, colon, semicolon, parentheses, or a full stop instead. When checking, grep for all four forms; a search for the bare character alone misses entity-encoded ones.
+
+## Rules (non negotiable)
+
+### Responsive
+Every page and component must work on mobile, tablet and desktop. Build mobile first, then add wider overrides with `min-*` variants. Check at 375px, 768px and 1280px. No horizontal scroll at any width. Tap targets at least 44px. Reuse the breakpoints already in the codebase: `sm:` (640px), `min-[900px]:` / `max-[899px]:` and `lg:` (1024px). Only invent a new arbitrary threshold when a component genuinely needs one.
+
+### No dash punctuation in visible text
+Never use em dashes, en dashes, or a hyphen as punctuation (" - ") in any copy, headings, labels, alt text, metadata, button text or translated strings (English, Sinhala and Tamil alike). Rewrite the sentence with a comma, colon, semicolon, parentheses, a full stop or "and" instead. Hyphens are fine in code, class names, URLs, filenames and compound words. The ban covers every encoding: the literal characters (U+2014, U+2013), the `&mdash;` / `&ndash;` entities, and the numeric forms `&#8212;` / `&#x2014;` / `&#8211;` / `&#x2013;`. When checking, grep for all of them; a search for the bare character alone misses entity-encoded ones. Also avoid them in commit messages and docs we write.
+
+### Always follow the theme
+Colours come from the `--home-*` custom properties in `src/app/globals.css`, defined on `[data-sj]` (dark) and overridden under `[data-sj][data-theme="light"]`, with the brand palette layered on by `[data-sj][data-palette="brand"]`. In components, reach them through Tailwind arbitrary values (`bg-[var(--home-surface)]`, `text-[var(--home-heading)]`), never raw hex or `rgb()`. To tint a token, use `color-mix(in srgb, var(--home-accent) 40%, transparent)`. Need a new value? Add the token to every block it belongs in (dark, light and brand) in `globals.css` first, then use it. Text on accent fills uses `--home-on-accent`.
+The one deliberate exception is the fixed-dark, photo-backed bands (each page's hero and its dark content bands), which stay dark in both themes and use the brand literals recorded in their files. Do not add new literals outside that pattern.
+
+### Light mode and dark mode
+Everything must look right in both. The theme is `data-theme` on `#sj-root` (not on `<html>`), driven by `src/components/theme/useSiteTheme.tsx`, persisted to `localStorage` under `sj-home-theme`, and set before paint by `src/components/theme/ThemeScript.tsx`. Light is the default when nothing is saved. Every colour token has a dark and a light value; when adding one, define both. Check every change in both themes (toggle with the header control) with readable contrast (WCAG AA).
+
+### Styling is Tailwind v4
+Style with Tailwind utility classes in the component itself. No CSS Modules, styled-components, inline `style` for colours, or new CSS files. `src/app/globals.css` holds only the theme tokens, the base layer, shared keyframes (`animate-sj-*`) and the few site-wide rules that cannot be utilities.
+
+### Scroll motion reuses what exists
+Use `Reveal`, `RevealOnScroll`, `RevealStagger` and `ParallaxLayer` from `@/components/ui`, and `useScrollParallax` from `@/hooks`, not new scroll listeners, observers or animation libraries. Keep the `prefers-reduced-motion` bail-out they all have. Scroll the full page to confirm timing before calling work done.
+
+### Images optimized for fast loading
+Every image must be light and load fast on slow networks:
+- Always render with `next/image` (never a raw `<img>`). It serves AVIF / WebP at the right size in production (dev has optimization turned off on purpose, see `next.config.ts`).
+- Always set `sizes` for responsive images and `width` / `height` (or `fill` with a sized parent) so there is no layout shift.
+- Only the first visible (above the fold) image gets `preload` (Next 16 replaces `priority`); everything else lazy loads.
+- Use `placeholder="blur"` for large photos (a static import gives the blur data for free).
+- Before committing, resize to at most 2x the largest display size and compress. Photos as `.webp` or `.jpg`, graphics and logos as optimized `.svg` (or `.png` when only a raster master exists). Limits: raster 300 KB, SVG 50 KB. Some existing files in `public/images` exceed this; shrink them when you touch them and never add new ones that do.
+- When replacing an image, give it a new filename so cached copies don't linger.
+- Real hospital photography comes from the hospital's own media library, not stock.
+
+### No external image links
+Every image (photos, logos, icons, backgrounds, Open Graph images) is downloaded into `public/images` and served from our own domain. Never use a CDN, hotlink or third party URL for an image. The one approved exception is the OpenStreetMap tile server used by the Leaflet map in `features/contact`.
+
+### Tight security, always
+Think about security in every change:
+- There are no security headers or CSP yet. When they are added in `next.config.ts`, never loosen them (new external domains, `unsafe-eval` in production, removing headers) without asking the user first.
+- No third party scripts, trackers, embeds or iframes without explicit user approval. Plain outbound links (Calendly, maps, socials) are fine. Load fonts only through `next/font` (self hosted).
+- Never commit secrets. Keep them in `.env.local` (gitignored); `.env.local.example` lists the names only. Only `NEXT_PUBLIC_*` values reach the browser, so never put secrets in them, and put `import 'server-only'` on every module that reads them (for example `lib/mailer.ts`).
+- Never use `dangerouslySetInnerHTML`, `eval` or unsanitized user input in the DOM. The one allowed use is the fixed theme bootstrap string in `ThemeScript.tsx`.
+- Forms: validate and sanitize on the server (Server Actions with the feature's zod schema), limit input length and upload size, add spam protection, and never trust client side validation alone. Escape user input before it goes into an email body.
+- External links use `target="_blank" rel="noopener noreferrer"`.
+- Treat any patient or health information (appointment details, symptoms, CVs, contact form messages) as sensitive: never log it, never put it in URLs or query strings.
+- Add dependencies only when needed, prefer well maintained packages, and keep `npm audit` clean.
+
+### Commit everything
+Small, focused commits using Conventional Commits with the feature as scope where it fits (`feat(e-channeling):`, `fix:`, `chore:`, `style:`, `refactor:`, `docs:`, `test:`). Never leave work uncommitted at the end of a task; the working tree must be clean when done. Run `npm run lint`, `npm test` and `npm run build` before calling a feature finished.
+
+### New feature means a new git worktree
+Never build features directly on `main`. Worktrees live under `.claude/worktrees/` (gitignored), one branch each named `worktree-<feature>`:
+
+```bash
+git worktree add .claude/worktrees/<feature> -b worktree-<feature>
+cd .claude/worktrees/<feature> && npm ci   # a worktree has no node_modules of its own
+# work, commit
+```
+
+When the work is done, report and **wait for the user to confirm** before merging. Then, from the main checkout:
+
+```bash
+git merge --no-ff worktree-<feature>
+git worktree remove .claude/worktrees/<feature> && git branch -d worktree-<feature>
+```
+
+Restart the dev server inside a worktree before each visual check; it does not pick up file changes on its own. Small chores (docs, config) and one line fixes may go straight to `main`.
+
+### Follow the folder architecture
+Put new files where the Folder architecture section says they belong. Do not invent new top level folders under `src/` without updating this file.
