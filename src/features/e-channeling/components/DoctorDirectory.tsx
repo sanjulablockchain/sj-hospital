@@ -34,6 +34,7 @@ type DirectoryCopy = {
   bookAppointment: string;
   callToBook: string;
   weekdays: Record<Weekday, string>;
+  dayRangeTemplate: string;
   phone: string;
   phoneHref: string;
 };
