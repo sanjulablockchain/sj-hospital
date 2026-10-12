@@ -1,5 +1,6 @@
 import { WellnessHero } from "./WellnessHero";
 import { JumpCards } from "./JumpCards";
+import { ProgrammeSchoolsSection } from "./ProgrammeSchoolsSection";
 import { WhySchoolSection } from "./WhySchoolSection";
 import { ScreeningSection } from "./ScreeningSection";
 import { GradeBandsSection } from "./GradeBandsSection";
@@ -15,8 +16,9 @@ import type { Locale } from "@/lib/i18n/locales";
 import { getSchoolWellnessContent } from "../data/getContent";
 
 /**
- * The school wellness page in the reference's order: hero, jump cards, then the
- * eight numbered sections and the footer.
+ * The school wellness page in the reference's order: hero, jump cards, the
+ * unnumbered list of schools in the programme, then the eight numbered
+ * sections and the footer.
  *
  * `FaqAccordion` is the shared section, so `#faq` is not built here. It renders
  * the same one-open-at-a-time rows the reference does, with the `+` rotating on
@@ -41,6 +43,7 @@ export async function SchoolWellnessPage({ locale }: { locale: Locale }) {
       <main>
         <WellnessHero content={content} />
         <JumpCards content={content} />
+        <ProgrammeSchoolsSection content={content} locale={locale} />
         <WhySchoolSection content={content} />
         <ScreeningSection content={content} />
         <GradeBandsSection content={content} />
