@@ -51,9 +51,23 @@ test("no internal tracker note reaches the page", () => {
 test("a joining school claims no finished milestone", () => {
   for (const school of base.schools.filter((s) => s.status === "joining")) {
     assert.deepEqual(school.done, [], school.name);
-    assert.equal(school.next, undefined, school.name);
   }
 });
+
+test("every card says something: an open school lists its center, a joining one its next step", () => {
+  for (const school of base.schools) {
+    if (school.status === "open") assert.equal(school.done[0], "Wellness Center set up", school.name);
+    else assert.ok(school.next, school.name);
+  }
+});
+
+for (const [name, overlay] of overlays) {
+  test(`the ${name} overlay translates next wherever the base has one`, () => {
+    overlay.schools.forEach((school, i) => {
+      assert.equal("next" in school, base.schools[i].next !== undefined, `schools[${i}].next`);
+    });
+  });
+}
 
 for (const [name, overlay] of overlays) {
   test(`every translatable schools string has ${name}`, () => {

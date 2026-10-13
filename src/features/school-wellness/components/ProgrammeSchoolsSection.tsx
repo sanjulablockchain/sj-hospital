@@ -102,7 +102,7 @@ export function ProgrammeSchoolsSection({
               <h3 className="font-display wrap-break-word text-[21px] leading-[1.15] font-bold tracking-[-0.02em] text-[var(--home-heading)]">
                 {school.name}
               </h3>
-              {school.done.length > 0 && (
+              {(school.done.length > 0 || school.next) && (
                 <ul className="flex flex-col gap-1.5">
                   {school.done.map((line) => (
                     <li
@@ -115,15 +115,15 @@ export function ProgrammeSchoolsSection({
                       <span className="min-w-0 wrap-break-word">{line}</span>
                     </li>
                   ))}
+                  {school.next && (
+                    <li className="flex gap-2.5 text-[14.5px] leading-[1.5] text-[var(--home-muted)]">
+                      <span aria-hidden className="text-[var(--home-accent)]">
+                        &#8594;
+                      </span>
+                      <span className="min-w-0 wrap-break-word">{school.next}</span>
+                    </li>
+                  )}
                 </ul>
-              )}
-              {school.next && (
-                <p className="flex gap-2.5 text-[14.5px] leading-[1.5] text-[var(--home-muted)]">
-                  <span aria-hidden className="text-[var(--home-accent)]">
-                    &#8594;
-                  </span>
-                  <span className="min-w-0 wrap-break-word">{school.next}</span>
-                </p>
               )}
             </article>
           );
