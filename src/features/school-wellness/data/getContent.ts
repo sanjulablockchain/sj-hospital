@@ -1,6 +1,7 @@
 import { localize } from "@/lib/i18n/localize";
 import { DEFAULT_LOCALE, type Locale } from "@/lib/i18n/locales";
 import * as base from "./content";
+import * as schoolsBase from "./schools";
 
 /**
  * The school wellness page's copy in one locale.
@@ -13,15 +14,19 @@ import * as base from "./content";
  * The overlay loads by dynamic import, so a reader downloads only their own
  * language. This runs in Server Components, so no translation data reaches
  * the client bundle at all.
+ *
+ * The verified programme list lives apart from the placeholder copy, in
+ * `schools.ts` with its own overlays, and is merged in under `programme`.
  */
 const overlays = {
-  si: () => import("./content.si"),
-  ta: () => import("./content.ta"),
+  si: () => Promise.all([import("./content.si"), import("./schools.si")]),
+  ta: () => Promise.all([import("./content.ta"), import("./schools.ta")]),
 };
 
-export type SchoolWellnessContent = typeof base;
+export type SchoolWellnessContent = typeof base & { programme: typeof schoolsBase };
 
 export async function getSchoolWellnessContent(locale: Locale): Promise<SchoolWellnessContent> {
-  if (locale === DEFAULT_LOCALE) return { ...base };
-  return localize(base, await overlays[locale]());
+  if (locale === DEFAULT_LOCALE) return { ...base, programme: { ...schoolsBase } };
+  const [content, schools] = await overlays[locale]();
+  return { ...localize(base, content), programme: localize(schoolsBase, schools) };
 }

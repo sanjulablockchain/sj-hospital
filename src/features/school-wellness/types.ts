@@ -41,3 +41,17 @@ export type ContactRow = {
   glyph: "phone" | "arrow";
   internal?: boolean;
 };
+
+/**
+ * One school in the Wellness Center Program. `open` means the hospital has set
+ * up the school's Wellness Center; `joining` means the school is on the way in
+ * but not yet a signed partner. `done` lists the public milestones reached
+ * there, and may be empty. `next`, when set, is the one milestone announced
+ * as coming, shown apart from the finished ones.
+ */
+export type ProgrammeSchool = {
+  name: string;
+  status: "open" | "joining";
+  done: string[];
+  next?: string;
+};
