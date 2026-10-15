@@ -55,6 +55,19 @@ export const freeOpd = {
   ],
 };
 
+// `#community`: the body and the three stat captions. The eyebrow, heading
+// and both CTAs are register-policy English and absent here, and the figures
+// are counted by the component. "நல்வாழ்வு மையம்" follows school-wellness's
+// own schools.ta.ts.
+export const community = {
+  body: "ஒரு மருத்துவமனை அதைச் சுற்றியுள்ள நகரத்துக்குச் சொந்தமானது. எங்கள் மருத்துவர்களும் Nurses உம் உள்ளூர் பள்ளிகளுக்குள் நல்வாழ்வு மையங்களை அமைத்து, பள்ளி ஆண்டு முழுவதும் அங்கு பரிசோதனைகளையும் சுகாதாரத் திட்டங்களையும் நடத்துகிறார்கள். எங்கள் OPD Consultation இலவசம், அதனால் பணம் ஒருபோதும் யாருக்கும் மருத்துவரைப் பார்ப்பதற்குத் தடையாக இருக்காது. எங்கள் Health Tips ஆங்கிலம், சிங்களம் மற்றும் தமிழில் இலவசமாக வாசிக்கலாம்.",
+  stats: [
+    { label: "எங்கள் நல்வாழ்வு மைய திட்டத்தில் உள்ள பள்ளிகள்" },
+    { label: "ஏற்கனவே திறக்கப்பட்ட நல்வாழ்வு மையங்கள்" },
+    { label: "ஒரு OPD Consultation க்கு" },
+  ],
+};
+
 export const specialties = {
   body: "நேரடியாக வரும் Consultation இலிருந்து Surgery, Diagnostics மற்றும் வீட்டில் பராமரிப்பு வரை, ஒவ்வொரு சேவையும் ஒரே அமெரிக்க Protocol இன் படி நடக்கிறது.",
   countTemplate: "{total} இல் {n}",

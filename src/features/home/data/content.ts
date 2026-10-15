@@ -204,6 +204,54 @@ export const freeOpd = {
     "A St. Joseph Hospital doctor in a branded white coat, arms folded, a stethoscope around his neck.",
 };
 
+/**
+ * `#community`: the band under the free OPD one, on the work the hospital does
+ * for the town rather than for its patients. Every claim has a home elsewhere:
+ * the Wellness Centers in `school-wellness/data/schools.ts` (the hospital's own
+ * tracker, verified, and the source of both `{total}` and `{open}`, which the
+ * component counts so the figures can never drift), the free consultation in
+ * `freeOpd` above, and the trilingual health tips in `features/health-tips`.
+ *
+ * It deliberately does NOT say the school programme is free. That is in
+ * `school-wellness/data/content.ts`'s list of unverified placeholder claims,
+ * and this band must not promote it to fact. The "LKR 0" figure is the OPD
+ * consultation, which is.
+ *
+ * The three tiles are the hospital's own photographs, already on the site:
+ * the school assembly from the programme's hero, three clinicians from the
+ * careers page, and the reception desk.
+ */
+export const community = {
+  eyebrow: "In our community",
+  heading: "Good care should reach everyone",
+  body: "A hospital belongs to the town around it. Our doctors and nurses set up Wellness Centers inside local schools and run screening and health programmes there through the school year. Our OPD consultation is free, so cost never stands between anyone and a doctor, and our health tips are free to read in English, Sinhala and Tamil.",
+  stats: [
+    { value: "{total}", label: "Schools in our Wellness Center Program" },
+    { value: "{open}", label: "Wellness Centers already open" },
+    { value: "LKR 0", label: "For an OPD consultation" },
+  ],
+  ctaPrimary: "Our school programme",
+  hrefPrimary: "/school-wellness",
+  ctaSecondary: "Free health tips",
+  hrefSecondary: "/health-tips",
+  // Keyed rather than an array so the overlays, which carry no tile strings
+  // (alt text stays English on this page), need no placeholder entries.
+  tiles: {
+    school: {
+      photo: "/images/school-wellness/assembly.jpg",
+      photoAlt: "A school assembly of students in uniform seen from behind, seated in rows.",
+    },
+    team: {
+      photo: "/images/career-staff.jpg",
+      photoAlt: "A nurse, a doctor in a white coat and a doctor in scrubs, arms folded, in St. Joseph Hospital uniforms.",
+    },
+    welcome: {
+      photo: "/images/welcome.jpg",
+      photoAlt: "The St. Joseph Hospital reception desk, its counter reading We treat the human spirit.",
+    },
+  },
+};
+
 export type SpecialtyLink = { title: string; href: string };
 export type SpecialtyTab = {
   /** Compared against `SERVICE_GROUPS`; the tabs run in that order. */

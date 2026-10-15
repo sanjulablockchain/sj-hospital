@@ -28,6 +28,7 @@ export const HOME_ICON_KEYS = [
   "right",
   "arrow",
   "chat",
+  "heart",
 ] as const;
 
 export type HomeIconKey = (typeof HOME_ICON_KEYS)[number];
