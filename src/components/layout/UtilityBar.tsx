@@ -4,7 +4,8 @@ import { LocaleLink } from "@/components/i18n/LocaleLink";
  * The emergency strip above the header on the v4 home page: fixed ink
  * (`#1A1540`) in both themes, white text, the reference's 9px vertical
  * padding. Left, the pulsing red dot, "Emergency 24/7" and the switchboard as a
- * bold tel link, then the address; right, WhatsApp, Careers and Media. The
+ * bold tel link, then the address; right, WhatsApp, Free OPD (the outpatient
+ * department page, where the free consultation lives) and School Wellness. The
  * right group hides under 640px so the strip stays one or two lines on a phone.
  *
  * Every string here is chrome and stays English in every locale, the same
@@ -29,11 +30,11 @@ export function UtilityBar() {
           <a href="https://wa.me/94742223334" className="text-white/85 transition-colors hover:text-white">
             WhatsApp 074 222 333 4
           </a>
-          <LocaleLink href="/careers" className="text-white/85 transition-colors hover:text-white">
-            Careers
+          <LocaleLink href="/services/outpatient-department" className="text-white/85 transition-colors hover:text-white">
+            Free OPD
           </LocaleLink>
-          <LocaleLink href="/media" className="text-white/85 transition-colors hover:text-white">
-            Media
+          <LocaleLink href="/school-wellness" className="text-white/85 transition-colors hover:text-white">
+            School Wellness
           </LocaleLink>
         </div>
       </div>
