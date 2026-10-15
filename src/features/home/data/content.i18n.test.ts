@@ -91,6 +91,7 @@ function isUntranslatable(moduleName: string, path: string): boolean {
   if (moduleName === "content") {
     if (/^whoWeAre\.stats\[\d+\]\.value$/.test(path)) return true;
     if (/^pharmacy\.stats\[\d+\]\.value$/.test(path)) return true;
+    if (/^community\.stats\[\d+\]\.value$/.test(path)) return true;
   }
   return false;
 }

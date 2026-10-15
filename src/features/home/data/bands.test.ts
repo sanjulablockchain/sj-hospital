@@ -91,9 +91,31 @@ test("every template only uses tokens the components substitute", () => {
     content.specialties.viewAll.ctaTemplate,
     content.specialties.countTemplate,
     content.quickAccess.facilities.bodyTemplate,
+    content.community.stats.map((s) => s.value).join(" "),
   ].join(" ");
   const tokens = [...templates.matchAll(/\{([a-z]+)\}/g)].map((m) => m[1]);
   for (const token of tokens) {
-    assert.ok(["count", "n", "total"].includes(token), `unknown template token {${token}}`);
+    assert.ok(["count", "n", "total", "open"].includes(token), `unknown template token {${token}}`);
+  }
+});
+
+/**
+ * The community band's school figures are counted from the programme tracker
+ * by the component, never typed, and it links to the two pages that back it.
+ * It must not say the school programme is free: that claim sits in
+ * school-wellness's own list of unverified placeholder copy. Its one price is
+ * the OPD consultation's LKR 0.
+ */
+test("the community band counts its schools live and claims nothing the repo cannot back", () => {
+  assert.deepEqual(
+    content.community.stats.map((s) => s.value),
+    ["{total}", "{open}", "LKR 0"],
+  );
+  assert.match(content.community.stats[2].label, /OPD consultation/);
+  assert.equal(content.community.hrefPrimary, "/school-wellness");
+  assert.equal(content.community.hrefSecondary, "/health-tips");
+  const sentences = content.community.body.split(/(?<=\.)\s+/);
+  for (const sentence of sentences.filter((s) => /school/i.test(s))) {
+    assert.ok(!/\bfree\b|no cost|charge/i.test(sentence), `a free school claim: ${sentence}`);
   }
 });

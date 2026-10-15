@@ -70,6 +70,19 @@ export const freeOpd = {
   ],
 };
 
+// `#community`: the body and the three stat captions. The eyebrow, heading
+// and both CTAs are register-policy English and absent here, and the figures
+// are counted by the component. "සුවතා මධ්‍යස්ථාන" follows school-wellness's
+// own schools.si.ts.
+export const community = {
+  body: "රෝහලක් අයිති එය වටා ඇති නගරයටයි. අපේ වෛද්‍යවරු සහ Nurses ප්‍රදේශයේ පාසල් තුළ සුවතා මධ්‍යස්ථාන පිහිටුවා, පාසල් වර්ෂය පුරා එහි පරීක්ෂණ සහ සෞඛ්‍ය වැඩසටහන් පවත්වනවා. අපේ OPD Consultation එක නොමිලේ, ඒ නිසා වෛද්‍යවරයෙක් හමුවෙන්න කාටවත් මුදල් බාධාවක් වෙන්නේ නෑ. අපේ Health Tips ඉංග්‍රීසි, සිංහල සහ දෙමළ භාෂාවලින් නොමිලේ කියවන්න පුළුවන්.",
+  stats: [
+    { label: "අපේ සුවතා මධ්‍යස්ථාන වැඩසටහනේ පාසල්" },
+    { label: "දැනටමත් විවෘත සුවතා මධ්‍යස්ථාන" },
+    { label: "OPD Consultation එකක් සඳහා" },
+  ],
+};
+
 export const specialties = {
   body: "කෙලින්ම එන Consultation එකේ ඉඳන් Surgery, Diagnostics සහ ගෙදරදී සත්කාරය දක්වා, හැම සේවාවක්ම දුවන්නේ එකම ඇමෙරිකානු Protocol එකටයි.",
   countTemplate: "{total}න් {n}",

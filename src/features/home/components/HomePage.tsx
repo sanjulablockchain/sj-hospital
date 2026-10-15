@@ -7,6 +7,7 @@ import { HeroSection } from "./HeroSection";
 import { QuickAccessSection } from "./QuickAccessSection";
 import { WhoWeAreSection } from "./WhoWeAreSection";
 import { FreeOpdSection } from "./FreeOpdSection";
+import { CommunitySection } from "./CommunitySection";
 import { SpecialtiesSection } from "./SpecialtiesSection";
 import { PatientCareSection } from "./PatientCareSection";
 import { PharmacySection } from "./PharmacySection";
@@ -45,6 +46,7 @@ export async function HomePage({ locale }: { locale: Locale }) {
         <QuickAccessSection content={content.quickAccess} servicesCount={services.length} locale={locale} />
         <WhoWeAreSection content={content.whoWeAre} servicesCount={services.length} locale={locale} />
         <FreeOpdSection content={content.freeOpd} locale={locale} />
+        <CommunitySection content={content.community} locale={locale} />
         <SpecialtiesSection content={content.specialties} servicesCount={services.length} locale={locale} />
         <PatientCareSection content={content.patientCare} locale={locale} />
         <PharmacySection content={content.pharmacy} locale={locale} />
