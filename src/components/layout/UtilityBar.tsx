@@ -27,6 +27,15 @@ export function UtilityBar() {
           <span className="text-white/75">229/10 St. Joseph Street, Negombo</span>
         </div>
         <div className="hidden gap-[22px] sm:flex">
+          {/* The affiliation as a one-line mark on every page. Hidden below
+              1024px, where the strip has no room for a fifth item; the
+              footer carries the full mark at every width. */}
+          <LocaleLink
+            href="/network#family"
+            className="hidden font-semibold text-[#9FD6F5] transition-colors hover:text-white lg:inline"
+          >
+            Managed by Kids &amp; Teens Medical Group, Los Angeles
+          </LocaleLink>
           <a href="https://wa.me/94742223334" className="text-white/85 transition-colors hover:text-white">
             WhatsApp 074 222 333 4
           </a>

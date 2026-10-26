@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ChromeText } from "@/components/i18n/ChromeText";
 import { LocaleLink } from "@/components/i18n/LocaleLink";
+import { AffiliationMark } from "@/components/layout/AffiliationMark";
 import { LOGO_LOCKUP_BRAND } from "@/config/brand";
 import { homeFooterColumns } from "@/config/homeNavigation";
 import { navLabel, translateFooterColumns } from "@/config/navigationLabels";
@@ -34,6 +35,7 @@ export function HomeFooter({ locale }: { locale: Locale }) {
             <span className="max-w-[300px] text-[14px] leading-[1.7] text-[var(--home-muted)]">
               <ChromeText id="tagline" />
             </span>
+            <AffiliationMark layout="stacked" className="mt-2 self-start" />
           </div>
           {columns.map((column) => (
             <div key={column.heading} className="flex flex-col gap-3">

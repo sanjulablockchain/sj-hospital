@@ -142,6 +142,7 @@ export const standards = {
     { desc: "Consumables කවදාවත් නැවත පාවිච්චි කරන්නේ නෑ, කසළ ජාත්‍යන්තර Protocol එකට Manage කරනවා." },
     { desc: "හැම මතුපිටක්ම පැය දෙකකට සැරයක්, US Specification එකට Clean කරනවා." },
     { desc: "හැම ප්‍රතිඵලයක්ම ඔබ ලඟට එන්න කලින් වෛද්‍යවරු දෙන්නෙක් කියවනවා, එදිනම." },
+    { desc: "Protocols, වෛද්‍ය පුහුණුව සහ Clinical අධීක්ෂණය එන්නේ Los Angeles හි Board Certified ළමා රෝග විශේෂඥයින් 50කට වැඩි Kids & Teens Medical Group එකෙන්." },
   ],
 };
 
