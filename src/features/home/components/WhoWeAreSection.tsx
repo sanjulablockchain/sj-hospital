@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AffiliationMark } from "@/components/layout/AffiliationMark";
 import { RevealStagger } from "@/components/ui/RevealStagger";
 import { Reveal } from "@/components/ui/Reveal";
 import type { Locale } from "@/lib/i18n/locales";
@@ -59,6 +60,7 @@ export function WhoWeAreSection({
             <p className="m-0 text-[15.5px] leading-[1.7] text-[var(--home-muted-2)]" style={{ textWrap: "pretty" }}>
               {content.body}
             </p>
+            <AffiliationMark className="mt-2 self-start" />
           </div>
         </Reveal>
 

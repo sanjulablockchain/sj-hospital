@@ -3,6 +3,7 @@ import { FacebookIcon, InstagramIcon, LinkedInIcon, WhatsAppIcon } from "@/compo
 import { LOGO_LOCKUP_BRAND } from "@/config/brand";
 import { LocaleLink } from "@/components/i18n/LocaleLink";
 import { ChromeText } from "@/components/i18n/ChromeText";
+import { AffiliationMark } from "@/components/layout/AffiliationMark";
 
 export type FooterColumn = {
   heading: string;
@@ -73,6 +74,7 @@ export function ThemedFooter({ columns, reachUsLabel, id = "contact" }: ThemedFo
               </a>
             ))}
           </div>
+          <AffiliationMark className="mt-7" />
         </div>
 
         {columns.map((column) => (

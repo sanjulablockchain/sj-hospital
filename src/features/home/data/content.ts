@@ -40,10 +40,13 @@ export const __review = { status: "draft", reviewer: null, date: null } as const
  *
  * The phone number beside the standfirst is a structural fact
  * (`tel:+94117848484`), not copy: there is no separate label to translate.
+ *
+ * The "Managed from Los Angeles, USA" eyebrow that used to open the hero is
+ * now the affiliation mark (`components/layout/AffiliationMark.tsx`): the
+ * group's logo and name, the same fact set as a mark rather than a line.
  */
 export const hero = {
   locationLabel: "Negombo, Sri Lanka",
-  managedBy: "Managed from Los Angeles, USA",
   headingLine1: "To live is",
   headingOutline: "a",
   headingAccent: "privilege.",
@@ -434,6 +437,14 @@ export const standards = {
       icon: "report",
       title: "Reports read twice",
       desc: "Every result is read by two doctors before it reaches you, the same day.",
+    },
+    // The group's size is the fact `about/data/content.ts` states in
+    // `groupBody` ("over 50 board-certified pediatricians"); governance,
+    // protocols and training are what `network.ts` credits the group with.
+    {
+      icon: "globe",
+      title: "Governed from Los Angeles",
+      desc: "Protocols, physician training and clinical oversight come from Kids & Teens Medical Group, over 50 board certified pediatricians in Los Angeles.",
     },
   ] satisfies { icon: HomeIconKey; title: string; desc: string }[],
   /** The motto set as a brand mark, English in every locale (see ThemedFooter's note). */

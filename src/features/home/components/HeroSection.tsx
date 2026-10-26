@@ -1,4 +1,5 @@
 import { HeroParallaxBackground } from "./HeroParallaxBackground";
+import { AffiliationMark } from "@/components/layout/AffiliationMark";
 import { Ticker } from "@/components/ui/Ticker";
 import type { HomeContent } from "../data/getContent";
 
@@ -56,9 +57,11 @@ export function HeroSection({
         </div>
 
         <div className="flex min-w-0 flex-1 flex-col justify-end pb-6 sm:pb-13">
-          <div className="animate-sj-up inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#9FD6F5] uppercase">
-            <span aria-hidden className="h-px w-11 shrink-0 bg-[var(--home-accent)]" />
-            <span className="wrap-break-word">{hero.managedBy}</span>
+          {/* The affiliation mark leads the hero: the group's logo and name
+              where the "Managed from Los Angeles, USA" eyebrow used to sit,
+              so the American management is seen before it is read. */}
+          <div className="animate-sj-up">
+            <AffiliationMark tone="dark" />
           </div>
           <h1 className="font-display animate-sj-up mt-5 wrap-break-word text-[clamp(52px,9vw,152px)] leading-[0.86] font-extrabold tracking-[-0.045em] text-white uppercase [animation-delay:120ms]">
             {hero.headingLine1}
