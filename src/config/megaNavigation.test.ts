@@ -21,6 +21,7 @@ import { accommodationFooterColumns } from "./accommodationNavigation.ts";
 import { channelingFooterColumns } from "./channelingNavigation.ts";
 import { privacyFooterColumns } from "./privacyNavigation.ts";
 import { homeCareFooterColumns } from "./homeCareNavigation.ts";
+import { locationsFooterColumns } from "./locationsNavigation.ts";
 
 const menus = megaNavigation.filter((s): s is MegaNavMenu => s.kind === "menu");
 const menu = (id: string): MegaNavMenu => {
@@ -31,13 +32,14 @@ const menu = (id: string): MegaNavMenu => {
 
 // One header for every page now, so the tree is checked once rather than
 // seventeen near-identical per-page navs being checked against each other.
-test("the header carries Services, Patient Care and About menus and a Contact link, in that order", () => {
+test("the header carries Services, Patient Care, About and Locations menus and a Contact link, in that order", () => {
   assert.deepEqual(
     megaNavigation.map((s) => [s.kind, s.label]),
     [
       ["menu", "Services"],
       ["menu", "Patient Care"],
       ["menu", "About"],
+      ["menu", "Locations"],
       ["link", "Contact"],
     ]
   );
@@ -67,10 +69,10 @@ test("every service appears exactly once in the Services menu, and nothing that 
 });
 
 // Services is a dense directory (Clinics alone holds fourteen), so its links are
-// title-only. The two tile menus have room for a line under each title, and a
+// title-only. The tile menus have room for a line under each title, and a
 // tile without one reads as unfinished next to its neighbours.
-test("every Patient Care and About tile carries a short description and an icon", () => {
-  for (const id of ["patient-care", "about"]) {
+test("every Patient Care, About and Locations tile carries a short description and an icon", () => {
+  for (const id of ["patient-care", "about", "locations"]) {
     for (const column of menu(id).columns) {
       for (const link of column.links) {
         assert.ok(link.description, `${link.label} has no description`);
@@ -136,6 +138,19 @@ test("every public page is reachable from the header", () => {
   }
 });
 
+// Each hospital is one tile, and the panel grid is sized from the column
+// count, so a hospital added as a second link in an existing column would
+// render under its neighbour rather than beside it.
+test("the Locations menu has one column per hospital, one hospital each", () => {
+  const columns = menu("locations").columns;
+  assert.equal(columns.length, 2);
+  for (const column of columns) assert.equal(column.links.length, 1);
+  assert.deepEqual(
+    columns.map((c) => c.links[0].href),
+    ["/locations#negombo", "/locations#ratnapura"]
+  );
+});
+
 test("every /services/<slug> link is a real service page", () => {
   for (const link of megaNavLinks()) {
     if (!link.href.startsWith("/services/")) continue;
@@ -165,6 +180,7 @@ const FOOTERS_BY_PAGE: [string, typeof homeFooterColumns][] = [
   ["/services", servicesFooterColumns],
   ["/school-wellness", wellnessFooterColumns],
   ["/home-care", homeCareFooterColumns],
+  ["/locations", locationsFooterColumns],
   ["/", homeFooterColumns],
 ];
 

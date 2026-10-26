@@ -86,6 +86,13 @@ export const pageMetadata = {
     description:
       "St. Joseph Hospital Negombo හි පැය 24ම විවෘත Pharmacy Counter එකක්: Authorized Stock විතරයි, හැම Order එකක්ම Pharmacist කෙනෙක් විසින් ඔබේ Hospital File එකට සසඳා පරීක්ෂා කරනවා, Repeat Prescriptions Digital ලෙස තියාගන්නවා, සහ මීගමුව පුරාම Delivery.",
   },
+  locations: {
+    // "මීගමුව" (Negombo) and "රත්නපුර" (Ratnapura) are the place names the
+    // locations feature's own content.si.ts uses; both hospital names stay
+    // English there too.
+    description:
+      "මීගමුව St. Joseph Hospital සහ රත්නපුර Blue Sapphire Hospital: සමූහයේ රෝහල් දෙකෙහිම ලිපින, දුරකථන අංක, මාර්ග උපදෙස් සහ විවෘත වේලාවන්.",
+  },
   privacyPolicy: {
     description:
       "St. Joseph Hospital Negombo හි පුද්ගලිකත්ව ප්‍රතිපත්තිය: අපි ඔබේ පුද්ගලික දත්ත රැස් කරන, භාවිතා කරන, සහ ආරක්ෂා කරන ආකාරය.",

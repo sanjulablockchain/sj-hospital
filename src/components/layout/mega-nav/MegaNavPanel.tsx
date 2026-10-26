@@ -20,25 +20,33 @@ type MegaNavPanelProps = {
  * behind it.
  *
  * `columns` is the Services directory: six eyebrow-headed columns of dense
- * title-only links. `tiles` is a three-column grid of icon, title and one
- * line, for the two menus with six entries each.
+ * title-only links. `tiles` is a grid of icon, title and one line: three
+ * columns for the two menus with six entries each, two for Locations, which
+ * has one tile per hospital. The grid is sized from the column count, with
+ * the class names spelled out so Tailwind can see them.
  */
+const TILE_GRID: Record<number, { grid: string; width: string }> = {
+  2: { grid: "grid grid-cols-2", width: "max-w-[720px]" },
+  3: { grid: "grid grid-cols-3", width: "max-w-[960px]" },
+};
+
 export function MegaNavPanel({ menu, locale, labelledBy, onNavigate }: MegaNavPanelProps) {
   const isTiles = menu.layout === "tiles";
+  const tiles = TILE_GRID[menu.columns.length] ?? TILE_GRID[3];
 
   return (
     <div
       id={`mega-panel-${menu.id}`}
       role="region"
       aria-labelledby={labelledBy}
-      className={`animate-sj-menu-in mx-auto w-full ${isTiles ? "max-w-[960px]" : "max-w-[1320px]"}`}
+      className={`animate-sj-menu-in mx-auto w-full ${isTiles ? tiles.width : "max-w-[1320px]"}`}
     >
       {/* Opaque, not translucent: the hero's fact strip sits right behind the
           footer row on every page and read through anything less. */}
       <div className="sj-mega-panel-frame border border-[var(--home-hairline)] p-1.5 shadow-[0_36px_70px_-30px_rgba(0,0,0,0.7)]">
         <div
           className={`sj-mega-panel-surface max-h-[calc(100vh-var(--sj-header-h)-96px)] overflow-y-auto themed-scrollbar border border-[var(--home-hairline)] ${
-            isTiles ? "grid grid-cols-3" : "grid grid-cols-6"
+            isTiles ? tiles.grid : "grid grid-cols-6"
           }`}
         >
           {menu.columns.map((column, index) => (

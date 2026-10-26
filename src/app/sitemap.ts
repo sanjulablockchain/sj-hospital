@@ -30,6 +30,7 @@ const STATIC_PATHS = [
   "/health-tips",
   "/home-care",
   "/international-care",
+  "/locations",
   "/media",
   "/network",
   "/pharmacy",

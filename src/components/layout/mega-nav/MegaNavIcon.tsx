@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import type { MegaNavIconKey } from "@/config/megaNavigation";
 
 /**
- * The tile icons for the Patient Care and About panels: 24-unit line icons at
+ * The tile icons for the Patient Care, About and Locations panels: 24-unit line icons at
  * a 1.6 stroke, drawn to sit beside a 14px bold title. Keyed by the strings in
  * `megaNavigation.ts` so the tree stays plain data. Same shape as `Icons.tsx`:
  * `currentColor`, `aria-hidden`, sized by the caller.
@@ -92,6 +92,12 @@ const PATHS: Record<MegaNavIconKey, ReactNode> = {
     <>
       <path d="M12 3.5 5 6.5v5c0 4.3 3 7.6 7 9 4-1.4 7-4.7 7-9v-5l-7-3Z" />
       <path d="m9 12 2 2 4-4.5" />
+    </>
+  ),
+  pin: (
+    <>
+      <path d="M12 21s-6.5-5.7-6.5-11a6.5 6.5 0 0 1 13 0c0 5.3-6.5 11-6.5 11Z" />
+      <circle cx="12" cy="10" r="2.5" />
     </>
   ),
 };
