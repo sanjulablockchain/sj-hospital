@@ -26,7 +26,8 @@ export type MegaNavIconKey =
   | "newspaper"
   | "briefcase"
   | "heart"
-  | "shield";
+  | "shield"
+  | "pin";
 
 export type MegaNavLink = {
   label: string;
@@ -287,10 +288,54 @@ const about: MegaNavMenu = {
   },
 };
 
+/**
+ * The group's hospitals, one tile each. Blue Sapphire Hospital in Ratnapura
+ * is listed before its address, phone and hours are known: the page it points
+ * at says so plainly, and the tile fills in once the hospital confirms them.
+ * Two columns rather than three, so `MegaNavPanel` sizes the grid from the
+ * column count instead of assuming the tile menus always have six entries.
+ */
+const locations: MegaNavMenu = {
+  kind: "menu",
+  id: "locations",
+  label: "Locations",
+  layout: "tiles",
+  columns: [
+    {
+      links: [
+        {
+          label: "St. Joseph Hospital",
+          href: "/locations#negombo",
+          description: "Negombo. 229/10 St. Joseph Street, emergency 24/7",
+          icon: "pin",
+        },
+      ],
+    },
+    {
+      links: [
+        {
+          label: "Blue Sapphire Hospital",
+          href: "/locations#ratnapura",
+          description: "Ratnapura. Address and hours to follow",
+          icon: "pin",
+        },
+      ],
+    },
+  ],
+  footer: {
+    primary: { label: "Which hospital is nearest?", href: "/locations" },
+    links: [
+      { label: "Contact us", href: "/contact-us" },
+      { label: "International patients", href: "/international-care" },
+    ],
+  },
+};
+
 export const megaNavigation: MegaNavSection[] = [
   services,
   patientCare,
   about,
+  locations,
   { kind: "link", id: "contact", label: "Contact", href: "/contact-us" },
 ];
 

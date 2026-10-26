@@ -123,6 +123,11 @@ export const pageMetadata = {
     description:
       "St. Joseph Hospital is operated by Kids & Teens Medical Group in Los Angeles, one of nine companies across two continents. What that connection changes about your care, and who else is in the family.",
   },
+  locations: {
+    title: "Locations | St. Joseph Hospital Negombo",
+    description:
+      "St. Joseph Hospital in Negombo and Blue Sapphire Hospital in Ratnapura: addresses, phone numbers, directions and opening hours for both hospitals in the group.",
+  },
   pharmacy: {
     title: "Pharmacy | St. Joseph Hospital Negombo",
     description:

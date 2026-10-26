@@ -18,6 +18,7 @@ import { accommodationFooterColumns } from "./accommodationNavigation.ts";
 import { channelingFooterColumns } from "./channelingNavigation.ts";
 import { privacyFooterColumns } from "./privacyNavigation.ts";
 import { homeCareFooterColumns } from "./homeCareNavigation.ts";
+import { locationsFooterColumns } from "./locationsNavigation.ts";
 
 // The header's own tree (one for the whole site, src/config/megaNavigation.ts)
 // is checked in megaNavigation.test.ts. This file covers the per-page footers
@@ -43,6 +44,7 @@ const ALL_FOOTERS = [
   servicesFooterColumns,
   wellnessFooterColumns,
   homeCareFooterColumns,
+  locationsFooterColumns,
   homeFooterColumns,
 ];
 

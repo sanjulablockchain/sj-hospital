@@ -88,6 +88,13 @@ export const pageMetadata = {
     description:
       "St. Joseph Hospital Negombo இல் 24 மணி நேரமும் திறந்திருக்கும் Pharmacy Counter: Authorized Stock மட்டும், ஒவ்வொரு Order உம் ஒரு Pharmacist ஆல் உங்கள் Hospital File உடன் சரிபார்க்கப்படும், Repeat Prescriptions Digital ஆக வைக்கப்படும், மற்றும் நீர்கொழும்பு முழுவதும் Delivery.",
   },
+  locations: {
+    // "நீர்கொழும்பு" (Negombo) and "இரத்தினபுரி" (Ratnapura) are the place
+    // names the locations feature's own content.ta.ts uses; both hospital
+    // names stay English there too.
+    description:
+      "நீர்கொழும்பு St. Joseph Hospital மற்றும் இரத்தினபுரி Blue Sapphire Hospital: குழுவின் இரு மருத்துவமனைகளின் முகவரிகள், தொலைபேசி எண்கள், வழிகள் மற்றும் திறக்கும் நேரங்கள்.",
+  },
   privacyPolicy: {
     description:
       "St. Joseph Hospital Negombo இன் தனியுரிமைக் கொள்கை: நாங்கள் உங்கள் தனிப்பட்ட தரவை எவ்வாறு சேகரிக்கிறோம், பயன்படுத்துகிறோம், பாதுகாக்கிறோம்.",
