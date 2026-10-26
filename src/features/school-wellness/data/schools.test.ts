@@ -22,11 +22,11 @@ const overlays = [
   ["ta", ta],
 ] as const;
 
-test("the tracker of 12 October 2026: eleven schools, nine centers set up, two joining", () => {
+test("the tracker of 26 October 2026: eleven schools, nine centers set up, two joining", () => {
   assert.equal(base.schools.length, 11);
   assert.equal(base.schools.filter((s) => s.status === "open").length, 9);
   assert.equal(base.schools.filter((s) => s.status === "joining").length, 2);
-  assert.equal(base.schoolsAsOf, "2026-10-12");
+  assert.equal(base.schoolsAsOf, "2026-10-26");
 });
 
 test("every school is listed once", () => {
