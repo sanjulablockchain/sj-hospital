@@ -79,6 +79,12 @@ export const pageMetadata = {
     description:
       "St. Joseph Hospital ක්‍රියාත්මක කරන්නේ Los Angeles හි Kids & Teens Medical Group, මහාද්වීප දෙකක සමාගම් නවයෙන් එකක්. මේ සම්බන්ධතාවෙන් ඔබේ සත්කාරයට වෙනස් වන දේ, සහ පවුලේ ඉන්නා අනිත් අය.",
   },
+  laboratoryTests: {
+    // "Lab", "Test", "Sample", "Report" and "OPD" reuse the laboratory
+    // feature's own content.si.ts register.
+    description:
+      "St. Joseph Hospital Negombo කරන හැම Lab Test එකක්ම සහ ඒකට යන මුදල, රෝහලේම 2026 මිල ලැයිස්තුවෙන්: Sample එක, Report එක ලැබෙන කාලය සහ මිල LKR වලින්, OPD රෝගීන්ට 10% අඩුවෙන්.",
+  },
   pharmacy: {
     // "Authorized Stock", "Counter", "Order", "Pharmacist", "Hospital File",
     // "Prescriptions" and "Delivery" all reuse content.si.ts's own

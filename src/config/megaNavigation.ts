@@ -105,6 +105,7 @@ const services: MegaNavMenu = {
       heading: "Diagnostics",
       links: [
         { label: "Laboratory services", href: "/services/laboratory" },
+        { label: "Laboratory tests & prices", href: "/laboratory-tests" },
         { label: "Radiology & digital X-ray", href: "/services/radiology" },
         { label: "Cardiac screening & ECG", href: "/services/cardiac-screening" },
         { label: "CTG & fetal monitoring", href: "/services/fetal-monitoring" },
