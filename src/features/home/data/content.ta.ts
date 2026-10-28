@@ -9,6 +9,8 @@ export const heroControls = {
   ariaShow: "Slide {n} / {total}: {kicker}",
   ariaPrev: "முந்தைய Slide",
   ariaNext: "அடுத்த Slide",
+  ariaPause: "Slideshow ஐ நிறுத்துங்கள்",
+  ariaPlay: "Slideshow ஐ Play செய்யுங்கள்",
 };
 
 export const statTickerItems = [

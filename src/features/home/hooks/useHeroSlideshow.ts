@@ -1,71 +1,79 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
 import { initialSlideState, stepSlides, type SlideState } from "./slideState";
+
+const REDUCED_MOTION = "(prefers-reduced-motion: reduce)";
+
+function subscribeReducedMotion(onChange: () => void) {
+  const query = window.matchMedia(REDUCED_MOTION);
+  query.addEventListener("change", onChange);
+  return () => query.removeEventListener("change", onChange);
+}
+
+function subscribeVisibility(onChange: () => void) {
+  document.addEventListener("visibilitychange", onChange);
+  return () => document.removeEventListener("visibilitychange", onChange);
+}
 
 /**
  * Drives the home hero slideshow: the active index, which photo layers to
  * keep mounted (and when each mounted), and the auto advance timer.
  *
- * The timer never starts under `prefers-reduced-motion` (the first slide
- * holds, the controls still work), pauses while the pointer or focus is
- * inside the hero (`pause` / `resume`, called by the component) and while
- * the tab is hidden, and restarts from a full interval after any manual
- * step so a tap is never followed by an immediate auto advance.
+ * `rotating` is derived, never set: the slides move on their own only when
+ * the reader has not asked for reduced motion, the tab is visible, the
+ * pointer and focus are outside the hero, and the reader has not pressed
+ * pause. The interval effect follows that one boolean (plus `cycle`, which
+ * a manual step bumps so the next auto advance is a full interval away, and
+ * a tap is never followed by an immediate advance). Reduced motion and tab
+ * visibility are read through `useSyncExternalStore`, so nothing here sets
+ * state inside an effect; on the server both read as "rotating", which is
+ * also the first client render, so hydration agrees.
+ *
+ * `togglePlay` is the reader's own stop (WCAG 2.2.2): once stopped, hover
+ * and focus leaving the hero do not restart it; only pressing play does.
  */
 export function useHeroSlideshow(count: number, intervalMs: number) {
   const [state, setState] = useState<SlideState>(() => initialSlideState(count, Date.now()));
-  const paused = useRef(false);
-  const timer = useRef<number | null>(null);
-  const reduced = useRef(false);
+  const [held, setHeld] = useState(false);
+  const [stopped, setStopped] = useState(false);
+  const [cycle, setCycle] = useState(0);
+  const reduced = useSyncExternalStore(
+    subscribeReducedMotion,
+    () => window.matchMedia(REDUCED_MOTION).matches,
+    () => false
+  );
+  const visible = useSyncExternalStore(subscribeVisibility, () => !document.hidden, () => true);
 
-  const stop = useCallback(() => {
-    if (timer.current !== null) window.clearInterval(timer.current);
-    timer.current = null;
-  }, []);
-
-  const start = useCallback(() => {
-    stop();
-    if (reduced.current || paused.current || document.hidden) return;
-    timer.current = window.setInterval(() => {
-      setState((s) => stepSlides(s, count, s.active + 1, Date.now()));
-    }, intervalMs);
-  }, [count, intervalMs, stop]);
+  const rotating = !reduced && visible && !held && !stopped;
 
   useEffect(() => {
-    reduced.current =
-      typeof window.matchMedia === "function" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    start();
-    const onVisibility = () => (document.hidden ? stop() : start());
-    document.addEventListener("visibilitychange", onVisibility);
-    return () => {
-      stop();
-      document.removeEventListener("visibilitychange", onVisibility);
-    };
-  }, [start, stop]);
+    if (!rotating) return;
+    const id = window.setInterval(() => {
+      setState((s) => stepSlides(s, count, s.active + 1, Date.now()));
+    }, intervalMs);
+    return () => window.clearInterval(id);
+  }, [rotating, cycle, count, intervalMs]);
 
   const go = useCallback(
     (to: number) => {
       setState((s) => stepSlides(s, count, to, Date.now()));
-      start();
+      setCycle((c) => c + 1);
     },
-    [count, start]
+    [count]
   );
 
   return {
     active: state.active,
     mounted: state.mounted,
     mountedAt: state.mountedAt,
+    rotating,
+    stopped,
     go,
     next: () => go(state.active + 1),
     prev: () => go(state.active - 1),
-    pause: () => {
-      paused.current = true;
-      stop();
-    },
-    resume: () => {
-      paused.current = false;
-      start();
-    },
+    pause: () => setHeld(true),
+    resume: () => setHeld(false),
+    togglePlay: () => setStopped((s) => !s),
   };
 }

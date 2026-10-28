@@ -22,7 +22,7 @@ export type HeroSlideView = {
   positionClass: string;
 };
 
-export type HeroControlsCopy = { ariaShow: string; ariaPrev: string; ariaNext: string };
+export type HeroControlsCopy = { ariaShow: string; ariaPrev: string; ariaNext: string; ariaPause: string; ariaPlay: string };
 
 /** `.animate-sj-burns` runs 26s in globals.css; a layer mounted later starts mid-cycle to match. */
 const BURNS_MS = 26_000;
@@ -37,8 +37,10 @@ const BURNS_MS = 26_000;
  * Photo layers mount on demand (see `slideState.ts`) and crossfade by
  * opacity; only the first slide's image is preloaded. The copy block is
  * keyed by the active index so each slide rises in with `animate-sj-up`.
- * One `<h1>` is in the DOM at any time, the visible slide's, and a polite
- * live region announces the heading when it changes. Below `sm:` the dots
+ * One `<h1>` is in the DOM at any time, the visible slide's, and a live
+ * region announces the heading when the reader changes it (silent during
+ * auto rotation). A pause button beside the arrows stops the rotation for
+ * good until pressed again (WCAG 2.2.2); hover and focus only hold it. Below `sm:` the dots
  * are dropped (eight 44px targets plus the arrows do not fit in 335px) and
  * the counter and arrows carry the position on their own.
  *
@@ -59,7 +61,10 @@ export function HeroSlideshow({
   rail: ReactNode;
   mark: ReactNode;
 }) {
-  const { active, mounted, mountedAt, go, next, prev, pause, resume } = useHeroSlideshow(slides.length, intervalMs);
+  const { active, mounted, mountedAt, rotating, stopped, go, next, prev, pause, resume, togglePlay } = useHeroSlideshow(
+    slides.length,
+    intervalMs
+  );
   const { ref, offset } = useParallax(0.16, 130);
   // A layer mounted later starts its Ken Burns cycle that far in, so it
   // matches the zoom of the layer it fades over. Slide 0 is always 0ms, on
@@ -72,6 +77,7 @@ export function HeroSlideshow({
   return (
     <div
       className="relative flex flex-1 flex-col"
+      aria-roledescription="carousel"
       onPointerEnter={pause}
       onPointerLeave={resume}
       onFocus={pause}
@@ -138,7 +144,10 @@ export function HeroSlideshow({
             </div>
           </div>
 
-          <p aria-live="polite" className="sr-only">
+          {/* Silent while the slides rotate on their own (a reader elsewhere on
+              the page must not hear a new heading every seven seconds), polite
+              once they stop, so a slide the reader chose is announced. */}
+          <p aria-live={rotating ? "off" : "polite"} className="sr-only">
             {slide.heading.lead} {slide.heading.accent}
           </p>
 
@@ -167,6 +176,15 @@ export function HeroSlideshow({
               <span className="text-[12px] tracking-[0.18em] text-white/60 tabular-nums">
                 {String(active + 1).padStart(2, "0")} / {total}
               </span>
+              <button
+                type="button"
+                onClick={togglePlay}
+                aria-pressed={stopped}
+                aria-label={stopped ? copy.ariaPlay : copy.ariaPause}
+                className="grid h-11 w-11 place-items-center border border-white/30 text-white transition-colors hover:bg-white/10"
+              >
+                <span aria-hidden className="text-[13px]">{stopped ? "\u25B6" : "\u2759\u2759"}</span>
+              </button>
               <button
                 type="button"
                 onClick={prev}
