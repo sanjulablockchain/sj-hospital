@@ -96,6 +96,19 @@ export const heroFacts: FactRow[] = [
   { k: "Sri Lanka arm", v: "This hospital, and ACIG" },
 ];
 
+/**
+ * The parent group teaser that sits directly under the hero, above the jump
+ * cards, as the owner asked on 2026-10-28. The card itself (logo, name,
+ * body, chips, link) is the Kids & Teens entry in `orgGroups` below, found
+ * by slug, so the fact has one home; only the teaser's own framing lives
+ * here. `eyebrow` and `cta` are English in every locale; `note` translates.
+ */
+export const parentTeaser = {
+  eyebrow: "Our parent, Los Angeles",
+  cta: "Visit ktdoctor.com",
+  note: "Everything on this site is run to the protocols of the group that operates this hospital. Their own site has the clinics, the doctors and the care they give in California.",
+};
+
 export const jumpCards: JumpCard[] = [
   {
     count: "Why it matters",

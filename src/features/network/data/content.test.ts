@@ -16,6 +16,7 @@ import {
   referralIntro,
   referrals,
   tickerItems,
+  parentTeaser,
 } from "./content.ts";
 
 const orgs = orgGroups.flatMap((g) => g.orgs);
@@ -218,4 +219,15 @@ test("no em dash, in any encoding", () => {
 test("the airport distance is never the reference's twelve minutes", () => {
   assert.ok(!/twelve minutes/i.test(allCopy));
   assert.ok(!/12 minutes/i.test(allCopy));
+});
+
+// The parent teaser at the top of the page is built from the Kids & Teens
+// card in `orgGroups`, so that card has to exist and point at ktdoctor.com.
+test("the parent teaser can find the Kids & Teens card and sends readers to ktdoctor.com", () => {
+  const parent = orgs.find((o) => o.slug === "kids-and-teens");
+  assert.ok(parent, "no kids-and-teens org");
+  assert.equal(parent.href, "https://www.ktdoctor.com");
+  assert.match(parentTeaser.cta, /ktdoctor\.com/);
+  assert.ok(parentTeaser.eyebrow.length > 0);
+  assert.ok(parentTeaser.note.length > 40);
 });
