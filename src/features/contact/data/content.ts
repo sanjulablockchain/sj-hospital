@@ -12,6 +12,13 @@
 export const HOSPITAL_COORDS: [number, number] = [7.206699127328975, 79.8453343846586];
 
 // ContactDetailsPanel.tsx's DIRECTIONS_URL, verbatim.
+/**
+ * The hospital switchboard, as printed and as dialled. The home hero's call
+ * buttons read these rather than typing the digits a second time.
+ */
+export const HOSPITAL_PHONE_LABEL = "0117 84 84 84";
+export const HOSPITAL_TEL = "tel:+94117848484";
+
 export const DIRECTIONS_URL =
   "https://www.google.com/maps/dir/?api=1&destination=7.206699127328975,79.8453343846586";
 

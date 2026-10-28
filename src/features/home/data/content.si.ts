@@ -20,8 +20,10 @@
 
 export const __review = { status: "draft", reviewer: null, date: null } as const;
 
-export const hero = {
-  photoAlt: "St. Joseph Hospital ගොඩනැගිල්ල සන්ධ්‍යාවේ",
+export const heroControls = {
+  ariaShow: "Slide {n} / {total}: {kicker}",
+  ariaPrev: "කලින් Slide එක",
+  ariaNext: "ඊළඟ Slide එක",
 };
 
 export const statTickerItems = [

@@ -82,7 +82,7 @@ function isUntranslatable(moduleName: string, path: string): boolean {
   // `photo` is also a top-level export of testimonials.ts, internationalCare.ts
   // and media.ts (the band's photograph), and `photoAlt` its description.
   if (path === "photo" || path === "photoAlt") return true;
-  if (path.endsWith(".photoAlt") && !(moduleName === "content" && path === "hero.photoAlt")) return true;
+  if (path.endsWith(".photoAlt")) return true;
   if (path.endsWith(".date")) return true;
   // Structural keys the components switch on: an icon name, a colour tone, a
   // service group, and the specialties photograph path.

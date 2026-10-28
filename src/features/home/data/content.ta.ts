@@ -5,8 +5,10 @@
 
 export const __review = { status: "draft", reviewer: null, date: null } as const;
 
-export const hero = {
-  photoAlt: "St. Joseph Hospital கட்டிடம் அந்தி நேரத்தில்",
+export const heroControls = {
+  ariaShow: "Slide {n} / {total}: {kicker}",
+  ariaPrev: "முந்தைய Slide",
+  ariaNext: "அடுத்த Slide",
 };
 
 export const statTickerItems = [

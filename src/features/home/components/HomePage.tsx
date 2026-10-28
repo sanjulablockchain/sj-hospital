@@ -1,9 +1,11 @@
 import { ThemedShell } from "@/components/layout/ThemedShell";
 import { FloatingActions } from "@/components/layout/FloatingActions";
 import type { Locale } from "@/lib/i18n/locales";
+import { localeHref } from "@/lib/i18n/paths";
 import { services } from "@/features/services";
 import { featuredCodes, fillTemplate, labCatalogueSummary, labTests } from "@/features/laboratory";
 import { getHomeContent } from "../data/getContent";
+import { heroSlides, HERO_SLIDE_INTERVAL_MS } from "../data/heroSlides";
 import { HeroSection } from "./HeroSection";
 import { QuickAccessSection } from "./QuickAccessSection";
 import { WhoWeAreSection } from "./WhoWeAreSection";
@@ -44,6 +46,19 @@ export async function HomePage({ locale }: { locale: Locale }) {
   // The laboratory band's figures come from the catalogue, never the copy:
   // the body's `{count}` / `{fromPrice}` and each tile's price are looked up
   // here, so a re-imported price list changes the band on its own.
+  // The hero slides leave here ready to render: the laboratory slide's
+  // `{count}` / `{fromPrice}` filled from the catalogue summary and every
+  // route passed through `localeHref` (`tel:` is left alone), so the client
+  // leaf never touches a data file or the locale.
+  const slides = heroSlides.map((slide) => ({
+    ...slide,
+    body: fillTemplate(slide.body, labCatalogueSummary),
+    ctaPrimary: { ...slide.ctaPrimary, href: localeHref(slide.ctaPrimary.href, locale) },
+    ctaSecondary: slide.ctaSecondary
+      ? { ...slide.ctaSecondary, href: localeHref(slide.ctaSecondary.href, locale) }
+      : undefined,
+  }));
+
   const laboratoryBody = fillTemplate(content.laboratory.bodyTemplate, labCatalogueSummary);
   const laboratoryTiles = featuredCodes.flatMap(({ code, label }) => {
     const test = labTests.find((t) => t.code === code);
@@ -53,7 +68,13 @@ export async function HomePage({ locale }: { locale: Locale }) {
   return (
     <ThemedShell palette="brand" header="solid" utilityBar>
       <main>
-        <HeroSection hero={content.hero} tickerItems={content.statTickerItems} />
+        <HeroSection
+          slides={slides}
+          intervalMs={HERO_SLIDE_INTERVAL_MS}
+          controls={content.heroControls}
+          locationLabel={content.hero.locationLabel}
+          tickerItems={content.statTickerItems}
+        />
         <QuickAccessSection content={content.quickAccess} servicesCount={services.length} locale={locale} />
         <WhoWeAreSection content={content.whoWeAre} servicesCount={services.length} locale={locale} />
         <FreeOpdSection content={content.freeOpd} locale={locale} />

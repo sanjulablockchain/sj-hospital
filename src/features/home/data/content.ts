@@ -33,25 +33,21 @@ import type { HomeIconKey, StatTone } from "../types.ts";
 export const __review = { status: "draft", reviewer: null, date: null } as const;
 
 /**
- * `headingLine1` / `headingOutline` / `headingAccent` are three independent
- * segments of one visual heading: `HeroSection.tsx` renders the outlined
- * segment with a stroke-only text style. Each locale composes its own phrase
- * across the three segments rather than preserving "a" specifically.
- *
- * The phone number beside the standfirst is a structural fact
- * (`tel:+94117848484`), not copy: there is no separate label to translate.
- *
- * The "Managed from Los Angeles, USA" eyebrow that used to open the hero is
- * now the affiliation mark (`components/layout/AffiliationMark.tsx`): the
- * group's logo and name, the same fact set as a mark rather than a line.
+ * `hero.locationLabel` is the vertical rail beside the slides, the one field
+ * the old motto hero keeps. The slides themselves are in `heroSlides.ts`:
+ * hero copy is English in every locale, so they live outside this overlaid
+ * module (whose walker would otherwise demand eight placeholder entries per
+ * language).
  */
 export const hero = {
   locationLabel: "Negombo, Sri Lanka",
-  headingLine1: "To live is",
-  headingOutline: "a",
-  headingAccent: "privilege.",
-  body: "American healthcare standards in Negombo: 24 hour emergency care, in-house doctors, a modern laboratory, digital X-ray, home drug delivery, home visits and a pharmacy that never closes.",
-  photoAlt: "St. Joseph Hospital building at dusk",
+};
+
+/** Assistive labels on the slideshow controls. `{n}`, `{total}` and `{kicker}` are filled per dot. */
+export const heroControls = {
+  ariaShow: "Slide {n} of {total}: {kicker}",
+  ariaPrev: "Previous slide",
+  ariaNext: "Next slide",
 };
 
 /** The five-item ticker under the hero. The room price is the fact `facilities/data/content.ts` owns. */
