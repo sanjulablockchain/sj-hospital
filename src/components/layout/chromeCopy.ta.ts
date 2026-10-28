@@ -36,6 +36,6 @@ export const chromeCopy = {
   bookOnlineDesc: "ஒரு Consultant ஐயும் நேரத்தையும் தேர்ந்தெடுங்கள்; Channelling Desk அதை Confirm செய்யும்.",
   bookMessageDesc: "உங்கள் பெயரையும் உங்களுக்குத் தேவையான Clinic ஐயும் அனுப்புங்கள்.",
   bookCallDesc: "Switchboard ஒவ்வொரு மணி நேரமும் பதிலளிக்கும்.",
-  bookFooter: "OPD Consultation இலவசம். OPD இல் Corporate Insurance ஏற்றுக்கொள்ளப்படும்.",
+  bookFooter: "OPD Consultation இலவசம். எல்லா Insurance உம் ஏற்றுக்கொள்ளப்படும், Cashless வசதியும் உண்டு.",
   closeBooking: "Booking விருப்பங்களை மூடு",
 };
