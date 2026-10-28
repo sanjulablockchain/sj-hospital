@@ -498,6 +498,8 @@ export const detailChrome = {
   /** `{cta}` is the service's own `cta` field, e.g. "Come straight in today." */
   bookHeading: "{cta} today.",
   backToServices: "Back to all services",
+  /** Shown on the laboratory service only, under its facts card. */
+  priceListCta: "See every test and price",
 };
 
 export const internationalSteps: Step[] = [

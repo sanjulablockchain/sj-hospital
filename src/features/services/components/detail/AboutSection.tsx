@@ -1,3 +1,4 @@
+import { LocaleLink } from "@/components/i18n/LocaleLink";
 import { Reveal } from "@/components/ui/Reveal";
 import type { Service } from "@/features/services/types";
 import type { ServicesContent } from "@/features/services/data/getContent";
@@ -96,6 +97,17 @@ export function AboutSection({ service, content }: { service: Service; content: 
               <div className="text-[13.5px] font-bold text-[var(--home-heading)]">{service.location}</div>
               <div className="mt-1.5 text-[13px] text-[var(--home-muted)]">{detailChrome.addressLine}</div>
             </div>
+
+            {/* The laboratory is the one service with a published price list
+                of its own, so its card alone links to it. */}
+            {service.slug === "laboratory" ? (
+              <LocaleLink
+                href="/laboratory-tests"
+                className="mt-6 inline-flex min-h-11 items-center gap-2 text-[14.5px] font-bold text-[var(--home-accent)] hover:text-[var(--home-accent-soft)]"
+              >
+                {detailChrome.priceListCta} <span aria-hidden>&rarr;</span>
+              </LocaleLink>
+            ) : null}
           </Reveal>
         </div>
       </div>
