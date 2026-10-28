@@ -83,3 +83,16 @@ test("applyRules drops excluded rows, renames, notes, and reports unused keys", 
   ]);
   assert.deepEqual(unusedOverrideKeys, ["Z9#0"]);
 });
+
+// An override keyed by code and occurrence can land on a different row after
+// the sheet is re-ordered; `expect` is the mechanically cleaned name the
+// importer must find there, so a shifted row stops the import instead of
+// renaming the wrong test.
+test("an override whose expected name does not match its row stops the import", () => {
+  const rows: RawRow[] = [{ code: "10134", name: "VITAMIN B 12", container: "Plain Tube", turnaround: "One day", price: 8200 }];
+  assert.doesNotThrow(() => applyRules(rows, { [overrideKey("10134", 0)]: { expect: "Vitamin B 12", name: "Vitamin B12" } }));
+  assert.throws(
+    () => applyRules(rows, { [overrideKey("10134", 0)]: { expect: "Vitamin B12", name: "Vitamin B12" } }),
+    /10134#0 expected "Vitamin B12" but the row reads "Vitamin B 12"/
+  );
+});

@@ -35,6 +35,12 @@ export type RawRow = {
 };
 
 export type LabOverride = {
+  /**
+   * The mechanically cleaned name the importer must find at this key
+   * (`sentenceCaseName` of the sheet's spelling). A row that moved under the
+   * same code stops the import instead of taking another row's correction.
+   */
+  expect?: string;
   name?: string;
   note?: string;
   exclude?: true;
@@ -150,7 +156,8 @@ export function priceOf(value: string | number | null): number | null {
  * code among the rows, since a code can repeat (Vitamin B12 is 10134 twice).
  * The raw name is deliberately NOT part of the key: it would put the sheet's
  * own dash punctuation into a string under `src`, which `check:dashes`
- * scans. `overrides.ts` records the raw name in a comment instead.
+ * scans. Each override instead carries `expect`, the cleaned name, which
+ * `applyRules` checks against the row before applying anything.
  */
 export function overrideKey(code: string, occurrence: number): string {
   return `${String(code).trim()}#${occurrence}`;
@@ -170,10 +177,14 @@ export function applyRules(
     const key = overrideKey(code, occurrence);
     const override = overrides[key];
     if (override) used.add(key);
+    const cleaned = sentenceCaseName(row.name);
+    if (override?.expect !== undefined && override.expect !== cleaned) {
+      throw new Error(`override ${key} expected "${override.expect}" but the row reads "${cleaned}"`);
+    }
     if (override?.exclude) continue;
     const test: LabTest = {
-      code: String(row.code).trim(),
-      name: override?.name ?? sentenceCaseName(row.name),
+      code,
+      name: override?.name ?? cleaned,
       container: cleanContainer(row.container),
       turnaroundDays: turnaroundDays(row.turnaround),
       price: priceOf(row.price),
