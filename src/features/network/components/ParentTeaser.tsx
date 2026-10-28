@@ -51,7 +51,7 @@ export function ParentTeaser({ content }: { content: NetworkContent }) {
             rel="noopener noreferrer"
             className="mt-6 inline-flex min-h-11 items-center gap-2.5 bg-[var(--home-accent)] px-5 text-[14.5px] font-bold text-[var(--home-on-accent)] transition-colors hover:bg-[var(--home-accent-hover)]"
           >
-            {parentTeaser.cta} <span aria-hidden>&nearr;</span>
+            {parentTeaser.cta} <span aria-hidden>{"↗"}</span>
           </a>
         </div>
       </Reveal>
