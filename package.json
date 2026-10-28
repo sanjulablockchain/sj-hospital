@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "test": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test \"src/**/*.test.ts\"",
+    "lab:import": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/import-lab-catalogue.mjs",
     "i18n:status": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/i18n-status.mjs",
     "i18n:register-audit": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/i18n-register-audit.mjs",
     "check:dashes": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/check-dashes.mjs",
