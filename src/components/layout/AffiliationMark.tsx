@@ -1,13 +1,15 @@
 import Image from "next/image";
-import { LocaleLink } from "@/components/i18n/LocaleLink";
+import { AFFILIATION } from "./affiliation";
+
+export { AFFILIATION };
 
 /**
  * The group's logo beside "Managed and operated by Kids & Teens Medical
  * Group, Los Angeles, USA": the hospital's American affiliation set as a
  * mark rather than a sentence, so it reads the same wherever it appears.
  * Both footers, the home hero and the home "who we are" band carry it, and
- * it links to the group family band on /network, the same destination the
- * home network accordion already uses for the Los Angeles parent.
+ * it opens the group's own site, ktdoctor.com, in a new tab (a plain `<a>`
+ * with the safe `rel`, never `LocaleLink`, which is for routes on this site).
  *
  * Both lines stay English in every locale, like the footer's copyright line
  * and the motto beside it: the group's name never changes script, and the
@@ -19,14 +21,6 @@ import { LocaleLink } from "@/components/i18n/LocaleLink";
  * `layout="stacked"` puts the logo above the text for a narrow footer
  * column, where the inline form would wrap the caption mid-phrase.
  */
-export const AFFILIATION = {
-  caption: "Managed and operated by",
-  name: "Kids & Teens Medical Group",
-  place: "Los Angeles, USA",
-  href: "/network#family",
-  logo: { src: "/images/network/logos/kids-and-teens.png", width: 144, height: 144 },
-} as const;
-
 export function AffiliationMark({
   tone = "chrome",
   layout = "inline",
@@ -38,8 +32,10 @@ export function AffiliationMark({
 }) {
   const dark = tone === "dark";
   return (
-    <LocaleLink
+    <a
       href={AFFILIATION.href}
+      target="_blank"
+      rel="noopener noreferrer"
       className={`group inline-flex min-h-11 gap-3.5 no-underline ${
         layout === "stacked" ? "flex-col items-start" : "items-center"
       } ${className}`}
@@ -74,11 +70,12 @@ export function AffiliationMark({
           }`}
         >
           {AFFILIATION.name}
+          <span className="sr-only"> (opens in a new tab)</span>
         </span>
         <span className={`text-[13px] leading-[1.3] font-semibold ${dark ? "text-white/70" : "text-[var(--home-muted)]"}`}>
           {AFFILIATION.place}
         </span>
       </span>
-    </LocaleLink>
+    </a>
   );
 }
