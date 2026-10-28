@@ -74,6 +74,11 @@ export const freeOpd = {
 // and both CTAs are register-policy English and absent here, and the figures
 // are counted by the component. "සුවතා මධ්‍යස්ථාන" follows school-wellness's
 // own schools.si.ts.
+export const laboratory = {
+  bodyTemplate:
+    "Tests {count} ක්, බොහොමයක් එදිනම, හැම Report එකක්ම වෛද්‍යවරු දෙන්නෙක් කියවනවා, මිල ගණන් මීගමුවට හදලා. Tests {fromPrice} LKR සිට ඉහළට.",
+};
+
 export const community = {
   body: "රෝහලක් අයිති එය වටා ඇති නගරයටයි. අපේ වෛද්‍යවරු සහ Nurses ප්‍රදේශයේ පාසල් තුළ සුවතා මධ්‍යස්ථාන පිහිටුවා, පාසල් වර්ෂය පුරා එහි පරීක්ෂණ සහ සෞඛ්‍ය වැඩසටහන් පවත්වනවා. අපේ OPD Consultation එක නොමිලේ, ඒ නිසා වෛද්‍යවරයෙක් හමුවෙන්න කාටවත් මුදල් බාධාවක් වෙන්නේ නෑ. අපේ Health Tips ඉංග්‍රීසි, සිංහල සහ දෙමළ භාෂාවලින් නොමිලේ කියවන්න පුළුවන්.",
   stats: [

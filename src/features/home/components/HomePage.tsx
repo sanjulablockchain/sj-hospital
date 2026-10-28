@@ -2,11 +2,13 @@ import { ThemedShell } from "@/components/layout/ThemedShell";
 import { FloatingActions } from "@/components/layout/FloatingActions";
 import type { Locale } from "@/lib/i18n/locales";
 import { services } from "@/features/services";
+import { featuredCodes, fillTemplate, labCatalogueSummary, labTests } from "@/features/laboratory";
 import { getHomeContent } from "../data/getContent";
 import { HeroSection } from "./HeroSection";
 import { QuickAccessSection } from "./QuickAccessSection";
 import { WhoWeAreSection } from "./WhoWeAreSection";
 import { FreeOpdSection } from "./FreeOpdSection";
+import { LaboratorySection } from "./LaboratorySection";
 import { CommunitySection } from "./CommunitySection";
 import { SpecialtiesSection } from "./SpecialtiesSection";
 import { PatientCareSection } from "./PatientCareSection";
@@ -39,6 +41,15 @@ export async function HomePage({ locale }: { locale: Locale }) {
   const home = await getHomeContent(locale);
   const { content } = home;
 
+  // The laboratory band's figures come from the catalogue, never the copy:
+  // the body's `{count}` / `{fromPrice}` and each tile's price are looked up
+  // here, so a re-imported price list changes the band on its own.
+  const laboratoryBody = fillTemplate(content.laboratory.bodyTemplate, labCatalogueSummary);
+  const laboratoryTiles = featuredCodes.flatMap(({ code, label }) => {
+    const test = labTests.find((t) => t.code === code);
+    return test && test.price !== null ? [{ label, price: test.price }] : [];
+  });
+
   return (
     <ThemedShell palette="brand" header="solid" utilityBar>
       <main>
@@ -46,6 +57,7 @@ export async function HomePage({ locale }: { locale: Locale }) {
         <QuickAccessSection content={content.quickAccess} servicesCount={services.length} locale={locale} />
         <WhoWeAreSection content={content.whoWeAre} servicesCount={services.length} locale={locale} />
         <FreeOpdSection content={content.freeOpd} locale={locale} />
+        <LaboratorySection content={content.laboratory} body={laboratoryBody} tiles={laboratoryTiles} locale={locale} />
         <CommunitySection content={content.community} locale={locale} />
         <SpecialtiesSection content={content.specialties} servicesCount={services.length} locale={locale} />
         <PatientCareSection content={content.patientCare} locale={locale} />

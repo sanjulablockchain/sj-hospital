@@ -208,6 +208,27 @@ export const freeOpd = {
 };
 
 /**
+ * `#laboratory`: the teaser band between the free OPD band and the community
+ * band. It carries NO figure: `{count}` and `{fromPrice}` are filled by the
+ * page from the laboratory feature's catalogue summary, and each of the
+ * eight tiles is one of the laboratory feature's own `featuredCodes` (its
+ * price list page's ticker shows the same eight), looked up in the catalogue
+ * by code, so a re-import of the price list changes this band too
+ * (`laboratoryTeaser.test.ts`). No array of facts lives here: the overlay
+ * walker would demand eight placeholder entries for it in every language.
+ */
+export const laboratory = {
+  eyebrow: "Laboratory",
+  heading: { line1: "The best equipment,", line2: "at the lowest prices." },
+  bodyTemplate:
+    "{count} tests, most back the same day, every report read by two doctors, and prices set for Negombo. Tests from {fromPrice} LKR onwards.",
+  ctaPrimary: "See all tests and prices",
+  hrefPrimary: "/laboratory-tests",
+  ctaSecondary: "Book a test",
+  hrefSecondary: "/services/laboratory",
+};
+
+/**
  * `#community`: the band under the free OPD one, on the work the hospital does
  * for the town rather than for its patients. Every claim has a home elsewhere:
  * the Wellness Centers in `school-wellness/data/schools.ts` (the hospital's own

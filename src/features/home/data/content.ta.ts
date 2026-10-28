@@ -59,6 +59,11 @@ export const freeOpd = {
 // and both CTAs are register-policy English and absent here, and the figures
 // are counted by the component. "நல்வாழ்வு மையம்" follows school-wellness's
 // own schools.ta.ts.
+export const laboratory = {
+  bodyTemplate:
+    "{count} Tests, பெரும்பாலானவை அன்றே, ஒவ்வொரு Report ஐயும் இரு மருத்துவர்கள் படிக்கிறார்கள், விலைகள் நீர்கொழும்புக்காக அமைக்கப்பட்டவை. Tests {fromPrice} LKR இலிருந்து.",
+};
+
 export const community = {
   body: "ஒரு மருத்துவமனை அதைச் சுற்றியுள்ள நகரத்துக்குச் சொந்தமானது. எங்கள் மருத்துவர்களும் Nurses உம் உள்ளூர் பள்ளிகளுக்குள் நல்வாழ்வு மையங்களை அமைத்து, பள்ளி ஆண்டு முழுவதும் அங்கு பரிசோதனைகளையும் சுகாதாரத் திட்டங்களையும் நடத்துகிறார்கள். எங்கள் OPD Consultation இலவசம், அதனால் பணம் ஒருபோதும் யாருக்கும் மருத்துவரைப் பார்ப்பதற்குத் தடையாக இருக்காது. எங்கள் Health Tips ஆங்கிலம், சிங்களம் மற்றும் தமிழில் இலவசமாக வாசிக்கலாம்.",
   stats: [
