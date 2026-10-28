@@ -129,3 +129,14 @@ test("relatedServices returns 3 distinct others, preferring the same group", () 
     assert.equal(new Set(rel.map((r) => r.slug)).size, 3, `${s.slug} related duplicates`);
   }
 });
+
+// The home hero says medicine delivery runs 24/7 (owner, 2026-10-28); the
+// service entry is the fact's one home, so it has to say the same.
+test("medicine delivery runs 24 hours, in its hours, its facts and its strip", () => {
+  const delivery = atHomeServices.find((s) => s.slug === "medicine-delivery");
+  assert.ok(delivery, "no medicine-delivery service");
+  assert.equal(delivery.hours, "24 hours");
+  assert.deepEqual(delivery.facts[0], { k: "Hours", v: "24 hours" });
+  assert.ok(delivery.strip.some((cell) => cell.k === "Hours" && cell.v === "24 hours"), "the strip has no Hours cell");
+  assert.ok(!/daily/i.test(delivery.body2), "body2 still says daily");
+});
