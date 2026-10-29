@@ -43,9 +43,6 @@ export async function HomePage({ locale }: { locale: Locale }) {
   const home = await getHomeContent(locale);
   const { content } = home;
 
-  // The laboratory band's figures come from the catalogue, never the copy:
-  // the body's `{count}` / `{fromPrice}` and each tile's price are looked up
-  // here, so a re-imported price list changes the band on its own.
   // The hero slides leave here ready to render: the laboratory slide's
   // `{count}` / `{fromPrice}` filled from the catalogue summary and every
   // route passed through `localeHref` (`tel:` is left alone), so the client
@@ -59,11 +56,14 @@ export async function HomePage({ locale }: { locale: Locale }) {
       : undefined,
   }));
 
+  // The laboratory band's figures come from the catalogue, never the copy:
+  // the body's `{count}` / `{fromPrice}` are filled here, and each tile is
+  // kept only while its test is in the catalogue, so a re-imported price
+  // list changes the band on its own. The tiles show names, not prices.
   const laboratoryBody = fillTemplate(content.laboratory.bodyTemplate, labCatalogueSummary);
-  const laboratoryTiles = featuredCodes.flatMap(({ code, label }) => {
-    const test = labTests.find((t) => t.code === code);
-    return test && test.price !== null ? [{ label, price: test.price }] : [];
-  });
+  const laboratoryTiles = featuredCodes.flatMap(({ code, label }) =>
+    labTests.some((t) => t.code === code) ? [label] : []
+  );
 
   return (
     <ThemedShell palette="brand" header="solid" utilityBar>

@@ -207,9 +207,10 @@ export const freeOpd = {
  * `#laboratory`: the teaser band between the free OPD band and the community
  * band. It carries NO figure: `{count}` and `{fromPrice}` are filled by the
  * page from the laboratory feature's catalogue summary, and each of the
- * eight tiles is one of the laboratory feature's own `featuredCodes` (its
- * price list page's ticker shows the same eight), looked up in the catalogue
- * by code, so a re-import of the price list changes this band too
+ * eight tiles names one of the laboratory feature's own `featuredCodes` (its
+ * price list page's ticker shows the same eight, with prices; the tiles here
+ * carry none), checked against the catalogue by code, so a re-import of the
+ * price list changes this band too
  * (`laboratoryTeaser.test.ts`). No array of facts lives here: the overlay
  * walker would demand eight placeholder entries for it in every language.
  */
