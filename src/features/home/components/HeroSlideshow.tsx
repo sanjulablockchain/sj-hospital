@@ -22,7 +22,7 @@ export type HeroSlideView = {
   positionClass: string;
 };
 
-export type HeroControlsCopy = { ariaShow: string; ariaPrev: string; ariaNext: string; ariaPause: string; ariaPlay: string };
+export type HeroControlsCopy = { ariaShow: string; ariaPrev: string; ariaNext: string };
 
 /** `.animate-sj-burns` runs 26s in globals.css; a layer mounted later starts mid-cycle to match. */
 const BURNS_MS = 26_000;
@@ -39,8 +39,8 @@ const BURNS_MS = 26_000;
  * keyed by the active index so each slide rises in with `animate-sj-up`.
  * One `<h1>` is in the DOM at any time, the visible slide's, and a live
  * region announces the heading when the reader changes it (silent during
- * auto rotation). A pause button beside the arrows stops the rotation for
- * good until pressed again (WCAG 2.2.2); hover and focus only hold it. Below `sm:` the dots
+ * auto rotation). Hover and focus hold the rotation; there is no pause
+ * button, at the owner's request (2026-10-29). Below `sm:` the dots
  * are dropped (eight 44px targets plus the arrows do not fit in 335px) and
  * the counter and arrows carry the position on their own.
  *
@@ -61,10 +61,7 @@ export function HeroSlideshow({
   rail: ReactNode;
   mark: ReactNode;
 }) {
-  const { active, mounted, mountedAt, rotating, stopped, go, next, prev, pause, resume, togglePlay } = useHeroSlideshow(
-    slides.length,
-    intervalMs
-  );
+  const { active, mounted, mountedAt, rotating, go, next, prev, pause, resume } = useHeroSlideshow(slides.length, intervalMs);
   const { ref, offset } = useParallax(0.16, 130);
   // A layer mounted later starts its Ken Burns cycle that far in, so it
   // matches the zoom of the layer it fades over. Slide 0 is always 0ms, on
@@ -176,15 +173,6 @@ export function HeroSlideshow({
               <span className="text-[12px] tracking-[0.18em] text-white/60 tabular-nums">
                 {String(active + 1).padStart(2, "0")} / {total}
               </span>
-              <button
-                type="button"
-                onClick={togglePlay}
-                aria-pressed={stopped}
-                aria-label={stopped ? copy.ariaPlay : copy.ariaPause}
-                className="grid h-11 w-11 place-items-center border border-white/30 text-white transition-colors hover:bg-white/10"
-              >
-                <span aria-hidden className="text-[13px]">{stopped ? "\u25B6" : "\u2759\u2759"}</span>
-              </button>
               <button
                 type="button"
                 onClick={prev}

@@ -21,22 +21,21 @@ function subscribeVisibility(onChange: () => void) {
  * keep mounted (and when each mounted), and the auto advance timer.
  *
  * `rotating` is derived, never set: the slides move on their own only when
- * the reader has not asked for reduced motion, the tab is visible, the
- * pointer and focus are outside the hero, and the reader has not pressed
- * pause. The interval effect follows that one boolean (plus `cycle`, which
- * a manual step bumps so the next auto advance is a full interval away, and
- * a tap is never followed by an immediate advance). Reduced motion and tab
+ * the reader has not asked for reduced motion, the tab is visible, and the
+ * pointer and focus are outside the hero. The interval effect follows that
+ * one boolean (plus `cycle`, which a manual step bumps so the next auto
+ * advance is a full interval away, and a tap is never followed by an
+ * immediate advance). Reduced motion and tab
  * visibility are read through `useSyncExternalStore`, so nothing here sets
  * state inside an effect; on the server both read as "rotating", which is
  * also the first client render, so hydration agrees.
  *
- * `togglePlay` is the reader's own stop (WCAG 2.2.2): once stopped, hover
- * and focus leaving the hero do not restart it; only pressing play does.
+ * There is no stop button: the owner asked for it to go (2026-10-29), so
+ * hover and focus are the only holds on the rotation.
  */
 export function useHeroSlideshow(count: number, intervalMs: number) {
   const [state, setState] = useState<SlideState>(() => initialSlideState(count, Date.now()));
   const [held, setHeld] = useState(false);
-  const [stopped, setStopped] = useState(false);
   const [cycle, setCycle] = useState(0);
   const reduced = useSyncExternalStore(
     subscribeReducedMotion,
@@ -45,7 +44,7 @@ export function useHeroSlideshow(count: number, intervalMs: number) {
   );
   const visible = useSyncExternalStore(subscribeVisibility, () => !document.hidden, () => true);
 
-  const rotating = !reduced && visible && !held && !stopped;
+  const rotating = !reduced && visible && !held;
 
   useEffect(() => {
     if (!rotating) return;
@@ -68,12 +67,10 @@ export function useHeroSlideshow(count: number, intervalMs: number) {
     mounted: state.mounted,
     mountedAt: state.mountedAt,
     rotating,
-    stopped,
     go,
     next: () => go(state.active + 1),
     prev: () => go(state.active - 1),
     pause: () => setHeld(true),
     resume: () => setHeld(false),
-    togglePlay: () => setStopped((s) => !s),
   };
 }

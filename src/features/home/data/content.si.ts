@@ -24,8 +24,6 @@ export const heroControls = {
   ariaShow: "Slide {n} / {total}: {kicker}",
   ariaPrev: "කලින් Slide එක",
   ariaNext: "ඊළඟ Slide එක",
-  ariaPause: "Slideshow එක නවත්වන්න",
-  ariaPlay: "Slideshow එක Play කරන්න",
 };
 
 export const statTickerItems = [

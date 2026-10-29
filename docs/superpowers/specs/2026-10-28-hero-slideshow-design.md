@@ -201,3 +201,9 @@ the ward team at a bedside (slide 8), each resized to 1920px and under
 300 KB in `public/images/home/hero-*.jpg`. The eye care and meal tray
 photographs fit no slide and the second children photograph duplicates the
 first, so those three are unused. `HERO_SLIDE_INTERVAL_MS` is 5000.
+
+Later the same day the owner asked for a ninth slide, Blue Sapphire Hospital
+in Ratnapura (linking to the pending card on /locations and stating only
+what that page states), and for the pause button to be removed. Hover and
+focus still hold the rotation; the WCAG 2.2.2 pause control is gone at the
+owner's request.

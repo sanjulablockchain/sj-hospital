@@ -20,24 +20,27 @@ function staticRoutes(dir: string, prefix = ""): string[] {
   return found;
 }
 
-/** Whether some component under src/features/<feature>/components renders `id="<fragment>"`. */
+/**
+ * Whether the feature renders a section `id="<fragment>"`: literally in a
+ * component, or as `id: "<fragment>"` in its data when the component sets
+ * `id={item.id}` (the locations page does).
+ */
 function sectionExists(feature: string, fragment: string): boolean {
-  const dir = join(REPO, "src", "features", feature, "components");
-  if (!existsSync(dir)) return false;
-  const pattern = new RegExp(`id="${fragment}"`);
+  const pattern = new RegExp(`id(="|: ")${fragment}"`);
   const walk = (d: string): boolean =>
+    existsSync(d) &&
     readdirSync(d, { withFileTypes: true }).some((entry) =>
       entry.isDirectory() ? walk(join(d, entry.name)) : pattern.test(readFileSync(join(d, entry.name), "utf8"))
     );
-  return walk(dir);
+  return ["components", "data"].some((sub) => walk(join(REPO, "src", "features", feature, sub)));
 }
 
-test("eight slides in the owner's order, each with a distinct id and a photo on disk", () => {
+test("nine slides in the owner's order, each with a distinct id and a photo on disk", () => {
   assert.deepEqual(
     heroSlides.map((s) => s.id),
-    ["free-opd", "medicine-delivery", "patient-transport", "digital-xray", "laboratory", "channeling", "insurance", "cashless"]
+    ["free-opd", "medicine-delivery", "patient-transport", "digital-xray", "laboratory", "channeling", "insurance", "cashless", "ratnapura"]
   );
-  assert.equal(new Set(heroSlides.map((s) => s.photo)).size, 8);
+  assert.equal(new Set(heroSlides.map((s) => s.photo)).size, 9);
   for (const s of heroSlides) {
     assert.ok(existsSync(join(REPO, "public", s.photo)), `${s.id}: ${s.photo} is not in public/`);
     assert.ok(s.photoAlt.length > 10, `${s.id} has no alt text`);
@@ -48,7 +51,12 @@ test("eight slides in the owner's order, each with a distinct id and a photo on 
 test("every slide link is a call or a page on this site, and every fragment names a real section", () => {
   const routes = new Set([...staticRoutes(join(REPO, "src", "app", "[locale]")), "/", ...serviceSlugs.map((slug) => `/services/${slug}`)]);
   // Route → the feature folder whose components render that page's sections.
-  const featureOf: Record<string, string> = { "/facilities": "facilities", "/e-channeling": "e-channeling", "/school-wellness": "school-wellness" };
+  const featureOf: Record<string, string> = {
+    "/facilities": "facilities",
+    "/e-channeling": "e-channeling",
+    "/school-wellness": "school-wellness",
+    "/locations": "locations",
+  };
   for (const s of heroSlides) {
     for (const cta of [s.ctaPrimary, s.ctaSecondary]) {
       if (!cta) continue;

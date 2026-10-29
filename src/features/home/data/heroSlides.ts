@@ -1,8 +1,9 @@
 import { HOSPITAL_PHONE_LABEL, HOSPITAL_TEL } from "../../contact/data/content.ts";
 
 /**
- * The hero is a slideshow of eight message slides, one per advantage the
- * hospital leads with, in the order the owner set on 2026-10-28. Each slide
+ * The hero is a slideshow of nine message slides, one per advantage the
+ * hospital leads with, in the order the owner set on 2026-10-28 (the ninth,
+ * Ratnapura, added 2026-10-29). Each slide
  * is a kicker, a two part heading (`accent` is drawn in `--home-accent`), one
  * paragraph, one or two buttons and its own photograph (`positionClass` is
  * the object-position for `object-cover`, chosen per shot for a portrait
@@ -124,5 +125,19 @@ export const heroSlides: readonly HeroSlideContent[] = [
     photo: "/images/home/hero-ward-team.jpg",
     photoAlt: "Two nurses and a doctor smiling with a patient sitting up in a St. Joseph Hospital bed.",
     positionClass: "object-[50%_45%]",
+  },
+  // Blue Sapphire Hospital is a `pending` card on /locations until the owner
+  // supplies its details, so this slide states only what that page states:
+  // the name, the town and the shared protocol. The photograph is this
+  // hospital's own building; there is no Blue Sapphire photograph yet.
+  {
+    id: "ratnapura",
+    kicker: "Now in Ratnapura",
+    heading: { lead: "Our care is coming to", accent: "Ratnapura." },
+    body: "Blue Sapphire Hospital in Ratnapura joins St. Joseph Hospital, run to the same American protocol. Full details are on our locations page as soon as they are confirmed.",
+    ctaPrimary: { label: "Our locations", href: "/locations#ratnapura" },
+    photo: "/images/home/hero-dusk-facade.jpg",
+    photoAlt: "St. Joseph Hospital building at dusk",
+    positionClass: "object-[50%_50%]",
   },
 ];

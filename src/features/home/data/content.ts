@@ -48,8 +48,6 @@ export const heroControls = {
   ariaShow: "Slide {n} of {total}: {kicker}",
   ariaPrev: "Previous slide",
   ariaNext: "Next slide",
-  ariaPause: "Pause the slideshow",
-  ariaPlay: "Play the slideshow",
 };
 
 /** The five-item ticker under the hero. The room price is the fact `facilities/data/content.ts` owns. */
