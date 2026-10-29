@@ -42,7 +42,7 @@ test("eight slides in the owner's order, each with a distinct id and a photo on 
     assert.ok(existsSync(join(REPO, "public", s.photo)), `${s.id}: ${s.photo} is not in public/`);
     assert.ok(s.photoAlt.length > 10, `${s.id} has no alt text`);
   }
-  assert.equal(HERO_SLIDE_INTERVAL_MS, 7000);
+  assert.equal(HERO_SLIDE_INTERVAL_MS, 5000);
 });
 
 test("every slide link is a call or a page on this site, and every fragment names a real section", () => {

@@ -189,3 +189,15 @@ Copy (`content.ts`, `laboratory`): eyebrow "Laboratory"; heading "The best equip
 ## Verification before reporting done
 
 `npm run lint`, `npm test`, `npm run check`, `npm run build`, `npm run i18n:status` (new overlays listed as awaiting review, which is expected), then a visual pass of `/`, `/laboratory-tests`, `/network` and `/services/laboratory` at 375, 768 and 1280 in both themes, with the dev server restarted inside the worktree first. Report, then wait for the owner before merging.
+
+## Amendment, 2026-10-29
+
+The owner supplied eight photographs of the hospital's own
+(`C:\Users\User\Documents\Designs\sj-hospital\Images`) and asked that the
+slides advance every five seconds. Five of the photographs replaced the
+slide table's entries: the paediatric clinic (slide 1), the pharmacy counter
+(slide 2), the laboratory microscope (slide 5), a patient room (slide 7) and
+the ward team at a bedside (slide 8), each resized to 1920px and under
+300 KB in `public/images/home/hero-*.jpg`. The eye care and meal tray
+photographs fit no slide and the second children photograph duplicates the
+first, so those three are unused. `HERO_SLIDE_INTERVAL_MS` is 5000.

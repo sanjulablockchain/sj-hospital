@@ -7,7 +7,9 @@ import { HOSPITAL_PHONE_LABEL, HOSPITAL_TEL } from "../../contact/data/content.t
  * paragraph, one or two buttons and its own photograph (`positionClass` is
  * the object-position for `object-cover`, chosen per shot for a portrait
  * crop). Every slide links to the page that backs it; `heroSlides.test.ts`
- * resolves each route and fragment.
+ * resolves each route and fragment. Five of the photographs are the
+ * hospital's own, supplied by the owner on 2026-10-29 (see
+ * docs/image-credits.md); the other three are already on the site.
  *
  * Hero copy stays English in every locale (the register rule), so none of
  * this is translated.
@@ -33,8 +35,8 @@ export type HeroSlideContent = {
   positionClass: string;
 };
 
-/** Time each slide holds before the next crossfade begins. */
-export const HERO_SLIDE_INTERVAL_MS = 7000;
+/** Time each slide holds before the next crossfade begins (the owner asked for five seconds, 2026-10-29). */
+export const HERO_SLIDE_INTERVAL_MS = 5000;
 
 const callTheHospital = { label: `Call ${HOSPITAL_PHONE_LABEL}`, href: HOSPITAL_TEL };
 
@@ -46,9 +48,9 @@ export const heroSlides: readonly HeroSlideContent[] = [
     body: "Consultations at our outpatient department are free, every hour we are open. Walk in and see a doctor, and never weigh a fever or a week of pain against the money.",
     ctaPrimary: { label: "See the free OPD", href: "/services/outpatient-department" },
     ctaSecondary: callTheHospital,
-    photo: "/images/home/free-opd-doctor.jpg",
-    photoAlt: "A St. Joseph Hospital doctor in a branded white coat, arms folded, a stethoscope around his neck.",
-    positionClass: "object-[50%_18%]",
+    photo: "/images/home/hero-opd-family.jpg",
+    photoAlt: "A St. Joseph Hospital doctor high fiving a young girl in the paediatric clinic, a boy beside him and a nurse and mother looking on.",
+    positionClass: "object-[50%_45%]",
   },
   {
     id: "medicine-delivery",
@@ -56,9 +58,9 @@ export const heroSlides: readonly HeroSlideContent[] = [
     heading: { lead: "Your medicine, at your door,", accent: "any hour." },
     body: "Send a photo of your prescription. A pharmacist checks it, and it leaves our own counter for anywhere in Negombo, day or night.",
     ctaPrimary: { label: "Send a prescription", href: "/services/medicine-delivery" },
-    photo: "/images/services/heroes/medicine-delivery.jpg",
-    photoAlt: "Medicine delivery boxes left at a doorstep",
-    positionClass: "object-[50%_50%]",
+    photo: "/images/home/hero-pharmacy-counter.jpg",
+    photoAlt: "The St. Joseph Hospital pharmacy counter, its wooden front reading Our Kind Of Magic Beans, with stocked shelves behind.",
+    positionClass: "object-[50%_55%]",
   },
   {
     id: "patient-transport",
@@ -88,9 +90,9 @@ export const heroSlides: readonly HeroSlideContent[] = [
     body: "{count} tests, most reported the same day and every report checked by two doctors. Tests from {fromPrice} LKR onwards.",
     ctaPrimary: { label: "See every test and price", href: "/laboratory-tests" },
     ctaSecondary: { label: "Book a test", href: "/services/laboratory" },
-    photo: "/images/services/heroes/laboratory.jpg",
-    photoAlt: "A gloved hand holding a sample vial beside a laboratory analyser",
-    positionClass: "object-[50%_50%]",
+    photo: "/images/home/hero-laboratory-microscope.jpg",
+    photoAlt: "A St. Joseph Hospital laboratory technologist in a white coat and gloves looking into a microscope.",
+    positionClass: "object-[42%_50%]",
   },
   {
     id: "channeling",
@@ -109,9 +111,9 @@ export const heroSlides: readonly HeroSlideContent[] = [
     heading: { lead: "We accept", accent: "all insurance." },
     body: "Every insurer, personal or corporate, at the OPD and on the wards. Bring your policy and the billing desk does the paperwork with you.",
     ctaPrimary: { label: "Ask the billing desk", href: "/contact-us" },
-    photo: "/images/doctors.jpg",
-    photoAlt: "St. Joseph Hospital doctors",
-    positionClass: "object-[50%_30%]",
+    photo: "/images/home/hero-patient-room.jpg",
+    photoAlt: "A St. Joseph Hospital patient room: a made bed with a monitor beside it, a table across it and a sofa by the window.",
+    positionClass: "object-[50%_50%]",
   },
   {
     id: "cashless",
@@ -119,8 +121,8 @@ export const heroSlides: readonly HeroSlideContent[] = [
     heading: { lead: "Does any other hospital", accent: "do this?" },
     body: "A free consultation. Cashless admission, so nobody waits on money while they are ill. Reports read twice, surfaces cleaned every two hours, and a doctor who explains before you leave. We treat the human spirit.",
     ctaPrimary: { label: "How we care for you", href: "/about-us" },
-    photo: "/images/welcome.jpg",
-    photoAlt: "The St. Joseph Hospital reception desk, its counter reading We treat the human spirit.",
-    positionClass: "object-[50%_50%]",
+    photo: "/images/home/hero-ward-team.jpg",
+    photoAlt: "Two nurses and a doctor smiling with a patient sitting up in a St. Joseph Hospital bed.",
+    positionClass: "object-[50%_45%]",
   },
 ];
