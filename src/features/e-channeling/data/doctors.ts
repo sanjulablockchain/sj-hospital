@@ -45,7 +45,7 @@ export type Doctor = {
 };
 
 /**
- * Source: the hospital's consultant roster of 2026-11-06 (87 rows), which
+ * Source: the hospital's consultant roster of 2026-11-06 (82 rows), which
  * updated the roster of 2026-10-05. Where the roster and this file spelled a
  * name differently, this file's spelling was kept. Fees, qualifications,
  * registration numbers and phone numbers in the roster are deliberately not
@@ -123,7 +123,6 @@ export const doctors: Doctor[] = [
   // Cardiologist
   { name: "Dr. Ajith Wanniarachchi", specialization: "Cardiologist", calendlySlug: "consultant-cardiologist-dr-ajith-wanniarachchi", sessions: { tue: ["4.00 PM"], thu: ["4.00 PM"] } },
   { name: "Dr. Nimali Fernando", specialization: "Cardiologist", calendlySlug: "consultant-cardiologist-dr-nimali-fernando", sessions: { mon: ["2.00 PM"], fri: ["2.00 PM"] } },
-  { name: "Dr. Sanjaya Kularathne", specialization: "Cardiologist", sessions: { thu: ["4.30 PM"], sun: ["6.00 PM"] } },
   { name: "Dr. Tharanga Fernando", specialization: "Cardiologist", calendlySlug: "consultant-cardiologist-dr-taranga-fernando", sessions: { sun: ["10.15 AM"] } },
   { name: "Dr. Wasantha Abeywickrama", specialization: "Cardiologist", calendlySlug: "consultant-cardiologist-dr-wasantha-abeywickrama", sessions: { sat: ["7.00 PM"] } },
 
@@ -134,7 +133,6 @@ export const doctors: Doctor[] = [
 
   // Dermatologist / Skin Specialist
   { name: "Dr. Ahamed Uwyes", specialization: "Dermatologist / Skin Specialist", calendlySlug: "consultant-dermatologist-dr-ahamed-uwyes", sessions: { mon: ["8.45 PM"], wed: ["8.45 PM"] } },
-  { name: "Dr. Lakmali Pathiraja", specialization: "Dermatologist / Skin Specialist", calendlySlug: "pta-physical-therapy-assistant-mr-lilangit-clone", sessions: { tue: ["4.30 PM"] } },
   { name: "Dr. Poorna Weerasinghe", specialization: "Dermatologist / Skin Specialist", sessions: { mon: ["4.00 PM"], thu: ["4.00 PM"] } },
   { name: "Dr. Punya Abeygunawardana", specialization: "Dermatologist / Skin Specialist", calendlySlug: "consultant-dermatologist-dr-punya", sessions: { wed: ["4.00 PM"], sat: ["2.00 PM"] } },
 
@@ -169,7 +167,6 @@ export const doctors: Doctor[] = [
   { name: "Dr. Aruna Jayawardhana", specialization: "Hematologist", calendlySlug: "consultant-psychiatrist-dr-saman-weerawardha-clone", sessions: { mon: ["5.00 PM"], wed: ["5.00 PM"], sat: ["7.00 AM"], sun: ["5.00 PM"] } },
 
   // Urologist
-  { name: "Dr. D. S. Indrajith", specialization: "Urologist", sessions: { wed: ["4.00 PM"] } },
   { name: "Dr. Ishan Jayasuriya", specialization: "Urologist", calendlySlug: "consultant-urologist-dr-ishan-jayasuriya", sessions: { mon: ["6.45 AM", "7.00 PM"], tue: ["6.45 AM", "7.00 PM"], wed: ["6.45 AM", "7.00 PM"], thu: ["6.45 AM", "7.00 PM"], fri: ["6.45 AM", "7.00 PM"], sat: ["4.00 PM"], sun: ["9.00 AM", "4.00 PM"] } },
   { name: "Dr. Munipriya Willarachchi", specialization: "Urologist", sessions: { tue: ["5.00 PM"], wed: ["5.00 PM"], sat: ["8.00 PM"] } },
 
@@ -183,10 +180,8 @@ export const doctors: Doctor[] = [
   { name: "Dr. Ineesha Jayasinghe", specialization: "Histopathologist", calendlySlug: "consultant-histopathologist-dr-ineesha-jayasinghe", sessions: { mon: ["6.30 AM"], tue: ["6.30 AM"], wed: ["6.30 AM"], thu: ["6.30 AM"], fri: ["6.30 AM"] } },
 
   // Radiologist
-  { name: "Dr. Nimesha Madagedara", specialization: "Radiologist", contactOnly: true, sessions: { mon: ["3.30 PM"], tue: ["3.30 PM"], wed: ["3.30 PM"], thu: ["3.30 PM"], fri: ["3.30 PM"], sat: ["11.30 AM"] } },
   { name: "Dr. Prasanna Rupasinghe", specialization: "Radiologist", contactOnly: true, sessions: { sun: ["8.00 AM"] } },
   { name: "Dr. Ranjita Sivapatham", specialization: "Radiologist", contactOnly: true, sessions: { mon: ["3.30 PM"], wed: ["3.30 PM"], thu: ["3.30 PM"], fri: ["3.30 PM"], sat: ["12.00 PM"] } },
-  { name: "Dr. Wasantha Hewapathirana", specialization: "Radiologist", contactOnly: true, sessions: { mon: ["3.30 PM"], tue: ["3.30 PM"], wed: ["3.30 PM"], thu: ["3.30 PM"], fri: ["3.30 PM"], sat: ["12.00 PM"] } },
 
   // Medico-Legal Consultant
   { name: "Dr. W. A. S. R. Wickramarachchi", specialization: "Medico-Legal Consultant", sessions: { mon: ["4.30 PM"], tue: ["4.30 PM"], wed: ["4.30 PM"], thu: ["4.30 PM"] } },

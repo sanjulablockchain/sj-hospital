@@ -3,7 +3,7 @@
 // Only `specialization` is here, plus `sessionNote` on the two rows that have
 // one. `name` is a proper noun, exactly like the hospital's own name, and
 // never changes script; content.i18n.test.ts excludes it by path rather than
-// listing all 87 names. `calendlySlug` is a URL fragment and `sessions` holds
+// listing all 82 names. `calendlySlug` is a URL fragment and `sessions` holds
 // times in numerals, so both stay in doctors.ts too.
 //
 // The 32 specialities below use the same vocabulary as the hero's ticker
@@ -62,11 +62,9 @@ export const doctors = [
   { specialization: "இதய நோய் நிபுணர்" },
   { specialization: "இதய நோய் நிபுணர்" },
   { specialization: "இதய நோய் நிபுணர்" },
-  { specialization: "இதய நோய் நிபுணர்" },
   { specialization: "கண் அறுவை சிகிச்சை நிபுணர்" },
   { specialization: "கண் அறுவை சிகிச்சை நிபுணர்" },
   { specialization: "கண் அறுவை சிகிச்சை நிபுணர்" },
-  { specialization: "தோல் நோய் நிபுணர்" },
   { specialization: "தோல் நோய் நிபுணர்" },
   { specialization: "தோல் நோய் நிபுணர்" },
   { specialization: "தோல் நோய் நிபுணர்" },
@@ -86,12 +84,9 @@ export const doctors = [
   { specialization: "இரத்த நோய் நிபுணர்" },
   { specialization: "சிறுநீரியல் நிபுணர்" },
   { specialization: "சிறுநீரியல் நிபுணர்" },
-  { specialization: "சிறுநீரியல் நிபுணர்" },
   { specialization: "புற்றுநோய் நிபுணர்" },
   { specialization: "புற்றுநோய் அறுவை சிகிச்சை நிபுணர்" },
   { specialization: "திசு நோயியல் நிபுணர்" },
-  { specialization: "கதிரியக்கவியல் நிபுணர்" },
-  { specialization: "கதிரியக்கவியல் நிபுணர்" },
   { specialization: "கதிரியக்கவியல் நிபுணர்" },
   { specialization: "கதிரியக்கவியல் நிபுணர்" },
   { specialization: "சட்ட மருத்துவ நிபுணர்" },

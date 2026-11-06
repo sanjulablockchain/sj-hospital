@@ -6,22 +6,22 @@ import { CALENDLY_BASE, doctors } from "./doctors.ts";
 
 const source = readFileSync(fileURLToPath(new URL("./doctors.ts", import.meta.url)), "utf8");
 
-// The hospital roster of 2026-11-06: 85 consultants carried over from the
-// 2026-10-05 roster (3 dropped, see docs/consultants-removed-2026-11-06.md)
+// The hospital roster of 2026-11-06: 80 consultants carried over from the
+// 2026-10-05 roster (8 dropped, see docs/consultants-removed-2026-11-06.md)
 // and 2 added. Dropping the only Clinical Embryologist took a speciality with
 // it.
-test("87 consultants across 32 specialities", () => {
-  assert.equal(doctors.length, 87);
+test("82 consultants across 32 specialities", () => {
+  assert.equal(doctors.length, 82);
   assert.equal(new Set(doctors.map((d) => d.specialization)).size, 32);
 });
 
-// 29 of the rows added on 2026-10-05 and both rows added on 2026-11-06 have no
+// 27 of the rows added on 2026-10-05 and both rows added on 2026-11-06 have no
 // Calendly event yet (their cards offer a call and a text to the channelling
 // desk instead). When a slug is filled in, lower the waiting number; when it
 // reaches zero, every card that can book online does.
-test("52 consultants book online, 31 still wait for a Calendly link", () => {
-  assert.equal(doctors.filter((d) => d.calendlySlug).length, 52);
-  assert.equal(doctors.filter((d) => !d.calendlySlug && !d.contactOnly).length, 31);
+test("51 consultants book online, 29 still wait for a Calendly link", () => {
+  assert.equal(doctors.filter((d) => d.calendlySlug).length, 51);
+  assert.equal(doctors.filter((d) => !d.calendlySlug && !d.contactOnly).length, 29);
 });
 
 // Decided 2026-11-06: radiology is arranged with the desk by call or text,
