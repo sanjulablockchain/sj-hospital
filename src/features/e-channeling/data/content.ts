@@ -109,9 +109,11 @@ export const directory = {
     "Try a different name or speciality, or call our channelling desk on {phone} and we will find the right doctor for you.",
   showAllDoctors: "Show all doctors",
   bookAppointment: "Book appointment",
-  // The CTA on a card whose Calendly event has not been set up yet: the card
-  // dials the channelling desk instead of opening a booking page.
+  // The two CTAs on a card that has no Calendly event (not set up yet, or
+  // `contactOnly` by the hospital's decision): the card dials the channelling
+  // desk, or opens a WhatsApp chat with it, instead of a booking page.
   callToBook: "Call to book",
+  textToBook: "Text to book",
   // Short day names for each card's weekly sessions, keyed like
   // doctors.ts's WEEKDAYS. A run of days with the same times prints as one
   // range through dayRangeTemplate ("Mon to Fri").
@@ -136,6 +138,11 @@ export const helpRail = {
   body: "Our channelling desk will match you to the right consultant, any hour of the day.",
   phone: "0117 84 84 84",
   phoneHref: "tel:+94117848484",
+  // The hospital's WhatsApp line, the same number the header's booking sheet
+  // and the footer offer. A directory card without a booking page offers it
+  // as its "text" option beside the call.
+  whatsapp: "074 222 333 4",
+  whatsappHref: "https://wa.me/94742223334",
   // The channelling desk books consultations, so it takes the appointments
   // mailbox rather than the general one. See `@/config/contactEmails`.
   email: "appointments@sjhospital.lk",

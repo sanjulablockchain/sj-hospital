@@ -12,7 +12,7 @@
 // Sentence forms use the polite plural ("කරන්න"), which is how a hospital
 // addresses a patient it has not met.
 //
-// Only translatable copy lives here. `doctors.si.ts` carries the 88
+// Only translatable copy lives here. `doctors.si.ts` carries the 82
 // consultants' translated specialities; every href, phone number and email
 // address stays in content.ts and has exactly one home.
 
@@ -23,30 +23,29 @@
  */
 export const __review = { status: "draft", reviewer: null, date: null } as const;
 
-// Same 33 specialities as doctors.si.ts, in the base's count-sorted order.
+// Same 32 specialities as doctors.si.ts, in the base's count-sorted order.
 export const tickerItems = [
   "ශල්‍ය වෛද්‍ය විශේෂඥ",
   "ළමා රෝග විශේෂඥ",
   "ප්‍රසව හා නාරි රෝග විශේෂඥ",
-  "හෘද රෝග විශේෂඥ",
   "වෛද්‍ය විශේෂඥ",
-  "විකිරණවේද විශේෂඥ",
-  "සම රෝග විශේෂඥ",
+  "හෘද රෝග විශේෂඥ",
   "අස්ථි ශල්‍ය වෛද්‍ය විශේෂඥ",
+  "සම රෝග විශේෂඥ",
+  "ඇස් ශල්‍ය වෛද්‍ය විශේෂඥ",
   "වකුගඩු රෝග විශේෂඥ",
   "පෝෂණ විශේෂඥ",
   "සන්ධි රෝග විශේෂඥ",
-  "මුත්‍රා පද්ධති රෝග විශේෂඥ",
   "ශ්‍රවණ පරීක්ෂණ විශේෂඥ",
+  "අන්තර්ස්‍රාවී රෝග විශේෂඥ",
   "ENT ශල්‍ය වෛද්‍ය විශේෂඥ",
-  "ඇස් ශල්‍ය වෛද්‍ය විශේෂඥ",
   "මනෝ රෝග විශේෂඥ",
   "මනෝවිද්‍යාත්මක උපදේශනය",
+  "විකිරණවේද විශේෂඥ",
   "පපුවේ රෝග විශේෂඥ",
-  "වන්ධ්‍යත්ව උපදේශන විශේෂඥ",
+  "මුත්‍රා පද්ධති රෝග විශේෂඥ",
   "උපදේශන මනෝවිද්‍යාඥ",
   "EEG (මොළයේ විද්‍යුත් තරංග පරීක්ෂණය)",
-  "අන්තර්ස්‍රාවී රෝග විශේෂඥ",
   "රක්ත රෝග විශේෂඥ",
   "පටක රෝග විශේෂඥ",
   "පෙනහළු ක්‍රියාකාරිත්ව පරීක්ෂණය",

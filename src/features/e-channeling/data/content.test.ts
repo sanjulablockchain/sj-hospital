@@ -15,6 +15,8 @@ test("the hero's counts are computed from the doctor list, not typed in", () => 
 test("the help rail offers the hospital's own desk only", () => {
   assert.equal(helpRail.phone, "0117 84 84 84");
   assert.equal(helpRail.phoneHref, "tel:+94117848484");
+  assert.equal(helpRail.whatsapp, "074 222 333 4");
+  assert.equal(helpRail.whatsappHref, "https://wa.me/94742223334");
   assert.equal(helpRail.email, "appointments@sjhospital.lk");
 });
 

@@ -6,17 +6,34 @@ import { CALENDLY_BASE, doctors } from "./doctors.ts";
 
 const source = readFileSync(fileURLToPath(new URL("./doctors.ts", import.meta.url)), "utf8");
 
-// The hospital roster of 2026-10-05: 57 consultants carried over, 31 added.
-test("88 consultants across 33 specialities", () => {
-  assert.equal(doctors.length, 88);
-  assert.equal(new Set(doctors.map((d) => d.specialization)).size, 33);
+// The hospital roster of 2026-11-06: 80 consultants carried over from the
+// 2026-10-05 roster (8 dropped, see docs/consultants-removed-2026-11-06.md)
+// and 2 added. Dropping the only Clinical Embryologist took a speciality with
+// it.
+test("82 consultants across 32 specialities", () => {
+  assert.equal(doctors.length, 82);
+  assert.equal(new Set(doctors.map((d) => d.specialization)).size, 32);
 });
 
-// The 31 added on 2026-10-05 have no Calendly event yet (their cards dial the
-// channelling desk instead). When a slug is filled in, lower this number; when
-// it reaches 57 + 31 = 88, every card books online.
-test("57 consultants book online, 31 still wait for a Calendly link", () => {
-  assert.equal(doctors.filter((d) => d.calendlySlug).length, 57);
+// 27 of the rows added on 2026-10-05 and both rows added on 2026-11-06 have no
+// Calendly event yet (their cards offer a call and a text to the channelling
+// desk instead). When a slug is filled in, lower the waiting number; when it
+// reaches zero, every card that can book online does.
+test("51 consultants book online, 29 still wait for a Calendly link", () => {
+  assert.equal(doctors.filter((d) => d.calendlySlug).length, 51);
+  assert.equal(doctors.filter((d) => !d.calendlySlug && !d.contactOnly).length, 29);
+});
+
+// Decided 2026-11-06: radiology is arranged with the desk by call or text,
+// never through a Calendly event, so every radiologist is `contactOnly` and
+// no other speciality is. A slug on a radiologist, or a radiologist without
+// the flag, means somebody undid that decision by accident.
+test("radiologists, and only radiologists, are booked by contact only", () => {
+  for (const doctor of doctors) {
+    const isRadiologist = doctor.specialization === "Radiologist";
+    assert.equal(doctor.contactOnly === true, isRadiologist, `${doctor.name} contactOnly`);
+    if (isRadiologist) assert.equal(doctor.calendlySlug, undefined, `${doctor.name} still has a slug`);
+  }
 });
 
 // Every one of the slugs of the time was verified against the live Calendly

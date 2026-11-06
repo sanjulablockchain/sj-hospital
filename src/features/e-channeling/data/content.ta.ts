@@ -12,7 +12,7 @@
 // Sentence forms use the polite plural ("செய்யுங்கள்"), which is how a
 // hospital addresses a patient it has not met.
 //
-// Only translatable copy lives here. `doctors.ta.ts` carries the 88
+// Only translatable copy lives here. `doctors.ta.ts` carries the 82
 // consultants' translated specialities; every href, phone number and email
 // address stays in content.ts and has exactly one home.
 
@@ -23,30 +23,29 @@
  */
 export const __review = { status: "draft", reviewer: null, date: null } as const;
 
-// Same 33 specialities as doctors.ta.ts, in the base's count-sorted order.
+// Same 32 specialities as doctors.ta.ts, in the base's count-sorted order.
 export const tickerItems = [
   "அறுவை சிகிச்சை நிபுணர்",
   "குழந்தை மருத்துவ நிபுணர்",
   "மகப்பேறு மற்றும் மகளிர் நோய் நிபுணர்",
-  "இதய நோய் நிபுணர்",
   "பொது மருத்துவ நிபுணர்",
-  "கதிரியக்கவியல் நிபுணர்",
-  "தோல் நோய் நிபுணர்",
+  "இதய நோய் நிபுணர்",
   "எலும்பியல் அறுவை சிகிச்சை நிபுணர்",
+  "தோல் நோய் நிபுணர்",
+  "கண் அறுவை சிகிச்சை நிபுணர்",
   "சிறுநீரக நோய் நிபுணர்",
   "ஊட்டச்சத்து நிபுணர்",
   "மூட்டு நோய் நிபுணர்",
-  "சிறுநீரியல் நிபுணர்",
   "செவிவழி பரிசோதனை நிபுணர்",
+  "நாளமில்லச் சுரப்பி நோய் நிபுணர்",
   "ENT அறுவை சிகிச்சை நிபுணர்",
-  "கண் அறுவை சிகிச்சை நிபுணர்",
   "மனநல மருத்துவ நிபுணர்",
   "உளவியல் ஆலோசனை",
+  "கதிரியக்கவியல் நிபுணர்",
   "மார்பு நோய் நிபுணர்",
-  "கருவுறுதல் ஆலோசனை நிபுணர்",
+  "சிறுநீரியல் நிபுணர்",
   "ஆலோசனை உளவியல் நிபுணர்",
   "EEG (மூளை மின் அலை பரிசோதனை)",
-  "நாளமில்லச் சுரப்பி நோய் நிபுணர்",
   "இரத்த நோய் நிபுணர்",
   "திசு நோயியல் நிபுணர்",
   "நுரையீரல் செயல்பாட்டு பரிசோதனை",
