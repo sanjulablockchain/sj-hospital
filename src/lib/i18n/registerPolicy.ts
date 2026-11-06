@@ -310,9 +310,11 @@ const CTA_LEAVES = new Set([
   // table's first row is "every Book now button, in the header, the rail and
   // in-page", and this is the in-page one.
   "bookAppointment",
-  // The same card's CTA while its Calendly event is still missing: it dials
-  // the channelling desk instead, but it is still the card's Book button.
+  // The same card's two CTAs while it has no Calendly event: one dials the
+  // channelling desk, the other opens a WhatsApp chat with it, but each is
+  // still the card's Book button.
   "callToBook",
+  "textToBook",
   // "Show all doctors" and "View all {count} services": the same species as
   // `allServicesLabel`, a link that opens the full list.
   "showAllDoctors",

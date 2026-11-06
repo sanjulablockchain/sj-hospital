@@ -51,10 +51,12 @@ export function DirectorySection({
             showAllDoctors: directory.showAllDoctors,
             bookAppointment: directory.bookAppointment,
             callToBook: directory.callToBook,
+            textToBook: directory.textToBook,
             weekdays: directory.weekdays,
             dayRangeTemplate: directory.dayRangeTemplate,
             phone: helpRail.phone,
             phoneHref: helpRail.phoneHref,
+            whatsappHref: helpRail.whatsappHref,
           }}
         />
       </div>

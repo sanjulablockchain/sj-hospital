@@ -13,10 +13,12 @@ import { groupSessions } from "../data/sessions";
  *
  * `introTemplate` and `noResultsBodyTemplate` carry `{count}` / `{specialities}`
  * / `{phone}` tokens rather than a fixed split: word order moves between
- * languages. `phone` / `phoneHref` are the channelling desk's own number,
- * threaded through from `helpRail` so it has one home rather than a second
- * copy living here. A card whose consultant has no Calendly slug yet dials
- * that same number, labelled `callToBook`, instead of opening a booking page.
+ * languages. `phone` / `phoneHref` and `whatsappHref` are the channelling
+ * desk's own numbers, threaded through from `helpRail` so each has one home
+ * rather than a second copy living here. A card whose consultant has no
+ * Calendly slug (still waiting for one, or `contactOnly`) is not a link
+ * itself: it carries two, `callToBook` dialling the desk and `textToBook`
+ * opening a WhatsApp chat with it, instead of opening a booking page.
  */
 type DirectoryCopy = {
   introTemplate: string;
@@ -33,10 +35,12 @@ type DirectoryCopy = {
   showAllDoctors: string;
   bookAppointment: string;
   callToBook: string;
+  textToBook: string;
   weekdays: Record<Weekday, string>;
   dayRangeTemplate: string;
   phone: string;
   phoneHref: string;
+  whatsappHref: string;
 };
 
 type DoctorDirectoryProps = {
@@ -45,6 +49,10 @@ type DoctorDirectoryProps = {
 };
 
 const MOBILE_CHIP_LIMIT = 6;
+
+/** One card, whether it is a booking link or a holder of a call and a text. */
+const CARD_CLASS =
+  "sj-fill group flex flex-col gap-3 rounded-2xl border border-[var(--home-hairline)] bg-[var(--home-bg)] p-5 transition";
 
 function chipClass(active: boolean) {
   return [
@@ -228,70 +236,125 @@ export function DoctorDirectory({ doctors, copy }: DoctorDirectoryProps) {
               the grid, not just in its own row, so all cards share one size
               and their Book links line up across the page. Kept to sm and
               up: in the single mobile column nothing sits side by side, and
-              padding 88 cards to the tallest would only add scrolling.
+              padding every card to the tallest would only add scrolling.
               groupSessions keeps that tallest card short. */}
           {filtered.length > 0 ? (
             <div className="grid grid-cols-1 gap-4 sm:auto-rows-fr sm:grid-cols-2 xl:grid-cols-3">
               {filtered.map((doctor) => {
                 const sessions = groupSessions(doctor.sessions);
-                return (
-                <a
-                  key={doctor.name}
-                  {...(doctor.calendlySlug
-                    ? {
-                        href: `${CALENDLY_BASE}${doctor.calendlySlug}`,
-                        target: "_blank",
-                        rel: "noopener noreferrer",
-                      }
-                    : { href: copy.phoneHref })}
-                  className="sj-fill group flex flex-col gap-3 rounded-2xl border border-[var(--home-hairline)] bg-[var(--home-bg)] p-5 transition hover:-translate-y-0.5 hover:shadow-lg"
-                >
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-[var(--home-accent-soft)]">
-                    {doctor.specialization}
-                  </span>
-                  <span className="font-display text-lg font-bold text-[var(--home-heading)]">
-                    {doctor.name}
-                  </span>
-                  {(sessions.length > 0 || doctor.sessionNote) && (
-                    <span className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-3 gap-y-1 text-[13px] leading-snug text-[var(--home-muted)]">
-                      {sessions.map((group) => (
-                        <Fragment key={group.times.join("|")}>
-                          <span className="font-semibold text-[var(--home-body)]">
-                            {group.days
-                              .map(({ from, to }) =>
-                                from === to
-                                  ? copy.weekdays[from]
-                                  : copy.dayRangeTemplate
-                                      .replace("{from}", copy.weekdays[from])
-                                      .replace("{to}", copy.weekdays[to])
-                              )
-                              .join(", ")}
-                          </span>
-                          <span>{group.times.join(", ")}</span>
-                        </Fragment>
-                      ))}
-                      {doctor.sessionNote && <span className="col-span-2">{doctor.sessionNote}</span>}
+                const body = (
+                  <>
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-[var(--home-accent-soft)]">
+                      {doctor.specialization}
                     </span>
-                  )}
-                  <span className="mt-auto inline-flex items-center gap-2 pt-1 text-sm font-semibold text-[var(--home-accent)]">
-                    {doctor.calendlySlug ? copy.bookAppointment : copy.callToBook}
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="shrink-0 transition group-hover:translate-x-0.5"
-                      aria-hidden="true"
+                    <span className="font-display text-lg font-bold text-[var(--home-heading)]">
+                      {doctor.name}
+                    </span>
+                    {(sessions.length > 0 || doctor.sessionNote) && (
+                      <span className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-3 gap-y-1 text-[13px] leading-snug text-[var(--home-muted)]">
+                        {sessions.map((group) => (
+                          <Fragment key={group.times.join("|")}>
+                            <span className="font-semibold text-[var(--home-body)]">
+                              {group.days
+                                .map(({ from, to }) =>
+                                  from === to
+                                    ? copy.weekdays[from]
+                                    : copy.dayRangeTemplate
+                                        .replace("{from}", copy.weekdays[from])
+                                        .replace("{to}", copy.weekdays[to])
+                                )
+                                .join(", ")}
+                            </span>
+                            <span>{group.times.join(", ")}</span>
+                          </Fragment>
+                        ))}
+                        {doctor.sessionNote && <span className="col-span-2">{doctor.sessionNote}</span>}
+                      </span>
+                    )}
+                  </>
+                );
+
+                // A consultant with a booking page: the whole card is the link.
+                if (doctor.calendlySlug) {
+                  return (
+                    <a
+                      key={doctor.name}
+                      href={`${CALENDLY_BASE}${doctor.calendlySlug}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`${CARD_CLASS} hover:-translate-y-0.5 hover:shadow-lg`}
                     >
-                      <path d="M7 17 17 7" />
-                      <path d="M7 7h10v10" />
-                    </svg>
-                  </span>
-                </a>
+                      {body}
+                      <span className="mt-auto inline-flex items-center gap-2 pt-1 text-sm font-semibold text-[var(--home-accent)]">
+                        {copy.bookAppointment}
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="shrink-0 transition group-hover:translate-x-0.5"
+                          aria-hidden="true"
+                        >
+                          <path d="M7 17 17 7" />
+                          <path d="M7 7h10v10" />
+                        </svg>
+                      </span>
+                    </a>
+                  );
+                }
+
+                // No booking page (waiting for its Calendly event, or booked by
+                // contact only): the card holds two links, a call and a text,
+                // each tall enough to be a tap target on its own.
+                return (
+                  <div key={doctor.name} className={CARD_CLASS}>
+                    {body}
+                    <span className="mt-auto flex flex-wrap gap-x-5 text-sm font-semibold text-[var(--home-accent)]">
+                      <a href={copy.phoneHref} className="inline-flex min-h-11 items-center gap-2 hover:underline">
+                        {copy.callToBook}
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="shrink-0"
+                          aria-hidden="true"
+                        >
+                          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" />
+                        </svg>
+                      </a>
+                      <a
+                        href={copy.whatsappHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex min-h-11 items-center gap-2 hover:underline"
+                      >
+                        {copy.textToBook}
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="shrink-0"
+                          aria-hidden="true"
+                        >
+                          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                        </svg>
+                      </a>
+                    </span>
+                  </div>
                 );
               })}
             </div>

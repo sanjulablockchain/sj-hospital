@@ -89,8 +89,9 @@ test("no translated speciality is left identical to its English source, ignoring
  * `heroFacts[0].v` and `heroFacts[1].v` are the Consultants and Specialities
  * counts, computed from doctors.ts rather than typed in (see content.ts), so
  * they are numerals rendered as strings, not prose. `heroFacts[3].v` and
- * every `helpRail.phone` / `helpRail.phoneHref` / `helpRail.email` are the
- * channelling desk's own facts, which have exactly one home in content.ts.
+ * every `helpRail.phone` / `helpRail.phoneHref` / `helpRail.whatsapp` /
+ * `helpRail.whatsappHref` / `helpRail.email` are the channelling desk's own
+ * facts, which have exactly one home in content.ts.
  */
 function isContentUntranslatable(path: string): boolean {
   return (
@@ -99,6 +100,8 @@ function isContentUntranslatable(path: string): boolean {
     path === "heroFacts[3].v" ||
     path === "helpRail.phone" ||
     path === "helpRail.phoneHref" ||
+    path === "helpRail.whatsapp" ||
+    path === "helpRail.whatsappHref" ||
     path === "helpRail.email"
   );
 }
