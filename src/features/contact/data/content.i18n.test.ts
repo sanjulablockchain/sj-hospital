@@ -21,6 +21,9 @@ import { assertTranslationParity, stringPaths } from "../../../lib/i18n/stringPa
 function isUntranslatable(path: string): boolean {
   return (
     path === "DIRECTIONS_URL" ||
+    // The switchboard as printed and as dialled: digits, not copy.
+    path === "HOSPITAL_PHONE_LABEL" ||
+    path === "HOSPITAL_TEL" ||
     path.endsWith(".href") ||
     path.endsWith(".value") ||
     path.endsWith(".count") ||

@@ -42,7 +42,7 @@ export const chromeCopy = {
   // descriptions and the footer line are prose and translate. Every claim in
   // them has its home elsewhere: same-day slots and the free consultation in
   // `services/data/clinics.ts` (the OPD), online 24/7 in e-channeling's own
-  // hero facts, corporate insurance at the OPD in `about/data/content.ts`.
+  // hero facts; the insurance line here says what the home hero says.
   // The phone and WhatsApp numbers are facts rendered by the component.
   bookTitle: "Book an appointment",
   bookSubtitle: "Same-day slots at the OPD, and online booking around the clock.",
@@ -55,7 +55,7 @@ export const chromeCopy = {
   bookMessageDesc: "Send your name and the clinic you need.",
   bookCallKicker: "Call",
   bookCallDesc: "The switchboard answers at every hour.",
-  bookFooter: "Free OPD consultation. Corporate insurance accepted at the OPD.",
+  bookFooter: "Free OPD consultation. All insurance accepted, cashless available.",
   notNow: "Not now",
   closeBooking: "Close booking options",
 };

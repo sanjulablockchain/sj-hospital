@@ -61,6 +61,10 @@ export const heroFacts = [
   {},
 ];
 
+export const parentTeaser = {
+  note: "මේ Site එකේ හැම දෙයක්ම මේ රෝහල Operate කරන Group එකේ Protocols වලට අනුව කෙරෙනවා. ඔවුන්ගේම Site එකේ California හි Clinics, වෛද්‍යවරු සහ ඔවුන් දෙන සත්කාරය තියෙනවා.",
+};
+
 export const jumpCards = [
   { count: "ඇයි වැදගත්ද", note: "මේ සම්බන්ධතාවෙන් ඔබේ සත්කාරයට වෙන වෙනස." },
   { count: "සමාගම් 9ක්", note: "කැලිෆෝනියාව, ශ්‍රී ලංකාව, සහ සහායක අංශ." },

@@ -128,6 +128,11 @@ export const pageMetadata = {
     description:
       "St. Joseph Hospital in Negombo and Blue Sapphire Hospital in Ratnapura: addresses, phone numbers, directions and opening hours for both hospitals in the group.",
   },
+  laboratoryTests: {
+    title: "Laboratory Tests & Prices | St. Joseph Hospital Negombo",
+    description:
+      "Every laboratory test St. Joseph Hospital Negombo runs and what it costs, from the hospital's own 2026 price list: sample, turnaround and price in LKR, with 10% off for OPD patients.",
+  },
   pharmacy: {
     title: "Pharmacy | St. Joseph Hospital Negombo",
     description:

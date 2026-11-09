@@ -1,12 +1,16 @@
 import { ThemedShell } from "@/components/layout/ThemedShell";
 import { FloatingActions } from "@/components/layout/FloatingActions";
 import type { Locale } from "@/lib/i18n/locales";
+import { localeHref } from "@/lib/i18n/paths";
 import { services } from "@/features/services";
+import { featuredCodes, fillTemplate, labCatalogueSummary, labTests } from "@/features/laboratory";
 import { getHomeContent } from "../data/getContent";
+import { heroSlides, HERO_SLIDE_INTERVAL_MS } from "../data/heroSlides";
 import { HeroSection } from "./HeroSection";
 import { QuickAccessSection } from "./QuickAccessSection";
 import { WhoWeAreSection } from "./WhoWeAreSection";
 import { FreeOpdSection } from "./FreeOpdSection";
+import { LaboratorySection } from "./LaboratorySection";
 import { CommunitySection } from "./CommunitySection";
 import { SpecialtiesSection } from "./SpecialtiesSection";
 import { PatientCareSection } from "./PatientCareSection";
@@ -39,13 +43,42 @@ export async function HomePage({ locale }: { locale: Locale }) {
   const home = await getHomeContent(locale);
   const { content } = home;
 
+  // The hero slides leave here ready to render: the laboratory slide's
+  // `{count}` / `{fromPrice}` filled from the catalogue summary and every
+  // route passed through `localeHref` (`tel:` is left alone), so the client
+  // leaf never touches a data file or the locale.
+  const slides = heroSlides.map((slide) => ({
+    ...slide,
+    body: fillTemplate(slide.body, labCatalogueSummary),
+    ctaPrimary: { ...slide.ctaPrimary, href: localeHref(slide.ctaPrimary.href, locale) },
+    ctaSecondary: slide.ctaSecondary
+      ? { ...slide.ctaSecondary, href: localeHref(slide.ctaSecondary.href, locale) }
+      : undefined,
+  }));
+
+  // The laboratory band's figures come from the catalogue, never the copy:
+  // the body's `{count}` / `{fromPrice}` are filled here, and each tile is
+  // kept only while its test is in the catalogue, so a re-imported price
+  // list changes the band on its own. The tiles show names, not prices.
+  const laboratoryBody = fillTemplate(content.laboratory.bodyTemplate, labCatalogueSummary);
+  const laboratoryTiles = featuredCodes.flatMap(({ code, label }) =>
+    labTests.some((t) => t.code === code) ? [label] : []
+  );
+
   return (
     <ThemedShell palette="brand" header="solid" utilityBar>
       <main>
-        <HeroSection hero={content.hero} tickerItems={content.statTickerItems} />
+        <HeroSection
+          slides={slides}
+          intervalMs={HERO_SLIDE_INTERVAL_MS}
+          controls={content.heroControls}
+          locationLabel={content.hero.locationLabel}
+          tickerItems={content.statTickerItems}
+        />
         <QuickAccessSection content={content.quickAccess} servicesCount={services.length} locale={locale} />
         <WhoWeAreSection content={content.whoWeAre} servicesCount={services.length} locale={locale} />
         <FreeOpdSection content={content.freeOpd} locale={locale} />
+        <LaboratorySection content={content.laboratory} body={laboratoryBody} tiles={laboratoryTiles} locale={locale} />
         <CommunitySection content={content.community} locale={locale} />
         <SpecialtiesSection content={content.specialties} servicesCount={services.length} locale={locale} />
         <PatientCareSection content={content.patientCare} locale={locale} />

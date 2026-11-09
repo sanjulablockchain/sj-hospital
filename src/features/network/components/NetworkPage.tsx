@@ -1,5 +1,6 @@
 import { NetworkHero } from "./NetworkHero";
 import { JumpCards } from "./JumpCards";
+import { ParentTeaser } from "./ParentTeaser";
 import { MattersSection } from "./MattersSection";
 import { FamilySection } from "./FamilySection";
 import { ReachSection } from "./ReachSection";
@@ -11,7 +12,8 @@ import { navLabel, translateFooterColumns } from "@/config/navigationLabels";
 import type { Locale } from "@/lib/i18n/locales";
 import { getNetworkContent } from "../data/getContent";
 
-// The network page in the reference's order: hero, jump cards, then the five
+// The network page in the reference's order with one addition the owner asked
+// for on 2026-10-28: hero, the parent group teaser, jump cards, then the five
 // numbered sections (why it matters, the family, the numbers, moving between
 // us, get in touch) and the footer.
 //
@@ -29,6 +31,7 @@ export async function NetworkPage({ locale }: { locale: Locale }) {
     <>
       <main>
         <NetworkHero content={content} />
+        <ParentTeaser content={content} />
         <JumpCards content={content} />
         <MattersSection content={content} />
         <FamilySection content={content} />

@@ -22,7 +22,7 @@ import * as testimonials from "./testimonials";
  * awaits once rather than eight times, and passes slices of the one result
  * down to its sections as props. This runs in a Server Component, so no
  * translation data reaches the client bundle; the Client Component leaves on
- * this page (`HeroParallaxBackground`, `SpecialtiesCarousel`,
+ * this page (`HeroSlideshow`, `SpecialtiesCarousel`,
  * `TestimonialsSection`, `NetworkAccordion`, `FaqList`, `AnnouncementModal`)
  * each receive their own slice of the already localized result as a prop
  * from their Server parent, never by importing a data file themselves.

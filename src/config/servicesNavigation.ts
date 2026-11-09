@@ -19,6 +19,7 @@ export const servicesFooterColumns: FooterColumn[] = [
       { label: "Full directory", href: "/services#directory" },
       { label: "Department of surgery", href: "/services#surgical" },
       { label: "Diagnostics & radiology", href: "/services#diagnostics" },
+      { label: "Laboratory tests & prices", href: "/laboratory-tests" },
       { label: "Pharmacy", href: "/pharmacy" },
       { label: "Care at home", href: "/home-care" },
     ],

@@ -18,7 +18,7 @@ const WHATSAPP_DISPLAY = "074 222 333 4";
 /**
  * The sheet that opens from the header's Book now: three ways to be seen,
  * side by side. Online channelling (the highlighted card), WhatsApp, and the
- * switchboard, with the free OPD consultation and corporate insurance line
+ * switchboard, with the free OPD consultation and all-insurance line
  * along the foot and a "Not now" to dismiss. Themed, so it is dark on the
  * dark theme, and sized as a compact sheet rather than the wide announcement
  * panel. The Book now button itself stays a real link to /e-channeling, so
