@@ -36,8 +36,8 @@ export type HeroSlideContent = {
   positionClass: string;
 };
 
-/** Time each slide holds before the next crossfade begins (the owner asked for five seconds, 2026-10-29). */
-export const HERO_SLIDE_INTERVAL_MS = 5000;
+/** Time each slide holds before the next crossfade begins (the owner asked for three seconds, 2026-11-17; five before that). */
+export const HERO_SLIDE_INTERVAL_MS = 3000;
 
 const callTheHospital = { label: `Call ${HOSPITAL_PHONE_LABEL}`, href: HOSPITAL_TEL };
 

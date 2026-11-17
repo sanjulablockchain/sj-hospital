@@ -35,8 +35,9 @@ const BURNS_MS = 26_000;
  * leaf holds nothing but behaviour.
  *
  * Photo layers mount on demand (see `slideState.ts`) and crossfade by
- * opacity; only the first slide's image is preloaded. The copy block is
- * keyed by the active index so each slide rises in with `animate-sj-up`.
+ * opacity; only the first slide's image is preloaded. Every slide's copy is
+ * stacked in one grid cell (see below) so the hero never changes size, and
+ * the visible one rises in with `animate-sj-up`.
  * One `<h1>` is in the DOM at any time, the visible slide's, and a live
  * region announces the heading when the reader changes it (silent during
  * auto rotation). Hover and focus hold the rotation; there is no pause
@@ -97,7 +98,7 @@ export function HeroSlideshow({
               loading={index === 0 ? undefined : "lazy"}
               sizes="100vw"
               style={{ animationDelay: delayFor(index) }}
-              className={`animate-sj-burns object-cover transition-opacity duration-[1600ms] ease-in-out ${s.positionClass} ${
+              className={`animate-sj-burns object-cover transition-opacity duration-[1000ms] ease-in-out ${s.positionClass} ${
                 index === active ? "opacity-100" : "opacity-0"
               }`}
             />
@@ -111,38 +112,60 @@ export function HeroSlideshow({
         <div className="flex min-w-0 flex-1 flex-col justify-end">
           <div className="animate-sj-up">{mark}</div>
 
-          <div key={slide.id} className="animate-sj-up mt-4 flex flex-col items-start gap-4 [animation-delay:80ms] sm:mt-7 sm:gap-6">
-            <span className="inline-flex items-center gap-3 text-[11.5px] font-extrabold tracking-[0.22em] text-[#9FD6F5] uppercase">
-              <span aria-hidden className="h-px w-11 bg-[var(--home-accent)]" />
-              {slide.kicker}
-            </span>
-            <h1 className="font-display m-0 max-w-[18ch] wrap-break-word text-[clamp(40px,7.4vw,120px)] leading-[0.88] font-extrabold tracking-[-0.045em] text-white uppercase">
-              {slide.heading.lead} <span className="text-[var(--home-accent)]">{slide.heading.accent}</span>
-            </h1>
-            <p className="m-0 max-w-[48ch] text-[16px] leading-[1.6] text-white/84 sm:text-[18px]" style={{ textWrap: "pretty" }}>
-              {slide.body}
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <a
-                href={slide.ctaPrimary.href}
-                className="sj-invert inline-flex min-h-11 items-center gap-2.5 bg-[var(--home-accent)] px-6 py-3.5 text-[15px] font-bold text-[var(--home-on-accent)]"
-              >
-                {slide.ctaPrimary.label} <span aria-hidden>&rarr;</span>
-              </a>
-              {slide.ctaSecondary ? (
-                <a
-                  href={slide.ctaSecondary.href}
-                  className="inline-flex min-h-11 items-center gap-3 border border-white/30 px-6 py-3.5 text-[15px] font-bold whitespace-nowrap text-white tabular-nums transition-colors hover:bg-white/8"
+          {/* Every slide's copy sits in the same grid cell, so this block is
+              always as tall as the longest slide. With only the active copy
+              in the DOM the hero grew and shrank as the slides changed, and
+              the object-cover photo behind it rescaled with it. Inactive
+              copies are invisible and inert (out of the tab order and the
+              accessibility tree), and their heading is a <p>, so the page
+              still has the one <h1>. The visible copy rises in again each
+              time `animate-sj-up` is applied to it. */}
+          <div className="mt-4 grid sm:mt-7">
+            {slides.map((s, index) => {
+              const isActive = index === active;
+              const Heading = isActive ? "h1" : "p";
+              return (
+                <div
+                  key={s.id}
+                  inert={!isActive}
+                  className={`flex flex-col items-start gap-4 [grid-area:1/1] sm:gap-6 ${
+                    isActive ? "animate-sj-up [animation-delay:80ms]" : "invisible"
+                  }`}
                 >
-                  <span aria-hidden className="animate-sj-pulse h-2 w-2 rounded-full bg-[var(--home-accent)]" />
-                  {slide.ctaSecondary.label}
-                </a>
-              ) : null}
-            </div>
+                  <span className="inline-flex items-center gap-3 text-[11.5px] font-extrabold tracking-[0.22em] text-[#9FD6F5] uppercase">
+                    <span aria-hidden className="h-px w-11 bg-[var(--home-accent)]" />
+                    {s.kicker}
+                  </span>
+                  <Heading className="font-display m-0 max-w-[18ch] wrap-break-word text-[clamp(40px,7.4vw,120px)] leading-[0.88] font-extrabold tracking-[-0.045em] text-white uppercase">
+                    {s.heading.lead} <span className="text-[var(--home-accent)]">{s.heading.accent}</span>
+                  </Heading>
+                  <p className="m-0 max-w-[48ch] text-[16px] leading-[1.6] text-white/84 sm:text-[18px]" style={{ textWrap: "pretty" }}>
+                    {s.body}
+                  </p>
+                  <div className="flex flex-wrap gap-3">
+                    <a
+                      href={s.ctaPrimary.href}
+                      className="sj-invert inline-flex min-h-11 items-center gap-2.5 bg-[var(--home-accent)] px-6 py-3.5 text-[15px] font-bold text-[var(--home-on-accent)]"
+                    >
+                      {s.ctaPrimary.label} <span aria-hidden>&rarr;</span>
+                    </a>
+                    {s.ctaSecondary ? (
+                      <a
+                        href={s.ctaSecondary.href}
+                        className="inline-flex min-h-11 items-center gap-3 border border-white/30 px-6 py-3.5 text-[15px] font-bold whitespace-nowrap text-white tabular-nums transition-colors hover:bg-white/8"
+                      >
+                        <span aria-hidden className="animate-sj-pulse h-2 w-2 rounded-full bg-[var(--home-accent)]" />
+                        {s.ctaSecondary.label}
+                      </a>
+                    ) : null}
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
           {/* Silent while the slides rotate on their own (a reader elsewhere on
-              the page must not hear a new heading every seven seconds), polite
+              the page must not hear a new heading every few seconds), polite
               once they stop, so a slide the reader chose is announced. */}
           <p aria-live={rotating ? "off" : "polite"} className="sr-only">
             {slide.heading.lead} {slide.heading.accent}
