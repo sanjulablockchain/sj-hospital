@@ -87,7 +87,7 @@ export const directory = {
     sat: "சனி",
     sun: "ஞாயிறு",
   },
-  dayRangeTemplate: "{from} முதல் {to} வரை",
+  noSession: "அமர்வு இல்லை",
 };
 
 export const helpRail = {

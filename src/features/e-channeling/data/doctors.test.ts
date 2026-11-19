@@ -88,3 +88,20 @@ test("no em dash in any consultant name or speciality", () => {
     }
   }
 });
+
+test("every consultant has weekly sessions or a note saying why not", () => {
+  for (const d of doctors) {
+    const sits = Object.values(d.sessions).some((times) => times?.length);
+    assert.ok(sits || d.sessionNote, `${d.name} has no sessions and no note`);
+  }
+});
+
+test("every session time is written the one way the site prints times", () => {
+  const time = String.raw`(?:[1-9]|1[0-2])\.[0-5]\d (?:AM|PM)`;
+  const pattern = new RegExp(`^${time}(?: to ${time})?$`);
+  for (const d of doctors) {
+    for (const times of Object.values(d.sessions)) {
+      for (const t of times ?? []) assert.match(t, pattern, `${d.name}: ${t}`);
+    }
+  }
+});

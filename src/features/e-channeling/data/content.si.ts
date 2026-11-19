@@ -87,7 +87,7 @@ export const directory = {
     sat: "සෙන",
     sun: "ඉරි",
   },
-  dayRangeTemplate: "{from} සිට {to} දක්වා",
+  noSession: "සැසියක් නැත",
 };
 
 export const helpRail = {

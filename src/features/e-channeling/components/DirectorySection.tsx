@@ -53,7 +53,7 @@ export function DirectorySection({
             callToBook: directory.callToBook,
             textToBook: directory.textToBook,
             weekdays: directory.weekdays,
-            dayRangeTemplate: directory.dayRangeTemplate,
+            noSession: directory.noSession,
             phone: helpRail.phone,
             phoneHref: helpRail.phoneHref,
             whatsappHref: helpRail.whatsappHref,
