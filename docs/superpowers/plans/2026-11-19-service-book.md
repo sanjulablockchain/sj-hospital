@@ -53,7 +53,7 @@
 **Interfaces (Produces):**
 - `type ChapterId = "welcome" | "about" | "services" | "lab" | "doctors" | "guide"`
 - `type Chapter = { id: ChapterId; label: string; first: number; last: number }`
-- `chapters: readonly Chapter[]` with labels Welcome, About, Services, Lab fees, Doctors, Patient guide and ranges 1-4, 5-7, 8-18, 19-30, 31-37, 38-41.
+- `chapters: readonly Chapter[]` with labels Welcome, About, Services, Lab fees, Doctors, Patient guide and ranges 1-4, 5-7, 8-17, 18-30, 31-37, 38-41 (printed order; see Task 1 fix).
 - `type BookPage = { number: number; alt: string }`; `bookPages: readonly BookPage[]` (41 entries; pure data, no image imports so `node --test` can load it).
 - `PAGE_COUNT = 41`
 - `chapterForPage(page: number): Chapter`
