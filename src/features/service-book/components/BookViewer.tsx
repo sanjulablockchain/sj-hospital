@@ -266,10 +266,12 @@ export function BookViewer({ labels, download, chapters, pages, images }: Props)
             <ChevronRightIcon className="h-5 w-5" />
           </button>
         </div>
-        <div className="flex items-center gap-2">
+        {/* Its own left-aligned row on phones: the site's floating WhatsApp
+            and call buttons sit over the right edge there. */}
+        <div className="flex items-center gap-2 max-sm:w-full">
           <button type="button" onClick={openFull} className={iconButton}>
             <ExpandIcon className="h-4.5 w-4.5" />
-            <span className="max-sm:sr-only">{labels.fullScreen}</span>
+            <span>{labels.fullScreen}</span>
           </button>
           <a href={download.href} download className={iconButton}>
             <DownloadIcon className="h-4.5 w-4.5" />

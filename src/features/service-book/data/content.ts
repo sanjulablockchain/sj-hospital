@@ -39,7 +39,7 @@ export const heroStandfirst =
 /** The first cell renders in accent. */
 export const heroFacts = [
   { k: "Pages", v: "41" },
-  { k: "Laboratory tests", v: "323" },
+  { k: "Lab tests", v: "323" },
   { k: "Consultants", v: "74" },
   { k: "Edition", v: "2026" },
 ];
