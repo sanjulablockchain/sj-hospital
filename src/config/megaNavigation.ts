@@ -221,6 +221,7 @@ const patientCare: MegaNavMenu = {
       { label: "Visiting hours", href: "/facilities#visiting" },
       { label: "Ambulance", href: "/facilities#ambulance" },
       { label: "Medicine delivery", href: "/pharmacy#delivery" },
+      { label: "Service book", href: "/service-book" },
     ],
   },
 };

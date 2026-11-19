@@ -21,6 +21,16 @@ export const hero = {
   headingAccent: "Book",
   readCta: "Start reading",
   downloadCta: "Download PDF",
+  /** What the book covers, as printed in the 2026 edition. */
+  ticker: [
+    "Free OPD, 7.00 AM to 6.00 PM",
+    "Emergency care, 24 hours",
+    "Laboratory open 24/7",
+    "323 tests with prices",
+    "74 consultants",
+    "Pharmacy open 24/7",
+    "Home visits",
+  ],
 };
 
 export const heroStandfirst =
