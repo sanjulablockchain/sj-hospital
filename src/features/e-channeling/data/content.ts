@@ -128,6 +128,13 @@ export const directory = {
   // Read by screen readers on a day the consultant does not sit; the row
   // itself shows only the muted day name.
   noSession: "No session",
+  // The booking modal a card with a Calendly event opens (BookingFrame.tsx).
+  // `bookingFrameTitleTemplate` names the embedded page for screen readers;
+  // `{name}` is the consultant.
+  closeBooking: "Close",
+  openInNewTab: "Open in a new tab",
+  loadingBooking: "Loading the booking calendar",
+  bookingFrameTitleTemplate: "Book an appointment with {name}",
 };
 
 // Lifted verbatim from the gradient rail that used to sit at the bottom of

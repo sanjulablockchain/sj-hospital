@@ -2,6 +2,7 @@
 
 import { Fragment, useMemo, useState } from "react";
 import { CALENDLY_BASE, WEEKDAYS, type Doctor, type Weekday } from "../data/doctors";
+import { BookingFrame, type BookingFrameCopy, type BookingTarget } from "./BookingFrame";
 
 /**
  * The translatable copy this component needs, defined here rather than
@@ -40,7 +41,7 @@ type DirectoryCopy = {
   phone: string;
   phoneHref: string;
   whatsappHref: string;
-};
+} & BookingFrameCopy;
 
 type DoctorDirectoryProps = {
   doctors: Doctor[];
@@ -83,6 +84,7 @@ function countBadgeClass(active: boolean) {
 export function DoctorDirectory({ doctors, copy }: DoctorDirectoryProps) {
   const [query, setQuery] = useState("");
   const [activeSpec, setActiveSpec] = useState("All");
+  const [booking, setBooking] = useState<BookingTarget | null>(null);
   const [noResultsBefore, noResultsAfter] = copy.noResultsBodyTemplate.split("{phone}");
 
   const specs = useMemo(() => {
@@ -287,13 +289,23 @@ export function DoctorDirectory({ doctors, copy }: DoctorDirectoryProps) {
                 );
 
                 // A consultant with a booking page: the whole card is the link.
+                // A plain click opens the page in our own modal; a click with
+                // a modifier (or a middle click, which never fires onClick)
+                // keeps the browser's own new tab or window, and so does a
+                // visitor without JavaScript.
                 if (doctor.calendlySlug) {
+                  const href = `${CALENDLY_BASE}${doctor.calendlySlug}`;
                   return (
                     <a
                       key={doctor.name}
-                      href={`${CALENDLY_BASE}${doctor.calendlySlug}`}
+                      href={href}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={(event) => {
+                        if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+                        event.preventDefault();
+                        setBooking({ name: doctor.name, specialization: doctor.specialization, href });
+                      }}
                       className={`${CARD_CLASS} hover:-translate-y-0.5 hover:shadow-lg`}
                     >
                       {body}
@@ -396,6 +408,8 @@ export function DoctorDirectory({ doctors, copy }: DoctorDirectoryProps) {
           )}
         </div>
       </div>
+
+      <BookingFrame target={booking} onClose={() => setBooking(null)} copy={copy} />
     </div>
   );
 }

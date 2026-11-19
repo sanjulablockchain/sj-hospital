@@ -88,6 +88,10 @@ export const directory = {
     sun: "ඉරි",
   },
   noSession: "සැසියක් නැත",
+  closeBooking: "වසන්න",
+  openInNewTab: "නව tab එකක විවෘත කරන්න",
+  loadingBooking: "Booking දින දර්ශනය පූරණය වෙමින්",
+  bookingFrameTitleTemplate: "{name} සමඟ appointment එකක් Book කරන්න",
 };
 
 export const helpRail = {

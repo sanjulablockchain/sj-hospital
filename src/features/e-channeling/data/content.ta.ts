@@ -88,6 +88,10 @@ export const directory = {
     sun: "ஞாயிறு",
   },
   noSession: "அமர்வு இல்லை",
+  closeBooking: "மூடு",
+  openInNewTab: "புதிய tab இல் திறக்கவும்",
+  loadingBooking: "Booking நாட்காட்டி ஏற்றப்படுகிறது",
+  bookingFrameTitleTemplate: "{name} உடன் appointment ஐ Book செய்யவும்",
 };
 
 export const helpRail = {
