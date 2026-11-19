@@ -39,15 +39,6 @@ const SIZES = {
       "h-fit max-h-[calc(100dvh-1.5rem)] w-[calc(100%-1.5rem)] rounded-[18px] border lg:max-h-[90vh] lg:w-[calc(100%-2rem)] lg:max-w-[680px] lg:rounded-[22px]",
     scroll: "max-h-[calc(100dvh-1.5rem)] lg:max-h-[90vh]",
   },
-  /**
-   * `viewer` is the whole screen at every width: a page of the Service Book
-   * read at zoom, where every pixel goes to the page. The children own their
-   * own chrome and scrolling.
-   */
-  viewer: {
-    dialog: "h-dvh max-h-none w-full max-w-none rounded-none border-0",
-    scroll: "h-full",
-  },
 } as const;
 
 /**

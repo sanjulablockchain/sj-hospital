@@ -153,6 +153,11 @@ export const pageMetadata = {
     description:
       "Read St. Joseph Hospital Negombo's 2026 Service Book online: our services, room prices, the laboratory price list for 323 tests, our 74 consultants and how to book, or download it as a PDF.",
   },
+  serviceBookReader: {
+    title: "Read the Service Book | St. Joseph Hospital Negombo",
+    description:
+      "Read St. Joseph Hospital Negombo's 2026 Service Book page by page on your phone or computer: services, room prices, laboratory fees for 323 tests and our 74 consultants.",
+  },
   // `description` is a template: `{total}` and `{groupList}` are interpolated
   // in `src/app/[locale]/services/page.tsx`. `{total}` is `groupCounts().All`,
   // a locale-invariant count. `{groupList}` is built from the ALREADY

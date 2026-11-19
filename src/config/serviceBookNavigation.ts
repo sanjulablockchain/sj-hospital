@@ -1,13 +1,13 @@
 import type { FooterColumn } from "@/components/layout/ThemedFooter";
 
-// Bare hashes are safe here, as on the pharmacy page: both sections are on
+// The bare hash is safe here, as on the pharmacy page: that section is on
 // this single page.
 export const serviceBookFooterColumns: FooterColumn[] = [
   {
     heading: "Service book",
     links: [
-      { label: "Read the book", href: "#read" },
-      { label: "What's inside", href: "#inside" },
+      { label: "Read the book", href: "/service-book/read" },
+      { label: "Inside the book", href: "#inside" },
       { label: "Laboratory tests & prices", href: "/laboratory-tests" },
       { label: "Doctor directory", href: "/e-channeling#directory" },
       { label: "All services", href: "/services" },

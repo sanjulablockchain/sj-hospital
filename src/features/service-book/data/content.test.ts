@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { statSync } from "node:fs";
-import { chapterGuide, download, editionLinks, heroFacts, viewer } from "./content.ts";
+import { chapterGuide, download, editionLinks, heroFacts, reader } from "./content.ts";
 import { chapters } from "./chapters.ts";
 import { PAGE_COUNT } from "./pages.ts";
 
@@ -26,8 +26,10 @@ test("every link stays on this site", () => {
   for (const { href } of [...chapterGuide, ...editionLinks]) assert.match(href, /^\/[a-z]/);
 });
 
-test("the viewer's templates carry their placeholders", () => {
-  assert.match(viewer.pageOf, /\{page\}/);
-  assert.match(viewer.pageOf, /\{count\}/);
-  assert.match(viewer.goToPage, /\{page\}/);
+test("the reader's templates carry their placeholders", () => {
+  for (const template of [reader.pageOf, reader.pageShort]) {
+    assert.match(template, /\{page\}/);
+    assert.match(template, /\{count\}/);
+  }
+  assert.match(reader.chapterPages, /\{first\}.*\{last\}/);
 });

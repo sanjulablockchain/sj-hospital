@@ -23,7 +23,7 @@ const FAN = [
  * the photograph.
  *
  * The fan is hidden below 900px, and its images are lazy, so a phone never
- * downloads them: the reader right below starts on the cover anyway.
+ * downloads them; the chapter cards just below show the book on a phone.
  */
 export function ServiceBookHero({ content }: { content: ServiceBookContent }) {
   const { hero, heroFacts, heroStandfirst, download } = content;
@@ -80,12 +80,12 @@ export function ServiceBookHero({ content }: { content: ServiceBookContent }) {
           </p>
 
           <div className="animate-sj-up mt-7 flex flex-wrap gap-3">
-            <a
-              href="#read"
+            <LocaleLink
+              href="/service-book/read"
               className="inline-flex min-h-11 items-center bg-[var(--home-accent)] px-6 py-4 text-[15px] font-bold text-[var(--home-on-accent)] transition-colors hover:bg-white hover:text-[#0B0826]"
             >
               {hero.readCta}
-            </a>
+            </LocaleLink>
             <a
               href={download.href}
               download

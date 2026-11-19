@@ -105,6 +105,10 @@ export const pageMetadata = {
     description:
       "St. Joseph Hospital Negombo හි 2026 Service Book එක Online කියවන්න: අපේ සේවා, කාමර මිල, Tests 323ක Laboratory මිල ලැයිස්තුව, Consultants 74 දෙනා සහ Book කරන හැටි, නැත්නම් PDF එකක් ලෙස Download කරගන්න.",
   },
+  serviceBookReader: {
+    description:
+      "St. Joseph Hospital Negombo හි 2026 Service Book එක ඔබේ Phone එකෙන් හෝ Computer එකෙන් පිටුවෙන් පිටුව කියවන්න: සේවා, කාමර මිල, Tests 323ක Laboratory ගාස්තු සහ Consultants 74 දෙනා.",
+  },
   privacyPolicy: {
     description:
       "St. Joseph Hospital Negombo හි පුද්ගලිකත්ව ප්‍රතිපත්තිය: අපි ඔබේ පුද්ගලික දත්ත රැස් කරන, භාවිතා කරන, සහ ආරක්ෂා කරන ආකාරය.",

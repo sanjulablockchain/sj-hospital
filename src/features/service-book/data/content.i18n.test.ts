@@ -10,12 +10,12 @@ import { assertTranslationParity, stringPaths } from "../../../lib/i18n/stringPa
  * already keeps English (hero, eyebrows, headings, link and CTA labels).
  *
  * `href` and `id` are structure. `download.size` is a fact about a file.
- * `viewer.*` is the reader's controls and its page announcements: chrome of
+ * `reader.*` is the reader's controls and its page announcements: chrome of
  * the same kind as the laboratory page's filter row, so English.
  */
 function isUntranslatable(path: string): boolean {
   if (/\.(href|id)$/.test(path)) return true;
-  return path.startsWith("download.") || path.startsWith("viewer.");
+  return path.startsWith("download.") || path.startsWith("reader.");
 }
 
 test("every translatable string in service-book has Sinhala", () => {

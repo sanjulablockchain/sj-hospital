@@ -1,6 +1,6 @@
 /**
- * Copy for the /service-book page: the hospital's printed Service Book,
- * read page by page in `BookViewer`.
+ * Copy for the /service-book intro page and the reader at
+ * /service-book/read (`BookReader`): the hospital's printed Service Book.
  *
  * The book's facts (41 pages, 323 tests, 74 consultants) are as printed in
  * the 2026 edition, which is the thing this page shows; the live price list
@@ -19,7 +19,7 @@ export const hero = {
   breadcrumbCurrent: "Service book",
   headingLead: "Service",
   headingAccent: "Book",
-  readCta: "Start reading",
+  readCta: "Read now",
   downloadCta: "Download PDF",
   /** What the book covers, as printed in the 2026 edition. */
   ticker: [
@@ -34,7 +34,7 @@ export const hero = {
 };
 
 export const heroStandfirst =
-  "Everything in one book: our services, room prices, the 2026 laboratory price list, our doctors and how to book. Read it here page by page, or download a copy to keep.";
+  "Everything in one book: our services, room prices, the 2026 laboratory price list, our doctors and how to book. Read it on your phone like a book, page by page, or download a copy to keep.";
 
 /** The first cell renders in accent. */
 export const heroFacts = [
@@ -51,30 +51,34 @@ export const download = {
 };
 
 /**
- * The viewer's controls and its screen reader announcements: chrome, like
+ * The reader's bar, controls and screen reader announcements: chrome, like
  * the filter row on the laboratory page, so English in every locale.
- * `{page}` and `{count}` are filled by the viewer.
+ * `{page}` and `{count}` are filled by the reader.
  */
-export const viewer = {
+export const reader = {
   regionLabel: "Service Book reader",
-  chaptersLabel: "Chapters",
-  thumbnailsLabel: "All pages",
+  back: "Service book",
+  title: "Service Book",
+  chapters: "Chapters",
+  pageOf: "Page {page} of {count}",
+  pageShort: "{page} / {count}",
+  chapterPages: "Pages {first} to {last}",
+  scroll: "Scroll",
+  pages: "Pages",
+  modeLabel: "Reading mode",
   previous: "Previous page",
   next: "Next page",
-  fullScreen: "Full screen",
-  close: "Close full screen",
+  toggleBars: "Show or hide the controls",
   zoomIn: "Zoom in",
   zoomOut: "Zoom out",
-  pageOf: "Page {page} of {count}",
-  goToPage: "Go to page {page}",
+  startOver: "Start from page 1",
+  close: "Close",
+  progress: "Reading progress",
 };
 
 export const sectionEyebrows = {
-  read: "01 / Read the book",
-  inside: "02 / What's inside",
+  inside: "01 / Inside the book",
 };
-
-export const readHeading = "Page by page";
 
 export const editionNote =
   "This is the 2026 edition. Prices and the doctor list can change during the year, so the Laboratory Tests page and the Doctor directory always carry the current details. Please confirm a price when you book.";
@@ -84,12 +88,12 @@ export const editionLinks = [
   { linkLabel: "Doctor directory", href: "/e-channeling#directory" },
 ];
 
-export const insideHeading = "What's inside";
+export const insideHeading = "Six chapters";
 
 export const insideIntro =
-  "After the welcome pages the book has five chapters. Each is summarised below, with a link that opens it in the book and a link to the page on this site that covers the same ground.";
+  "From the welcome pages to the patient guide. Open any chapter in the reader, or go to the page on this site that covers the same ground.";
 
-export const openInBookCta = "Open in the book";
+export const openInBookCta = "Read this chapter";
 
 /** One entry per chapter, in `chapters.ts` order (content.test.ts pins it). */
 export const chapterGuide: { id: ChapterId; summary: string; linkLabel: string; href: string }[] = [
