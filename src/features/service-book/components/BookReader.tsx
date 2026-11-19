@@ -173,38 +173,37 @@ export function BookReader({ labels, backHref, chapters, pages, images }: Props)
     return () => window.removeEventListener("resize", onResize);
   }, [modeChosen, scrollToPage]);
 
-  // Scroll mode: the page crossing the middle of the screen is the current one.
+  // Scroll mode, on every scrolled frame: which page is being read, and
+  // whether the bar should show. The bar hides while reading down and returns
+  // on the way back up. This is reading state and chrome visibility, not
+  // scroll motion, so it does not go through the Reveal/Parallax helpers; one
+  // passive listener, frame throttled.
   useEffect(() => {
     if (mode !== "scroll") return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (jumping.current) return;
-        for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          const next = Number((entry.target as HTMLElement).dataset.page);
-          if (next !== pageRef.current) {
-            setPage(next);
-            record(next);
-          }
-        }
-      },
-      { rootMargin: "-50% 0px -50% 0px" }
-    );
-    for (const element of pageRefs.current) if (element) observer.observe(element);
-    return () => observer.disconnect();
-  }, [mode, record]);
-
-  // Scroll mode: the bar hides while reading down and returns on the way back
-  // up. This is chrome visibility, not scroll motion, so it does not go
-  // through the Reveal/Parallax helpers; one passive listener, frame throttled.
-  useEffect(() => {
-    if (mode !== "scroll") return;
+    // The page under a line a third of the way down the screen is the one
+    // being read. A landscape page is short on a phone, so the very top is
+    // always page 1 and the very bottom always the last page.
+    const currentPage = () => {
+      const root = document.documentElement;
+      if (window.scrollY < 8) return 1;
+      if (window.scrollY + window.innerHeight >= root.scrollHeight - 8) return count;
+      const line = window.innerHeight * 0.35;
+      const index = pageRefs.current.findIndex((element) => element && element.getBoundingClientRect().bottom > line);
+      return index === -1 ? count : index + 1;
+    };
     let last = window.scrollY;
     let frame = 0;
     const onScroll = () => {
       if (frame) return;
       frame = window.requestAnimationFrame(() => {
         frame = 0;
+        if (!jumping.current) {
+          const next = currentPage();
+          if (next !== pageRef.current) {
+            setPage(next);
+            record(next);
+          }
+        }
         const y = window.scrollY;
         if (y < 80) setBarsShown(true);
         else if (y > last + BAR_SCROLL_PX) setBarsShown(false);
@@ -218,7 +217,7 @@ export function BookReader({ labels, backHref, chapters, pages, images }: Props)
       window.removeEventListener("scroll", onScroll);
       if (frame) window.cancelAnimationFrame(frame);
     };
-  }, [mode]);
+  }, [mode, count, record]);
 
   // Pages mode: arrow keys anywhere on the reader (it is the whole screen).
   useEffect(() => {
@@ -483,7 +482,7 @@ export function BookReader({ labels, backHref, chapters, pages, images }: Props)
                 placeholder="blur"
                 draggable={false}
                 sizes={`${zoom * 100}vw`}
-                className="m-auto h-auto max-w-none select-none"
+                className="m-auto h-auto max-w-none shrink-0 select-none"
                 style={{ width: `${zoom * 100}%` }}
               />
             </div>
