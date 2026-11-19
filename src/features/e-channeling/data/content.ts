@@ -114,9 +114,8 @@ export const directory = {
   // desk, or opens a WhatsApp chat with it, instead of a booking page.
   callToBook: "Call to book",
   textToBook: "Text to book",
-  // Short day names for each card's weekly sessions, keyed like
-  // doctors.ts's WEEKDAYS. A run of days with the same times prints as one
-  // range through dayRangeTemplate ("Mon to Fri").
+  // Short day names for each card's seven day table, keyed like
+  // doctors.ts's WEEKDAYS.
   weekdays: {
     mon: "Mon",
     tue: "Tue",
@@ -126,7 +125,16 @@ export const directory = {
     sat: "Sat",
     sun: "Sun",
   },
-  dayRangeTemplate: "{from} to {to}",
+  // Read by screen readers on a day the consultant does not sit; the row
+  // itself shows only the muted day name.
+  noSession: "No session",
+  // The booking modal a card with a Calendly event opens (BookingFrame.tsx).
+  // `bookingFrameTitleTemplate` names the embedded page for screen readers;
+  // `{name}` is the consultant.
+  closeBooking: "Close",
+  openInNewTab: "Open in a new tab",
+  loadingBooking: "Loading the booking calendar",
+  bookingFrameTitleTemplate: "Book an appointment with {name}",
 };
 
 // Lifted verbatim from the gradient rail that used to sit at the bottom of

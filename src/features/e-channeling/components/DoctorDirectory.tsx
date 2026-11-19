@@ -1,8 +1,8 @@
 "use client";
 
 import { Fragment, useMemo, useState } from "react";
-import { CALENDLY_BASE, type Doctor, type Weekday } from "../data/doctors";
-import { groupSessions } from "../data/sessions";
+import { CALENDLY_BASE, WEEKDAYS, type Doctor, type Weekday } from "../data/doctors";
+import { BookingFrame, type BookingFrameCopy, type BookingTarget } from "./BookingFrame";
 
 /**
  * The translatable copy this component needs, defined here rather than
@@ -37,11 +37,11 @@ type DirectoryCopy = {
   callToBook: string;
   textToBook: string;
   weekdays: Record<Weekday, string>;
-  dayRangeTemplate: string;
+  noSession: string;
   phone: string;
   phoneHref: string;
   whatsappHref: string;
-};
+} & BookingFrameCopy;
 
 type DoctorDirectoryProps = {
   doctors: Doctor[];
@@ -84,6 +84,7 @@ function countBadgeClass(active: boolean) {
 export function DoctorDirectory({ doctors, copy }: DoctorDirectoryProps) {
   const [query, setQuery] = useState("");
   const [activeSpec, setActiveSpec] = useState("All");
+  const [booking, setBooking] = useState<BookingTarget | null>(null);
   const [noResultsBefore, noResultsAfter] = copy.noResultsBodyTemplate.split("{phone}");
 
   const specs = useMemo(() => {
@@ -237,11 +238,12 @@ export function DoctorDirectory({ doctors, copy }: DoctorDirectoryProps) {
               and their Book links line up across the page. Kept to sm and
               up: in the single mobile column nothing sits side by side, and
               padding every card to the tallest would only add scrolling.
-              groupSessions keeps that tallest card short. */}
+              Every card with weekly sessions prints the same seven day
+              table, so most cards are that height anyway. */}
           {filtered.length > 0 ? (
             <div className="grid grid-cols-1 gap-4 sm:auto-rows-fr sm:grid-cols-2 xl:grid-cols-3">
               {filtered.map((doctor) => {
-                const sessions = groupSessions(doctor.sessions);
+                const hasSessions = WEEKDAYS.some((day) => doctor.sessions[day]?.length);
                 const body = (
                   <>
                     <span className="text-[11px] font-bold uppercase tracking-wider text-[var(--home-accent-soft)]">
@@ -250,38 +252,60 @@ export function DoctorDirectory({ doctors, copy }: DoctorDirectoryProps) {
                     <span className="font-display text-lg font-bold text-[var(--home-heading)]">
                       {doctor.name}
                     </span>
-                    {(sessions.length > 0 || doctor.sessionNote) && (
-                      <span className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-3 gap-y-1 text-[13px] leading-snug text-[var(--home-muted)]">
-                        {sessions.map((group) => (
-                          <Fragment key={group.times.join("|")}>
-                            <span className="font-semibold text-[var(--home-body)]">
-                              {group.days
-                                .map(({ from, to }) =>
-                                  from === to
-                                    ? copy.weekdays[from]
-                                    : copy.dayRangeTemplate
-                                        .replace("{from}", copy.weekdays[from])
-                                        .replace("{to}", copy.weekdays[to])
-                                )
-                                .join(", ")}
-                            </span>
-                            <span>{group.times.join(", ")}</span>
-                          </Fragment>
-                        ))}
-                        {doctor.sessionNote && <span className="col-span-2">{doctor.sessionNote}</span>}
+                    {hasSessions && (
+                      <span className="grid grid-cols-[auto_minmax(0,1fr)] text-[13px] leading-snug">
+                        {WEEKDAYS.map((day, index) => {
+                          const times = doctor.sessions[day];
+                          const rule = index > 0 ? "border-t border-[var(--home-hairline)]" : "";
+                          return (
+                            <Fragment key={day}>
+                              <span
+                                className={`${rule} py-1 pr-4 ${
+                                  times?.length
+                                    ? "font-semibold text-[var(--home-heading)]"
+                                    : "text-[var(--home-muted)]"
+                                }`}
+                              >
+                                {copy.weekdays[day]}
+                              </span>
+                              <span className={`${rule} py-1 text-[var(--home-body)]`}>
+                                {times?.length ? (
+                                  times.join(", ")
+                                ) : (
+                                  <span className="sr-only">{copy.noSession}</span>
+                                )}
+                              </span>
+                            </Fragment>
+                          );
+                        })}
+                      </span>
+                    )}
+                    {doctor.sessionNote && (
+                      <span className="text-[13px] leading-snug text-[var(--home-muted)]">
+                        {doctor.sessionNote}
                       </span>
                     )}
                   </>
                 );
 
                 // A consultant with a booking page: the whole card is the link.
+                // A plain click opens the page in our own modal; a click with
+                // a modifier (or a middle click, which never fires onClick)
+                // keeps the browser's own new tab or window, and so does a
+                // visitor without JavaScript.
                 if (doctor.calendlySlug) {
+                  const href = `${CALENDLY_BASE}${doctor.calendlySlug}`;
                   return (
                     <a
                       key={doctor.name}
-                      href={`${CALENDLY_BASE}${doctor.calendlySlug}`}
+                      href={href}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={(event) => {
+                        if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+                        event.preventDefault();
+                        setBooking({ name: doctor.name, specialization: doctor.specialization, href });
+                      }}
                       className={`${CARD_CLASS} hover:-translate-y-0.5 hover:shadow-lg`}
                     >
                       {body}
@@ -384,6 +408,8 @@ export function DoctorDirectory({ doctors, copy }: DoctorDirectoryProps) {
           )}
         </div>
       </div>
+
+      <BookingFrame target={booking} onClose={() => setBooking(null)} copy={copy} />
     </div>
   );
 }

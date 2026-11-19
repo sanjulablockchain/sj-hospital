@@ -39,6 +39,18 @@ const SIZES = {
       "h-fit max-h-[calc(100dvh-1.5rem)] w-[calc(100%-1.5rem)] rounded-[18px] border lg:max-h-[90vh] lg:w-[calc(100%-2rem)] lg:max-w-[680px] lg:rounded-[22px]",
     scroll: "max-h-[calc(100dvh-1.5rem)] lg:max-h-[90vh]",
   },
+  /**
+   * `frame` holds an embedded page (the Calendly booking calendar) rather
+   * than our own content: full screen on a phone, where the embed needs every
+   * pixel, and a fixed, tall window from `lg`, so the page inside has a
+   * height to fill instead of a content height to size to. Its child fills
+   * the height and does its own scrolling.
+   */
+  frame: {
+    dialog:
+      "h-full max-h-none w-full rounded-none border-0 lg:h-[min(88vh,860px)] lg:w-[calc(100%-2rem)] lg:max-w-[1060px] lg:rounded-[22px] lg:border",
+    scroll: "h-full",
+  },
 } as const;
 
 /**
