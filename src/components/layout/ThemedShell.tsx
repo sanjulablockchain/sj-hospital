@@ -17,9 +17,11 @@ type ThemedShellProps = {
   /**
    * `"fixed"` (default) floats the header over the hero, transparent until the
    * page scrolls. `"solid"` puts it in normal flow, sticky and always solid,
-   * which is how the v4 home reference draws it.
+   * which is how the v4 home reference draws it. `"none"` renders no site
+   * header at all, for a full screen tool that brings its own bar (the
+   * Service Book reader).
    */
-  header?: "fixed" | "solid";
+  header?: "fixed" | "solid" | "none";
   /** The dark emergency strip above the header. */
   utilityBar?: boolean;
 };
@@ -53,7 +55,7 @@ export function ThemedShell({
       <ThemeScript />
       <SiteThemeProvider>
         {utilityBar ? <UtilityBar /> : null}
-        <ThemedHeader sections={megaNavigation} variant={header} />
+        {header === "none" ? null : <ThemedHeader sections={megaNavigation} variant={header} />}
         {children}
       </SiteThemeProvider>
     </div>

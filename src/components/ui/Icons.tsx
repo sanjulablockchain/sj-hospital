@@ -133,3 +133,87 @@ export function ArrowLeftIcon({ className = "" }: IconProps) {
     </svg>
   );
 }
+
+/** The shared stroke icon frame: 24px grid, 2px round stroke, currentColor. */
+function StrokeIcon({ className = "", children }: IconProps & { children: React.ReactNode }) {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      className={className}
+    >
+      {children}
+    </svg>
+  );
+}
+
+export function ZoomInIcon({ className = "" }: IconProps) {
+  return (
+    <StrokeIcon className={className}>
+      <circle cx="11" cy="11" r="7" />
+      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+      <line x1="11" y1="8" x2="11" y2="14" />
+      <line x1="8" y1="11" x2="14" y2="11" />
+    </StrokeIcon>
+  );
+}
+
+export function ZoomOutIcon({ className = "" }: IconProps) {
+  return (
+    <StrokeIcon className={className}>
+      <circle cx="11" cy="11" r="7" />
+      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+      <line x1="8" y1="11" x2="14" y2="11" />
+    </StrokeIcon>
+  );
+}
+
+export function DownloadIcon({ className = "" }: IconProps) {
+  return (
+    <StrokeIcon className={className}>
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+      <polyline points="7 10 12 15 17 10" />
+      <line x1="12" y1="15" x2="12" y2="3" />
+    </StrokeIcon>
+  );
+}
+
+export function ListIcon({ className = "" }: IconProps) {
+  return (
+    <StrokeIcon className={className}>
+      <line x1="8" y1="6" x2="21" y2="6" />
+      <line x1="8" y1="12" x2="21" y2="12" />
+      <line x1="8" y1="18" x2="21" y2="18" />
+      <line x1="3" y1="6" x2="3.01" y2="6" />
+      <line x1="3" y1="12" x2="3.01" y2="12" />
+      <line x1="3" y1="18" x2="3.01" y2="18" />
+    </StrokeIcon>
+  );
+}
+
+/** Pages stacked in a column: the reader's scroll mode. */
+export function RowsIcon({ className = "" }: IconProps) {
+  return (
+    <StrokeIcon className={className}>
+      <rect x="4" y="3" width="16" height="7" rx="1.5" />
+      <rect x="4" y="14" width="16" height="7" rx="1.5" />
+    </StrokeIcon>
+  );
+}
+
+/** An open book: the reader's page mode. */
+export function BookOpenIcon({ className = "" }: IconProps) {
+  return (
+    <StrokeIcon className={className}>
+      <path d="M2 4h6a4 4 0 0 1 4 4v13a3 3 0 0 0-3-3H2z" />
+      <path d="M22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z" />
+    </StrokeIcon>
+  );
+}

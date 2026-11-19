@@ -127,3 +127,52 @@ Measured: a page re-encoded to 2000 x 1414 WebP at quality 75 to 85 weighs **70 
 - Swipe threshold and the zoom panning mechanics.
 
 Work happens in a worktree, `worktree-service-book`, and is not merged until the owner confirms.
+
+## Revision, 2026-11-19: a separate manga style reader
+
+The owner will print a QR code pointing at `/service-book`, and people will
+scan it on their phones to read the book. They asked for the reading to feel
+like a manga reader. Approved design:
+
+### Intro page `/service-book` (the QR target)
+
+- The hero stays; its main button becomes "Read now" and opens the reader.
+- The inline viewer is removed (two readers would compete). In its place,
+  "Inside the book": six chapter cards, each with the chapter's opening page,
+  the summary, "Read this chapter" (opens the reader at that chapter) and the
+  live page link. This merges the old viewer and "What's inside".
+- Edition note and footer stay.
+
+### Reader `/service-book/read` (en, si, ta)
+
+- No site header, footer or floating buttons. A slim top bar: back to the
+  intro page, the title, a chapter menu, "Page N of 41", the mode switch.
+- **Scroll mode** (default on a phone held upright): all 41 pages stacked
+  full width, read by scrolling, native pinch zoom. The top bar hides on
+  scroll down and returns on scroll up or a tap. A thin progress bar at the
+  bottom.
+- **Page mode** (default in landscape, tablet and desktop): one page fitted
+  to the screen. Tap or click the right third for next, the left third for
+  previous, the middle to show or hide the bars. Arrow keys and swipe. Zoom
+  1x, 2x, 3x with panning.
+- A Scroll / Pages switch overrides the default; the choice is remembered in
+  `localStorage` (a per viewer convenience, safe if storage is blocked).
+- Resume: the last page read is remembered and reopened, with a "Start from
+  page 1" button. A `#page-N` link always wins over the remembered page.
+- Pages load just ahead of the reader (lazy loading with the next pages
+  eager), so scrolling never waits on a blank page.
+- Follows the light and dark theme.
+
+### QR code
+
+SVG (for print) and PNG for `https://sjhospital.lk/service-book`, error
+correction level M, committed under `docs/qr/`.
+
+### Routing note
+
+The two pages need different shells, so the route is split with a route
+group: `service-book/(intro)/` carries the themed shell with the header,
+`service-book/read/` a headerless shell (`ThemedShell header="none"`). The
+header reachability test learns that route groups add no URL segment, and
+exempts the reader, which is reached from its intro page and the QR code
+rather than the menu.

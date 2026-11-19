@@ -37,6 +37,7 @@ const STATIC_PATHS = [
   "/pharmacy",
   "/privacy-policy",
   "/school-wellness",
+  "/service-book",
   "/services",
 ];
 

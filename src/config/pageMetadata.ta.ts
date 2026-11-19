@@ -101,6 +101,16 @@ export const pageMetadata = {
     description:
       "நீர்கொழும்பு St. Joseph Hospital மற்றும் இரத்தினபுரி Blue Sapphire Hospital: குழுவின் இரு மருத்துவமனைகளின் முகவரிகள், தொலைபேசி எண்கள், வழிகள் மற்றும் திறக்கும் நேரங்கள்.",
   },
+  serviceBook: {
+    // "Service Book", "Laboratory", "Tests", "Consultants", "Book" and "PDF"
+    // reuse the service-book feature's own content.ta.ts register.
+    description:
+      "St. Joseph Hospital Negombo இன் 2026 Service Book ஐ Online இல் படியுங்கள்: எங்கள் சேவைகள், அறை விலைகள், 323 Tests இன் Laboratory விலைப் பட்டியல், 74 Consultants மற்றும் Book செய்யும் முறை, அல்லது PDF ஆக Download செய்யுங்கள்.",
+  },
+  serviceBookReader: {
+    description:
+      "St. Joseph Hospital Negombo இன் 2026 Service Book ஐ உங்கள் Phone அல்லது Computer இல் பக்கம் பக்கமாகப் படியுங்கள்: சேவைகள், அறை விலைகள், 323 Tests இன் Laboratory கட்டணங்கள் மற்றும் 74 Consultants.",
+  },
   privacyPolicy: {
     description:
       "St. Joseph Hospital Negombo இன் தனியுரிமைக் கொள்கை: நாங்கள் உங்கள் தனிப்பட்ட தரவை எவ்வாறு சேகரிக்கிறோம், பயன்படுத்துகிறோம், பாதுகாக்கிறோம்.",

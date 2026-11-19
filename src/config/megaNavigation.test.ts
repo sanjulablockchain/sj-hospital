@@ -120,12 +120,15 @@ function staticRoutes(dir: string, prefix = ""): string[] {
     // Dynamic segments ([slug]) and private folders (_components) are not
     // pages the menu could name.
     if (entry.name.startsWith("[") || entry.name.startsWith("_")) continue;
-    const route = `${prefix}/${entry.name}`;
+    // A route group, `(intro)`, adds no segment to the URL.
+    const route = entry.name.startsWith("(") ? prefix : `${prefix}/${entry.name}`;
     if (existsSync(join(dir, entry.name, "page.tsx"))) found.push(route);
     found.push(...staticRoutes(join(dir, entry.name), route));
   }
   return found;
 }
+
+const READER_ROUTES = ["/service-book/read"];
 
 // About us, Contact us, Accommodation and E-channeling were footer-only before
 // the mega menu; this is what stops any page sliding back to that.
@@ -133,6 +136,10 @@ test("every public page is reachable from the header", () => {
   const routes = staticRoutes("src/app/[locale]");
   assert.ok(routes.length >= 15, `only found ${routes.length} routes`);
   const reachable = new Set(megaNavLinks().map((l) => l.href.split("#")[0]));
+  // The Service Book reader is a full screen tool with no header of its own
+  // to be reached from; people arrive from its intro page (in the menu) and
+  // from the printed QR code.
+  for (const route of READER_ROUTES) reachable.add(route);
   for (const route of routes) {
     assert.ok(reachable.has(route), `${route} is not in the header`);
   }
