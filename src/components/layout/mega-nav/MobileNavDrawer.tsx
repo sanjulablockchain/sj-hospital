@@ -13,8 +13,6 @@ import type { MegaNavMenu, MegaNavSection } from "@/config/megaNavigation";
 import type { Locale } from "@/lib/i18n/locales";
 import { localeHref } from "@/lib/i18n/paths";
 import { MegaNavIcon } from "./MegaNavIcon";
-import { ComingSoonBadge } from "@/components/ui/ComingSoonBadge";
-import { isComingSoonHref } from "@/config/comingSoon";
 
 type MobileNavDrawerProps = {
   sections: MegaNavSection[];
@@ -268,10 +266,9 @@ function DrawerMenu({ menu, locale }: { menu: MegaNavMenu; locale: Locale }) {
                       <li key={link.href}>
                         <a
                           href={localeHref(link.href, locale)}
-                          className="flex min-h-11 flex-wrap items-center gap-x-2 gap-y-1 py-2 text-[14px] text-[var(--home-body)] hover:text-[var(--home-heading)]"
+                          className="block py-2 text-[14px] text-[var(--home-body)] hover:text-[var(--home-heading)]"
                         >
                           {link.label}
-                          {isComingSoonHref(link.href) && <ComingSoonBadge />}
                         </a>
                       </li>
                     ))}

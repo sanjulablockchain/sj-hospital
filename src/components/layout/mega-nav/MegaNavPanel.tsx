@@ -2,8 +2,6 @@ import type { MegaNavLink, MegaNavMenu } from "@/config/megaNavigation";
 import type { Locale } from "@/lib/i18n/locales";
 import { localeHref } from "@/lib/i18n/paths";
 import { MegaNavIcon } from "./MegaNavIcon";
-import { ComingSoonBadge } from "@/components/ui/ComingSoonBadge";
-import { isComingSoonHref } from "@/config/comingSoon";
 
 type MegaNavPanelProps = {
   menu: MegaNavMenu;
@@ -74,10 +72,9 @@ export function MegaNavPanel({ menu, locale, labelledBy, onNavigate }: MegaNavPa
                       <a
                         href={localeHref(link.href, locale)}
                         onClick={onNavigate}
-                        className="flex flex-wrap items-center gap-x-2 gap-y-1 py-[7px] text-[13.5px] font-semibold leading-[1.3] text-[var(--home-body)] transition-[color,transform] duration-200 ease-out hover:translate-x-0.5 hover:text-[var(--home-accent-soft)] focus-visible:text-[var(--home-accent-soft)] focus-visible:outline-none"
+                        className="block py-[7px] text-[13.5px] font-semibold leading-[1.3] text-[var(--home-body)] transition-[color,transform] duration-200 ease-out hover:translate-x-0.5 hover:text-[var(--home-accent-soft)] focus-visible:text-[var(--home-accent-soft)] focus-visible:outline-none"
                       >
                         {link.label}
-                        {isComingSoonHref(link.href) && <ComingSoonBadge />}
                       </a>
                     </li>
                   ))}
@@ -133,14 +130,7 @@ function TileLink({ link, locale, onNavigate }: { link: MegaNavLink; locale: Loc
         />
       )}
       <span className="block min-w-0">
-        <span className="block text-[14px] font-bold leading-[1.25] text-[var(--home-heading)]">
-          {link.label}
-          {isComingSoonHref(link.href) && (
-            <span className="ml-2 align-middle">
-              <ComingSoonBadge />
-            </span>
-          )}
-        </span>
+        <span className="block text-[14px] font-bold leading-[1.25] text-[var(--home-heading)]">{link.label}</span>
         {link.description && (
           <span className="mt-1 block text-[12.5px] leading-[1.45] text-[var(--home-muted)]">{link.description}</span>
         )}

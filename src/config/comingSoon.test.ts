@@ -42,11 +42,13 @@ test("isComingSoonHref recognises a coming soon service link in any locale, with
 // ---- Every link to a coming soon service is badged ----
 
 // The badge is drawn by the components that render these modules' links (the
-// header menu, the footer, the home carousel and network teaser, the home
-// care hand-off band, the services index admissions band). A link to a coming
-// soon service added in any other file would render without it, so this walks
-// the source for `/services/<slug>` literals and fails on a file nobody has
-// taught to draw the badge. Service objects themselves (the directory, the
+// footer, the home carousel and network teaser, the home care hand-off band,
+// the services index admissions band). The header menu (`megaNavigation.ts`)
+// is listed but deliberately shows no badge: the owner asked for the nav bar
+// to stay clean (2026-11-20), and every page it leads to says Coming soon. A
+// link to a coming soon service added in any other file would render without
+// it, so this walks the source for `/services/<slug>` literals and fails on a
+// file nobody has looked at. Service objects themselves (the directory, the
 // related cards, the picker) carry the slug, not a link, and are badged by
 // slug in their components.
 const BADGED_SOURCES = [
