@@ -126,18 +126,17 @@ export const heroSlides: readonly HeroSlideContent[] = [
     photoAlt: "Two nurses and a doctor smiling with a patient sitting up in a St. Joseph Hospital bed.",
     positionClass: "object-[50%_45%]",
   },
-  // Blue Sapphire Hospital is a `pending` card on /locations until the owner
-  // supplies its details, so this slide states only what that page states:
-  // the name, the town and the shared protocol. The photograph is this
-  // hospital's own building; there is no Blue Sapphire photograph yet.
+  // Blue Sapphire Hospital's card on /locations carries its address, phone
+  // and hours; this slide states only what that card states. The photograph
+  // is the same building front.
   {
     id: "ratnapura",
-    kicker: "Now in Ratnapura",
-    heading: { lead: "Our care is coming to", accent: "Ratnapura." },
-    body: "Blue Sapphire Hospital in Ratnapura joins St. Joseph Hospital, run to the same American protocol. Full details are on our locations page as soon as they are confirmed.",
-    ctaPrimary: { label: "Our locations", href: "/locations#ratnapura" },
-    photo: "/images/home/hero-dusk-facade.jpg",
-    photoAlt: "St. Joseph Hospital building at dusk",
+    kicker: "Our sister hospital",
+    heading: { lead: "The same care, now in", accent: "Ratnapura." },
+    body: "Blue Sapphire Hospital on Colombo Road, Ratnapura is open every hour of every day, run to the same American protocol as St. Joseph Hospital.",
+    ctaPrimary: { label: "Find Blue Sapphire", href: "/locations#ratnapura" },
+    photo: "/images/locations/ratnapura-building-front.webp",
+    photoAlt: "Blue Sapphire Hospital in Ratnapura, seen from below against the sky",
     positionClass: "object-[50%_50%]",
   },
 ];
