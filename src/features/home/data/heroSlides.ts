@@ -41,6 +41,9 @@ export const HERO_SLIDE_INTERVAL_MS = 3000;
 
 const callTheHospital = { label: `Call ${HOSPITAL_PHONE_LABEL}`, href: HOSPITAL_TEL };
 
+/** Blue Sapphire Hospital's own site; heroSlides.test.ts pins it to the locations feature's `RATNAPURA_SITE_URL`. */
+export const BLUE_SAPPHIRE_SITE_URL = "https://bluesapphirehospitals.lk";
+
 export const heroSlides: readonly HeroSlideContent[] = [
   {
     id: "free-opd",
@@ -128,13 +131,14 @@ export const heroSlides: readonly HeroSlideContent[] = [
   },
   // Blue Sapphire Hospital's card on /locations carries its address, phone
   // and hours; this slide states only what that card states. The photograph
-  // is the same building front.
+  // is the same building front. The button goes to the hospital's own site in
+  // the same tab, at the owner's request (2026-11-20).
   {
     id: "ratnapura",
     kicker: "Our sister hospital",
     heading: { lead: "The same care, now in", accent: "Ratnapura." },
     body: "Blue Sapphire Hospital on Colombo Road, Ratnapura is open every hour of every day, run to the same American protocol as St. Joseph Hospital.",
-    ctaPrimary: { label: "Find Blue Sapphire", href: "/locations#ratnapura" },
+    ctaPrimary: { label: "Find Blue Sapphire", href: BLUE_SAPPHIRE_SITE_URL },
     photo: "/images/locations/ratnapura-building-front.webp",
     photoAlt: "Blue Sapphire Hospital in Ratnapura, seen from below against the sky",
     positionClass: "object-[50%_50%]",

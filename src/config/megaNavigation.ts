@@ -291,11 +291,20 @@ const about: MegaNavMenu = {
 };
 
 /**
- * The group's hospitals, one tile each, deep linking to its card on
- * /locations.
+ * The group's hospitals, one tile each. Negombo deep links to its card on
+ * /locations; Blue Sapphire Hospital has its own site, and the owner asked
+ * (2026-11-20) for its tile to go straight there in the same tab.
  * Two columns rather than three, so `MegaNavPanel` sizes the grid from the
  * column count instead of assuming the tile menus always have six entries.
  */
+/**
+ * Blue Sapphire Hospital's own site, the one external href the header
+ * carries. `features/locations` owns the same URL as `RATNAPURA_SITE_URL`;
+ * restated here so config does not reach into a feature's internals, and
+ * megaNavigation.test.ts asserts the two are equal.
+ */
+export const BLUE_SAPPHIRE_SITE_URL = "https://bluesapphirehospitals.lk";
+
 const locations: MegaNavMenu = {
   kind: "menu",
   id: "locations",
@@ -316,7 +325,7 @@ const locations: MegaNavMenu = {
       links: [
         {
           label: "Blue Sapphire Hospital",
-          href: "/locations#ratnapura",
+          href: BLUE_SAPPHIRE_SITE_URL,
           description: "Ratnapura. Open 24/7",
           icon: "pin",
         },

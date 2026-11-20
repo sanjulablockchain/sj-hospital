@@ -123,7 +123,9 @@ test("the Ratnapura card carries Blue Sapphire Hospital's published details", ()
 // ---- Wiring ----
 
 // The header's Locations menu deep links to `/locations#<id>`; a card renamed
-// here would leave the menu pointing at nothing.
+// here would leave the menu pointing at nothing. Ratnapura is the exception:
+// its tile goes to Blue Sapphire Hospital's own site instead (owner's
+// request, 2026-11-20), so it has no deep link to check.
 test("every hospital the header links to is a card on this page, and vice versa", () => {
   const linked = megaNavLinks()
     .map((l) => l.href)
@@ -133,8 +135,9 @@ test("every hospital the header links to is a card on this page, and vice versa"
     .sort();
   assert.deepEqual(
     linked,
-    hospitals.map((h) => h.id).sort()
+    hospitals.map((h) => h.id).filter((id) => id !== "ratnapura").sort()
   );
+  assert.ok(megaNavLinks().some((l) => l.href === RATNAPURA_SITE_URL), "the header has no Blue Sapphire link");
 });
 
 test("card ids are unique and usable as element ids", () => {

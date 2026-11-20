@@ -2,7 +2,8 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readdirSync, existsSync } from "node:fs";
 import { join } from "node:path";
-import { megaNavigation, megaNavLinks, type MegaNavMenu } from "./megaNavigation.ts";
+import { BLUE_SAPPHIRE_SITE_URL, megaNavigation, megaNavLinks, type MegaNavMenu } from "./megaNavigation.ts";
+import { RATNAPURA_SITE_URL } from "../features/locations/data/content.ts";
 import { serviceSlugs } from "../features/services/data/services.ts";
 import { SERVICE_GROUPS } from "../features/services/data/groups.ts";
 import { homeFooterColumns } from "./homeNavigation.ts";
@@ -94,8 +95,12 @@ test("Services links are title-only so the panel fits a laptop viewport", () => 
 // The header is rendered once per page from the shell rather than inside each
 // hero, so an href can never be a bare hash: it would mean something different
 // on every page it was clicked from.
+// The one exception is Blue Sapphire Hospital's own site, which the owner
+// asked the Locations tile to open directly (2026-11-20).
 test("every link is an absolute path, never a bare hash or an external URL", () => {
+  assert.equal(BLUE_SAPPHIRE_SITE_URL, RATNAPURA_SITE_URL);
   for (const link of megaNavLinks()) {
+    if (link.href === BLUE_SAPPHIRE_SITE_URL) continue;
     assert.match(link.href, /^\/[a-z0-9\-/]*(#[a-z0-9-]+)?$/, `${link.label} points at ${link.href}`);
   }
 });
@@ -154,7 +159,7 @@ test("the Locations menu has one column per hospital, one hospital each", () => 
   for (const column of columns) assert.equal(column.links.length, 1);
   assert.deepEqual(
     columns.map((c) => c.links[0].href),
-    ["/locations#negombo", "/locations#ratnapura"]
+    ["/locations#negombo", BLUE_SAPPHIRE_SITE_URL]
   );
 });
 
