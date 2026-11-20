@@ -14,7 +14,7 @@
 // same Sinhala names contact's, pharmacy's and network's own content.si.ts
 // already use for the first of them.
 //
-// "10,000 LKR" keeps its currency code and figure exactly as content.ts
+// "12,500 LKR" keeps its currency code and figure exactly as content.ts
 // prints them: a currency code is not a word with a Sinhala equivalent, the
 // same way a phone number or an href is not.
 //
@@ -85,7 +85,7 @@ export const journeySteps = [
     when: "පැමිණෙන දිනය",
   },
   {
-    desc: "Attendant කෙනෙක් කාමරයේ රැඳී සිටිනවා, සෑම Category එකකම Bystander ඇඳක් සහ පුටුවක් සමඟ, ආහාර වේල Dietary Order එකට අනුවයි. Critical Care එකේ සිට, පවුලේ කෙනෙකුට දිනකට වරක් යාවත්කාලීන කිරීමක් Call කරනවා.",
+    desc: "Attendant කෙනෙක් කාමරයේ රැඳී සිටිනවා, සෑම Category එකකම Bystander ඇඳක් සහ පුටුවක් සමඟ, ආහාර වේල Dietary Order එකට අනුවයි. Critical Care Unit එක විවෘත වූ පසු, එහි රෝගියෙකුගේ පවුලේ කෙනෙකුට දිනකට වරක් යාවත්කාලීන කිරීමක් Call කරනවා.",
     when: "ඔබ රැඳී සිටින කාලය තුළ",
   },
   {
@@ -102,7 +102,7 @@ export const servicesIntro =
 export const deskServices = [
   {
     kind: "පියාසර කිරීමට කලින්",
-    desc: "Telemedicine එකෙන් අපගේ වෛද්‍යවරයෙක් සමඟ Video එකෙන් හෝ Phone එකෙන්, දිනපතා වෙන් කරගත හැකි Consultation එකක් ලැබෙනවා. සෘජුව පරීක්ෂණයක් අවශ්‍ය නොවන කතාබහකට ගැලපෙනවා, Flight එකට කලින් බහුතරයක්ම ඒ වගේ.",
+    desc: "Telemedicine ළඟදීම: අපගේ වෛද්‍යවරයෙක් සමඟ Video එකෙන් හෝ Phone එකෙන් Consultation එකක් ලැබෙනු ඇත. සෘජුව පරීක්ෂණයක් අවශ්‍ය නොවන කතාබහකට ගැලපෙනවා, Flight එකට කලින් බහුතරයක්ම ඒ වගේ. ඒ තෙක් විදේශීය Desk එකට Email හෝ WhatsApp කරන්න.",
   },
   {
     kind: "ප්‍රවාහනය",
@@ -138,7 +138,7 @@ export const deskServices = [
   },
   {
     kind: "Follow-up සත්කාර",
-    desc: "මෙහි බැලූ රෝගීන් ගෙදර ගිය පසු Follow-up සඳහා Telemedicine Use කරනවා, ඊළඟ පියවරේදීත් එකම වෛද්‍යවරයා සම්බන්ධව තියාගන්නවා.",
+    desc: "මෙහි බැලූ රෝගීන් ගෙදර ගිය පසු Telemedicine හරහා Follow-up ළඟදීම, ඊළඟ පියවරේදීත් එකම වෛද්‍යවරයා සම්බන්ධව තියාගනිමින්.",
   },
 ];
 
@@ -188,13 +188,13 @@ export const treatments = [
     stay: "Day Case එකක්",
   },
   {
-    name: "Gastroscopy හෝ Colonoscopy",
+    name: "Gastroscopy හෝ Colonoscopy (ළඟදීම)",
     note: "Consultant Anaesthetist කෙනෙක් Sedation දෙනවා, අවශ්‍ය වුනොත් එදිනම Biopsy එකක්",
     stay: "Day Procedure එකක්",
   },
   {
-    name: "Obstetrics සහ ප්‍රසූතිය",
-    note: "Delivery එක දක්වාම Consultant කෙනෙක්, වෙන් වූ Obstetric Theatre එකක් සහ කාමරයේම Neonatal සහාය",
+    name: "Obstetrics සහ ප්‍රසූතිය (ළඟදීම)",
+    note: "Delivery එක දක්වාම Consultant කෙනෙක්, වෙන් වූ Obstetric Theatre එකක් සහ කාමරයේම Neonatal සහාය, Maternity සත්කාරය විවෘත වූ පසු",
     stay: "ඔබේ Consultant සමඟ තහවුරු කරගනී",
   },
   {
@@ -214,8 +214,8 @@ export const estimateNote =
   "රැඳී සිටින කාලය ඔබේ Surgeon බලාපොරොත්තු වන එකයි, පොරොන්දුවක් නෙවෙයි, ඔබේ Consultation එකේදී තහවුරු කරගනී. Treatment එක ආරම්භ වීමට කලින් ලිඛිත Estimate එකක් ලැබෙනවා, ඇතිවිය හැකි සත්කාර ක්‍රියාවලිය ආවරණය කරමින්, ඒක ලිඛිතව ලැබෙන තෙක් කිසිවක් ආරම්භ වන්නේ නෑ. CT සහ MRI මෙතන කරන්නේ නෑ, Partner Imaging Centre එකකට Referral එකකින් සකසනවා.";
 
 /** `#rooms`: the four categories the hospital actually offers, taken from
- *  `features/facilities/data/content`. Only the standard single carries a
- *  figure, because 10,000 LKR is the sole room price the repo publishes. */
+ *  `features/facilities/data/content`. The standard room carries its
+ *  price per day from the 2026 Service Book (page 17). */
 export const roomsHeading = {};
 /** Sits under the shared amenity list in `#rooms`. */
 export const roomsNote = "සෑම Category එකකම, Wards වල සිටම, ඉහත ලැයිස්තුව සම්මතව තියෙනවා.";
@@ -240,7 +240,7 @@ export const roomTiles = [
     tier: "එක ඇඳක්",
     name: "Standard Rooms",
     desc: "Bystander ඇඳක් සහ පුටුවක්, වායු සමීකරණය, රූපවාහිනිය සහ කාමරයට අවශ්‍ය වෛද්‍ය සහාය. කෙටි ක්‍රියාපටිපාටියකට සාමාන්‍ය තේරීම.",
-    extra: "10,000 LKR සිට",
+    extra: "දිනකට 12,500 LKR",
   },
   {
     tier: "ඇඳ දෙකක් හෝ තුනක්",
@@ -312,7 +312,7 @@ export const practical = [
 export const faq = [
   {
     q: "පියාසර කිරීමට කලින් අදහසක් ලබාගන්නේ කොහොමද?",
-    a: "ඔබේ Scans, Laboratory Reports, වර්තමාන බෙහෙත් ලැයිස්තුව සහ කෙටි ඉතිහාසයක් විදේශීය Desk එකට Email කරන්න හෝ WhatsApp කරන්න, Telemedicine Consultation එකක් ඉල්ලන්න. ඒක අපගේ වෛද්‍යවරයෙක් සමඟ Video එකෙන් හෝ Phone එකෙන්, දිනපතා වෙන් කරගත හැකි Consultation එකක්, සෘජුව පරීක්ෂණයක් අවශ්‍ය නොවන කතාබහකට හරියටම ගැලපෙනවා. Treatment එක Carry කරන වෛද්‍යවරයා සමඟ සාකච්ඡා නොකර කිසිම කෙනෙක් Ticket එකක් ගන්න ඕන නෑ.",
+    a: "ඔබේ Scans, Laboratory Reports, වර්තමාන බෙහෙත් ලැයිස්තුව සහ කෙටි ඉතිහාසයක් විදේශීය Desk එකට Email කරන්න හෝ WhatsApp කරන්න, ඔබට ප්‍රතිකාර කරන වෛද්‍යවරයාට Desk එක ඔබේ ප්‍රශ්න යොමු කරනවා. Video හෝ Phone හරහා Telemedicine Consultations ළඟදීම. Treatment එක Carry කරන වෛද්‍යවරයා සමඟ සාකච්ඡා නොකර කිසිම කෙනෙක් Ticket එකක් ගන්න ඕන නෑ.",
   },
   {
     q: "රෝහල ගුවන් තොටුපළෙන් කොපමණ දුරද?",
@@ -328,7 +328,7 @@ export const faq = [
   },
   {
     q: "පවුලේ කෙනෙකුට මා එක්ක රැඳී සිටින්න පුළුවන්ද?",
-    a: "ඔව්. Wards වල සිට Super Deluxe දක්වා සෑම කාමර Category එකකම Bystander ඇඳක් සහ පුටුවක් තියෙනවා, එක් Attendant කෙනෙකුට රාත්‍රිය රැඳී සිටිය හැක. Admission එකේදී සටහන් කරගත් Dietary Order එකට ආහාර සකසනවා. සාමාන්‍ය Wards දහවල් Visiting සඳහා විවෘතයි; Critical Care Visiting Unit Desk එක තහවුරු කරන නිශ්චිත වේලාවන් වලට සීමායි, පවුලේ කෙනෙකුට Unit එකෙන් දිනකට වරක් යාවත්කාලීන කිරීමක් Call කරනවා.",
+    a: "ඔව්. Wards වල සිට Super Deluxe දක්වා සෑම කාමර Category එකකම Bystander ඇඳක් සහ පුටුවක් තියෙනවා, එක් Attendant කෙනෙකුට රාත්‍රිය රැඳී සිටිය හැක. Admission එකේදී සටහන් කරගත් Dietary Order එකට ආහාර සකසනවා. සාමාන්‍ය Wards දහවල් Visiting සඳහා විවෘතයි; Critical Care Unit එක විවෘත වූ පසු, එහි Visiting Unit Desk එක තහවුරු කරන නිශ්චිත වේලාවන් වලට සීමා වන අතර, පවුලේ කෙනෙකුට දිනකට වරක් යාවත්කාලීන කිරීමක් Call කරනවා.",
   },
   {
     q: "මගේ Insurance එක මෙතන වැඩ කරනවද?",
@@ -336,7 +336,7 @@ export const faq = [
   },
   {
     q: "කොපමණ මුදලක් වැයවේද?",
-    a: "Treatment එක ආරම්භ වීමට කලින් ලිඛිත Estimate එකක් ලැබෙනවා, ඇතිවිය හැකි සත්කාර ක්‍රියාවලිය ආවරණය කරමින්, ඒක ලැබෙන තෙක් කිසිවක් ආරම්භ වන්නේ නෑ. එය Operation එක, ඔබ තෝරාගන්නා කාමරය සහ රැඳී සිටින කාලය මතයි, ඒකයි Estimate එක Price List එකකට වඩා ඔබේ Reports අනුව එන්නේ. Standard Single එකකට කාමර 10,000 LKR සිට ආරම්භ වේ, Outpatients ලාට Laboratory ගාස්තු වලින් 10%ක වට්ටමක්.",
+    a: "Treatment එක ආරම්භ වීමට කලින් ලිඛිත Estimate එකක් ලැබෙනවා, ඇතිවිය හැකි සත්කාර ක්‍රියාවලිය ආවරණය කරමින්, ඒක ලැබෙන තෙක් කිසිවක් ආරම්භ වන්නේ නෑ. එය Operation එක, ඔබ තෝරාගන්නා කාමරය සහ රැඳී සිටින කාලය මතයි, ඒකයි Estimate එක Price List එකකට වඩා ඔබේ Reports අනුව එන්නේ. දිනකට වාට්ටු ඇඳක් 9,500 LKR සිට සහ Standard කාමරයක් 12,500 LKR, Outpatients ලාට Laboratory ගාස්තු වලින් 10%ක වට්ටමක්.",
   },
   {
     q: "මට මෙතන CT හෝ MRI Scan එකක් කරගන්න පුළුවන්ද?",
@@ -348,7 +348,7 @@ export const faq = [
   },
   {
     q: "සැත්කමකින් පස්සේ මට කොපමණ ඉක්මනින් ගෙදර පියාසර කරන්න පුළුවන්ද?",
-    a: "ඒක තියෙන්නේ Operation එක මතම, ඒ නිසා ආපසු Ticket එක Book කරන්න කලින් ඔබේ Surgeon ලවා අහන්න, වෙනස් කරගත හැකි Ticket එකක් තෝරන්න. Recovery එක ඔබේ Flight එකට වඩා දිගු වුනොත්, ඔබ ගමන් කරාට පස්සේත් Telemedicine එකයි එකම වෛද්‍යවරයා සම්බන්ධව තියාගන්නේ: Video එකෙන් හෝ Phone එකෙන් දිනපතා වෙන් කරගත හැකි Review එකක්, ඔබේ Chart එක කවදාවත් නොදැක්ක කෙනෙක් සමඟ අලුතින් පටන් ගන්නවා වෙනුවට.",
+    a: "ඒක තියෙන්නේ Operation එක මතම, ඒ නිසා ආපසු Ticket එක Book කරන්න කලින් ඔබේ Surgeon ලවා අහන්න, වෙනස් කරගත හැකි Ticket එකක් තෝරන්න. Recovery එක ඔබේ Flight එකට වඩා දිගු වුනොත්, ඔබ ගමන් කරාට පස්සේත් ළඟදීම එන Telemedicine එකෙන් එකම වෛද්‍යවරයා සම්බන්ධව තියාගනීවි, ඔබේ Chart එක කවදාවත් නොදැක්ක කෙනෙක් සමඟ අලුතින් පටන් ගන්නවා වෙනුවට.",
   },
 ];
 

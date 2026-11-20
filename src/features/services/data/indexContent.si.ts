@@ -20,7 +20,7 @@ export const __review = { status: "draft", reviewer: null, date: null } as const
 
 export const tickerItems: readonly string[] = [
   "විශිෂ්ඨතා මධ්‍යස්ථාන නවයක්",
-  "Emergency සහ OPD හැම වේලාවකම",
+  "OPD පෙ.ව. 7.00 සිට ප.ව. 6.00 දක්වා",
   "රසායනාගාරය පැය 24ම විවෘතයි",
   "Digital X-ray විනාඩි 60කින් Report කරයි",
   "වෛද්‍යවරු දෙදෙනෙක් හැම Report එකක්ම කියවනවා",
@@ -60,7 +60,7 @@ export const centres = [
   },
   {
     name: "මවයි දරුවයි",
-    desc: "දරුවා බිහිවෙනකන් Obstetric ප්‍රතිකාර, පළමු මිනිත්තුවේ සිටම කාමරයේම Neonatal සහාය සමඟ.",
+    desc: "දරුවා බිහිවෙනකන් Obstetric ප්‍රතිකාර, පළමු මිනිත්තුවේ සිටම කාමරයේම Neonatal සහාය සමඟ, ළඟදීම විවෘත වෙනවා.",
     lead: "නම් කළ විශේෂඥවරයා",
   },
   {
@@ -80,8 +80,8 @@ export const centres = [
   },
   {
     name: "Endoscopy ඒකකය",
-    desc: "සැලසුම් කළ Lists වල Gastroscopy සහ Colonoscopy, විශේෂඥ Anaesthetist කෙනෙක් විසින් Sedation ලබාදෙනවා.",
-    lead: "එදිනම Reporting",
+    desc: "සැලසුම් කළ Lists වල Gastroscopy සහ Colonoscopy, විශේෂඥ Anaesthetist කෙනෙක් විසින් Sedation ලබාදෙනවා, ඒකකය විවෘත වූ පසු.",
+    lead: "ළඟදීම විවෘත වෙනවා",
   },
   {
     name: "සුවතාවයයි සෞඛ්‍ය පරීක්ෂණයයි",
@@ -102,7 +102,7 @@ export const surgicalRows = [
   { name: "Urology අංශය", note: "එදිනම Ultrasound සහ Flow Studies" },
   { name: "ඇස් ශල්‍යකර්මය සහ Cataract ශල්‍යකර්මය", note: "එදින ශල්‍යකර්මය" },
   { name: "Neurosurgery අංශය", note: "Referral එකකින්, Imaging Lead" },
-  { name: "Gastrointestinal සහ Endoscopy", note: "එදිනම Reporting" },
+  { name: "Gastrointestinal සහ Endoscopy", note: "ළඟදීම විවෘත වෙනවා" },
   { name: "Anaesthesia සේවාව", note: "විශේෂඥ Lead කරන Lists" },
   { name: "ශල්‍යකර්මයෙන් පසු ප්‍රතිකාර", note: "Assign කළ Recovery Nurse" },
 ];
@@ -140,8 +140,8 @@ export const diagnosticRows = [
   },
   {
     name: "Endoscopy සේවාව",
-    note: "Gastroscopy සහ Colonoscopy, එම Sitting එකේම Biopsy සමඟ",
-    turnaround: "එදිනම",
+    note: "Gastroscopy සහ Colonoscopy, එම Sitting එකේම Biopsy සමඟ, ඒකකය විවෘත වූ පසු",
+    turnaround: "ළඟදීම විවෘත වෙනවා",
   },
   {
     name: "CT සහ MRI",
@@ -263,10 +263,10 @@ export const facilityCards = [
     body: "මීගමුවේ විශේෂයෙන් තැනූ රෝහලක්, Ambulance Bay එකටයි OPD රෝගීන්ටයි වහලක් සහිත පිවිසුම් සමඟ.",
   },
   {
-    body: "පැය 24ම විවෘත OPD එකක්, ඔබ ඕනෑම වේලාවක ආවත් Emergency පිවිසුම ලඟින්ම සේවකයින් සිටිනවා.",
+    body: "Emergency පිවිසුම ලඟින්ම OPD එකක්, පෙ.ව. 7.00 සිට ප.ව. 6.00 දක්වා විවෘතයි; ඉන් පසු Emergency අංශය ඔබව බලනවා.",
   },
   {
-    body: "රාත්‍රියකට LKR 10,000 සිට Private සහ Semi-Private කාමර, උසස් Dependency සත්කාරය සඳහා සම්පූර්ණ ICU එකක් සහිතව.",
+    body: "දිනකට LKR 9,500 සිට වාට්ටු සහ පුද්ගලික කාමර, උසස් Dependency සත්කාරය සඳහා සම්පූර්ණ ICU එකක් ළඟදීම විවෘත වෙනවා.",
   },
   {
     body: "අපගේම Ambulance රථ පිරිසක් සේවය කරන වහලක් සහිත පිවිසුමක්, Bandaranaike International සිට විනාඩි දහයයි.",
@@ -296,6 +296,11 @@ export const bookSection = {
 
 export const detailChrome = {
   addressLine: "229/10 St. Joseph Street, මීගමුව",
+  bookExcerpt: {
+    why: "St. Joseph තෝරාගන්නේ ඇයි",
+    read: "Service Book හි {page} වන පිටුව කියවන්න",
+  },
+  comingSoonNote: "මෙම සේවාව තවම විවෘත කර නැත. එය විවෘත වන විට දැනගැනීමට අපට Call කරන්න හෝ WhatsApp කරන්න.",
 };
 
 export const internationalSteps = [
@@ -315,6 +320,6 @@ export const internationalSteps = [
     desc: "ඔබ සමඟ ගෙනියන්න ඔබේ Reports, Imaging Referrals සහ Discharge Summary එකේ පිටපත්.",
   },
   {
-    desc: "ඔබ ගෙදර ගිය පසුවත් Telemedicine Consultation එකක් ඔබේ සත්කාරය දිගටම කරගෙන යනවා.",
+    desc: "ඔබ ගෙදර ගිය පසුවත් Telemedicine Consultation එකක් ඔබේ සත්කාරය දිගටම කරගෙන යනු ඇත, ළඟදීම.",
   },
 ];

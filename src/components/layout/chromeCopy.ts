@@ -58,6 +58,10 @@ export const chromeCopy = {
   bookFooter: "Free OPD consultation. All insurance accepted, cashless available.",
   notNow: "Not now",
   closeBooking: "Close booking options",
+
+  // The badge on every preview of a service the hospital does not run yet
+  // (`config/comingSoon.ts`), rendered by `components/ui/ComingSoonBadge`.
+  comingSoon: "Coming soon",
 };
 
 export type ChromeCopy = typeof chromeCopy;

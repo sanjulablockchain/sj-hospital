@@ -92,7 +92,7 @@ export const jumpCards = [
   },
   {
     count: "Monitor කරන ඇඳන්",
-    note: "ශල්‍යාගාර අසලින්ම දැඩි සත්කාරය.",
+    note: "ශල්‍යාගාර අසලින්ම දැඩි සත්කාරය, ළඟදීම.",
   },
   {
     count: "වර්ග 4ක්",
@@ -117,26 +117,26 @@ export const buildingZones = [
   {
     name: "Clinics සහ Outpatients",
     contents:
-      "සෑම විශේෂඥතාවකටම වෙන් වූ Consulting Suites, පැය 24ම විවෘත Outpatient අංශයක් සහ Physiotherapy.",
+      "සෑම විශේෂඥතාවකටම වෙන් වූ Consulting Suites, Outpatient අංශය සහ Physiotherapy.",
   },
   {
     // Reused verbatim from navigationLabels.si.ts's "Diagnostics" ->
     // "රෝග විනිශ්චය".
     name: "රෝග විනිශ්චය",
     contents:
-      "පැය 24ම විවෘත රසායනාගාරයක්, Digital X-ray, Ultrasound, ECG සහ Echocardiography, සහ Endoscopy අංශය.",
+      "පැය 24ම විවෘත රසායනාගාරයක්, Digital X-ray, Ultrasound, ECG සහ Echocardiography, සහ ළඟදීම විවෘත වන Endoscopy අංශය.",
   },
   {
     name: "ශල්‍යාගාර සහ සුවය ලැබීම",
     contents:
-      "අසලින්ම Recovery Bay එකක් සහිත ශල්‍යාගාර, සාමාන්‍ය List වලින් වෙන් කර තියෙන විශේෂිත Obstetric Theatre එකක් සහ Sterile Services.",
+      "අසලින්ම Recovery Bay එකක් සහිත ශල්‍යාගාර, සාමාන්‍ය List වලින් වෙන් කර තියෙන විශේෂිත Obstetric Theatre එකක් (Maternity සත්කාරය සමඟ ළඟදීම) සහ Sterile Services.",
   },
   {
     // Reused verbatim from navigationLabels.si.ts's "Critical care" ->
     // "දැඩි සත්කාර".
     name: "දැඩි සත්කාර",
     contents:
-      "ශල්‍යාගාර සහ හදිසි අංශය අසලින්ම තියෙන Intensive Care ඇඳන්, ඕන වන අලුත උපන් දරුවන්ට Neonatal සහාය සමඟ.",
+      "ශල්‍යාගාර සහ හදිසි අංශය අසලින්ම තියෙන Intensive Care ඇඳන්, ඕන වන අලුත උපන් දරුවන්ට Neonatal සහාය සමඟ, ළඟදීම.",
   },
   {
     name: "වාට්ටු සහ කාමර",
@@ -198,7 +198,7 @@ export const theatreSpecs = [
 
 export const criticalHeading = {};
 export const criticalIntro =
-  "Ventilation එකක් හෝ ළඟින් නිරීක්ෂණයක් ඕන රෝගීන්ට, ශල්‍යකර්මයෙන් පසු, හෝ අනිත් හැම දෙයක්ම වෙන්න කලින් Stabilise කරගන්න Monitor කරන ඇඳන්.";
+  "Ventilation එකක් හෝ ළඟින් නිරීක්ෂණයක් ඕන රෝගීන්ට, ශල්‍යකර්මයෙන් පසු, හෝ අනිත් හැම දෙයක්ම වෙන්න කලින් Stabilise කරගන්න Monitor කරන ඇඳන්. Unit එක ළඟදීම විවෘත වෙනවා.";
 
 export const careUnits = [
   {
@@ -225,7 +225,7 @@ export const careUnits = [
   {
     code: "NEO",
     name: "අලුත උපන් සහාය",
-    desc: "බබාගේ තත්ත්වය ඉල්ලුවොත් උපදින විටම Neonatal සහාය, Obstetric Theatre එකට යාබදව.",
+    desc: "බබාගේ තත්ත්වය ඉල්ලුවොත් උපදින විටම Neonatal සහාය, Obstetric Theatre එකට යාබදව, Maternity සත්කාරය විවෘත වූ පසු.",
     lead: "Paediatric කණ්ඩායම",
   },
 ];
@@ -235,7 +235,7 @@ export const careNotes = [
     body: "Unit එක ශල්‍යාගාර සහ හදිසි අංශය අසලින්ම තියෙන නිසා, වාට්ටුවේදී හෝ ශල්‍යකර්මයෙන් පසු තත්ත්වය නරක අතට හැරෙන රෝගියෙක් වෙනත් රෝහලකට මාරු කරනවා වෙනුවට කෙලින්ම මෙතනට ගෙනියනවා.",
   },
   {
-    body: "රෝගීන්ට විවේක ගන්නත් කණ්ඩායමට බාධාවකින් තොරව වැඩ කරන්නත් Unit එකට එන එක නියම වේලාවලට සීමා කරලා. දැනට ඇති වේලාවන් ICU Desk එකෙන් ඔබට කියාවි.",
+    body: "Unit එක විවෘත වූ පසු, රෝගීන්ට විවේක ගන්නත් කණ්ඩායමට බාධාවකින් තොරව වැඩ කරන්නත් Unit එකට එන එක නියම වේලාවලට සීමා කරලා. දැනට ඇති වේලාවන් ICU Desk එකෙන් ඔබට කියාවි.",
   },
   {
     body: "දිනකට එක් වතාවක් පවුලේ කෙනෙකුට Call එකක් එනවා, සහ Unit Coordinator විසින් පැමිණීමේ කටයුතුත් වාට්ටු ඇඳකට ආපසු මාරු වීමත් හසුරුවනවා.",
@@ -313,8 +313,8 @@ export const equipment = [
   { name: "ECG & echocardiography", note: "විවේකී ECG සහ හෘද අවදානම් තක්සේරුව", avail: "එදිනම" },
   {
     name: "Endoscopy",
-    note: "Gastroscopy සහ Colonoscopy, එකම වාරයේදීම Biopsy සමඟ",
-    avail: "එදිනම",
+    note: "Gastroscopy සහ Colonoscopy, එකම වාරයේදීම Biopsy සමඟ, ඒකකය විවෘත වූ පසු",
+    avail: "ළඟදීම විවෘත වෙනවා",
   },
   {
     name: "CT & MRI",
@@ -359,7 +359,7 @@ export const support = [
   },
   {
     name: "Outpatient අංශය",
-    desc: "පැය 24ම විවෘත Consulting Suites, ඔබ එන ඕන වෙලාවකදීම හදිසි අංශයේ පිවිසුම අසලින්ම Staff කර.",
+    desc: "හදිසි අංශයේ පිවිසුම අසලින්ම Consulting Suites, දවල් කාලයේ විවෘතයි; ඉන් පසු හදිසි අංශය ඔබව බලනවා.",
   },
   {
     name: "Pharmacy",
@@ -392,7 +392,7 @@ export const hygieneRows = [
   // singularised word.
   { k: "පරිභෝජ්‍ය ද්‍රව්‍ය", v: "එක් වතාවක් Use කරයි, කවදාවත් නැවත නෑ" },
   { k: "උපකරණ කට්ටල", v: "Set එකකට Track කරයි" },
-  { k: "ප්‍රසව ශල්‍යාගාරය", v: "සාමාන්‍ය List වලින් වෙනම" },
+  { k: "ප්‍රසව ශල්‍යාගාරය", v: "ළඟදීම විවෘත වෙනවා" },
   { k: "රසායනාගාර Reports", v: "වෛද්‍යවරු දෙදෙනෙක් Check කරයි" },
 ];
 
@@ -402,7 +402,7 @@ export const visitorsIntro =
 
 export const visitingRows = [
   { k: "සාමාන්‍ය වාට්ටු", v: "දවාලේ පැමිණීම" },
-  { k: "දැඩි සත්කාර", v: "නියම වේලාවලට" },
+  { k: "දැඩි සත්කාර", v: "ළඟදීම විවෘත වෙනවා" },
   { k: "පවුලේ අයට යාවත්කාලීන කිරීම", v: "Unit එකෙන් දිනකට එක් වතාවක්" },
   { k: "Bystander", v: "රෑ රැඳී සිටින්න පුළුවන්" },
 ];

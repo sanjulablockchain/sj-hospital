@@ -38,4 +38,5 @@ export const chromeCopy = {
   bookCallDesc: "Switchboard එක හැම පැයකම උත්තර දෙනවා.",
   bookFooter: "OPD Consultation නොමිලේ. හැම Insurance එකක්ම භාර ගන්නවා, Cashless පහසුකමත් තියෙනවා.",
   closeBooking: "Booking විකල්ප වසන්න",
+  comingSoon: "ළඟදීම",
 };

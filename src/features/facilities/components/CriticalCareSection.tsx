@@ -1,4 +1,5 @@
 import { Reveal } from "@/components/ui/Reveal";
+import { ComingSoonBadge } from "@/components/ui/ComingSoonBadge";
 import { RevealStagger } from "@/components/ui/RevealStagger";
 import type { FacilitiesContent } from "../data/getContent";
 
@@ -14,8 +15,10 @@ export function CriticalCareSection({ content }: { content: FacilitiesContent })
   return (
     <section id="critical" className="mx-auto max-w-[1440px] px-5 pt-30 sm:px-8 lg:px-11">
       <Reveal>
-        <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
+        <div className="flex flex-wrap items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
           {sectionEyebrows.critical}
+          {/* Built but not yet running (owner, 2026-11-20). */}
+          <ComingSoonBadge size="md" />
         </div>
         <div className="mt-4.5 grid min-w-0 gap-6 min-[900px]:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] min-[900px]:items-end min-[900px]:gap-14">
           <h2 className="font-display wrap-break-word min-w-0 text-[clamp(38px,4.4vw,66px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-[var(--home-heading)] uppercase">

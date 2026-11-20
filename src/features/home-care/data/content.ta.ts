@@ -37,7 +37,7 @@ export const tickerItems: readonly string[] = [
   "உங்கள் Hospital file இல் குறிப்புகள்",
   "முதியவர்கள், குழந்தைகள் மற்றும் அறுவை சிகிச்சை பின் சிகிச்சை",
   "எங்கள் Counter இலிருந்து மருந்து",
-  "Video மற்றும் Phone Consultations",
+  "Video மற்றும் Phone Consultations, விரைவில்",
 ];
 
 export const heroFacts = [
@@ -111,7 +111,7 @@ export const handoffs = [
     ],
   },
   {
-    body: "எல்லா கேள்விக்கும் வாசலில் ஒருவர் தேவையில்லை. Telemedicine Consultation ஒன்று Follow-up உரையாடல் அல்லது In-person Examination தேவையில்லாத ஒரு கவலையை Video அல்லது Phone மூலம் Cover செய்யும், Prescription ஏதேனும் இருந்தால் நேரடியாக Pharmacy க்கு அனுப்பப்படும்.",
+    body: "எல்லா கேள்விக்கும் வாசலில் ஒருவர் தேவையில்லை. விரைவில், Telemedicine Consultation ஒன்று Follow-up உரையாடல் அல்லது In-person Examination தேவையில்லாத ஒரு கவலையை Video அல்லது Phone மூலம் Cover செய்யும், Prescription ஏதேனும் இருந்தால் நேரடியாக Pharmacy க்கு அனுப்பப்படும்.",
     points: [
       "Video அல்லது Phone, நோயாளிக்கு ஏற்றபடி",
       "Prescription ஏதேனும் இருந்தால் அது Pharmacy க்கு செல்லும், Collect செய்யவோ Deliver செய்யவோ",

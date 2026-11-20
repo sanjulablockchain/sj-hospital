@@ -74,7 +74,7 @@ export const newsroomCopy = {
 
 export const featured = {
   kickerDate: "ஆகஸ்ட் 2026",
-  lede: "தனித்தனி Procedure அறைகள் இரண்டும் தனி Recovery Bay ஒன்றும், Gastroscopy மற்றும் Colonoscopy நோய் கண்டறிதலுக்கான காத்திருப்பு நேரத்தை ஒரு வாரத்திற்கும் குறைவாக ஆக்குகிறது. Suite ஆறு நாட்கள் இயங்குகிறது, Sedation ஐ Anaesthetic குழு கையாளுகிறது, Procedure நடைபெறும் போது எடுக்கப்படும் Biopsy க்கு அதே நாளில் அறிக்கை.",
+  lede: "தனித்தனி Procedure அறைகள் இரண்டும் தனி Recovery Bay ஒன்றும் Gastroscopy மற்றும் Colonoscopy நோய் கண்டறிதலுக்காகத் தயார் செய்யப்படுகின்றன, Sedation ஐ Anaesthetic குழு கையாளும், Procedure நடைபெறும் போது எடுக்கப்படும் Biopsy க்கு அதே நாளில் அறிக்கை.",
   date: "14 ஆகஸ்ட் 2026",
   type: "பத்திரிக்கை அறிக்கை",
   points: [
@@ -88,7 +88,7 @@ export const featured = {
 export const news = [
   {
     date: "ஆகஸ்ட் 2026",
-    lede: "தனித்தனி Procedure அறைகள் இரண்டும் தனி Recovery Bay ஒன்றும், Gastroscopy மற்றும் Colonoscopy காத்திருப்பு நேரத்தை ஒரு வாரத்திற்கும் குறைவாக ஆக்குகிறது.",
+    lede: "தனித்தனி Procedure அறைகள் இரண்டும் தனி Recovery Bay ஒன்றும் Gastroscopy மற்றும் Colonoscopy நோய் கண்டறிதலுக்காகத் தயார் செய்யப்படுகின்றன.",
   },
   {
     date: "ஜூலை 2026",

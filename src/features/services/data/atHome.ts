@@ -3,6 +3,19 @@ import type { Service } from "../types";
 export const atHomeServices: Service[] = [
   {
     slug: "pharmacy",
+    book: {
+      page: 16,
+      summary: "Send your prescription on WhatsApp and we will get your medicines ready, with delivery across Negombo.",
+      facts: [
+        { k: "WhatsApp", v: "076 422 8898" },
+        { k: "Delivery", v: "Across Negombo" },
+        { k: "Hours", v: "Open 24 hours, 7 days a week" },
+      ],
+      why: [
+        "Order from home, with no travelling when you are unwell.",
+        "Medicines from the hospital's own pharmacy.",
+      ],
+    },
     heroImage: "/images/services/heroes/pharmacy.jpg",
     heroAlt: "A pharmacist checking stocked medicine shelves in a dispensary",
     title: "24-hour pharmacy",
@@ -131,6 +144,19 @@ export const atHomeServices: Service[] = [
   },
   {
     slug: "home-visits",
+    book: {
+      page: 15,
+      summary: "Cannot come to the hospital? Our team can visit you at home for a health check.",
+      facts: [
+        { k: "Call", v: "031 784 84 84" },
+        { k: "WhatsApp", v: "076 422 8898" },
+        { k: "Charges and areas", v: "Please ask when you book" },
+      ],
+      why: [
+        "Hospital care that comes to you, helpful for older family members and anyone who finds travel hard.",
+        "Part of St. Joseph Hospital, with doctors, laboratory and pharmacy behind it.",
+      ],
+    },
     heroImage: "/images/services/heroes/home-visits.jpg",
     heroAlt: "A healthcare worker checking a patient's blood pressure during a home visit",
     title: "Home visits",
@@ -202,7 +228,7 @@ export const atHomeServices: Service[] = [
     directoryTitle: "Telemedicine",
     group: "At home",
     hours: "Daily",
-    cta: "Book a consultation",
+    cta: "Ask us when it opens",
     desc: "Video and phone consultations with our doctors, with prescriptions issued to the pharmacy for delivery and follow-up for patients who have travelled home.",
     tags: ["Video consultations", "Phone consultations", "Prescriptions to pharmacy", "Follow-up after travel"],
     facts: [

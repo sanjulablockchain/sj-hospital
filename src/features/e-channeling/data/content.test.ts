@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { doctors } from "./doctors.ts";
-import { heroFacts, helpRail, tickerItems } from "./content.ts";
+import { bookExcerpt, heroFacts, helpRail, tickerItems } from "./content.ts";
 
 // The hero states these counts and the directory computes them from the same
 // array. If they disagree the page contradicts itself in the first screen.
@@ -27,4 +27,15 @@ test("no em dash in any encoding", () => {
       assert.ok(!value.includes(form), `${value} contains ${form}`);
     }
   }
+});
+
+// Super Channelling is page 11 of the 2026 Service Book. It has no service
+// page of its own, so its excerpt is quoted here, on /e-channeling, with the
+// two numbers the book prints (both lines are in use, owner 2026-11-20).
+test("the Super Channelling excerpt quotes page 11 of the Service Book", () => {
+  assert.equal(bookExcerpt.page, 11);
+  const facts = new Map(bookExcerpt.facts.map((f) => [f.k, f.v]));
+  assert.equal(facts.get("Call"), "031 784 84 84");
+  assert.equal(facts.get("WhatsApp"), "076 422 8898");
+  assert.equal(bookExcerpt.why.length, 3);
 });

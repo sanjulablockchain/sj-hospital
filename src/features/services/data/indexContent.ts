@@ -46,7 +46,7 @@ export type PackageTier = {
  */
 export const tickerItems: readonly string[] = [
   "Nine centres of excellence",
-  "Emergency and OPD around the clock",
+  "OPD 7.00 AM to 6.00 PM",
   "Laboratory open 24 hours",
   "Digital X-ray read within the hour",
   "Two doctors read every report",
@@ -100,7 +100,7 @@ export const centres: Centre[] = [
   {
     no: "03",
     name: "Mother & Baby",
-    desc: "Obstetric care through to delivery, with neonatal support in the room from the first minute.",
+    desc: "Antenatal care through to delivery, with neonatal support in the room from the first minute, opening soon.",
     lead: "Named consultant",
   },
   {
@@ -124,8 +124,8 @@ export const centres: Centre[] = [
   {
     no: "07",
     name: "Endoscopy Unit",
-    desc: "Gastroscopy and colonoscopy on scheduled lists, with sedation given by a consultant anaesthetist.",
-    lead: "Same day reporting",
+    desc: "Gastroscopy and colonoscopy on scheduled lists, with sedation given by a consultant anaesthetist, once the unit opens.",
+    lead: "Opening soon",
   },
   {
     no: "08",
@@ -148,7 +148,7 @@ export const surgicalRows: SurgicalRow[] = [
   { name: "Urology", note: "Same-visit ultrasound & flow studies" },
   { name: "Ophthalmology & cataract surgery", note: "Day case surgery" },
   { name: "Neurosurgery", note: "By referral, imaging led" },
-  { name: "Gastrointestinal & endoscopy", note: "Same-day reporting" },
+  { name: "Gastrointestinal & endoscopy", note: "Opening soon" },
   { name: "Anaesthesia", note: "Consultant led lists" },
   { name: "Post-operative care", note: "Assigned recovery nurse" },
 ];
@@ -186,8 +186,8 @@ export const diagnosticRows: DiagnosticRow[] = [
   },
   {
     name: "Endoscopy",
-    note: "Gastroscopy and colonoscopy, with biopsy at the same sitting",
-    turnaround: "Same day",
+    note: "Gastroscopy and colonoscopy, with biopsy at the same sitting, once the unit opens",
+    turnaround: "Opening soon",
   },
   {
     name: "CT & MRI",
@@ -343,7 +343,7 @@ export const surgicalSection = {
 /** `DiagnosticsSection`, `#diagnostics`. */
 export const diagnosticsSection = {
   eyebrow: "04 / Diagnostics & radiology",
-  heading: "Lab, imaging & endoscopy",
+  heading: "Lab & imaging",
   cta: "Book a test",
 };
 
@@ -399,7 +399,7 @@ export const facilityCards: FacilityCard[] = [
   {
     index: "02",
     title: "Reception & OPD",
-    body: "A 24-hour outpatient department, staffed alongside the emergency entrance for whenever you arrive.",
+    body: "An outpatient department beside the emergency entrance, open from 7.00 AM to 6.00 PM; after hours, the emergency department sees you.",
     linkLabel: "See admissions",
     href: "#admissions",
     photo: "/images/welcome.jpg",
@@ -408,7 +408,7 @@ export const facilityCards: FacilityCard[] = [
   {
     index: "03",
     title: "Wards, rooms & ICU",
-    body: "Private and semi-private rooms from 10,000 LKR a night, backed by a full ICU for higher-dependency care.",
+    body: "Wards and private rooms from 9,500 LKR a day, with a full ICU for higher-dependency care opening soon.",
     linkLabel: "See intensive & critical care",
     href: "/services/intensive-critical-care",
     photo: "/images/doctors.jpg",
@@ -498,6 +498,22 @@ export const detailChrome = {
   /** `{cta}` is the service's own `cta` field, e.g. "Come straight in today." */
   bookHeading: "{cta} today.",
   backToServices: "Back to all services",
+  /**
+   * A service the hospital does not run yet (`config/comingSoon.ts`): the
+   * line under the hero's lede, and the closing section's heading, which
+   * replaces `bookHeading` there.
+   */
+  comingSoonNote: "This service is not open yet. Call or WhatsApp us to hear when it opens.",
+  comingSoonHeading: "Ask us when it opens",
+  /**
+   * `BookExcerptSection`'s labels, English in every locale like the other
+   * detail headings. `{page}` is the printed page number.
+   */
+  bookExcerpt: {
+    eyebrow: "From our Service Book, page {page}",
+    why: "Why St. Joseph",
+    read: "Read page {page} of the Service Book",
+  },
   /** Shown on the laboratory service only, under its facts card. */
   priceListCta: "See every test and price",
 };
@@ -531,6 +547,6 @@ export const internationalSteps: Step[] = [
   {
     no: "06",
     title: "Follow up online",
-    desc: "A telemedicine consultation continues your care once you are back home.",
+    desc: "A telemedicine consultation, coming soon, will continue your care once you are back home.",
   },
 ];

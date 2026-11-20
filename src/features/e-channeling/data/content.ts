@@ -157,3 +157,26 @@ export const helpRail = {
   callCtaTemplate: "Call {phone}",
   emailCta: "Email us",
 };
+
+/**
+ * Page 11 of the 2026 Service Book, "Super Channelling: book a specialist",
+ * quoted below the directory by the services feature's `BookExcerptSection`.
+ * The phone and WhatsApp lines are the ones the book prints; the owner
+ * confirmed both these and the site's own (above) are in use. The book's
+ * "74 consultants" is left out: the roster above is the live count.
+ */
+export const bookExcerpt = {
+  page: 11,
+  title: "Super Channelling",
+  summary: "Choose a consultant and book an appointment by phone or WhatsApp.",
+  facts: [
+    { k: "Call", v: "031 784 84 84" },
+    { k: "WhatsApp", v: "076 422 8898" },
+    { k: "Fee", v: "Please ask our staff for the current channelling fee" },
+  ],
+  why: [
+    "Consultants across more than 25 specialities.",
+    "Many consultants see patients on Sundays and in the evening.",
+    "Tests, X-ray and medicines are on the same site.",
+  ],
+};

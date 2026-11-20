@@ -3,6 +3,19 @@ import type { Service } from "../types";
 export const emergencyServices: Service[] = [
   {
     slug: "accident-emergency",
+    book: {
+      page: 10,
+      summary: "Urgent care at any hour of the day or night. Come to us straight away.",
+      facts: [
+        { k: "Hours", v: "24 hours, every day" },
+        { k: "Call", v: "031 784 84 84" },
+      ],
+      why: [
+        "Open day and night, including weekends.",
+        "Laboratory and pharmacy are open 24 hours too.",
+        "Specialist consultants work from the same hospital.",
+      ],
+    },
     heroImage: "/images/services/heroes/accident-emergency.jpg",
     heroAlt: "A stretcher and emergency medical equipment secured inside an ambulance",
     title: "Accident & emergency",
@@ -62,7 +75,7 @@ export const emergencyServices: Service[] = [
     team: [
       { role: "Emergency medical officers", note: "On site at every hour, with immediate access to senior support." },
       { role: "Emergency nursing team", note: "Triage trained, with one nurse assigned to each resuscitation bay." },
-      { role: "On-call consultants", note: "Surgery, anaesthesia, obstetrics and paediatrics on call at every hour." },
+      { role: "On-call consultants", note: "Surgery, anaesthesia and paediatrics on call at every hour, with obstetrics coming soon." },
       { role: "Ambulance crew", note: "Dispatched from our own bay with oxygen and monitoring on board." },
     ],
     faq: [
@@ -80,7 +93,7 @@ export const emergencyServices: Service[] = [
     directoryTitle: "Intensive care unit",
     group: "Emergency",
     hours: "Continuous",
-    cta: "Speak to the ICU desk",
+    cta: "Ask us when it opens",
     desc: "A monitored unit for patients who need continuous observation, ventilator support or close nursing after major surgery or a critical illness. One nurse covers only a small group of beds, and a consultant leads rounds every day.",
     tags: ["Ventilator support", "Continuous monitoring", "Consultant rounds", "Family updates"],
     facts: [

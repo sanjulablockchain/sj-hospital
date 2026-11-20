@@ -34,7 +34,7 @@ export const networkNodes = [
     location: "தீவு முழுவதும், LK",
     // Reused verbatim from navigationLabels.ta.ts's "Telemedicine".
     name: "தொலை மருத்துவம் மற்றும் விநியோகம்",
-    body: "நீர்கொழும்பு மாவட்டத்திற்கு அப்பால் தொலை Consultations மற்றும் மருந்து அனுப்புதல்.",
+    body: "நீர்கொழும்பு மாவட்டத்திற்கு அப்பால் மருந்து அனுப்புதல், தொலை Consultations விரைவில்.",
   },
 ];
 

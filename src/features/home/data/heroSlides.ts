@@ -49,7 +49,7 @@ export const heroSlides: readonly HeroSlideContent[] = [
     id: "free-opd",
     kicker: "A first for Sri Lanka",
     heading: { lead: "Seeing a doctor", accent: "costs you nothing." },
-    body: "Consultations at our outpatient department are free, every hour we are open. Walk in and see a doctor, and never weigh a fever or a week of pain against the money.",
+    body: "Consultations at our outpatient department are free, from 7.00 AM to 6.00 PM. Walk in and see a doctor, and never weigh a fever or a week of pain against the money.",
     ctaPrimary: { label: "See the free OPD", href: "/services/outpatient-department" },
     ctaSecondary: callTheHospital,
     photo: "/images/home/hero-opd-family.jpg",

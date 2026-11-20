@@ -102,7 +102,12 @@ function isContentUntranslatable(path: string): boolean {
     path === "helpRail.phoneHref" ||
     path === "helpRail.whatsapp" ||
     path === "helpRail.whatsappHref" ||
-    path === "helpRail.email"
+    path === "helpRail.email" ||
+    // The Service Book excerpt: the page's own name ("Super Channelling", the
+    // service's name as printed) and the two phone lines it prints.
+    path === "bookExcerpt.title" ||
+    path === "bookExcerpt.facts[0].v" ||
+    path === "bookExcerpt.facts[1].v"
   );
 }
 

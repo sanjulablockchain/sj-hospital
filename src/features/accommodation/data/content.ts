@@ -5,10 +5,10 @@
  * this page replaces: RoomTypes.tsx (the four room types, their descriptions,
  * amenities and photos, and the meals sentence) and SpecialtiesChecklist.tsx
  * (the ten specialties), plus the price each category carries in
- * features/facilities/data/content.ts's `roomRows`, the repo's price
- * authority: Standard is "From 10,000 LKR"; Deluxe, Super Deluxe and Wards
- * are "On request". content.test.ts pins that split, so a fabricated figure
- * for the other three categories fails the suite.
+ * features/facilities/data/content.ts's `roomRows`: the price per day the
+ * hospital's 2026 Service Book prints for each (page 17; owner confirmed
+ * 2026-11-20). content.test.ts pins all four, so a figure that drifts from
+ * the book fails the suite.
  *
  * The only new strings on this page are `tickerItems`, `heroFacts`' labels
  * and `jumpCards`' notes: each restates a claim already present in the copy
@@ -65,7 +65,7 @@ export const roomTypes: RoomType[] = [
       { src: "/images/rooms/standard-1.jpg", alt: "Standard room at St. Joseph Hospital Negombo" },
       { src: "/images/rooms/standard-2.jpg", alt: "Standard room detail" },
     ],
-    price: "From 10,000 LKR",
+    price: "12,500 LKR a day",
   },
   {
     id: "deluxe",
@@ -86,7 +86,7 @@ export const roomTypes: RoomType[] = [
       { src: "/images/rooms/deluxe-1.jpg", alt: "Deluxe room at St. Joseph Hospital Negombo" },
       { src: "/images/rooms/deluxe-2.jpg", alt: "Deluxe room detail" },
     ],
-    price: "On request",
+    price: "15,500 LKR a day",
   },
   {
     id: "super-deluxe",
@@ -109,7 +109,7 @@ export const roomTypes: RoomType[] = [
       { src: "/images/rooms/super-deluxe-1.jpg", alt: "Super Deluxe room at St. Joseph Hospital Negombo" },
       { src: "/images/rooms/super-deluxe-2.jpg", alt: "Super Deluxe room detail" },
     ],
-    price: "On request",
+    price: "19,500 LKR a day",
   },
   {
     id: "wards",
@@ -130,7 +130,7 @@ export const roomTypes: RoomType[] = [
       { src: "/images/rooms/wards-1.jpg", alt: "Ward at St. Joseph Hospital Negombo" },
       { src: "/images/rooms/wards-2.jpg", alt: "Ward detail" },
     ],
-    price: "On request",
+    price: "9,500 LKR a day",
   },
 ];
 
@@ -163,7 +163,7 @@ export const tickerItems = [
 
 export const heroFacts = [
   { k: "Room types", v: "Four" },
-  { k: "Standard from", v: "10,000 LKR" },
+  { k: "Rooms from", v: "9,500 LKR" },
   { k: "Meals", v: "Three daily" },
   { k: "Nursing", v: "24/7" },
 ];

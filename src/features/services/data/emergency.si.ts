@@ -77,7 +77,7 @@ export const emergencyServices = [
     team: [
       { role: "හදිසි ප්‍රතිකාර වෛද්‍ය නිලධාරීන්", note: "හැම වේලාවකම ස්ථානයේ ඉන්නවා, ඉහළ මට්ටමේ සහාය ක්ෂණිකව ලබාගත හැක." },
       { role: "හදිසි ප්‍රතිකාර Nursing කණ්ඩායම", note: "Triage පුහුණුව ලැබූ, එක Nurse කෙනෙක් එක Resuscitation Bay එකකට Assign කරලා." },
-      { role: "On-call විශේෂඥ වෛද්‍යවරු", note: "ශල්‍යකර්ම, Anaesthesia, ප්‍රසූතිය සහ ළමා රෝග සඳහා හැම වේලාවකම On-call." },
+      { role: "On-call විශේෂඥ වෛද්‍යවරු", note: "ශල්‍යකර්ම, Anaesthesia සහ ළමා රෝග සඳහා හැම වේලාවකම On-call, ප්‍රසූතිය ළඟදීම." },
       { role: "Ambulance කණ්ඩායම", note: "අපගේම Bay එකෙන් Dispatch වෙනවා, Oxygen සහ Monitoring එකත් සමඟ." },
     ],
     faq: [
@@ -98,6 +98,18 @@ export const emergencyServices = [
         a: "On-call ශල්‍ය සහ Anaesthetic කණ්ඩායම් සහ ශල්‍යාගාර ස්ථානයේම සූදානම්ව තියෙනවා, එහෙනම් Emergency ශල්‍යකර්ම සඳහා ඔබව වෙන Transfer කරන්නේ නෑ.",
       },
     ],
+    book: {
+      summary: "දිවා රාත්‍රී ඕනෑම වේලාවක හදිසි ප්‍රතිකාර. වහාම අප වෙත එන්න.",
+      facts: [
+        { k: "වේලාව", v: "දිනපතා පැය 24" },
+        { k: "දුරකථන" },
+      ],
+      why: [
+        "සති අන්තයද ඇතුළුව දිවා රාත්‍රී විවෘතයි.",
+        "Laboratory සහ Pharmacy ද පැය 24 විවෘතයි.",
+        "විශේෂඥ Consultants එකම රෝහලේ සේවය කරනවා.",
+      ],
+    },
   },
   {
     hours: "අඛණ්ඩව",

@@ -91,7 +91,7 @@ export const hero = {
 };
 
 export const heroStandfirst =
-  "Six purpose built floors in Negombo: operating theatres with the recovery bay next door, monitored critical care beside them, a laboratory that never closes, and rooms where your family can actually stay the night.";
+  "Six purpose built floors in Negombo: operating theatres with the recovery bay next door, a monitored critical care unit beside them that opens soon, a laboratory that never closes, and rooms where your family can actually stay the night.";
 
 /**
  * Every value below is reused verbatim from navigationLabels.si.ts and
@@ -120,7 +120,7 @@ export const heroFacts: SpecRow[] = [
   { k: "Floors", v: "Six, purpose built" },
   { k: "Cleaning cycle", v: "Every two hours" },
   { k: "Laboratory", v: "Open 24 hours" },
-  { k: "Rooms from", v: "10,000 LKR" },
+  { k: "Rooms from", v: "9,500 LKR" },
 ];
 
 export const tickerItems: string[] = [
@@ -142,7 +142,7 @@ export const jumpCards: { count: string; label: string; note: string; href: stri
   {
     count: "Monitored beds",
     label: "Critical care",
-    note: "Intensive care beside the theatres.",
+    note: "Intensive care beside the theatres, opening soon.",
     href: "#critical",
   },
   {
@@ -180,25 +180,25 @@ export const buildingZones: BuildingZone[] = [
     no: "02",
     name: "Clinics & outpatients",
     contents:
-      "Consulting suites for every specialty, an outpatient department open 24 hours, and physiotherapy.",
+      "Consulting suites for every specialty, the outpatient department and physiotherapy.",
   },
   {
     no: "03",
     name: "Diagnostics",
     contents:
-      "A 24 hour laboratory, digital X-ray, ultrasound, ECG and echocardiography, and the endoscopy unit.",
+      "A 24 hour laboratory, digital X-ray, ultrasound, ECG and echocardiography, and the endoscopy unit, opening soon.",
   },
   {
     no: "04",
     name: "Theatres & recovery",
     contents:
-      "Operating theatres with a recovery bay alongside, a dedicated obstetric theatre kept separate from general lists, and sterile services.",
+      "Operating theatres with a recovery bay alongside, a dedicated obstetric theatre kept separate from general lists (opening soon with maternity care), and sterile services.",
   },
   {
     no: "05",
     name: "Critical care",
     contents:
-      "Intensive care beds placed beside the theatres and the emergency department, with neonatal support for newborns who need it.",
+      "Intensive care beds placed beside the theatres and the emergency department, with neonatal support for newborns who need it, opening soon.",
   },
   {
     no: "06",
@@ -286,7 +286,7 @@ export const theatreSpecs: SpecRow[] = [
 
 export const criticalHeading: Heading2 = { line1: "Beds that watch", line2: "you all night" };
 export const criticalIntro =
-  "Monitored beds for patients who need ventilation, close observation after surgery, or stabilising before anything else can happen.";
+  "Monitored beds for patients who need ventilation, close observation after surgery, or stabilising before anything else can happen. The unit opens soon.";
 
 export const careUnits: CareUnit[] = [
   {
@@ -310,7 +310,7 @@ export const careUnits: CareUnit[] = [
   {
     code: "NEO",
     name: "Newborn support",
-    desc: "Neonatal support present at delivery whenever the baby's condition calls for it, alongside the obstetric theatre.",
+    desc: "Neonatal support present at delivery whenever the baby's condition calls for it, alongside the obstetric theatre, once maternity care opens.",
     lead: "Paediatric team",
   },
 ];
@@ -322,7 +322,7 @@ export const careNotes: { title: string; body: string }[] = [
   },
   {
     title: "Visiting",
-    body: "Visiting the unit is kept to fixed hours so patients can rest and the team can work without interruption. The ICU desk will tell you the current times.",
+    body: "Once the unit opens, visiting is kept to fixed hours so patients can rest and the team can work without interruption. The ICU desk will tell you the current times.",
   },
   {
     title: "Family updates",
@@ -332,9 +332,9 @@ export const careNotes: { title: string; body: string }[] = [
 
 /**
  * The four categories the hospital actually offers, taken from
- * `features/accommodation/components/RoomTypes`. Only the entry private room
- * carries a figure, because "private and semi private rooms from 10,000 LKR"
- * is the sole room price the repo publishes.
+ * `features/accommodation/components/RoomTypes`, each with the price per day
+ * the hospital's 2026 Service Book prints (page 17; owner confirmed
+ * 2026-11-20).
  */
 export const roomsHeading: Heading2 = { line1: "Four ways to", line2: "spend the night" };
 export const roomsIntro =
@@ -346,26 +346,26 @@ export const roomRows: RoomRow[] = [
     occupancy: "1 bed",
     amenities:
       "Bystander bed, sofa and chair, pantry with tea station, coffee table, kettle, morning papers, separate steward service",
-    price: "On request",
+    price: "19,500 LKR a day",
   },
   {
     name: "Deluxe Rooms",
     occupancy: "1 bed",
     amenities: "Bystander bed and sofa, pantry area with tea station, coffee table, hot water kettle",
-    price: "On request",
+    price: "15,500 LKR a day",
   },
   {
     name: "Standard Rooms",
     occupancy: "1 bed",
     amenities: "Bystander bed and chair, air conditioning, television, necessary medical support",
-    price: "From 10,000 LKR",
+    price: "12,500 LKR a day",
   },
   {
     name: "Wards",
     occupancy: "2 or 3 beds",
     amenities:
       "Individual bystander beds and chairs, bed separators for privacy, air conditioning, day visiting",
-    price: "On request",
+    price: "9,500 LKR a day",
   },
 ];
 
@@ -418,8 +418,8 @@ export const equipment: EquipmentRow[] = [
   { name: "ECG & echocardiography", note: "Resting ECG and cardiac risk assessment", avail: "Same day" },
   {
     name: "Endoscopy",
-    note: "Gastroscopy and colonoscopy, with biopsy at the same sitting",
-    avail: "Same day",
+    note: "Gastroscopy and colonoscopy, with biopsy at the same sitting, once the unit opens",
+    avail: "Opening soon",
   },
   {
     name: "CT & MRI",
@@ -482,7 +482,7 @@ export const support: SupportRow[] = [
   {
     no: "04",
     name: "Outpatient department",
-    desc: "Consulting suites open 24 hours, staffed alongside the emergency entrance whenever you arrive.",
+    desc: "Consulting suites beside the emergency entrance, open through the day; after hours, the emergency department sees you.",
   },
   {
     no: "05",
@@ -516,7 +516,7 @@ export const hygieneRows: SpecRow[] = [
   { k: "Standard", v: "US specification" },
   { k: "Consumables", v: "Single use, never reused" },
   { k: "Instrument sets", v: "Tracked per set" },
-  { k: "Obstetric theatre", v: "Separate from general lists" },
+  { k: "Obstetric theatre", v: "Opening soon" },
   { k: "Laboratory reports", v: "Checked by two doctors" },
 ];
 
@@ -527,7 +527,7 @@ export const visitorsIntro =
 export const visitingCardHeading = "Visiting";
 export const visitingRows: SpecRow[] = [
   { k: "General wards", v: "Day visiting" },
-  { k: "Critical care", v: "Fixed hours" },
+  { k: "Critical care", v: "Opening soon" },
   { k: "Family update", v: "Once a day from the unit" },
   { k: "Attendant", v: "May stay overnight" },
 ];

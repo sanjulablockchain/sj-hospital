@@ -2,6 +2,8 @@ import Link from "next/link";
 import type { Service } from "@/features/services/types";
 import { localePath } from "@/lib/i18n/paths";
 import type { Locale } from "@/lib/i18n/locales";
+import { ComingSoonBadge } from "@/components/ui/ComingSoonBadge";
+import { isComingSoonSlug } from "@/config/comingSoon";
 
 /**
  * All services as a chip row directly under the hero. Chips render from
@@ -49,11 +51,14 @@ export function ServicePicker({
               aria-current={isCurrent ? "page" : undefined}
               className={
                 isCurrent
-                  ? "shrink-0 whitespace-nowrap bg-[var(--home-accent)] px-4 py-2.5 text-[13px] font-bold text-[var(--home-on-accent)]"
-                  : "shrink-0 whitespace-nowrap border border-[var(--home-hairline)] px-4 py-2.5 text-[13px] font-semibold text-[var(--home-body)] hover:border-[var(--home-accent)] hover:text-[var(--home-heading)]"
+                  ? "inline-flex shrink-0 items-center gap-2 whitespace-nowrap bg-[var(--home-accent)] px-4 py-2.5 text-[13px] font-bold text-[var(--home-on-accent)]"
+                  : "inline-flex shrink-0 items-center gap-2 whitespace-nowrap border border-[var(--home-hairline)] px-4 py-2.5 text-[13px] font-semibold text-[var(--home-body)] hover:border-[var(--home-accent)] hover:text-[var(--home-heading)]"
               }
             >
               {service.directoryTitle}
+              {/* The current page's hero already says so, and the accent pill
+                  would vanish on the current chip's accent fill. */}
+              {!isCurrent && isComingSoonSlug(service.slug) && <ComingSoonBadge />}
             </Link>
           );
         })}

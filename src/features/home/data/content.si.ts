@@ -31,7 +31,7 @@ export const statTickerItems = [
   "US Protocol එකට ශල්‍යාගාර",
   "පැය දෙකට සැරයක් පිරිසිදු කරනවා",
   "Reports එදිනම, දෙපාරක් Check කරලා",
-  "කාමර 10,000 LKR සිට",
+  "කාමර 9,500 LKR සිට",
 ];
 
 export const quickAccess = {
@@ -39,7 +39,7 @@ export const quickAccess = {
     body: "Consultant කෙනෙක් සහ වෙලාවක් Online තෝරන්න, නැත්නම් අපේ නොමිලේ OPD එකට කෙලින්ම එන්න.",
   },
   emergency: {
-    body: "ඕනෑම වෙලාවක කෙලින්ම එන්න. Ambulance Bay සහ Critical Care පැය 24ම විවෘත.",
+    body: "ඕනෑම වෙලාවක කෙලින්ම එන්න. Ambulance Bay පැය 24ම විවෘතයි, Critical Care ළඟදීම විවෘත වෙනවා.",
   },
   facilities: {
     bodyTemplate: "{count} සේවාවන් එක වහලක් යට, US Protocol එකට.",
@@ -54,8 +54,8 @@ export const whoWeAre = {
     "Los Angeles හි Kids & Teens Pediatric Medical Group විසින් මෙහෙයවනු සහ Operate කරනු ලබන: ඇමෙරිකානු සත්කාරයේ Standards, Protocols සහ Clinical Discipline, මීගමුවේ පවුල් සඳහා දැරිය හැකි මිලකට.",
   body: "Consumables කවදාවත් නැවත පාවිච්චි කරන්නේ නෑ. හැම මතුපිටක්ම පැය දෙකකට සැරයක් Clean කරනවා. හැම Report එකක්ම ඔබ ලඟට එන්න කලින් වෛද්‍යවරු දෙන්නෙක් කියවනවා.",
   stats: [
-    { label: "Emergency සහ OPD", desc: "හැම සේවාවක්ම, හැම පැයකම, අවුරුද්දේ හැම දිනකම විවෘත." },
-    { label: "සේවාවන්", desc: "Emergency සත්කාරයේ ඉඳන් Fertility දක්වා, එක වහලක් යට." },
+    { label: "හදිසි ප්‍රතිකාර", desc: "Accident සහ Emergency සත්කාරය, හැම පැයකම, අවුරුද්දේ හැම දිනකම." },
+    { label: "සේවාවන්", desc: "Emergency සත්කාරයේ ඉඳන් කාන්තා සෞඛ්‍යය දක්වා, එක වහලක් යට." },
     { label: "මහල් රෝහල", desc: "මීගමුවේ මේ සඳහාම ඉදිකළ, Ambulance Bay සහ වැසුණු පිවිසුමක් සමඟ." },
     { label: "Cleaning Cycle එක", desc: "හැම මතුපිටක්ම, US Specification එකට Clean කරනවා." },
     { label: "Home Visit වාහන", desc: "වෛද්‍යවරු, Nurses සහ Lab Technicians ඔබේ දොරටුවට." },
@@ -66,7 +66,7 @@ export const whoWeAre = {
 export const freeOpd = {
   body: "අපේ බාහිර රෝගී අංශයේ Consultations නොමිලේ, ඒ නිසා උණක්, ගෙඩියක් හෝ සතියක වේදනාවක් සඳහා මුදල් වියදම් කරන්න වටිනවද කියලා කාටවත් කල්පනා කරන්න වෙන්නේ නෑ. කෙලින්ම ඇවිත් වෛද්‍යවරයෙක් හමුවෙන්න.",
   points: [
-    "අපි විවෘත හැම පැයකම නොමිලේ Consultation",
+    "පෙ.ව. 7.00 සිට ප.ව. 6.00 දක්වා නොමිලේ Consultation",
     "සාමාන්‍ය පැමිණිලිවලට වගේම විශේෂඥ Referral එකටත්",
     "ඔබ යන්න කලින්ම ඔබේ රෝග විනිශ්චය පැහැදිලි කරනවා",
   ],
@@ -100,7 +100,7 @@ export const specialties = {
   // array lengths match the English (the same shape media.si.ts uses).
   tabs: [
     {
-      desc: "පැය 24ම Accident සහ Emergency සත්කාරය, Intensive සහ Critical Care එතැනම. අවුරුද්දේ හැම දිනකම ඕනෑම වෙලාවක කෙලින්ම එන්න, නැත්නම් Call කරන්න, අපි ඔබ ලඟට එනවා.",
+      desc: "පැය 24ම Accident සහ Emergency සත්කාරය, Intensive සහ Critical Care ළඟදීම විවෘත වෙනවා. අවුරුද්දේ හැම දිනකම ඕනෑම වෙලාවක කෙලින්ම එන්න, නැත්නම් කතා කරන්න, අපි ඔබ ළඟට එනවා.",
       links: [{}, {}, {}],
     },
     {
@@ -116,11 +116,11 @@ export const specialties = {
       links: [{}, {}, {}, {}, {}, {}, {}, {}],
     },
     {
-      desc: "Maternity, Gynaecology සහ Paediatric සත්කාරය, අපේ Los Angeles සමූහය තමන්ගේම රෝගීන්ට පාවිච්චි කරන ම Kids and Teens Protocol එකෙන් මෙහෙයවනවා.",
+      desc: "Gynaecology සහ Paediatric සත්කාරය, අපේ Los Angeles සමූහය තමන්ගේම රෝගීන්ට පාවිච්චි කරන ම Kids and Teens Protocol එකෙන් මෙහෙයවනවා, Maternity සත්කාරය ළඟදීම විවෘත වෙනවා.",
       links: [{}, {}, {}, {}, {}],
     },
     {
-      desc: "කවදාවත් වහන්නේ නැති Pharmacy එකක්, මීගමුව පුරාම බෙහෙත් ගෙන්වා දීම, වාහන හයක් මත Home Visits සහ දිවයිනේ ඕනෑම තැනකින් Telemedicine.",
+      desc: "කවදාවත් වහන්නේ නැති Pharmacy එකක්, මීගමුව පුරාම බෙහෙත් ගෙන්වා දීම සහ වාහන හයක් මත Home Visits, Telemedicine ළඟදීම.",
       links: [{}, {}, {}, {}],
     },
   ],

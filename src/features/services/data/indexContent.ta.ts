@@ -19,7 +19,7 @@ export const __review = { status: "draft", reviewer: null, date: null } as const
 
 export const tickerItems: readonly string[] = [
   "ஒன்பது சிறப்பு மையங்கள்",
-  "Emergency மற்றும் OPD எல்லா நேரமும்",
+  "OPD காலை 7.00 முதல் மாலை 6.00 வரை",
   "ஆய்வுகூடம் 24 மணி நேரமும் திறந்திருக்கும்",
   "Digital X-ray ஒரு மணி நேரத்தில் Report ஆகும்",
   "இரண்டு மருத்துவர்கள் ஒவ்வொரு Report ஐயும் படிப்பர்",
@@ -59,7 +59,7 @@ export const centres = [
   },
   {
     name: "தாயும் குழந்தையும்",
-    desc: "பிரசவம் வரையிலான மகப்பேறு சிகிச்சை, முதல் நிமிடத்திலிருந்தே அறையிலேயே புதிதாகப் பிறந்த குழந்தைக்கான ஆதரவுடன்.",
+    desc: "பிரசவம் வரையிலான மகப்பேறு சிகிச்சை, முதல் நிமிடத்திலிருந்தே அறையிலேயே Neonatal ஆதரவுடன், விரைவில் திறக்கப்படும்.",
     lead: "நியமிக்கப்பட்ட நிபுணர்",
   },
   {
@@ -79,8 +79,8 @@ export const centres = [
   },
   {
     name: "Endoscopy பிரிவு",
-    desc: "திட்டமிடப்பட்ட Lists இல் Gastroscopy மற்றும் Colonoscopy, ஒரு நிபுணர் Anaesthetist Sedation வழங்குவார்.",
-    lead: "அன்றே Reporting",
+    desc: "திட்டமிடப்பட்ட Lists இல் Gastroscopy மற்றும் Colonoscopy, ஒரு நிபுணர் Anaesthetist Sedation வழங்குவார், பிரிவு திறந்த பின்.",
+    lead: "விரைவில் திறக்கப்படும்",
   },
   {
     name: "நல்வாழ்வு மற்றும் சுகாதார பரிசோதனை",
@@ -101,7 +101,7 @@ export const surgicalRows = [
   { name: "Urology பிரிவு", note: "அதே வருகை Ultrasound மற்றும் Flow Studies" },
   { name: "கண் அறுவை சிகிச்சை மற்றும் Cataract அறுவை சிகிச்சை", note: "Day Case அறுவை சிகிச்சை" },
   { name: "Neurosurgery பிரிவு", note: "Referral வழியாக, Imaging Led" },
-  { name: "Gastrointestinal மற்றும் Endoscopy", note: "அன்றே Reporting" },
+  { name: "Gastrointestinal மற்றும் Endoscopy", note: "விரைவில் திறக்கப்படும்" },
   { name: "Anaesthesia சேவை", note: "நிபுணர் Lead செய்யும் Lists" },
   { name: "அறுவை சிகிச்சைக்குப் பிந்தைய பராமரிப்பு", note: "Assign செய்யப்பட்ட Recovery Nurse" },
 ];
@@ -139,8 +139,8 @@ export const diagnosticRows = [
   },
   {
     name: "Endoscopy சேவை",
-    note: "Gastroscopy மற்றும் Colonoscopy, அதே Sitting இல் Biopsy உடன்",
-    turnaround: "அன்றே",
+    note: "Gastroscopy மற்றும் Colonoscopy, அதே Sitting இல் Biopsy உடன், பிரிவு திறந்த பின்",
+    turnaround: "விரைவில் திறக்கப்படும்",
   },
   {
     name: "CT மற்றும் MRI",
@@ -262,10 +262,10 @@ export const facilityCards = [
     body: "நீர்கொழும்பில் விசேடமாக கட்டப்பட்ட மருத்துவமனை, Ambulance Bay மற்றும் Outpatients இருவருக்கும் கூரையுள்ள வருகையுடன்.",
   },
   {
-    body: "24 மணி நேர Outpatient பிரிவு, நீங்கள் எப்போது வந்தாலும் Emergency நுழைவுக்கு அருகில் பணியாளர்களுடன்.",
+    body: "Emergency நுழைவுக்கு அருகில் Outpatient பிரிவு, காலை 7.00 முதல் மாலை 6.00 வரை திறந்திருக்கும்; அதன் பின் Emergency பிரிவு உங்களைப் பார்க்கும்.",
   },
   {
-    body: "ஒரு இரவுக்கு LKR 10,000 முதல் Private மற்றும் Semi-Private அறைகள், அதிக Dependency சிகிச்சைக்கு முழு ICU உடன்.",
+    body: "ஒரு நாளுக்கு LKR 9,500 முதல் வார்டுகள் மற்றும் தனியார் அறைகள், அதிக Dependency சிகிச்சைக்கான முழு ICU விரைவில் திறக்கப்படும்.",
   },
   {
     body: "எங்கள் சொந்த Ambulance வாகனங்கள் சேவை செய்யும் கூரையுள்ள நுழைவு, Bandaranaike International இலிருந்து பத்து நிமிடங்கள்.",
@@ -295,6 +295,11 @@ export const bookSection = {
 
 export const detailChrome = {
   addressLine: "229/10 St. Joseph Street, நீர்கொழும்பு",
+  bookExcerpt: {
+    why: "ஏன் St. Joseph",
+    read: "Service Book இன் பக்கம் {page} ஐப் படியுங்கள்",
+  },
+  comingSoonNote: "இந்த சேவை இன்னும் திறக்கப்படவில்லை. அது திறக்கும்போது அறிய எங்களை Call அல்லது WhatsApp செய்யுங்கள்.",
 };
 
 export const internationalSteps = [
@@ -314,6 +319,6 @@ export const internationalSteps = [
     desc: "உங்கள் Reports, Imaging Referrals மற்றும் Discharge Summary இன் பிரதிகளை உங்களுடன் கொண்டு செல்ல.",
   },
   {
-    desc: "நீங்கள் வீடு திரும்பியதும் ஒரு Telemedicine Consultation உங்கள் சிகிச்சையைத் தொடரும்.",
+    desc: "நீங்கள் வீடு திரும்பியதும் ஒரு Telemedicine Consultation உங்கள் சிகிச்சையைத் தொடரும், விரைவில்.",
   },
 ];

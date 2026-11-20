@@ -3,6 +3,8 @@ import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { LocaleLink } from "@/components/i18n/LocaleLink";
+import { ComingSoonBadge } from "@/components/ui/ComingSoonBadge";
+import { isComingSoonHref } from "@/config/comingSoon";
 import type { ServicesContent } from "@/features/services/data/getContent";
 
 /**
@@ -60,7 +62,10 @@ export function FacilitiesSection({ content }: { content: ServicesContent }) {
             />
             <div className="absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-[var(--home-accent)] transition-transform duration-[450ms] group-hover:scale-x-100" />
             <div className="relative p-7 transition-transform duration-500 group-hover:-translate-y-2">
-              <div className="text-[12px] font-bold tracking-[0.18em] text-[#9FD6F5]">{card.index}</div>
+              <div className="flex flex-wrap items-center gap-3 text-[12px] font-bold tracking-[0.18em] text-[#9FD6F5]">
+                {card.index}
+                {isComingSoonHref(card.href) && <ComingSoonBadge onDark />}
+              </div>
               <h3 className="font-display wrap-break-word mt-3 text-[26px] leading-[1.06] font-semibold tracking-[-0.025em] text-white">
                 {card.title}
               </h3>

@@ -77,7 +77,7 @@ export const newsroomCopy = {
 
 export const featured = {
   kickerDate: "අගෝස්තු 2026",
-  lede: "වෙන් වූ Procedure කාමර දෙකක් සහ වෙනම Recovery Bay එකක් සමඟ, රෝග විනිශ්චය සඳහා වන Gastroscopy සහ Colonoscopy සඳහා රැඳී සිටින කාලය සතියකට වඩා අඩුවෙයි. Suite එක දින හයක් ක්‍රියාත්මක වන අතර, Sedation එක Anaesthetic කණ්ඩායම විසින් හසුරුවනු ලබන අතර, Procedure එකේදී ලබාගත් Biopsy සඳහා එදිනම Report කිරීමකි.",
+  lede: "වෙන් වූ Procedure කාමර දෙකක් සහ වෙනම Recovery Bay එකක් රෝග විනිශ්චය සඳහා වන Gastroscopy සහ Colonoscopy සඳහා සූදානම් කරමින් පවතී, Sedation එක Anaesthetic කණ්ඩායම විසින් හසුරුවන අතර Procedure එකේදී ලබාගත් Biopsy සඳහා එදිනම Report කිරීමක් සමඟ.",
   date: "14 අගෝස්තු 2026",
   type: "පුවත් නිවේදනය",
   points: [
@@ -91,7 +91,7 @@ export const featured = {
 export const news = [
   {
     date: "අගෝස්තු 2026",
-    lede: "වෙන් වූ Procedure කාමර දෙකක් සහ වෙනම Recovery Bay එකක්, රෝග විනිශ්චය Gastroscopy සහ Colonoscopy සඳහා රැඳී සිටින කාලය සතියකට වඩා අඩු කරයි.",
+    lede: "වෙන් වූ Procedure කාමර දෙකක් සහ වෙනම Recovery Bay එකක් රෝග විනිශ්චය Gastroscopy සහ Colonoscopy සඳහා සූදානම් කරමින් පවතී.",
   },
   {
     date: "ජූලි 2026",

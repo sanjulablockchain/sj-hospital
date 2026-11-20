@@ -4,6 +4,8 @@ import { LOGO_LOCKUP_BRAND } from "@/config/brand";
 import { LocaleLink } from "@/components/i18n/LocaleLink";
 import { ChromeText } from "@/components/i18n/ChromeText";
 import { AffiliationMark } from "@/components/layout/AffiliationMark";
+import { ComingSoonBadge } from "@/components/ui/ComingSoonBadge";
+import { isComingSoonHref } from "@/config/comingSoon";
 
 export type FooterColumn = {
   heading: string;
@@ -83,9 +85,12 @@ export function ThemedFooter({ columns, reachUsLabel, id = "contact" }: ThemedFo
               {column.heading}
             </span>
             {column.links.map((item) => (
-              <LocaleLink key={item.href} href={item.href} className="sj-link text-[var(--home-body)]">
-                {item.label}
-              </LocaleLink>
+              <span key={item.href} className="flex flex-wrap items-center gap-2">
+                <LocaleLink href={item.href} className="sj-link text-[var(--home-body)]">
+                  {item.label}
+                </LocaleLink>
+                {isComingSoonHref(item.href) && <ComingSoonBadge />}
+              </span>
             ))}
           </div>
         ))}

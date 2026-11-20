@@ -14,7 +14,7 @@
 // "கொழும்பு", the same Tamil names contact's, pharmacy's and network's own
 // content.ta.ts already use for the first of them.
 //
-// "10,000 LKR" keeps its currency code and figure exactly as content.ts
+// "12,500 LKR" keeps its currency code and figure exactly as content.ts
 // prints them: a currency code is not a word with a Tamil equivalent, the
 // same way a phone number or an href is not.
 //
@@ -82,7 +82,7 @@ export const journeySteps = [
     when: "வரும் நாள்",
   },
   {
-    desc: "ஒரு Attendant அறையில் தங்குவார், ஒவ்வொரு Category இலும் ஒரு Bystander படுக்கையும் நாற்காலியும் உணவும் Dietary Order படி. Critical Care இலிருந்து, குடும்ப உறுப்பினர் ஒருவருக்கு நாளொன்றுக்கு ஒரு Update Call செய்யப்படும்.",
+    desc: "ஒரு Attendant அறையில் தங்குவார், ஒவ்வொரு Category இலும் ஒரு Bystander படுக்கையும் நாற்காலியும் உணவும் Dietary Order படி. Critical Care Unit திறந்த பின், அங்குள்ள நோயாளியின் குடும்ப உறுப்பினர் ஒருவருக்கு நாளொன்றுக்கு ஒரு Update Call செய்யப்படும்.",
     when: "நீங்கள் தங்கியிருக்கும் போது",
   },
   {
@@ -99,7 +99,7 @@ export const servicesIntro =
 export const deskServices = [
   {
     kind: "பயணிப்பதற்கு முன்",
-    desc: "Telemedicine எங்கள் மருத்துவர்களில் ஒருவருடன் Video அல்லது Phone மூலம், தினமும் ஒதுக்கப்படும் Consultation ஐ வழங்குகிறது. நேரடியாக பரிசோதனை தேவையில்லாத ஒரு உரையாடலுக்கு இது பொருந்தும், Flight க்கு முன் பெரும்பாலானவை அப்படித்தான்.",
+    desc: "Telemedicine விரைவில்: எங்கள் மருத்துவர்களில் ஒருவருடன் Video அல்லது Phone மூலம் Consultation வழங்கப்படும். நேரடியாக பரிசோதனை தேவையில்லாத ஒரு உரையாடலுக்கு இது பொருந்தும், Flight க்கு முன் பெரும்பாலானவை அப்படித்தான். அதுவரை வெளிநாட்டு Desk க்கு Email அல்லது WhatsApp செய்யுங்கள்.",
   },
   {
     kind: "போக்குவரத்து",
@@ -135,7 +135,7 @@ export const deskServices = [
   },
   {
     kind: "Follow-up சிகிச்சை",
-    desc: "இங்கு பார்க்கப்பட்டு வீடு திரும்பிய நோயாளர்களுக்கு Follow-up க்காக Telemedicine பயன்படுத்தப்படுகிறது, இது உங்கள் அடுத்த சிகிச்சை படியிலும் அதே மருத்துவரை ஈடுபடுத்துகிறது.",
+    desc: "இங்கு பார்க்கப்பட்டு வீடு திரும்பிய நோயாளர்களுக்கு Telemedicine மூலம் Follow-up விரைவில், உங்கள் அடுத்த சிகிச்சை படியிலும் அதே மருத்துவரை ஈடுபடுத்தும்.",
   },
 ];
 
@@ -185,13 +185,13 @@ export const treatments = [
     stay: "Day Case ஒன்று",
   },
   {
-    name: "Gastroscopy அல்லது Colonoscopy",
+    name: "Gastroscopy அல்லது Colonoscopy (விரைவில்)",
     note: "Consultant Anaesthetist ஒருவரால் Sedation, தேவைப்பட்டால் அதே அமர்வில் Biopsy",
     stay: "Day Procedure ஒன்று",
   },
   {
-    name: "Obstetrics மற்றும் பிரசவம்",
-    note: "Delivery வரை ஒரு Consultant, தனி Obstetric Theatre மற்றும் அறையிலேயே Neonatal ஆதரவு",
+    name: "Obstetrics மற்றும் பிரசவம் (விரைவில்)",
+    note: "Delivery வரை ஒரு Consultant, தனி Obstetric Theatre மற்றும் அறையிலேயே Neonatal ஆதரவு, Maternity சிகிச்சை திறந்த பின்",
     stay: "உங்கள் Consultant உடன் உறுதி செய்யப்படும்",
   },
   {
@@ -211,8 +211,8 @@ export const estimateNote =
   "தங்கும் காலம் உங்கள் Surgeon எதிர்பார்ப்பது, ஒரு உத்தரவாதம் அல்ல, உங்கள் Consultation இல் உறுதி செய்யப்படும். சிகிச்சை தொடங்குவதற்கு முன் ஒரு எழுத்துப்பூர்வ Estimate வழங்கப்படும், சாத்தியமான சிகிச்சை போக்கை உள்ளடக்கியது, அது எழுத்துப்பூர்வமாக கிடைக்கும் வரை எதுவும் தொடங்காது. CT மற்றும் MRI தளத்தில் செய்யப்படுவதில்லை, ஒரு Partner Imaging Centre க்கு Referral மூலம் ஏற்பாடு செய்யப்படும்.";
 
 /** `#rooms`: the four categories the hospital actually offers, taken from
- *  `features/facilities/data/content`. Only the standard single carries a
- *  figure, because 10,000 LKR is the sole room price the repo publishes. */
+ *  `features/facilities/data/content`. The standard room carries its
+ *  price per day from the 2026 Service Book (page 17). */
 export const roomsHeading = {};
 /** Sits under the shared amenity list in `#rooms`. */
 export const roomsNote = "Wards முதல் மேலாக, ஒவ்வொரு Category இலும் மேலே உள்ள பட்டியல் standard ஆக உள்ளது.";
@@ -237,7 +237,7 @@ export const roomTiles = [
     tier: "ஒரு படுக்கை",
     name: "Standard Rooms",
     desc: "Bystander படுக்கை மற்றும் நாற்காலி, குளிரூட்டி, தொலைக்காட்சி மற்றும் அறைக்குத் தேவையான மருத்துவ ஆதரவு. ஒரு குறுகிய செயல்முறைக்கான வழக்கமான தேர்வு.",
-    extra: "10,000 LKR முதல்",
+    extra: "ஒரு நாளுக்கு 12,500 LKR",
   },
   {
     tier: "இரண்டு அல்லது மூன்று படுக்கைகள்",
@@ -309,7 +309,7 @@ export const practical = [
 export const faq = [
   {
     q: "பறப்பதற்கு முன் ஒரு கருத்தை எப்படி பெறுவது?",
-    a: "உங்கள் Scans, Laboratory Reports, தற்போதைய மருந்து பட்டியல் மற்றும் ஒரு சுருக்கமான வரலாற்றை வெளிநாட்டு Desk க்கு Email செய்யுங்கள் அல்லது WhatsApp செய்யுங்கள், ஒரு Telemedicine Consultation கேளுங்கள். இது எங்கள் மருத்துவர்களில் ஒருவருடன் Video அல்லது Phone மூலம், தினமும் ஒதுக்கப்படும் Consultation, இது நேரடியாக பரிசோதனை தேவையில்லாத ஒரு உரையாடலுக்கு சரியாக பொருந்தும். சிகிச்சையை மேற்கொள்ளும் மருத்துவருடன் விவாதிக்காமல் யாரும் Ticket வாங்கக் கூடாது.",
+    a: "உங்கள் Scans, Laboratory Reports, தற்போதைய மருந்து பட்டியல் மற்றும் ஒரு சுருக்கமான வரலாற்றை வெளிநாட்டு Desk க்கு Email செய்யுங்கள் அல்லது WhatsApp செய்யுங்கள், உங்களுக்குச் சிகிச்சை அளிக்கும் மருத்துவரிடம் Desk உங்கள் கேள்விகளைக் கொண்டு செல்லும். Video அல்லது Phone மூலம் Telemedicine Consultations விரைவில். சிகிச்சையை மேற்கொள்ளும் மருத்துவருடன் விவாதிக்காமல் யாரும் Ticket வாங்கக் கூடாது.",
   },
   {
     q: "மருத்துவமனை விமான நிலையத்திலிருந்து எவ்வளவு தூரம்?",
@@ -325,7 +325,7 @@ export const faq = [
   },
   {
     q: "ஒரு குடும்ப உறுப்பினர் என்னுடன் தங்கலாமா?",
-    a: "ஆம். Wards முதல் Super Deluxe வரை ஒவ்வொரு அறை Category இலும் ஒரு Bystander படுக்கையும் நாற்காலியும் உள்ளது, ஒரு Attendant இரவில் தங்கலாம். Admission இல் குறிக்கப்பட்ட Dietary Order படி உணவு தயார் செய்யப்படும். பொது Wards பகல் Visiting க்காக திறந்திருக்கும்; Critical Care Visiting Unit Desk உறுதி செய்யும் நிலையான நேரங்களுக்கு மட்டுப்படும், குடும்ப உறுப்பினர் ஒருவருக்கு Unit இலிருந்து நாளொன்றுக்கு ஒரு Update Call செய்யப்படும்.",
+    a: "ஆம். Wards முதல் Super Deluxe வரை ஒவ்வொரு அறை Category இலும் ஒரு Bystander படுக்கையும் நாற்காலியும் உள்ளது, ஒரு Attendant இரவில் தங்கலாம். Admission இல் குறிக்கப்பட்ட Dietary Order படி உணவு தயார் செய்யப்படும். பொது Wards பகல் Visiting க்காக திறந்திருக்கும்; Critical Care Unit திறந்த பின், அதன் Visiting Unit Desk உறுதி செய்யும் நிலையான நேரங்களுக்கு மட்டுப்படும், குடும்ப உறுப்பினர் ஒருவருக்கு நாளொன்றுக்கு ஒரு Update Call செய்யப்படும்.",
   },
   {
     q: "எனது Insurance இங்கு வேலை செய்யுமா?",
@@ -333,7 +333,7 @@ export const faq = [
   },
   {
     q: "எவ்வளவு செலவாகும்?",
-    a: "சிகிச்சை தொடங்குவதற்கு முன் ஒரு எழுத்துப்பூர்வ Estimate வழங்கப்படும், சாத்தியமான சிகிச்சை போக்கை உள்ளடக்கியது, அது கிடைக்கும் வரை எதுவும் தொடங்காது. இது Operation, நீங்கள் தேர்ந்தெடுக்கும் அறை மற்றும் தங்கும் காலத்தைப் பொறுத்தது, அதனால்தான் Estimate ஒரு Price List ஐ விட உங்கள் Reports ஐ பின்பற்றுகிறது. Standard Single அறைகள் இரவுக்கு 10,000 LKR முதல் தொடங்குகின்றன, Outpatients க்கு Laboratory கட்டணங்களில் 10% தள்ளுபடி.",
+    a: "சிகிச்சை தொடங்குவதற்கு முன் ஒரு எழுத்துப்பூர்வ Estimate வழங்கப்படும், சாத்தியமான சிகிச்சை போக்கை உள்ளடக்கியது, அது கிடைக்கும் வரை எதுவும் தொடங்காது. இது Operation, நீங்கள் தேர்ந்தெடுக்கும் அறை மற்றும் தங்கும் காலத்தைப் பொறுத்தது, அதனால்தான் Estimate ஒரு Price List ஐ விட உங்கள் Reports ஐ பின்பற்றுகிறது. ஒரு நாளுக்கு வார்டு படுக்கை 9,500 LKR முதல், Standard அறை 12,500 LKR, Outpatients க்கு Laboratory கட்டணங்களில் 10% தள்ளுபடி.",
   },
   {
     q: "எனக்கு இங்கு CT அல்லது MRI Scan செய்யலாமா?",
@@ -345,7 +345,7 @@ export const faq = [
   },
   {
     q: "அறுவை சிகிச்சைக்குப் பிறகு நான் எவ்வளவு விரைவில் வீடு பறக்க முடியும்?",
-    a: "இது முற்றிலும் Operation ஐ பொறுத்தது, எனவே திரும்பும் பயணத்தை Book செய்வதற்கு முன் உங்கள் Surgeon இடம் கேளுங்கள், மாற்றக்கூடிய Ticket ஒன்றைத் தேர்வு செய்யுங்கள். Recovery உங்கள் Flight ஐ விட நீண்டால், நீங்கள் பயணித்த பிறகும் Telemedicine அதே மருத்துவரை ஈடுபடுத்துகிறது: Video அல்லது Phone மூலம் தினமும் ஒதுக்கப்படும் ஒரு Review, உங்கள் Chart ஐ ஒருபோதும் பார்க்காத ஒருவருடன் மீண்டும் தொடங்குவதற்குப் பதிலாக.",
+    a: "இது முற்றிலும் Operation ஐ பொறுத்தது, எனவே திரும்பும் பயணத்தை Book செய்வதற்கு முன் உங்கள் Surgeon இடம் கேளுங்கள், மாற்றக்கூடிய Ticket ஒன்றைத் தேர்வு செய்யுங்கள். Recovery உங்கள் Flight ஐ விட நீண்டால், நீங்கள் பயணித்த பிறகும் விரைவில் வரும் Telemedicine அதே மருத்துவரை ஈடுபடுத்தும், உங்கள் Chart ஐ ஒருபோதும் பார்க்காத ஒருவருடன் மீண்டும் தொடங்குவதற்குப் பதிலாக.",
   },
 ];
 

@@ -55,10 +55,10 @@ export const networkNodes: NetworkNode[] = [
     index: "04",
     location: "Island wide, LK",
     name: "Telemedicine & delivery",
-    body: "Remote consultations and medicine dispatch beyond the Negombo district.",
+    body: "Medicine dispatch beyond the Negombo district, with remote consultations coming soon.",
     photo: "/images/network/home-visit-vehicle.jpg",
     photoAlt: "St. Joseph Hospital home visit service vehicle",
-    linkLabel: "Consult from home",
+    linkLabel: "About telemedicine",
     href: "/services/telemedicine",
   },
 ];

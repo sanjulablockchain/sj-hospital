@@ -174,7 +174,7 @@ export const journeySteps: JourneyStep[] = [
   {
     no: "05",
     title: "Treatment and family",
-    desc: "One attendant stays in the room, with a bystander bed and chair in every category and meals to dietary orders. From critical care, a family member is called with an update once a day.",
+    desc: "One attendant stays in the room, with a bystander bed and chair in every category and meals to dietary orders. Once our critical care unit opens, a family member of a patient there will be called with an update once a day.",
     when: "During your stay",
   },
   {
@@ -197,7 +197,7 @@ export const deskServices: DeskService[] = [
   {
     kind: "Before you travel",
     title: "Consultation by video or phone",
-    desc: "Telemedicine offers a consultation with one of our doctors by video or by phone, booked daily. It suits a conversation that does not need an examination in person, which is most of them before a flight.",
+    desc: "Telemedicine, coming soon, will offer a consultation with one of our doctors by video or by phone. It will suit a conversation that does not need an examination in person, which is most of them before a flight. Until then, email or WhatsApp the international desk.",
   },
   {
     kind: "Transport",
@@ -242,7 +242,7 @@ export const deskServices: DeskService[] = [
   {
     kind: "Follow up",
     title: "Review once you are home",
-    desc: "Telemedicine is used for follow-up with patients who have travelled home after being seen here, which keeps the same doctor involved in the next step of your care.",
+    desc: "Telemedicine follow-up for patients who have travelled home after being seen here is coming soon, keeping the same doctor involved in the next step of your care.",
   },
 ];
 
@@ -292,13 +292,13 @@ export const treatments: TreatmentRow[] = [
     stay: "Day case",
   },
   {
-    name: "Gastroscopy or colonoscopy",
+    name: "Gastroscopy or colonoscopy (opening soon)",
     note: "Sedation given by a consultant anaesthetist, with biopsy at the same sitting where indicated",
     stay: "Day procedure",
   },
   {
-    name: "Obstetrics and delivery",
-    note: "One consultant through to delivery, a separate obstetric theatre and neonatal support in the room",
+    name: "Obstetrics and delivery (opening soon)",
+    note: "One consultant through to delivery, a separate obstetric theatre and neonatal support in the room, once maternity care opens",
     stay: "Confirmed with your consultant",
   },
   {
@@ -318,8 +318,8 @@ export const estimateNote =
   "Length of stay is what your surgeon expects, not a guarantee, and is confirmed at your consultation. A written estimate is given before treatment starts and covers the likely course of care, so nothing begins before you have it in writing. CT and MRI are not performed on site and are arranged by referral to a partner imaging centre.";
 
 /** `#rooms`: the four categories the hospital actually offers, taken from
- *  `features/facilities/data/content`. Only the standard single carries a
- *  figure, because 10,000 LKR is the sole room price the repo publishes. */
+ *  `features/facilities/data/content`. The standard room carries its
+ *  price per day from the 2026 Service Book (page 17). */
 export const roomsHeading = { line1: "Your attendant", line2: "stays with you" };
 /** Sits under the shared amenity list in `#rooms`. */
 export const roomsNote = "Every category, from the wards up, carries the list above as standard.";
@@ -341,7 +341,7 @@ export const roomTiles: RoomTile[] = [
     tier: "One bed",
     name: "Standard Rooms",
     desc: "Bystander bed and chair, air conditioning, television and the medical support the room needs. The usual choice for a short procedure.",
-    extra: "From 10,000 LKR",
+    extra: "12,500 LKR a day",
   },
   {
     tier: "Two or three beds",
@@ -412,7 +412,7 @@ export const faqHeading = "The questions we always get";
 export const faq: InternationalFaq[] = [
   {
     q: "How do I get an opinion before I fly?",
-    a: "Email or WhatsApp your scans, laboratory reports, current medicine list and a short history to the international desk, and ask for a telemedicine consultation. That is a consultation with one of our doctors by video or by phone, booked daily, and it suits exactly this: a conversation that does not need an examination in person. Nobody should buy a ticket without having discussed the treatment with the doctor who would carry it out.",
+    a: "Email or WhatsApp your scans, laboratory reports, current medicine list and a short history to the international desk, and the desk will put your questions to the doctor who would treat you. Telemedicine consultations by video or by phone are coming soon. Nobody should buy a ticket without having discussed the treatment with the doctor who would carry it out.",
   },
   {
     q: "How far is the hospital from the airport?",
@@ -428,7 +428,7 @@ export const faq: InternationalFaq[] = [
   },
   {
     q: "Can a family member stay with me?",
-    a: "Yes. Every room category, from the wards up to super deluxe, has a bystander bed and chair, and one attendant may stay overnight. Meals are prepared to the dietary orders noted at admission. General wards are open for day visiting; critical care visiting is kept to fixed hours that the unit desk will confirm, and a family member is called with an update once a day from the unit.",
+    a: "Yes. Every room category, from the wards up to super deluxe, has a bystander bed and chair, and one attendant may stay overnight. Meals are prepared to the dietary orders noted at admission. General wards are open for day visiting; once our critical care unit opens, its visiting will be kept to fixed hours the unit desk confirms, with a family member called with an update once a day.",
   },
   {
     q: "Does my insurance work here?",
@@ -436,7 +436,7 @@ export const faq: InternationalFaq[] = [
   },
   {
     q: "How much will it cost?",
-    a: "A written estimate is given before treatment starts, covering the likely course of care, and nothing begins until you have it. What it comes to depends on the operation, the room you choose and how long you stay, which is why the estimate follows your reports rather than a price list. Rooms start at 10,000 LKR a night for a standard single, and outpatients get a 10% discount on laboratory charges.",
+    a: "A written estimate is given before treatment starts, covering the likely course of care, and nothing begins until you have it. What it comes to depends on the operation, the room you choose and how long you stay, which is why the estimate follows your reports rather than a price list. Rooms start at 9,500 LKR a day for a ward bed and 12,500 LKR for a standard room, and outpatients get a 10% discount on laboratory charges.",
   },
   {
     q: "Can I have a CT or MRI scan here?",
@@ -448,7 +448,7 @@ export const faq: InternationalFaq[] = [
   },
   {
     q: "How soon can I fly home after surgery?",
-    a: "It depends entirely on the operation, so ask your surgeon before you book the return leg and prefer a ticket you can change. Where the recovery runs past your flight, telemedicine keeps the same doctor involved once you have travelled: a video or phone review, booked daily, rather than starting again with somebody who has never seen your chart.",
+    a: "It depends entirely on the operation, so ask your surgeon before you book the return leg and prefer a ticket you can change. Where the recovery runs past your flight, telemedicine, coming soon, will keep the same doctor involved once you have travelled, rather than starting again with somebody who has never seen your chart.",
   },
 ];
 

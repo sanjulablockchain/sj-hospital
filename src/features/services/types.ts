@@ -11,6 +11,18 @@ export type Step = { no: string; title: string; desc: string };
 export type TeamMember = { role: string; note: string };
 export type Faq = { q: string; a: string };
 
+/**
+ * One printed page of the 2026 Service Book's Services chapter, quoted on the
+ * service page it covers (`BookExcerptSection`). `page` is the printed page
+ * number, which is also the reader's `#page-N` (docs/service-book.md).
+ */
+export type ServiceBookExcerpt = {
+  page: number;
+  summary: string;
+  facts: KeyValue[];
+  why: string[];
+};
+
 export type Service = {
   /** URL segment under /services */
   slug: string;
@@ -43,4 +55,6 @@ export type Service = {
   prep: string[];
   team: TeamMember[];
   faq: Faq[];
+  /** What the Service Book says about this service, where it covers it. */
+  book?: ServiceBookExcerpt;
 };

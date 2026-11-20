@@ -33,7 +33,7 @@ export const internationalCareItems: InternationalCareItem[] = [
   {
     index: "06",
     title: "Follow up online",
-    body: "Post treatment review by telemedicine once you have travelled back.",
+    body: "Post treatment review by telemedicine once you have travelled back, coming soon.",
   },
 ];
 

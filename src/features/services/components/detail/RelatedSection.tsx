@@ -2,6 +2,8 @@ import { LocaleLink } from "@/components/i18n/LocaleLink";
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
 import type { Service } from "@/features/services/types";
+import { ComingSoonBadge } from "@/components/ui/ComingSoonBadge";
+import { isComingSoonSlug } from "@/config/comingSoon";
 import type { ServicesContent } from "@/features/services/data/getContent";
 
 /**
@@ -37,8 +39,9 @@ export function RelatedSection({ related, content }: { related: Service[]; conte
               href={`/services/${service.slug}`}
               className="group flex flex-col bg-[var(--home-bg)] p-7.5 transition-transform duration-[400ms] hover:-translate-y-1.5"
             >
-              <div className="text-[11.5px] font-bold tracking-[0.18em] text-[var(--home-accent)] uppercase">
+              <div className="flex flex-wrap items-center gap-2.5 text-[11.5px] font-bold tracking-[0.18em] text-[var(--home-accent)] uppercase">
                 {groupLabels[service.group] ?? service.group}
+                {isComingSoonSlug(service.slug) && <ComingSoonBadge />}
               </div>
               <h3 className="font-display wrap-break-word mt-3 text-[21px] leading-[1.15] font-semibold tracking-[-0.02em] text-[var(--home-heading)]">
                 {service.directoryTitle}

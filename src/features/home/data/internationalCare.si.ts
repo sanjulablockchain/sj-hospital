@@ -24,7 +24,7 @@ export const internationalCareItems = [
     body: "Digital Reports, Imaging සහ Discharge සටහන් ගෙදර ඔබේ වෛද්‍යවරයාට යවනවා.",
   },
   {
-    body: "ඔබ ආපහු පිටරට ගියාට පස්සේ Telemedicine එකෙන් Treatment එකෙන් පස්සේ Review එකක්.",
+    body: "ඔබ ආපහු පිටරට ගියාට පස්සේ Telemedicine එකෙන් Treatment එකෙන් පස්සේ Review එකක්, ළඟදීම.",
   },
 ];
 

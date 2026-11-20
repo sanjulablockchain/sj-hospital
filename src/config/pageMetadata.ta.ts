@@ -17,7 +17,7 @@ export const __review = { status: "draft", reviewer: null, date: null } as const
 export const pageMetadata = {
   home: {
     description:
-      "நீர்கொழும்பு, இலங்கையில் அமெரிக்க தர சுகாதார சேவை. 24/7 OPD, Emergency, Pharmacy, House Doctors, மற்றும் Digital X-ray, 10,000 LKR முதல் தொடங்கும் உள்நோயாளர் அறைகளுடன்.",
+      "நீர்கொழும்பு, இலங்கையில் அமெரிக்க தர சுகாதார சேவை. இலவச OPD, 24/7 Emergency மற்றும் Pharmacy, House Doctors, மற்றும் Digital X-ray, ஒரு நாளுக்கு 9,500 LKR முதல் தொடங்கும் உள்நோயாளர் அறைகளுடன்.",
   },
   aboutUs: {
     description:
@@ -41,7 +41,7 @@ export const pageMetadata = {
   },
   facilities: {
     description:
-      "St. Joseph Hospital Negombo உள்ளே: சிறப்பாகக் கட்டப்பட்ட 6 மாடிகள், அறுவை சிகிச்சை அரங்குகள், Monitor செய்யப்படும் தீவிர சிகிச்சை, 24 மணி நேர ஆய்வுகூடம், நான்கு அறை வகைகள் மற்றும் கூரையுள்ள Ambulance Bay.",
+      "St. Joseph Hospital Negombo உள்ளே: சிறப்பாகக் கட்டப்பட்ட 6 மாடிகள், அறுவை சிகிச்சை அரங்குகள், Monitor செய்யப்படும் தீவிர சிகிச்சை (விரைவில்), 24 மணி நேர ஆய்வுகூடம், நான்கு அறை வகைகள் மற்றும் கூரையுள்ள Ambulance Bay.",
   },
   healthTips: {
     // {articleCount} / {warningCount} are the interpolation tokens; see

@@ -3,6 +3,20 @@ import type { Service } from "../types";
 export const diagnosticServices: Service[] = [
   {
     slug: "laboratory",
+    book: {
+      page: 14,
+      summary: "Blood, urine and other tests, at any hour, with every price on our laboratory price list.",
+      facts: [
+        { k: "Hours", v: "Open 24 hours, 7 days a week" },
+        { k: "Reports", v: "Most common tests are reported within 1 day" },
+        { k: "Call", v: "031 784 84 84" },
+      ],
+      why: [
+        "Open day and night, so tests are never held up by the clock.",
+        "Every test under one roof, with its price published.",
+        "A consultant histopathologist is part of our team.",
+      ],
+    },
     heroImage: "/images/services/heroes/laboratory.jpg",
     heroAlt: "A gloved hand holding a sample vial beside a laboratory analyser",
     title: "Laboratory services",
@@ -71,6 +85,19 @@ export const diagnosticServices: Service[] = [
   },
   {
     slug: "radiology",
+    book: {
+      page: 13,
+      summary: "Digital X-ray gives your doctor clear images quickly, so treatment can start sooner.",
+      facts: [
+        { k: "How", v: "Bring your doctor's request, or ask your St. Joseph doctor to refer you" },
+        { k: "Fee", v: "Please ask our staff for the current fee" },
+      ],
+      why: [
+        "Digital X-ray on site: images are ready on screen straight away.",
+        "Consultant radiologists are on our doctor list.",
+        "Tests, X-ray and medicines are on the same site.",
+      ],
+    },
     heroImage: "/images/services/heroes/radiology.jpg",
     heroAlt: "A digital X-ray room with an overhead imaging unit and examination table",
     title: "Radiology & digital X-ray",
@@ -139,6 +166,20 @@ export const diagnosticServices: Service[] = [
   },
   {
     slug: "cardiac-screening",
+    book: {
+      page: 12,
+      summary: "An exercise ECG checks how your heart works when it is under effort. Same day appointments are available.",
+      facts: [
+        { k: "Appointment", v: "Same day. Call or WhatsApp to book" },
+        { k: "Your test", v: "A medical officer is appointed for your test" },
+        { k: "Fee", v: "Please ask our staff for the current fee" },
+      ],
+      why: [
+        "A same day appointment, so you can be tested without delay.",
+        "A medical officer is appointed to look after you during the test.",
+        "Consultant cardiologists are on the same site.",
+      ],
+    },
     heroImage: "/images/services/heroes/cardiac-screening.jpg",
     heroAlt: "A bedside monitor displaying an ECG waveform and heart rate readings",
     title: "Cardiac screening & ECG",
@@ -213,7 +254,7 @@ export const diagnosticServices: Service[] = [
     directoryTitle: "CTG & fetal monitoring",
     group: "Diagnostics",
     hours: "By appointment",
-    cta: "Book monitoring",
+    cta: "Ask us when it opens",
     desc: "Cardiotocography (CTG) for fetal heart rate and contraction monitoring, run alongside the antenatal clinic and reviewed by the obstetric team.",
     tags: ["Cardiotocography", "Fetal heart rate", "Contraction monitoring", "Antenatal clinic"],
     facts: [

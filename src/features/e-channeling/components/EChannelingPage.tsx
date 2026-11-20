@@ -6,6 +6,7 @@ import { getEChannelingContent, getLocalizedDoctors } from "../data/getContent";
 import { ChannelingHero } from "./ChannelingHero";
 import { DirectorySection } from "./DirectorySection";
 import { HelpSection } from "./HelpSection";
+import { BookExcerptSection, getServicesContent } from "@/features/services";
 
 /**
  * The e-channeling page in source order: hero, then the directory (this
@@ -19,9 +20,10 @@ import { HelpSection } from "./HelpSection";
  * rendering.
  */
 export async function EChannelingPage({ locale }: { locale: Locale }) {
-  const [content, doctors] = await Promise.all([
+  const [content, doctors, services] = await Promise.all([
     getEChannelingContent(locale),
     getLocalizedDoctors(locale),
+    getServicesContent(locale),
   ]);
 
   return (
@@ -29,6 +31,11 @@ export async function EChannelingPage({ locale }: { locale: Locale }) {
       <main>
         <ChannelingHero content={content} />
         <DirectorySection content={content} doctors={doctors} />
+        <BookExcerptSection
+          excerpt={content.bookExcerpt}
+          title={content.bookExcerpt.title}
+          labels={services.indexContent.detailChrome.bookExcerpt}
+        />
         <HelpSection content={content} />
       </main>
       <ThemedFooter

@@ -56,7 +56,7 @@ export const statTickerItems = [
   "Surgical theatres to US protocol",
   "Cleaned every two hours",
   "Reports same day, checked twice",
-  "Rooms from 10,000 LKR",
+  "Rooms from 9,500 LKR",
 ];
 
 /**
@@ -80,7 +80,7 @@ export const quickAccess = {
   },
   emergency: {
     title: "Emergency assistance",
-    body: "Walk in at any hour. Ambulance bay and critical care open 24/7.",
+    body: "Walk in at any hour. The ambulance bay is open 24/7, and critical care opens soon.",
     cta: "Read more",
     href: "/services/accident-emergency",
     photo: "/images/services/heroes/accident-emergency.jpg",
@@ -126,8 +126,8 @@ export const whoWeAre = {
     {
       icon: "clock",
       value: "24/7",
-      label: "Emergency and OPD",
-      desc: "Every service open, every hour, every day of the year.",
+      label: "Emergency",
+      desc: "Accident and emergency care, every hour, every day of the year.",
       tone: "red",
       href: "/services/accident-emergency",
     },
@@ -135,7 +135,7 @@ export const whoWeAre = {
       icon: "grid",
       value: "{count}",
       label: "Services",
-      desc: "From emergency care to fertility, under one roof.",
+      desc: "From emergency care to women's health, under one roof.",
       tone: "brand",
       href: "/services",
     },
@@ -190,7 +190,7 @@ export const freeOpd = {
   heading: "Seeing a doctor costs you nothing",
   body: "Consultations at our outpatient department are free, so nobody has to weigh up whether a fever, a lump or a week of pain is worth the money. Walk in and see a doctor.",
   points: [
-    "Free consultation, every hour we are open",
+    "Free consultation, 7.00 AM to 6.00 PM",
     "General complaints and specialist referral alike",
     "Your diagnosis explained before you leave",
   ],
@@ -309,7 +309,7 @@ export const specialties = {
       group: "Emergency",
       label: "Emergency",
       title: "Emergency and critical care",
-      desc: "Accident and emergency care around the clock, with intensive and critical care on site. Walk in at any hour, every day of the year, or call and we come to you.",
+      desc: "Accident and emergency care around the clock, with intensive and critical care opening soon. Walk in at any hour, every day of the year, or call and we come to you.",
       image: "/images/services/heroes/accident-emergency.jpg",
       links: [
         { title: "Accident and emergency", href: "/services/accident-emergency" },
@@ -367,7 +367,7 @@ export const specialties = {
       group: "Women & children",
       label: "Women and children",
       title: "Women and children",
-      desc: "Maternity, gynaecology and paediatric care, led by the same Kids and Teens protocol our Los Angeles group uses for its own patients.",
+      desc: "Gynaecology and paediatric care, led by the same Kids and Teens protocol our Los Angeles group uses for its own patients, with maternity care opening soon.",
       image: "/images/services/heroes/obstetrics-maternity.jpg",
       links: [
         { title: "Obstetrics and maternity", href: "/services/obstetrics-maternity" },
@@ -381,7 +381,7 @@ export const specialties = {
       group: "At home",
       label: "At home",
       title: "Care at home",
-      desc: "A pharmacy that never closes, medicine delivered across Negombo, home visits on six dedicated vehicles and telemedicine from anywhere on the island.",
+      desc: "A pharmacy that never closes, medicine delivered across Negombo and home visits on six dedicated vehicles, with telemedicine coming soon.",
       image: "/images/services/heroes/home-visits.jpg",
       links: [
         { title: "24 hour pharmacy", href: "/services/pharmacy" },

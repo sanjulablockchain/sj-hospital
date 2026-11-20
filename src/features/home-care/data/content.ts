@@ -79,7 +79,7 @@ export const tickerItems: readonly string[] = [
   "Notes on your hospital file",
   "Elders, infants and post-operative care",
   "Medicine from our own counter",
-  "Video and phone consultations",
+  "Video and phone consultations, coming soon",
 ];
 
 /**
@@ -187,7 +187,7 @@ export const handoffs: Handoff[] = [
   {
     eyebrow: "06 / Remote",
     heading: "A consultation without travelling in",
-    body: "Not every question needs someone at the door. A telemedicine consultation covers a follow-up conversation or a concern that does not need an in-person examination, by video or by phone, with any prescription issued straight to the pharmacy.",
+    body: "Not every question needs someone at the door. A telemedicine consultation, coming soon, will cover a follow-up conversation or a concern that does not need an in-person examination, by video or by phone, with any prescription issued straight to the pharmacy.",
     points: [
       "Video or phone, whichever suits the patient",
       "Any prescription goes to the pharmacy for collection or delivery",

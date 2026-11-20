@@ -97,3 +97,17 @@ export const directory = {
 export const helpRail = {
   body: "අපගේ Channelling කවුන්ටරය ඔබට ගැලපෙන විශේෂඥ වෛද්‍යවරයා දවසේ ඕන වෙලාවක සොයා දෙනවා.",
 };
+
+export const bookExcerpt = {
+  summary: "Consultant කෙනෙක් තෝරා දුරකථනයෙන් හෝ WhatsApp මගින් Appointment එකක් Book කරන්න.",
+  facts: [
+    { k: "දුරකථන" },
+    { k: "WhatsApp අංකය" },
+    { k: "ගාස්තුව", v: "වත්මන් Channelling ගාස්තුව අපේ කාර්ය මණ්ඩලයෙන් විමසන්න" },
+  ],
+  why: [
+    "විශේෂ ක්ෂේත්‍ර 25කට වඩා ආවරණය කරන Consultants.",
+    "බොහෝ Consultants ඉරිදා දිනවල සහ සවස් කාලයේ රෝගීන් බලනවා.",
+    "පරීක්ෂණ, X-ray සහ බෙහෙත් එකම ස්ථානයේ තියෙනවා.",
+  ],
+};

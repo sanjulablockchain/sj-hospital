@@ -183,8 +183,8 @@ export const newsroomCopy = {
  */
 export const featured: FeaturedRelease = {
   kickerDate: "August 2026",
-  title: "New endoscopy suite opens on the second floor",
-  lede: "Two dedicated procedure rooms and a separate recovery bay bring diagnostic gastroscopy and colonoscopy waiting times under a week. The suite runs six days, with sedation managed by the anaesthetic team and same day reporting for biopsies taken during the procedure.",
+  title: "Endoscopy suite on the second floor opens soon",
+  lede: "Two dedicated procedure rooms and a separate recovery bay are being readied for diagnostic gastroscopy and colonoscopy, with sedation managed by the anaesthetic team and same day reporting for biopsies taken during the procedure.",
   date: "14 August 2026",
   type: "Press release",
   points: [
@@ -199,8 +199,8 @@ export const news: NewsItem[] = [
   {
     tag: "Press releases",
     date: "August 2026",
-    title: "New endoscopy suite opens on the second floor",
-    lede: "Two dedicated procedure rooms with a separate recovery bay, cutting the wait for diagnostic gastroscopy and colonoscopy to under a week.",
+    title: "Endoscopy suite on the second floor opens soon",
+    lede: "Two dedicated procedure rooms with a separate recovery bay are being readied for diagnostic gastroscopy and colonoscopy.",
   },
   {
     tag: "Press releases",

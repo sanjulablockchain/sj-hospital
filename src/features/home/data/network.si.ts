@@ -34,7 +34,7 @@ export const networkNodes = [
     location: "දිවයින පුරා, LK",
     // Reused verbatim from navigationLabels.si.ts's "Telemedicine".
     name: "දුරස්ථ වෛද්‍ය සේවා සහ ගෙන්වා දීම",
-    body: "මීගමුව දිස්ත්‍රික්කයෙන් එහායින් දුරස්ථ Consultations සහ බෙහෙත් යැවීම.",
+    body: "මීගමුව දිස්ත්‍රික්කයෙන් එහායට බෙහෙත් යැවීම, දුරස්ථ Consultations ළඟදීම.",
   },
 ];
 

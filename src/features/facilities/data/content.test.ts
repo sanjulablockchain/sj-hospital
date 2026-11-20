@@ -106,20 +106,29 @@ test("the room categories are the four the hospital actually offers", () => {
   assert.doesNotMatch(allCopy, /private suite|semi[- ]private room/i);
 });
 
-test("10,000 LKR is the only price quoted anywhere on the page", () => {
+// The four room prices are the 2026 Service Book's, per day (page 17; owner
+// confirmed 2026-11-20), and no other figure is quoted on the page.
+test("the room prices are the Service Book's, and no other price is quoted", () => {
   const prices = allCopy.match(/\b\d{1,3},\d{3}\b/g) ?? [];
-  assert.deepEqual([...new Set(prices)], ["10,000"]);
-  // and it is attached to the entry private room, the one figure the repo publishes
-  const standard = roomRows.find((r) => r.name === "Standard Rooms");
-  assert.ok(standard);
-  assert.match(standard.price, /10,000 LKR/);
+  assert.deepEqual([...new Set(prices)].sort(), ["12,500", "15,500", "19,500", "9,500"]);
+  const price = (name: string) => roomRows.find((r) => r.name === name)?.price;
+  assert.equal(price("Wards"), "9,500 LKR a day");
+  assert.equal(price("Standard Rooms"), "12,500 LKR a day");
+  assert.equal(price("Deluxe Rooms"), "15,500 LKR a day");
+  assert.equal(price("Super Deluxe Rooms"), "19,500 LKR a day");
 });
 
 test("no clock-time visiting hours, which the hospital does not publish", () => {
   assert.doesNotMatch(allCopy, /\b\d{1,2}[:.]\d{2}\b/);
+  // Critical care is built but not running yet (owner, 2026-11-20), so its
+  // visiting row says so; the note on how visiting will run keeps "fixed
+  // hours" rather than a clock time.
   const critical = visitingRows.find((r) => r.k === "Critical care");
   assert.ok(critical);
-  assert.match(critical.v, /fixed hours/i);
+  assert.match(critical.v, /opening soon/i);
+  const visiting = careNotes.find((n) => n.title === "Visiting");
+  assert.ok(visiting);
+  assert.match(visiting.body, /fixed hours/i);
 });
 
 test("no unbacked regulatory, engineering or dental claims", () => {
