@@ -21,7 +21,7 @@ export const body =
 export const items: FaqItem[] = [
   {
     q: "Is an OPD consultation really free?",
-    a: "Yes. Consultations at our outpatient department are free, every hour we are open, for general complaints and specialist referral alike. Your diagnosis is explained before you leave, and OPD patients save 10% on laboratory tests.",
+    a: "Yes. Consultations at our outpatient department are free, from 7.00 AM to 6.00 PM, for general complaints and specialist referral alike. Your diagnosis is explained before you leave, and OPD patients save 10% on laboratory tests.",
   },
   {
     q: "How far is the hospital from the airport?",

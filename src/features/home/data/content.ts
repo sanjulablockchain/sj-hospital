@@ -56,7 +56,7 @@ export const statTickerItems = [
   "Surgical theatres to US protocol",
   "Cleaned every two hours",
   "Reports same day, checked twice",
-  "Rooms from 10,000 LKR",
+  "Rooms from 9,500 LKR",
 ];
 
 /**
@@ -190,7 +190,7 @@ export const freeOpd = {
   heading: "Seeing a doctor costs you nothing",
   body: "Consultations at our outpatient department are free, so nobody has to weigh up whether a fever, a lump or a week of pain is worth the money. Walk in and see a doctor.",
   points: [
-    "Free consultation, every hour we are open",
+    "Free consultation, 7.00 AM to 6.00 PM",
     "General complaints and specialist referral alike",
     "Your diagnosis explained before you leave",
   ],

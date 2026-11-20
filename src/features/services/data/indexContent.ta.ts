@@ -19,7 +19,7 @@ export const __review = { status: "draft", reviewer: null, date: null } as const
 
 export const tickerItems: readonly string[] = [
   "ஒன்பது சிறப்பு மையங்கள்",
-  "Emergency மற்றும் OPD எல்லா நேரமும்",
+  "OPD காலை 7.00 முதல் மாலை 6.00 வரை",
   "ஆய்வுகூடம் 24 மணி நேரமும் திறந்திருக்கும்",
   "Digital X-ray ஒரு மணி நேரத்தில் Report ஆகும்",
   "இரண்டு மருத்துவர்கள் ஒவ்வொரு Report ஐயும் படிப்பர்",
@@ -265,7 +265,7 @@ export const facilityCards = [
     body: "24 மணி நேர Outpatient பிரிவு, நீங்கள் எப்போது வந்தாலும் Emergency நுழைவுக்கு அருகில் பணியாளர்களுடன்.",
   },
   {
-    body: "ஒரு இரவுக்கு LKR 10,000 முதல் Private மற்றும் Semi-Private அறைகள், அதிக Dependency சிகிச்சைக்கான முழு ICU விரைவில் திறக்கப்படும்.",
+    body: "ஒரு நாளுக்கு LKR 9,500 முதல் வார்டுகள் மற்றும் தனியார் அறைகள், அதிக Dependency சிகிச்சைக்கான முழு ICU விரைவில் திறக்கப்படும்.",
   },
   {
     body: "எங்கள் சொந்த Ambulance வாகனங்கள் சேவை செய்யும் கூரையுள்ள நுழைவு, Bandaranaike International இலிருந்து பத்து நிமிடங்கள்.",

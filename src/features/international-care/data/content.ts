@@ -318,8 +318,8 @@ export const estimateNote =
   "Length of stay is what your surgeon expects, not a guarantee, and is confirmed at your consultation. A written estimate is given before treatment starts and covers the likely course of care, so nothing begins before you have it in writing. CT and MRI are not performed on site and are arranged by referral to a partner imaging centre.";
 
 /** `#rooms`: the four categories the hospital actually offers, taken from
- *  `features/facilities/data/content`. Only the standard single carries a
- *  figure, because 10,000 LKR is the sole room price the repo publishes. */
+ *  `features/facilities/data/content`. The standard room carries its
+ *  price per day from the 2026 Service Book (page 17). */
 export const roomsHeading = { line1: "Your attendant", line2: "stays with you" };
 /** Sits under the shared amenity list in `#rooms`. */
 export const roomsNote = "Every category, from the wards up, carries the list above as standard.";
@@ -341,7 +341,7 @@ export const roomTiles: RoomTile[] = [
     tier: "One bed",
     name: "Standard Rooms",
     desc: "Bystander bed and chair, air conditioning, television and the medical support the room needs. The usual choice for a short procedure.",
-    extra: "From 10,000 LKR",
+    extra: "12,500 LKR a day",
   },
   {
     tier: "Two or three beds",
@@ -436,7 +436,7 @@ export const faq: InternationalFaq[] = [
   },
   {
     q: "How much will it cost?",
-    a: "A written estimate is given before treatment starts, covering the likely course of care, and nothing begins until you have it. What it comes to depends on the operation, the room you choose and how long you stay, which is why the estimate follows your reports rather than a price list. Rooms start at 10,000 LKR a night for a standard single, and outpatients get a 10% discount on laboratory charges.",
+    a: "A written estimate is given before treatment starts, covering the likely course of care, and nothing begins until you have it. What it comes to depends on the operation, the room you choose and how long you stay, which is why the estimate follows your reports rather than a price list. Rooms start at 9,500 LKR a day for a ward bed and 12,500 LKR for a standard room, and outpatients get a 10% discount on laboratory charges.",
   },
   {
     q: "Can I have a CT or MRI scan here?",

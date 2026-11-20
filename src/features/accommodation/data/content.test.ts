@@ -25,15 +25,15 @@ test("every room type has photos, amenities, a price and a short label", () => {
   }
 });
 
-// The repo publishes exactly one room price. The other three categories are
-// quoted on request, and inventing numbers for them would be inventing a price
-// list. features/facilities/data/content.ts is the authority for this.
-test("only the standard room carries a figure; the rest are on request", () => {
+// Every room carries the price per day the hospital's 2026 Service Book
+// prints (page 17; owner confirmed 2026-11-20). Before the book the site
+// published only the standard room's price and quoted the rest on request.
+test("every room carries the Service Book's price per day", () => {
   const byId = new Map(roomTypes.map((r) => [r.id, r]));
-  assert.equal(byId.get("standard")?.price, "From 10,000 LKR");
-  for (const id of ["deluxe", "super-deluxe", "wards"]) {
-    assert.equal(byId.get(id)?.price, "On request");
-  }
+  assert.equal(byId.get("wards")?.price, "9,500 LKR a day");
+  assert.equal(byId.get("standard")?.price, "12,500 LKR a day");
+  assert.equal(byId.get("deluxe")?.price, "15,500 LKR a day");
+  assert.equal(byId.get("super-deluxe")?.price, "19,500 LKR a day");
 });
 
 // FIX 4: the #book contact rail used to be hardcoded inside BookSection.tsx,
@@ -112,12 +112,15 @@ const routeMetadataDescription = metadataDescriptionMatch[1];
 // price-bearing string (a fabricated figure, a stray currency, a typo that
 // duplicates the real price under different phrasing, or a price smuggled into
 // a heading, an intro, or the route's metadata) still fails.
-test("no price figure appears anywhere except the standard room's own and the hero fact restating it", () => {
+test("no price figure appears anywhere except the four room prices and the hero fact restating the lowest", () => {
   const priceRegex = /LKR|Rs\.?\s*\d/;
   const found = new Set(
     [...allCopy, routeMetadataDescription].filter((value) => priceRegex.test(value))
   );
-  assert.deepEqual(found, new Set(["From 10,000 LKR", "10,000 LKR"]));
+  assert.deepEqual(
+    found,
+    new Set(["9,500 LKR a day", "12,500 LKR a day", "15,500 LKR a day", "19,500 LKR a day", "9,500 LKR"])
+  );
 });
 
 test("ten inpatient specialties", () => {

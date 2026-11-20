@@ -17,7 +17,7 @@ export const __review = { status: "draft", reviewer: null, date: null } as const
 export const pageMetadata = {
   home: {
     description:
-      "මීගමුව, ශ්‍රී ලංකාවේ ඇමරිකානු ප්‍රමිතියේ සෞඛ්‍ය සේවා. 24/7 OPD, Emergency, Pharmacy, House Doctors, සහ Digital X-ray, 10,000 LKR සිට ආරම්භ වන රෝගී කාමර සමඟ.",
+      "මීගමුව, ශ්‍රී ලංකාවේ ඇමරිකානු ප්‍රමිතියේ සෞඛ්‍ය සේවා. නොමිලේ OPD, 24/7 Emergency සහ Pharmacy, House Doctors, සහ Digital X-ray, දිනකට 9,500 LKR සිට ආරම්භ වන රෝගී කාමර සමඟ.",
   },
   aboutUs: {
     description:

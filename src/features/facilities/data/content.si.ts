@@ -117,7 +117,7 @@ export const buildingZones = [
   {
     name: "Clinics සහ Outpatients",
     contents:
-      "සෑම විශේෂඥතාවකටම වෙන් වූ Consulting Suites, පැය 24ම විවෘත Outpatient අංශයක් සහ Physiotherapy.",
+      "සෑම විශේෂඥතාවකටම වෙන් වූ Consulting Suites, Outpatient අංශය සහ Physiotherapy.",
   },
   {
     // Reused verbatim from navigationLabels.si.ts's "Diagnostics" ->
@@ -359,7 +359,7 @@ export const support = [
   },
   {
     name: "Outpatient අංශය",
-    desc: "පැය 24ම විවෘත Consulting Suites, ඔබ එන ඕන වෙලාවකදීම හදිසි අංශයේ පිවිසුම අසලින්ම Staff කර.",
+    desc: "හදිසි අංශයේ පිවිසුම අසලින්ම Consulting Suites, දවල් කාලයේ විවෘතයි; ඉන් පසු හදිසි අංශය ඔබව බලනවා.",
   },
   {
     name: "Pharmacy",

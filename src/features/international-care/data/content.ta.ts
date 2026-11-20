@@ -14,7 +14,7 @@
 // "கொழும்பு", the same Tamil names contact's, pharmacy's and network's own
 // content.ta.ts already use for the first of them.
 //
-// "10,000 LKR" keeps its currency code and figure exactly as content.ts
+// "12,500 LKR" keeps its currency code and figure exactly as content.ts
 // prints them: a currency code is not a word with a Tamil equivalent, the
 // same way a phone number or an href is not.
 //
@@ -211,8 +211,8 @@ export const estimateNote =
   "தங்கும் காலம் உங்கள் Surgeon எதிர்பார்ப்பது, ஒரு உத்தரவாதம் அல்ல, உங்கள் Consultation இல் உறுதி செய்யப்படும். சிகிச்சை தொடங்குவதற்கு முன் ஒரு எழுத்துப்பூர்வ Estimate வழங்கப்படும், சாத்தியமான சிகிச்சை போக்கை உள்ளடக்கியது, அது எழுத்துப்பூர்வமாக கிடைக்கும் வரை எதுவும் தொடங்காது. CT மற்றும் MRI தளத்தில் செய்யப்படுவதில்லை, ஒரு Partner Imaging Centre க்கு Referral மூலம் ஏற்பாடு செய்யப்படும்.";
 
 /** `#rooms`: the four categories the hospital actually offers, taken from
- *  `features/facilities/data/content`. Only the standard single carries a
- *  figure, because 10,000 LKR is the sole room price the repo publishes. */
+ *  `features/facilities/data/content`. The standard room carries its
+ *  price per day from the 2026 Service Book (page 17). */
 export const roomsHeading = {};
 /** Sits under the shared amenity list in `#rooms`. */
 export const roomsNote = "Wards முதல் மேலாக, ஒவ்வொரு Category இலும் மேலே உள்ள பட்டியல் standard ஆக உள்ளது.";
@@ -237,7 +237,7 @@ export const roomTiles = [
     tier: "ஒரு படுக்கை",
     name: "Standard Rooms",
     desc: "Bystander படுக்கை மற்றும் நாற்காலி, குளிரூட்டி, தொலைக்காட்சி மற்றும் அறைக்குத் தேவையான மருத்துவ ஆதரவு. ஒரு குறுகிய செயல்முறைக்கான வழக்கமான தேர்வு.",
-    extra: "10,000 LKR முதல்",
+    extra: "ஒரு நாளுக்கு 12,500 LKR",
   },
   {
     tier: "இரண்டு அல்லது மூன்று படுக்கைகள்",
@@ -333,7 +333,7 @@ export const faq = [
   },
   {
     q: "எவ்வளவு செலவாகும்?",
-    a: "சிகிச்சை தொடங்குவதற்கு முன் ஒரு எழுத்துப்பூர்வ Estimate வழங்கப்படும், சாத்தியமான சிகிச்சை போக்கை உள்ளடக்கியது, அது கிடைக்கும் வரை எதுவும் தொடங்காது. இது Operation, நீங்கள் தேர்ந்தெடுக்கும் அறை மற்றும் தங்கும் காலத்தைப் பொறுத்தது, அதனால்தான் Estimate ஒரு Price List ஐ விட உங்கள் Reports ஐ பின்பற்றுகிறது. Standard Single அறைகள் இரவுக்கு 10,000 LKR முதல் தொடங்குகின்றன, Outpatients க்கு Laboratory கட்டணங்களில் 10% தள்ளுபடி.",
+    a: "சிகிச்சை தொடங்குவதற்கு முன் ஒரு எழுத்துப்பூர்வ Estimate வழங்கப்படும், சாத்தியமான சிகிச்சை போக்கை உள்ளடக்கியது, அது கிடைக்கும் வரை எதுவும் தொடங்காது. இது Operation, நீங்கள் தேர்ந்தெடுக்கும் அறை மற்றும் தங்கும் காலத்தைப் பொறுத்தது, அதனால்தான் Estimate ஒரு Price List ஐ விட உங்கள் Reports ஐ பின்பற்றுகிறது. ஒரு நாளுக்கு வார்டு படுக்கை 9,500 LKR முதல், Standard அறை 12,500 LKR, Outpatients க்கு Laboratory கட்டணங்களில் 10% தள்ளுபடி.",
   },
   {
     q: "எனக்கு இங்கு CT அல்லது MRI Scan செய்யலாமா?",

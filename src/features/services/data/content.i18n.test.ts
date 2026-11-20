@@ -472,3 +472,14 @@ test("no overlay supplies a value at an untranslatable path", () => {
     }
   }
 });
+
+// The OPD's Sinhala and Tamil must not keep the old 24 hour claim either.
+test("the OPD's translations do not say 24 hours", () => {
+  for (const [name, overlay] of [
+    ["si", clinicsSi],
+    ["ta", clinicsTa],
+  ] as const) {
+    const opd = JSON.stringify(overlay[0]);
+    assert.doesNotMatch(opd, /පැය 24|24 மணி|24\/7/, `${name} outpatient-department still says 24 hours`);
+  }
+});

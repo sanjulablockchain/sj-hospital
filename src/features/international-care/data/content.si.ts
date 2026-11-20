@@ -14,7 +14,7 @@
 // same Sinhala names contact's, pharmacy's and network's own content.si.ts
 // already use for the first of them.
 //
-// "10,000 LKR" keeps its currency code and figure exactly as content.ts
+// "12,500 LKR" keeps its currency code and figure exactly as content.ts
 // prints them: a currency code is not a word with a Sinhala equivalent, the
 // same way a phone number or an href is not.
 //
@@ -214,8 +214,8 @@ export const estimateNote =
   "රැඳී සිටින කාලය ඔබේ Surgeon බලාපොරොත්තු වන එකයි, පොරොන්දුවක් නෙවෙයි, ඔබේ Consultation එකේදී තහවුරු කරගනී. Treatment එක ආරම්භ වීමට කලින් ලිඛිත Estimate එකක් ලැබෙනවා, ඇතිවිය හැකි සත්කාර ක්‍රියාවලිය ආවරණය කරමින්, ඒක ලිඛිතව ලැබෙන තෙක් කිසිවක් ආරම්භ වන්නේ නෑ. CT සහ MRI මෙතන කරන්නේ නෑ, Partner Imaging Centre එකකට Referral එකකින් සකසනවා.";
 
 /** `#rooms`: the four categories the hospital actually offers, taken from
- *  `features/facilities/data/content`. Only the standard single carries a
- *  figure, because 10,000 LKR is the sole room price the repo publishes. */
+ *  `features/facilities/data/content`. The standard room carries its
+ *  price per day from the 2026 Service Book (page 17). */
 export const roomsHeading = {};
 /** Sits under the shared amenity list in `#rooms`. */
 export const roomsNote = "සෑම Category එකකම, Wards වල සිටම, ඉහත ලැයිස්තුව සම්මතව තියෙනවා.";
@@ -240,7 +240,7 @@ export const roomTiles = [
     tier: "එක ඇඳක්",
     name: "Standard Rooms",
     desc: "Bystander ඇඳක් සහ පුටුවක්, වායු සමීකරණය, රූපවාහිනිය සහ කාමරයට අවශ්‍ය වෛද්‍ය සහාය. කෙටි ක්‍රියාපටිපාටියකට සාමාන්‍ය තේරීම.",
-    extra: "10,000 LKR සිට",
+    extra: "දිනකට 12,500 LKR",
   },
   {
     tier: "ඇඳ දෙකක් හෝ තුනක්",
@@ -336,7 +336,7 @@ export const faq = [
   },
   {
     q: "කොපමණ මුදලක් වැයවේද?",
-    a: "Treatment එක ආරම්භ වීමට කලින් ලිඛිත Estimate එකක් ලැබෙනවා, ඇතිවිය හැකි සත්කාර ක්‍රියාවලිය ආවරණය කරමින්, ඒක ලැබෙන තෙක් කිසිවක් ආරම්භ වන්නේ නෑ. එය Operation එක, ඔබ තෝරාගන්නා කාමරය සහ රැඳී සිටින කාලය මතයි, ඒකයි Estimate එක Price List එකකට වඩා ඔබේ Reports අනුව එන්නේ. Standard Single එකකට කාමර 10,000 LKR සිට ආරම්භ වේ, Outpatients ලාට Laboratory ගාස්තු වලින් 10%ක වට්ටමක්.",
+    a: "Treatment එක ආරම්භ වීමට කලින් ලිඛිත Estimate එකක් ලැබෙනවා, ඇතිවිය හැකි සත්කාර ක්‍රියාවලිය ආවරණය කරමින්, ඒක ලැබෙන තෙක් කිසිවක් ආරම්භ වන්නේ නෑ. එය Operation එක, ඔබ තෝරාගන්නා කාමරය සහ රැඳී සිටින කාලය මතයි, ඒකයි Estimate එක Price List එකකට වඩා ඔබේ Reports අනුව එන්නේ. දිනකට වාට්ටු ඇඳක් 9,500 LKR සිට සහ Standard කාමරයක් 12,500 LKR, Outpatients ලාට Laboratory ගාස්තු වලින් 10%ක වට්ටමක්.",
   },
   {
     q: "මට මෙතන CT හෝ MRI Scan එකක් කරගන්න පුළුවන්ද?",

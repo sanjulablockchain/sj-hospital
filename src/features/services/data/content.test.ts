@@ -203,3 +203,13 @@ test("no excerpt claims hospital standards or accreditation", () => {
     for (const why of s.book?.why ?? []) assert.doesNotMatch(why, /standard|accredit|certif/i, `${s.slug}: ${why}`);
   }
 });
+
+// The 2026 Service Book prints OPD hours of 7.00 AM to 6.00 PM (owner
+// confirmed, 2026-11-20); the page used to say 24 hours throughout.
+test("the OPD states the Service Book's hours and never 24 hours", () => {
+  const opd = ALL.find((s) => s.slug === "outpatient-department")!;
+  assert.equal(opd.hours, "7.00 AM to 6.00 PM");
+  for (const [label, v] of strings(opd)) {
+    assert.doesNotMatch(v, /24 hours|24\/7|around the clock|every hour|at any hour/i, `${label}: ${v}`);
+  }
+});

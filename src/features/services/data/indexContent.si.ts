@@ -20,7 +20,7 @@ export const __review = { status: "draft", reviewer: null, date: null } as const
 
 export const tickerItems: readonly string[] = [
   "විශිෂ්ඨතා මධ්‍යස්ථාන නවයක්",
-  "Emergency සහ OPD හැම වේලාවකම",
+  "OPD පෙ.ව. 7.00 සිට ප.ව. 6.00 දක්වා",
   "රසායනාගාරය පැය 24ම විවෘතයි",
   "Digital X-ray විනාඩි 60කින් Report කරයි",
   "වෛද්‍යවරු දෙදෙනෙක් හැම Report එකක්ම කියවනවා",
@@ -266,7 +266,7 @@ export const facilityCards = [
     body: "පැය 24ම විවෘත OPD එකක්, ඔබ ඕනෑම වේලාවක ආවත් Emergency පිවිසුම ලඟින්ම සේවකයින් සිටිනවා.",
   },
   {
-    body: "රාත්‍රියකට LKR 10,000 සිට Private සහ Semi-Private කාමර, උසස් Dependency සත්කාරය සඳහා සම්පූර්ණ ICU එකක් ළඟදීම විවෘත වෙනවා.",
+    body: "දිනකට LKR 9,500 සිට වාට්ටු සහ පුද්ගලික කාමර, උසස් Dependency සත්කාරය සඳහා සම්පූර්ණ ICU එකක් ළඟදීම විවෘත වෙනවා.",
   },
   {
     body: "අපගේම Ambulance රථ පිරිසක් සේවය කරන වහලක් සහිත පිවිසුමක්, Bandaranaike International සිට විනාඩි දහයයි.",

@@ -120,7 +120,7 @@ export const heroFacts: SpecRow[] = [
   { k: "Floors", v: "Six, purpose built" },
   { k: "Cleaning cycle", v: "Every two hours" },
   { k: "Laboratory", v: "Open 24 hours" },
-  { k: "Rooms from", v: "10,000 LKR" },
+  { k: "Rooms from", v: "9,500 LKR" },
 ];
 
 export const tickerItems: string[] = [
@@ -180,7 +180,7 @@ export const buildingZones: BuildingZone[] = [
     no: "02",
     name: "Clinics & outpatients",
     contents:
-      "Consulting suites for every specialty, an outpatient department open 24 hours, and physiotherapy.",
+      "Consulting suites for every specialty, the outpatient department and physiotherapy.",
   },
   {
     no: "03",
@@ -332,9 +332,9 @@ export const careNotes: { title: string; body: string }[] = [
 
 /**
  * The four categories the hospital actually offers, taken from
- * `features/accommodation/components/RoomTypes`. Only the entry private room
- * carries a figure, because "private and semi private rooms from 10,000 LKR"
- * is the sole room price the repo publishes.
+ * `features/accommodation/components/RoomTypes`, each with the price per day
+ * the hospital's 2026 Service Book prints (page 17; owner confirmed
+ * 2026-11-20).
  */
 export const roomsHeading: Heading2 = { line1: "Four ways to", line2: "spend the night" };
 export const roomsIntro =
@@ -346,26 +346,26 @@ export const roomRows: RoomRow[] = [
     occupancy: "1 bed",
     amenities:
       "Bystander bed, sofa and chair, pantry with tea station, coffee table, kettle, morning papers, separate steward service",
-    price: "On request",
+    price: "19,500 LKR a day",
   },
   {
     name: "Deluxe Rooms",
     occupancy: "1 bed",
     amenities: "Bystander bed and sofa, pantry area with tea station, coffee table, hot water kettle",
-    price: "On request",
+    price: "15,500 LKR a day",
   },
   {
     name: "Standard Rooms",
     occupancy: "1 bed",
     amenities: "Bystander bed and chair, air conditioning, television, necessary medical support",
-    price: "From 10,000 LKR",
+    price: "12,500 LKR a day",
   },
   {
     name: "Wards",
     occupancy: "2 or 3 beds",
     amenities:
       "Individual bystander beds and chairs, bed separators for privacy, air conditioning, day visiting",
-    price: "On request",
+    price: "9,500 LKR a day",
   },
 ];
 
@@ -482,7 +482,7 @@ export const support: SupportRow[] = [
   {
     no: "04",
     name: "Outpatient department",
-    desc: "Consulting suites open 24 hours, staffed alongside the emergency entrance whenever you arrive.",
+    desc: "Consulting suites beside the emergency entrance, open through the day; after hours, the emergency department sees you.",
   },
   {
     no: "05",

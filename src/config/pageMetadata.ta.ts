@@ -17,7 +17,7 @@ export const __review = { status: "draft", reviewer: null, date: null } as const
 export const pageMetadata = {
   home: {
     description:
-      "நீர்கொழும்பு, இலங்கையில் அமெரிக்க தர சுகாதார சேவை. 24/7 OPD, Emergency, Pharmacy, House Doctors, மற்றும் Digital X-ray, 10,000 LKR முதல் தொடங்கும் உள்நோயாளர் அறைகளுடன்.",
+      "நீர்கொழும்பு, இலங்கையில் அமெரிக்க தர சுகாதார சேவை. இலவச OPD, 24/7 Emergency மற்றும் Pharmacy, House Doctors, மற்றும் Digital X-ray, ஒரு நாளுக்கு 9,500 LKR முதல் தொடங்கும் உள்நோயாளர் அறைகளுடன்.",
   },
   aboutUs: {
     description:

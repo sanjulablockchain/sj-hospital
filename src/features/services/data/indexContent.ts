@@ -46,7 +46,7 @@ export type PackageTier = {
  */
 export const tickerItems: readonly string[] = [
   "Nine centres of excellence",
-  "Emergency and OPD around the clock",
+  "OPD 7.00 AM to 6.00 PM",
   "Laboratory open 24 hours",
   "Digital X-ray read within the hour",
   "Two doctors read every report",
@@ -408,7 +408,7 @@ export const facilityCards: FacilityCard[] = [
   {
     index: "03",
     title: "Wards, rooms & ICU",
-    body: "Private and semi-private rooms from 10,000 LKR a night, with a full ICU for higher-dependency care opening soon.",
+    body: "Wards and private rooms from 9,500 LKR a day, with a full ICU for higher-dependency care opening soon.",
     linkLabel: "See intensive & critical care",
     href: "/services/intensive-critical-care",
     photo: "/images/doctors.jpg",

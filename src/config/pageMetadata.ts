@@ -60,7 +60,7 @@ export const pageMetadata = {
   home: {
     title: "St. Joseph Hospital Negombo | To Live Is a Privilege",
     description:
-      "US-standard healthcare in Negombo, Sri Lanka. 24/7 OPD, Emergency, Pharmacy, in-house doctors, and digital X-ray, with inpatient rooms from 10,000 LKR.",
+      "US-standard healthcare in Negombo, Sri Lanka. A free OPD, 24/7 Emergency and Pharmacy, in-house doctors, and digital X-ray, with inpatient rooms from 9,500 LKR a day.",
   },
   aboutUs: {
     title: "About Us | St. Joseph Hospital Negombo",

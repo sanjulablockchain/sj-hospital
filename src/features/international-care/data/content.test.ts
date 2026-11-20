@@ -186,12 +186,15 @@ test("the room categories are the four the hospital actually offers", () => {
   );
 });
 
-test("10,000 LKR is the only price quoted anywhere on the page", () => {
+// Room prices are the 2026 Service Book's per day (page 17; owner confirmed
+// 2026-11-20): the ward bed and the standard room are the two this page
+// quotes, and no other figure appears.
+test("the only prices quoted are the Service Book's ward and standard room rates", () => {
   const prices = allCopy.match(/\b\d{1,3},\d{3}\b/g) ?? [];
-  assert.deepEqual([...new Set(prices)], ["10,000"]);
+  assert.deepEqual([...new Set(prices)].sort(), ["12,500", "9,500"]);
   const standard = roomTiles.find((r) => r.name === "Standard Rooms");
   assert.ok(standard);
-  assert.match(standard.extra, /10,000 LKR/);
+  assert.equal(standard.extra, "12,500 LKR a day");
 });
 
 test("only treatments the repo publishes are offered to travelling patients", () => {

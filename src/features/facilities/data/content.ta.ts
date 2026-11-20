@@ -118,7 +118,7 @@ export const buildingZones = [
   {
     name: "Clinics மற்றும் Outpatients",
     contents:
-      "ஒவ்வொரு சிறப்புத் துறைக்கும் Consulting Suites, 24 மணி நேரமும் திறந்திருக்கும் Outpatient துறை மற்றும் Physiotherapy.",
+      "ஒவ்வொரு சிறப்புத் துறைக்கும் Consulting Suites, Outpatient துறை மற்றும் Physiotherapy.",
   },
   {
     // Reused verbatim from navigationLabels.ta.ts's "Diagnostics" ->
@@ -361,7 +361,7 @@ export const support = [
   },
   {
     name: "Outpatient துறை",
-    desc: "24 மணி நேரமும் திறந்திருக்கும் Consulting Suites, நீங்கள் வரும் எந்த நேரமும் அவசரத் துறை நுழைவுக்கு அருகில் Staff உடன்.",
+    desc: "அவசரத் துறை நுழைவுக்கு அருகில் Consulting Suites, பகல் நேரத்தில் திறந்திருக்கும்; அதன் பின் அவசரத் துறை உங்களைப் பார்க்கும்.",
   },
   {
     name: "Pharmacy",
