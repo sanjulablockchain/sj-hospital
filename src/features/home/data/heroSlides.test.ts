@@ -3,7 +3,8 @@ import assert from "node:assert/strict";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { heroSlides, HERO_SLIDE_INTERVAL_MS } from "./heroSlides.ts";
+import { BLUE_SAPPHIRE_SITE_URL, heroSlides, HERO_SLIDE_INTERVAL_MS } from "./heroSlides.ts";
+import { RATNAPURA_SITE_URL } from "../../locations/data/content.ts";
 import { serviceSlugs } from "../../services/data/services.ts";
 
 const REPO = fileURLToPath(new URL("../../../../", import.meta.url));
@@ -48,7 +49,10 @@ test("nine slides in the owner's order, each with a distinct id and a photo on d
   assert.equal(HERO_SLIDE_INTERVAL_MS, 3000);
 });
 
+// The one off-site link is Blue Sapphire Hospital's own site, on the owner's
+// request (2026-11-20).
 test("every slide link is a call or a page on this site, and every fragment names a real section", () => {
+  assert.equal(BLUE_SAPPHIRE_SITE_URL, RATNAPURA_SITE_URL);
   const routes = new Set([...staticRoutes(join(REPO, "src", "app", "[locale]")), "/", ...serviceSlugs.map((slug) => `/services/${slug}`)]);
   // Route → the feature folder whose components render that page's sections.
   const featureOf: Record<string, string> = {
@@ -61,6 +65,7 @@ test("every slide link is a call or a page on this site, and every fragment name
     for (const cta of [s.ctaPrimary, s.ctaSecondary]) {
       if (!cta) continue;
       if (cta.href.startsWith("tel:")) continue;
+      if (cta.href === BLUE_SAPPHIRE_SITE_URL) continue;
       const [path, fragment] = cta.href.split("#");
       assert.ok(routes.has(path), `${s.id}: ${cta.href} is not a route`);
       if (fragment) {

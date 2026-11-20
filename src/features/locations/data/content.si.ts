@@ -34,14 +34,14 @@ export const hero = {
 
 export const tickerItems: readonly string[] = [
   "මීගමුව: Emergency 24/7 විවෘතයි",
-  "රත්නපුර: විස්තර ළඟදීම",
+  "රත්නපුර: 24/7 විවෘතයි",
   "රෝහල් දෙකක්, එක protocol එකක්",
   "Los Angeles, USA සිට කළමනාකරණය",
   "Reception අංකය 0117 84 84 84",
 ];
 
 export const hospitalsIntro =
-  "මීගමුව St. Joseph Hospital දැන් විවෘතයි. රත්නපුර Blue Sapphire Hospital ඊට එකතු වෙනවා; එහි සම්පූර්ණ විස්තර තහවුරු වූ වහාම මෙහි පළ කරනවා.";
+  "රෝහල් දෙකම දිනපතා පැය 24 පුරා විවෘතයි. ඔබට ළඟම රෝහල තෝරන්න, නැත්නම් ඕනෑම එකකට කතා කරන්න; නිවැරදි තැනට අපි ඔබව යොමු කරන්නම්.";
 
 export const hospitals = [
   {
@@ -58,8 +58,11 @@ export const hospitals = [
     name: "Blue Sapphire Hospital",
     city: "රත්නපුර",
     region: "සබරගමුව පළාත",
-    statusLabel: "විස්තර ළඟදීම",
-    body: "අපේ දෙවැනි රෝහල. ලිපිනය, දුරකථන අංක සහ විවෘත වේලාවන් තහවුරු කරමින් සිටින අතර ඒවා මෙහි පළ කරනවා. ඒ තෙක් මීගමුව switchboard එකෙන් උදව් ගන්න පුළුවන්.",
+    statusLabel: "24/7 විවෘතයි",
+    body: "අපේ සහෝදර රෝහල: OPD, channeling, eye care, digital X-ray, Laboratory සහ Pharmacy සේවා, දිනපතා පැය 24 පුරා විවෘතව, මීගමුව මෙන්ම American protocol අනුව ක්‍රියාත්මක වෙනවා.",
+    photoAlt: "අහස පසුබිම් කරගෙන පහළ සිට පෙනෙන රත්නපුර Blue Sapphire Hospital",
+    address: { locality: "රත්නපුර, ශ්‍රී ලංකාව" },
+    facts: [{ label: "විවෘතයි" }, { label: "දුරකථන" }],
   },
 ];
 

@@ -7,12 +7,11 @@
  * utility bar already publish; `content.test.ts` pins them together so the
  * two pages cannot drift apart.
  *
- * Blue Sapphire Hospital in Ratnapura is listed as `pending`: the hospital has
- * not yet supplied its address, phone numbers or opening hours, and the card
- * says so rather than carrying a guess. When they arrive, fill in `address`,
- * `facts` and `actions`, add a photograph, and flip `status` to `open`;
- * `content.test.ts` refuses a `pending` card that carries an address and an
- * `open` card that lacks one, so the switch cannot be half made.
+ * Blue Sapphire Hospital's facts (address, phone, hours) are the ones its own
+ * site, bluesapphirehospitals.lk, publishes (read 2026-11-20), and its
+ * photograph is the building front from that site's own library.
+ * `content.test.ts` pins them, and still refuses a `pending` card that
+ * carries an address or an `open` card that lacks one.
  */
 import type { ContactRow, HeroFact, Hospital } from "../types";
 
@@ -24,6 +23,16 @@ import type { ContactRow, HeroFact, Hospital } from "../types";
  */
 export const NEGOMBO_DIRECTIONS_URL =
   "https://www.google.com/maps/dir/?api=1&destination=7.206699127328975,79.8453343846586";
+
+/**
+ * Blue Sapphire Hospital's published phone number and the directions link its
+ * own site uses (an address search: the site gives no coordinates).
+ */
+export const RATNAPURA_PHONE_LABEL = "045 250 0500";
+export const RATNAPURA_TEL = "tel:+94452500500";
+export const RATNAPURA_DIRECTIONS_URL =
+  "https://www.google.com/maps/search/?api=1&query=No.%20189%20Colombo%20Road%2C%20Ratnapura%2C%20Sri%20Lanka";
+export const RATNAPURA_SITE_URL = "https://bluesapphirehospitals.lk";
 
 export const hero = {
   strapline: "Where to find us",
@@ -43,7 +52,7 @@ export const heroStandfirst =
 /** The ticker under the hero. The switchboard is the fact the utility bar owns. */
 export const tickerItems = [
   "Negombo: emergency open 24/7",
-  "Ratnapura: details to follow",
+  "Ratnapura: open 24/7",
   "Two hospitals, one protocol",
   "Managed from Los Angeles, USA",
   "Reception 0117 84 84 84",
@@ -52,7 +61,7 @@ export const tickerItems = [
 export const heroFacts: HeroFact[] = [
   { k: "Hospitals", v: "Two" },
   { k: "Negombo", v: "Emergency 24/7" },
-  { k: "Ratnapura", v: "Details to follow" },
+  { k: "Ratnapura", v: "Open 24/7" },
   { k: "Managed from", v: "Los Angeles, USA" },
 ];
 
@@ -64,7 +73,7 @@ export const sectionEyebrows = {
 export const hospitalsHeading = { line1: "Find the hospital", line2: "nearest you" };
 
 export const hospitalsIntro =
-  "St. Joseph Hospital in Negombo is open now. Blue Sapphire Hospital in Ratnapura joins it, with its full details published here as soon as they are confirmed.";
+  "Both hospitals are open every hour of every day. Pick the one nearest you, or call either and we will point you to the right door.";
 
 export const hospitals: Hospital[] = [
   {
@@ -94,11 +103,21 @@ export const hospitals: Hospital[] = [
     name: "Blue Sapphire Hospital",
     city: "Ratnapura",
     region: "Sabaragamuwa Province",
-    status: "pending",
-    statusLabel: "Details coming soon",
-    body: "Our second hospital. We are confirming the address, phone numbers and opening hours and will publish them here. Until then, the Negombo switchboard can help.",
-    facts: [],
-    actions: [{ label: "Call the Negombo switchboard", href: "tel:+94117848484" }],
+    status: "open",
+    statusLabel: "Open 24/7",
+    body: "Our sister hospital: OPD, channeling, eye care, digital X-ray, laboratory and pharmacy, open every hour of every day and run to the same American protocol as Negombo.",
+    photo: "/images/locations/ratnapura-building-front.webp",
+    photoAlt: "Blue Sapphire Hospital in Ratnapura, seen from below against the sky",
+    address: { street: "No. 189 Colombo Road", locality: "Ratnapura, Sri Lanka" },
+    facts: [
+      { label: "Open", value: "24/7" },
+      { label: "Phone", value: RATNAPURA_PHONE_LABEL },
+    ],
+    actions: [
+      { label: "Get directions", href: RATNAPURA_DIRECTIONS_URL, external: true },
+      { label: "Call the hospital", href: RATNAPURA_TEL },
+      { label: "Hospital website", href: RATNAPURA_SITE_URL, external: true },
+    ],
   },
 ];
 
@@ -108,7 +127,8 @@ export const helpBody =
   "Call or message us and we will point you to the right hospital, the right clinic and the right time to come in.";
 
 export const contactRows: ContactRow[] = [
-  { label: "Call the hospital", value: "0117 84 84 84", href: "tel:+94117848484", glyph: "phone" },
+  { label: "Call Negombo", value: "0117 84 84 84", href: "tel:+94117848484", glyph: "phone" },
+  { label: "Call Ratnapura", value: RATNAPURA_PHONE_LABEL, href: RATNAPURA_TEL, glyph: "phone" },
   { label: "WhatsApp us", value: "074 222 333 4", href: "https://wa.me/94742223334", glyph: "arrow" },
   { label: "Book a doctor", href: "/e-channeling", glyph: "arrow", internal: true },
   { label: "Contact page", href: "/contact-us", glyph: "arrow", internal: true },

@@ -8,7 +8,8 @@ import { assertTranslationParity, stringPaths } from "../../../lib/i18n/stringPa
 /**
  * What this feature refuses to translate.
  *
- * `NEGOMBO_DIRECTIONS_URL` is a URL. `href` is every anchor target. `id` is
+ * `NEGOMBO_DIRECTIONS_URL` is a URL, and the four `RATNAPURA_*` constants are
+ * Blue Sapphire Hospital's phone number, tel: link, directions and site URL. `href` is every anchor target. `id` is
  * the card's element id and the anchor the header links to. `photo` is a
  * file path. `status` is the string the card component switches on, never
  * shown. `glyph` is which character a `#help` row shows, a name the code
@@ -20,6 +21,7 @@ import { assertTranslationParity, stringPaths } from "../../../lib/i18n/stringPa
 function isUntranslatable(path: string): boolean {
   return (
     path === "NEGOMBO_DIRECTIONS_URL" ||
+    path.startsWith("RATNAPURA_") ||
     path.endsWith(".href") ||
     path.endsWith(".id") ||
     path.endsWith(".photo") ||

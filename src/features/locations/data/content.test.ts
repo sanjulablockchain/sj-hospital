@@ -2,6 +2,9 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   NEGOMBO_DIRECTIONS_URL,
+  RATNAPURA_DIRECTIONS_URL,
+  RATNAPURA_SITE_URL,
+  RATNAPURA_TEL,
   contactRows,
   helpBody,
   helpHeading,
@@ -69,7 +72,8 @@ test("the Negombo card repeats the contact page's own facts", () => {
 
 test("the help rail uses the hospital's published numbers", () => {
   const byLabel = new Map(contactRows.map((row) => [row.label, row]));
-  assert.equal(byLabel.get("Call the hospital")?.href, "tel:+94117848484");
+  assert.equal(byLabel.get("Call Negombo")?.href, "tel:+94117848484");
+  assert.equal(byLabel.get("Call Ratnapura")?.href, RATNAPURA_TEL);
   assert.equal(byLabel.get("WhatsApp us")?.href, "https://wa.me/94742223334");
   assert.equal(byLabel.get("Book a doctor")?.href, "/e-channeling");
   assert.equal(byLabel.get("Book a doctor")?.internal, true);
@@ -77,7 +81,7 @@ test("the help rail uses the hospital's published numbers", () => {
 
 // ---- Pending means pending ----
 
-// Blue Sapphire Hospital is listed before its details are known. A `pending`
+// A hospital is listed `pending` until its details are known. A `pending`
 // card must not carry an address, a phone fact or a photograph (there is
 // nothing to back one yet), and an `open` card must carry all three, so the
 // switch from one to the other cannot be half made.
@@ -97,17 +101,31 @@ test("an open card has its details and a pending card has none", () => {
   }
 });
 
-test("the Ratnapura card is still pending", () => {
+// Blue Sapphire Hospital's own site (bluesapphirehospitals.lk, read
+// 2026-11-20) is where these facts come from; a change here should start
+// with a change there.
+test("the Ratnapura card carries Blue Sapphire Hospital's published details", () => {
   const ratnapura = hospitals.find((h) => h.id === "ratnapura");
   assert.ok(ratnapura, "no Ratnapura card");
   assert.equal(ratnapura.name, "Blue Sapphire Hospital");
-  assert.equal(ratnapura.status, "pending");
+  assert.equal(ratnapura.status, "open");
+  assert.deepEqual(ratnapura.address, { street: "No. 189 Colombo Road", locality: "Ratnapura, Sri Lanka" });
+  assert.equal(RATNAPURA_TEL, "tel:+94452500500");
+  const facts = new Map(ratnapura.facts.map((f) => [f.label, f.value]));
+  assert.equal(facts.get("Phone"), "045 250 0500");
+  assert.equal(facts.get("Open"), "24/7");
+  const hrefs = ratnapura.actions.map((a) => a.href);
+  assert.ok(hrefs.includes(RATNAPURA_DIRECTIONS_URL), "no directions link");
+  assert.ok(hrefs.includes(RATNAPURA_TEL), "no tel: link");
+  assert.ok(hrefs.includes(RATNAPURA_SITE_URL), "no link to the hospital's own site");
 });
 
 // ---- Wiring ----
 
 // The header's Locations menu deep links to `/locations#<id>`; a card renamed
-// here would leave the menu pointing at nothing.
+// here would leave the menu pointing at nothing. Ratnapura is the exception:
+// its tile goes to Blue Sapphire Hospital's own site instead (owner's
+// request, 2026-11-20), so it has no deep link to check.
 test("every hospital the header links to is a card on this page, and vice versa", () => {
   const linked = megaNavLinks()
     .map((l) => l.href)
@@ -117,8 +135,9 @@ test("every hospital the header links to is a card on this page, and vice versa"
     .sort();
   assert.deepEqual(
     linked,
-    hospitals.map((h) => h.id).sort()
+    hospitals.map((h) => h.id).filter((id) => id !== "ratnapura").sort()
   );
+  assert.ok(megaNavLinks().some((l) => l.href === RATNAPURA_SITE_URL), "the header has no Blue Sapphire link");
 });
 
 test("card ids are unique and usable as element ids", () => {

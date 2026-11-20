@@ -4,9 +4,9 @@ import type { FooterColumn } from "@/components/layout/ThemedFooter";
 // tags, so the browser's same-document fragment navigation scrolls rather than
 // reloading the route), absolute paths for everything that lives elsewhere.
 //
-// The header's Locations menu deep links to `#negombo` and `#ratnapura`, and
+// The header's Locations menu deep links to `#negombo` (Ratnapura goes to its own site), and
 // megaNavigation.test.ts only accepts an anchor some footer vouches for, so
-// the two hospital rows here are what let the menu reach each card directly.
+// the Negombo row here is what lets the menu reach that card directly.
 export const locationsFooterColumns: FooterColumn[] = [
   {
     heading: "Locations",

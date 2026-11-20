@@ -12,6 +12,7 @@ photography or a render supplied by the client.
 | `public/images/network/logos/laipt.png` | [LA Intensive Pediatric Therapy](https://laipt.org) | N/A (company logo, not a photograph) | Official mark, taken from the company's own site. Group company logo, shown as published. |
 | `public/images/network/logos/human-compass.png` | [Human Compass MSO](https://humancompassmso.com) | N/A (company logo, not a photograph) | Official mark, taken from the company's own site. Group company logo, shown as published. |
 | `public/images/network/logos/serendib-healthways.png` | User's local brand folder (`C:\Users\User\Pictures\Logo\serendib-logo.png`) | N/A (company logo, not a photograph) | Official mark, supplied from the hospital's own logo library. Group company logo, shown as published. |
+| `public/images/locations/ratnapura-building-front.webp` | [Blue Sapphire Hospital](https://bluesapphirehospitals.lk) (`/images/pages/ratnapura-building-front.webp`) | Blue Sapphire Hospital's own photography | Sister hospital's own photograph of its building, taken from its site on 2026-11-20. The site's entrance photo was not used: it still shows the building's earlier "Arya Hospital" sign. |
 
 ## Adding to this list
 
