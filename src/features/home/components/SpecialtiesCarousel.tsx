@@ -6,6 +6,8 @@ import { useId, useState } from "react";
 import { useScrollParallax } from "@/hooks/useScrollParallax";
 import type { Locale } from "@/lib/i18n/locales";
 import { localeHref } from "@/lib/i18n/paths";
+import { ComingSoonBadge } from "@/components/ui/ComingSoonBadge";
+import { isComingSoonHref } from "@/config/comingSoon";
 import type { SpecialtyTab } from "../data/content";
 import { HomeIcon } from "./HomeIcon";
 import { pillButton, ArrowRight } from "./primitives";
@@ -133,9 +135,10 @@ export function SpecialtiesCarousel({
                         key={link.href}
                         href={localeHref(link.href, locale)}
                         tabIndex={active ? undefined : -1}
-                        className="rounded-full bg-[var(--home-surface)] px-3 py-2 text-[13.5px] font-bold text-[var(--home-body)] transition-colors hover:bg-[var(--home-brand)] hover:text-white"
+                        className="inline-flex items-center gap-2 rounded-full bg-[var(--home-surface)] px-3 py-2 text-[13.5px] font-bold text-[var(--home-body)] transition-colors hover:bg-[var(--home-brand)] hover:text-white"
                       >
                         {link.title}
+                        {isComingSoonHref(link.href) && <ComingSoonBadge />}
                       </Link>
                     ))}
                   </div>

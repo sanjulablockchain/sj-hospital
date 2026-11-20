@@ -6,6 +6,8 @@ import { useId, useRef, useState } from "react";
 import type { KeyboardEvent } from "react";
 import { useScrollParallax } from "@/hooks/useScrollParallax";
 import { localeHref } from "@/lib/i18n/paths";
+import { ComingSoonBadge } from "@/components/ui/ComingSoonBadge";
+import { isComingSoonHref } from "@/config/comingSoon";
 import type { Locale } from "@/lib/i18n/locales";
 import type { NetworkNode } from "../data/network";
 
@@ -144,8 +146,9 @@ export function NetworkAccordion({
                 isActive ? "animate-sj-fade-slow z-20 opacity-100 [animation-delay:200ms]" : "opacity-0"
               }`}
             >
-              <span className="text-[12px] font-extrabold tracking-[0.2em] text-[#9FD6F5] uppercase">
+              <span className="flex flex-wrap items-center gap-3 text-[12px] font-extrabold tracking-[0.2em] text-[#9FD6F5] uppercase">
                 {node.index} / {node.location}
+                {isComingSoonHref(node.href) && <ComingSoonBadge onDark />}
               </span>
               <h3 className="font-display m-0 wrap-break-word text-[clamp(26px,2.6vw,38px)] leading-[1.04] font-extrabold tracking-[-0.02em] text-white">
                 {node.name}

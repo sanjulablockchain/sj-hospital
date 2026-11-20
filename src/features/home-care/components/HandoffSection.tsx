@@ -1,6 +1,8 @@
 import { LocaleLink } from "@/components/i18n/LocaleLink";
 import { Reveal } from "@/components/ui/Reveal";
 import type { Handoff } from "../types";
+import { ComingSoonBadge } from "@/components/ui/ComingSoonBadge";
+import { isComingSoonHref } from "@/config/comingSoon";
 
 /**
  * `#medicine` and `#telemedicine`: the two bands that summarise and then get
@@ -28,8 +30,9 @@ export function HandoffSection({ id, band }: { id: string; band: Handoff }) {
           form long unbreakable tokens where English would have a space. */}
       <Reveal className="grid grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] gap-x-12 gap-y-8 border border-[var(--home-hairline)] px-9 py-9 max-[899px]:grid-cols-1 max-[640px]:px-6">
         <div>
-          <div className="text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
+          <div className="flex flex-wrap items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[var(--home-accent)] uppercase">
             {band.eyebrow}
+            {isComingSoonHref(band.href) && <ComingSoonBadge size="md" />}
           </div>
           <h2 className="font-display wrap-break-word mt-4 text-[clamp(28px,3vw,42px)] leading-[1.02] font-extrabold tracking-[-0.03em] text-[var(--home-heading)] uppercase">
             {band.heading}

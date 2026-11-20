@@ -7,6 +7,8 @@ import { Reveal } from "@/components/ui/Reveal";
 import { RevealStagger } from "@/components/ui/RevealStagger";
 import { GROUPS } from "@/features/services/data/groups";
 import type { Service } from "@/features/services/types";
+import { ComingSoonBadge } from "@/components/ui/ComingSoonBadge";
+import { isComingSoonSlug } from "@/config/comingSoon";
 
 /** The translatable copy this client component needs, passed as a prop rather than imported. */
 type DirectoryCopy = {
@@ -193,6 +195,11 @@ function DirectoryRow({ service, index, isOpen, onToggle, idPrefix, readMoreLabe
         </span>
         <span className="font-display wrap-break-word text-[clamp(18px,1.8vw,23px)] leading-[1.15] font-semibold tracking-[-0.02em] text-[var(--home-heading)]">
           {service.directoryTitle}
+          {isComingSoonSlug(service.slug) && (
+            <span className="ml-2.5 inline-block align-middle">
+              <ComingSoonBadge />
+            </span>
+          )}
         </span>
         <span className="hidden text-[13px] font-bold tracking-[0.05em] text-[var(--home-muted)] uppercase min-[900px]:block">
           {service.hours}
