@@ -113,7 +113,7 @@ function HospitalCard({ hospital }: { hospital: Hospital }) {
           )}
 
           {hospital.facts.length > 0 && (
-            <dl className="mt-6 grid grid-cols-[repeat(3,minmax(0,1fr))] gap-px border border-[var(--home-hairline)] bg-[var(--home-hairline)] max-[640px]:grid-cols-1">
+            <dl className="mt-6 grid grid-cols-1 gap-px border border-[var(--home-hairline)] bg-[var(--home-hairline)] min-[641px]:grid-flow-col min-[641px]:auto-cols-fr min-[641px]:grid-cols-none">
               {hospital.facts.map((fact) => (
                 <div key={fact.label} className="min-w-0 bg-[var(--home-surface)] px-4 py-3.5">
                   <dt className="text-[11px] font-bold tracking-[0.16em] text-[var(--home-muted)] uppercase">

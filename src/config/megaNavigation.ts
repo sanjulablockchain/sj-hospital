@@ -291,9 +291,8 @@ const about: MegaNavMenu = {
 };
 
 /**
- * The group's hospitals, one tile each. Blue Sapphire Hospital in Ratnapura
- * is listed before its address, phone and hours are known: the page it points
- * at says so plainly, and the tile fills in once the hospital confirms them.
+ * The group's hospitals, one tile each, deep linking to its card on
+ * /locations.
  * Two columns rather than three, so `MegaNavPanel` sizes the grid from the
  * column count instead of assuming the tile menus always have six entries.
  */
@@ -318,7 +317,7 @@ const locations: MegaNavMenu = {
         {
           label: "Blue Sapphire Hospital",
           href: "/locations#ratnapura",
-          description: "Ratnapura. Address and hours to follow",
+          description: "Ratnapura. Open 24/7",
           icon: "pin",
         },
       ],
