@@ -295,6 +295,10 @@ export const bookSection = {
 
 export const detailChrome = {
   addressLine: "229/10 St. Joseph Street, நீர்கொழும்பு",
+  bookExcerpt: {
+    why: "ஏன் St. Joseph",
+    read: "Service Book இன் பக்கம் {page} ஐப் படியுங்கள்",
+  },
   comingSoonNote: "இந்த சேவை இன்னும் திறக்கப்படவில்லை. அது திறக்கும்போது அறிய எங்களை Call அல்லது WhatsApp செய்யுங்கள்.",
 };
 

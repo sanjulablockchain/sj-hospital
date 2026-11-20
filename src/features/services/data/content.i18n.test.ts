@@ -94,7 +94,30 @@ const MODULES = [
  * `grep -rnE 'label: "(0117|074|\+94|[a-z.]+@)'`, zero hits), so neither
  * needs a value-level exception.
  */
+/**
+ * Book excerpt fact values that are bare figures (a phone number, a room
+ * price): `"<module>:<path>"`. Computed from the English data rather than
+ * listed, so a new excerpt's phone line is covered without editing this test.
+ */
+const BOOK_FIGURES = new Set<string>(
+  Object.entries({
+    emergency: emergencyServices,
+    diagnostics: diagnosticServices,
+    atHome: atHomeServices,
+    surgical: surgicalServices,
+    womenChildren: womenChildrenServices,
+    clinics: clinicServices,
+  }).flatMap(([moduleName, list]) =>
+    list.flatMap((service, i) =>
+      (service.book?.facts ?? []).flatMap((fact, j) =>
+        /^[\d\s,]+(?:LKR)?$/.test(fact.v) ? [`${moduleName}:[${i}].book.facts[${j}].v`] : []
+      )
+    )
+  )
+);
+
 function isUntranslatable(moduleName: string, path: string): boolean {
+  if (BOOK_FIGURES.has(`${moduleName}:${path}`)) return true;
   if (moduleName === "groups") {
     if (path.startsWith("GROUPS[")) return true;
     if (path.startsWith("SERVICE_GROUPS[")) return true;
@@ -281,6 +304,12 @@ function isUntranslatable(moduleName: string, path: string): boolean {
  *   `atHome:[2].facts[3].k` already use.
  */
 const KEEPS_ENGLISH = new Set<string>([
+  // The Service Book's room classes on inpatient-rooms ("Standard", "Deluxe",
+  // "Super Deluxe"): the same brand-style room names `navigationLabels` keeps
+  // English. "Ward", the first row, translates.
+  "clinics:[13].book.facts[1].k",
+  "clinics:[13].book.facts[2].k",
+  "clinics:[13].book.facts[3].k",
   "groups:groupLabels.Clinics",
   "indexContent:pharmacySection.eyebrow",
   "indexContent:centres[3].lead",

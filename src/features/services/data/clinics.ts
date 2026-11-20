@@ -3,6 +3,20 @@ import type { Service } from "../types";
 export const clinicServices: Service[] = [
   {
     slug: "outpatient-department",
+    book: {
+      page: 9,
+      summary: "Walk in and see a doctor. Our outpatient department (OPD) service is free.",
+      facts: [
+        { k: "Hours", v: "7.00 AM to 6.00 PM" },
+        { k: "Where", v: "St. Joseph Street, Negombo" },
+        { k: "Call", v: "031 784 84 84" },
+      ],
+      why: [
+        "No charge for the OPD service.",
+        "Managed and operated by Kids & Teens Medical Group of Los Angeles, USA.",
+        "Laboratory, digital X-ray and pharmacy are on the same site.",
+      ],
+    },
     heroImage: "/images/services/heroes/outpatient-department.jpg",
     heroAlt: "A doctor and patient reviewing medical notes together at a consultation desk",
     title: "Outpatient department (OPD)",
@@ -881,6 +895,22 @@ export const clinicServices: Service[] = [
   },
   {
     slug: "inpatient-rooms",
+    book: {
+      page: 17,
+      summary: "If you need to stay with us, choose the room that suits you and your family. Prices are per day.",
+      facts: [
+        { k: "Ward", v: "9,500 LKR" },
+        { k: "Standard", v: "12,500 LKR" },
+        { k: "Deluxe", v: "15,500 LKR" },
+        { k: "Super Deluxe", v: "19,500 LKR" },
+      ],
+      why: [
+        "Four room types, from ward to super deluxe, so you can choose what fits your family.",
+        "Comfortable patient rooms in a clean hospital.",
+        "Specialist doctors, laboratory and pharmacy are all in the same hospital.",
+        "Managed and operated by Kids & Teens Medical Group of Los Angeles, USA.",
+      ],
+    },
     heroImage: "/images/services/heroes/inpatient-rooms.jpg",
     heroAlt: "A clean, modern hospital room with an adjustable bed",
     title: "Inpatient rooms",

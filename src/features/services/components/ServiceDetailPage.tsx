@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { ServiceHero } from "./detail/ServiceHero";
 import { ServicePicker } from "./detail/ServicePicker";
 import { AboutSection } from "./detail/AboutSection";
+import { BookExcerptSection } from "./detail/BookExcerptSection";
 import { JourneySection } from "./detail/JourneySection";
 import { TeamSection } from "./detail/TeamSection";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
@@ -45,6 +46,13 @@ export async function ServiceDetailPage({ slug, locale }: { slug: string; locale
           locale={locale}
         />
         <AboutSection service={service} content={content} />
+        {service.book && (
+          <BookExcerptSection
+            excerpt={service.book}
+            title={service.title}
+            labels={content.indexContent.detailChrome.bookExcerpt}
+          />
+        )}
         <JourneySection service={service} content={content} />
         <TeamSection service={service} content={content} />
         <FaqAccordion faq={service.faq} heading={content.indexContent.detailChrome.faqHeading} />

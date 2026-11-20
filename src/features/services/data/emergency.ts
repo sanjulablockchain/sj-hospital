@@ -3,6 +3,19 @@ import type { Service } from "../types";
 export const emergencyServices: Service[] = [
   {
     slug: "accident-emergency",
+    book: {
+      page: 10,
+      summary: "Urgent care at any hour of the day or night. Come to us straight away.",
+      facts: [
+        { k: "Hours", v: "24 hours, every day" },
+        { k: "Call", v: "031 784 84 84" },
+      ],
+      why: [
+        "Open day and night, including weekends.",
+        "Laboratory and pharmacy are open 24 hours too.",
+        "Specialist consultants work from the same hospital.",
+      ],
+    },
     heroImage: "/images/services/heroes/accident-emergency.jpg",
     heroAlt: "A stretcher and emergency medical equipment secured inside an ambulance",
     title: "Accident & emergency",

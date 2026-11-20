@@ -505,6 +505,15 @@ export const detailChrome = {
    */
   comingSoonNote: "This service is not open yet. Call or WhatsApp us to hear when it opens.",
   comingSoonHeading: "Ask us when it opens",
+  /**
+   * `BookExcerptSection`'s labels, English in every locale like the other
+   * detail headings. `{page}` is the printed page number.
+   */
+  bookExcerpt: {
+    eyebrow: "From our Service Book, page {page}",
+    why: "Why St. Joseph",
+    read: "Read page {page} of the Service Book",
+  },
   /** Shown on the laboratory service only, under its facts card. */
   priceListCta: "See every test and price",
 };
