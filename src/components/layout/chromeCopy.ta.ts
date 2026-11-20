@@ -38,4 +38,5 @@ export const chromeCopy = {
   bookCallDesc: "Switchboard ஒவ்வொரு மணி நேரமும் பதிலளிக்கும்.",
   bookFooter: "OPD Consultation இலவசம். எல்லா Insurance உம் ஏற்றுக்கொள்ளப்படும், Cashless வசதியும் உண்டு.",
   closeBooking: "Booking விருப்பங்களை மூடு",
+  comingSoon: "விரைவில்",
 };
