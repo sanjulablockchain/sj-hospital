@@ -24,7 +24,7 @@ export const quickAccess = {
     body: "ஒரு Consultant ஐயும் நேரத்தையும் Online இல் தேர்ந்தெடுங்கள், அல்லது எங்கள் இலவச OPD க்கு நேரடியாக வாருங்கள்.",
   },
   emergency: {
-    body: "எந்த நேரத்திலும் நேரடியாக வாருங்கள். Ambulance Bay மற்றும் Critical Care 24 மணி நேரமும் திறந்திருக்கும்.",
+    body: "எந்த நேரத்திலும் நேரடியாக வாருங்கள். Ambulance Bay 24 மணி நேரமும் திறந்திருக்கும், Critical Care விரைவில் திறக்கப்படும்.",
   },
   facilities: {
     bodyTemplate: "{count} சேவைகள் ஒரே கூரையின் கீழ், US Protocol இன் படி.",
@@ -85,7 +85,7 @@ export const specialties = {
   // array lengths match the English (the same shape media.ta.ts uses).
   tabs: [
     {
-      desc: "24 மணி நேரமும் Accident மற்றும் Emergency சிகிச்சை, Intensive மற்றும் Critical Care அங்கேயே. ஆண்டின் ஒவ்வொரு நாளும் எந்த நேரத்திலும் நேரடியாக வாருங்கள், அல்லது Call செய்யுங்கள், நாங்கள் உங்களிடம் வருகிறோம்.",
+      desc: "24 மணி நேரமும் Accident மற்றும் Emergency சிகிச்சை, Intensive மற்றும் Critical Care விரைவில் திறக்கப்படும். ஆண்டின் ஒவ்வொரு நாளும் எந்த நேரத்திலும் நேரடியாக வாருங்கள், அல்லது அழையுங்கள், நாங்கள் உங்களிடம் வருவோம்.",
       links: [{}, {}, {}],
     },
     {
@@ -101,11 +101,11 @@ export const specialties = {
       links: [{}, {}, {}, {}, {}, {}, {}, {}],
     },
     {
-      desc: "Maternity, Gynaecology மற்றும் Paediatric சிகிச்சை, எங்கள் Los Angeles குழு தன் சொந்த நோயாளர்களுக்குப் பயன்படுத்தும் அதே Kids and Teens Protocol இன் தலைமையில்.",
+      desc: "Gynaecology மற்றும் Paediatric சிகிச்சை, எங்கள் Los Angeles குழு தன் சொந்த நோயாளர்களுக்குப் பயன்படுத்தும் அதே Kids and Teens Protocol வழியில், Maternity சிகிச்சை விரைவில் திறக்கப்படும்.",
       links: [{}, {}, {}, {}, {}],
     },
     {
-      desc: "ஒருபோதும் மூடாத Pharmacy, நீர்கொழும்பு முழுவதும் மருந்து விநியோகம், ஆறு வாகனங்களில் Home Visits மற்றும் தீவின் எந்த இடத்திலிருந்தும் Telemedicine.",
+      desc: "ஒருபோதும் மூடாத Pharmacy, நீர்கொழும்பு முழுவதும் மருந்து விநியோகம் மற்றும் ஆறு வாகனங்களில் Home Visits, Telemedicine விரைவில்.",
       links: [{}, {}, {}, {}],
     },
   ],

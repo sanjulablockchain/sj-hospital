@@ -117,9 +117,15 @@ test("10,000 LKR is the only price quoted anywhere on the page", () => {
 
 test("no clock-time visiting hours, which the hospital does not publish", () => {
   assert.doesNotMatch(allCopy, /\b\d{1,2}[:.]\d{2}\b/);
+  // Critical care is built but not running yet (owner, 2026-11-20), so its
+  // visiting row says so; the note on how visiting will run keeps "fixed
+  // hours" rather than a clock time.
   const critical = visitingRows.find((r) => r.k === "Critical care");
   assert.ok(critical);
-  assert.match(critical.v, /fixed hours/i);
+  assert.match(critical.v, /opening soon/i);
+  const visiting = careNotes.find((n) => n.title === "Visiting");
+  assert.ok(visiting);
+  assert.match(visiting.body, /fixed hours/i);
 });
 
 test("no unbacked regulatory, engineering or dental claims", () => {

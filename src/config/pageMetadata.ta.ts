@@ -41,7 +41,7 @@ export const pageMetadata = {
   },
   facilities: {
     description:
-      "St. Joseph Hospital Negombo உள்ளே: சிறப்பாகக் கட்டப்பட்ட 6 மாடிகள், அறுவை சிகிச்சை அரங்குகள், Monitor செய்யப்படும் தீவிர சிகிச்சை, 24 மணி நேர ஆய்வுகூடம், நான்கு அறை வகைகள் மற்றும் கூரையுள்ள Ambulance Bay.",
+      "St. Joseph Hospital Negombo உள்ளே: சிறப்பாகக் கட்டப்பட்ட 6 மாடிகள், அறுவை சிகிச்சை அரங்குகள், Monitor செய்யப்படும் தீவிர சிகிச்சை (விரைவில்), 24 மணி நேர ஆய்வுகூடம், நான்கு அறை வகைகள் மற்றும் கூரையுள்ள Ambulance Bay.",
   },
   healthTips: {
     // {articleCount} / {warningCount} are the interpolation tokens; see

@@ -91,7 +91,7 @@ export const hero = {
 };
 
 export const heroStandfirst =
-  "Six purpose built floors in Negombo: operating theatres with the recovery bay next door, monitored critical care beside them, a laboratory that never closes, and rooms where your family can actually stay the night.";
+  "Six purpose built floors in Negombo: operating theatres with the recovery bay next door, a monitored critical care unit beside them that opens soon, a laboratory that never closes, and rooms where your family can actually stay the night.";
 
 /**
  * Every value below is reused verbatim from navigationLabels.si.ts and
@@ -142,7 +142,7 @@ export const jumpCards: { count: string; label: string; note: string; href: stri
   {
     count: "Monitored beds",
     label: "Critical care",
-    note: "Intensive care beside the theatres.",
+    note: "Intensive care beside the theatres, opening soon.",
     href: "#critical",
   },
   {
@@ -186,7 +186,7 @@ export const buildingZones: BuildingZone[] = [
     no: "03",
     name: "Diagnostics",
     contents:
-      "A 24 hour laboratory, digital X-ray, ultrasound, ECG and echocardiography, and the endoscopy unit.",
+      "A 24 hour laboratory, digital X-ray, ultrasound, ECG and echocardiography, and the endoscopy unit, opening soon.",
   },
   {
     no: "04",
@@ -198,7 +198,7 @@ export const buildingZones: BuildingZone[] = [
     no: "05",
     name: "Critical care",
     contents:
-      "Intensive care beds placed beside the theatres and the emergency department, with neonatal support for newborns who need it.",
+      "Intensive care beds placed beside the theatres and the emergency department, with neonatal support for newborns who need it, opening soon.",
   },
   {
     no: "06",
@@ -286,7 +286,7 @@ export const theatreSpecs: SpecRow[] = [
 
 export const criticalHeading: Heading2 = { line1: "Beds that watch", line2: "you all night" };
 export const criticalIntro =
-  "Monitored beds for patients who need ventilation, close observation after surgery, or stabilising before anything else can happen.";
+  "Monitored beds for patients who need ventilation, close observation after surgery, or stabilising before anything else can happen. The unit opens soon.";
 
 export const careUnits: CareUnit[] = [
   {
@@ -310,7 +310,7 @@ export const careUnits: CareUnit[] = [
   {
     code: "NEO",
     name: "Newborn support",
-    desc: "Neonatal support present at delivery whenever the baby's condition calls for it, alongside the obstetric theatre.",
+    desc: "Neonatal support present at delivery whenever the baby's condition calls for it, alongside the obstetric theatre, once maternity care opens.",
     lead: "Paediatric team",
   },
 ];
@@ -322,7 +322,7 @@ export const careNotes: { title: string; body: string }[] = [
   },
   {
     title: "Visiting",
-    body: "Visiting the unit is kept to fixed hours so patients can rest and the team can work without interruption. The ICU desk will tell you the current times.",
+    body: "Once the unit opens, visiting is kept to fixed hours so patients can rest and the team can work without interruption. The ICU desk will tell you the current times.",
   },
   {
     title: "Family updates",
@@ -419,7 +419,7 @@ export const equipment: EquipmentRow[] = [
   {
     name: "Endoscopy",
     note: "Gastroscopy and colonoscopy, with biopsy at the same sitting",
-    avail: "Same day",
+    avail: "Opening soon",
   },
   {
     name: "CT & MRI",
@@ -516,7 +516,7 @@ export const hygieneRows: SpecRow[] = [
   { k: "Standard", v: "US specification" },
   { k: "Consumables", v: "Single use, never reused" },
   { k: "Instrument sets", v: "Tracked per set" },
-  { k: "Obstetric theatre", v: "Separate from general lists" },
+  { k: "Obstetric theatre", v: "Opening soon" },
   { k: "Laboratory reports", v: "Checked by two doctors" },
 ];
 
@@ -527,7 +527,7 @@ export const visitorsIntro =
 export const visitingCardHeading = "Visiting";
 export const visitingRows: SpecRow[] = [
   { k: "General wards", v: "Day visiting" },
-  { k: "Critical care", v: "Fixed hours" },
+  { k: "Critical care", v: "Opening soon" },
   { k: "Family update", v: "Once a day from the unit" },
   { k: "Attendant", v: "May stay overnight" },
 ];

@@ -111,7 +111,7 @@ export const handoffs = [
     ],
   },
   {
-    body: "හැම ප්‍රශ්නයකටම දොරකඩ කෙනෙක් ඕන නෑ. Telemedicine Consultation එකකින් Follow-up කතාවක් හෝ In-person Examination එකක් ඕන නැති ප්‍රශ්නයක් Video එකෙන් හෝ Phone එකෙන් Cover කරගන්න පුළුවන්, Prescription එකක් තිබ්බොත් ඒක කෙළින්ම Pharmacy එකට යනවා.",
+    body: "හැම ප්‍රශ්නයකටම දොරකඩ කෙනෙක් ඕන නෑ. ළඟදීම, Telemedicine Consultation එකකින් Follow-up කතාවක් හෝ In-person Examination එකක් ඕන නැති ප්‍රශ්නයක් Video එකෙන් හෝ Phone එකෙන් Cover කරගන්න පුළුවන්, Prescription එකක් තිබ්බොත් ඒක කෙළින්ම Pharmacy එකට යනවා.",
     points: [
       "Video හෝ Phone, රෝගියාට ගැලපෙන එකෙන්",
       "Prescription එකක් තිබ්බොත් ඒක Pharmacy එකට යනවා, Collect කරගන්න හෝ Deliver කරගන්න",

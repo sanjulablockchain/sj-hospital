@@ -39,7 +39,7 @@ export const quickAccess = {
     body: "Consultant කෙනෙක් සහ වෙලාවක් Online තෝරන්න, නැත්නම් අපේ නොමිලේ OPD එකට කෙලින්ම එන්න.",
   },
   emergency: {
-    body: "ඕනෑම වෙලාවක කෙලින්ම එන්න. Ambulance Bay සහ Critical Care පැය 24ම විවෘත.",
+    body: "ඕනෑම වෙලාවක කෙලින්ම එන්න. Ambulance Bay පැය 24ම විවෘතයි, Critical Care ළඟදීම විවෘත වෙනවා.",
   },
   facilities: {
     bodyTemplate: "{count} සේවාවන් එක වහලක් යට, US Protocol එකට.",
@@ -100,7 +100,7 @@ export const specialties = {
   // array lengths match the English (the same shape media.si.ts uses).
   tabs: [
     {
-      desc: "පැය 24ම Accident සහ Emergency සත්කාරය, Intensive සහ Critical Care එතැනම. අවුරුද්දේ හැම දිනකම ඕනෑම වෙලාවක කෙලින්ම එන්න, නැත්නම් Call කරන්න, අපි ඔබ ලඟට එනවා.",
+      desc: "පැය 24ම Accident සහ Emergency සත්කාරය, Intensive සහ Critical Care ළඟදීම විවෘත වෙනවා. අවුරුද්දේ හැම දිනකම ඕනෑම වෙලාවක කෙලින්ම එන්න, නැත්නම් කතා කරන්න, අපි ඔබ ළඟට එනවා.",
       links: [{}, {}, {}],
     },
     {
@@ -116,11 +116,11 @@ export const specialties = {
       links: [{}, {}, {}, {}, {}, {}, {}, {}],
     },
     {
-      desc: "Maternity, Gynaecology සහ Paediatric සත්කාරය, අපේ Los Angeles සමූහය තමන්ගේම රෝගීන්ට පාවිච්චි කරන ම Kids and Teens Protocol එකෙන් මෙහෙයවනවා.",
+      desc: "Gynaecology සහ Paediatric සත්කාරය, අපේ Los Angeles සමූහය තමන්ගේම රෝගීන්ට පාවිච්චි කරන ම Kids and Teens Protocol එකෙන් මෙහෙයවනවා, Maternity සත්කාරය ළඟදීම විවෘත වෙනවා.",
       links: [{}, {}, {}, {}, {}],
     },
     {
-      desc: "කවදාවත් වහන්නේ නැති Pharmacy එකක්, මීගමුව පුරාම බෙහෙත් ගෙන්වා දීම, වාහන හයක් මත Home Visits සහ දිවයිනේ ඕනෑම තැනකින් Telemedicine.",
+      desc: "කවදාවත් වහන්නේ නැති Pharmacy එකක්, මීගමුව පුරාම බෙහෙත් ගෙන්වා දීම සහ වාහන හයක් මත Home Visits, Telemedicine ළඟදීම.",
       links: [{}, {}, {}, {}],
     },
   ],

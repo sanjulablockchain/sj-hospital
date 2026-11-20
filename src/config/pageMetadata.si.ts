@@ -41,7 +41,7 @@ export const pageMetadata = {
   },
   facilities: {
     description:
-      "St. Joseph Hospital Negombo ඇතුළත: විශේෂයෙන් තැනූ තට්ටු 6ක්, ශල්‍යාගාර, Monitor කරන දැඩි සත්කාරය, පැය 24ම විවෘත රසායනාගාරයක්, කාමර වර්ග හතරක් සහ වහලක් සහිත Ambulance Bay එකක්.",
+      "St. Joseph Hospital Negombo ඇතුළත: විශේෂයෙන් තැනූ තට්ටු 6ක්, ශල්‍යාගාර, Monitor කරන දැඩි සත්කාරය (ළඟදීම), පැය 24ම විවෘත රසායනාගාරයක්, කාමර වර්ග හතරක් සහ වහලක් සහිත Ambulance Bay එකක්.",
   },
   healthTips: {
     // {articleCount} / {warningCount} are the interpolation tokens; see

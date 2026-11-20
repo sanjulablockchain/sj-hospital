@@ -85,7 +85,7 @@ export const journeySteps = [
     when: "පැමිණෙන දිනය",
   },
   {
-    desc: "Attendant කෙනෙක් කාමරයේ රැඳී සිටිනවා, සෑම Category එකකම Bystander ඇඳක් සහ පුටුවක් සමඟ, ආහාර වේල Dietary Order එකට අනුවයි. Critical Care එකේ සිට, පවුලේ කෙනෙකුට දිනකට වරක් යාවත්කාලීන කිරීමක් Call කරනවා.",
+    desc: "Attendant කෙනෙක් කාමරයේ රැඳී සිටිනවා, සෑම Category එකකම Bystander ඇඳක් සහ පුටුවක් සමඟ, ආහාර වේල Dietary Order එකට අනුවයි. Critical Care Unit එක විවෘත වූ පසු, එහි රෝගියෙකුගේ පවුලේ කෙනෙකුට දිනකට වරක් යාවත්කාලීන කිරීමක් Call කරනවා.",
     when: "ඔබ රැඳී සිටින කාලය තුළ",
   },
   {
@@ -102,7 +102,7 @@ export const servicesIntro =
 export const deskServices = [
   {
     kind: "පියාසර කිරීමට කලින්",
-    desc: "Telemedicine එකෙන් අපගේ වෛද්‍යවරයෙක් සමඟ Video එකෙන් හෝ Phone එකෙන්, දිනපතා වෙන් කරගත හැකි Consultation එකක් ලැබෙනවා. සෘජුව පරීක්ෂණයක් අවශ්‍ය නොවන කතාබහකට ගැලපෙනවා, Flight එකට කලින් බහුතරයක්ම ඒ වගේ.",
+    desc: "Telemedicine ළඟදීම: අපගේ වෛද්‍යවරයෙක් සමඟ Video එකෙන් හෝ Phone එකෙන් Consultation එකක් ලැබෙනු ඇත. සෘජුව පරීක්ෂණයක් අවශ්‍ය නොවන කතාබහකට ගැලපෙනවා, Flight එකට කලින් බහුතරයක්ම ඒ වගේ. ඒ තෙක් විදේශීය Desk එකට Email හෝ WhatsApp කරන්න.",
   },
   {
     kind: "ප්‍රවාහනය",
@@ -138,7 +138,7 @@ export const deskServices = [
   },
   {
     kind: "Follow-up සත්කාර",
-    desc: "මෙහි බැලූ රෝගීන් ගෙදර ගිය පසු Follow-up සඳහා Telemedicine Use කරනවා, ඊළඟ පියවරේදීත් එකම වෛද්‍යවරයා සම්බන්ධව තියාගන්නවා.",
+    desc: "මෙහි බැලූ රෝගීන් ගෙදර ගිය පසු Telemedicine හරහා Follow-up ළඟදීම, ඊළඟ පියවරේදීත් එකම වෛද්‍යවරයා සම්බන්ධව තියාගනිමින්.",
   },
 ];
 
@@ -312,7 +312,7 @@ export const practical = [
 export const faq = [
   {
     q: "පියාසර කිරීමට කලින් අදහසක් ලබාගන්නේ කොහොමද?",
-    a: "ඔබේ Scans, Laboratory Reports, වර්තමාන බෙහෙත් ලැයිස්තුව සහ කෙටි ඉතිහාසයක් විදේශීය Desk එකට Email කරන්න හෝ WhatsApp කරන්න, Telemedicine Consultation එකක් ඉල්ලන්න. ඒක අපගේ වෛද්‍යවරයෙක් සමඟ Video එකෙන් හෝ Phone එකෙන්, දිනපතා වෙන් කරගත හැකි Consultation එකක්, සෘජුව පරීක්ෂණයක් අවශ්‍ය නොවන කතාබහකට හරියටම ගැලපෙනවා. Treatment එක Carry කරන වෛද්‍යවරයා සමඟ සාකච්ඡා නොකර කිසිම කෙනෙක් Ticket එකක් ගන්න ඕන නෑ.",
+    a: "ඔබේ Scans, Laboratory Reports, වර්තමාන බෙහෙත් ලැයිස්තුව සහ කෙටි ඉතිහාසයක් විදේශීය Desk එකට Email කරන්න හෝ WhatsApp කරන්න, ඔබට ප්‍රතිකාර කරන වෛද්‍යවරයාට Desk එක ඔබේ ප්‍රශ්න යොමු කරනවා. Video හෝ Phone හරහා Telemedicine Consultations ළඟදීම. Treatment එක Carry කරන වෛද්‍යවරයා සමඟ සාකච්ඡා නොකර කිසිම කෙනෙක් Ticket එකක් ගන්න ඕන නෑ.",
   },
   {
     q: "රෝහල ගුවන් තොටුපළෙන් කොපමණ දුරද?",

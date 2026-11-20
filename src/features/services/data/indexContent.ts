@@ -100,7 +100,7 @@ export const centres: Centre[] = [
   {
     no: "03",
     name: "Mother & Baby",
-    desc: "Obstetric care through to delivery, with neonatal support in the room from the first minute.",
+    desc: "Antenatal care through to delivery, with neonatal support in the room from the first minute, opening soon.",
     lead: "Named consultant",
   },
   {
@@ -124,8 +124,8 @@ export const centres: Centre[] = [
   {
     no: "07",
     name: "Endoscopy Unit",
-    desc: "Gastroscopy and colonoscopy on scheduled lists, with sedation given by a consultant anaesthetist.",
-    lead: "Same day reporting",
+    desc: "Gastroscopy and colonoscopy on scheduled lists, with sedation given by a consultant anaesthetist, once the unit opens.",
+    lead: "Opening soon",
   },
   {
     no: "08",
@@ -148,7 +148,7 @@ export const surgicalRows: SurgicalRow[] = [
   { name: "Urology", note: "Same-visit ultrasound & flow studies" },
   { name: "Ophthalmology & cataract surgery", note: "Day case surgery" },
   { name: "Neurosurgery", note: "By referral, imaging led" },
-  { name: "Gastrointestinal & endoscopy", note: "Same-day reporting" },
+  { name: "Gastrointestinal & endoscopy", note: "Opening soon" },
   { name: "Anaesthesia", note: "Consultant led lists" },
   { name: "Post-operative care", note: "Assigned recovery nurse" },
 ];
@@ -187,7 +187,7 @@ export const diagnosticRows: DiagnosticRow[] = [
   {
     name: "Endoscopy",
     note: "Gastroscopy and colonoscopy, with biopsy at the same sitting",
-    turnaround: "Same day",
+    turnaround: "Opening soon",
   },
   {
     name: "CT & MRI",
@@ -343,7 +343,7 @@ export const surgicalSection = {
 /** `DiagnosticsSection`, `#diagnostics`. */
 export const diagnosticsSection = {
   eyebrow: "04 / Diagnostics & radiology",
-  heading: "Lab, imaging & endoscopy",
+  heading: "Lab & imaging",
   cta: "Book a test",
 };
 
@@ -408,7 +408,7 @@ export const facilityCards: FacilityCard[] = [
   {
     index: "03",
     title: "Wards, rooms & ICU",
-    body: "Private and semi-private rooms from 10,000 LKR a night, backed by a full ICU for higher-dependency care.",
+    body: "Private and semi-private rooms from 10,000 LKR a night, with a full ICU for higher-dependency care opening soon.",
     linkLabel: "See intensive & critical care",
     href: "/services/intensive-critical-care",
     photo: "/images/doctors.jpg",
@@ -547,6 +547,6 @@ export const internationalSteps: Step[] = [
   {
     no: "06",
     title: "Follow up online",
-    desc: "A telemedicine consultation continues your care once you are back home.",
+    desc: "A telemedicine consultation, coming soon, will continue your care once you are back home.",
   },
 ];

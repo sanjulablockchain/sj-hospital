@@ -90,7 +90,7 @@ export const pageMetadata = {
   facilities: {
     title: "Facilities | St. Joseph Hospital Negombo",
     description:
-      "Inside St. Joseph Hospital Negombo: six purpose built floors, operating theatres, monitored critical care, a 24 hour laboratory, four room categories and a covered ambulance bay.",
+      "Inside St. Joseph Hospital Negombo: six purpose built floors, operating theatres, monitored critical care (opening soon), a 24 hour laboratory, four room categories and a covered ambulance bay.",
   },
   // `description` is a template: `{articleCount}` and `{warningCount}` are
   // interpolated in `src/app/[locale]/health-tips/page.tsx` from

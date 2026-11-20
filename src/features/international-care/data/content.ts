@@ -174,7 +174,7 @@ export const journeySteps: JourneyStep[] = [
   {
     no: "05",
     title: "Treatment and family",
-    desc: "One attendant stays in the room, with a bystander bed and chair in every category and meals to dietary orders. From critical care, a family member is called with an update once a day.",
+    desc: "One attendant stays in the room, with a bystander bed and chair in every category and meals to dietary orders. Once our critical care unit opens, a family member of a patient there will be called with an update once a day.",
     when: "During your stay",
   },
   {
@@ -197,7 +197,7 @@ export const deskServices: DeskService[] = [
   {
     kind: "Before you travel",
     title: "Consultation by video or phone",
-    desc: "Telemedicine offers a consultation with one of our doctors by video or by phone, booked daily. It suits a conversation that does not need an examination in person, which is most of them before a flight.",
+    desc: "Telemedicine, coming soon, will offer a consultation with one of our doctors by video or by phone. It will suit a conversation that does not need an examination in person, which is most of them before a flight. Until then, email or WhatsApp the international desk.",
   },
   {
     kind: "Transport",
@@ -242,7 +242,7 @@ export const deskServices: DeskService[] = [
   {
     kind: "Follow up",
     title: "Review once you are home",
-    desc: "Telemedicine is used for follow-up with patients who have travelled home after being seen here, which keeps the same doctor involved in the next step of your care.",
+    desc: "Telemedicine follow-up for patients who have travelled home after being seen here is coming soon, keeping the same doctor involved in the next step of your care.",
   },
 ];
 
@@ -412,7 +412,7 @@ export const faqHeading = "The questions we always get";
 export const faq: InternationalFaq[] = [
   {
     q: "How do I get an opinion before I fly?",
-    a: "Email or WhatsApp your scans, laboratory reports, current medicine list and a short history to the international desk, and ask for a telemedicine consultation. That is a consultation with one of our doctors by video or by phone, booked daily, and it suits exactly this: a conversation that does not need an examination in person. Nobody should buy a ticket without having discussed the treatment with the doctor who would carry it out.",
+    a: "Email or WhatsApp your scans, laboratory reports, current medicine list and a short history to the international desk, and the desk will put your questions to the doctor who would treat you. Telemedicine consultations by video or by phone are coming soon. Nobody should buy a ticket without having discussed the treatment with the doctor who would carry it out.",
   },
   {
     q: "How far is the hospital from the airport?",

@@ -59,7 +59,7 @@ export const centres = [
   },
   {
     name: "தாயும் குழந்தையும்",
-    desc: "பிரசவம் வரையிலான மகப்பேறு சிகிச்சை, முதல் நிமிடத்திலிருந்தே அறையிலேயே புதிதாகப் பிறந்த குழந்தைக்கான ஆதரவுடன்.",
+    desc: "பிரசவம் வரையிலான மகப்பேறு சிகிச்சை, முதல் நிமிடத்திலிருந்தே அறையிலேயே Neonatal ஆதரவுடன், விரைவில் திறக்கப்படும்.",
     lead: "நியமிக்கப்பட்ட நிபுணர்",
   },
   {
@@ -79,8 +79,8 @@ export const centres = [
   },
   {
     name: "Endoscopy பிரிவு",
-    desc: "திட்டமிடப்பட்ட Lists இல் Gastroscopy மற்றும் Colonoscopy, ஒரு நிபுணர் Anaesthetist Sedation வழங்குவார்.",
-    lead: "அன்றே Reporting",
+    desc: "திட்டமிடப்பட்ட Lists இல் Gastroscopy மற்றும் Colonoscopy, ஒரு நிபுணர் Anaesthetist Sedation வழங்குவார், பிரிவு திறந்த பின்.",
+    lead: "விரைவில் திறக்கப்படும்",
   },
   {
     name: "நல்வாழ்வு மற்றும் சுகாதார பரிசோதனை",
@@ -101,7 +101,7 @@ export const surgicalRows = [
   { name: "Urology பிரிவு", note: "அதே வருகை Ultrasound மற்றும் Flow Studies" },
   { name: "கண் அறுவை சிகிச்சை மற்றும் Cataract அறுவை சிகிச்சை", note: "Day Case அறுவை சிகிச்சை" },
   { name: "Neurosurgery பிரிவு", note: "Referral வழியாக, Imaging Led" },
-  { name: "Gastrointestinal மற்றும் Endoscopy", note: "அன்றே Reporting" },
+  { name: "Gastrointestinal மற்றும் Endoscopy", note: "விரைவில் திறக்கப்படும்" },
   { name: "Anaesthesia சேவை", note: "நிபுணர் Lead செய்யும் Lists" },
   { name: "அறுவை சிகிச்சைக்குப் பிந்தைய பராமரிப்பு", note: "Assign செய்யப்பட்ட Recovery Nurse" },
 ];
@@ -140,7 +140,7 @@ export const diagnosticRows = [
   {
     name: "Endoscopy சேவை",
     note: "Gastroscopy மற்றும் Colonoscopy, அதே Sitting இல் Biopsy உடன்",
-    turnaround: "அன்றே",
+    turnaround: "விரைவில் திறக்கப்படும்",
   },
   {
     name: "CT மற்றும் MRI",
@@ -265,7 +265,7 @@ export const facilityCards = [
     body: "24 மணி நேர Outpatient பிரிவு, நீங்கள் எப்போது வந்தாலும் Emergency நுழைவுக்கு அருகில் பணியாளர்களுடன்.",
   },
   {
-    body: "ஒரு இரவுக்கு LKR 10,000 முதல் Private மற்றும் Semi-Private அறைகள், அதிக Dependency சிகிச்சைக்கு முழு ICU உடன்.",
+    body: "ஒரு இரவுக்கு LKR 10,000 முதல் Private மற்றும் Semi-Private அறைகள், அதிக Dependency சிகிச்சைக்கான முழு ICU விரைவில் திறக்கப்படும்.",
   },
   {
     body: "எங்கள் சொந்த Ambulance வாகனங்கள் சேவை செய்யும் கூரையுள்ள நுழைவு, Bandaranaike International இலிருந்து பத்து நிமிடங்கள்.",
@@ -319,6 +319,6 @@ export const internationalSteps = [
     desc: "உங்கள் Reports, Imaging Referrals மற்றும் Discharge Summary இன் பிரதிகளை உங்களுடன் கொண்டு செல்ல.",
   },
   {
-    desc: "நீங்கள் வீடு திரும்பியதும் ஒரு Telemedicine Consultation உங்கள் சிகிச்சையைத் தொடரும்.",
+    desc: "நீங்கள் வீடு திரும்பியதும் ஒரு Telemedicine Consultation உங்கள் சிகிச்சையைத் தொடரும், விரைவில்.",
   },
 ];

@@ -174,7 +174,7 @@ export const orgGroups: OrgGroup[] = [
         name: "St. Joseph Hospital Negombo",
         tagline: "US standard care in Negombo.",
         body: "Operated by Kids & Teens Medical Group, USA, bringing American healthcare standards to affordable, accessible care ten minutes from the international airport.",
-        chips: ["Emergency & outpatient", "Inpatient care", "Telemedicine", "Pharmacy & diagnostics"],
+        chips: ["Emergency & outpatient", "Inpatient care", "Telemedicine (coming soon)", "Pharmacy & diagnostics"],
         cta: "This hospital",
         flagship: true,
       },

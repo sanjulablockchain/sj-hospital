@@ -100,7 +100,7 @@ export const orgGroups = [
         name: "St. Joseph Hospital Negombo",
         tagline: "මීගමුවේ US Standard සත්කාරය.",
         body: "Kids & Teens Medical Group, USA විසින් මෙහෙයවනු ලබන, ජාත්‍යන්තර Airport එකේ සිට විනාඩි දහයක් දුරින්, ඇමෙරිකානු සෞඛ්‍ය සේවා Standards, දැරිය හැකි, ලබාගත හැකි සත්කාරයට ගෙන එනවා.",
-        chips: ["Emergency සහ OPD", "Inpatient සත්කාර", "Telemedicine සත්කාර", "Pharmacy සහ Diagnostics"],
+        chips: ["Emergency සහ OPD", "Inpatient සත්කාර", "Telemedicine සත්කාර (ළඟදීම)", "Pharmacy සහ Diagnostics"],
       },
       {
         wordmark: "Asiacorp Insurance",
