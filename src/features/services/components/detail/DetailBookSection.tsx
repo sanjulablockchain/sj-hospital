@@ -2,6 +2,8 @@ import { LocaleLink } from "@/components/i18n/LocaleLink";
 import { Reveal } from "@/components/ui/Reveal";
 import type { Service } from "@/features/services/types";
 import type { ServicesContent } from "@/features/services/data/getContent";
+import { isComingSoonSlug } from "@/config/comingSoon";
+import { ChromeText } from "@/components/i18n/ChromeText";
 
 /**
  * `#book`: the detail page's closing call to action, and the target the
@@ -16,7 +18,10 @@ import type { ServicesContent } from "@/features/services/data/getContent";
  */
 export function DetailBookSection({ service, content }: { service: Service; content: ServicesContent }) {
   const { bookSection, phoneNumber, detailChrome } = content.indexContent;
-  const heading = detailChrome.bookHeading.replace("{cta}", service.cta);
+  const comingSoon = isComingSoonSlug(service.slug);
+  // A service not open yet asks when it opens instead of booking: no contact
+  // form, just the switchboard and WhatsApp.
+  const heading = comingSoon ? detailChrome.comingSoonHeading : detailChrome.bookHeading.replace("{cta}", service.cta);
 
   return (
     <section id="book" className="mx-auto max-w-[1440px] px-5 pt-30 pb-4 sm:px-8 lg:px-11">
@@ -25,12 +30,23 @@ export function DetailBookSection({ service, content }: { service: Service; cont
           {heading}
         </h2>
         <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
-          <LocaleLink
-            href="/contact-us"
-            className="inline-flex items-center gap-2.5 bg-[var(--home-on-accent)] px-6 py-4 text-[15px] font-bold text-[var(--home-accent)] transition-opacity duration-300 hover:opacity-90"
-          >
-            {bookSection.contactCta} <span aria-hidden>&rarr;</span>
-          </LocaleLink>
+          {comingSoon ? (
+            <a
+              href="https://wa.me/94742223334"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2.5 bg-[var(--home-on-accent)] px-6 py-4 text-[15px] font-bold text-[var(--home-accent)] transition-opacity duration-300 hover:opacity-90"
+            >
+              <ChromeText id="whatsappUs" /> <span aria-hidden>&rarr;</span>
+            </a>
+          ) : (
+            <LocaleLink
+              href="/contact-us"
+              className="inline-flex items-center gap-2.5 bg-[var(--home-on-accent)] px-6 py-4 text-[15px] font-bold text-[var(--home-accent)] transition-opacity duration-300 hover:opacity-90"
+            >
+              {bookSection.contactCta} <span aria-hidden>&rarr;</span>
+            </LocaleLink>
+          )}
           <a
             href="tel:+94117848484"
             className="inline-flex items-center gap-2.5 border border-[var(--home-on-accent)]/40 px-6 py-4 text-[15px] font-bold tabular-nums"

@@ -498,6 +498,13 @@ export const detailChrome = {
   /** `{cta}` is the service's own `cta` field, e.g. "Come straight in today." */
   bookHeading: "{cta} today.",
   backToServices: "Back to all services",
+  /**
+   * A service the hospital does not run yet (`config/comingSoon.ts`): the
+   * line under the hero's lede, and the closing section's heading, which
+   * replaces `bookHeading` there.
+   */
+  comingSoonNote: "This service is not open yet. Call or WhatsApp us to hear when it opens.",
+  comingSoonHeading: "Ask us when it opens",
   /** Shown on the laboratory service only, under its facts card. */
   priceListCta: "See every test and price",
 };

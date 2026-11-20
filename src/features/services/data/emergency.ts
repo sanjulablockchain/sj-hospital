@@ -80,7 +80,7 @@ export const emergencyServices: Service[] = [
     directoryTitle: "Intensive care unit",
     group: "Emergency",
     hours: "Continuous",
-    cta: "Speak to the ICU desk",
+    cta: "Ask us when it opens",
     desc: "A monitored unit for patients who need continuous observation, ventilator support or close nursing after major surgery or a critical illness. One nurse covers only a small group of beds, and a consultant leads rounds every day.",
     tags: ["Ventilator support", "Continuous monitoring", "Consultant rounds", "Family updates"],
     facts: [

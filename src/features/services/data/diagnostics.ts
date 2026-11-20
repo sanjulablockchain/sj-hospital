@@ -213,7 +213,7 @@ export const diagnosticServices: Service[] = [
     directoryTitle: "CTG & fetal monitoring",
     group: "Diagnostics",
     hours: "By appointment",
-    cta: "Book monitoring",
+    cta: "Ask us when it opens",
     desc: "Cardiotocography (CTG) for fetal heart rate and contraction monitoring, run alongside the antenatal clinic and reviewed by the obstetric team.",
     tags: ["Cardiotocography", "Fetal heart rate", "Contraction monitoring", "Antenatal clinic"],
     facts: [

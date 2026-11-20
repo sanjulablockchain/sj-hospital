@@ -410,7 +410,7 @@ export const surgicalServices: Service[] = [
     directoryTitle: "Gastrointestinal & endoscopy",
     group: "Surgical",
     hours: "Scheduled lists",
-    cta: "Book endoscopy",
+    cta: "Ask us when it opens",
     desc: "Scheduled gastroscopy and colonoscopy lists, with biopsy and polypectomy carried out at the same sitting where needed, sedation given by a consultant anaesthetist, and same-day reporting before you leave.",
     tags: ["Gastroscopy", "Colonoscopy", "Biopsy & polypectomy", "Sedation"],
     facts: [

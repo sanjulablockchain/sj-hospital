@@ -2,6 +2,8 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import type { Service } from "../types.ts";
 import { services as ALL } from "./services.ts";
+import { detailChrome } from "./indexContent.ts";
+import { isComingSoonSlug } from "../../../config/comingSoon.ts";
 
 /** Every string in a service, with a label for failure messages. */
 function strings(s: Service): [string, string][] {
@@ -111,4 +113,23 @@ test("addresses, where present, are the hospital's own", () => {
       }
     }
   }
+});
+
+// ---- Coming soon services ask, they do not book ----
+
+// The owner's seven services not yet open (`config/comingSoon.ts`) keep their
+// pages, but nothing on them may offer a booking: their `cta` (the hero
+// button, the about card and the closing `#book` section) asks when it opens.
+const ASK_CTA = "Ask us when it opens";
+
+test("coming soon services ask when they open, and only they do", () => {
+  for (const s of ALL) {
+    if (isComingSoonSlug(s.slug)) assert.equal(s.cta, ASK_CTA, `${s.slug} still offers "${s.cta}"`);
+    else assert.notEqual(s.cta, ASK_CTA, `${s.slug} is open but asks when it opens`);
+  }
+});
+
+test("the detail chrome carries the coming soon note and heading", () => {
+  assert.ok(detailChrome.comingSoonNote.length > 20);
+  assert.equal(detailChrome.comingSoonHeading, ASK_CTA);
 });

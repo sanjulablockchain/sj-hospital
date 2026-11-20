@@ -202,7 +202,7 @@ export const atHomeServices: Service[] = [
     directoryTitle: "Telemedicine",
     group: "At home",
     hours: "Daily",
-    cta: "Book a consultation",
+    cta: "Ask us when it opens",
     desc: "Video and phone consultations with our doctors, with prescriptions issued to the pharmacy for delivery and follow-up for patients who have travelled home.",
     tags: ["Video consultations", "Phone consultations", "Prescriptions to pharmacy", "Follow-up after travel"],
     facts: [

@@ -296,6 +296,7 @@ export const bookSection = {
 
 export const detailChrome = {
   addressLine: "229/10 St. Joseph Street, මීගමුව",
+  comingSoonNote: "මෙම සේවාව තවම විවෘත කර නැත. එය විවෘත වන විට දැනගැනීමට අපට Call කරන්න හෝ WhatsApp කරන්න.",
 };
 
 export const internationalSteps = [

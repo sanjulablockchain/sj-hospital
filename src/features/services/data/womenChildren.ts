@@ -9,7 +9,7 @@ export const womenChildrenServices: Service[] = [
     directoryTitle: "Obstetrics & maternity",
     group: "Women & children",
     hours: "24 hours on call",
-    cta: "Speak to maternity",
+    cta: "Ask us when it opens",
     desc: "Pregnancy care built around one consultant seeing you through to delivery, with scans done in the clinic and a dedicated obstetric theatre kept separate from general surgery. Neonatal support is present at delivery when needed, and private rooms are available.",
     tags: ["Consultant-led pregnancy care", "In-clinic scans", "Dedicated obstetric theatre", "Neonatal support at delivery"],
     facts: [
@@ -211,7 +211,7 @@ export const womenChildrenServices: Service[] = [
     directoryTitle: "Fertility & embryology",
     group: "Women & children",
     hours: "By appointment",
-    cta: "Book a consultation",
+    cta: "Ask us when it opens",
     desc: "Assessment and counselling for anyone having difficulty conceiving, with cycle monitoring and embryology support as part of ongoing care.",
     tags: ["Fertility assessment", "Fertility counselling", "Cycle monitoring", "Embryology support"],
     facts: [
@@ -276,7 +276,7 @@ export const womenChildrenServices: Service[] = [
     directoryTitle: "Vaccination clinic",
     group: "Women & children",
     hours: "Daily",
-    cta: "Book a vaccination",
+    cta: "Ask us when it opens",
     desc: "The full childhood schedule plus adult and travel vaccination, run daily with cold chain monitoring, a printed record card at every visit, and SMS reminders for your next dose.",
     tags: ["Childhood schedule", "Adult & travel vaccination", "Cold chain monitoring", "SMS reminders"],
     facts: [

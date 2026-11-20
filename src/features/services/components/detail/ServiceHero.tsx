@@ -3,6 +3,8 @@ import { LocaleLink } from "@/components/i18n/LocaleLink";
 import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import type { Service } from "@/features/services/types";
 import type { ServicesContent } from "@/features/services/data/getContent";
+import { ComingSoonBadge } from "@/components/ui/ComingSoonBadge";
+import { isComingSoonSlug } from "@/config/comingSoon";
 
 /**
  * `#top` hero for a single service's detail page. Same fixed-dark gradient
@@ -20,6 +22,7 @@ import type { ServicesContent } from "@/features/services/data/getContent";
  */
 export function ServiceHero({ service, content }: { service: Service; content: ServicesContent }) {
   const groupLabel = content.groups.groupLabels[service.group] ?? service.group;
+  const comingSoon = isComingSoonSlug(service.slug);
 
   return (
     <section
@@ -60,6 +63,7 @@ export function ServiceHero({ service, content }: { service: Service; content: S
         <div className="animate-sj-up inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#9FD6F5] uppercase">
           <span className="h-px w-11 bg-[var(--home-accent)]" />
           {groupLabel}
+          {comingSoon && <ComingSoonBadge size="md" onDark />}
         </div>
 
         <h1 className="font-display animate-sj-up wrap-break-word text-[clamp(40px,7vw,108px)] leading-[0.92] font-extrabold tracking-[-0.035em] text-white uppercase">
@@ -72,6 +76,12 @@ export function ServiceHero({ service, content }: { service: Service; content: S
         >
           {service.lede}
         </p>
+
+        {comingSoon && (
+          <p className="animate-sj-up max-w-[58ch] border-l-2 border-[var(--home-accent)] pl-4 text-[16px] leading-[1.55] font-semibold text-white">
+            {content.indexContent.detailChrome.comingSoonNote}
+          </p>
+        )}
 
         <a
           href="#book"
