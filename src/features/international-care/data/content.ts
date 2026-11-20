@@ -292,13 +292,13 @@ export const treatments: TreatmentRow[] = [
     stay: "Day case",
   },
   {
-    name: "Gastroscopy or colonoscopy",
+    name: "Gastroscopy or colonoscopy (opening soon)",
     note: "Sedation given by a consultant anaesthetist, with biopsy at the same sitting where indicated",
     stay: "Day procedure",
   },
   {
-    name: "Obstetrics and delivery",
-    note: "One consultant through to delivery, a separate obstetric theatre and neonatal support in the room",
+    name: "Obstetrics and delivery (opening soon)",
+    note: "One consultant through to delivery, a separate obstetric theatre and neonatal support in the room, once maternity care opens",
     stay: "Confirmed with your consultant",
   },
   {
@@ -428,7 +428,7 @@ export const faq: InternationalFaq[] = [
   },
   {
     q: "Can a family member stay with me?",
-    a: "Yes. Every room category, from the wards up to super deluxe, has a bystander bed and chair, and one attendant may stay overnight. Meals are prepared to the dietary orders noted at admission. General wards are open for day visiting; critical care visiting is kept to fixed hours that the unit desk will confirm, and a family member is called with an update once a day from the unit.",
+    a: "Yes. Every room category, from the wards up to super deluxe, has a bystander bed and chair, and one attendant may stay overnight. Meals are prepared to the dietary orders noted at admission. General wards are open for day visiting; once our critical care unit opens, its visiting will be kept to fixed hours the unit desk confirms, with a family member called with an update once a day.",
   },
   {
     q: "Does my insurance work here?",
@@ -448,7 +448,7 @@ export const faq: InternationalFaq[] = [
   },
   {
     q: "How soon can I fly home after surgery?",
-    a: "It depends entirely on the operation, so ask your surgeon before you book the return leg and prefer a ticket you can change. Where the recovery runs past your flight, telemedicine keeps the same doctor involved once you have travelled: a video or phone review, booked daily, rather than starting again with somebody who has never seen your chart.",
+    a: "It depends entirely on the operation, so ask your surgeon before you book the return leg and prefer a ticket you can change. Where the recovery runs past your flight, telemedicine, coming soon, will keep the same doctor involved once you have travelled, rather than starting again with somebody who has never seen your chart.",
   },
 ];
 

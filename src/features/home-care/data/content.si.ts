@@ -37,7 +37,7 @@ export const tickerItems: readonly string[] = [
   "ඔබේ Hospital file එකට සටහන්",
   "වයෝවෘද්ධ, කුඩා දරුවන් සහ සැත්කම් පසු සත්කාර",
   "අපේම Counter එකෙන් බෙහෙත්",
-  "Video සහ Phone මගින් Consultations",
+  "Video සහ Phone මගින් Consultations, ළඟදීම",
 ];
 
 export const heroFacts = [

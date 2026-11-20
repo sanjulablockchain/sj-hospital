@@ -74,7 +74,7 @@ export const emergencyServices = [
     team: [
       { role: "அவசர சிகிச்சை மருத்துவ அதிகாரிகள்", note: "ஒவ்வொரு நேரமும் இடத்தில் இருப்பர், மூத்த ஆதரவை உடனடியாகப் பெறுவர்." },
       { role: "அவசர சிகிச்சை Nursing குழு", note: "Triage பயிற்சி பெற்றவர்கள், ஒரு Nurse ஒரு Resuscitation Bay க்கு Assign செய்யப்பட்டவர்." },
-      { role: "On-call நிபுணர் மருத்துவர்கள்", note: "அறுவை சிகிச்சை, Anaesthesia, மகப்பேறு மற்றும் குழந்தை மருத்துவத்திற்கு ஒவ்வொரு நேரமும் On-call." },
+      { role: "On-call நிபுணர் மருத்துவர்கள்", note: "அறுவை சிகிச்சை, Anaesthesia மற்றும் குழந்தை மருத்துவம் எந்த நேரத்திலும் On-call, மகப்பேறு விரைவில்." },
       { role: "Ambulance குழு", note: "எங்கள் சொந்த Bay இலிருந்து Dispatch செய்யப்படும், Oxygen மற்றும் Monitoring உடன்." },
     ],
     faq: [

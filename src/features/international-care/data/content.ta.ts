@@ -185,13 +185,13 @@ export const treatments = [
     stay: "Day Case ஒன்று",
   },
   {
-    name: "Gastroscopy அல்லது Colonoscopy",
+    name: "Gastroscopy அல்லது Colonoscopy (விரைவில்)",
     note: "Consultant Anaesthetist ஒருவரால் Sedation, தேவைப்பட்டால் அதே அமர்வில் Biopsy",
     stay: "Day Procedure ஒன்று",
   },
   {
-    name: "Obstetrics மற்றும் பிரசவம்",
-    note: "Delivery வரை ஒரு Consultant, தனி Obstetric Theatre மற்றும் அறையிலேயே Neonatal ஆதரவு",
+    name: "Obstetrics மற்றும் பிரசவம் (விரைவில்)",
+    note: "Delivery வரை ஒரு Consultant, தனி Obstetric Theatre மற்றும் அறையிலேயே Neonatal ஆதரவு, Maternity சிகிச்சை திறந்த பின்",
     stay: "உங்கள் Consultant உடன் உறுதி செய்யப்படும்",
   },
   {
@@ -325,7 +325,7 @@ export const faq = [
   },
   {
     q: "ஒரு குடும்ப உறுப்பினர் என்னுடன் தங்கலாமா?",
-    a: "ஆம். Wards முதல் Super Deluxe வரை ஒவ்வொரு அறை Category இலும் ஒரு Bystander படுக்கையும் நாற்காலியும் உள்ளது, ஒரு Attendant இரவில் தங்கலாம். Admission இல் குறிக்கப்பட்ட Dietary Order படி உணவு தயார் செய்யப்படும். பொது Wards பகல் Visiting க்காக திறந்திருக்கும்; Critical Care Visiting Unit Desk உறுதி செய்யும் நிலையான நேரங்களுக்கு மட்டுப்படும், குடும்ப உறுப்பினர் ஒருவருக்கு Unit இலிருந்து நாளொன்றுக்கு ஒரு Update Call செய்யப்படும்.",
+    a: "ஆம். Wards முதல் Super Deluxe வரை ஒவ்வொரு அறை Category இலும் ஒரு Bystander படுக்கையும் நாற்காலியும் உள்ளது, ஒரு Attendant இரவில் தங்கலாம். Admission இல் குறிக்கப்பட்ட Dietary Order படி உணவு தயார் செய்யப்படும். பொது Wards பகல் Visiting க்காக திறந்திருக்கும்; Critical Care Unit திறந்த பின், அதன் Visiting Unit Desk உறுதி செய்யும் நிலையான நேரங்களுக்கு மட்டுப்படும், குடும்ப உறுப்பினர் ஒருவருக்கு நாளொன்றுக்கு ஒரு Update Call செய்யப்படும்.",
   },
   {
     q: "எனது Insurance இங்கு வேலை செய்யுமா?",
@@ -345,7 +345,7 @@ export const faq = [
   },
   {
     q: "அறுவை சிகிச்சைக்குப் பிறகு நான் எவ்வளவு விரைவில் வீடு பறக்க முடியும்?",
-    a: "இது முற்றிலும் Operation ஐ பொறுத்தது, எனவே திரும்பும் பயணத்தை Book செய்வதற்கு முன் உங்கள் Surgeon இடம் கேளுங்கள், மாற்றக்கூடிய Ticket ஒன்றைத் தேர்வு செய்யுங்கள். Recovery உங்கள் Flight ஐ விட நீண்டால், நீங்கள் பயணித்த பிறகும் Telemedicine அதே மருத்துவரை ஈடுபடுத்துகிறது: Video அல்லது Phone மூலம் தினமும் ஒதுக்கப்படும் ஒரு Review, உங்கள் Chart ஐ ஒருபோதும் பார்க்காத ஒருவருடன் மீண்டும் தொடங்குவதற்குப் பதிலாக.",
+    a: "இது முற்றிலும் Operation ஐ பொறுத்தது, எனவே திரும்பும் பயணத்தை Book செய்வதற்கு முன் உங்கள் Surgeon இடம் கேளுங்கள், மாற்றக்கூடிய Ticket ஒன்றைத் தேர்வு செய்யுங்கள். Recovery உங்கள் Flight ஐ விட நீண்டால், நீங்கள் பயணித்த பிறகும் விரைவில் வரும் Telemedicine அதே மருத்துவரை ஈடுபடுத்தும், உங்கள் Chart ஐ ஒருபோதும் பார்க்காத ஒருவருடன் மீண்டும் தொடங்குவதற்குப் பதிலாக.",
   },
 ];
 

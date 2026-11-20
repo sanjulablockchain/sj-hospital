@@ -186,7 +186,7 @@ export const diagnosticRows: DiagnosticRow[] = [
   },
   {
     name: "Endoscopy",
-    note: "Gastroscopy and colonoscopy, with biopsy at the same sitting",
+    note: "Gastroscopy and colonoscopy, with biopsy at the same sitting, once the unit opens",
     turnaround: "Opening soon",
   },
   {
@@ -399,7 +399,7 @@ export const facilityCards: FacilityCard[] = [
   {
     index: "02",
     title: "Reception & OPD",
-    body: "A 24-hour outpatient department, staffed alongside the emergency entrance for whenever you arrive.",
+    body: "An outpatient department beside the emergency entrance, open from 7.00 AM to 6.00 PM; after hours, the emergency department sees you.",
     linkLabel: "See admissions",
     href: "#admissions",
     photo: "/images/welcome.jpg",

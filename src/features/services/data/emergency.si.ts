@@ -77,7 +77,7 @@ export const emergencyServices = [
     team: [
       { role: "හදිසි ප්‍රතිකාර වෛද්‍ය නිලධාරීන්", note: "හැම වේලාවකම ස්ථානයේ ඉන්නවා, ඉහළ මට්ටමේ සහාය ක්ෂණිකව ලබාගත හැක." },
       { role: "හදිසි ප්‍රතිකාර Nursing කණ්ඩායම", note: "Triage පුහුණුව ලැබූ, එක Nurse කෙනෙක් එක Resuscitation Bay එකකට Assign කරලා." },
-      { role: "On-call විශේෂඥ වෛද්‍යවරු", note: "ශල්‍යකර්ම, Anaesthesia, ප්‍රසූතිය සහ ළමා රෝග සඳහා හැම වේලාවකම On-call." },
+      { role: "On-call විශේෂඥ වෛද්‍යවරු", note: "ශල්‍යකර්ම, Anaesthesia සහ ළමා රෝග සඳහා හැම වේලාවකම On-call, ප්‍රසූතිය ළඟදීම." },
       { role: "Ambulance කණ්ඩායම", note: "අපගේම Bay එකෙන් Dispatch වෙනවා, Oxygen සහ Monitoring එකත් සමඟ." },
     ],
     faq: [

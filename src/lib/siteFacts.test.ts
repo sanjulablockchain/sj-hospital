@@ -39,6 +39,27 @@ function literals(source: string): string[] {
   return [...code.matchAll(/"((?:[^"\\\n]|\\.)*)"|`((?:[^`\\]|\\.)*)`/g)].map((m) => m[1] ?? m[2] ?? "");
 }
 
+/**
+ * Any string that names the OPD (in any of the three languages) alongside a
+ * round the clock claim. Broader than the phrases above, so a rewording such
+ * as "a 24-hour outpatient department" cannot slip through.
+ */
+const CLOCK = String.raw`(?:\b24\b|around the clock|every hour|any hour|පැය 24|24 மணி)`;
+const OPD = String.raw`(?:OPD|outpatient|Outpatient|බාහිර රෝගී|வெளிநோயாளர்)`;
+// The two within one clause (no full stop, comma or semicolon between them).
+const OPD_ROUND_THE_CLOCK = new RegExp(`${CLOCK}[^.,;]{0,18}${OPD}|${OPD}[^.,;]{0,25}${CLOCK}`, "i");
+
+test("no clause pairs the OPD with a round the clock claim", () => {
+  const hits: string[] = [];
+  for (const file of ROOTS.flatMap(files)) {
+    if (/features[\\/]locations[\\/]/.test(file)) continue; // Blue Sapphire is a different hospital
+    for (const text of literals(readFileSync(file, "utf8"))) {
+      if (OPD_ROUND_THE_CLOCK.test(text)) hits.push(`${file}: ${text.slice(0, 100)}`);
+    }
+  }
+  assert.deepEqual(hits, []);
+});
+
 test("no page states a room price or OPD hours the Service Book replaced", () => {
   const hits: string[] = [];
   for (const file of ROOTS.flatMap(files)) {
@@ -47,4 +68,15 @@ test("no page states a room price or OPD hours the Service Book replaced", () =>
     }
   }
   assert.deepEqual(hits, []);
+});
+
+// The home "Who we are" strip splits a claim across fields: a "24/7" value
+// over a label. That value must not sit over the OPD (7.00 AM to 6.00 PM), and
+// no stat may promise "every service open", with seven services not open yet.
+test("the home strip's round the clock stat is about emergency only", async () => {
+  const { whoWeAre } = await import("../features/home/data/content.ts");
+  for (const stat of whoWeAre.stats) {
+    if (stat.value === "24/7") assert.doesNotMatch(stat.label, /OPD|outpatient/i, `24/7 over "${stat.label}"`);
+    assert.doesNotMatch(stat.desc, /every service open/i, stat.desc);
+  }
 });

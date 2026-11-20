@@ -129,7 +129,7 @@ export const buildingZones = [
   {
     name: "ශල්‍යාගාර සහ සුවය ලැබීම",
     contents:
-      "අසලින්ම Recovery Bay එකක් සහිත ශල්‍යාගාර, සාමාන්‍ය List වලින් වෙන් කර තියෙන විශේෂිත Obstetric Theatre එකක් සහ Sterile Services.",
+      "අසලින්ම Recovery Bay එකක් සහිත ශල්‍යාගාර, සාමාන්‍ය List වලින් වෙන් කර තියෙන විශේෂිත Obstetric Theatre එකක් (Maternity සත්කාරය සමඟ ළඟදීම) සහ Sterile Services.",
   },
   {
     // Reused verbatim from navigationLabels.si.ts's "Critical care" ->
@@ -313,7 +313,7 @@ export const equipment = [
   { name: "ECG & echocardiography", note: "විවේකී ECG සහ හෘද අවදානම් තක්සේරුව", avail: "එදිනම" },
   {
     name: "Endoscopy",
-    note: "Gastroscopy සහ Colonoscopy, එකම වාරයේදීම Biopsy සමඟ",
+    note: "Gastroscopy සහ Colonoscopy, එකම වාරයේදීම Biopsy සමඟ, ඒකකය විවෘත වූ පසු",
     avail: "ළඟදීම විවෘත වෙනවා",
   },
   {

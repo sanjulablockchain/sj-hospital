@@ -130,7 +130,7 @@ export const buildingZones = [
   {
     name: "அறுவை சிகிச்சை அரங்குகள் மற்றும் குணமாதல்",
     contents:
-      "அருகிலேயே Recovery Bay உடன் அறுவை சிகிச்சை அரங்குகள், பொது Lists இலிருந்து தனியாக வைக்கப்பட்ட Obstetric Theatre மற்றும் Sterile Services.",
+      "அருகிலேயே Recovery Bay உடன் அறுவை சிகிச்சை அரங்குகள், பொது Lists இலிருந்து தனியாக வைக்கப்பட்ட Obstetric Theatre (Maternity சிகிச்சையுடன் விரைவில்) மற்றும் Sterile Services.",
   },
   {
     // Reused verbatim from navigationLabels.ta.ts's "Critical care" ->
@@ -315,7 +315,7 @@ export const equipment = [
   { name: "ECG & echocardiography", note: "ஓய்வு நேர ECG மற்றும் இதய அபாய மதிப்பீடு", avail: "அன்றே" },
   {
     name: "Endoscopy",
-    note: "Gastroscopy மற்றும் Colonoscopy, அதே அமர்வில் Biopsy உடன்",
+    note: "Gastroscopy மற்றும் Colonoscopy, அதே அமர்வில் Biopsy உடன், பிரிவு திறந்த பின்",
     avail: "விரைவில் திறக்கப்படும்",
   },
   {

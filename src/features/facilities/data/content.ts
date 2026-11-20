@@ -192,7 +192,7 @@ export const buildingZones: BuildingZone[] = [
     no: "04",
     name: "Theatres & recovery",
     contents:
-      "Operating theatres with a recovery bay alongside, a dedicated obstetric theatre kept separate from general lists, and sterile services.",
+      "Operating theatres with a recovery bay alongside, a dedicated obstetric theatre kept separate from general lists (opening soon with maternity care), and sterile services.",
   },
   {
     no: "05",
@@ -418,7 +418,7 @@ export const equipment: EquipmentRow[] = [
   { name: "ECG & echocardiography", note: "Resting ECG and cardiac risk assessment", avail: "Same day" },
   {
     name: "Endoscopy",
-    note: "Gastroscopy and colonoscopy, with biopsy at the same sitting",
+    note: "Gastroscopy and colonoscopy, with biopsy at the same sitting, once the unit opens",
     avail: "Opening soon",
   },
   {

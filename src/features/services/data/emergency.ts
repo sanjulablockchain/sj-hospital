@@ -75,7 +75,7 @@ export const emergencyServices: Service[] = [
     team: [
       { role: "Emergency medical officers", note: "On site at every hour, with immediate access to senior support." },
       { role: "Emergency nursing team", note: "Triage trained, with one nurse assigned to each resuscitation bay." },
-      { role: "On-call consultants", note: "Surgery, anaesthesia, obstetrics and paediatrics on call at every hour." },
+      { role: "On-call consultants", note: "Surgery, anaesthesia and paediatrics on call at every hour, with obstetrics coming soon." },
       { role: "Ambulance crew", note: "Dispatched from our own bay with oxygen and monitoring on board." },
     ],
     faq: [

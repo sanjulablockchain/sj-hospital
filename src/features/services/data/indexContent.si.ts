@@ -140,7 +140,7 @@ export const diagnosticRows = [
   },
   {
     name: "Endoscopy සේවාව",
-    note: "Gastroscopy සහ Colonoscopy, එම Sitting එකේම Biopsy සමඟ",
+    note: "Gastroscopy සහ Colonoscopy, එම Sitting එකේම Biopsy සමඟ, ඒකකය විවෘත වූ පසු",
     turnaround: "ළඟදීම විවෘත වෙනවා",
   },
   {
@@ -263,7 +263,7 @@ export const facilityCards = [
     body: "මීගමුවේ විශේෂයෙන් තැනූ රෝහලක්, Ambulance Bay එකටයි OPD රෝගීන්ටයි වහලක් සහිත පිවිසුම් සමඟ.",
   },
   {
-    body: "පැය 24ම විවෘත OPD එකක්, ඔබ ඕනෑම වේලාවක ආවත් Emergency පිවිසුම ලඟින්ම සේවකයින් සිටිනවා.",
+    body: "Emergency පිවිසුම ලඟින්ම OPD එකක්, පෙ.ව. 7.00 සිට ප.ව. 6.00 දක්වා විවෘතයි; ඉන් පසු Emergency අංශය ඔබව බලනවා.",
   },
   {
     body: "දිනකට LKR 9,500 සිට වාට්ටු සහ පුද්ගලික කාමර, උසස් Dependency සත්කාරය සඳහා සම්පූර්ණ ICU එකක් ළඟදීම විවෘත වෙනවා.",

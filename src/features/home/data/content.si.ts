@@ -54,8 +54,8 @@ export const whoWeAre = {
     "Los Angeles හි Kids & Teens Pediatric Medical Group විසින් මෙහෙයවනු සහ Operate කරනු ලබන: ඇමෙරිකානු සත්කාරයේ Standards, Protocols සහ Clinical Discipline, මීගමුවේ පවුල් සඳහා දැරිය හැකි මිලකට.",
   body: "Consumables කවදාවත් නැවත පාවිච්චි කරන්නේ නෑ. හැම මතුපිටක්ම පැය දෙකකට සැරයක් Clean කරනවා. හැම Report එකක්ම ඔබ ලඟට එන්න කලින් වෛද්‍යවරු දෙන්නෙක් කියවනවා.",
   stats: [
-    { label: "Emergency සහ OPD", desc: "හැම සේවාවක්ම, හැම පැයකම, අවුරුද්දේ හැම දිනකම විවෘත." },
-    { label: "සේවාවන්", desc: "Emergency සත්කාරයේ ඉඳන් Fertility දක්වා, එක වහලක් යට." },
+    { label: "හදිසි ප්‍රතිකාර", desc: "Accident සහ Emergency සත්කාරය, හැම පැයකම, අවුරුද්දේ හැම දිනකම." },
+    { label: "සේවාවන්", desc: "Emergency සත්කාරයේ ඉඳන් කාන්තා සෞඛ්‍යය දක්වා, එක වහලක් යට." },
     { label: "මහල් රෝහල", desc: "මීගමුවේ මේ සඳහාම ඉදිකළ, Ambulance Bay සහ වැසුණු පිවිසුමක් සමඟ." },
     { label: "Cleaning Cycle එක", desc: "හැම මතුපිටක්ම, US Specification එකට Clean කරනවා." },
     { label: "Home Visit වාහන", desc: "වෛද්‍යවරු, Nurses සහ Lab Technicians ඔබේ දොරටුවට." },

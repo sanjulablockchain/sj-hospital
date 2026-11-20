@@ -139,7 +139,7 @@ export const diagnosticRows = [
   },
   {
     name: "Endoscopy சேவை",
-    note: "Gastroscopy மற்றும் Colonoscopy, அதே Sitting இல் Biopsy உடன்",
+    note: "Gastroscopy மற்றும் Colonoscopy, அதே Sitting இல் Biopsy உடன், பிரிவு திறந்த பின்",
     turnaround: "விரைவில் திறக்கப்படும்",
   },
   {
@@ -262,7 +262,7 @@ export const facilityCards = [
     body: "நீர்கொழும்பில் விசேடமாக கட்டப்பட்ட மருத்துவமனை, Ambulance Bay மற்றும் Outpatients இருவருக்கும் கூரையுள்ள வருகையுடன்.",
   },
   {
-    body: "24 மணி நேர Outpatient பிரிவு, நீங்கள் எப்போது வந்தாலும் Emergency நுழைவுக்கு அருகில் பணியாளர்களுடன்.",
+    body: "Emergency நுழைவுக்கு அருகில் Outpatient பிரிவு, காலை 7.00 முதல் மாலை 6.00 வரை திறந்திருக்கும்; அதன் பின் Emergency பிரிவு உங்களைப் பார்க்கும்.",
   },
   {
     body: "ஒரு நாளுக்கு LKR 9,500 முதல் வார்டுகள் மற்றும் தனியார் அறைகள், அதிக Dependency சிகிச்சைக்கான முழு ICU விரைவில் திறக்கப்படும்.",

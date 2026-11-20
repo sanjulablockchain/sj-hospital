@@ -188,13 +188,13 @@ export const treatments = [
     stay: "Day Case එකක්",
   },
   {
-    name: "Gastroscopy හෝ Colonoscopy",
+    name: "Gastroscopy හෝ Colonoscopy (ළඟදීම)",
     note: "Consultant Anaesthetist කෙනෙක් Sedation දෙනවා, අවශ්‍ය වුනොත් එදිනම Biopsy එකක්",
     stay: "Day Procedure එකක්",
   },
   {
-    name: "Obstetrics සහ ප්‍රසූතිය",
-    note: "Delivery එක දක්වාම Consultant කෙනෙක්, වෙන් වූ Obstetric Theatre එකක් සහ කාමරයේම Neonatal සහාය",
+    name: "Obstetrics සහ ප්‍රසූතිය (ළඟදීම)",
+    note: "Delivery එක දක්වාම Consultant කෙනෙක්, වෙන් වූ Obstetric Theatre එකක් සහ කාමරයේම Neonatal සහාය, Maternity සත්කාරය විවෘත වූ පසු",
     stay: "ඔබේ Consultant සමඟ තහවුරු කරගනී",
   },
   {
@@ -328,7 +328,7 @@ export const faq = [
   },
   {
     q: "පවුලේ කෙනෙකුට මා එක්ක රැඳී සිටින්න පුළුවන්ද?",
-    a: "ඔව්. Wards වල සිට Super Deluxe දක්වා සෑම කාමර Category එකකම Bystander ඇඳක් සහ පුටුවක් තියෙනවා, එක් Attendant කෙනෙකුට රාත්‍රිය රැඳී සිටිය හැක. Admission එකේදී සටහන් කරගත් Dietary Order එකට ආහාර සකසනවා. සාමාන්‍ය Wards දහවල් Visiting සඳහා විවෘතයි; Critical Care Visiting Unit Desk එක තහවුරු කරන නිශ්චිත වේලාවන් වලට සීමායි, පවුලේ කෙනෙකුට Unit එකෙන් දිනකට වරක් යාවත්කාලීන කිරීමක් Call කරනවා.",
+    a: "ඔව්. Wards වල සිට Super Deluxe දක්වා සෑම කාමර Category එකකම Bystander ඇඳක් සහ පුටුවක් තියෙනවා, එක් Attendant කෙනෙකුට රාත්‍රිය රැඳී සිටිය හැක. Admission එකේදී සටහන් කරගත් Dietary Order එකට ආහාර සකසනවා. සාමාන්‍ය Wards දහවල් Visiting සඳහා විවෘතයි; Critical Care Unit එක විවෘත වූ පසු, එහි Visiting Unit Desk එක තහවුරු කරන නිශ්චිත වේලාවන් වලට සීමා වන අතර, පවුලේ කෙනෙකුට දිනකට වරක් යාවත්කාලීන කිරීමක් Call කරනවා.",
   },
   {
     q: "මගේ Insurance එක මෙතන වැඩ කරනවද?",
@@ -348,7 +348,7 @@ export const faq = [
   },
   {
     q: "සැත්කමකින් පස්සේ මට කොපමණ ඉක්මනින් ගෙදර පියාසර කරන්න පුළුවන්ද?",
-    a: "ඒක තියෙන්නේ Operation එක මතම, ඒ නිසා ආපසු Ticket එක Book කරන්න කලින් ඔබේ Surgeon ලවා අහන්න, වෙනස් කරගත හැකි Ticket එකක් තෝරන්න. Recovery එක ඔබේ Flight එකට වඩා දිගු වුනොත්, ඔබ ගමන් කරාට පස්සේත් Telemedicine එකයි එකම වෛද්‍යවරයා සම්බන්ධව තියාගන්නේ: Video එකෙන් හෝ Phone එකෙන් දිනපතා වෙන් කරගත හැකි Review එකක්, ඔබේ Chart එක කවදාවත් නොදැක්ක කෙනෙක් සමඟ අලුතින් පටන් ගන්නවා වෙනුවට.",
+    a: "ඒක තියෙන්නේ Operation එක මතම, ඒ නිසා ආපසු Ticket එක Book කරන්න කලින් ඔබේ Surgeon ලවා අහන්න, වෙනස් කරගත හැකි Ticket එකක් තෝරන්න. Recovery එක ඔබේ Flight එකට වඩා දිගු වුනොත්, ඔබ ගමන් කරාට පස්සේත් ළඟදීම එන Telemedicine එකෙන් එකම වෛද්‍යවරයා සම්බන්ධව තියාගනීවි, ඔබේ Chart එක කවදාවත් නොදැක්ක කෙනෙක් සමඟ අලුතින් පටන් ගන්නවා වෙනුවට.",
   },
 ];
 

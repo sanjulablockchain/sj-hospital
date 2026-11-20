@@ -79,7 +79,7 @@ export const tickerItems: readonly string[] = [
   "Notes on your hospital file",
   "Elders, infants and post-operative care",
   "Medicine from our own counter",
-  "Video and phone consultations",
+  "Video and phone consultations, coming soon",
 ];
 
 /**

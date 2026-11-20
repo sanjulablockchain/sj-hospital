@@ -126,8 +126,8 @@ export const whoWeAre = {
     {
       icon: "clock",
       value: "24/7",
-      label: "Emergency and OPD",
-      desc: "Every service open, every hour, every day of the year.",
+      label: "Emergency",
+      desc: "Accident and emergency care, every hour, every day of the year.",
       tone: "red",
       href: "/services/accident-emergency",
     },
