@@ -63,7 +63,7 @@ export function LocationMap({ ariaLabel }: { ariaLabel: string }) {
         .addTo(map)
         .bindPopup(
           `<div style="font-family:inherit;min-width:180px;">
-            <p style="margin:0 0 6px;font-weight:700;color:#1e1b2e;">St. Joseph Hospital Negombo</p>
+            <p style="margin:0 0 6px;font-weight:700;color:#0b1a40;">St. Joseph Hospital Negombo</p>
             <a href="${directionsUrl}" target="_blank" rel="noopener noreferrer"
               style="color:var(--home-accent);font-weight:600;text-decoration:none;">Get Directions &rarr;</a>
           </div>`

@@ -22,12 +22,12 @@ export function jobApplicationEmailHtml(input: JobApplicationInput, cvFileName: 
     .map((row) => {
       const value = escapeHtml(row.value);
       const cell = row.mailto
-        ? `<a href="mailto:${value}" style="color:#14769f;text-decoration:none;font-weight:600;">${value}</a>`
+        ? `<a href="mailto:${value}" style="color:#0058c2;text-decoration:none;font-weight:600;">${value}</a>`
         : value;
       return `
       <tr>
-        <td style="padding:0 12px 12px 0;width:112px;font-size:13px;font-weight:700;color:#5b6472;vertical-align:top;">${escapeHtml(row.label)}</td>
-        <td style="padding:0 0 12px;font-size:14px;color:#1e1b2e;${row.emphasise ? "font-weight:700;" : ""}">${cell}</td>
+        <td style="padding:0 12px 12px 0;width:112px;font-size:13px;font-weight:700;color:#46506b;vertical-align:top;">${escapeHtml(row.label)}</td>
+        <td style="padding:0 0 12px;font-size:14px;color:#0b1a40;${row.emphasise ? "font-weight:700;" : ""}">${cell}</td>
       </tr>`;
     })
     .join("");
@@ -40,18 +40,18 @@ export function jobApplicationEmailHtml(input: JobApplicationInput, cvFileName: 
       ${rowsHtml}
     </table>
 
-    <div style="background-color:#f4f6fa;border-radius:12px;padding:18px 20px;margin-bottom:20px;">
-      <p style="margin:0 0 6px;font-size:12px;font-weight:700;color:#5b6472;text-transform:uppercase;letter-spacing:0.5px;">Anything we should know</p>
-      <p style="margin:0;font-size:14px;line-height:1.6;color:#1e1b2e;">${note}</p>
+    <div style="background-color:#f3f7fd;border-radius:12px;padding:18px 20px;margin-bottom:20px;">
+      <p style="margin:0 0 6px;font-size:12px;font-weight:700;color:#46506b;text-transform:uppercase;letter-spacing:0.5px;">Anything we should know</p>
+      <p style="margin:0;font-size:14px;line-height:1.6;color:#0b1a40;">${note}</p>
     </div>
 
     <div style="border:1px solid rgba(30,27,46,0.1);border-radius:12px;padding:14px 16px;margin-bottom:20px;">
-      <p style="margin:0;font-size:13px;color:#1e1b2e;">
+      <p style="margin:0;font-size:13px;color:#0b1a40;">
         <span style="font-weight:700;">CV attached:</span> ${fileName}
       </p>
     </div>
 
-    <p style="margin:0;font-size:12px;line-height:1.6;color:#5b6472;">
+    <p style="margin:0;font-size:12px;line-height:1.6;color:#46506b;">
       The applicant ticked the consent box: this application may be held for six months and the
       applicant contacted about comparable vacancies. Their current employer must not be approached
       without written permission.
