@@ -1,6 +1,5 @@
-import Image from "next/image";
 import { FacebookIcon, InstagramIcon, LinkedInIcon, WhatsAppIcon } from "@/components/ui/BrandIcons";
-import { LOGO_LOCKUP_BRAND } from "@/config/brand";
+import { LogoLockup } from "@/components/layout/LogoLockup";
 import { LocaleLink } from "@/components/i18n/LocaleLink";
 import { ChromeText } from "@/components/i18n/ChromeText";
 import { AffiliationMark } from "@/components/layout/AffiliationMark";
@@ -53,14 +52,7 @@ export function ThemedFooter({ columns, reachUsLabel, id = "contact" }: ThemedFo
     <footer id={id} className="mx-auto max-w-[1440px] px-5 pb-10 pt-26 sm:px-8 lg:px-11">
       <div className="flex flex-wrap items-start justify-between gap-13">
         <div className="max-w-[34ch]">
-          <Image
-            src={LOGO_LOCKUP_BRAND.src}
-            alt="St. Joseph Hospital"
-            width={LOGO_LOCKUP_BRAND.width}
-            height={LOGO_LOCKUP_BRAND.height}
-            data-logo
-            className="-mx-4 -mt-2 block h-16 w-auto self-start"
-          />
+          <LogoLockup alt="St. Joseph Hospital" className="h-10.5 w-auto" />
           <p className="mt-4.5 text-[15px] leading-[1.62] text-[var(--home-muted)]">
             <ChromeText id="tagline" />
           </p>

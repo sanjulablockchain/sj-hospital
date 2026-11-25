@@ -92,7 +92,7 @@ test("news titles are unique, since the grid keys on them", () => {
 // These three files ship in public/images and carry other pages on the site;
 // the reference's own fallbacks pointed at paths that do not exist here.
 test("every gallery image is a repo asset with alt text and a credit", () => {
-  const known = ["/images/hero-exterior.jpg", "/images/career-staff.jpg", "/images/logo-mark.png"];
+  const known = ["/images/hero-exterior.jpg", "/images/career-staff.jpg", "/images/logo-mark-2026.svg"];
   assert.deepEqual(
     gallery.map((shot) => shot.src),
     known,
@@ -122,7 +122,7 @@ test("no photograph of an identifiable patient is used on the press page", () =>
 
 // The logo mark must not be cropped to a 4:3 box like the two photographs.
 test("the logo mark is contained, the photographs are covered", () => {
-  const mark = gallery.find((shot) => shot.src === "/images/logo-mark.png");
+  const mark = gallery.find((shot) => shot.src === "/images/logo-mark-2026.svg");
   assert.equal(mark?.fit, "contain");
   for (const shot of gallery.filter((s) => s !== mark)) assert.equal(shot.fit, "cover");
 });

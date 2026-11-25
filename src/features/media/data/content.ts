@@ -442,7 +442,7 @@ export const gallery: GalleryShot[] = [
     fit: "cover",
   },
   {
-    src: "/images/logo-mark.png",
+    src: "/images/logo-mark-2026.svg",
     tag: "Brand",
     title: "The hospital mark",
     alt: "The St. Joseph Hospital leaf mark",
