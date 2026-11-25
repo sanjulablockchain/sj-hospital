@@ -21,7 +21,7 @@ type Tile = HomeContent["content"]["community"]["tiles"]["school"];
  */
 function PhotoTile({ tile, focus }: { tile: Tile; focus: string }) {
   return (
-    <div className="group relative overflow-hidden rounded-[20px] bg-[var(--home-surface-2)] shadow-[0_18px_40px_-24px_rgba(26,21,64,0.45)]">
+    <div className="group relative overflow-hidden rounded-[20px] bg-[var(--home-surface-2)] shadow-[0_18px_40px_-24px_rgba(11,26,64,0.45)]">
       <div className="absolute -inset-[22%] -rotate-45">
         <Image
           src={tile.photo}

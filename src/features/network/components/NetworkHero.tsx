@@ -21,7 +21,7 @@ export function NetworkHero({ content }: { content: NetworkContent }) {
   return (
     <section
       id="top"
-      className="relative flex min-h-[calc(84vh-120px)] flex-col overflow-hidden bg-[#0B0826] max-[899px]:min-h-[calc(76vh-120px)]"
+      className="relative flex min-h-[calc(84vh-120px)] flex-col overflow-hidden bg-[#061026] sj-fixed-dark max-[899px]:min-h-[calc(76vh-120px)]"
     >
       <ParallaxLayer
         factor={0.14}
@@ -41,14 +41,14 @@ export function NetworkHero({ content }: { content: NetworkContent }) {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(rgba(12,8,38,0.9) 0%, rgba(12,8,38,0.58) 44%, rgba(12,8,38,0.97) 100%)",
+            "linear-gradient(rgba(6,16,38,0.9) 0%, rgba(6,16,38,0.58) 44%, rgba(6,16,38,0.97) 100%)",
         }}
       />
       <div
         className="animate-sj-sheen absolute inset-0"
         style={{
           background:
-            "radial-gradient(64% 50% at 78% 28%, rgba(82,181,232,0.32) 0%, rgba(12,8,38,0) 66%)",
+            "radial-gradient(64% 50% at 78% 28%, rgba(124,53,207,0.32) 0%, rgba(6,16,38,0) 66%)",
         }}
       />
 
@@ -69,9 +69,9 @@ export function NetworkHero({ content }: { content: NetworkContent }) {
         </div>
 
         <div className="min-w-0 flex-1 pb-11">
-          <div className="animate-sj-up inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#9FD6F5] uppercase">
+          <div className="animate-sj-up inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#9CC8FF] uppercase">
             <span aria-hidden className="h-px w-11 bg-[var(--home-accent)]" />
-            <LocaleLink href="/" className="text-[#9FD6F5] hover:text-white">
+            <LocaleLink href="/" className="text-[#9CC8FF] hover:text-white">
               {hero.breadcrumbHome}
             </LocaleLink>
             <span aria-hidden className="opacity-50">
@@ -120,7 +120,7 @@ export function NetworkHero({ content }: { content: NetworkContent }) {
                   line. */}
               <a
                 href="#matters"
-                className="inline-flex items-center gap-3 border border-white/30 px-6 py-4 text-[15px] font-bold text-white transition-colors hover:bg-white hover:text-[#0B0826]"
+                className="inline-flex items-center gap-3 border border-white/30 px-6 py-4 text-[15px] font-bold text-white transition-colors hover:bg-white hover:text-[#061026]"
               >
                 <span
                   aria-hidden
@@ -133,7 +133,7 @@ export function NetworkHero({ content }: { content: NetworkContent }) {
         </div>
       </div>
 
-      <div className="relative z-10 mt-11 border-t border-white/14 bg-[#0B0826]/55">
+      <div className="relative z-10 mt-11 border-t border-white/14 bg-[#061026]/55 sj-fixed-dark">
         <dl className="mx-auto grid max-w-[1440px] grid-cols-4 px-5 sm:px-8 lg:px-11 max-[899px]:grid-cols-2 max-[640px]:grid-cols-1">
           {heroFacts.map((fact, index) => (
             <div

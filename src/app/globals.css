@@ -13,14 +13,14 @@
 
 @theme inline {
   --color-background: var(--background);
-  --color-primary: #4a2a82;
-  --color-primary-dark: #3a2168;
-  --color-primary-mid: #5e3aa6;
-  --color-accent: #33b4e5;
-  --color-accent-dark: #14769f;
-  --color-surface: #f4f6fa;
-  --color-ink: #1e1b2e;
-  --color-muted: #5b6472;
+  --color-primary: #0043b8;
+  --color-primary-dark: #00358f;
+  --color-primary-mid: #0068d6;
+  --color-accent: #0278f4;
+  --color-accent-dark: #0058c2;
+  --color-surface: #f3f7fd;
+  --color-ink: #0b1a40;
+  --color-muted: #46506b;
   --font-sans: var(--font-plus-jakarta-sans);
   --font-heading: var(--font-sora);
 }
@@ -518,6 +518,11 @@ footer[id] {
      carry a theme-aware class of its own. The success pair is already
      --home-accent-soft, which flips the same way. */
   --home-danger: #ffb4a2;
+  /* The accent for the fixed-dark bands (each page's photo hero), which stay
+     dark in both themes, so this trio never changes with the theme. */
+  --home-accent-fixed: #2ca6f0;
+  --home-accent-fixed-hover: #7fcbff;
+  --home-on-accent-fixed: #04122b;
 }
 
 [data-sj][data-theme="light"] {
@@ -531,95 +536,122 @@ footer[id] {
   --home-danger: #b23a20;
 }
 
-/* ---- Brand palette (home page v4) ----
-   The logo's own purple and sky, light first, switched on by
-   data-palette="brand" on #sj-root (ThemedShell's `palette` prop). Every token
-   the default palette defines is redefined here so the shared chrome (header,
-   footer, toggles, floating rail) follows without knowing which palette it is
-   under; globals.test.ts fails if one is forgotten. Light values live in the
-   first block, dark in the second; data-theme is always set, so the right
-   block always wins. Values are the reference's
-   (docs/superpowers/specs/2026-09-23-home-page-v4-reference.html, its :root
-   and [data-theme="dark"]). */
+/* ---- Brand palette (the 2026 logo) ----
+   Built from the 2026 logo's three colours (owner's decision, 2026-11-25):
+   navy #0043b8 (wordmark, middle leaf), bright blue #0278f4 (top leaf) and
+   violet #7c35cf (bottom leaf, tagline). Navy is the brand: buttons, brand
+   text, ink. The blue is the accent, one shade per theme so it reads as text
+   on either (light #0068d6, 5.3:1 on white; dark #4a9dff, 6.7:1 on the page),
+   with white text on it in light and deep navy text on it in dark. Violet is
+   the glow behind each page's photo hero. Neutrals are navy tinted.
+
+   Switched on by data-palette="brand" on #sj-root (ThemedShell's `palette`
+   prop). Every token the default palette defines is redefined here so the
+   shared chrome (header, footer, toggles, floating rail) follows without
+   knowing which palette it is under; globals.test.ts fails if one is
+   forgotten. Light values live in the first block, dark in the second;
+   data-theme is always set, so the right block always wins. */
 [data-sj][data-palette="brand"] {
-  --home-brand: #45338f;
-  --home-brand-hover: #362872;
-  --home-brand-text: #45338f;
-  --home-accent: #52b5e8;
-  --home-accent-hover: #3fa6dc;
-  --home-accent-soft: #1b7fc0;
-  --home-on-accent: #0f0b30;
-  --home-deep: #231a5c;
-  --home-ink: #1a1540;
+  --home-brand: #0043b8;
+  --home-brand-hover: #00358f;
+  --home-brand-text: #0043b8;
+  --home-accent: #0068d6;
+  --home-accent-hover: #0057b8;
+  --home-accent-soft: #0058c2;
+  --home-on-accent: #ffffff;
+  /* The fixed-dark bands' accent: the dark theme's blue in both themes. */
+  --home-accent-fixed: #4a9dff;
+  --home-accent-fixed-hover: #7ab4ff;
+  --home-on-accent-fixed: #020a1f;
+  --home-violet: #7c35cf;
+  --home-deep: #0a2a73;
+  --home-ink: #0b1a40;
   --home-bg: #ffffff;
-  --home-surface: #f5f3fb;
-  --home-surface-2: #f0edfa;
-  --home-sky-bg: #eaf6fd;
-  --home-sky-bg-2: #dff1fc;
-  --home-heading: #1a1540;
-  --home-body: #2e2a55;
-  --home-muted: #4a4668;
-  --home-muted-2: #5a5775;
-  --home-hairline: rgba(26, 21, 64, 0.12);
-  --home-hairline-strong: rgba(26, 21, 64, 0.2);
-  --home-chip-on: #1a1540;
+  --home-surface: #f3f7fd;
+  --home-surface-2: #edf3fc;
+  --home-sky-bg: #eaf3ff;
+  --home-sky-bg-2: #dcebff;
+  --home-heading: #0b1a40;
+  --home-body: #24304f;
+  --home-muted: #46506b;
+  --home-muted-2: #5a6380;
+  --home-hairline: rgba(11, 26, 64, 0.12);
+  --home-hairline-strong: rgba(11, 26, 64, 0.2);
+  --home-chip-on: #0b1a40;
   --home-chip-on-fg: #ffffff;
   --home-fade-a: rgba(255, 255, 255, 0.97);
   --home-fade-b: rgba(255, 255, 255, 0.88);
   --home-fade-c: rgba(255, 255, 255, 0);
   --home-dot: rgba(255, 255, 255, 0.95);
   /* Outlined buttons fill with ink and go white on hover in both themes. */
-  --home-invert-bg: #1a1540;
+  --home-invert-bg: #0b1a40;
   --home-invert-fg: #ffffff;
-  --home-accent-tint: rgba(82, 181, 232, 0.1);
-  --home-accent-tint-soft: rgba(82, 181, 232, 0.06);
+  --home-accent-tint: rgba(0, 104, 214, 0.1);
+  --home-accent-tint-soft: rgba(0, 104, 214, 0.06);
   --home-danger: #b23a20;
   --home-cta-bg: var(--home-brand);
   --home-cta-fg: #ffffff;
   --home-cta-hover: var(--home-brand-hover);
-  /* Header chrome: the reference's 97% white bar and flat panels. */
+  /* Header chrome: a 97% white bar and flat panels. Over the hero the
+     transparent header's small accent text takes the hero kicker blue. */
+  --sj-chrome-accent: #9cc8ff;
   --sj-chrome-solid-bg: rgba(255, 255, 255, 0.97);
   --sj-chrome-hairline-accent: var(--home-hairline);
   --sj-chrome-panel-bg: #ffffff;
-  --sj-chrome-panel-frame-bg: #f5f3fb;
+  --sj-chrome-panel-frame-bg: #f3f7fd;
   --sj-chrome-col-tint: transparent;
   --sj-header-h: 84px;
 }
 
 [data-sj][data-palette="brand"][data-theme="dark"] {
-  --home-brand-text: #b3a6f5;
-  --home-accent-soft: #6cc4f0;
-  --home-bg: #110c30;
-  --home-surface: #1a1444;
-  --home-surface-2: #261e57;
-  --home-sky-bg: #0f1c3e;
-  --home-sky-bg-2: #13264d;
-  --home-heading: #f2f0fb;
-  --home-body: #d8d4ee;
-  --home-muted: #b9b4d6;
-  --home-muted-2: #a19cc2;
+  --home-brand-text: #9dbeff;
+  --home-accent: #4a9dff;
+  --home-accent-hover: #7ab4ff;
+  --home-accent-soft: #7ab4ff;
+  --home-on-accent: #020a1f;
+  --home-bg: #07122e;
+  --home-surface: #0d1c45;
+  --home-surface-2: #14275a;
+  --home-sky-bg: #0b1f4a;
+  --home-sky-bg-2: #102a5c;
+  --home-heading: #f0f4fc;
+  --home-body: #d3dcef;
+  --home-muted: #aeb9d3;
+  --home-muted-2: #95a2c0;
   --home-hairline: rgba(255, 255, 255, 0.12);
   --home-hairline-strong: rgba(255, 255, 255, 0.25);
-  --home-chip-on: #52b5e8;
-  --home-chip-on-fg: #0f0b30;
-  --home-fade-a: rgba(17, 12, 48, 0.97);
-  --home-fade-b: rgba(17, 12, 48, 0.86);
-  --home-fade-c: rgba(17, 12, 48, 0);
-  --home-dot: rgba(82, 181, 232, 0.18);
+  --home-chip-on: #4a9dff;
+  --home-chip-on-fg: #020a1f;
+  --home-fade-a: rgba(7, 18, 46, 0.97);
+  --home-fade-b: rgba(7, 18, 46, 0.86);
+  --home-fade-c: rgba(7, 18, 46, 0);
+  --home-dot: rgba(74, 157, 255, 0.18);
+  --home-accent-tint: rgba(74, 157, 255, 0.1);
+  --home-accent-tint-soft: rgba(74, 157, 255, 0.06);
   --home-danger: #ffb4a2;
-  --sj-chrome-solid-bg: rgba(17, 12, 48, 0.94);
-  --sj-chrome-panel-bg: #110c30;
-  --sj-chrome-panel-frame-bg: #1a1444;
+  --sj-chrome-solid-bg: rgba(7, 18, 46, 0.94);
+  --sj-chrome-panel-bg: #07122e;
+  --sj-chrome-panel-frame-bg: #0d1c45;
   color-scheme: dark;
 }
 
-/* The lockup keeps its own colours on both themes (owner's decision,
-   2026-09-23; the reference inverted it to white on dark). `data-logo` stays
-   on the images as a hook, with no rule attached. */
+/* The lockup has a light and a dark variant (`LogoLockup`); `data-logo`
+   stays on the images as a hook, with no rule attached. */
+
+/* Fixed-dark bands (each page's photo hero and its dark content bands, painted
+   with the #061026 / #0b1a40 literals) stay dark in both themes, so inside
+   them the accent is the dark theme's light blue whatever the theme: the light
+   theme's deep blue would read at about 3.5:1 there. Every element painted
+   with those two backgrounds carries this class. */
+[data-sj] .sj-fixed-dark {
+  --home-accent: var(--home-accent-fixed);
+  --home-accent-hover: var(--home-accent-fixed-hover);
+  --home-on-accent: var(--home-on-accent-fixed);
+}
 
 /* The solid header variant (ThemedShell `header="solid"`): in normal flow and
    sticky, always in its solid state. Nav triggers take the reference's 14px
-   bold and its lavender hover wash only under the brand palette, so the
+   bold and a tinted hover wash only under the brand palette, so the
    transparent header on every other page is untouched. */
 [data-sj] .sj-header-solid {
   position: sticky;
@@ -1106,7 +1138,7 @@ footer[id] {
 @media (hover: hover) {
   [data-sj] .sj-card-lift:hover {
     transform: translateY(-6px);
-    box-shadow: 0 26px 48px -26px rgba(26, 21, 64, 0.45);
+    box-shadow: 0 26px 48px -26px rgba(11, 26, 64, 0.45);
   }
 
   [data-sj] .sj-card-lift:hover .sj-card-zoom,

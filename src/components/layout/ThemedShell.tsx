@@ -9,7 +9,7 @@ type ThemedShellProps = {
   children: ReactNode;
   className?: string;
   /**
-   * `"brand"` switches every `--home-*` token to the logo purple and sky set
+   * `"brand"` switches every `--home-*` token to the 2026 logo navy, blue and violet set
    * (globals.css, `[data-sj][data-palette="brand"]`). Omitted, the page keeps
    * the default navy palette. The home page is the first to use it.
    */

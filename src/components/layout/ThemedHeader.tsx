@@ -44,7 +44,7 @@ const SOLID_AFTER_PX = 24;
  * The `"solid"` variant (the v4 home page) skips the transparent state: it is
  * `data-solid` from the first paint, sticky in normal flow rather than fixed
  * over the hero, and shows the horizontal lockup. Book now paints from the
- * `--home-cta-*` pair so the brand palette can turn it purple while every
+ * `--home-cta-*` pair so the brand palette can turn it navy while every
  * other page keeps the accent.
  *
  * `--sj-header-h` (globals.css) is this bar's height. The heroes pad by it and

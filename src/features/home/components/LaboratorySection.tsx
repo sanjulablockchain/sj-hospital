@@ -55,7 +55,7 @@ export function LaboratorySection({
           </div>
           <RevealStagger
             stepMs={70}
-            className="grid grid-cols-1 gap-px overflow-hidden rounded-[14px] bg-[var(--home-hairline)] shadow-[0_24px_50px_-30px_rgba(26,21,64,0.35)] sm:grid-cols-2"
+            className="grid grid-cols-1 gap-px overflow-hidden rounded-[14px] bg-[var(--home-hairline)] shadow-[0_24px_50px_-30px_rgba(11,26,64,0.35)] sm:grid-cols-2"
           >
             {tiles.map((tile) => (
               <div key={tile} className="sj-tint-row flex min-w-0 items-center gap-3 bg-[var(--home-bg)] px-5 py-5 sm:px-6 sm:py-6">

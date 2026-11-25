@@ -37,19 +37,19 @@ export function HeroSection({
       <div
         className="pointer-events-none absolute inset-0"
         style={{
-          background: "linear-gradient(rgba(12,8,38,0.84) 0%, rgba(12,8,38,0.4) 40%, rgba(12,8,38,0.95) 100%)",
+          background: "linear-gradient(rgba(6,16,38,0.84) 0%, rgba(6,16,38,0.4) 40%, rgba(6,16,38,0.95) 100%)",
         }}
       />
       <div
         className="animate-sj-sheen pointer-events-none absolute inset-0"
         style={{
-          background: "radial-gradient(70% 55% at 78% 26%, rgba(82,181,232,0.34) 0%, rgba(12,8,38,0) 66%)",
+          background: "radial-gradient(70% 55% at 78% 26%, rgba(124,53,207,0.34) 0%, rgba(6,16,38,0) 66%)",
         }}
       />
       <div
         className="animate-sj-scan pointer-events-none absolute inset-x-0 top-0 h-[14%]"
         style={{
-          background: "linear-gradient(rgba(159,214,245,0) 0%, rgba(159,214,245,0.16) 60%, rgba(159,214,245,0) 100%)",
+          background: "linear-gradient(rgba(156,200,255,0) 0%, rgba(156,200,255,0.16) 60%, rgba(156,200,255,0) 100%)",
         }}
       />
     </>
@@ -65,7 +65,7 @@ export function HeroSection({
   );
 
   return (
-    <section id="top" className="relative flex min-h-[calc(100vh-120px)] flex-col overflow-hidden bg-[#0B0826]">
+    <section id="top" className="relative flex min-h-[calc(100vh-120px)] flex-col overflow-hidden bg-[#061026] sj-fixed-dark">
       <HeroSlideshow
         slides={slides}
         intervalMs={intervalMs}

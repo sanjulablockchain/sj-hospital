@@ -59,7 +59,7 @@ function HospitalCard({ hospital }: { hospital: Hospital }) {
         className="flex h-full min-w-0 flex-col scroll-mt-[calc(var(--sj-header-h)+16px)]"
       >
         {open && hospital.photo ? (
-          <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#0B0826]">
+          <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#061026] sj-fixed-dark">
             <Image
               src={hospital.photo}
               alt={hospital.photoAlt ?? hospital.name}

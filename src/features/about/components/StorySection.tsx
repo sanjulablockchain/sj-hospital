@@ -29,7 +29,7 @@ export function StorySection({ content }: { content: AboutContent }) {
         </Reveal>
 
         <Reveal>
-          <div className="relative aspect-[4/3] overflow-hidden bg-[#1A1540]">
+          <div className="relative aspect-[4/3] overflow-hidden bg-[#0B1A40] sj-fixed-dark">
             <Image
               src="/images/about-facility.jpg"
               alt="The St. Joseph Hospital building in Negombo"

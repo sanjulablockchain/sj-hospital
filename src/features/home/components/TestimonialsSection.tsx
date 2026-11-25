@@ -110,7 +110,7 @@ export function TestimonialsSection({
                 aria-label={ariaNext}
                 onClick={() => step(1)}
                 // The reference draws this box with the theme's ink border over a
-                // fixed #1A1540 fill, so on the dark theme the border stays light
+                // fixed #0B1A40 fill, so on the dark theme the border stays light
                 // and the box is still visible against the lavender card.
                 className="flex h-12 w-12 items-center justify-center border-[1.5px] border-[var(--home-heading)] bg-[var(--home-ink)] text-white transition-colors hover:border-[var(--home-brand)] hover:bg-[var(--home-brand)]"
               >
@@ -119,7 +119,7 @@ export function TestimonialsSection({
             </div>
           </div>
         </div>
-        <div className="relative h-[360px] overflow-hidden shadow-[0_30px_60px_-30px_rgba(26,21,64,0.45)] sm:h-[540px]">
+        <div className="relative h-[360px] overflow-hidden shadow-[0_30px_60px_-30px_rgba(11,26,64,0.45)] sm:h-[540px]">
           <div ref={photoRef} style={{ transform: `translateY(${photoOffset}px)` }} className="absolute inset-x-0 -inset-y-[12%]">
             <Image src={photo} alt={photoAlt} fill sizes="(min-width: 960px) 50vw, 100vw" className="object-cover" />
           </div>

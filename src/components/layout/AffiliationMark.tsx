@@ -57,7 +57,7 @@ export function AffiliationMark({
       <span className="flex min-w-0 flex-col gap-0.5">
         <span
           className={`whitespace-nowrap text-[10.5px] font-bold tracking-[0.2em] uppercase ${
-            dark ? "text-[#9FD6F5]" : "text-[var(--home-accent)]"
+            dark ? "text-[#9CC8FF]" : "text-[var(--home-accent)]"
           }`}
         >
           {AFFILIATION.caption}
@@ -65,7 +65,7 @@ export function AffiliationMark({
         <span
           className={`text-[14px] leading-[1.3] font-extrabold transition-colors ${
             dark
-              ? "text-white group-hover:text-[#9FD6F5]"
+              ? "text-white group-hover:text-[#9CC8FF]"
               : "text-[var(--home-heading)] group-hover:text-[var(--home-accent-soft)]"
           }`}
         >

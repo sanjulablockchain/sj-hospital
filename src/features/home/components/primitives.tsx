@@ -24,7 +24,7 @@ export const displayHeading =
 type PillVariant = "brand" | "outline" | "accent" | "surface";
 
 /**
- * The reference's four pill buttons. `brand` fills purple and darkens on
+ * The reference's four pill buttons. `brand` fills navy and darkens on
  * hover; `outline` is a 1.5px ink border that fills ink on hover (the
  * `sj-invert` tokens); `accent` fills sky; `surface` is white on a brand
  * background. Height and padding vary per band, so the caller adds them.

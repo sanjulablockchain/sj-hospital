@@ -30,7 +30,7 @@ export function InternationalCareSection({
   locale: Locale;
 }) {
   const badge =
-    "sj-card-lift group/badge absolute flex items-center justify-center rounded-full shadow-[0_16px_30px_-14px_rgba(26,21,64,0.4)] hover:z-10";
+    "sj-card-lift group/badge absolute flex items-center justify-center rounded-full shadow-[0_16px_30px_-14px_rgba(11,26,64,0.4)] hover:z-10";
   const badgeIcon = "transition-transform duration-500 group-hover/badge:rotate-[-8deg] group-hover/badge:scale-110 motion-reduce:transition-none";
 
   return (
@@ -83,7 +83,7 @@ export function InternationalCareSection({
           </ParallaxLayer>
           {/* Depth 2: the photograph, drifting slowly inside its ring and easing up on hover. */}
           <ParallaxLayer factor={0.03} maxOffsetPx={18} className="relative aspect-square w-[min(82%,480px)]">
-            <div className="group relative h-full w-full overflow-hidden rounded-full border-[10px] border-white shadow-[0_30px_60px_-30px_rgba(26,21,64,0.45)] transition-shadow duration-500 hover:shadow-[0_40px_80px_-30px_rgba(26,21,64,0.6)]">
+            <div className="group relative h-full w-full overflow-hidden rounded-full border-[10px] border-white shadow-[0_30px_60px_-30px_rgba(11,26,64,0.45)] transition-shadow duration-500 hover:shadow-[0_40px_80px_-30px_rgba(11,26,64,0.6)]">
               <ParallaxLayer factor={0.05} maxOffsetPx={30} className="absolute inset-x-0 -inset-y-[10%]">
                 <Image src={content.photo} alt={content.photoAlt} fill sizes="(min-width: 1024px) 40vw, 90vw" className="sj-card-zoom object-cover" />
               </ParallaxLayer>
@@ -92,7 +92,7 @@ export function InternationalCareSection({
           {/* Depths 3 to 5: the badges sink at increasing rates. */}
           <ParallaxLayer factor={0.08} maxOffsetPx={44} className="pointer-events-none absolute inset-0">
             <div
-              className={`${badge} pointer-events-auto top-[12%] left-[4%] h-[92px] w-[92px] bg-[var(--home-brand)] text-white shadow-[0_16px_30px_-14px_rgba(69,51,143,0.7)] hover:bg-[var(--home-brand-hover)]`}
+              className={`${badge} pointer-events-auto top-[12%] left-[4%] h-[92px] w-[92px] bg-[var(--home-brand)] text-white shadow-[0_16px_30px_-14px_rgba(0,67,184,0.7)] hover:bg-[var(--home-brand-hover)]`}
             >
               <span aria-hidden className={badgeIcon}>
                 <HomeIcon name="plane" size={40} stroke={1.5} />
@@ -112,7 +112,7 @@ export function InternationalCareSection({
             </div>
           </ParallaxLayer>
           <ParallaxLayer factor={0.16} maxOffsetPx={64} className="pointer-events-none absolute inset-0">
-            <div className="sj-card-lift group/badge pointer-events-auto absolute bottom-[10%] left-[10%] flex items-center gap-3 rounded-[12px] bg-[var(--home-bg)] px-4.5 py-3.5 shadow-[0_16px_30px_-14px_rgba(26,21,64,0.4)] hover:z-10">
+            <div className="sj-card-lift group/badge pointer-events-auto absolute bottom-[10%] left-[10%] flex items-center gap-3 rounded-[12px] bg-[var(--home-bg)] px-4.5 py-3.5 shadow-[0_16px_30px_-14px_rgba(11,26,64,0.4)] hover:z-10">
               <span className={`text-[var(--home-brand-text)] ${badgeIcon}`}>
                 <HomeIcon name="shield" size={28} stroke={1.7} />
               </span>

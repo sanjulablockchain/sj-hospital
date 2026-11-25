@@ -19,21 +19,21 @@ export function PolicyHero({ locale }: { locale: Locale }) {
   return (
     <section
       id="top"
-      className="relative flex min-h-[calc(52vh-120px)] flex-col overflow-hidden bg-[#0B0826]"
+      className="relative flex min-h-[calc(52vh-120px)] flex-col overflow-hidden bg-[#061026] sj-fixed-dark"
     >
       <div
         className="animate-sj-sheen absolute inset-0"
         style={{
           background:
-            "radial-gradient(64% 50% at 80% 26%, rgba(82,181,232,0.3) 0%, rgba(12,8,38,0) 66%)",
+            "radial-gradient(64% 50% at 80% 26%, rgba(124,53,207,0.3) 0%, rgba(6,16,38,0) 66%)",
         }}
       />
 
       <div className="relative z-10 mx-auto mt-auto flex w-full max-w-[1440px] px-5 pb-11 sm:px-8 lg:px-11">
         <div className="flex-1">
-          <div className="animate-sj-up inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#9FD6F5] uppercase">
+          <div className="animate-sj-up inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#9CC8FF] uppercase">
             <span aria-hidden className="h-px w-11 bg-[var(--home-accent)]" />
-            <Link href={localePath("/", locale)} className="text-[#9FD6F5] hover:text-white">
+            <Link href={localePath("/", locale)} className="text-[#9CC8FF] hover:text-white">
               {navLabel("Home", locale)}
             </Link>
             <span aria-hidden className="opacity-50">
