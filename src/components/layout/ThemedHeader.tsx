@@ -88,7 +88,7 @@ export function ThemedHeader({ sections, variant = "fixed" }: ThemedHeaderProps)
             <LogoLockup
               alt="St. Joseph Hospital, to live is a privilege"
               className="h-7.5 w-auto sm:h-10.5"
-              preload
+              compactBelowSm
             />
           ) : (
             <>

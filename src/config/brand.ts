@@ -18,11 +18,16 @@ export const LOGO_MARK = {
  * Horizontal lockup: mark, wordmark and tagline, trimmed tight to the
  * artwork. `darkSrc` is the dark theme variant: the same mark, with the
  * wordmark and tagline in white (the navy wordmark reads at about 2.2:1 on
- * the dark surfaces). Render it through `LogoLockup`, which swaps the two.
+ * the dark surfaces). The `compact` pair drops the tagline for the mobile
+ * header, with the wordmark moved down 28 units so its capitals centre on
+ * the leaf; same canvas, so the same width and height apply. Render them
+ * through `LogoLockup`, which shows the right one.
  */
 export const LOGO_LOCKUP = {
   src: "/images/logo-lockup-2026.svg",
   darkSrc: "/images/logo-lockup-2026-dark.svg",
+  compactSrc: "/images/logo-lockup-2026-compact.svg",
+  compactDarkSrc: "/images/logo-lockup-2026-compact-dark.svg",
   width: 1575,
   height: 306,
 } as const;
