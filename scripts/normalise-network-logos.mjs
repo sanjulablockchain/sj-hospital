@@ -5,9 +5,11 @@
 // transparent canvas, padded so nothing touches the tile edge. The card renders
 // them on a solid white chip, so marks that arrive on an opaque white
 // background (St. Gianna, LAIPT, Human Compass MSO) need no alpha surgery: the
-// white simply meets the white of the chip. That is why this script does not
-// repeat the flood-fill and un-composite treatment that `logo-mark.png` needed,
-// which exists because that mark sits directly on the dark theme.
+// white simply meets the white of the chip, and no alpha surgery is needed.
+//
+// St. Joseph's own tile is rendered from the 2026 traced mark
+// (`logo-mark-2026.svg`, rasterised at high density) and written as
+// `st-joseph-2026.png`, a new filename so cached copies of the old mark drop.
 //
 // sharp is not a declared dependency. It is resolved from the repository's
 // node_modules, where Next installs it for image optimisation. Run from the
@@ -27,7 +29,7 @@ const SCRATCH = "C:/Users/User/AppData/Local/Temp/claude/c--dev-sj-hospital/0400
 
 /** slug -> source file. Order matches the cards' reading order on the page. */
 const SOURCES = {
-  "st-joseph": "public/images/logo-mark.png",
+  "st-joseph": "public/images/logo-mark-2026.svg",
   acig: "public/images/partners/partner-4.png",
   "kids-and-teens": "public/images/kids-teens-logo.png",
   "st-gianna": `${SCRATCH}/sgm.png`,
@@ -38,11 +40,14 @@ const SOURCES = {
   "blockchain-bpo": "public/images/partners/partner-2.png",
 };
 
+/** slug -> output basename, where a replaced logo needed a new filename. */
+const OUT_NAMES = { "st-joseph": "st-joseph-2026" };
+
 await mkdir(OUT_DIR, { recursive: true });
 
 for (const [slug, src] of Object.entries(SOURCES)) {
-  const out = path.join(OUT_DIR, `${slug}.png`);
-  await sharp(src)
+  const out = path.join(OUT_DIR, `${OUT_NAMES[slug] ?? slug}.png`);
+  await sharp(src, src.endsWith(".svg") ? { density: 600 } : {})
     .resize(SIZE - PAD * 2, SIZE - PAD * 2, {
       fit: "contain",
       background: { r: 0, g: 0, b: 0, alpha: 0 },

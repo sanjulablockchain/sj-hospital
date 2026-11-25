@@ -168,7 +168,7 @@ export const orgGroups: OrgGroup[] = [
     orgs: [
       {
         slug: "st-joseph",
-        logo: "/images/network/logos/st-joseph.png",
+        logo: "/images/network/logos/st-joseph-2026.png",
         wordmark: "St. Joseph Hospital",
         badge: "You are here",
         name: "St. Joseph Hospital Negombo",
