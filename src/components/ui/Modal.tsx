@@ -116,7 +116,7 @@ export function Modal({
         ref={dialogRef}
         aria-labelledby={labelledBy}
         onClose={onClose}
-        className={`fixed inset-0 z-70 m-auto max-w-none overflow-hidden p-0 shadow-none lg:shadow-[0_40px_80px_-30px_rgba(20,10,50,0.45)] ${SIZES[size].dialog} ${SURFACES[surface]}`}
+        className={`fixed inset-0 z-70 m-auto max-w-none overflow-hidden p-0 shadow-none lg:shadow-[0_40px_80px_-30px_rgba(11,26,64,0.45)] ${SIZES[size].dialog} ${SURFACES[surface]}`}
       >
         <div className={`themed-scrollbar overflow-y-auto ${SIZES[size].scroll}`}>
           {title && (

@@ -10,7 +10,7 @@ import type { LaboratoryContent } from "../data/getContent";
  * tests people ask for most, each with its price.
  *
  * Fixed-dark in both themes, with the literal accents every other hero on
- * the site records (`#9FD6F5`, `rgba(82,181,232,…)`): the light theme's
+ * the site records (`#9CC8FF`, `rgba(124,53,207,…)`): the light theme's
  * `--home-accent` would sink into the photograph.
  *
  * `standfirst` and `facts` arrive already filled: the page replaces the
@@ -33,7 +33,7 @@ export function LaboratoryHero({
   return (
     <section
       id="top"
-      className="relative flex min-h-[calc(84vh-120px)] flex-col overflow-hidden bg-[#0B0826] max-[899px]:min-h-[calc(76vh-120px)]"
+      className="relative flex min-h-[calc(84vh-120px)] flex-col overflow-hidden bg-[#061026] sj-fixed-dark max-[899px]:min-h-[calc(76vh-120px)]"
     >
       <ParallaxLayer factor={0.14} maxOffsetPx={100} className="absolute inset-x-0 -top-[14%] h-[128%] overflow-hidden">
         <Image
@@ -48,13 +48,13 @@ export function LaboratoryHero({
       <div
         className="absolute inset-0"
         style={{
-          background: "linear-gradient(rgba(12,8,38,0.9) 0%, rgba(12,8,38,0.5) 42%, rgba(12,8,38,0.96) 100%)",
+          background: "linear-gradient(rgba(6,16,38,0.9) 0%, rgba(6,16,38,0.5) 42%, rgba(6,16,38,0.96) 100%)",
         }}
       />
       <div
         className="animate-sj-sheen absolute inset-0"
         style={{
-          background: "radial-gradient(66% 52% at 78% 26%, rgba(82,181,232,0.32) 0%, rgba(12,8,38,0) 66%)",
+          background: "radial-gradient(66% 52% at 78% 26%, rgba(124,53,207,0.32) 0%, rgba(6,16,38,0) 66%)",
         }}
       />
 
@@ -67,9 +67,9 @@ export function LaboratoryHero({
         </div>
 
         <div className="min-w-0 flex-1 pb-11">
-          <div className="animate-sj-up inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#9FD6F5] uppercase">
+          <div className="animate-sj-up inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#9CC8FF] uppercase">
             <span aria-hidden className="h-px w-11 bg-[var(--home-accent)]" />
-            <LocaleLink href="/" className="text-[#9FD6F5] hover:text-white">
+            <LocaleLink href="/" className="text-[#9CC8FF] hover:text-white">
               {hero.breadcrumbHome}
             </LocaleLink>
             <span aria-hidden className="opacity-50">
@@ -97,7 +97,7 @@ export function LaboratoryHero({
               </a>
               <a
                 href="tel:+94117848484"
-                className="inline-flex items-center gap-3 border border-white/30 px-6 py-4 text-[15px] font-bold whitespace-nowrap text-white tabular-nums transition-colors hover:bg-white hover:text-[#0B0826]"
+                className="inline-flex items-center gap-3 border border-white/30 px-6 py-4 text-[15px] font-bold whitespace-nowrap text-white tabular-nums transition-colors hover:bg-white hover:text-[#061026]"
               >
                 <span aria-hidden className="animate-sj-pulse h-2 w-2 rounded-full bg-[var(--home-accent)]" />
                 {hero.call.value}
@@ -107,7 +107,7 @@ export function LaboratoryHero({
         </div>
       </div>
 
-      <div className="relative z-10 mt-11 border-t border-white/14 bg-[#0B0826]/55">
+      <div className="relative z-10 mt-11 border-t border-white/14 bg-[#061026]/55 sj-fixed-dark">
         <dl className="mx-auto grid max-w-[1440px] grid-cols-4 px-5 sm:px-8 lg:px-11 max-[899px]:grid-cols-2 max-[640px]:grid-cols-1">
           {facts.map((fact, index) => (
             <div key={fact.k} className={`py-5.5 ${index === 0 ? "pr-6" : "px-6"} max-[899px]:px-0 max-[899px]:pr-6`}>

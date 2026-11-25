@@ -1,10 +1,10 @@
 export const EMAIL_BRAND = {
-  primary: "#4a2a82",
-  accent: "#33b4e5",
-  accentDark: "#14769f",
-  surface: "#f4f6fa",
-  ink: "#1e1b2e",
-  muted: "#5b6472",
+  primary: "#0043b8",
+  accent: "#0278f4",
+  accentDark: "#0058c2",
+  surface: "#f3f7fd",
+  ink: "#0b1a40",
+  muted: "#46506b",
 };
 
 export function escapeHtml(value: string) {

@@ -132,7 +132,7 @@ export function HeroSlideshow({
                     isActive ? "animate-sj-up [animation-delay:80ms]" : "invisible"
                   }`}
                 >
-                  <span className="inline-flex items-center gap-3 text-[11.5px] font-extrabold tracking-[0.22em] text-[#9FD6F5] uppercase">
+                  <span className="inline-flex items-center gap-3 text-[11.5px] font-extrabold tracking-[0.22em] text-[#9CC8FF] uppercase">
                     <span aria-hidden className="h-px w-11 bg-[var(--home-accent)]" />
                     {s.kicker}
                   </span>

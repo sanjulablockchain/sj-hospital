@@ -64,7 +64,7 @@ export function PharmacySection({
           </div>
           <RevealStagger
             stepMs={90}
-            className="relative flex flex-col rounded-[14px] bg-[var(--home-bg)] px-5 py-2 shadow-[0_24px_50px_-30px_rgba(26,21,64,0.35)] sm:px-8"
+            className="relative flex flex-col rounded-[14px] bg-[var(--home-bg)] px-5 py-2 shadow-[0_24px_50px_-30px_rgba(11,26,64,0.35)] sm:px-8"
           >
             {content.stats.map((row, i) => (
               <div

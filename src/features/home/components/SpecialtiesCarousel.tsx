@@ -91,7 +91,7 @@ export function SpecialtiesCarousel({
           <HomeIcon name="left" size={22} stroke={2} />
         </button>
 
-        <div className="grid min-w-0 flex-1 gap-8 rounded-[18px] bg-[var(--home-bg)] p-4 shadow-[0_30px_60px_-40px_rgba(26,21,64,0.4)] sm:p-6 [grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))]">
+        <div className="grid min-w-0 flex-1 gap-8 rounded-[18px] bg-[var(--home-bg)] p-4 shadow-[0_30px_60px_-40px_rgba(11,26,64,0.4)] sm:p-6 [grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))]">
           <div ref={photoRef} className="group relative grid min-h-[260px] min-w-0 overflow-hidden rounded-[12px] bg-[#DDE3EE] sm:min-h-[360px]">
             {tabs.map((tab, i) => (
               <div key={tab.group} aria-hidden={i !== index} className={`${stacked} ${i === index ? shown : hidden}`}>

@@ -45,7 +45,7 @@ export function FacilitiesSection({ content }: { content: ServicesContent }) {
         {facilityCards.map((card) => (
           <article
             key={card.index}
-            className="group relative flex min-h-[430px] items-end overflow-hidden bg-[#1A1540]"
+            className="group relative flex min-h-[430px] items-end overflow-hidden bg-[#0B1A40] sj-fixed-dark"
           >
             <ParallaxLayer factor={0.05} maxOffsetPx={26} className="absolute inset-x-0 -top-[8%] h-[116%]">
               <Image
@@ -58,11 +58,11 @@ export function FacilitiesSection({ content }: { content: ServicesContent }) {
             </ParallaxLayer>
             <div
               className="absolute inset-0"
-              style={{ background: "linear-gradient(rgba(26,21,64,0.08) 30%, rgba(26,21,64,0.94) 100%)" }}
+              style={{ background: "linear-gradient(rgba(11,26,64,0.08) 30%, rgba(11,26,64,0.94) 100%)" }}
             />
             <div className="absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-[var(--home-accent)] transition-transform duration-[450ms] group-hover:scale-x-100" />
             <div className="relative p-7 transition-transform duration-500 group-hover:-translate-y-2">
-              <div className="flex flex-wrap items-center gap-3 text-[12px] font-bold tracking-[0.18em] text-[#9FD6F5]">
+              <div className="flex flex-wrap items-center gap-3 text-[12px] font-bold tracking-[0.18em] text-[#9CC8FF]">
                 {card.index}
                 {isComingSoonHref(card.href) && <ComingSoonBadge onDark />}
               </div>
@@ -72,7 +72,7 @@ export function FacilitiesSection({ content }: { content: ServicesContent }) {
               <p className="mt-2.5 text-[14.5px] leading-[1.55] text-white/78">{card.body}</p>
               <LocaleLink
                 href={card.href}
-                className="mt-3.5 inline-flex translate-y-2.5 items-center gap-2 text-[13.5px] font-bold text-[#9FD6F5] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100"
+                className="mt-3.5 inline-flex translate-y-2.5 items-center gap-2 text-[13.5px] font-bold text-[#9CC8FF] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100"
               >
                 {card.linkLabel} <span aria-hidden>&rarr;</span>
               </LocaleLink>

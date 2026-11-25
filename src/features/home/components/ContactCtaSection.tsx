@@ -39,11 +39,11 @@ export function ContactCtaSection({
                 className="h-full w-auto opacity-[0.12]"
               />
             </ParallaxLayer>
-            <span className="relative text-[12px] font-extrabold tracking-[0.2em] text-[#CFE9F8] uppercase">{content.eyebrow}</span>
+            <span className="relative text-[12px] font-extrabold tracking-[0.2em] text-[#CFE0FF] uppercase">{content.eyebrow}</span>
             <h2 className="font-display relative m-0 text-[clamp(42px,5vw,72px)] leading-[0.92] font-extrabold tracking-[-0.04em] uppercase">
               {content.heading}
             </h2>
-            <p className="relative m-0 max-w-[420px] text-[16.5px] leading-[1.6] text-[#EDEAF8]">{content.body}</p>
+            <p className="relative m-0 max-w-[420px] text-[16.5px] leading-[1.6] text-[#E6EDFB]">{content.body}</p>
           </div>
           <RevealStagger stepMs={80} className="flex flex-col border border-[var(--home-hairline)] min-[960px]:border-l-0">
             {content.contactRows.map((row) => {

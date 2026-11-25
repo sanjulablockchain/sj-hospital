@@ -23,7 +23,7 @@ export function ServicesHero({ content }: { content: ServicesContent }) {
   return (
     <section
       id="top"
-      className="relative flex min-h-[calc(86vh-120px)] flex-col overflow-hidden bg-[#0B0826] max-[899px]:min-h-[calc(74vh-120px)]"
+      className="relative flex min-h-[calc(86vh-120px)] flex-col overflow-hidden bg-[#061026] sj-fixed-dark max-[899px]:min-h-[calc(74vh-120px)]"
     >
       <ParallaxLayer
         factor={0.14}
@@ -50,12 +50,12 @@ export function ServicesHero({ content }: { content: ServicesContent }) {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(rgba(12,8,38,0.86) 0%, rgba(12,8,38,0.42) 42%, rgba(12,8,38,0.96) 100%)",
+            "linear-gradient(rgba(6,16,38,0.86) 0%, rgba(6,16,38,0.42) 42%, rgba(6,16,38,0.96) 100%)",
         }}
       />
 
       <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 flex-col justify-end gap-6 px-5 pb-12 sm:px-8 lg:px-11">
-        <div className="animate-sj-up inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#9FD6F5] uppercase">
+        <div className="animate-sj-up inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#9CC8FF] uppercase">
           <span className="h-px w-11 bg-[var(--home-accent)]" />
           {hero.eyebrow}
         </div>

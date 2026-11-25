@@ -18,7 +18,7 @@ const FAN = [
  * <h1>, and from 900px the book itself fanned out on the right.
  *
  * Fixed-dark in both themes, like every page hero: the literals are the
- * brand hero set (`#0B0826` base, `#9FD6F5` eyebrow) the pharmacy and
+ * brand hero set (`#061026` base, `#9CC8FF` eyebrow) the pharmacy and
  * laboratory heroes use, because the light theme's accent would sink into
  * the photograph.
  *
@@ -30,7 +30,7 @@ export function ServiceBookHero({ content }: { content: ServiceBookContent }) {
   return (
     <section
       id="top"
-      className="relative flex min-h-[calc(84vh-120px)] flex-col overflow-hidden bg-[#0B0826] max-[899px]:min-h-[calc(76vh-120px)]"
+      className="relative flex min-h-[calc(84vh-120px)] flex-col overflow-hidden bg-[#061026] sj-fixed-dark max-[899px]:min-h-[calc(76vh-120px)]"
     >
       <ParallaxLayer factor={0.14} maxOffsetPx={100} className="absolute inset-x-0 -top-[14%] h-[128%] overflow-hidden">
         <Image
@@ -46,15 +46,15 @@ export function ServiceBookHero({ content }: { content: ServiceBookContent }) {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(100deg, rgba(12,8,38,0.94) 0%, rgba(12,8,38,0.78) 48%, rgba(12,8,38,0.55) 100%)",
+            "linear-gradient(100deg, rgba(6,16,38,0.94) 0%, rgba(6,16,38,0.78) 48%, rgba(6,16,38,0.55) 100%)",
         }}
       />
 
       <div className="relative z-10 mx-auto my-auto grid w-full max-w-[1440px] gap-10 px-5 pt-14 pb-14 sm:px-8 min-[900px]:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] min-[900px]:items-center min-[900px]:pt-20 min-[900px]:pb-24 lg:px-11">
         <div className="min-w-0">
-          <div className="animate-sj-up inline-flex flex-wrap items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#9FD6F5] uppercase">
+          <div className="animate-sj-up inline-flex flex-wrap items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#9CC8FF] uppercase">
             <span aria-hidden className="h-px w-11 bg-[var(--home-accent)]" />
-            <LocaleLink href="/" className="text-[#9FD6F5] hover:text-white">
+            <LocaleLink href="/" className="text-[#9CC8FF] hover:text-white">
               {hero.breadcrumbHome}
             </LocaleLink>
             <span aria-hidden className="opacity-50">
@@ -82,14 +82,14 @@ export function ServiceBookHero({ content }: { content: ServiceBookContent }) {
           <div className="animate-sj-up mt-7 flex flex-wrap gap-3">
             <LocaleLink
               href="/service-book/read"
-              className="inline-flex min-h-11 items-center bg-[var(--home-accent)] px-6 py-4 text-[15px] font-bold text-[var(--home-on-accent)] transition-colors hover:bg-white hover:text-[#0B0826]"
+              className="inline-flex min-h-11 items-center bg-[var(--home-accent)] px-6 py-4 text-[15px] font-bold text-[var(--home-on-accent)] transition-colors hover:bg-white hover:text-[#061026]"
             >
               {hero.readCta}
             </LocaleLink>
             <a
               href={download.href}
               download
-              className="inline-flex min-h-11 items-center gap-2.5 border border-white/30 px-6 py-4 text-[15px] font-bold text-white transition-colors hover:bg-white hover:text-[#0B0826]"
+              className="inline-flex min-h-11 items-center gap-2.5 border border-white/30 px-6 py-4 text-[15px] font-bold text-white transition-colors hover:bg-white hover:text-[#061026]"
             >
               <DownloadIcon className="h-4.5 w-4.5" />
               {hero.downloadCta} ({download.size})
@@ -109,7 +109,7 @@ export function ServiceBookHero({ content }: { content: ServiceBookContent }) {
         </div>
       </div>
 
-      <div className="relative z-10 border-t border-white/14 bg-[#0B0826]/55">
+      <div className="relative z-10 border-t border-white/14 bg-[#061026]/55 sj-fixed-dark">
         <dl className="mx-auto grid max-w-[1440px] grid-cols-4 px-5 sm:px-8 lg:px-11 max-[899px]:grid-cols-2">
           {heroFacts.map((fact, index) => (
             <div key={fact.k} className={`py-5.5 ${index === 0 ? "pr-6" : "px-6"} max-[899px]:px-0 max-[899px]:pr-6`}>

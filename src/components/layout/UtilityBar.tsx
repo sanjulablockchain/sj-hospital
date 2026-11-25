@@ -2,7 +2,7 @@ import { LocaleLink } from "@/components/i18n/LocaleLink";
 
 /**
  * The emergency strip above the header on the v4 home page: fixed ink
- * (`#1A1540`) in both themes, white text, the reference's 9px vertical
+ * (`#0B1A40`) in both themes, white text, the reference's 9px vertical
  * padding. Left, the pulsing red dot, "Emergency 24/7" and the switchboard as a
  * bold tel link, then the address; right, WhatsApp, Free OPD (the outpatient
  * department page, where the free consultation lives) and School Wellness. The
@@ -14,7 +14,7 @@ import { LocaleLink } from "@/components/i18n/LocaleLink";
  */
 export function UtilityBar() {
   return (
-    <div className="bg-[#1A1540] text-[13px] text-white">
+    <div className="bg-[#0B1A40] sj-fixed-dark text-[13px] text-white">
       <div className="mx-auto flex w-full max-w-[1440px] flex-wrap items-center justify-between gap-x-5 gap-y-1 px-5 py-[9px] sm:px-8 lg:px-11">
         <div className="flex flex-wrap items-center gap-x-6 gap-y-1">
           <span className="flex items-center gap-2">
@@ -32,7 +32,7 @@ export function UtilityBar() {
               footer carries the full mark at every width. */}
           <LocaleLink
             href="/network#family"
-            className="hidden font-semibold text-[#9FD6F5] transition-colors hover:text-white lg:inline"
+            className="hidden font-semibold text-[#9CC8FF] transition-colors hover:text-white lg:inline"
           >
             Managed by Kids &amp; Teens Medical Group, Los Angeles
           </LocaleLink>

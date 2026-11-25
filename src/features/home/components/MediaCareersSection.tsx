@@ -30,7 +30,7 @@ export function MediaCareersSection({
   return (
     <section id="media" className="pb-20 sm:pb-27.5">
       <Container className="grid gap-5 [grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr))]">
-        <Reveal className="flex flex-col overflow-hidden rounded-[16px] bg-[#1A1540] text-white">
+        <Reveal className="flex flex-col overflow-hidden rounded-[16px] bg-[#0B1A40] sj-fixed-dark text-white">
           <Link href={story} className="group relative block min-h-[300px] flex-1 overflow-hidden text-white hover:text-white">
             <ParallaxLayer factor={0.09} maxOffsetPx={40} className="absolute inset-x-0 -inset-y-[10%]">
               <Image
@@ -44,22 +44,22 @@ export function MediaCareersSection({
             <div
               aria-hidden
               className="absolute inset-0"
-              style={{ background: "linear-gradient(rgba(26,21,64,0.15) 0%, rgba(26,21,64,0.25) 40%, rgba(26,21,64,0.95) 100%)" }}
+              style={{ background: "linear-gradient(rgba(11,26,64,0.15) 0%, rgba(11,26,64,0.25) 40%, rgba(11,26,64,0.95) 100%)" }}
             />
             <div className="absolute inset-x-0 top-0 flex items-center justify-between gap-3 px-6 py-7 sm:px-8">
-              <span className="rounded-full bg-[rgba(26,21,64,0.55)] px-3 py-2 text-[12px] font-extrabold tracking-[0.2em] text-white uppercase backdrop-blur-[6px]">
+              <span className="rounded-full bg-[rgba(11,26,64,0.55)] px-3 py-2 text-[12px] font-extrabold tracking-[0.2em] text-white uppercase backdrop-blur-[6px]">
                 {media.sectionEyebrow}
               </span>
             </div>
             <div className="absolute inset-x-0 bottom-0 flex flex-col gap-2.5 p-6 sm:p-8">
-              <span className="flex items-center gap-2.5 text-[13px] font-bold text-[#9FD6F5]">
-                <span className="rounded-full bg-[var(--home-accent)] px-2.5 py-[5px] text-[11px] font-extrabold tracking-[0.1em] text-[#0F0B30] uppercase">
+              <span className="flex items-center gap-2.5 text-[13px] font-bold text-[#9CC8FF]">
+                <span className="rounded-full bg-[var(--home-accent)] px-2.5 py-[5px] text-[11px] font-extrabold tracking-[0.1em] text-[var(--home-on-accent)] uppercase">
                   {top.tag}
                 </span>
                 {top.date}
               </span>
               <span className="font-display text-[clamp(26px,2.4vw,34px)] leading-[1.1] font-extrabold tracking-[-0.02em]">{top.title}</span>
-              <span className="inline-flex items-center gap-2 text-[14px] font-extrabold text-[#9FD6F5]">
+              <span className="inline-flex items-center gap-2 text-[14px] font-extrabold text-[#9CC8FF]">
                 {media.readMore} <ArrowRight />
               </span>
             </div>
@@ -69,7 +69,7 @@ export function MediaCareersSection({
               <Link
                 key={item.title}
                 href={story}
-                className="sj-card-lift relative flex flex-col gap-2 bg-[#1A1540] px-6 py-5.5 text-white hover:z-10 hover:bg-[var(--home-deep)] hover:text-white"
+                className="sj-card-lift relative flex flex-col gap-2 bg-[#0B1A40] sj-fixed-dark px-6 py-5.5 text-white hover:z-10 hover:bg-[var(--home-deep)] hover:text-white"
               >
                 <span className="text-[11px] font-extrabold tracking-[0.12em] text-[var(--home-accent)] uppercase">
                   {item.tag} &middot; {item.date}

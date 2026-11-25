@@ -91,7 +91,7 @@ export function NetworkAccordion({
             key={node.index}
             // Collapsed panels hold a fixed spine (64px tall stacked, 90px wide
             // in a row) and the open one takes whatever is left.
-            className={`relative min-h-0 min-w-0 overflow-hidden rounded-[22px] bg-[#1A1540] shadow-[0_24px_48px_-30px_rgba(26,21,64,0.55)] transition-[flex-basis,flex-grow] duration-[600ms] ease-[cubic-bezier(0.2,0.8,0.2,1)] motion-reduce:transition-none ${
+            className={`relative min-h-0 min-w-0 overflow-hidden rounded-[22px] bg-[#0B1A40] sj-fixed-dark shadow-[0_24px_48px_-30px_rgba(11,26,64,0.55)] transition-[flex-basis,flex-grow] duration-[600ms] ease-[cubic-bezier(0.2,0.8,0.2,1)] motion-reduce:transition-none ${
               isActive ? "grow basis-0" : "grow-0 basis-16 min-[760px]:basis-[90px]"
             }`}
           >
@@ -103,8 +103,8 @@ export function NetworkAccordion({
               className="absolute inset-0 transition-[background] duration-[400ms] motion-reduce:transition-none"
               style={{
                 background: isActive
-                  ? "linear-gradient(rgba(26,21,64,0) 35%, rgba(26,21,64,0.9) 100%)"
-                  : "rgba(35,26,92,0.72)",
+                  ? "linear-gradient(rgba(11,26,64,0) 35%, rgba(11,26,64,0.9) 100%)"
+                  : "rgba(10,42,115,0.72)",
               }}
             />
 
@@ -146,7 +146,7 @@ export function NetworkAccordion({
                 isActive ? "animate-sj-fade-slow z-20 opacity-100 [animation-delay:200ms]" : "opacity-0"
               }`}
             >
-              <span className="flex flex-wrap items-center gap-3 text-[12px] font-extrabold tracking-[0.2em] text-[#9FD6F5] uppercase">
+              <span className="flex flex-wrap items-center gap-3 text-[12px] font-extrabold tracking-[0.2em] text-[#9CC8FF] uppercase">
                 {node.index} / {node.location}
                 {isComingSoonHref(node.href) && <ComingSoonBadge onDark />}
               </span>
@@ -162,7 +162,7 @@ export function NetworkAccordion({
               <Link
                 href={localeHref(node.href, locale)}
                 tabIndex={isActive ? undefined : -1}
-                className={`inline-flex w-fit items-center gap-2 text-[14px] font-extrabold text-[#9FD6F5] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--home-accent)] ${
+                className={`inline-flex w-fit items-center gap-2 text-[14px] font-extrabold text-[#9CC8FF] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--home-accent)] ${
                   isActive ? "pointer-events-auto" : ""
                 }`}
               >

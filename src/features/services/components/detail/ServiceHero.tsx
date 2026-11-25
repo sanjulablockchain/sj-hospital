@@ -27,7 +27,7 @@ export function ServiceHero({ service, content }: { service: Service; content: S
   return (
     <section
       id="top"
-      className="relative flex min-h-[calc(72vh-120px)] flex-col overflow-hidden bg-[#0B0826]"
+      className="relative flex min-h-[calc(72vh-120px)] flex-col overflow-hidden bg-[#061026] sj-fixed-dark"
     >
       <ParallaxLayer
         factor={0.14}
@@ -48,7 +48,7 @@ export function ServiceHero({ service, content }: { service: Service; content: S
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(rgba(12,8,38,0.86) 0%, rgba(12,8,38,0.42) 42%, rgba(12,8,38,0.96) 100%)",
+            "linear-gradient(rgba(6,16,38,0.86) 0%, rgba(6,16,38,0.42) 42%, rgba(6,16,38,0.96) 100%)",
         }}
       />
 
@@ -60,7 +60,7 @@ export function ServiceHero({ service, content }: { service: Service; content: S
           <span aria-hidden>&larr;</span> {content.indexContent.allServicesLabel}
         </LocaleLink>
 
-        <div className="animate-sj-up inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#9FD6F5] uppercase">
+        <div className="animate-sj-up inline-flex items-center gap-3 text-[11.5px] font-bold tracking-[0.24em] text-[#9CC8FF] uppercase">
           <span className="h-px w-11 bg-[var(--home-accent)]" />
           {groupLabel}
           {comingSoon && <ComingSoonBadge size="md" onDark />}

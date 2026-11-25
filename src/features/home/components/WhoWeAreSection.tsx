@@ -71,7 +71,7 @@ export function WhoWeAreSection({
               <Link
                 key={stat.label}
                 href={localeHref(stat.href, locale)}
-                className="sj-card-lift flex gap-5 rounded-[14px] bg-[var(--home-bg)] p-5.5 text-inherit no-underline shadow-[0_1px_2px_rgba(26,21,64,0.06),0_12px_32px_-20px_rgba(26,21,64,0.25)]"
+                className="sj-card-lift flex gap-5 rounded-[14px] bg-[var(--home-bg)] p-5.5 text-inherit no-underline shadow-[0_1px_2px_rgba(11,26,64,0.06),0_12px_32px_-20px_rgba(11,26,64,0.25)]"
               >
                 <span
                   className="flex h-[84px] w-[84px] shrink-0 items-center justify-center rounded-[14px]"

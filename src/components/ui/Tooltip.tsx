@@ -54,7 +54,7 @@ export function Tooltip({
       <div
         id={panelId}
         role="tooltip"
-        className={`pointer-events-none absolute top-full left-1/2 z-20 mt-2 w-40 -translate-x-1/2 translate-y-1 rounded-xl border border-ink/10 bg-ink px-3 py-2 text-xs leading-relaxed text-white opacity-0 shadow-[0_18px_32px_-16px_rgba(20,10,50,0.55)] transition duration-200 ease-out sm:w-48 group-hover/tooltip:translate-y-0 group-hover/tooltip:opacity-100 group-hover/tooltip:pointer-events-auto group-focus-within/tooltip:translate-y-0 group-focus-within/tooltip:opacity-100 group-focus-within/tooltip:pointer-events-auto ${
+        className={`pointer-events-none absolute top-full left-1/2 z-20 mt-2 w-40 -translate-x-1/2 translate-y-1 rounded-xl border border-ink/10 bg-ink px-3 py-2 text-xs leading-relaxed text-white opacity-0 shadow-[0_18px_32px_-16px_rgba(11,26,64,0.55)] transition duration-200 ease-out sm:w-48 group-hover/tooltip:translate-y-0 group-hover/tooltip:opacity-100 group-hover/tooltip:pointer-events-auto group-focus-within/tooltip:translate-y-0 group-focus-within/tooltip:opacity-100 group-focus-within/tooltip:pointer-events-auto ${
           open ? "translate-y-0 opacity-100 pointer-events-auto" : ""
         } ${panelClassName}`}
       >
