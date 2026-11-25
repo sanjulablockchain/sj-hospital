@@ -202,7 +202,8 @@ test("no wordmark or name anglicises a company's own spelling", () => {
 
 test("every logo path points at a file that exists", () => {
   for (const org of orgs) {
-    assert.equal(org.logo, `/images/network/logos/${org.slug}.png`);
+    // A replaced logo takes a suffix (`st-joseph-2026.png`) so cached copies drop.
+    assert.match(org.logo, new RegExp(`^/images/network/logos/${org.slug}(-[a-z0-9]+)?\\.png$`));
     assert.ok(existsSync(`public${org.logo}`), `missing public${org.logo}`);
   }
 });

@@ -7,7 +7,8 @@ import { LanguageToggleButton } from "@/components/i18n/LanguageToggleButton";
 import { BookingModal } from "@/components/layout/BookingModal";
 import { DesktopNav } from "@/components/layout/mega-nav/DesktopNav";
 import { MobileNavDrawer } from "@/components/layout/mega-nav/MobileNavDrawer";
-import { LOGO_LOCKUP_BRAND, LOGO_MARK } from "@/config/brand";
+import { LOGO_MARK } from "@/config/brand";
+import { LogoLockup } from "@/components/layout/LogoLockup";
 import type { MegaNavSection } from "@/config/megaNavigation";
 import { chromeCopyFor } from "@/components/layout/chromeCopy";
 import { useLocale } from "@/lib/i18n/useLocale";
@@ -84,14 +85,10 @@ export function ThemedHeader({ sections, variant = "fixed" }: ThemedHeaderProps)
       <div className="mx-auto flex h-[var(--sj-header-h)] w-full max-w-[1440px] items-center gap-1.5 px-3 sm:gap-5 sm:px-8 lg:gap-6 lg:px-11">
         <a href={localeHref("/", locale)} className="flex shrink-0 items-center gap-2.5 sm:gap-3.25">
           {solid ? (
-            <Image
-              src={LOGO_LOCKUP_BRAND.src}
+            <LogoLockup
               alt="St. Joseph Hospital, to live is a privilege"
-              width={LOGO_LOCKUP_BRAND.width}
-              height={LOGO_LOCKUP_BRAND.height}
-              data-logo
-              className="-mx-2 block h-12 w-auto sm:-mx-3.5 sm:h-16"
-              preload
+              className="h-7.5 w-auto sm:h-10.5"
+              compactBelowSm
             />
           ) : (
             <>

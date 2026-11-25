@@ -1,8 +1,7 @@
-import Image from "next/image";
 import { ChromeText } from "@/components/i18n/ChromeText";
 import { LocaleLink } from "@/components/i18n/LocaleLink";
 import { AffiliationMark } from "@/components/layout/AffiliationMark";
-import { LOGO_LOCKUP_BRAND } from "@/config/brand";
+import { LogoLockup } from "@/components/layout/LogoLockup";
 import { homeFooterColumns } from "@/config/homeNavigation";
 import { navLabel, translateFooterColumns } from "@/config/navigationLabels";
 import type { Locale } from "@/lib/i18n/locales";
@@ -24,14 +23,7 @@ export function HomeFooter({ locale }: { locale: Locale }) {
       <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-12 px-5 pt-14 pb-8 sm:px-8 sm:pt-18 lg:px-11">
         <div className="grid gap-10 [grid-template-columns:repeat(auto-fit,minmax(200px,1fr))]">
           <div className="flex flex-col gap-4.5">
-            <Image
-              src={LOGO_LOCKUP_BRAND.src}
-              alt="St. Joseph Hospital"
-              width={LOGO_LOCKUP_BRAND.width}
-              height={LOGO_LOCKUP_BRAND.height}
-              data-logo
-              className="-mx-4 -mt-2 block h-18 w-auto self-start"
-            />
+            <LogoLockup alt="St. Joseph Hospital" className="h-10.5 w-auto self-start" />
             <span className="max-w-[300px] text-[14px] leading-[1.7] text-[var(--home-muted)]">
               <ChromeText id="tagline" />
             </span>
